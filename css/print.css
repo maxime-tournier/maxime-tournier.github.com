@@ -1,0 +1,9 @@
+/* add overrides here */
+#stamp {  display:none; }
+
+.break { page-break-before: always; }
+
+body{ margin-top: 0; font-size: 11pt;}
+
+/* h1 { text-shadow: none; } */
+/* h2 { text-shadow: none; } */

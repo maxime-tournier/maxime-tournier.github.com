@@ -1,0 +1,110 @@
+body { 
+    background-color: #fff; 
+    color: #222; 		/* easy on the eyes */
+    font-family: Georgia, serif;
+    font-size: 95%;
+    /* font-size:smaller; */
+    text-align:center;
+
+    /* width: 600px; */
+    max-width:48em;
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3em;
+    /* line-height: 140%; */
+}
+
+p { line-height: 145%; }
+
+img { border:0; }
+
+table { font-size:small; }
+
+a {
+    font-weight: bolder;
+    text-decoration: none; 
+}
+
+a:link {
+    color: #113399; 
+}
+
+a:visited {
+    color: #661166;
+}
+
+img.preview {
+    float:left;
+    height:60px;
+    width:60px;
+    margin-right:1em;
+    
+}
+
+#title {
+    text-align: center;
+}
+
+h1 {
+    text-shadow: #ddd 1px 1px 4px;
+}
+
+h2 {
+    margin-top:2.5em;
+    text-shadow: #ddd 1px 1px 4px;
+}
+
+sup { font-size: xx-small; }
+
+a.paper {
+          font-style: italic;
+          /* display:block; */
+}
+
+.authors {  }
+
+.source {  }
+
+table.publis { line-height:150%; width:100%; }
+table.publis td:first-child { text-align: center; }
+table.publis td:last-child { padding-right:0; }
+table.publis img.preview { 
+                           float:right;
+                           margin:0;
+                           /* margin-left:1em; */
+                           /* margin-bottom:1em; */
+                           /* margin-right:0; */
+                           /* padding:0; */
+                           }
+table.publis ul { list-style-type:none; margin-top: 0;}
+table.publis td { vertical-align: top;  }
+
+#footer {
+    clear: both;
+    padding:0;
+    margin:0;
+    padding-top: 2em;
+    font-size: x-small;
+    text-align: center;
+    list-style-type: none;
+}
+
+#footer li {
+    display:inline;
+    margin: 1em;
+}
+
+#stamp {
+    margin-top: 5em;
+    text-align: center;
+    font-size:x-small;
+}
+
+
+
+div.video { width: 470px; margin: 0 auto; }
+
+img.icon { width:1em; height:1em; padding:.1em .1em; margin:0 .1em; vertical-align: middle; }
+img.pop:hover {  width:1.1em; height:1.1em; padding: 0 ; }
+

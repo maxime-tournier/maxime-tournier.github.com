@@ -1,0 +1,25 @@
+
+p.abstract:first-letter{
+                        font-weight: bold;
+                        font-size:3em;
+                        color:#222222;
+                        margin:0;
+                        margin-right:0.1em;
+                        float        : left;
+                        line-height: 90%;
+			text-shadow: #ddd 1px 1px 4px; 
+			
+}
+
+#authors {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+p.abstract {
+    /* line-height: 150%; */
+}
+
+#teaser {
+    
+}

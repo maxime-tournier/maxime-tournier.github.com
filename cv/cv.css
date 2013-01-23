@@ -1,0 +1,55 @@
+body {
+
+    width: 48em;
+
+}
+
+#personal { 
+            float:left;
+            
+            }
+
+#contact { 
+           float:right;
+           text-align: right;
+           padding-top:0;
+           }
+
+ul { 
+     list-style-type:none;
+     padding: 0;
+     margin-top: 0;
+     margin-bottom: 1em;
+     }
+
+ul.strong li:first-child { 
+                           font-weight: bolder;
+                           }
+
+ul.strong li { margin:0; margin-bottom: .3em;  }
+
+tr { 
+     padding-top:1em;
+     padding-bottom:2em;
+     }
+
+td { 
+     vertical-align: top;
+     padding: 0 1em;
+     }
+
+tr td:first-child {  
+    white-space: nowrap; 
+    padding-left: 0; 
+}
+
+
+
+#title { 
+         clear: both;
+         padding-top:3em;
+         padding-bottom:2em;
+         }
+
+
+address { font-style:normal;  }

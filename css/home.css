@@ -1,0 +1,55 @@
+
+
+
+#contact { float:right; 
+
+           
+}
+
+#contact ul { padding: 0; 
+              margin: 0;
+              list-style-type:none; 
+              }
+
+
+
+#me { float:right;
+      width:250px;
+      margin-left:3em; }
+
+.header { text-align: left; }
+
+h1 {  padding-top:.5em ; white-space:nowrap; }
+
+#summary { margin-bottom:1em;
+           font-weight:bold;
+	 }
+
+#affiliations{
+               list-style-type:none; padding:0;
+               font-size:90%;
+               }
+
+#cv {  font-size: smaller; margin-top:2em; }
+
+#start {
+    clear:both;
+    padding-top:1em;
+    
+}
+
+#publications {
+    list-style-type:none;
+    padding-left: 0;
+}
+
+#publications li {
+    clear:both;
+    margin-bottom: 1em;
+    min-height: 60px;
+}
+
+
+#misc { list-style-type:none; padding: 0;}
+
+img.logo {   float:left; margin-right: 0.5ex }

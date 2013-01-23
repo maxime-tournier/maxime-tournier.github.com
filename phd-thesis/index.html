@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<link rel="stylesheet" href="../css/base.css" type="text/css" media="all">
+<link rel="stylesheet" href="../css/pubs.css" type="text/css" media="all">
+<link rel="stylesheet" href="style.css" type="text/css" media="all">
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+<title>Dimension Reduction for Character Animation</title>
+</head>
+
+<body>
+<h1 id="title">Dimension Reduction for Character Animation</h1>
+
+<div id="author">Maxime Tournier</div>
+
+<div id="teaser">
+  <img src="teaser.png" style="width:100%" alt="Teaser" />
+</div>
+
+
+<h2>Download</h2>
+
+<ul style="list-style:none">
+  <li> <a href="tournier-thesis.pdf" class="pdf">Manuscript</a> (PDF, 10.1 Mo) </li>
+  <li> <a href="slides.pdf" class="pdf">Slides</a> (PDF without movies, 3.9 Mo) </li>
+  <li> And some <a href="videos.html">videos</a>. </li>
+</ul>
+
+
+
+<h2>Abstract</h2>
+
+<p class="abstract">
+
+In this thesis, we propose novel, data-driven representations for
+human poses, suitable for real-time synthesis of novel character
+motion. In the first part, we exploit Lie group statistical analysis
+techniques (Principal Geodesic Analysis, PGA) to approximate the pose
+manifold of a motion capture sequence by a reduced set of pose
+geodesics. We propose an inverse kinematics algorithm using this
+reduced parametrization to automatically produce poses that are close
+to the learning set. We demonstrate the efficiency of the resulting
+pose model by an application to motion capture data <a
+href="../compression" >compression</a>, where only a few end-effector
+trajectories are used to recover a good approximation of the initial
+data.
+
+</p>
+
+
+<p>
+
+In the second part, we extend this approach to the physically-based
+animation of virtual characters. The PGA-reduced parametrization
+provides generalized coordinates in a Lagrangian formulation of
+mechanics. We derive an explicit time integrator by approximating
+existing variational integrators, and propose a damping model based on
+the Levenberg-Marquardt algorithm. We also describe a geometric,
+data-driven, angular limit learning algorithm, and the associated
+kinematic constraints.
+
+</p>
+
+
+<p>
+
+In the third part, we reach the problem of task-space motion
+control. By formulating both physical simulation and inverse
+kinematics time stepping schemes as two quadratic programs, we propose
+a simple pseudo-control algorithm that interpolates between the two
+metrics. This allows for an intuitive trade-off between uncontrolled
+simulation and kinematic manipulation. Since this approach makes use
+of external forces, we propose an alternate formulation using only the
+generalized forces associated to the pose parametrization. A control
+algorithm is obtained by the relaxation of the exact, non-convex
+control problem under unilateral constraints, into a convex quadratic
+program. These algorithms are evaluated on simple balance and tracking
+controllers.
+
+</p>
+
+<h2>Résumé</h2>
+
+
+<p class="abstract">
+
+Dans cette thèse, nous proposons de nouvelles representations pour les
+poses du mouvement humain, apprises sur des données réelles, en vue
+d'une synthèse de nouveaux mouvements en temps-réel. Dans une première
+partie, nous exploitons une méthode statistique adaptée aux groupes de
+Lie (Analyse en Géodésiques Principales, AGP) pour approximer la
+variété des poses d'un sujet en mouvement, à partir de données de
+capture de mouvement. Nous proposons un algorithme de cinématique
+inverse exploitant cette paramétrisation réduite, permettant par
+construction de synthétiser des poses proches des données
+initiales. Nous validons ce modèle cinématique par une application à
+la <a href="../compression" >compression</a> de données de mouvements,
+dans laquelle seules quelques trajectoires des extrémités des membres
+du squelettes permettent de reconstruire une bonne approximation de
+l'ensemble des données initiales.
+
+</p>
+
+<p>
+
+Dans une deuxième partie, nous étendons cette approche à l'animation
+physique de personnages virtuels. La paramétrisation réduite par AGP
+fournit les coordonnées généralisées de la formulation Lagrangienne de
+la mécanique. Nous dérivons un intégrateur temporel explicite, basé
+sur les intégrateurs variationnels. Afin d'en améliorer la stabilité,
+nous proposons un modèle d'amortissement inspiré de l'algorithme de
+Levenberg-Marquardt. Nous présentons également une méthode géométrique
+d'apprentissage des limites angulaires sur des données de capture de
+mouvement, ainsi que leur application comme contraintes
+cinématiques.
+</p>
+
+
+<p>
+Dans une troisième partie, nous abordons le problème du contrôle du
+mouvement. En formulant les étapes de la simulation physique d'une
+part, et de la cinématique inverse d'autre part comme deux programmes
+quadratiques, nous proposons un algorithme de pseudo-contrôle par
+interpolation des métriques, permettant un compromis intuitif entre
+simulation physique non-contrôlée, et cinématique inverse. Cette
+approche faisant intervenir des forces externes, nous proposons une
+formulation alternative utilisant uniquement les forces associées à la
+paramétrisation réduite des poses. Cette formulation est obtenue par
+relaxation du problème théorique de contrôle sous contraintes
+unilatérales, non-convexe, en un programme quadratique convexe. Ces
+algorithmes sont évalués sur des contrôleurs d'équilibre et de suivi.
+</p>
+
+
+
+<h2>Jury</h2>
+
+<ul id="jury">
+  <li>
+  <a href="http://m2slab.com/index.php?option=com_jresearch&view=member&task=show&id=6&Itemid=15&lang=en">Franck Multon</a><br/>
+  Professeur, Université de Rennes 2, Rapporteur
+  </li>
+  
+  <li>
+  <a href="http://www2.lirmm.fr/DEMAR//index.php?option=com_content&view=article&id=32&Itemid=54/">David Guiraud</a><br/>
+  Directeur de recherche, INRIA Sophia-Antipolis, Rapporteur
+  </li>
+
+  <li>
+  <a href="http://www-evasion.imag.fr/~Marie-Paule.Cani/">Marie-Paule Cani</a><br/>
+  Professeur, Université de Grenoble, Présidente de Jury
+  </li>
+  
+  <li>
+  <a href="http://www.cs.mcgill.ca/~kry/">Paul Kry</a><br/>
+  Assistant Professeur, Université de McGill, Montréal, Examinateur
+  </li>
+
+  <li>
+  <a href="http://www-evasion.imag.fr/~Francois.Faure/index.gb.html">François Faure</a><br/>
+  Professeur, Université de Grenoble, Directeur de thèse
+  </li>
+ 
+  <li>
+  <a href="http://morpheo.inrialpes.fr/people/reveret/">Lionel Reveret</a><br/>
+  Chargé de recherche, Inria Rhône-Alpes, Co-encadrant
+  </li>
+</ul>
+
+
+<div id="stamp">
+  <ul id="footer">
+  <li><a href="..">back</a></li>
+  <li>
+  <a href="mailto:maxime.tournier.at.inria.fr">e-mail</a> any comment
+  </li>
+  <li>  <!-- hhmts start -->Last modified: Wed Sep  5 17:27:18 CEST 2012 <!-- hhmts end --> </li>
+</ul>
+ 
+</div>
+
+</body> </html>

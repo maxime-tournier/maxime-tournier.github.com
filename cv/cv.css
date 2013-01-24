@@ -53,3 +53,7 @@ tr td:first-child {
 
 
 address { font-style:normal;  }
+
+table.work td:first-child { text-align:left; }
+
+table.work tr { margin-top:0.5em; margin-bottom:0.5em }

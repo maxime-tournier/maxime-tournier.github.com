@@ -7,7 +7,7 @@ body {
     text-align:center;
 
     /* width: 600px; */
-    max-width:48em;
+    max-width:45em;
     text-align: justify;
     margin-left: auto;
     margin-right: auto;
@@ -15,7 +15,11 @@ body {
     /* line-height: 140%; */
 }
 
-p { line-height: 145%; }
+p { line-height: 150%;
+    /* max-width: 42em; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    }
 
 img { border:0; }
 
@@ -35,10 +39,10 @@ a:visited {
 }
 
 img.preview {
-    float:left;
+    float:right;
     height:60px;
     width:60px;
-    margin-right:1em;
+    margin-left:1em;
     
 }
 
@@ -67,17 +71,18 @@ a.paper {
 .source {  }
 
 table.publis { line-height:150%; width:100%; }
-table.publis td:first-child { text-align: center; }
-table.publis td:last-child { padding-right:0; }
+table.publis td:first-child { text-align: center; padding:0px; margin:0px}
+table.publis td:last-child { padding-right:0; padding-left:0 margin-left:0;}
 table.publis img.preview { 
                            float:right;
                            margin:0;
+                           margin-left: 1em;
                            /* margin-left:1em; */
                            /* margin-bottom:1em; */
                            /* margin-right:0; */
                            /* padding:0; */
                            }
-table.publis ul { list-style-type:none; margin-top: 0;}
+table.publis ul { list-style-type:none; margin-top: 0; padding-left:1.5em;}
 table.publis td { vertical-align: top;  }
 
 #footer {

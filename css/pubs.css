@@ -18,8 +18,21 @@ p.abstract:first-letter{
 
 p.abstract {
     /* line-height: 150%; */
+       
 }
 
+p { max-width:42em;
+    margin:auto; }
+
 #teaser {
-    
+          text-align:center;
 }
+
+#video-left{ height:300px; margin:auto; border:0}
+#video-right{ height:300px; margin:auto; border:0}
+
+a.pdf{ 
+       background: url('../images/pdf-small.png') no-repeat center right; 
+       background-size: 1em;
+       padding-right:1em;
+       }

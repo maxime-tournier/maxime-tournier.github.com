@@ -1,7 +1,5 @@
 body {
-
-    width: 48em;
-
+       width: 48em;
 }
 
 #personal { 
@@ -47,8 +45,8 @@ tr td:first-child {
 
 #title { 
          clear: both;
-         padding-top:3em;
-         padding-bottom:2em;
+         padding-top:2.5em;
+         padding-bottom:1.5em;
          }
 
 
@@ -57,3 +55,6 @@ address { font-style:normal;  }
 table.work td:first-child { text-align:left; }
 
 table.work tr { margin-top:0.5em; margin-bottom:0.5em }
+
+h2 { margin-top:1.5em }
+table{  font-size:smaller; }

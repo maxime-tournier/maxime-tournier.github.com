@@ -41,20 +41,25 @@ tr td:first-child {
     padding-left: 0; 
 }
 
-
-
 #title { 
          clear: both;
-         padding-top:2.5em;
-         padding-bottom:1.5em;
+         padding-top:2em;
+         padding-bottom:1em;
          }
 
 
 address { font-style:normal;  }
 
-table.work td:first-child { text-align:left; }
+/* table.work td:first-child { text-align:left; } */
 
 table.work tr { margin-top:0.5em; margin-bottom:0.5em }
 
-h2 { margin-top:1.5em }
-table{  font-size:smaller; }
+h2 { margin-top:1.2em }
+table{  font-size:90%; }
+
+table tr td:first-child { max-width:8em; text-align: center;}
+td:first-child em { display:block; text-align:center; padding-top:0.8em; font-size:smaller}
+
+
+p { max-width: 43em; }
+

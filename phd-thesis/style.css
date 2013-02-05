@@ -4,7 +4,7 @@ body { max-width:42em; }
 
 #author { text-align:center; font-variant: small-caps; font-size: 1.2em; margin:2em;}
 
-a.pdf:before{  content:url(../images/pdf-small.png); }
+/* a.pdf:before{  content:url(../images/pdf-small.png); } */
 
 
 ul { list-style: none; padding:0 }

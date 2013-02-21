@@ -32,7 +32,7 @@ p { max-width:42em;
 #video-right{ height:300px; margin:auto; border:0}
 
 a.pdf{ 
-       background: url('../images/pdf-small.png') no-repeat center right; 
+       background: url('../images/pdf-small.png') no-repeat center left; 
        background-size: 1em;
-       padding-right:1em;
+       padding-left:1.2em;
        }

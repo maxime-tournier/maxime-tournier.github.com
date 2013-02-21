@@ -43,7 +43,7 @@ geodesics. We propose an inverse kinematics algorithm using this
 reduced parametrization to automatically produce poses that are close
 to the learning set. We demonstrate the efficiency of the resulting
 pose model by an application to motion capture data <a
-href="../compression" >compression</a>, where only a few end-effector
+href="../compression/" >compression</a>, where only a few end-effector
 trajectories are used to recover a good approximation of the initial
 data.
 
@@ -52,12 +52,13 @@ data.
 
 <p>
 
-In the second part, we extend this approach to the physically-based
-animation of virtual characters. The PGA-reduced parametrization
-provides generalized coordinates in a Lagrangian formulation of
-mechanics. We derive an explicit time integrator by approximating
-existing variational integrators, and propose a damping model based on
-the Levenberg-Marquardt algorithm. We also describe a geometric,
+In the second part, we extend this approach to the <a
+href="../pg-dynamics/">physically-based</a> animation of virtual
+characters. The PGA-reduced parametrization provides generalized
+coordinates in a Lagrangian formulation of mechanics. We derive an
+explicit time integrator by approximating existing variational
+integrators, and propose a damping model based on the
+Levenberg-Marquardt algorithm. We also describe a geometric,
 data-driven, angular limit learning algorithm, and the associated
 kinematic constraints.
 
@@ -106,15 +107,15 @@ l'ensemble des données initiales.
 <p>
 
 Dans une deuxième partie, nous étendons cette approche à l'animation
-physique de personnages virtuels. La paramétrisation réduite par AGP
-fournit les coordonnées généralisées de la formulation Lagrangienne de
-la mécanique. Nous dérivons un intégrateur temporel explicite, basé
-sur les intégrateurs variationnels. Afin d'en améliorer la stabilité,
-nous proposons un modèle d'amortissement inspiré de l'algorithme de
+<a href="../pg-dynamics/">physique</a> de personnages virtuels. La
+paramétrisation réduite par AGP fournit les coordonnées généralisées
+de la formulation Lagrangienne de la mécanique. Nous dérivons un
+intégrateur temporel explicite, basé sur les intégrateurs
+variationnels. Afin d'en améliorer la stabilité, nous proposons un
+modèle d'amortissement inspiré de l'algorithme de
 Levenberg-Marquardt. Nous présentons également une méthode géométrique
 d'apprentissage des limites angulaires sur des données de capture de
-mouvement, ainsi que leur application comme contraintes
-cinématiques.
+mouvement, ainsi que leur application comme contraintes cinématiques.
 </p>
 
 
@@ -176,7 +177,7 @@ algorithmes sont évalués sur des contrôleurs d'équilibre et de suivi.
   <li>
   <a href="mailto:maxime.tournier.at.inria.fr">e-mail</a> any comment
   </li>
-  <li>  <!-- hhmts start -->Last modified: Tue Feb  5 16:10:06 CET 2013 <!-- hhmts end --> </li>
+  <li>  <!-- hhmts start -->Last modified: Thu Feb 21 14:23:43 CET 2013 <!-- hhmts end --> </li>
 </ul>
  
 </div>

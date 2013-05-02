@@ -51,15 +51,15 @@ img.preview {
 }
 
 h1 {
-    text-shadow: #ddd 1px 1px 4px;
+    text-shadow: #eaeaea 1px 1px 4px;
 }
 
 h2 {
     margin-top:2em;
-    text-shadow: #ddd 1px 1px 4px;
+    text-shadow: #eaeaea 1px 1px 4px;
 }
 
-sup { font-size: xx-small; }
+sup { font-size: 90%; }
 
 a.paper {
           font-style: italic;

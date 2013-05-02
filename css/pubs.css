@@ -22,7 +22,7 @@ p.abstract {
 }
 
 p { max-width:42em;
-    margin:auto; }
+    margin: 1em auto; }
 
 #teaser {
           text-align:center;

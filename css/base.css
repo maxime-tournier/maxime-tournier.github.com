@@ -70,6 +70,10 @@ a.paper {
 
 .source {  }
 
+a.mail:first-letter{
+
+}
+
 table.publis { line-height:150%; width:100%; }
 table.publis td:first-child { text-align: center; padding:0px; margin:0px}
 table.publis td:last-child { padding-right:0; padding-left:0 margin-left:0;}

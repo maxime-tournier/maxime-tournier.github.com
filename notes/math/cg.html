@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Conjugate Gradient</title>
-<!-- 2014-11-26 Wed 12:23 -->
+<!-- 2014-11-26 Wed 12:29 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Maxime Tournier" />
@@ -714,12 +714,12 @@ inner-product, as one could expect.
 <div class="outline-text-2" id="text-6">
 <p>
 Preconditioning can be seen as a special case of the above:
-\(\inv{B}A\) is PSD for the inner-product \(B\) and the above algorithm
-then becomes the Preconditioned Conjugate Gradient. The \(p_k\) will
-be \(A\)-conjugate, and \(A\) will be minimized along the way, but the
-gradients \(r_k\) will now be \(B\)-orthogonal and exploit
-preconditioning, hopefully to obtain better convergence. A
-straightforward adaptatation of the above gives:
+\(\inv{B}A\) is positive definite for the inner-product \(B\) and the
+above algorithm then becomes the Preconditioned Conjugate
+Gradient. The \(p_k\) will be \(A\)-conjugate, and \(A\) will be minimized
+along the way, but the gradients \(r_k\) will now be \(B\)-orthogonal
+and exploit preconditioning, hopefully to obtain better
+convergence. A straightforward adaptatation of the above gives:
 </p>
 
 <p>
@@ -793,7 +793,7 @@ p_{k+1} &= r_{k+1} - \beta_k p_k & \beta_k &= \frac{r_{k+1}^TA^2p_k}{p_k^TA^2p_k
 
 <p>
 This algorithm yields the same iterates as MINRES (and is cheaper to
-compute), but requires a PSD matrix \(A\).
+compute), but requires a positive (semi?)definite matrix \(A\).
 </p>
 </div>
 </div>
@@ -824,7 +824,7 @@ p_{k+1} &= r_{k+1} - \beta_k p_k & \beta_k &= \frac{r_{k+1}^TA \inv{B} A p_k}{p_
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Maxime Tournier</p>
-<p class="date">Created: 2014-11-26 Wed 12:23</p>
+<p class="date">Created: 2014-11-26 Wed 12:29</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.5c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

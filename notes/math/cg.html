@@ -1,0 +1,832 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Conjugate Gradient</title>
+<!-- 2014-11-26 Wed 12:23 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Maxime Tournier" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../style.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2014 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./"> UP </a>
+ |
+ <a accesskey="H" href="../"> HOME </a>
+</div><div id="content">
+<h1 class="title">Conjugate Gradient</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Gradient Descent</a></li>
+<li><a href="#sec-2">2. Conjugate Directions</a></li>
+<li><a href="#sec-3">3. Standard Algorithm</a></li>
+<li><a href="#sec-4">4. <span class="todo TODO">TODO</span> Convergence Analysis</a></li>
+<li><a href="#sec-5">5. Non-Standard Inner Product</a></li>
+<li><a href="#sec-6">6. Preconditioning</a></li>
+<li><a href="#sec-7">7. Conjugate Residuals</a></li>
+<li><a href="#sec-8">8. Preconditioned Conjugate Residuals</a></li>
+</ul>
+</div>
+</div>
+<p>
+Over time, I found myself checking the <a href="http://http://en.wikipedia.org/wiki/Conjugate_gradient_method">Wikipedia</a> page for Conjugate
+Gradient over and over again, and finally got tired of it. So here is
+a complete, self-contained and hopefully correct derivation of the
+method, including non-standard inner products and preconditioning, and
+even including Conjugate Residuals as special cases. The alternate
+Lanczos formulation can be found in other notes concerning the <a href="./krylov.html">Krylov
+methods</a>. 
+</p>
+
+\[
+%% custom latex commands go here
+
+% math
+
+% parenthesis block
+\newcommand{\chunk}[1]{\left( #1 \right)}
+\newcommand{\block}[1]{\left( #1 \right)}
+
+% differentials
+\newcommand{\dd}{d}
+\newcommand{\db}{\dd^b}
+\newcommand{\ds}{\dd^s}
+
+\newcommand{\dL}{\dd^L}
+\newcommand{\dR}{\dd^R}
+ 
+% Lie algebra
+\newcommand{\alg}[1]{\mathfrak{\lowercase{#1}}}
+\newcommand{\coalg}[1]{\mathfrak{\lowercase{#1}}^*}
+
+% inverse
+\newcommand{\inv}[1]{{#1}^{-1}}
+
+% common spaces
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\Diag}{\mathbb{D}}
+\newcommand{\Sym}{\mathbb{S}}
+
+\newcommand{\PSD}{\Sym_+}
+\newcommand{\SPD}{\Sym_{++}}
+
+% quotient space
+\newcommand{\quotient}[2]{
+  #1_{/#2}
+}
+
+
+% sinus cardinal
+\newcommand{\sinc}{\mathrm{sinc}}
+ 
+% misc
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\st}{\mathrm{s.t.}}
+
+% kernel
+\newcommand{\Ker}[1]{Ker\block{#1}}
+
+% image
+\newcommand{\Image}[1]{Im\block{#1}}
+
+% span
+\newcommand{\Span}[1]{\mathrm{span}\block{#1}}
+
+% trace
+\newcommand{\trace}[1]{\mathrm{tr}\block{#1}}
+
+% Lagrangian
+\newcommand{\LL}{\mathcal{L}}
+
+% differentiability class
+\newcommand{\DD}{\mathcal{C}}
+
+% complementarity constraint
+\newcommand{\compl}[2]{ 0 \leq #1 \  \bot \  #2 \geq 0 }
+
+% matrices
+\newcommand{\mat}[1]{ \begin{pmatrix} #1 \end{pmatrix} }                
+\newcommand{\inner}[2]{ \langle #1, #2 \rangle }
+\newcommand{\norm}[1]{ \left| \left| #1 \right| \right| }
+\newcommand{\argmin}[1]{ \underset{#1}{\mathrm{argmin}} }
+\newcommand{\argmax}[1]{ \underset{#1}{\mathrm{argmax}} }
+
+\newcommand{\ddd}[2]{\frac{\partial #1}{\partial #2} }
+
+\newcommand{\half}{\frac{1}{2}}
+
+% 
+\renewcommand{\bar}{\overline}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\tilde}{\widetilde}
+
+% 
+\newcommand{\upbar}{\bar}
+\newcommand{\downbar}{\underline}
+
+% superscripts
+\renewcommand{\th}{\textsuperscript{th} }
+
+% latin
+\newcommand{\ie}{\emph{i.e.~}}
+\newcommand{\cf}{\emph{cf.~}}
+\newcommand{\eg}{\emph{e.g.~}}
+\newcommand{\etal}{\emph{et al.~}} 
+\newcommand{\apriori}{\emph{a priori}\xspace}
+\newcommand{\adhoc}{\emph{ad hoc} }
+\newcommand{\vs}{\emph{vs }}
+
+% figures
+\newcommand{\fig}{\emph{fig.}}
+
+% indications on figures (left, right, colors)
+\newcommand{\indic}[1]{\emph{(#1)}}
+
+\newcommand{\license}[1]{ {\tiny \indic{#1} } }
+
+\newcommand{\hstretch}[1]{\hspace{ \stretch{#1} }}
+
+\newcommand{\twopics}[3]{\hstretch{1} \includegraphics[#1]{#2}
+  \hstretch{1} \includegraphics[#1]{#3} \hstretch{1} }
+
+\newcommand{\threepics}[4]{ \hstretch{1} \includegraphics[#1]{#2}
+  \hstretch{1} \includegraphics[#1]{#3}
+  \hstretch{1} \includegraphics[#1]{#4} \hstretch{1} }
+ 
+\newcommand{\Threepics}[4]{\includegraphics[#1]{#2}\includegraphics[#1]{#3}\includegraphics[#1]{#4}}
+
+\newcommand{\fourpics}[5]{\includegraphics[#1]{#2}\includegraphics[#1]{#3}\includegraphics[#1]{#4}\includegraphics[#1]{#5}}
+\newcommand{\fivepics}[6]{\includegraphics[#1]{#2}\includegraphics[#1]{#3}\includegraphics[#1]{#4}\includegraphics[#1]{#5}\includegraphics[#1]{#6}}
+
+% TODOS
+
+\newcommand{\TODO}[1]{ \textbf{\huge{TODO}} \emph{#1}}
+
+% panic
+% \renewcommand{\TODO}[1]{}       
+
+% pd controller
+\newcommand{\pd}{\mathrm{pd}}
+
+\newcommand{\txtidx}[1]{_{\text{#1}}}
+
+\newcommand{\desired}[1]{#1\txtidx{des}}
+\newcommand{\target}[1]{{{#1}^\star}}
+\newcommand{\current}[1]{#1\txtidx{curr}}
+\newcommand{\com}{\text{CoM}}
+
+%abbrevs
+\newcommand{\wrt}{with respect to }
+
+
+\newcommand{\separator}{ 
+  \begin{center}
+     $\star\star\star$
+  \end{center}
+}
+\newcommand{\Krylov}{\mathcal{K}}
+\]
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Gradient Descent</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+When a matrix \(A\) is positive definite, the solution to \(Ax = b\) is
+given by the <i>unique</i> minimizer of the following convex quadratic
+form:
+</p>
+
+<p>
+\[ E(x) = \half x^T A x - b^T x \]
+</p>
+
+<p>
+The gradient descent algorithm proceeds by minimizing \(E\) along
+successive <i>descent directions</i> \(p_k\), given in this case by the
+negative gradient \(r_k = b - A x_k\) of \(E\):
+</p>
+
+<p>
+\[ x_{k+1} = x_k + \alpha_k p_k \]
+</p>
+
+<p>
+where \(p_k = r_k\) is known as the <i>steepest descent</i>
+direction. \(\alpha_k\) is found by the following <i>line-search</i>
+procedure, a one-dimensional minimization problem (convex in this
+case):
+</p>
+
+<p>
+\[ \alpha_k = \argmin{\alpha \in \RR} \quad f_k(\alpha) =  E\block{x_k + \alpha p_k} \]
+</p>
+
+<p>
+Stationarity conditions give:
+</p>
+
+\begin{align}
+\dd f_k(\alpha) = 0 &\iff  \block{x_k + \alpha p_k}^T A p_k - b^Tp_k = 0 \\
+& \iff \quad p_k^T A p_k = \block{b - A x_k}^T p_k \\
+& \iff \quad \alpha = \frac{\block{b - A x_k}^T p_k}{p_k^T A p_k} 
+\end{align}
+
+<p>
+Geometrically, the line-search along \(p_k\) can be seen in terms of
+the \(A\)-projection of \(x_k\) along \(p_k\):
+</p>
+
+<p>
+\[ x_{k+1} = x_k - p_k \frac{p_k^TAx_k}{p_k^TAp_k} \quad + \quad p_k \frac{p_k^T b}{p_k^TAp_k} \]
+</p>
+
+<p>
+At each iteration, the \(A\)-projection of \(x_k\) along \(p_k\) is
+replaced with that of the solution \(\inv{A}b = x^\star\) to obtain
+\(x_{k+1}\).
+</p>
+
+<p>
+Consequently, an interesting choice for descent directions
+\(\block{p_k}_k\) is to use mutually \(A\)-orthogonal directions, so
+that the solution is found in maximum \(n\) steps (in exact
+arithmetic). This is precisely the idea behind the Conjugate
+Gradient (CG) method.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Conjugate Directions</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+The CG algorithm chooses \(p_{k+1}\) by \(A\)-orthogonalizing the
+gradient \(r_{k+1}\) against the previous \(p_k\), so that the family
+\(\block{p_k}_k\) is \(A\)-orthogonal:
+</p>
+
+<p>
+\[ p_{k+1} = r_{k+1} - \sum_{i=1}^k p_i \frac{p_i^TAr_{k+1}}{p_i^T A p_i} \]
+</p>
+
+<p>
+Since the \(p_i\) are now mutually \(A\)-orthogonal, and from the
+geometric interpretation above, the \(A\)-projection of
+\(x_{k+1}\) over the previous \(\block{p_i}_{i\leq k} = P_k\) gives:
+</p>
+
+<p>
+\[ P_k^T A x_{k+1} = P_k^T A x^\star = P_k^T b \]
+</p>
+
+<p>
+Grouping both sides, we obtain:
+</p>
+
+<p>
+\[ P_k^T r_{k+1} = 0 \]
+</p>
+
+<p>
+Now, since each \(p_k\) is of the form \(p_k = r_k + \sum_{i < k}
+  \beta_{ik} p_i\) and each of the \(\block{p_i}_{i \leq k}\) is
+orthogonal to \(r_{k+1}\), we have the following important property:
+</p>
+
+<p>
+\[ R_k^T r_{k+1} = 0 \]
+</p>
+
+<p>
+So the \(r_k\) are <i>mutually orthogonal</i>. 
+</p>
+
+<p>
+Before moving on, we also note that \(p_k^T r_k = \norm{r_k}^2\). At
+this point, let us rewrite the \(r_k\) update equations in block form,
+in order to have a clearer view of the situation. From each \(r_k -
+  r_{k+1} = \alpha_k A p_k\), we obtain:
+</p>
+
+<p>
+\[ R_{k+1} \underbrace{\mat{
+  1& \\
+  -1 & 1\\
+  & -1 & 1 \\
+  & & \ddots & \ddots \\
+  & & & -1 & 1 \\
+  & & & & -1 \\
+  }}_{\underline{D}_k} = A P_k \block{\alpha_k}_k \]
+</p>
+
+<p>
+Projecting onto \(R_k\), and introducing \(\phi_k = \norm{r_k}^2\), gives:
+</p>
+
+\begin{align}
+
+R_k^T R_{k+1} \underline{D}_k &= R_k^T A P_k \block{\alpha_k}_k \\
+
+\mat{ \diag\block{\phi_k} & 0_k} \underline{D}_k &= R_k^T A P_k \block{\alpha_k}_k \\
+
+\diag\block{\phi_k} D_k &= R_k^T A P_k \block{\alpha_k}_k \\
+
+\end{align}
+
+<p>
+where \(D_k\) is the upper \(k\times k\) (upper Hessenberg) block from
+\(\underline{D}_k\). More precisely:
+</p>
+
+<p>
+\[ \diag\block{\phi_k} D_k = \mat{
+  \phi_1 & \\
+   -\phi_2 & \phi_2\\
+  & -\phi_3 & \phi_3 \\
+  & & \ddots & \ddots \\
+  & & & -\phi_k & \phi_k \\
+  }
+  \]
+</p>
+
+<p>
+From this, we finally get:
+</p>
+
+<p>
+\[ r_i^T A p_j \alpha_j = \cases{ 
+  \phi_i  & if \quad i = j \\
+  -\phi_i & if \quad j = i - 1 \\
+  0 & otherwise
+  } \]
+</p>
+
+<p>
+Since \(\alpha_k \neq 0\) (unless we are finished), \(p_i^T A r_{k+1} =
+  0\) for \(i < k\) and the update for \(p_{k+1}\) reduces to:
+</p>
+
+<p>
+\[ p_{k+1} = r_{k+1} - p_k \frac{p_k^TAr_{k+1}}{p_k^T A p_k} \]
+</p>
+
+<p>
+This is called a <i>short-recurrence</i> relation: each \(p_k\) only need
+to be conjugated with the previous one. Some alternate formula
+before finishing:
+</p>
+
+\begin{align}
+\beta_k &= \frac{p_k^TAr_{k+1}}{p_k^T A p_k} \\
+&= -\frac{\phi_{k+1}}{\alpha_k p_k^T A p_k } = -\frac{\phi_{k+1}}{r_k^T p_k} \\
+&= -\frac{\phi_{k+1}}{\phi_k} \\
+\\ 
+\alpha_k &= \frac{r_k^T p_k}{p_k^T A p_k} \\
+&= \frac{\phi_k}{p_k^T A p_k} \\
+\end{align}
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Standard Algorithm</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Initialisation:
+</p>
+
+<p>
+\[ p_0 = r_0 = b - Ax_0 \]
+</p>
+
+<p>
+Iteration: 
+</p>
+
+\begin{align}
+x_{k+1} &= x_k + \alpha_k p_k  &\alpha_k = \frac{r_k^Tp_k}{p_k^T A p_k} &= \frac{r_k^T r_k}{p_k^T A p_k} \\
+r_{k+1} &= r_k - \alpha_k Ap_k & & \\
+p_{k+1} &= r_{k+1} - \beta_k p_k &\beta_k = \frac{r_{k+1}^T Ap_k}{p_k^T A p_k} &= -\frac{ r_{k+1}^T r_{k+1} }{r_k^T r_k} \\
+\end{align}
+
+<p>
+While the initial search direction \(p_0\) is set to the initial
+residual \(r_0\), any other initial direction could be chosen. Some
+references mention, however, that the speed of convergence can be
+adversely affected (namely: linear instead of superlinear) when the
+initial residual is not chosen for \(p_0\).
+</p>
+
+<p>
+The normalized \(r_k\) provide an orthogonal basis for the Krylov
+subspace \(\Krylov_k(A, b)\) and can be related to the Lanczos
+vectors. If \(p_0 = r_0\), then the \(p_k\) vectors also provide an
+\(A\)-orthogonal basis for \(\Krylov_k(A, b)\).
+</p>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Convergence Analysis</h2>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Non-Standard Inner Product</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Let \(A\) be self-adjoint with respect to an inner product \(M\), and be
+also positive-definite for \(M\), that is:
+</p>
+
+<ul class="org-ul">
+<li>\(A^T M = M A\)
+</li>
+<li>\(x^TMAx > 0\) for all \(x > 0\). 
+</li>
+</ul>
+
+<p>
+Or simpler: \(MA\) is symmetric positive definite. Then the following
+quadratic form is positive-definite-thus-convex:
+</p>
+
+\begin{align}
+E_M(x) &= \half \inner{x}{A x - b}_M \\
+&= \half x^TMAx - b^TMx \\
+\end{align}
+
+<p>
+So again, we look for its minimum. We apply the CG algorithm to the
+modified system \(MA x = Mb\), letting \(z_k = M r_k\) and denoting the
+\(MA\)-conjugate directions by \(q_k\). We still obtain:
+</p>
+
+<ul class="org-ul">
+<li>\(\alpha_k = \frac{z_k^T q_k}{q_k^TMAq_k}\)
+</li>
+<li>\(Q_k^Tz_{k+1} = Q_k^T M r_{k+1} = 0\)
+</li>
+</ul>
+
+<p>
+Now we can make a choice regarding who should span the \(q_k\). If the
+\(q_k\) are spanned by \(r_k\), we get:
+</p>
+
+<ul class="org-ul">
+<li>\(R_k^T M r_{k+1} = 0\)
+</li>
+<li>\(q_0 = r_0 \Rightarrow x_k \in \Krylov_k\block{A, b}\)
+</li>
+</ul>
+
+<p>
+In contrast, if the \(q_k\) are spanned by the \(z_k\) (which would be
+vanilla CG on the modified system), we get:
+</p>
+
+<ul class="org-ul">
+<li>\(Z_k^T z_{k+1} = 0\)
+</li>
+<li>\(R_k^T M^2 r_{k+1} = 0\)
+</li>
+<li>\(q_0 = z_0 \Rightarrow x_k \in \Krylov_k\block{MA, Mb}\)
+</li>
+</ul>
+
+<p>
+It is not entirely clear why one should adopt one over the other in
+the general case. However, the precise definition of the <i>gradient</i>,
+which depends on the metric \(M\) (in this case, the gradient of \(E_M\)
+is the residual), would favor the first definition. It also seems
+more natural to build a \(M\)-orthogonal residual basis, and work in
+the original Krylov subspace.
+</p>
+
+<p>
+Intuitively, the gradient descent follows directions that are
+<i>orthogonal</i> to level-sets in order to minimize the function, and
+orthogonality depends on the metric. Different metrics will yield
+different trajectories across level-sets, hopefully to obtain faster
+convergence towards the minimum. 
+</p>
+
+<p>
+Anyways, since the second case has already been described, we
+continue with the first one and obtain the following algorithm:
+</p>
+
+<p>
+Initialization:
+\[ p_0 = r_0 = b - Ax_0 \]
+</p>
+
+<p>
+Iteration:
+</p>
+\begin{align}
+x_{k+1} &= x_k + \alpha_k p_k  & \alpha_k &= \frac{r_k^TMp_k}{p_k^TMAp_k} &= \frac{r_k^TMr_k}{p_k^TMAp_k}\\
+r_{k+1} &= r_k - \alpha_k Ap_k & & \\
+p_{k+1} &= r_{k+1} - \beta_k p_k & \beta_k &= \frac{r_{k+1}^TMAp_k}{p_k^TMAp_k} &= -\frac{ r_{k+1}^T M r_{k+1} }{r_k^T M r_k} \\
+\end{align}
+
+<p>
+&#x2026;which is exactly the standard CG algorithm using \(M\) as
+inner-product, as one could expect.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Preconditioning</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Preconditioning can be seen as a special case of the above:
+\(\inv{B}A\) is PSD for the inner-product \(B\) and the above algorithm
+then becomes the Preconditioned Conjugate Gradient. The \(p_k\) will
+be \(A\)-conjugate, and \(A\) will be minimized along the way, but the
+gradients \(r_k\) will now be \(B\)-orthogonal and exploit
+preconditioning, hopefully to obtain better convergence. A
+straightforward adaptatation of the above gives:
+</p>
+
+<p>
+Initialization:
+\[ p_0 = r_0 = \inv{B}\block{b - Ax_0} \]
+</p>
+
+<p>
+Iteration:
+</p>
+\begin{align}
+x_{k+1} &= x_k + \alpha_k p_k  & \alpha_k &= \frac{r_k^T B p_k}{p_k^TAp_k} \\
+r_{k+1} &= r_k - \alpha_k \inv{B}Ap_k & & \\
+p_{k+1} &= r_{k+1} - \beta_k p_k & \beta_k &= \frac{r_k^TAp_k}{p_k^TAp_k} \\
+\end{align}
+
+<p>
+It is probably more readable to use the residual for the original
+system instead, and introduce an extra variable \(z = \inv{B} r\)
+</p>
+
+<p>
+Initialization:
+\[ r_0 = b - A x_0, \quad p_0 = z_0 = \inv{B} r_0 \]
+</p>
+
+<p>
+Iteration:
+</p>
+\begin{align}
+x_{k+1} &= x_k + \alpha_k p_k  & \alpha_k &= \frac{r_k^Tp_k}{p_k^TAp_k} &= \frac{z_k^Tr_k}{p_k^TAp_k} \\
+r_{k+1} &= r_k - \alpha_k Ap_k & & \\
+z_{k+1} &= \inv{B} r_{k+1} \\
+p_{k+1} &= z_{k+1} - \beta_k p_k & \beta_k &= \frac{z_{k+1}^TAp_k}{p_k^TAp_k} &= -\frac{z_{k+1}^Tr_{k+1}}{z_k^T r_k} \\
+\end{align}
+
+<p>
+Intuitively, the metric \(B\) should ease motion where the curvature
+is low, and damp it where the curvature is high, in order to make
+convergence more homogeneous. We can do so by assigning a high cost
+to highly-curved directions using metric \(B\), so that the gradient
+in these directions will become smaller, and conversely. In this
+respect, the diagonal preconditioner \(B = \diag(A)\) approximates the
+curvature along each axis separately (in a Levernberg-Marquardt
+fashion) and damps the corresponding displacement proportionally.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Conjugate Residuals</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+This is exactly CG on \(A\) with non-standard metric \(M = A\). The
+residual norm is minimized, and the residuals are \(A\)-conjugate.
+</p>
+
+<p>
+Initialization:
+\[ p_0 = r_0 = b - Ax_0 \]
+</p>
+
+<p>
+Iteration:
+</p>
+\begin{align}
+x_{k+1} &= x_k + \alpha_k p_k  & \alpha_k &= \frac{r_k^T A p_k}{p_k^TA^2p_k} &= \frac{r_k^TAr_k}{p_k^TA^2p_k}\\
+r_{k+1} &= r_k - \alpha_k Ap_k & & \\
+p_{k+1} &= r_{k+1} - \beta_k p_k & \beta_k &= \frac{r_{k+1}^TA^2p_k}{p_k^TA^2p_k} &= -\frac{ r_{k+1}^T A r_{k+1} }{r_k^T A r_k} \\
+\end{align}
+
+<p>
+This algorithm yields the same iterates as MINRES (and is cheaper to
+compute), but requires a PSD matrix \(A\).
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Preconditioned Conjugate Residuals</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Again, this is CG on \(\inv{B}A\) with metric \(A\). The \(\inv{B}\)-norm
+of the residual is minimized, and the residuals are again
+\(A\)-conjugate.
+</p>
+
+<p>
+Initialization:
+\[ p_0 = r_0 = \inv{B}\block{b - Ax_0} \]
+</p>
+
+<p>
+Iteration:
+</p>
+\begin{align}
+x_{k+1} &= x_k + \alpha_k p_k  & \alpha_k &= \frac{r_k^T A p_k}{p_k^TA\inv{B} Ap_k} &= \frac{r_k^T A r_k}{p_k^TA\inv{B} Ap_k}\\
+r_{k+1} &= r_k - \alpha_k \inv{B} Ap_k & & \\
+p_{k+1} &= r_{k+1} - \beta_k p_k & \beta_k &= \frac{r_{k+1}^TA \inv{B} A p_k}{p_k^TA \inv{B} A p_k} &= -\frac{ r_{k+1}^T A r_{k+1} }{r_k^T A r_k} \\
+\end{align}
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Maxime Tournier</p>
+<p class="date">Created: 2014-11-26 Wed 12:23</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.5c)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

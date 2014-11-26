@@ -1,0 +1,91 @@
+
+body {
+
+	margin: auto;
+	max-width: 40em;
+
+	color: #222;
+	background: #fafafa;
+
+	font-family: Iowan Old Style, Palatino, Georgia, Serif;
+	line-height: 150%;
+	text-align: justify;
+	
+}
+
+img {
+	margin-left:auto;
+	margin-right:auto;
+}
+
+@media print {
+
+	body {
+		font-size:13px;
+	}
+
+}
+
+
+a:link {
+	color: #24a;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+h1 ~ div.MathJax_Display {
+	display:none;
+}
+
+span.section-number-2:after {
+	content: ".";
+}
+
+h1 {
+	margin: 1em 0;
+	line-height: 120%;
+}
+
+h2 {
+	margin: 2em 1em 0 0;
+}
+
+h3 {
+	margin: 2em 1em 0 0;
+}
+
+#postamble {
+	font-size: 80%;
+	text-align:center;
+	margin: 2em 1em 0 0;
+	color: #aaa
+}
+
+#postamble a {
+	color: #67a
+}
+
+
+#postamble p {
+	display:inline;
+	padding: 0 0.5em;
+}
+
+div.algorithm ul {
+	list-style-type:none;
+}
+
+div.algorithm li ul {
+	border-left: 2px solid lightgrey;
+}
+
+div.algorithm {
+	/* width:%; */
+}
+
+div.algorithm i {
+	margin: 0 auto;
+	float:right;
+	color: grey;
+}
+

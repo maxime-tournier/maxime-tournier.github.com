@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Kinect Setup</title>
+<!-- 2014-12-04 Thu 21:03 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Maxime Tournier" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../style.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2014 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./"> UP </a>
+ |
+ <a accesskey="H" href="../"> HOME </a>
+</div><div id="content">
+<h1 class="title">Kinect Setup</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. OSX</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Homebrew/Cask</a></li>
+<li><a href="#sec-1-2">1.2. Java</a></li>
+<li><a href="#sec-1-3">1.3. tap homebrew/science</a></li>
+<li><a href="#sec-1-4">1.4. OpenNI2</a></li>
+<li><a href="#sec-1-5">1.5. Freenect driver for OpenNI2</a>
+<ul>
+<li><a href="#sec-1-5-1">1.5.1. Homebrew</a>
+<ul>
+<li><a href="#sec-1-5-1-1">1.5.1.1. libfreenect</a></li>
+<li><a href="#sec-1-5-1-2">1.5.1.2. openni2-freenectdriver</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-5-2">1.5.2. Sources</a>
+<ul>
+<li><a href="#sec-1-5-2-1">1.5.2.1. clone libfreenect</a></li>
+<li><a href="#sec-1-5-2-2">1.5.2.2. configure</a></li>
+<li><a href="#sec-1-5-2-3">1.5.2.3. build and install</a></li>
+<li><a href="#sec-1-5-2-4">1.5.2.4. symlink driver</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-2">2. <span class="todo TODO">TODO</span> Debian</a></li>
+<li><a href="#sec-3">3. NiTE2</a></li>
+<li><a href="#sec-4">4. Primesense Python bindings</a></li>
+<li><a href="#sec-5">5. Python Skeleton Tracker</a></li>
+<li><a href="#sec-6">6. Freenect Registration Infos</a></li>
+</ul>
+</div>
+</div>
+<p>
+A short summary of the steps needed to get a working development
+environment for kinect on unix:
+</p>
+
+<ul class="org-ul">
+<li>open-source kinect driver: <code>libfreenect</code> from <a href="https://github.com/OpenKinect/libfreenect">OpenKinect</a>
+</li>
+<li><a href="https://github.com/occipital/openni2">OpenNI2</a> framework, with the Freenect driver
+</li>
+<li>NiTE2 skeleton tracker 
+</li>
+<li>python bindings
+</li>
+</ul>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> OSX</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Homebrew/Cask</h3>
+<div class="outline-text-3" id="text-1-1">
+<div class="org-src-container">
+
+<pre class="src src-sh">ruby -e <span style="color: #ffb08c;">"$(</span><span style="color: #fc9584;">curl</span><span style="color: #ffb08c;"> -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</span>
+brew install caskroom/cask/brew-cask
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Java</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+
+<pre class="src src-sh">brew cask install java
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> tap homebrew/science</h3>
+<div class="outline-text-3" id="text-1-3">
+<div class="org-src-container">
+
+<pre class="src src-sh">brew tap homebrew/science
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> OpenNI2</h3>
+<div class="outline-text-3" id="text-1-4">
+<div class="org-src-container">
+
+<pre class="src src-sh">brew install homebrew/science/openni2
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Freenect driver for OpenNI2</h3>
+<div class="outline-text-3" id="text-1-5">
+</div><div id="outline-container-sec-1-5-1" class="outline-4">
+<h4 id="sec-1-5-1"><span class="section-number-4">1.5.1</span> Homebrew</h4>
+<div class="outline-text-4" id="text-1-5-1">
+<p>
+do this if you don't care about using fakenect with openni.
+</p>
+</div>
+
+<div id="outline-container-sec-1-5-1-1" class="outline-5">
+<h5 id="sec-1-5-1-1"><span class="section-number-5">1.5.1.1</span> libfreenect</h5>
+<div class="outline-text-5" id="text-1-5-1-1">
+<div class="org-src-container">
+
+<pre class="src src-sh">brew install libfreenect
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-5-1-2" class="outline-5">
+<h5 id="sec-1-5-1-2"><span class="section-number-5">1.5.1.2</span> openni2-freenectdriver</h5>
+<div class="outline-text-5" id="text-1-5-1-2">
+<div class="org-src-container">
+
+<pre class="src src-sh">brew tap totakke/openni2
+brew install openni2-freenectdriver
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #ff922e;"># </span><span style="color: #ff922e;">Add the recommended variables to your dotfiles.</span>
+<span style="color: #ff922e;"># </span><span style="color: #ff922e;">,* On Bash, add them to `~/.bash_profile`.</span>
+<span style="color: #ff922e;"># </span><span style="color: #ff922e;">,* On Zsh, add them to `~/.zprofile` instead.</span>
+
+<span style="color: #bdcfe4;">export</span> <span style="color: #f1e193;">OPENNI2_INCLUDE</span>=/usr/local/include/ni2
+<span style="color: #bdcfe4;">export</span> <span style="color: #f1e193;">OPENNI2_REDIST</span>=/usr/local/lib/ni2
+</pre>
+</div>
+
+<p>
+<code>Openni2-Freenectdriver</code> links to <code>libfreenect</code>
+<b>statically</b>, so you won't be able to use fakenect with it if you
+don't patch it.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-5-2" class="outline-4">
+<h4 id="sec-1-5-2"><span class="section-number-4">1.5.2</span> Sources</h4>
+<div class="outline-text-4" id="text-1-5-2">
+<p>
+If you want to use <code>fakenect</code> with OpenNI2 (<i>e.g.</i> for skeleton
+tracking on recorded sequences), use this method instead.
+</p>
+
+<p>
+I had to patch <code>fakenect</code> to make it work, because I could not use
+<code>OniFile</code> recorder to do skeleton tracking (probably
+calibration/registration related). And OpenNI2 seems half-dead anyways.
+</p>
+
+<p>
+The patch adds stubs to <code>fakenect</code> where needed, and converts
+<code>DEPTH_11BIT</code> to <code>DEPTH_MM</code> if this format is requested (it is by
+NiTE2 skeleton tracker).
+</p>
+</div>
+
+<div id="outline-container-sec-1-5-2-1" class="outline-5">
+<h5 id="sec-1-5-2-1"><span class="section-number-5">1.5.2.1</span> clone libfreenect</h5>
+<div class="outline-text-5" id="text-1-5-2-1">
+<p>
+In this case, the one with my patches:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">git clone https://github.com/maxime-tournier/libfreenect.git
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-5-2-2" class="outline-5">
+<h5 id="sec-1-5-2-2"><span class="section-number-5">1.5.2.2</span> configure</h5>
+<div class="outline-text-5" id="text-1-5-2-2">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #bdcfe4;">cd</span> libfreenect
+mkdir build
+<span style="color: #bdcfe4;">cd</span> build
+cmake -L .. -DCMAKE_BUILD_TYPE=Release -DBUILD_OPENNI2_DRIVER=ON
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-5-2-3" class="outline-5">
+<h5 id="sec-1-5-2-3"><span class="section-number-5">1.5.2.3</span> build and install</h5>
+<div class="outline-text-5" id="text-1-5-2-3">
+<div class="org-src-container">
+
+<pre class="src src-sh">make install
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-5-2-4" class="outline-5">
+<h5 id="sec-1-5-2-4"><span class="section-number-5">1.5.2.4</span> symlink driver</h5>
+<div class="outline-text-5" id="text-1-5-2-4">
+<div class="org-src-container">
+
+<pre class="src src-sh">ln -s /usr/local/lib/OpenNI2-FreenectDriver/libFreenectDriver.dylib /usr/local/lib/ni2/OpenNI2/Drivers
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> <span class="todo TODO">TODO</span> Debian</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+should be mostly similar, use <code>apt-get</code> instead of Homebrew to get
+OpenNI2 and the Freenect driver
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> NiTE2</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Use this for skeleton tracking, get it from <i>e.g.</i>
+ <a href="https://drive.google.com/folderview?id=0BypeAImCbxeUa0dyckN5Y0pDTjQ&usp=drive_web">https://drive.google.com/folderview?id=0BypeAImCbxeUa0dyckN5Y0pDTjQ&usp=drive_web</a>
+</p>
+
+<p>
+or find other sources from the web as it has been discontinued.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Primesense Python bindings</h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+
+<pre class="src src-sh">pip install primesense
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Python Skeleton Tracker</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+See this <a href="https://github.com/maxime-tournier/kinect/blob/master/example.py">example</a>.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Freenect Registration Infos</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+(for reference, Kinect for Windows)
+</p>
+
+<pre class="example">
+send_cmd: cmd=0016 tag=0000 len=000a: 18
+Control reply: 18
+start_lines:    0
+end_lines:      0
+cropping_lines: 0
+send_cmd: cmd=0004 tag=0001 len=000a: 18
+Control reply: 18
+dcmos_emitter_distance: 7.500000
+dcmos_rcmos_distance:   2.300000
+reference_distance:     120.000000
+reference_pixel_size:   0.104200
+send_cmd: cmd=0016 tag=0002 len=000a: 18
+Control reply: 18
+ax:                -424
+bx:                -151
+cx:                7
+dx:                -171
+ay:                58
+by:                280
+cy:                -105
+dy:                -64
+dx_start:          9884
+dy_start:          8174
+dx_beta_start:     10062
+dy_beta_start:     130801
+dx_beta_inc:       170
+dy_beta_inc:       136
+dxdx_start:        2093150
+dxdy_start:        2096813
+dydx_start:        2096965
+dydy_start:        2093257
+dxdxdx_start:      513
+dydxdx_start:      237
+dxdxdy_start:      88
+dydxdy_start:      199
+dydydx_start:      351
+dydydy_start:      74
+send_cmd: cmd=0016 tag=0003 len=000a: 18
+Control reply: 18
+const_shift: 200.000000
+</pre>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Maxime Tournier</p>
+<p class="date">Created: 2014-12-04 Thu 21:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.5c)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

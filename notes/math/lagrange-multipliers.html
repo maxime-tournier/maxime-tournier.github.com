@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Multiplicateurs de Lagrange</title>
+<!-- 2014-12-08 Mon 19:06 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Maxime Tournier" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../style.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2014 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./"> UP </a>
+ |
+ <a accesskey="H" href="../"> HOME </a>
+</div><div id="content">
+<h1 class="title">Multiplicateurs de Lagrange</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Énoncé</a></li>
+<li><a href="#sec-2">2. Preuve</a></li>
+<li><a href="#muchel">3. Lagrangien</a></li>
+</ul>
+</div>
+</div>
+\[
+%% custom latex commands go here
+
+% math
+
+% parenthesis block
+\newcommand{\chunk}[1]{\left( #1 \right)}
+\newcommand{\block}[1]{\left( #1 \right)}
+
+% differentials
+\newcommand{\dd}{d}
+\newcommand{\db}{\dd^b}
+\newcommand{\ds}{\dd^s}
+
+\newcommand{\dL}{\dd^L}
+\newcommand{\dR}{\dd^R}
+ 
+% Lie algebra
+\newcommand{\alg}[1]{\mathfrak{\lowercase{#1}}}
+\newcommand{\coalg}[1]{\mathfrak{\lowercase{#1}}^*}
+
+% inverse
+\newcommand{\inv}[1]{{#1}^{-1}}
+
+% common spaces
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\Diag}{\mathbb{D}}
+\newcommand{\Sym}{\mathbb{S}}
+
+\newcommand{\PSD}{\Sym_+}
+\newcommand{\SPD}{\Sym_{++}}
+
+% quotient space
+\newcommand{\quotient}[2]{
+  #1_{/#2}
+}
+
+
+% sinus cardinal
+\newcommand{\sinc}{\mathrm{sinc}}
+ 
+% misc
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\st}{\mathrm{s.t.}}
+
+% kernel
+\newcommand{\Ker}[1]{Ker\block{#1}}
+
+% image
+\newcommand{\Image}[1]{Im\block{#1}}
+
+% span
+\newcommand{\Span}[1]{\mathrm{span}\block{#1}}
+
+% trace
+\newcommand{\trace}[1]{\mathrm{tr}\block{#1}}
+
+% Lagrangian
+\newcommand{\LL}{\mathcal{L}}
+
+% differentiability class
+\newcommand{\DD}{\mathcal{C}}
+
+% complementarity constraint
+\newcommand{\compl}[2]{ 0 \leq #1 \  \bot \  #2 \geq 0 }
+
+% matrices
+\newcommand{\mat}[1]{ \begin{pmatrix} #1 \end{pmatrix} }                
+\newcommand{\inner}[2]{ \langle #1, #2 \rangle }
+\newcommand{\norm}[1]{ \left| \left| #1 \right| \right| }
+\newcommand{\argmin}[1]{ \underset{#1}{\mathrm{argmin}} }
+\newcommand{\argmax}[1]{ \underset{#1}{\mathrm{argmax}} }
+
+\newcommand{\ddd}[2]{\frac{\partial #1}{\partial #2} }
+
+\newcommand{\half}{\frac{1}{2}}
+
+% 
+\renewcommand{\bar}{\overline}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\tilde}{\widetilde}
+
+% 
+\newcommand{\upbar}{\bar}
+\newcommand{\downbar}{\underline}
+
+% superscripts
+\renewcommand{\th}{\textsuperscript{th} }
+
+% latin
+\newcommand{\ie}{\emph{i.e.~}}
+\newcommand{\cf}{\emph{cf.~}}
+\newcommand{\eg}{\emph{e.g.~}}
+\newcommand{\etal}{\emph{et al.~}} 
+\newcommand{\apriori}{\emph{a priori}\xspace}
+\newcommand{\adhoc}{\emph{ad hoc} }
+\newcommand{\vs}{\emph{vs }}
+
+% figures
+\newcommand{\fig}{\emph{fig.}}
+
+% indications on figures (left, right, colors)
+\newcommand{\indic}[1]{\emph{(#1)}}
+
+\newcommand{\license}[1]{ {\tiny \indic{#1} } }
+
+\newcommand{\hstretch}[1]{\hspace{ \stretch{#1} }}
+
+\newcommand{\twopics}[3]{\hstretch{1} \includegraphics[#1]{#2}
+  \hstretch{1} \includegraphics[#1]{#3} \hstretch{1} }
+
+\newcommand{\threepics}[4]{ \hstretch{1} \includegraphics[#1]{#2}
+  \hstretch{1} \includegraphics[#1]{#3}
+  \hstretch{1} \includegraphics[#1]{#4} \hstretch{1} }
+ 
+\newcommand{\Threepics}[4]{\includegraphics[#1]{#2}\includegraphics[#1]{#3}\includegraphics[#1]{#4}}
+
+\newcommand{\fourpics}[5]{\includegraphics[#1]{#2}\includegraphics[#1]{#3}\includegraphics[#1]{#4}\includegraphics[#1]{#5}}
+\newcommand{\fivepics}[6]{\includegraphics[#1]{#2}\includegraphics[#1]{#3}\includegraphics[#1]{#4}\includegraphics[#1]{#5}\includegraphics[#1]{#6}}
+
+% TODOS
+
+\newcommand{\TODO}[1]{ \textbf{\huge{TODO}} \emph{#1}}
+
+% panic
+% \renewcommand{\TODO}[1]{}       
+
+% pd controller
+\newcommand{\pd}{\mathrm{pd}}
+
+\newcommand{\txtidx}[1]{_{\text{#1}}}
+
+\newcommand{\desired}[1]{#1\txtidx{des}}
+\newcommand{\target}[1]{{{#1}^\star}}
+\newcommand{\current}[1]{#1\txtidx{curr}}
+\newcommand{\com}{\text{CoM}}
+
+%abbrevs
+\newcommand{\wrt}{with respect to }
+
+
+\newcommand{\separator}{ 
+  \begin{center}
+     $\star\star\star$
+  \end{center}
+}
+\newcommand{\Krylov}{\mathcal{K}}
+\]
+
+<p>
+On note \(E = \RR^m\) et \(F = \RR^n\) pour \(m, n \in \NN\) avec \(n \leq
+m\). On cherche à optimiser une fonction \(f \in C^1 (E, \mathbb{R})\)
+sous \(m\) contraintes <i>holonomes</i> \(c \in C^1 (E, F)\), c'est-à-dire
+qu'on cherche des valeurs extrêmales de la fonction \(f\) restreinte à
+l'ensemble des points vérifiant \(c(x) = 0\).
+</p>
+
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Énoncé</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Le théorème des <b>extrêma liés</b> établit une condition <i>nécéssaire</i>
+d'optimalité: si \(x^\star\) est un point critique pour \(f_{|C}\),
+alors la différentielle de \(f\) en \(x^\star\) est combinaison linéaire
+des différentielles des contraintes \(c_i\) :
+</p>
+
+<p>
+\[ \dd f(x^\star) \in \Span{ \dd c_i(x^\star) } \]
+</p>
+
+<p>
+Pour une unique contrainte, cela se traduit par deux gradients
+<i>colinéaires</i>, ce qu'exprime le nom du théorème. On s'en sert pour
+trouver des candidats possibles au titre d'extrêmum. On suppose en
+outre que les domaines de définition sont ouverts (et
+non-disjoints): le théorème ne dit donc rien sur ce qui peut se
+passer aux bords.
+</p>
+
+<p>
+On a une assez bonne <b>intuition</b> du théorème en considérant un
+pendule soumis à la gravité: les extrema de l'énergie potentielle se
+produisent lorsque son gradient <i>(la force de gravité)</i> et celui des
+contraintes <i>(le fil du pendule)</i> sont alignés. On peut également
+résumer en disant qu'à l'optimium, le gradient de la fonction coût
+est orthogonal à l'ensemble des contraintes, donc engendré par leurs
+gradients.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Preuve</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Soit \(C = c^{-1}(0)\). Puisque \(c\) est constante sur \(C\) , tout
+vecteur tangent à \(C\) en \(x \in C\) est dans le noyau de \(\dd c(x)\):
+soit \(v \in T_xE\). \(v \in T_xC \iff \dd c(x).v = 0\). La stationnarité
+de \(f\) en \(x\) peut alors s'exprimer de la manière suivante:
+</p>
+
+<p>
+\[ v \in T_x C \Rightarrow \dd f(x).v = 0 \]
+\[ \dd c(x).v = 0 \Rightarrow \dd f(x).v = 0 \]
+\[ v \in \Ker{\dd c(x)} \Rightarrow v \in \Ker{\dd f(x)} \]
+</p>
+
+<p>
+Finalement:
+</p>
+
+<p>
+\[ \Ker{\dd c(x)} \subset \Ker{\dd f(x)} \]
+</p>
+
+<p>
+Ceci implique que \(\dd f(x)\) est combinaison linéaire des \(\dd c_i(x)\). En
+effet, les \(\dd c_i(x)\) étant libres, on prend leur famille <i>duale</i> <sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>
+\((g_i)_{i \leq m}\), puis l'on forme pour tout \(v \in T_xC\) le
+vecteur \(y \in T_x C\) défini par:
+</p>
+
+<p>
+\[ y(v) = v - \sum_{i = 1}^{i = m}(\dd c_i(x).v).g_i \]
+</p>
+
+<p>
+On vérifie que \(y \in \underset{i}{\bigcap} Ker(\dd c_i(x))\) donc que
+\(y(v) \in Ker( \dd f(x) )\) pour tout \(v \in T_x C\). En d'autres termes,
+\(\dd f(x)\) s'écrit:
+</p>
+
+<p>
+\[ \dd f(x).v = \sum_{i = 1}^{i = m}(\dd c_i(x).v) (\dd f(x).g_i) \]
+</p>
+
+<p>
+Ou, plus simplement:
+</p>
+
+<p>
+\[ \dd f(x) = \sum_{i = 1}^{i = m}(\dd f(x).g_i) \  \dd c_i(x) \]
+</p>
+</div>
+</div>
+
+<div id="outline-container-muchel" class="outline-2">
+<h2 id="muchel"><a id="sec-3" name="sec-3"></a><span class="section-number-2">3</span> Lagrangien</h2>
+<div class="outline-text-2" id="text-muchel">
+
+<p>
+Le théorème affirme donc l'existence de \(m\) scalaires
+\((\lambda_i)_{i \leq m}\) appelés <b>multiplicateurs de Lagrange</b>,
+tels que:
+</p>
+
+<p>
+\[ \dd f(x) = \sum_{i=1}^{i=m} \lambda_i.\dd c_i(x) \]
+</p>
+
+<p>
+&#x2026;dont la valeur est donnée dans la preuve. En pratique, on pourra
+se ramener à l'étude équivalente des points critiques du
+<b>Lagrangien</b>:
+</p>
+
+<p>
+\[ L(x, \lambda) = f(x) + \lambda^T c(x) \] 
+</p>
+
+<p>
+En effet, un point critique de \(L\) vérifie:
+</p>
+
+<p>
+\[ dL = 0 \iff \cases { \frac{\partial L}{\partial x} = 0 \cr
+  \frac{\partial L}{\partial x} = 0 } \]
+</p>
+
+<p>
+Avec:
+</p>
+
+<p>
+\[ \frac{\partial L}{\partial x} \dd x = \dd f(x).\dd x + \lambda^T \dd c(x).\dd x \]
+\[ \frac{\partial L}{\partial \lambda} \dd \lambda = c(x)^T \dd \lambda \]
+</p>
+
+<p>
+Un point critique du Lagrangien vérifie donc exactement les
+conditions d'optimalité recherchées pour \(f\).
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<i>i.e.</i> telle que \(\dd c_i(x).g_j = \delta_{i,j}\)
+</p></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="author">Author: Maxime Tournier</p>
+<p class="date">Created: 2014-12-08 Mon 19:06</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.5c)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

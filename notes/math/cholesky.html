@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Cholesky Decomposition</title>
+<!-- 2015-01-13 Tue 12:23 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Maxime Tournier" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../style.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2014 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./"> UP </a>
+ |
+ <a accesskey="H" href="../"> HOME </a>
+</div><div id="content">
+<h1 class="title">Cholesky Decomposition</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. <span class="todo TODO">TODO</span> </a></li>
+<li><a href="#sec-2">2. <span class="todo TODO">TODO</span> Theory</a></li>
+<li><a href="#sec-3">3. Algorithm</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Factor</a></li>
+<li><a href="#sec-3-2">3.2. Solve</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Sparse Algorithm</a>
+<ul>
+<li><a href="#sec-4-1">4.1. Factor</a></li>
+<li><a href="#sec-4-2">4.2. Solve</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5. Acyclic Graph, Fill-in</a></li>
+<li><a href="#sec-6">6. Applications</a></li>
+</ul>
+</div>
+</div>
+\[
+%% custom latex commands go here
+
+% math
+
+% parenthesis block
+\newcommand{\chunk}[1]{\left( #1 \right)}
+\newcommand{\block}[1]{\left( #1 \right)}
+
+% differentials
+\newcommand{\dd}{d}
+\newcommand{\db}{\dd^b}
+\newcommand{\ds}{\dd^s}
+
+\newcommand{\dL}{\dd^L}
+\newcommand{\dR}{\dd^R}
+ 
+% Lie algebra
+\newcommand{\alg}[1]{\mathfrak{\lowercase{#1}}}
+\newcommand{\coalg}[1]{\mathfrak{\lowercase{#1}}^*}
+
+% inverse
+\newcommand{\inv}[1]{{#1}^{-1}}
+
+% common spaces
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\Diag}{\mathbb{D}}
+\newcommand{\Sym}{\mathbb{S}}
+
+\newcommand{\PSD}{\Sym_+}
+\newcommand{\SPD}{\Sym_{++}}
+
+% quotient space
+\newcommand{\quotient}[2]{
+  #1_{/#2}
+}
+
+
+% sinus cardinal
+\newcommand{\sinc}{\mathrm{sinc}}
+ 
+% misc
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\st}{\mathrm{s.t.}}
+
+% kernel
+\newcommand{\Ker}[1]{Ker\block{#1}}
+
+% image
+\newcommand{\Image}[1]{Im\block{#1}}
+
+% span
+\newcommand{\Span}[1]{\mathrm{span}\block{#1}}
+
+% trace
+\newcommand{\trace}[1]{\mathrm{tr}\block{#1}}
+
+% Lagrangian
+\newcommand{\LL}{\mathcal{L}}
+
+% differentiability class
+\newcommand{\DD}{\mathcal{C}}
+
+% complementarity constraint
+\newcommand{\compl}[2]{ 0 \leq #1 \  \bot \  #2 \geq 0 }
+
+% matrices
+\newcommand{\mat}[1]{ \begin{pmatrix} #1 \end{pmatrix} }                
+\newcommand{\inner}[2]{ \langle #1, #2 \rangle }
+\newcommand{\norm}[1]{ \left| \left| #1 \right| \right| }
+\newcommand{\argmin}[1]{ \underset{#1}{\mathrm{argmin}} }
+\newcommand{\argmax}[1]{ \underset{#1}{\mathrm{argmax}} }
+
+\newcommand{\ddd}[2]{\frac{\partial #1}{\partial #2} }
+
+\newcommand{\half}{\frac{1}{2}}
+
+% 
+\renewcommand{\bar}{\overline}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\tilde}{\widetilde}
+
+% 
+\newcommand{\upbar}{\bar}
+\newcommand{\downbar}{\underline}
+
+% superscripts
+\renewcommand{\th}{\textsuperscript{th} }
+
+% latin
+\newcommand{\ie}{\emph{i.e.~}}
+\newcommand{\cf}{\emph{cf.~}}
+\newcommand{\eg}{\emph{e.g.~}}
+\newcommand{\etal}{\emph{et al.~}} 
+\newcommand{\apriori}{\emph{a priori}\xspace}
+\newcommand{\adhoc}{\emph{ad hoc} }
+\newcommand{\vs}{\emph{vs }}
+
+% figures
+\newcommand{\fig}{\emph{fig.}}
+
+% indications on figures (left, right, colors)
+\newcommand{\indic}[1]{\emph{(#1)}}
+
+\newcommand{\license}[1]{ {\tiny \indic{#1} } }
+
+\newcommand{\hstretch}[1]{\hspace{ \stretch{#1} }}
+
+\newcommand{\twopics}[3]{\hstretch{1} \includegraphics[#1]{#2}
+  \hstretch{1} \includegraphics[#1]{#3} \hstretch{1} }
+
+\newcommand{\threepics}[4]{ \hstretch{1} \includegraphics[#1]{#2}
+  \hstretch{1} \includegraphics[#1]{#3}
+  \hstretch{1} \includegraphics[#1]{#4} \hstretch{1} }
+ 
+\newcommand{\Threepics}[4]{\includegraphics[#1]{#2}\includegraphics[#1]{#3}\includegraphics[#1]{#4}}
+
+\newcommand{\fourpics}[5]{\includegraphics[#1]{#2}\includegraphics[#1]{#3}\includegraphics[#1]{#4}\includegraphics[#1]{#5}}
+\newcommand{\fivepics}[6]{\includegraphics[#1]{#2}\includegraphics[#1]{#3}\includegraphics[#1]{#4}\includegraphics[#1]{#5}\includegraphics[#1]{#6}}
+
+% TODOS
+
+\newcommand{\TODO}[1]{ \textbf{\huge{TODO}} \emph{#1}}
+
+% panic
+% \renewcommand{\TODO}[1]{}       
+
+% pd controller
+\newcommand{\pd}{\mathrm{pd}}
+
+\newcommand{\txtidx}[1]{_{\text{#1}}}
+
+\newcommand{\desired}[1]{#1\txtidx{des}}
+\newcommand{\target}[1]{{{#1}^\star}}
+\newcommand{\current}[1]{#1\txtidx{curr}}
+\newcommand{\com}{\text{CoM}}
+
+%abbrevs
+\newcommand{\wrt}{with respect to }
+
+
+\newcommand{\separator}{ 
+  \begin{center}
+     $\star\star\star$
+  \end{center}
+}
+\newcommand{\Krylov}{\mathcal{K}}
+\]
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> <span class="todo TODO">TODO</span> </h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>complete the theory part
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> <span class="todo TODO">TODO</span> Theory</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Most symmetric matrices \(H\) have a factorization of the form:
+</p>
+
+<p>
+\[ H = L D L^T \]
+</p>
+
+<p>
+where \(L\) is <i>lower</i>-triangular with unit diagonal elements, and \(D\)
+is diagonal and positive.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Algorithm</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+The following algorithm computes the Cholesky decomposition of a
+matrix \(H\) <i>in-place</i>, using the diagonal blocks to store \(D\). See
+<a href="http://en.wikipedia.org/wiki/Cholesky_decomposition#Avoiding_taking_square_roots">Wikipedia</a> for more details. Note that the algorithm presented here
+works on the <i>upper</i> diagonal of the original matrix.
+</p>
+</div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Factor</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+<div class="algorithm">
+</p>
+<ul class="org-ul">
+<li>for \(i = 0\) to \(n\) 
+<ul class="org-ul">
+<li>for \(k = i − 1\) to \(1\)  <i>\(k \in\) processed</i>
+<ul class="org-ul">
+<li>\(H_{ii} \gets H_{ii} -  H_{ki}^T H_{kk} H_{ki}\)
+</li>
+</ul>
+</li>
+<li>for \(j = i + 1\) to \(n\)  <i>\(j \in\) remaining</i>
+<ul class="org-ul">
+<li>for \(k = i − 1\) to \(1\) <i>\(k \in\) processed</i> 
+<ul class="org-ul">
+<li>\(H_{ij} \gets H_{ij} - H_{ki}^T H_{kk} H_{kj}\) <i>fill-in !</i>
+</li>
+</ul>
+</li>
+<li>\(H_{ij} \gets \inv{H_{ii}} H_{ij}\)
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>
+</div>
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Solve</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+We solve the system \(Hx = z\) using the following algorithm, which
+essentially performs two back-substitutions on triangular systems and
+a diagonal scaling:
+</p>
+
+<p>
+<div class="algorithm">
+</p>
+<ul class="org-ul">
+<li>for \(i = 1\) to \(n\)
+<ul class="org-ul">
+<li>\(x_i \gets z_i\)
+</li>
+<li>for \(j = 1\) to \(i − 1\)  <i>\(j \in\) processed</i>
+<ul class="org-ul">
+<li>\(x_i \gets x_i – H_{ij}^T x_j\)
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>for \(i = n\) to \(1\) 
+<ul class="org-ul">
+<li>\(x_i \gets \inv{H_{ii}} x_i\)
+</li>
+<li>for \(j = i + 1\) to \(n\) <i>\(j \in\) processed</i>
+<ul class="org-ul">
+<li>\(x_i \gets x_i – H_{ij} x_j\)
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>
+</div>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Sparse Algorithm</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+When a lot of matrix blocks are zero in \(H\), the algorithm may be
+simplified based on an undirected <i>adjacency graph</i> structure, where
+an edge \((i, j)\) indicates a non-zero matrix block between coordinates
+\(i\) and \(j\).
+</p>
+
+<p>
+A postfix <i>depth-first</i> traversal of the graph allows one to number
+and order the graph as a <i>direct acyclic graph</i> (DAG). In such
+numbering, every vertex has an index greater than all its predecessors
+according to the topological sort.
+</p>
+
+<p>
+With this convention, processing nodes by <i>increasing</i> indices
+corresponds to a <b>postfix</b> (<i>i.e</i> children first) depth-first
+traversal, while processing nodes by <i>decreasing</i> indices corresponds to
+a <b>prefix</b> traversal (parents first).
+</p>
+</div>
+
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Factor</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+<div class="algorithm">
+</p>
+<ul class="org-ul">
+<li>for each vertex \(i\) in <b>postfix</b> order
+<ul class="org-ul">
+<li>for each <b>child</b> vertex \(k\) of \(i\) <i>otherwise \(H_{ki}\) is zero</i>
+<ul class="org-ul">
+<li>\(H_{ii} \gets H_{ii} -  H_{ki}^T H_{kk} H_{ki}\)  
+</li>
+</ul>
+</li>
+<li>for each <b>remaining</b> vertex \(j\)
+<ul class="org-ul">
+<li>for each <b>common</b> child \(k\) of \(i\) and \(j\)  <i>otherwise either \(H_{ki}\) or \(H_{kj}\) is zero</i>
+<ul class="org-ul">
+<li>\(H_{ij} \gets H_{ij} - H_{ki}^T H_{kk} H_{kj}\) <i>may add a new edge !</i>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>for each <b>parent</b> vertex \(j\) of \(i\) <i>otherwise \(H_{ij}\) is zero</i>
+<ul class="org-ul">
+<li>\(H_{ij} \gets \inv{H_{ii}} H_{ij}\)
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>
+</div>
+</p>
+
+<p>
+On fill-in between \(i\) and \(j\), the added edge is oriented such that
+\(i\) becomes a new child of \(j\), which does not alter the topological
+ordering.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Solve</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+<div class="algorithm">
+</p>
+<ul class="org-ul">
+<li>for each vertex \(i\) in <b>postfix</b> order
+<ul class="org-ul">
+<li>\(x_i \gets z_i\)
+</li>
+<li>for each <b>child</b> vertex \(j\) of \(i\)
+<ul class="org-ul">
+<li>\(x_i \gets x_i – H_{ij}^T x_j\)
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>for each vertex \(i\) in <b>prefix</b> order
+<ul class="org-ul">
+<li>\(x_i \gets \inv{H_{ii}} x_i\)
+</li>
+<li>for each <b>parent</b> vertex \(j\) of \(i\)
+<ul class="org-ul">
+<li>\(x_i \gets x_i – H_{ij} x_j\)
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>
+</div>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Acyclic Graph, Fill-in</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+We see that when the DAG is a <i>tree</i>, there is never any common child
+between two vertices. Therefore, no fill-in can happen, and the factor
+algorithm reduces to:
+</p>
+
+<p>
+<div class="algorithm">
+</p>
+<ul class="org-ul">
+<li>for each vertex \(i\) in <b>postfix</b> order
+<ul class="org-ul">
+<li>for each <b>child</b> vertex \(k\) of \(i\)  
+<ul class="org-ul">
+<li>\(H_{ii} \gets H_{ii} -  H_{ki}^T H_{kk} H_{ki}\)  
+</li>
+</ul>
+</li>
+<li>for <b>the</b> parent vertex \(j\) of \(i\), if any:
+<ul class="org-ul">
+<li>\(H_{ij} \gets \inv{H_{ii}} H_{ij}\)
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>
+</div>
+</p>
+
+
+<p>
+It can be useful to perform an <i>incomplete</i> factorization by
+preventing off-diagonal fill-in. The associated <i>solve</i> algorithm can
+act as a <i>preconditioner</i> for iterative methods.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Applications</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+See <a href="../phys/constraint-graphs.html">Constraint Graphs</a>.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Maxime Tournier</p>
+<p class="date">Created: 2015-01-13 Tue 12:23</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.5c)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

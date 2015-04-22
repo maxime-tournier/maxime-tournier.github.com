@@ -256,8 +256,8 @@ computing the logarithm:
 
 $$ f(q) =
 \begin{cases}
-q & \text{if} w_q \geq 0\\
--q & \text{if} w_q < 0\\
+q & \text{if} &  w_q \geq 0\\
+-q & \text{if} & w_q < 0\\
 \end{cases}
 $$
 
@@ -269,14 +269,17 @@ interpolated along the logarithm by $$\exp\block{\alpha \log(q)},\
 
 At this point, we still do not know which rotation is represented by a
 given unit quaternion. From the Taylor series, we see that $$\exp(v)$$
-and $$v$$ commute, so $$Ad_{\exp(v)} = \exp(v)v\exp(-v) =
-\exp(v)\exp(-v)v = v$$ and the rotation axis of $$Ad_{\exp(v)}$$ is
-$$v$$. From the adjoint representation, the additive structure along
-vector $$v$$ corresponds to the addition of angles, since we compose
-rotations along the same axis. Hence the rotation angle is propotional
-to $$\norm{v}$$. Finally, $$\exp(\pi n) = -1$$ for a unit vector
-$$n$$, which corresponds to the identity rotation (or $$2\pi$$), so
-the rotation angle for $$\exp(v)$$ is $$2\norm{v}$$. Equivalently:
+and $$v$$ commute, so that:
+
+$$Ad_{\exp(v)} = \exp(v)v\exp(-v) = \exp(v)\exp(-v)v = v$$
+
+and the rotation axis of $$Ad_{\exp(v)}$$ is $$v$$. From the adjoint
+representation, the additive structure along vector $$v$$ corresponds
+to the addition of angles, since we compose rotations along the same
+axis. Hence the rotation angle is propotional to
+$$\norm{v}$$. Finally, $$\exp(\pi n) = -1$$ for a unit vector $$n$$,
+which corresponds to the identity rotation (or $$2\pi$$), so the
+rotation angle for $$\exp(v)$$ is $$2\norm{v}$$. Equivalently:
 
 $$ R_{n, \theta} \simeq \cos \frac{\theta}{2} + \sin \frac{\theta}{2} n $$
 

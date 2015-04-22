@@ -211,7 +211,7 @@ $$ [x, y] = 2 x \times y $$
 The exponential is given by the usual Taylor series, using quaternion
 product on $$s^3$$:
 
-$$ \exp(v) = \sum_i \frac{v^i}{i!} $$
+$$ \exp(v) = \sum_{i=0}^{\infty} \frac{v^i}{i!} $$
 
 When $$v \neq 0$$, there exist a unit vector $$n\in S^2$$ such that
 $$v = \norm{v} n$$. This unit vector satisfies $$n^2 = -1$$, so the
@@ -219,8 +219,8 @@ above sum can be rewritten as:
 
 $$
 \begin{align}
-\exp(v) &= \sum_i \frac{v}^{2i}{2i!} + \frac{v}^{2i+1}{2i+1!} \\
-&= \sum_i -1^i \norm{v}^{2i}{2i!} + n -1^{i} \norm{v}^{2i+1}{2i+1!} \\
+\exp(v) &= \sum_i \frac{v^{2i}}{2i!} + \frac{v^{2i+1}}{2i+1!} \\
+&= \sum_i -1^i \frac{\norm{v^{2i}}}{2i!} + n -1^{i} \frac{\norm{v^{2i+1}}}{2i+1!} \\
 &= \cos\block{\norm{v}} + n \sin\block{\norm{v}}
 \end{align}
 $$

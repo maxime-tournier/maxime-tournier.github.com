@@ -20,7 +20,7 @@ your layouts, for instance:
 	{{ content }}
   </body>
 </html>
-{% endhighlight }
+{% endhighlight %}
 
 Then you will directly be able to include latex commands between \$\$
 (this is due to kramdown apparently).

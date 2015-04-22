@@ -248,10 +248,19 @@ $$
 $$
 
 Since both $$q$$ and $$-q$$ represent the same rotation, it is common
-to *flip* the quaternion prior to computing the logarithm: this
-ensures the rotation interpolated along the logarithm by
-$$\exp\block{\alpha \log(q)},\ \alpha \in [0, 1]$$ takes the *short
-way*.
+to *flip* the quaternion to the positive real hemisphere prior to
+computing the logarithm:
+
+$$ f(q) =
+\begin{cases}
+q & \text{if} w_q \geq 0\\
+-q & \text{if} w_q < 0\\
+\end{cases}
+$$
+
+Doing so ensures the arc-cosine is well defined, and that the rotation
+interpolated along the logarithm by $$\exp\block{\alpha \log(q)},\
+\alpha \in [0, 1]$$ takes the *short way*.
 
 
 ## Riemannian Manifold

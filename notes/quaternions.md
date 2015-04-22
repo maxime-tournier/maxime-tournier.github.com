@@ -218,8 +218,7 @@ That is: we cut our vector $$v$$ in infinitesimally small pieces to
 obtain elements of the group infinitesimally close to $$1$$ in the
 direction $$v$$, and multiply (compose) these elements together. As in
 the matrix case, one can verify that the exponential is also given by
-the usual Taylor series, this time using quaternion product on
-$$\alg{s^3}$$:
+the usual Taylor series, this time using quaternion product:
 
 $$ \exp(v) = \sum_{i=0}^{\infty} \frac{v^i}{i!} $$
 

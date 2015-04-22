@@ -147,15 +147,16 @@ complex coefficients, *i.e.* the group $$SU(2)$$.
 
 $$S^3$$ is a closed, $$3$$-dimensional smooth submanifold of $$\RR^4$$
 as the inverse image of $$0$$ by the smooth function $$f(q) =
-\norm{q} - 1$$.
+\norm{q} - 1$$. It is also compact and simply connex, meaning that
+every smooth closed path can be deformed to a point.
 
-It is also compact and simply connex, meaning that every smooth closed
-path can be deformed to a point. The multiplication and inverse are
-smooth, so $$S^3$$ has a Lie group structure. Finally, the ambient
-metric in $$\RR^4$$ induces a Riemannian structure, which plays nicely
-with the Lie group structure as we shall see.
 
 ## Lie Group
+
+The multiplication and inverse are smooth ($$1 \in S^3$$) so $$S^3$$
+has a Lie group structure.
+
+### Adjoint Representation
 
 The tangent space at $$1$$ is the space of imaginary quaternions,
 which we identify with $$\RR^4$$. The inner automorphism $$\Psi_q$$:
@@ -185,6 +186,8 @@ rotations. However, it is not injective (the representation is not
 $$2$$-to-$$1$$ relationship is known as the *double covering* of
 $$SO(3)$$ by $$S^3$$.
 
+### Lie Algebra
+
 The derivative of the adjoint map at the identity provides the Lie algebra
 structure on $$\RR^3$$, noted $$\mathfrak{s^3}$$:
 
@@ -204,7 +207,6 @@ $$ [x, y] = 2 x \times y $$
 
 ## Riemannian Manifold
 
-
- 
-
-
+The ambient metric in $$\RR^4$$ induces a Riemannian
+structure, which plays nicely with the Lie group structure as we shall
+see.

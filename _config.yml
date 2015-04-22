@@ -7,7 +7,6 @@ defaults:
       author: "Maxime Tournier"
 
 
-markdown:    kramdown
 highlighter: pygments
 
 

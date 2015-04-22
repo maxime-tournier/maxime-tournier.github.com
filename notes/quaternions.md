@@ -319,7 +319,7 @@ Geodesics are locally shortest path between points in the
 manifold. The fact that the Riemannian metric is bi-invariant implies
 that curves of the form:
 
-$$ q \exp(t v),\quad t\in\RR $$
+$$ q \exp(t x),\quad t\in\RR $$
 
 are geodesic curves (and all geodesics are of this form). We can
 obtain geodesic curves joining two unit quaternions $$a, b \in S^3$$

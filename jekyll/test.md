@@ -12,6 +12,12 @@ Maybe this instead:
 
 $$ x \mapsto y $$
 
+what about:
+
+\begin{align}
+x &= 5
+\end{align}
+
 
 
 

@@ -13,6 +13,9 @@ of view.
 
 # Construction and Properties
 
+In this section, we give a simple construction of the quaternions and
+list their basic properties (product, inverse, norm, etc...).
+
 ## Complex Numbers
    
 We start by building the complex numbers as the real $$\small{2 \times 2}$$
@@ -77,5 +80,19 @@ the following notations:
 $$ q = (w, x, y, z) =: w + v $$
   
 where $$v$$$ is a pure imaginary quaternion with coordinates $$(0, x,
-y, z)$$.
+y, z)$$, which we will happily identify with the corresponding vector
+in $$\RR^3$$ when needed.
+
+## Product
+
+The quaternion product follows from the matrix product. In
+coordinates, the product has the following expression:
+
+$$
+ab = (w_a + n_a) (w_b + n_b) = w_a w_b - n_a^T n_b \quad + \quad w_a n_b + n_a w_b + n_a\times n_b
+$$
+
+In particular, for pure imaginary quaternions $$x$$ and $$y$$ this gives:
+
+$$ x y = x \times y - x^Ty $$
 

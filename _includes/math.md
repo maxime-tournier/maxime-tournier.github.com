@@ -18,13 +18,13 @@ $$
 \newcommand{\inv}[1]{ {#1}^{-1} }
 
 \newcommand{\block}[1]{\left(#1\right)}
-
+\newcommand{\trace}[1]{\mathrm{tr}\block{#1}}
 
 \newcommand{\norm}[1]{ \left| \left| #1 \right| \right| }
 \newcommand{\argmin}[1]{ \underset{#1}{\mathrm{argmin}} }
 
 \newcommand{\half}{\frac{1}{2}}
-
+\newcommand{\inner}[2]{ \langle #1, #2 \rangle }
 
 \newcommand{\dd}{d}
 \newcommand{\ddd}[2]{\frac{\partial #1}{\partial #2} }

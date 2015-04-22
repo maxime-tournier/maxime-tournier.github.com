@@ -284,11 +284,37 @@ rotation angle for $$\exp(v)$$ is $$2\norm{v}$$. Equivalently:
 
 $$ R_{n, \theta} \simeq \cos \frac{\theta}{2} + \sin \frac{\theta}{2} n $$
 
+Now the double covering makes more sense.
+
 ## Riemannian Manifold
 
 The ambient metric in $$\RR^4$$ induces a Riemannian manifold
 structure on $$S^3$$, which plays nicely with the Lie group structure
 as we shall see.
+
+### Bi-invariant Metric
+
+The ambient metric on $$\RR^4$$ induces a metric each fiber (tangent
+space) of the tangent bundle $$TS^3$$. This metric is left-invariant:
+
+$$ \inner{u}{v}_{\RR^4} = \inner{qu}{qv} $$
+
+It is also right invariant (and thus also $Ad$):
+
+$$ \inner{u}{v}_{\RR^4} = \inner{uq}{vq} $$
+
+To see both of these, it is useful to come back to the matrix
+representation of quaternions, in which the metric is:
+
+$$ \inner{u}{v} = \trace{u^Tv} $$
+
+The practical consequence is that the Lie algebra metric, extended to
+the manifold by left or right translation, is a *Riemannian
+metric*. The most interesting consequence is that the Lie group
+exponential can be used to compute geodesics for this metric.
+
+### Geodesics
+
 
 
 # Misc.

@@ -173,8 +173,8 @@ From the multiplicative property of the norm, we see that $$Ad_g$$ is
 an isometry of $$\RR^3$$, so it is either a rotation or a reflection
 (or a mix of the two). Since $$S^3$$ is connex and $$1 \in S^3$$ (and
 $$Ad_1 = I_3$$ which is a rotation) $$Ad_g$$ has to be a rotation:
-there is a smooth path from $$1$$ to any quaternion so that $$\det
-Ad_g$$ has to remain $$1$$.
+there is a smooth path from $$1$$ to any quaternion so that
+$$\det\block{Ad_g}$$ has to remain $$1$$.
 
 $$Ad$$ provides a group homomorphism between $$S^3$$ and $$SO(3)$$
 (the *adjoint representation*):
@@ -186,6 +186,7 @@ rotations. However, it is not injective (the representation is not
 *faithful*): both $$q$$ and $$-q$$ share the same adjoint. This
 $$2$$-to-$$1$$ relationship is known as the *double covering* of
 $$SO(3)$$ by $$S^3$$.
+
 
 ### Lie Algebra
 
@@ -240,6 +241,8 @@ defined inside the injectivity radius:
 
 $$ \log q = \theta n $$
 
+where:
+
 $$
 \begin{align}
     \theta &= \inv{\cos}(w) \\ 
@@ -262,6 +265,18 @@ Doing so ensures the arc-cosine is well defined, and that the rotation
 interpolated along the logarithm by $$\exp\block{\alpha \log(q)},\
 \alpha \in [0, 1]$$ takes the *short way*.
 
+We still do not know which rotation is represented by a given unit
+quaternion. From the Taylor series, we see that $$\exp(v)$$ and $$v$$
+commute, so $$Ad_{\exp(v)} = \exp(v)v\exp(-v) = \exp(v)\exp(-v)v = v$$
+and the rotation axis of $$Ad_{\exp(v)}$$ is $$v$$. From the adjoint
+representation, the additive structure along vector $$v$$ corresponds
+to the addition of angles, since we compose rotations along the same
+axis. Hence the rotation angle is propotional to
+$$\norm{v}$$. Finally, $$\exp(\pi n) = -1$$ for a unit vector $$n$$,
+which corresponds to the identity rotation (or $$2\pi$$), so the
+rotation angle for $$\exp(v)$$ is $$2\norm{v}$$. Equivalently:
+
+$$ R_{n, \theta} \simeq \cos \frac{\theta}{2} + \sin \frac{\theta}{2} n $$
 
 ## Riemannian Manifold
 

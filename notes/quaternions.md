@@ -236,9 +236,7 @@ $$
 
 The injectivity radius is $$2\pi$$, but we start getting the same
 rotations after $$\pi$$. The logarithm is the inverse operation,
-defined inside the injectivity radius. Since both $$q$$ and $$-q$$
-represent the same rotation, it is common to *flip* the quaternion
-prior to computing the logarithm as follows:
+defined inside the injectivity radius:
 
 $$ \log q = \theta n $$
 
@@ -249,13 +247,11 @@ $$
 \end{align}
 $$
 
-Flipping the quaternion ensures the rotation interpolated along the
-logarithm: $$\exp(\alpha \log(q)),\ \alpha \in [0, 1]$$ takes the
-*short way*.
-
-Test
-
-$$ \lowercase{\mathfrak{SO(3)}} $$
+Since both $$q$$ and $$-q$$ represent the same rotation, it is common
+to *flip* the quaternion prior to computing the logarithm: this
+ensures the rotation interpolated along the logarithm by
+$$\exp\block{\alpha \log(q)},\ \alpha \in [0, 1]$$ takes the *short
+way*.
 
 
 ## Riemannian Manifold
@@ -263,4 +259,19 @@ $$ \lowercase{\mathfrak{SO(3)}} $$
 The ambient metric in $$\RR^4$$ induces a Riemannian manifold
 structure on $$S^3$$, which plays nicely with the Lie group structure
 as we shall see.
+
+
+# Misc.
+
+## Conversion to Rotation Matrix 
+
+## Interpolation
+
+## Averaging
+
+## Geodesic Projection
+
+## Exponential Map Derivative
+
+## Conversion to/from Euler Angles
 

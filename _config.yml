@@ -10,9 +10,7 @@ defaults:
 markdown: kramdown
 highlighter: pygments
 
-kramdown:
-  syntax_highlighter: pygments
-  input: GFM
+
 
 
 

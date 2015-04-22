@@ -22,7 +22,7 @@ your layouts, for instance:
 </html>
 ~~~
 
-Then you will directly be able to include latex commands between `\$\$`
+Then you will directly be able to include latex commands between `$$`
 (this is due to kramdown apparently).
 
 Sweet !

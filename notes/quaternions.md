@@ -38,7 +38,7 @@ a *field*, the complex numbers, noted $$\CC$$
 We repeat this construction, this time with *complex* matrices of the
 form:
 
-$$ \mat{ x & y \\ -\bar{y} & \bar{x} } $$
+$$ \mat{ x & \bar{y} \\ -y & \bar{x} } $$
 
 We end up with a 2-dimensional *complex* vector-space, that is also
 a 4-dimensional *real* vector space, given by real $$4 \times
@@ -134,12 +134,25 @@ the quaternion inverse:
 
 $$ \inv{q} = \frac{\bar{q}}{|q|^2} $$
 
-# Unit Quaternion: $$S^3$$
+# Unit Quaternions: $$S^3$$
 
 The unit sphere $$S^3$$ is stable under quaternion multiplication and
 inverse, which makes it a multiplicative subgroup of $$\HH$$. As we
 shall see, this space is particularly interesting for representing
-rotations.
+rotations. The unit sphere, together with quaternion multiplication,
+is isomorphic to the complex represention with unit complex
+coefficients, *i.e.* the group $$SU(2)$$.
 
+## Topology
+
+$$S^3$$ is a closed, compact submanifold of $$\RR^4$$. It is also
+simply connex, meaning that every smooth closed path can be deformed
+to a point. As the inverse image of $$0$$ by the smooth function
+$$f(q) = \norm{q} - 1$, it is a smooth manifold of dimension $$3$$.
+
+
+
+
+ 
 
 

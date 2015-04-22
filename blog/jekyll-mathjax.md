@@ -6,7 +6,7 @@ Not much to do, basically all you need is to load MathJax from one of
 your layouts, for instance:
 
 
-``` html
+```html
 <!doctype html>
 <html>
   <head>

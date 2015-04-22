@@ -1,9 +1,9 @@
 ---
-title: This is my title
-layout: post
+title: Notes
+layout: note
 ---
 
-Here is my page.
+It are working nao
 
 # Latest posts
 

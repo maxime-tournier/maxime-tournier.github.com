@@ -229,7 +229,7 @@ above sum can be rewritten as:
 $$
 \begin{align}
 \exp(v) &= \sum_i \frac{v^{2i}}{2i!} + \frac{v^{2i+1}}{2i+1!} \\
-&= \sum_i (-1)^i \frac{\norm{v^{2i}}}{2i!} + (-1)^{i} \frac{\norm{v^{2i+1}}}{2i+1!} n \\
+&= \sum_i (-1)^i \frac{\norm{v}^{2i}}{2i!} + (-1)^{i} \frac{\norm{v}^{2i+1}}{2i+1!} n \\
 &= \cos \norm{v} + \sin \norm{v} n
 \end{align}
 $$

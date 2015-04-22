@@ -15,9 +15,16 @@ $$ x \mapsto y $$
 what about:
 
 \begin{align}
-x &= 5 \\
+x &= 5 \\\\
 y &= 1 + 2 + 3 + 4
 \end{align}
+
+$$
+	\begin{align}
+		x &= 2 \\
+		y &= 6 + 12 \\
+	\end{align}	
+$$
 
 
 

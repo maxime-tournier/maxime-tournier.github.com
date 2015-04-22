@@ -299,7 +299,7 @@ space) of the tangent bundle $$TS^3$$. This metric is left-invariant:
 
 $$ \inner{u}{v}_{\RR^4} = \inner{qu}{qv} $$
 
-It is also right invariant (and thus also $Ad$):
+It is also right invariant (and thus also $$Ad$$-invariant):
 
 $$ \inner{u}{v}_{\RR^4} = \inner{uq}{vq} $$
 
@@ -308,12 +308,13 @@ representation of quaternions, in which the metric is:
 
 $$ \inner{u}{v} = \trace{u^Tv} $$
 
-The practical consequence is that the Lie algebra metric, extended to
-the manifold by left or right translation, is a *Riemannian
-metric*. The most interesting consequence is that the Lie group
+So the Lie algebra metric, extended to the whole manifold by left or
+right translation, is a *Riemannian metric* (the one induced by the
+ambient space). An interesting consequence is that the Lie group
 exponential can be used to compute geodesics for this metric.
 
 ### Geodesics
+
 
 
 

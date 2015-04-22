@@ -1,9 +1,12 @@
 defaults:
--
- scope:
-   path: "blog" 
- values:
-   layout: "note"
-	  
+  -
+    scope:
+      path: "blog" 
+    values:
+      layout: "note"
+      author: "Maxime Tournier"
+
+
+   
 
 

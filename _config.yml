@@ -8,7 +8,8 @@ defaults:
 
 
 markdown:    kramdown
-highlighter: rouge
+highlighter: pygments
+
 
 
 

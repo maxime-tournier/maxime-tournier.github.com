@@ -170,7 +170,16 @@ $$ Ad_g = \dd \Psi_g(1): \RR^3 \to \RR^3 $$
 From the multiplicative property of the norm, we see that $$Ad_g$$ is
 an isometry of $$\RR^3$$, so it is either a rotation or a reflection
 (or a mix of the two). Since $$S^3$$ is connex and $$1 \in S^3$$ (and
-$$Ad_1 = I_3$$) $$Ad_g$$ has to be a rotation.
+$$Ad_1 = I_3$$ which is a rotation) $$Ad_g$$ has to be a rotation:
+there is a smooth path from $$1$$ to any quaternion so that $$\det
+Ad_g$$ has to remain $$1$$.
+
+$$Ad$$ provides a group homomorphism between $$S^3$$ and $$SO(3)$$, so
+that multiplying quaternions corresponds to composiong
+rotations. However, it is not an isomorphism: both $$q$$ and $$-q$$
+share the same adjoint. This $$2$$-to-$$1$$ relationship is known as
+the *double covering* of $$SO(3)$$ by $$S^3$$.
+
 
 ## Riemannian Manifold
 

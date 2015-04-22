@@ -81,7 +81,8 @@ $$ q = (w, x, y, z) =: w + v $$
   
 where $$v$$$ is a pure imaginary quaternion with coordinates $$(0, x,
 y, z)$$, which we will happily identify with the corresponding vector
-in $$\RR^3$$ when needed.
+in $$\RR^3$$ when needed. $$w$$ is called the *real* part, and $$v$$
+the *imaginary* part, just like for complex numbers.
 
 ## Product
 
@@ -95,4 +96,22 @@ $$
 In particular, for pure imaginary quaternions $$x$$ and $$y$$ this gives:
 
 $$ x y = x \times y - x^Ty $$
+
+## Conjugate
+
+As for the complex numbers, this corresponds to the transpose of the
+matrix representation. This immediately implies that:
+  
+$$ \bar{p q} = \bar{q} \bar{p} $$
+
+In coordinates, the conjugation is simply given by:
+
+$$ \bar{q} = w_q - v_q $$
+  
+The real and imaginary parts of a quaternion may be expressed using
+conjugation:
+
+$$ w_q = \frac{q + \bar{q}}{2} $$
+$$ v_q = \frac{q - \bar{q}}{2} $$
+
 

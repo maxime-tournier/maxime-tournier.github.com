@@ -12,7 +12,7 @@ highlighter: pygments
 
 kramdown:
   syntax_highlighter: pygments
-
+  input: GFM
 
 
 

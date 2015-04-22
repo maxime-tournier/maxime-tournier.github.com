@@ -5,6 +5,7 @@ title: Setting up Jekyll with MathJax
 Not much to do, basically all you need is to load MathJax from one of
 your layouts, for instance:
 
+
 ~~~ html
 <!doctype html>
 <html>
@@ -20,7 +21,7 @@ your layouts, for instance:
 	{{ content }}
   </body>
 </html>
-~~~
+
 
 Then you will directly be able to include latex commands between `$$`
 (this is due to kramdown apparently).

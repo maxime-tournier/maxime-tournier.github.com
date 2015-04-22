@@ -20,7 +20,8 @@ your layouts, for instance:
 	<h1>{{ page.title }}</h1>
 	{{ content }}
   </body>
-</html>
+  </html>
+~~~
 
 
 Then you will directly be able to include latex commands between `$$`

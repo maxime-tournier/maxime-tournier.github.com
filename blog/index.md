@@ -5,13 +5,16 @@ layout: post
 
 Here is my page.
 
-Pages:
+# Latest posts
+
+{% for post in site.posts %}
+   -  [{{ post.title }}]({{ post.url }})
+{% endfor %}
+
+
+# Pages
 {% for page in site.pages %}
    -  [{{ page.title }}]({{ page.url }})
 {% endfor %}
 
-Posts:
-{% for post in site.posts %}
-   -  [{{ post.title }}]({{ post.url }})
-{% endfor %}
 

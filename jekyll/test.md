@@ -1,6 +1,6 @@
 ---
-title: katex test
-layout: katex
+title: mathjax test
+layout: note
 ---
 
 howdy y'all
@@ -9,6 +9,6 @@ howdy y'all
 
 \[ displaymath g(x) \]
 
-
 michel $math y$ mabelle $$ \int f(x) $$
+
 

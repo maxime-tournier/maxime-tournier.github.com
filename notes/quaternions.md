@@ -11,7 +11,7 @@ of view.
 
 
 
-# Construction
+# Construction and Properties
 
 ## Complex Numbers
    
@@ -54,3 +54,27 @@ $$ \mat{
 This space is again closed under matrix multiplication, but the
 multiplication is no longer commutative. Together with the matrix
 product, this space forms the quaternions, noted $\HH$.
+
+We will generally use the *real* vector space structure, and identify
+a quaternion with its coordinates $$(w, x, y, z)$$ in the canonical
+basis.
+
+## Canonical Basis
+
+The 4 basis vectors for the *real* vector space structure are commonly
+noted $$(1, i, j, k)$$ and verify:
+
+$$ i^2 = j^2 = k^2 = ijk = -1 $$
+
+
+These formula are actually sufficient to define the quaternions, and
+were carved on /Brougham (Broom) Bridge/ in Dublin by *Hamilton*, on
+the 16th of October 1843 (yay wikipedia).
+  
+In the remaining of this document, we will denote quaternions using
+the following notations:
+  
+$$ q = (w, x, y, z) =: w + v $$
+  
+where $$v$$$ is a pure imaginary quaternion with coordinates $$(0, x,
+y, z)$$.

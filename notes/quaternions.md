@@ -315,8 +315,19 @@ exponential can be used to compute geodesics for this metric.
 
 ### Geodesics
 
+Geodesics are locally shortest path between points in the
+manifold. The fact that the Riemannian metric is bi-invariant implies
+that curves of the form:
 
+$$ q \exp(t v),\quad t\in\RR $$
 
+are geodesic curves (and all geodesics are of this form). We can
+obtain geodesic curves joining two unit quaternions as follows:
+
+$$ f(t) = a\exp\block{t \log\block{ \inv{a} b } } $$
+
+This is generally referred to as the *spherical linear interpolation*,
+or SLERP.
 
 # Misc.
 

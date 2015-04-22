@@ -137,20 +137,27 @@ $$ \inv{q} = \frac{\bar{q}}{|q|^2} $$
 # Unit Quaternions: $$S^3$$
 
 The unit sphere $$S^3$$ is stable under quaternion multiplication and
-inverse, which makes it a multiplicative subgroup of $$\HH$$. As we
-shall see, this space is particularly interesting for representing
-rotations. The unit sphere, together with quaternion multiplication,
-is isomorphic to the complex represention with unit complex
-coefficients, *i.e.* the group $$SU(2)$$.
+inverse, (and contains $$1$$) which makes it a multiplicative subgroup
+of $$\HH$$. As we shall see, this space is particularly interesting
+for representing rotations. The unit sphere, together with quaternion
+multiplication, is isomorphic to the complex represention with unit
+complex coefficients, *i.e.* the group $$SU(2)$$.
 
-## Topology
+## Smooth Manifold 
 
-$$S^3$$ is a closed, compact submanifold of $$\RR^4$$. It is also
-simply connex, meaning that every smooth closed path can be deformed
-to a point. As the inverse image of $$0$$ by the smooth function
-$$f(q) = \norm{q} - 1$, it is a smooth manifold of dimension $$3$$.
+$$S^3$$ is a closed, $$3$$-dimensional smooth submanifold of $$\RR^4$$
+as the inverse image of $$0$$ by the smooth function $$f(q) =
+\norm{q} - 1$$.
 
+It is also compact and simply connex, meaning that every smooth closed
+path can be deformed to a point. The multiplication and inverse are
+smooth, so $$S^3$$ has a Lie group structure. Finally, the ambient
+metric in $$\RR^4$$ induces a Riemannian structure, which plays nicely
+with the Lie group structure as we shall see.
 
+## Lie Group
+
+## Riemannian Manifold
 
 
  

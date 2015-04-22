@@ -206,12 +206,12 @@ In coordinates, the Lie bracked is twice the cross product:
 
 $$ [x, y] = 2 x \times y $$
 
-### Exponential
+### Exponential Map
 
 The classical characterization of the exponential (due to Euler)
-captures pretty well what the exponential does:
+conveys pretty well what the exponential does:
 
-$$ \exp(v) = \lim_{n \go \infty} \block{ 1 + \frac{v}{n} }^n $$
+$$ \exp(v) = \lim_{n \to \infty} \block{ 1 + \frac{v}{n} }^n $$
 
 That is: we cut our vector $$v$$ in infinitesimally small pieces to
 obtain elements of the group infinitesimally close to $$1$$ in the
@@ -230,13 +230,34 @@ $$
 \begin{align}
 \exp(v) &= \sum_i \frac{v^{2i}}{2i!} + \frac{v^{2i+1}}{2i+1!} \\
 &= \sum_i (-1)^i \frac{\norm{v^{2i}}}{2i!} + (-1)^{i} \frac{\norm{v^{2i+1}}}{2i+1!} n \\
-&= \cos \norm{v} + n \sin \norm{v}
+&= \cos \norm{v} + \sin \norm{v} n
 \end{align}
 $$
+
+The injectivity radius is $$2\pi$$, but we start getting the same
+rotations after $$\pi$$. The logarithm is the inverse operation,
+defined inside the injectivity radius. Since both $$q$$ and $$-q$$
+represent the same rotation, it is common to *flip* the quaternion
+prior to computing the logarithm as follows:
+
+$$ \log q = \theta n $$
+
+$$
+\begin{align}
+    \theta &= \inv{\cos}(w) \\ 
+    n &= \frac{v}{\norm{v}} \\
+\end{align}
+$$
+
+Flipping the quaternion ensures the rotation interpolated along the
+logarithm: $$\exp(\alpha \log(q)),\ \alpha \in [0, 1]$$ takes the
+*short way*.
+
 
 
 ## Riemannian Manifold
 
-The ambient metric in $$\RR^4$$ induces a Riemannian
-structure, which plays nicely with the Lie group structure as we shall
-see.
+The ambient metric in $$\RR^4$$ induces a Riemannian manifold
+structure on $$S^3$$, which plays nicely with the Lie group structure
+as we shall see.
+

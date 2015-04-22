@@ -1,6 +1,5 @@
 ---
 title: Quaternions
-includes: math
 ---
 
 Quaternions are primarily used as a representation of space

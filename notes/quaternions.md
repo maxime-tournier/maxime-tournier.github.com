@@ -8,6 +8,7 @@ geometric properties. Most operations on rotations can be expressed by
 means of quaternion representation, which generally offers a somewhat
 more intuitive point of view.
 
+* TOC
 {:toc}
 
 # Construction and Properties

@@ -1,5 +1,6 @@
 ---
 title: Quaternions
+includes: math
 ---
 
 Quaternions are primarily used as a representation of space
@@ -9,7 +10,7 @@ operations on rotations can be expressed by means of quaternion
 representation, which generally offers a somewhat more intuitive point
 of view.
 
-$$\newcommand{\mat}[1]{ \begin{pmatrix} #1 \end{pmatrix} }$$
+
 
 # Construction
 
@@ -23,8 +24,8 @@ $$\newcommand{\mat}[1]{ \begin{pmatrix} #1 \end{pmatrix} }$$
    -y & x  \\
    } $$
    
-   The above set is obviously a $2$-dimensional vector
-   space, whose basis is noted $(1, i)$. One can check that $$i^2 = -1$$.
+   The above set is obviously a $$2$$-dimensional vector
+   space, whose basis is noted $$(1, i)$$. One can check that $$i^2 = -1$$.
    
    This space is closed under matrix multiplication, and determinants
    show that this space, together with this (commutative)

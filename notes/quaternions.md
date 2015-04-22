@@ -119,7 +119,7 @@ $$ v_q = \frac{q - \bar{q}}{2} $$
 
 As for the complex numbers, the conjugation induces a norm over the
 quaternions (the Frobenius norm on the matrix representation), which
-coincides with the Euclidean norm on $\RR^4$:
+coincides with the Euclidean norm on $$\RR^4$$:
   
 $$ |q|^2 = q \bar{q} = \bar{q} q = ||q||_{\RR^4}^2 \geq 0 $$
 
@@ -156,6 +156,22 @@ metric in $$\RR^4$$ induces a Riemannian structure, which plays nicely
 with the Lie group structure as we shall see.
 
 ## Lie Group
+
+The tangent space at $$1$$ is the space of imaginary quaternions,
+which we identify with $$\RR^4$$. The inner automorphism $$\Psi_q$:
+
+$$ \Psi_q: h \mapsto q h \bar{q} $$
+
+is sometimes known as the *conjugation by $$q$$*, and its derivative
+at $$1$$ is the *adjoint* of the group:
+
+$$ Ad_g = \dd \Psi_g(1): \RR^3 \to \RR^3 $$
+
+From the multiplicative property of the norm, we see that $$Ad_g$$ is
+an isometry of $$\RR^3$$, so it is either a rotation or a reflection
+(or a mix of the two). Since $$S^3$$ is connex and $$1 \in S^3$$ (and
+$$Ad_1 = I_3$$) $$Ad_g$$ has to be a rotation.
+
 
 ## Riemannian Manifold
 

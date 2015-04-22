@@ -2,11 +2,11 @@
 title: Notes
 ---
 
+![yo euclid](euclid.png)
+
 These are random research notes, generally providing quick reference
 on recurring mathematical issues. Hopefully they can be helpful to
 others :)
-
-![yo euclid](euclid.png)
 
 ## TODO
    - tags ?

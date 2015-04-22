@@ -11,7 +11,7 @@ $$
 \newcommand{\mat}[1]{ \begin{pmatrix} #1 \end{pmatrix} }
 \renewcommand{\bar}{\overline}
 
-\newcommand{\inv}[1]{{#1}^{-1}}
+\newcommand{\inv}[1]{ {#1}^{-1} }
 
 \newcommand{\block}[1]{\left(#1\right)}
 

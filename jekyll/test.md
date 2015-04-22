@@ -1,4 +1,3 @@
-
 ---
 title: katex test
 layout: katex

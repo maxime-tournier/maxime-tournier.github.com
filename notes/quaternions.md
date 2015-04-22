@@ -158,12 +158,12 @@ with the Lie group structure as we shall see.
 ## Lie Group
 
 The tangent space at $$1$$ is the space of imaginary quaternions,
-which we identify with $$\RR^4$$. The inner automorphism $$\Psi_q$:
+which we identify with $$\RR^4$$. The inner automorphism $$\Psi_q$$:
 
 $$ \Psi_q: h \mapsto q h \bar{q} $$
 
 is sometimes known as the *conjugation by $$q$$*, and its derivative
-at $$1$$ is the *adjoint* of the group:
+at $$1$$ is the *adjoint* of the Lie group:
 
 $$ Ad_g = \dd \Psi_g(1): \RR^3 \to \RR^3 $$
 
@@ -174,12 +174,29 @@ $$Ad_1 = I_3$$ which is a rotation) $$Ad_g$$ has to be a rotation:
 there is a smooth path from $$1$$ to any quaternion so that $$\det
 Ad_g$$ has to remain $$1$$.
 
-$$Ad$$ provides a group homomorphism between $$S^3$$ and $$SO(3)$$, so
-that multiplying quaternions corresponds to composiong
-rotations. However, it is not an isomorphism: both $$q$$ and $$-q$$
-share the same adjoint. This $$2$$-to-$$1$$ relationship is known as
-the *double covering* of $$SO(3)$$ by $$S^3$$.
+$$Ad$$ provides a group homomorphism between $$S^3$$ and $$SO(3)$$
+(the *adjoint representation*) so that multiplying quaternions
+corresponds to composing rotations. However, it is not injective (the
+representation is not *faithful*): both $$q$$ and $$-q$$ share the
+same adjoint. This $$2$$-to-$$1$$ relationship is known as the *double
+covering* of $$SO(3)$$ by $$S^3$$.
 
+The derivative of the adjoint map at the identity provides the Lie algebra
+structure on $$\RR^3$$, noted $$\mathfrak{s^3}$$:
+
+$$ ad = \dd Ad_1 \in \mathfrak{gl(3)} $$
+
+where the Lie bracked is given by:
+
+$$ [x, y] = ad(x)y $$
+
+The Lie bracked can also be expressed as the quaternion commutator:
+
+$$ [x, y] = xy - yx $$
+
+In coordinates, the Lie bracked is twice the cross product:
+
+$$ [x, y] = 2 x \times y $$
 
 ## Riemannian Manifold
 

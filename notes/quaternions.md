@@ -175,16 +175,20 @@ there is a smooth path from $$1$$ to any quaternion so that $$\det
 Ad_g$$ has to remain $$1$$.
 
 $$Ad$$ provides a group homomorphism between $$S^3$$ and $$SO(3)$$
-(the *adjoint representation*) so that multiplying quaternions
-corresponds to composing rotations. However, it is not injective (the
-representation is not *faithful*): both $$q$$ and $$-q$$ share the
-same adjoint. This $$2$$-to-$$1$$ relationship is known as the *double
-covering* of $$SO(3)$$ by $$S^3$$.
+(the *adjoint representation*):
+
+$$ Ad: S^3 \to SO(3) $$
+
+so that multiplying quaternions corresponds to composing
+rotations. However, it is not injective (the representation is not
+*faithful*): both $$q$$ and $$-q$$ share the same adjoint. This
+$$2$$-to-$$1$$ relationship is known as the *double covering* of
+$$SO(3)$$ by $$S^3$$.
 
 The derivative of the adjoint map at the identity provides the Lie algebra
 structure on $$\RR^3$$, noted $$\mathfrak{s^3}$$:
 
-$$ ad = \dd Ad_1 \in \mathfrak{gl(3)} $$
+$$ ad = \dd Ad_1: \RR^3 \mapsto \mathfrak{so(3)} $$
 
 where the Lie bracked is given by:
 

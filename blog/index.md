@@ -5,9 +5,11 @@ layout: note
 
 # Notes
 
-These are random research notes, generally providing some quick
-reference on recurring mathematical issues. I'm just leaving this
-here :)
+![I'M A CHIKIN LOL](chikin.jpg)
+
+These are random research notes, generally providing quick reference
+on recurring mathematical issues. Hopefully they can be helpful to
+others :)
 
 ## TODO
    - tags ?

@@ -153,8 +153,9 @@ every smooth closed path can be deformed to a point.
 
 ## Lie Group
 
-The multiplication and inverse are smooth ($$1 \in S^3$$) so $$S^3$$
-has a Lie group structure.
+The multiplication and inverse are smooth (and $$1 \in S^3$$) so
+$$S^3$$ has a Lie group structure, which provides the connection with
+rotations in $$\RR^3$$.
 
 ### Adjoint Representation
 
@@ -204,6 +205,26 @@ $$ [x, y] = xy - yx $$
 In coordinates, the Lie bracked is twice the cross product:
 
 $$ [x, y] = 2 x \times y $$
+
+### Exponential
+
+The exponential is given by the usual Taylor series, using quaternion
+product on $$s^3$$:
+
+$$ \exp(v) = \sum_i \frac{v}^i{i!} $$
+
+When $$v \neq 0$$, there exist a unit vector $$n\in S^2$$ such that
+$$v = \norm{v} n$$. This unit vector satisfies $$n^2 = -1$$, so the
+above sum can be rewritten as:
+
+$$
+\begin{align}
+\exp(v) &= \sum_i \frac{v}^{2i}{2i!} + \frac{v}^{2i+1}{2i+1!} \\
+&= \sum_i -1^i \norm{v}^{2i}{2i!} + n -1^{i} \norm{v}^{2i+1}{2i+1!} \\
+&= \cos\block{\norm{v}} + n \sin\block{\norm{v}}
+\end{align}
+$$
+
 
 ## Riemannian Manifold
 

@@ -44,6 +44,8 @@ span.section-number-2:after {
 h1 {
 	margin: 1em 0;
 	line-height: 120%;
+	text-align: center;
+	
 }
 
 h2 {

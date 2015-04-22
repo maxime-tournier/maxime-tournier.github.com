@@ -5,7 +5,10 @@ layout: note
 
 # Notes
 
+<p style="text-align:center>
 ![I'M A CHIKIN LOL](chikin.jpg)
+</p>
+
 These are random research notes, generally providing quick reference
 on recurring mathematical issues. Hopefully they can be helpful to
 others :)

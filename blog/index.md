@@ -5,7 +5,7 @@ layout: note
 
 # Notes
 
-<p style="text-align:center>
+<p style="text-align:center">
 ![I'M A CHIKIN LOL](chikin.jpg)
 </p>
 

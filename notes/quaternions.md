@@ -79,15 +79,15 @@ the following notations:
   
 $$ q = (w, x, y, z) =: w + v $$
   
-where $$v$$$ is a pure imaginary quaternion with coordinates $$(0, x,
+where $$v$$ is a pure imaginary quaternion with coordinates $$(0, x,
 y, z)$$, which we will happily identify with the corresponding vector
 in $$\RR^3$$ when needed. $$w$$ is called the *real* part, and $$v$$
 the *imaginary* part, just like for complex numbers.
 
 ## Product
 
-The quaternion product follows from the matrix product. In
-coordinates, the product has the following expression:
+The quaternion product follows from the matrix representation
+product. In coordinates, it has the following expression:
 
 $$
 ab = (w_a + n_a) (w_b + n_b) = w_a w_b - n_a^T n_b \quad + \quad w_a n_b + n_a w_b + n_a\times n_b
@@ -102,7 +102,7 @@ $$ x y = x \times y - x^Ty $$
 As for the complex numbers, this corresponds to the transpose of the
 matrix representation. This immediately implies that:
   
-$$ \bar{p q} = \bar{q} \bar{p} $$
+$$ \bar{p q} = \bar{q} \ \bar{p} $$
 
 In coordinates, the conjugation is simply given by:
 
@@ -112,6 +112,27 @@ The real and imaginary parts of a quaternion may be expressed using
 conjugation:
 
 $$ w_q = \frac{q + \bar{q}}{2} $$
+
 $$ v_q = \frac{q - \bar{q}}{2} $$
 
+## Norm
 
+As for the complex numbers, the conjugation induces a norm over the
+quaternions (the Frobenius norm on the matrix representation), which
+coincides with the Euclidean norm on $\RR^4$:
+  
+$$ |q|^2 = q \bar{q} = \bar{q} q = ||q||_{\RR^4}^2 \geq 0 $$
+
+As for the complex numbers, the norm is multiplicative:
+
+$$ |ab| = |a|\ |b| $$
+
+## Inverse
+
+From the norm definition, a simple expression can be obtained for
+the quaternion inverse:
+
+$$ \inv{q} = \frac{\bar{q}}{|q|^2} $$
+
+
+ 

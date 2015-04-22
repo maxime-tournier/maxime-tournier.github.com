@@ -322,12 +322,13 @@ that curves of the form:
 $$ q \exp(t v),\quad t\in\RR $$
 
 are geodesic curves (and all geodesics are of this form). We can
-obtain geodesic curves joining two unit quaternions as follows:
+obtain geodesic curves joining two unit quaternions $$a, b \in S^3$$
+as follows:
 
 $$ f(t) = a\exp\block{t \log\block{ \inv{a} b } } $$
 
 This is generally referred to as the *spherical linear interpolation*,
-or SLERP.
+or SLERP, and is used to interpolate the corresponding rotations.
 
 # Misc.
 

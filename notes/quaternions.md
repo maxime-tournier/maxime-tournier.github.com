@@ -190,9 +190,9 @@ $$SO(3)$$ by $$S^3$$.
 ### Lie Algebra
 
 The derivative of the adjoint map at the identity provides the Lie algebra
-structure on $$\RR^3$$, noted $$\mathfrak{s^3}$$:
+structure on $$\RR^3$$, noted $$\alg{s^3}$$:
 
-$$ ad = \dd Ad_1: \RR^3 \mapsto \mathfrak{so(3)} $$
+$$ ad = \dd Ad_1: \RR^3 \mapsto \alg{so(3)} $$
 
 where the Lie bracked is given by:
 
@@ -218,7 +218,7 @@ obtain elements of the group infinitesimally close to $$1$$ in the
 direction $$v$$, and multiply (compose) these elements together. As in
 the matrix case, one can verify that the exponential is also given by
 the usual Taylor series, this time using quaternion product on
-$$s^3$$:
+$$\alg{s^3}$$:
 
 $$ \exp(v) = \sum_{i=0}^{\infty} \frac{v^i}{i!} $$
 
@@ -253,6 +253,9 @@ Flipping the quaternion ensures the rotation interpolated along the
 logarithm: $$\exp(\alpha \log(q)),\ \alpha \in [0, 1]$$ takes the
 *short way*.
 
+Test
+
+$$ \lowercase{\mathfrak{SO(3)}} $$
 
 
 ## Riemannian Manifold

@@ -6,6 +6,7 @@ $$
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\HH}{\mathbb{H}}
+\newcommand{\alg}[1]{\mathfrak{#1}}
 
 
 \newcommand{\mat}[1]{ \begin{pmatrix} #1 \end{pmatrix} }

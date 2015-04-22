@@ -21,7 +21,16 @@ $$
 
 \newcommand{\norm}[1]{ \left| \left| #1 \right| \right| }
 \newcommand{\argmin}[1]{ \underset{#1}{\mathrm{argmin}} }
-\newcommand{\ddd}[2]{\frac{\partial #1}{\partial #2} }
+
 \newcommand{\half}{\frac{1}{2}}
+
+
+\newcommand{\dd}{d}
+\newcommand{\ddd}[2]{\frac{\partial #1}{\partial #2} }
+\newcommand{\db}{\dd^b}
+\newcommand{\ds}{\dd^s}
+\newcommand{\dL}{\dd_L}
+\newcommand{\dR}{\dd_R}
+
 $$
 

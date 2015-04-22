@@ -172,7 +172,6 @@ an isometry of $$\RR^3$$, so it is either a rotation or a reflection
 (or a mix of the two). Since $$S^3$$ is connex and $$1 \in S^3$$ (and
 $$Ad_1 = I_3$$) $$Ad_g$$ has to be a rotation.
 
-
 ## Riemannian Manifold
 
 

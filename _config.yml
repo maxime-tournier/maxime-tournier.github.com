@@ -1,1 +1,4 @@
-gems: [jekyll-org-mode-converter]
+gems:
+	-jekyll-org-mode-converter
+
+

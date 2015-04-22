@@ -71,6 +71,10 @@ h3 {
 	padding: 0 0.5em;
 }
 
+ul {
+	line-height: 0.75em;
+}
+
 div.algorithm ul {
 	list-style-type:none;
 }

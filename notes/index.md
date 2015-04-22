@@ -14,9 +14,11 @@ others :)
 
 ## Pages
 
+<ul>
 {% for page in site.pages %}
-- [{{ page.title }}]({{ page.url }})  
+<li><a href="page.url">page.title</a></li>
 {% endfor %}
+</ul>
 
 
 

@@ -2,14 +2,13 @@
 title: Quaternions
 ---
 
-Quaternions are primarily used as a representation of space
-rotations. As such, they turn out to be quite convenient to use in
-practice due to their compactness and nice geometric properties. Most
-operations on rotations can be expressed by means of quaternion
-representation, which generally offers a somewhat more intuitive point
-of view.
+Quaternions are primarily used as a representation of space rotations.
+They are convenient to use due to their compact form and their nice
+geometric properties. Most operations on rotations can be expressed by
+means of quaternion representation, which generally offers a somewhat
+more intuitive point of view.
 
-
+{:toc}
 
 # Construction and Properties
 

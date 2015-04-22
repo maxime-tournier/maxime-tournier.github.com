@@ -5,9 +5,14 @@ layout: note
 
 # Notes
 
-It are working nao
+These are random research notes, generally providing some quick
+reference on recurring mathematical issues. I'm just leaving this
+here :)
 
-## Latest posts
+## TODO
+   - tags ?
+
+## Latest Posts
 
 {% for post in site.posts %}
    -  [{{ post.title }}]({{ post.url }})

@@ -6,7 +6,9 @@ layout: note
 # Notes
 
 <div style="text-align:center">
+
 ![I'M A CHIKIN LOL](chikin.jpg)
+
 </div>
 
 These are random research notes, generally providing quick reference

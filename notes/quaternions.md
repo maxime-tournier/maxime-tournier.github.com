@@ -53,7 +53,7 @@ $$ \mat{
 
 This space is again closed under matrix multiplication, but the
 multiplication is no longer commutative. Together with the matrix
-product, this space forms the quaternions, noted $\HH$.
+product, this space forms the quaternions, noted $$\HH$$.
 
 We will generally use the *real* vector space structure, and identify
 a quaternion with its coordinates $$(w, x, y, z)$$ in the canonical
@@ -68,7 +68,7 @@ $$ i^2 = j^2 = k^2 = ijk = -1 $$
 
 
 These formula are actually sufficient to define the quaternions, and
-were carved on /Brougham (Broom) Bridge/ in Dublin by *Hamilton*, on
+were carved on *Brougham (Broom) Bridge* in Dublin by **Hamilton**, on
 the 16th of October 1843 (yay wikipedia).
   
 In the remaining of this document, we will denote quaternions using
@@ -78,3 +78,4 @@ $$ q = (w, x, y, z) =: w + v $$
   
 where $$v$$$ is a pure imaginary quaternion with coordinates $$(0, x,
 y, z)$$.
+

@@ -134,5 +134,12 @@ the quaternion inverse:
 
 $$ \inv{q} = \frac{\bar{q}}{|q|^2} $$
 
+# Unit Quaternion: $$S^3$$
 
- 
+The unit sphere $$S^3$$ is stable under quaternion multiplication and
+inverse, which makes it a multiplicative subgroup of $$\HH$$. As we
+shall see, this space is particularly interesting for representing
+rotations.
+
+
+

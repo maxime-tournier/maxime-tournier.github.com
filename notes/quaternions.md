@@ -208,8 +208,17 @@ $$ [x, y] = 2 x \times y $$
 
 ### Exponential
 
-The exponential is given by the usual Taylor series, using quaternion
-product on $$s^3$$:
+The classical characterization of the exponential (due to Euler)
+captures pretty well what the exponential does:
+
+$$ \exp(v) = \lim_{n \go \infty} \block{ 1 + \frac{v}{n} }^n $$
+
+That is: we cut our vector $$v$$ in infinitesimally small pieces to
+obtain elements of the group infinitesimally close to $$1$$ in the
+direction $$v$$, and multiply (compose) these elements together. As in
+the matrix case, one can verify that the exponential is also given by
+the usual Taylor series, this time using quaternion product on
+$$s^3$$:
 
 $$ \exp(v) = \sum_{i=0}^{\infty} \frac{v^i}{i!} $$
 
@@ -220,8 +229,8 @@ above sum can be rewritten as:
 $$
 \begin{align}
 \exp(v) &= \sum_i \frac{v^{2i}}{2i!} + \frac{v^{2i+1}}{2i+1!} \\
-&= \sum_i -1^i \frac{\norm{v^{2i}}}{2i!} + n -1^{i} \frac{\norm{v^{2i+1}}}{2i+1!} \\
-&= \cos\block{\norm{v}} + n \sin\block{\norm{v}}
+&= \sum_i (-1)^i \frac{\norm{v^{2i}}}{2i!} + (-1)^{i} \frac{\norm{v^{2i+1}}}{2i+1!} n \\
+&= \cos \norm{v} + n \sin \norm{v}
 \end{align}
 $$
 

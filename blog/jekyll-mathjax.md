@@ -6,7 +6,7 @@ Not much to do, basically all you need is to load MathJax from one of
 your layouts, for instance:
 
 
-~~~ html
+``` html
 <!doctype html>
 <html>
   <head>
@@ -21,7 +21,7 @@ your layouts, for instance:
 	{{ content }}
   </body>
   </html>
-~~~
+```
 
 
 Then you will directly be able to include latex commands between `$$`

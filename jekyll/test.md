@@ -7,7 +7,8 @@ howdy y'all
 
 \\[ f(x) \\]
 
-\[ g(x) \]
+\[ displaymath g(x) \]
 
 
-michel $y$ mabelle
+michel $math y$ mabelle $$ \int f(x) $$
+

@@ -14,8 +14,9 @@ others :)
 
 ## Pages
 
+* test
 {% for page in site.pages %}
-   -  [{{ page.title }}]({{ page.url }})
+   [{{ page.title }}]({{ page.url }})
 {% endfor %}
 
 

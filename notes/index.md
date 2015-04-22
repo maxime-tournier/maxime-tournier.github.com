@@ -9,10 +9,8 @@ These are random research notes, generally providing quick reference
 on recurring mathematical issues. Hopefully they can be helpful to
 others :)
 
-## TODO
-   - tags ?
 
-## Pages
+# Pages
 
 <ul>
 {% for page in site.pages %}
@@ -21,4 +19,7 @@ others :)
 </ul>
 
 
+# TODO
+
+- tags ?
 

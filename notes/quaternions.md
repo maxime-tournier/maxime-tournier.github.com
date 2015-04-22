@@ -1,5 +1,7 @@
 ---
 title: Quaternions
+categories: [math, lie group]
+
 ---
 
 Quaternions are primarily used as a representation of space rotations.

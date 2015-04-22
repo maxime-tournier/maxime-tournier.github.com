@@ -9,6 +9,8 @@ howdy y'all
 
 \[ displaymath g(x) \]
 
-michel $math y$ mabelle $$ \int f(x) $$
+michel $math y$ mabelle $$\int f(x)$$
+
+oh sweet mama \[\int f(x) \]
 
 

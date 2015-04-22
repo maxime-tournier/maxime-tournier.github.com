@@ -211,7 +211,7 @@ $$ [x, y] = 2 x \times y $$
 The exponential is given by the usual Taylor series, using quaternion
 product on $$s^3$$:
 
-$$ \exp(v) = \sum_i \frac{v}^i{i!} $$
+$$ \exp(v) = \sum_i \frac{v^i}{i!} $$
 
 When $$v \neq 0$$, there exist a unit vector $$n\in S^2$$ such that
 $$v = \norm{v} n$$. This unit vector satisfies $$n^2 = -1$$, so the

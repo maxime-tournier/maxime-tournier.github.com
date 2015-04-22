@@ -1,3 +1,11 @@
+#+BEGIN_HTML
+---
+layout: default
+title: Benighted on the Ben.
+excerpt: An unplanned bivouac on Ben Nevis.
+---
+#+END_HTML
+
 #+title: Org mode
 
 this is a quick test for org mode yo

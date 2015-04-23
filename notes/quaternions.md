@@ -256,7 +256,7 @@ Since both $$q$$ and $$-q$$ represent the same rotation, it is common
 to *flip* the quaternion to the positive real hemisphere prior to
 computing the logarithm:
 
-$$ f(q) =
+$$ q^+ =
 \begin{cases}
 q & \text{if} &  w_q \geq 0\\
 -q & \text{if} & w_q < 0\\

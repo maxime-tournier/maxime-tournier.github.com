@@ -92,7 +92,7 @@ The quaternion product follows from the matrix representation
 product. In coordinates, it has the following expression:
 
 $$
-ab = (w_a + n_a) (w_b + n_b) = w_a w_b - n_a^T n_b \ + \ w_a n_b + n_a w_b + n_a\times n_b
+ab = (w_a + v_a) (w_b + v_b) = w_a w_b - v_a^T v_b \ + \ w_a v_b + v_a w_b + v_a\times v_b
 $$
 
 In particular, for pure imaginary quaternions $$x$$ and $$y$$ this gives:

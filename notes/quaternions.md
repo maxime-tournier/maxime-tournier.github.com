@@ -238,10 +238,10 @@ $$
 $$
 
 The injectivity radius is $$2\pi$$, but we start getting the same
-rotations again after a radius of $$\pi$$. The logarithm is the
+rotations again after a radius of $$\pi$$. The *logarithm* is the
 inverse operation, defined inside the injectivity radius:
 
-$$ \log q = \theta n $$
+$$ \log(q) = \theta n $$
 
 where:
 

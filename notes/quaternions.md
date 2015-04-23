@@ -32,8 +32,8 @@ The above set is a $$2$$-dimensional vector space, whose basis is
 noted $$(1, i)$$. One can check that $$i^2 = -1$$.
    
 This space is closed under matrix multiplication, and one can show
-that this space, together with this (commutative!) multiplication, form
-a *field*, the complex numbers, noted $$\CC$$
+that this space, together with this (commutative) multiplication, form
+a *field*, the complex numbers, noted $$\CC$$.
 
 ## Quaternions
 
@@ -54,7 +54,7 @@ $$ \mat{
    }
    $$
 
-*(notice the $$2\times 2$$ complex blocks)*
+*(notice the $$2\times 2$$ complex blocks)* (TODO some signs are wrong :-/)
 
 This space is again closed under matrix multiplication, but the
 multiplication is no longer commutative. Together with the matrix
@@ -149,7 +149,7 @@ complex coefficients, *i.e.* the group $$SU(2)$$.
 
 $$S^3$$ is a closed, $$3$$-dimensional smooth submanifold of $$\RR^4$$
 as the inverse image of $$0$$ by the smooth function $$f(q) =
-\norm{q} - 1$$. It is also compact and simply connex, meaning that
+\norm{q}^2 - 1$$. It is also compact and simply connex, meaning that
 every smooth closed path can be deformed to a point.
 
 

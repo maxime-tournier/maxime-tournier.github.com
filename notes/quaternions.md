@@ -335,11 +335,12 @@ or SLERP, and is used to interpolate the corresponding rotations.
 
 ## Conversion to Rotation Matrix 
 
-Let $$q = (w, v)$$ be a unit quaternion.
+Let $$q = (w, v)$$ be a unit quaternion. The corresponding rotation
+$Ad_g$ is:
 
 $$
 \begin{align}
-R_g x = Ad_g x &=q x \bar{q} \\
+Ad_g x &=q x \bar{q} \\
 &= (w + v) x ( w - v) \\
 &= w^2 x + w \block{vx - xv} - vxv\\
 &= w^2 x + w ad(v) x - vxv\\
@@ -355,7 +356,7 @@ is:
 
 $$
 \begin{align}
-R_g &= w^2 I + 2w \hat{v} + v v^T + \hat{v}^2 \\
+Ad_g &= w^2 I + 2w \hat{v} + v v^T + \hat{v}^2 \\
 &= I + 2w \hat{v} + \norm{v}^2\block{ \frac{v v^T}{\norm{v}^2} - I} + \hat{v}^2 \\
 \end{align}
 $$

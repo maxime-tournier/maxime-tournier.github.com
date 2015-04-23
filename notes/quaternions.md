@@ -347,7 +347,7 @@ or SLERP, and is used to interpolate the corresponding rotations.
 ## Conversion to Rotation Matrix 
 
 Let $$q = (w, v)$$ be a unit quaternion. The corresponding rotation
-$Ad_g$ is:
+$$Ad_g$$ is:
 
 $$
 \begin{align}

@@ -378,11 +378,31 @@ $$\frac{\theta}{2}$$).
 
 ## Interpolation
 
+As seen above, the SLERP between unit quaternions $$a$$ and $$b$$ is
+expressed as:
+
+$$ f(t) = a\exp\block{t \log\block{ \inv{a} b } } $$
+
+Kim et al.[^Kim95] propose spline-like interpolation curves for unit
+quaternions $$\block{q}_{i \geq 0}$$ as follows: the sline basis
+functions $$B_i(t)$$ are first transformed to cumulative basis
+functions $$\tilde{B}_i(t) = B_i(t) - B_{i-1}(t)$$, then the curve is
+obtained as:
+
+$$ f(t) = q_0 \prod_{i=1}^n \exp\block{ \tilde{B}_i(t) \log\block{q_{i-1}^{-1}q_i}} $$
+
+The authors report low acceleration/torque and easy to compute
+derivatives. This scheme is easily generalizable to other Lie groups.
+
+[^Kim95]: *A general construction scheme for unit quaternion curves with simple high order derivatives*, Kim, Kim and Shin, 1995
+
 ## Averaging
 
 ## Geodesic Projection
+
 
 ## Exponential Map Derivative
 
 ## Conversion to/from Euler Angles
 
+# References

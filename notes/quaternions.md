@@ -164,7 +164,7 @@ rotations in $$\RR^3$$.
 The tangent space at $$1$$ is the space of imaginary quaternions,
 which we identify with $$\RR^3$$. The inner automorphism $$\Psi_q$$:
 
-$$ \Psi_q: S^3 \to S^3, \quad h \mapsto q h \bar{q} $$
+$$ \Psi_q: S^3 \to S^3 \quad h \mapsto q h \bar{q} $$
 
 is sometimes known as the *conjugation by $$q$$*, and its derivative
 at $$1$$ is the *adjoint* of the Lie group:

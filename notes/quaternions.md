@@ -92,7 +92,7 @@ The quaternion product follows from the matrix representation
 product. In coordinates, it has the following expression:
 
 $$
-ab = (w_a + v_a) (w_b + v_b) = w_a w_b - v_a^T v_b \ + \ w_a v_b + v_a w_b + v_a\times v_b
+ab = (w_a + v_a) (w_b + v_b) = w_a w_b - v_a^T v_b \ \  + \ \ w_a v_b + v_a w_b + v_a\times v_b
 $$
 
 In particular, for pure imaginary quaternions $$x$$ and $$y$$ this gives:
@@ -157,7 +157,7 @@ every smooth closed path can be deformed to a point.
 
 The multiplication and inverse are smooth (and $$1 \in S^3$$) so
 $$S^3$$ has a Lie group structure, which provides the connection with
-rotations in $$\RR^3$$.
+rotations in $$\RR^3$$ through the adjoint representation.
 
 ### Adjoint Representation
 

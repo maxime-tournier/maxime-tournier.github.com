@@ -33,5 +33,8 @@ $$
 \newcommand{\dL}{\dd_L}
 \newcommand{\dR}{\dd_R}
 
+\newcommand{\Ad}{\mathrm{Ad}}
+\newcommand{\ad}{\mathrm{ad}}
+
 $$
 

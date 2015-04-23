@@ -169,19 +169,19 @@ $$ \Psi_q: S^3 \to S^3 \quad h \mapsto q h \bar{q} $$
 is sometimes known as the *conjugation by $$q$$*, and its derivative
 at $$1$$ is the *adjoint* of the Lie group:
 
-$$ Ad_q = \dd \Psi_q(1): \RR^3 \to \RR^3 \quad x \mapsto qx\bar{q} $$
+$$ \Ad_q = \dd \Psi_q(1): \RR^3 \to \RR^3 \quad x \mapsto qx\bar{q} $$
 
-From the multiplicative property of the norm, we see that $$Ad_g$$ is
+From the multiplicative property of the norm, we see that $$\Ad_g$$ is
 an isometry of $$\RR^3$$, so it is either a rotation or a reflection
 (or a mix of the two). Since $$S^3$$ is connex and $$1 \in S^3$$ (and
-$$Ad_1 = I_3$$ which is a rotation) $$Ad_g$$ has to be a rotation:
+$$\Ad_1 = I_3$$ which is a rotation) $$\Ad_g$$ has to be a rotation:
 there is a smooth path from $$1$$ to any quaternion so that
-$$\det\block{Ad_g}$$ has to remain $$1$$.
+$$\det\block{\Ad_g}$$ has to remain $$1$$.
 
-$$Ad$$ provides a group homomorphism between $$S^3$$ and $$SO(3)$$
+$$\Ad$$ provides a group homomorphism between $$S^3$$ and $$SO(3)$$
 (the *adjoint representation*):
 
-$$ Ad: S^3 \to SO(3) $$
+$$ \Ad: S^3 \to SO(3) $$
 
 so that multiplying quaternions corresponds to composing
 rotations. However, it is not injective (the representation is not
@@ -195,13 +195,13 @@ $$SO(3)$$ by $$S^3$$.
 The derivative of the adjoint map at the identity provides the Lie algebra
 structure on $$\RR^3$$, noted $$\alg{s^3}$$:
 
-$$ ad = \dd Ad_1: \RR^3 \mapsto \alg{so(3)} $$
+$$ \ad = \dd \Ad_1: \RR^3 \mapsto \alg{so(3)} $$
 
 where the Lie bracked is given by:
 
-$$ [x, y] = ad(x)y $$
+$$ [x, y] = \ad(x)y $$
 
-The actual derivation of $$Ad$$ at the identity provides an expression
+The actual derivation of $$\Ad$$ at the identity provides an expression
 as the quaternion commutator:
 
 $$ [x, y] = xy - yx $$
@@ -210,15 +210,15 @@ In coordinates, the Lie bracked is twice the cross product:
 
 $$ [x, y] = 2 x \times y $$
 
-While we're at it, $$ad$$ also provides a Lie algebra isomorphism
+While we're at it, $$\ad$$ also provides a Lie algebra isomorphism
 between $$\alg{s^3}\ (\simeq \RR^3)$$ and $$\alg{so(3)}$$, the space of
 $$3 \times 3$$ skew-symmetric matrices:
 
-$$ ad(x) = 2 \hat{x} $$
+$$ \ad(x) = 2 \hat{x} $$
 
 and the Lie bracket is preserved:
 
-$$ ad( [x, y] ) = [ad(x), ad(y)] $$
+$$ \ad( [x, y] ) = [\ad(x), \ad(y)] $$
 
 
 ### Exponential Map
@@ -284,9 +284,9 @@ At this point, we still do not know which rotation is represented by a
 given unit quaternion. From the Taylor series, we see that $$\exp(v)$$
 and $$v$$ commute, so that:
 
-$$Ad_{\exp(v)} = \exp(v)v\exp(-v) = \exp(v)\exp(-v)v = v$$
+$$\Ad_{\exp(v)} = \exp(v)v\exp(-v) = \exp(v)\exp(-v)v = v$$
 
-and the rotation axis of $$Ad_{\exp(v)}$$ is $$v$$. From the adjoint
+and the rotation axis of $$\Ad_{\exp(v)}$$ is $$v$$. From the adjoint
 representation, the additive structure along vector $$v$$ corresponds
 to the addition of angles, since we compose rotations along the same
 axis. Hence the rotation angle is propotional to
@@ -311,7 +311,7 @@ space) of the tangent bundle $$TS^3$$. This metric is left-invariant:
 
 $$ \inner{u}{v}_{\RR^4} = \inner{qu}{qv} $$
 
-It is also right invariant (and thus also $$Ad$$-invariant):
+It is also right invariant (and thus also $$\Ad$$-invariant):
 
 $$ \inner{u}{v}_{\RR^4} = \inner{uq}{vq} $$
 
@@ -347,14 +347,14 @@ or SLERP, and is used to interpolate the corresponding rotations.
 ## Conversion to Rotation Matrix 
 
 Let $$q = (w, v)$$ be a unit quaternion. The corresponding rotation
-$$Ad_g$$ is:
+$$\Ad_g$$ is:
 
 $$
 \begin{align}
-Ad_g x &=q x \bar{q} \\
+\Ad_g x &=q x \bar{q} \\
 &= (w + v) x ( w - v) \\
 &= w^2 x + w \block{vx - xv} - vxv\\
-&= w^2 x + w ad(v) x - vxv\\
+&= w^2 x + w \ad(v) x - vxv\\
 \end{align}
 $$
 
@@ -362,12 +362,12 @@ One can check that:
 
 $$ -vxv = v v^T x + \hat{v}^2 x $$
 
-and we have seen that $$ ad(v) = 2 \hat{v} $$, so the final formula
+and we have seen that $$\ad(v) = 2 \hat{v} $$, so the final formula
 is:
 
 $$
 \begin{align}
-Ad_g &= w^2 I + 2w \hat{v} + v v^T + \hat{v}^2 \\
+\Ad_g &= w^2 I + 2w \hat{v} + v v^T + \hat{v}^2 \\
 &= I + 2w \hat{v} + \norm{v}^2\block{ \frac{v v^T}{\norm{v}^2} - I} + \hat{v}^2 \\
 \end{align}
 $$

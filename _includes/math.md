@@ -1,6 +1,5 @@
 
 $$
-
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\PP}{\mathbb{P}}
 \newcommand{\NN}{\mathbb{N}}
@@ -26,7 +25,7 @@ $$
 \newcommand{\half}{\frac{1}{2}}
 \newcommand{\inner}[2]{ \langle #1, #2 \rangle }
 
-\newcommand{\dd}{d}
+\newcommand{\dd}{\mathrm{d}}
 \newcommand{\ddd}[2]{\frac{\partial #1}{\partial #2} }
 \newcommand{\db}{\dd^b}
 \newcommand{\ds}{\dd^s}

@@ -258,7 +258,7 @@ where:
 
 $$
 \begin{align}
-    \theta &= \inv{\cos}(w) \\ 
+    \theta &= \arccos(w) \\ 
     n &= \frac{v}{\norm{v}} \\
 \end{align}
 $$
@@ -342,6 +342,27 @@ $$ f(t) = a\exp\block{t \log\block{ \inv{a} b } } $$
 This is generally referred to as the *spherical linear interpolation*,
 or SLERP, and is used to interpolate the corresponding rotations.
 
+### Geodesic Distance
+
+The Riemannian metric induces a distance on the manifold, obtained by
+measuring the length of the shortest geodesic curve between two unit
+quaternions. The length of the geodesic between $$a$$ and $$b$$ (and
+thus the geodesic distance) is:
+
+$$ d(a, b) = \norm{\log\block{\inv{a}b}} $$
+
+Expanding a little bit, we have:
+
+$$
+\begin{align} 
+d(a, b) &= \arccos\block{w_{\inv{a}b}} \\
+&= \arccos\block{ w_a w_b + v_a^T v_b } \\
+\end{align}
+$$
+
+which is exactly the *angle* between vectors $$a$$ and $$b$$, as one
+would expect from vectors on a sphere.
+
 # Misc.
 
 ## Conversion to Rotation Matrix 
@@ -383,7 +404,7 @@ expressed as:
 
 $$ f(t) = a\exp\block{t \log\block{ \inv{a} b } } $$
 
-Kim et al.[^Kim95] propose spline-like interpolation curves for unit
+Kim et al[^Kim95] propose spline-like interpolation curves for unit
 quaternions $$\block{q}_{i \geq 0}$$ as follows: the sline basis
 functions $$B_i(t)$$ are first transformed to cumulative basis
 functions $$\tilde{B}_i(t) = B_i(t) - B_{i-1}(t)$$, then the curve is
@@ -394,14 +415,120 @@ $$ f(t) = q_0 \prod_{i=1}^n \exp\block{ \tilde{B}_i(t) \log\block{q_{i-1}^{-1}q_
 The authors report low acceleration/torque and easy to compute
 derivatives. This scheme is easily generalizable to other Lie groups.
 
-[^Kim95]: *A general construction scheme for unit quaternion curves with simple high order derivatives*, Kim, Kim and Shin, 1995
+[^Kim95]: Kim, Myoung-Jun, Myung-Soo Kim, and Sung Yong Shin. *"A general construction scheme for unit quaternion curves with simple high order derivatives."* Proceedings of the 22nd annual conference on Computer graphics and interactive techniques. ACM, 1995.
 
 ## Averaging
 
-## Geodesic Projection
+The Euclidean mean minimizes the sum of distances squared to all the
+points considered. This property is easily generalized to Riemannian
+manifolds, provided the minimizer exists and is unique. Since $$S^3$$ is
+compact, the existence is granted, but the unicity is not (think of
+averaging antipodal points).
 
+Arsigny et al[^Arsigny06], as others before[^Moakher02], describe a
+fast, gradient-descent-like iterative scheme to compute the *geometric
+mean* of $$n$$ unit quaternions $$(q_i)_{i \geq 1}$$. The algorithm
+produces successive estimates of the geometric mean $$\mu_k$$ as
+follows:
+
+$$
+\begin{align}
+\mu_0 &= 1 \\
+\mu_{k+1} &= \mu_k \exp\block{ \frac{1}{n} \sum_{i=0}^n \log\block{ \mu_k^{-1} q_i } } \\
+\end{align}
+$$
+
+That is: the data is linearized in the tangent space at $$\mu_k$$,
+then the Euclidean mean is computed, and the exponential maps the
+result back to the group. The algorithm stops when the tangent
+Euclidean mean is sufficiently close to zero. This algorithm
+generalizes easily to other Lie groups, but the existence might be
+harder to establish.
+
+Right translations can of course be used instead, depending on the
+problem.
+
+[^Arsigny06]: Arsigny, Vincent, Xavier Pennec, and Nicholas Ayache. *"Bi-invariant means in Lie groups. Application to left-invariant polyaffine transformations."* (2006).
+
+[^Moakher02]: Moakher, Maher. *"Means and averaging in the group of rotations."* SIAM journal on matrix analysis and applications
 
 ## Exponential Map Derivative
+
+## Geodesic Projection
+
+There is a closed-form solution to the problem of the geodesic
+projection of a unit quaternion to a geodesic. This problem arises in
+non-Euclidean generalizations[^Fletcher04] of the Principal Component
+Analysis.
+
+Assuming we are given a geodesic curve starting at $$1$$, with
+(normalized) direction $$n \in S^2$$, and a unit quaternion $$q$$, we
+consider the following optimization problem:
+
+$$ \argmin{\alpha \in \RR}\quad f(\alpha) = \half d\block{\exp\block{\alpha n}^{-1}, q}^2 $$
+
+We may rewrite the objective function a little bit:
+
+$$
+\begin{align}
+f(\alpha) &= \half \norm{ \log \block{ \exp\block{-\alpha n} q } }^2 \\
+\end{align}
+$$
+
+We introduce $$e = \exp\block{-\alpha n}$$ and $$u = e q$$. The
+derivative, using *spatial* coordinates where needed, is:
+
+$$
+\begin{align}
+\dd f(\alpha)\dd \alpha &= -\log(u)^T \ds \log(u) \ds \exp(-\alpha n) n \\
+&=  -\log(u)^T n \\
+\end{align}
+$$
+
+(TODO we need the derivatives of $$\exp$$ and $$\log$$)
+
+The first-order optimality conditions for our problem imply that:
+
+$$ \log(u)^T n = 0 $$
+
+Since the logarithm will be along the imaginary part, it is equivalent
+to ask for the imaginary part of $$u$$ to be orthogonal to $$n$$:
+
+$$ v_u = w_e v_q + w_q v_e + v_e \times v_q $$
+
+$$v_e = -\sin (\alpha) n$$ so we may drop the cross product
+which will be orthogonal to $$n$$. We are left with:
+
+$$ w_e v_q + w_q v_e \quad \bot \quad n $$
+
+Or:
+
+$$ \cos(\alpha) v_q^T n - w_q \sin(\alpha) = 0 $$
+
+- if $$w_q \neq 0$$:
+	
+	$$
+	\begin{align}
+	\frac{v_q^T n}{w_q} &= \tan(\theta) \\
+	\alpha &= \theta \mod \pi
+	\end{align}
+	$$
+
+- if $$v_q^T n \neq 0$$:
+
+	$$
+	\begin{align}
+	\frac{w_q}{v_q^T n} &= \tan(\theta) \\
+	\alpha &= \pi / 2 - \theta  \mod \pi
+	\end{align}
+	$$
+  
+TODO figure out whether Said et al[^Said07] got the same formula.
+  
+
+[^Fletcher04]: Fletcher, P. Thomas, et al. *"Principal geodesic analysis for the study of nonlinear statistics of shape."* Medical Imaging, IEEE Transactions on 23.8 (2004): 995-1005.
+
+[^Said07]: Said, Salem, et al. *"Exact principal geodesic analysis for data on so (3)."* 15th European Signal Processing Conference (EUSIPCO-2007). EURASIP, 2007.
 
 ## Conversion to/from Euler Angles
 

@@ -201,7 +201,8 @@ where the Lie bracked is given by:
 
 $$ [x, y] = ad(x)y $$
 
-The Lie bracked can also be expressed as the quaternion commutator:
+The actual derivation of $$Ad$$ at the idendity provides an expression
+as the quaternion commutator:
 
 $$ [x, y] = xy - yx $$
 

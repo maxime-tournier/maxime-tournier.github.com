@@ -316,7 +316,7 @@ exponential can be used to compute geodesics for this metric.
 
 ### Geodesics
 
-Geodesics are locally shortest path between points in the
+Geodesics are locally shortest paths between points in the
 manifold. The fact that the Riemannian metric is bi-invariant implies
 that curves of the form:
 
@@ -334,6 +334,35 @@ or SLERP, and is used to interpolate the corresponding rotations.
 # Misc.
 
 ## Conversion to Rotation Matrix 
+
+Let $$q = (w, v)$$ be a unit quaternion.
+
+$$
+\begin{align}
+R_g x = Ad_g x &=q x \bar{q} \\
+&= (w + v) x ( w - v) \\
+&= w^2 x + w \block{vx - xv} - vxv\\
+&= w^2 x + w ad(v) x - vxv\\
+\end{align}
+$$
+
+One can check that:
+
+$$ -vxv = v v^T x + \hat{v}^2 x $$
+
+and we have seen that $$ ad(v) = 2 \hat{v} $$, so the final formula
+is:
+
+$$
+\begin{align}
+R_g &= w^2 I + 2w \hat{v} + v v^T + \hat{v}^2 \\
+&= I + 2w \hat{v} + \norm{v}^2\block{ \frac{v v^T}{\norm{v}^2} - I} + \hat{v}^2 \\
+\end{align}
+$$
+
+Note the similarity with Rodrigues' formula (except it's written using
+$$\frac{\theta}{2}$$).
+
 
 ## Interpolation
 

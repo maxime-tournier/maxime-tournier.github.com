@@ -162,7 +162,7 @@ rotations in $$\RR^3$$.
 ### Adjoint Representation
 
 The tangent space at $$1$$ is the space of imaginary quaternions,
-which we identify with $$\RR^4$$. The inner automorphism $$\Psi_q$$:
+which we identify with $$\RR^3$$. The inner automorphism $$\Psi_q$$:
 
 $$ \Psi_q: h \mapsto q h \bar{q} $$
 

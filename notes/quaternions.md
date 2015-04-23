@@ -201,7 +201,7 @@ where the Lie bracked is given by:
 
 $$ [x, y] = \ad(x)y $$
 
-The actual derivation of $$\Ad$$ at the identity provides an expression
+The actual derivation of $$\Ad$$ at the identity gives an expression
 as the quaternion commutator:
 
 $$ [x, y] = xy - yx $$
@@ -296,7 +296,7 @@ rotation angle for $$\exp(v)$$ is $$2\norm{v}$$. Equivalently:
 
 $$ R_{n, \theta} \simeq \cos \frac{\theta}{2} + \sin \frac{\theta}{2} n $$
 
-Now the double covering makes more sense.
+Now hopefully that double covering thing makes more sense.
 
 ## Riemannian Manifold
 

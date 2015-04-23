@@ -201,7 +201,7 @@ where the Lie bracked is given by:
 
 $$ [x, y] = ad(x)y $$
 
-The actual derivation of $$Ad$$ at the idendity provides an expression
+The actual derivation of $$Ad$$ at the identity provides an expression
 as the quaternion commutator:
 
 $$ [x, y] = xy - yx $$
@@ -209,6 +209,17 @@ $$ [x, y] = xy - yx $$
 In coordinates, the Lie bracked is twice the cross product:
 
 $$ [x, y] = 2 x \times y $$
+
+While we're at it, $$ad$$ also provides a Lie algebra isomorphism
+between $$\alg{s^3}\ (\simeq \RR^3)$$ and $$\alg{so(3)$$, the space of
+$$3 \times 3$$ skew-symmetric matrices:
+
+$$ ad(x) = 2 \hat{x} $$
+
+and the Lie bracket is preserved:
+
+$$ ad( [x, y] ) = [ad(x), ad(y)] $$
+
 
 ### Exponential Map
 

@@ -164,12 +164,12 @@ rotations in $$\RR^3$$.
 The tangent space at $$1$$ is the space of imaginary quaternions,
 which we identify with $$\RR^3$$. The inner automorphism $$\Psi_q$$:
 
-$$ \Psi_q: h \mapsto q h \bar{q} $$
+$$ \Psi_q: S^3 \to S^3, \quad h \mapsto q h \bar{q} $$
 
 is sometimes known as the *conjugation by $$q$$*, and its derivative
 at $$1$$ is the *adjoint* of the Lie group:
 
-$$ Ad_g = \dd \Psi_g(1): \RR^3 \to \RR^3 $$
+$$ Ad_q = \dd \Psi_q(1): \RR^3 \to \RR^3 \quad x \mapsto qx\bar{q} $$
 
 From the multiplicative property of the norm, we see that $$Ad_g$$ is
 an isometry of $$\RR^3$$, so it is either a rotation or a reflection
@@ -237,8 +237,8 @@ $$
 $$
 
 The injectivity radius is $$2\pi$$, but we start getting the same
-rotations after $$\pi$$. The logarithm is the inverse operation,
-defined inside the injectivity radius:
+rotations again after a radius of $$\pi$$. The logarithm is the
+inverse operation, defined inside the injectivity radius:
 
 $$ \log q = \theta n $$
 

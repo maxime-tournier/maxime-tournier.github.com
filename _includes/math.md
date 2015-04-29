@@ -1,3 +1,7 @@
+<div style="display:none">
+<script type="text/javascript"
+src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+</script>
 
 $$
 \newcommand{\RR}{\mathbb{R}}
@@ -34,6 +38,6 @@ $$
 
 \newcommand{\Ad}{\mathrm{Ad}}
 \newcommand{\ad}{\mathrm{ad}}
-
 $$
 
+</div>

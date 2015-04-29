@@ -512,6 +512,25 @@ $$ \cos(\alpha) v_q^T n - w_q \sin(\alpha) = 0 $$
 	\end{align}
 	$$
 
+	With $$x = \frac{v_q^T n}{w_q}$$, the projected quaternion is:
+
+	$$\exp\block{\theta n} = \frac{1 + x n}{\sqrt{1 + x^2}} = \frac{1 + nn^T\frac{v_q}{w_q}}{\sqrt{1 + x^2}}$$
+
+	Geometrically, this corresponds to:
+
+	1. (in $$\HH$$) project $$q$$ to the Lie algebra by dividing it by
+       its real part, so that $$\pi(q) = 1 + \frac{v_q}{w_q} \in 1 +
+       \alg{s^3}$$. This corresponds to scaling $$q$$ until it reaches
+       the tangent space at the identity.
+	2. (in $$\alg{s^3}$$) project the imaginary part of the result
+       $$\frac{v_q^T n}{w_q}$$ orthogonally along $$n$$
+	3. (in $$\HH$$) project back the result onto $$S^3$$ by normalizing 
+
+	It seems that the action of unprojecting from the tangent space is
+    exactly the square root of the Cayley transform, which would be
+    awesome since geodesic projections would then be
+    Cayley-invariant. This needs more work though.
+
 - if $$v_q^T n \neq 0$$:
 
 	$$

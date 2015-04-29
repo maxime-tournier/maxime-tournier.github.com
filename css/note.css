@@ -13,14 +13,6 @@ body {
 	
 }
 
-#hidden {
-	margin:0;
-	padding:0;
-	width:0;
-	height:0;
-	visibility:hidden;
-	display:inline;
-}
 
 #home {
 	font-size: 0.5em;
@@ -41,6 +33,39 @@ img {
 	}
 
 }
+
+
+/* input[type=checkbox]:checked ~ div ul#markdown-toc { */
+/* 	display: block; */
+/* 	height: auto; */
+/* } */
+
+#markdown-toc {
+	padding: 0 1em;
+}
+
+/* #markdown-toc { */
+/* 	height:0; */
+/* 	font-size:75%; */
+/* 	max-height: 100%; */
+/* 	display:none; */
+/* } */
+
+#markdown-toc ul {
+	padding: 0 1.5em;
+}
+
+/* #markdown-toc a { */
+/* 	opacity: 0.5; */
+/* } */
+
+#markdown-toc li {
+	list-style-type: none;
+}
+
+/* #markdown-toc a:link:hover { */
+/* 	opacity: 1; */
+/* } */
 
 
 a:link {

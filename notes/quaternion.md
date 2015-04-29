@@ -524,11 +524,15 @@ $$ \cos(\alpha) v_q^T n - w_q \sin(\alpha) = 0 $$
        the tangent space at the identity.
 	2. (in $$\alg{s^3}$$) project the imaginary part of the result
        $$\frac{v_q^T n}{w_q}$$ orthogonally along $$n$$
-	3. (in $$\HH$$) project back the result onto $$S^3$$ by normalizing 
+    3. (in $$\HH$$) project back the result onto $$S^3$$ by normalizing
+
+	This is exactly the
+    [gnomonic projection](http://en.wikipedia.org/wiki/Gnomonic_projection)
+    for $$S^3$$, as one could expect.
 
 	It seems that the action of unprojecting from the tangent space is
     exactly the square root of the Cayley transform, which would be
-    awesome since geodesic projections would then be
+    awesome since geodesic projections would then be kinda
     Cayley-invariant. This needs more work though.
 
 - if $$v_q^T n \neq 0$$:

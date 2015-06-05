@@ -38,6 +38,8 @@ $$
 
 \newcommand{\Ad}{\mathrm{Ad}}
 \newcommand{\ad}{\mathrm{ad}}
+
+\newcommand{\LL}{\mathcal{L}}
 $$
 
 </div>

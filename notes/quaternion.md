@@ -363,6 +363,55 @@ would expect from vectors on a sphere.
 
 # Misc.
 
+
+## Polar Decomposition Derivative
+
+We have seen that any unit quaternion can be written as:
+
+$$ q = \cos(\theta) + \sin(\theta) n $$
+
+where $$\theta \in S^1$$ and $$n \in S^2$$ (which gives the
+[Hopf fibration](http://en.wikipedia.org/wiki/Hopf_fibration)). We now
+consider the derivative of this formula:
+
+$$ \dd q = -sin(\theta) \dd \theta + cos(\theta) n \dd \theta + \sin(\theta) \dd n $$
+
+To keep things readable, we introduce $$c = \cos(\theta)$$ and $$s =
+\sin(\theta)$$, and remark that $$n^T\dd n = 0$$ since $$n \in S^2$$,
+$$n\dd n = n \times \dd n$$, and $$n^2 = -1$$. The body-fixed
+derivative is:
+
+$$
+\begin{align}
+\db q &= \inv{q} \dd q \\
+&= (c - s n) (-s \dd \theta + c n \dd \theta + s \dd n) \\
+&= -cs \dd \theta + c^2 n \dd \theta + cs \dd n + s^2 n \dd \theta -sc n^2 \dd \theta - s^2 n \dd n  \\
+&= n\ \dd \theta + cs\ \dd n - s^2 n\ \dd n\\
+&= n\ \dd \theta + s \block{c  - s n} \dd n\\
+\end{align}
+$$
+
+One can verify that $$(c - s n) \dd n = R_{-\theta, n} \dd n$$, so
+that:
+
+$$
+\begin{align}
+\db q &= R_{-\theta, n}\block{n\ \dd \theta + s\ \dd n}
+\end{align}
+$$
+
+When $$q \neq 1, -1$$, the formula above provides the orthogonal
+decomposition:
+
+$$
+\begin{align}
+\dd \theta &= n^T \db q\\
+\dd n &= \frac{1}{\sin(\theta)} R_{\theta, n} \block{I - nn^T}\db q\\
+\end{align}
+$$
+
+
+
 ## Conversion to Rotation Matrix 
 
 Let $$q = (w, v)$$ be a unit quaternion. The corresponding rotation
@@ -450,7 +499,50 @@ problem.
 
 [^Moakher02]: Moakher, Maher. *"Means and averaging in the group of rotations."* SIAM journal on matrix analysis and applications
 
-## Exponential Map Derivative
+## Fast Square Root
+
+The Cayley map for imaginary quaternions has an interesting geometric
+interpretation:
+
+$$
+\begin{align}
+Cay(x) &= \frac{1 - x}{1 + x} \\
+&= \frac{ \block{1 - x}^2}{ \block{1 - x}{1 + x} } \\
+&= \block{ \frac{1 - x}{\norm{1 - x}} }^2 \\
+\end{align}
+$$
+
+That is:
+
+1. flip the vector in $$\alg{s^3}$$ (multiply by $$-1$$)
+2. add $$1$$ to the real part (go to $$\HH$$)
+3. project to $$S^3$$
+4. square the result
+
+Now, since $$Cay$$ is its own inverse, one can interpret its
+computation for a unit quaternion as the following (reversed) steps:
+
+1. square root
+2. unproject to $$1 + \alg{s^3}$$ (divide by real part)
+3. substract $$1$$ (project to $$\alg{s^3}$$)
+4. flip the result
+
+So the square root can be expressed in terms of $$Cay$$ and other
+simple operations. In particular, we have:
+
+$$q^{\half} = \pi_{S^3} \block{ 1 - \frac{1 - q}{1 + q} }$$
+
+A much simpler formula can also be obtained:
+
+$$q^\half = \pi_{S^3} \block{q + \norm{q}^2}$$
+
+That is: add the squared norm of a quaternion to its real part, then
+normalize the result. Sweet !
+
+TODO find out whether we can obtain a of such formula for different
+powers, probably using the magnitudes of $$Cay(q)$$ and $$\log(q)$$.
+
+## TODO Exponential Map Derivative
 
 ## Geodesic Projection
 
@@ -478,7 +570,7 @@ derivative, using *spatial* coordinates where needed, is:
 
 $$
 \begin{align}
-\dd f(\alpha)\dd \alpha &= -\log(u)^T \ds \log(u) \ds \exp(-\alpha n) n \\
+\dd f(\alpha) &= -\log(u)^T \ds \log(u) \ds \exp(-\alpha n) n \\
 &=  -\log(u)^T n \\
 \end{align}
 $$

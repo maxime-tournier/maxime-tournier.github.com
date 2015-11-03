@@ -507,7 +507,7 @@ interpretation:
 $$
 \begin{align}
 Cay(x) &= \frac{1 - x}{1 + x} \\
-&= \frac{ \block{1 - x}^2}{ \block{1 - x}{1 + x} } \\
+&= \frac{ \block{1 - x}^2}{ \block{1 - x}\block{1 + x} } \\
 &= \block{ \frac{1 - x}{\norm{1 - x}} }^2 \\
 \end{align}
 $$

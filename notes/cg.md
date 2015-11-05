@@ -4,7 +4,7 @@ categories: [math]
 ---
 
 Over time, I found myself checking the
-[Wikipedia](http://http://en.wikipedia.org/wiki/Conjugate_gradient_method)
+[Wikipedia](http://en.wikipedia.org/wiki/Conjugate_gradient_method)
 page for Conjugate Gradient over and over again, and finally got tired
 of it. So here is a complete, self-contained and hopefully correct
 derivation of the method, including non-standard inner products and
@@ -137,7 +137,7 @@ $$
 
   $$ p_{k+1} = r_{k+1} - p_k \frac{p_k^TAr_{k+1}}{p_k^T A p_k} $$
   
-  This is called a *short-recurrence* relation: each $$p_k$$ only need
+  This is called a *short-recurrence* relation: each $$p_k$$ only needs
   to be conjugated with the previous one. Some alternate formula
   before finishing:
 
@@ -171,8 +171,8 @@ $$
   While the initial search direction $$p_0$$ is set to the initial
   residual $$r_0$$, any other initial direction could be chosen. Some
   references mention, however, that the speed of convergence can be
-  adversely affected (namely: linear instead of superlinear) when the
-  initial residual is not chosen for $$p_0$$.
+  affected ( *i.e.* linear instead of superlinear) when the initial
+  residual is not chosen for $$p_0$$.
 
   The normalized $$r_k$$ provide an orthogonal basis for the Krylov
   subspace $$\Krylov_k(A, b)$$ and can be related to the Lanczos

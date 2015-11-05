@@ -40,6 +40,9 @@ $$
 \newcommand{\ad}{\mathrm{ad}}
 
 \newcommand{\LL}{\mathcal{L}}
+\newcommand{\Krylov}{\mathcal{K}}
+
+\newcommand{\diag}{\mathrm{diag}}
 $$
 
 </div>

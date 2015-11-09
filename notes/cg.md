@@ -362,7 +362,7 @@ $$
   This algorithm yields the same iterates as MINRES (and is cheaper to
   compute), but requires a PSD matrix $$A$$.
 
-# Preconditioned Conjugate Residuals (1)
+# Preconditioned Conjugate Residuals
 
   Again, this is CG on $$\inv{B}A$$ with metric $$A^T$$. The $$\inv{B}$$-norm
   of the residual is minimized, and the residuals are again
@@ -384,27 +384,3 @@ $$
 $$Ap$$ can be obtained from $$Ar$$ at each iteration to keep only one
 multiplication by $$A$$ per iteration.
 
-# Preconditioned Conjugate Residuals (2)
-
-CG on $$\inv{B}A$$ with metric $$A^TB$$: the residual norm is
-minimized, and the residuals are $$A^TB$$ conjugate.
-
-Initialization:
-
-  $$ r_0 = \block{b - Ax_0}, \quad z_0 = p_0 = \inv{B}r_0 $$
-  
-  Iteration:
-
-$$
-  \begin{align}
-  x_{k+1} &= x_k + \alpha_k p_k  & \alpha_k &= \frac{p_k^T A^T r_k}{p_k^TA^TAp_k} \\
-  
-  r_{k+1} &= r_k - \alpha_k Ap_k & & \\
-  z_{k+1} &= \inv{B} r_{k+1} \\
-  
-  p_{k+1} &= z_{k+1} - \beta_k p_k & \beta_k &= \frac{z_{k+1}^TA^T A p_k}{p_k^TA^T A p_k}  \\
-  \end{align}
-  $$
-  
-Again, $$Ap$$ can be obtained from $$Az$$ at each iteration to keep
-only one multiplication by $$A$$ per iteration.

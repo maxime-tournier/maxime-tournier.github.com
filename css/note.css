@@ -136,3 +136,14 @@ div.algorithm i {
 	color: grey;
 }
 
+#footer {
+	margin:2em;
+	opacity: 0.5;
+	font-size:smaller;
+	text-align:center;
+}
+
+#cc {
+	height:0.9em;
+}
+

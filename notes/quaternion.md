@@ -391,24 +391,30 @@ $$
 \end{align}
 $$
 
-One can verify that $$(c - s n) \dd n = R_{-\theta, n} \dd n$$, so
-that:
-
-$$
-\begin{align}
-\db q &= R_{-\theta, n}\block{n\ \dd \theta + s\ \dd n}
-\end{align}
-$$
-
-When $$q \neq 1, -1$$, the formula above provides the orthogonal
-decomposition:
+By inverting this formula in the respective stable subspace, one can
+obtain the following:
 
 $$
 \begin{align}
 \dd \theta &= n^T \db q\\
-\dd n &= \frac{1}{\sin(\theta)} R_{\theta, n} \block{I - nn^T}\db q\\
+\dd n &= \frac{1}{\sin(\theta)} \block{cI + s \hat{n}} \block{I - nn^T}\db q\\
 \end{align}
 $$
+
+
+
+<!-- One can verify that $$(c - s n) \dd n = R_{-\theta, n} \dd n$$, so -->
+<!-- that: -->
+
+<!-- $$ -->
+<!-- \begin{align} -->
+<!-- \db q &= R_{-\theta, n}\block{n\ \dd \theta + s\ \dd n} -->
+<!-- \end{align} -->
+<!-- $$ -->
+
+<!-- When $$q \neq 1, -1$$, the formula above provides the orthogonal -->
+<!-- decomposition: -->
+
 
 ## Logarithm Derivative
 
@@ -422,18 +428,22 @@ Thus, when defined, the derivative of the logarithm satisfies:
 $$ \dd \log(\theta, n) = \dd \theta \ n + \theta \dd n $$
 
 The body-fixed derivative may be obtained by plugging the orthogonal
-decomposition for $$\dd \theta, \dd n$$ from $$\db q$$. Which gives:
+decomposition for $$\dd \theta, \dd n$$ given $$\db q$$. Which gives:
 
-$$ \db \log(q).\db q = nn^T \db q + \frac{\theta}{\sin(\theta)} Ad_q \block{I - nn^T} \db q$$
+$$ \db \log(q).\db q = nn^T \db q + \frac{\theta}{\tan(\theta)}\block{I - nn^T}\db q + \log(q)\times \db q$$
 
-Note that this formula can be extended by continuity at $$q=1$$.
+Note that this formula can be extended by continuity at $$q=1$$. See
+Bullo et al.[^Bullo95] for a similar formula in the case of $$SO(3)$$,
+up to a factor $$2$$ due to the double covering.
+
+[^Bullo95]: F. Bullo , R. M. Murray, *Proportional Derivative (PD) Control On The Euclidean Group*, European Control Conference, 1995.
 
 ## Exponential Derivative
 
-The formula above can be inverted on stable subspaces ($$x$$ and
-$$x^\bot$$) to obtain the exponential derivative:
+<!-- The formula above can be inverted on stable subspaces ($$x$$ and -->
+<!-- $$x^\bot$$) to obtain the exponential derivative: -->
 
-$$ \db \exp(x).\dd x = \frac{x x^T}{\norm{x}^2} \dd x + \frac{\sin\norm{x}}{\norm{x}} Ad_{\exp(-x)} \block{I - \frac{xx^T}{\norm{x}^2}} \dd x $$
+<!-- $$ \db \exp(x).\dd x = \frac{x x^T}{\norm{x}^2} \dd x + \frac{\sin\norm{x}}{\norm{x}} Ad_{\exp(-x)} \block{I - \frac{xx^T}{\norm{x}^2}} \dd x $$ -->
 
 ## Conversion to Rotation Matrix 
 

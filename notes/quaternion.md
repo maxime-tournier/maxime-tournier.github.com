@@ -428,6 +428,12 @@ $$ \db \log(q).\db q = nn^T \db q + \frac{\theta}{\sin(\theta)} Ad_q \block{I - 
 
 Note that this formula can be extended by continuity at $$q=1$$.
 
+## Exponential Derivative
+
+The formula above can be inverted on stable subspaces ($$x$$ and
+$$x^\bot$$) to obtain the exponential derivative:
+
+$$ \db \exp(x).\dd x = \frac{x x^T}{\norm{x}^2} \dd x + \frac{\sin\norm{x}}{\norm{x}} Ad_{\exp(-x)} \block{I - \frac{xx^T}{\norm{x}^2}} \dd x $$
 
 ## Conversion to Rotation Matrix 
 
@@ -555,8 +561,6 @@ $$q^\half = \pi_{S^3} \block{q + \norm{q}^2}$$
 
 That is: add the squared norm of a quaternion to its real part, then
 normalize the result. Sweet.
-
-## TODO Exponential Map Derivative
 
 ## Geodesic Projection
 

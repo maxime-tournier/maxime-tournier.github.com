@@ -360,7 +360,9 @@ $$
 $$
 
   This algorithm yields the same iterates as MINRES (and is cheaper to
-  compute), but requires a PSD matrix $$A$$.
+  compute). $$Ap$$ can be obtained from $$Ar$$ at each iteration to
+  keep only one multiplication by $$A$$ per iteration.
+
 
 # Preconditioned Conjugate Residuals
 

@@ -43,6 +43,7 @@ $$
 \newcommand{\Krylov}{\mathcal{K}}
 
 \newcommand{\diag}{\mathrm{diag}}
+\newcommand{\tr}{\mathrm{tr}}
 $$
 
 </div>

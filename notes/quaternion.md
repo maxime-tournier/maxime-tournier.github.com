@@ -366,20 +366,20 @@ would expect from vectors on a sphere.
 
 ## Polar Decomposition Derivative
 
-We have seen that any unit quaternion can be written as:
+As seen before, any unit quaternion may be written as:
 
 $$ q = \cos(\theta) + \sin(\theta) n $$
 
 where $$\theta \in S^1$$ and $$n \in S^2$$ (which gives the
-[Hopf fibration](http://en.wikipedia.org/wiki/Hopf_fibration)). We now
-consider the derivative of this formula:
+[Hopf fibration](http://en.wikipedia.org/wiki/Hopf_fibration)). Let us
+now consider the derivative of this formula:
 
-$$ \dd q = -sin(\theta) \dd \theta + cos(\theta) n \dd \theta + \sin(\theta) \dd n $$
+$$ \dd q = -\sin(\theta) \dd \theta + \cos(\theta) n \dd \theta + \sin(\theta) \dd n $$
 
 To keep things readable, we introduce $$c = \cos(\theta)$$ and $$s =
 \sin(\theta)$$, and remark that $$n^T\dd n = 0$$ since $$n \in S^2$$,
-$$n\dd n = n \times \dd n$$, and $$n^2 = -1$$. The body-fixed
-derivative is:
+hence the pure quaternion product $$n\dd n = n \times \dd n$$, and
+$$n^2 = -1$$. The body-fixed derivative is:
 
 $$
 \begin{align}
@@ -410,6 +410,23 @@ $$
 \end{align}
 $$
 
+## Logarithm Derivative
+
+The polar decomposition is useful when computing the logarithm
+derivative. In polar coordinates, the logarithm is simply:
+
+$$ \log(\theta, n) = \theta n $$
+
+Thus, when defined, the derivative of the logarithm satisfies:
+
+$$ \dd \log(\theta, n) = \dd \theta \ n + \theta \dd n $$
+
+The body-fixed derivative may be obtained by plugging the orthogonal
+decomposition for $$\dd \theta, \dd n$$ from $$\db q$$. Which gives:
+
+$$ \db \log(q).\db q = nn^T \db q + \frac{\theta}{\sin(\theta)} Ad_q \block{I - nn^T} \db q$$
+
+Note that this formula can be extended by continuity at $$q=1$$.
 
 
 ## Conversion to Rotation Matrix 
@@ -537,10 +554,7 @@ A much simpler formula can also be obtained:
 $$q^\half = \pi_{S^3} \block{q + \norm{q}^2}$$
 
 That is: add the squared norm of a quaternion to its real part, then
-normalize the result. Sweet !
-
-TODO find out whether we can obtain a of such formula for different
-powers, probably using the magnitudes of $$Cay(q)$$ and $$\log(q)$$.
+normalize the result. Sweet.
 
 ## TODO Exponential Map Derivative
 

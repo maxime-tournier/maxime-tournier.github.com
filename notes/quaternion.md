@@ -304,8 +304,9 @@ as we shall see.
 
 ### Bi-invariant Metric
 
-The ambient metric on $$\RR^4$$ induces a metric each fiber (tangent
-space) of the tangent bundle $$TS^3$$. This metric is left-invariant:
+The ambient metric on $$\RR^4$$ induces a metric on each fiber
+(tangent space) of the tangent bundle $$TS^3$$. This metric is
+left-invariant:
 
 $$ \inner{u}{v}_{\RR^4} = \inner{qu}{qv} $$
 

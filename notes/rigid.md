@@ -106,7 +106,7 @@ $$\dd_r^2 R_h^T(g).\lambda.\dd^r g = \mat{ - \hat{t_h}\hat{R_g^Tf} & 0 \\ 0 & 0 
 ### Point Mapping
 
 Let $$x \in \RR^3$$ be a fixed point in our rigid frame, we consider
-the mapping to absolute coordinates:
+the mapping to the absolute coordinates:
 
 $$s: (R, t) \mapsto Rx + t$$
 
@@ -117,4 +117,22 @@ $$ \dd^r s(g)^T f = \mat{\hat{x}R^Tf \\ f} $$
 $$ \dd_r^2 s(g)^T f.\dd^r g = \mat{\hat{x} \hat{R^Tf} & 0 \\ 0 & 0} $$
 
 ### Inverse
+
+$$ \dd^r \inv{g} = \mat{-\Ad_R & \\ -\hat{R^Tt} & -R^T} $$
+
+$$
+\begin{align}
+\dd^r {\inv{g}}^T \lambda &= \mat{-\Ad_R^T & \hat{R^Tt} \\  & -R} \mat{\tau^b \\ f^r} \\
+&= \mat{-\Ad_R^T \tau - \hat{f} R^Tt \\  -R f}
+\end{align}
+$$
+
+Now the geometric stiffness for this one is quite a beast:
+
+
+### Product
+
+
+
+
 

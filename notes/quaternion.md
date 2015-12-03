@@ -321,8 +321,12 @@ $$ \inner{u}{v} = \trace{u^Tv} $$
 
 So the Lie algebra metric, extended to the whole manifold by left or
 right translation, is a *Riemannian metric* (the one induced by the
-ambient space). An interesting consequence is that the Lie group
-exponential can be used to compute geodesics for this metric.
+ambient space), called a bi-invariant metric. An interesting
+consequence is that the Lie group exponential can be used to compute
+geodesics for this metric.
+
+More generally, compact Lie groups (such as $$S^3$$) always have a
+bi-invariant metric.
 
 ### Geodesics
 
@@ -360,7 +364,7 @@ d(a, b) &= \arccos\block{w_{\inv{a}b}} \\
 $$
 
 which is exactly the *angle* between vectors $$a$$ and $$b$$, as one
-would expect from vectors on a sphere.
+would expect from vectors on a unit sphere.
 
 # Misc.
 

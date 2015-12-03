@@ -100,7 +100,7 @@ $$
 \end{align}
 $$
 
-$$\dd_r^2 R_h^T(g).\lambda.\dd^r g = \mat{ - \hat{t_h}\hat{R_g^Tf} & 0 \\ 0 & 0 } $$
+$$\dd_r^2 R_h^T(g).\lambda = \mat{ - \hat{t_h}\hat{R_g^Tf} & 0 \\ 0 & 0 } $$
 
 
 ### Point Mapping
@@ -114,7 +114,7 @@ $$ \dd^r s(g) = \mat{-R \hat{x} & I } $$
 
 $$ \dd^r s(g)^T f = \mat{\hat{x}R^Tf \\ f} $$
 
-$$ \dd_r^2 s(g)^T f.\dd^r g = \mat{\hat{x} \hat{R^Tf} & 0 \\ 0 & 0} $$
+$$ \dd_r^2 s(g)^T f = \mat{\hat{x} \hat{R^Tf} & 0 \\ 0 & 0} $$
 
 ### Inverse
 

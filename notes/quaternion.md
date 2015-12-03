@@ -3,8 +3,8 @@ title: Quaternions
 categories: [math, lie group]
 ---
 
-Quaternions are primarily used as a representation of space rotations.
-They are convenient to use due to their compact form and their nice
+Quaternions are primarily used as a representation of 3D rotations.
+They are convenient to use due to their compact size and their nice
 geometric properties. Most operations on rotations can be expressed by
 means of quaternion representation, which generally offers a somewhat
 more intuitive point of view.
@@ -171,7 +171,7 @@ $$ \Ad_q = \dd \Psi_q(1): \RR^3 \to \RR^3 \quad x \mapsto qx\bar{q} $$
 
 From the multiplicative property of the norm, we see that $$\Ad_g$$ is
 an isometry of $$\RR^3$$, so it is either a rotation or a reflection
-(or a mix of the two). Since $$S^3$$ is connex and $$1 \in S^3$$ (and
+(or a mix of the two). Since $$S^3$$ is connected and $$1 \in S^3$$ (and
 $$\Ad_1 = I_3$$ which is a rotation) $$\Ad_g$$ has to be a rotation:
 there is a smooth path from $$1$$ to any quaternion so that
 $$\det\block{\Ad_g}$$ has to remain $$1$$.
@@ -391,7 +391,7 @@ $$
 \end{align}
 $$
 
-By inverting this formula in the respective stable subspace, one can
+By inverting this formula in the respective stable subspaces, one can
 obtain the following:
 
 $$
@@ -440,10 +440,29 @@ up to a factor $$2$$ due to the double covering.
 
 ## Exponential Derivative
 
-<!-- The formula above can be inverted on stable subspaces ($$x$$ and -->
-<!-- $$x^\bot$$) to obtain the exponential derivative: -->
+Similarly, given a pure imaginary quaternion $$x\in\alg{s^3}$$ one can
+obtain the polar coordinates of $$\exp(x)$$ as:
 
-<!-- $$ \db \exp(x).\dd x = \frac{x x^T}{\norm{x}^2} \dd x + \frac{\sin\norm{x}}{\norm{x}} Ad_{\exp(-x)} \block{I - \frac{xx^T}{\norm{x}^2}} \dd x $$ -->
+$$(\theta, n) = \block{\norm{x}, \frac{x}{\norm{x}}}$$
+
+Therefore:
+
+$$
+\begin{align}
+\dd \theta &= \frac{x^T}{\norm{x}} \dd x \\
+\dd n &= \frac{1}{\norm{x}}\block{I - \frac{x x^T}{\norm{x}^2}} \dd x \\
+\end{align}
+$$
+
+Plugging the above in the body-fixed derivative formula for polar
+coordinates gives:
+
+$$
+\begin{align}
+\dd \exp(x).\dd x = \db q &= n \dd \theta + s(c - sn) \dd n \\
+&= nn^T \dd x + \frac{\sin(\theta)}{\theta}\block{cI - s \hat{n}} \block{I - nn^T} \dd x \\
+\end{align}
+$$
 
 ## Conversion to Rotation Matrix 
 

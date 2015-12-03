@@ -627,8 +627,6 @@ $$
 \end{align}
 $$
 
-(TODO we need the derivatives of $$\exp$$ and $$\log$$)
-
 The first-order optimality conditions for our problem imply that:
 
 $$ \log(u)^T n = 0 $$

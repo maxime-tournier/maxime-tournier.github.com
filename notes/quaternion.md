@@ -234,7 +234,7 @@ the usual Taylor series, this time using quaternion product:
 
 $$ \exp(v) = \sum_{i=0}^{\infty} \frac{v^i}{i!} $$
 
-When $$v \neq 0$$, there exist a unit vector $$n\in S^2$$ such that
+When $$v \neq 0$$, there exists a unit vector $$n\in S^2$$ such that
 $$v = \norm{v} n$$. This unit vector satisfies $$n^2 = -1$$, so the
 above sum can be rewritten as:
 

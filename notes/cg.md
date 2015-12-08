@@ -12,6 +12,8 @@ preconditioning, up to the Conjugate Residuals variations. The
 alternate Lanczos formulation can be found in the notes for
 [Krylov methods](krylov.md).
 
+{% include toc.md %}
+
 # Gradient Descent
 
   When a matrix $$A$$ is positive definite, the solution to $$Ax = b$$ is
@@ -154,11 +156,11 @@ $$
   
 # Standard Algorithm
 
-  Initialisation:
+  - Initialisation:
   
   $$ p_0 = r_0 = b - Ax_0 $$
 
-  Iteration: 
+  - Iteration: 
 
   $$
   \begin{align}
@@ -219,12 +221,14 @@ $$
   - $$R_k^T M^2 r_{k+1} = 0$$,
   - $$q_0 = z_0 \Rightarrow x_k \in \Krylov_k\block{MA, Mb}$$.
 	
-  It is not entirely clear why one should adopt one over the other in
-  the general case. However, the precise definition of the *gradient*,
-  which depends on the metric $$M$$ (in this case, the gradient of $$E_M$$
-  is the residual), would favor the first definition. It also seems
-  more natural to build a $$M$$-orthogonal residual basis, and work in
-  the original Krylov subspace.
+  It is not immediately clear why one should adopt one over the other
+  in the general case: it all depends on the problem at hand. However,
+  the definition of the *gradient*, which depends on the metric $$M$$
+  (in this case, the gradient of $$E_M$$ is the residual), plays in
+  favor of the first definition. Some particular choices of $$A$$ and
+  $$M$$ also allow to minimize the original quadratic form, by taking
+  alternate paths in order to improve convergence (*cf.*
+  preconditioning).
   
   Intuitively, the gradient descent follows directions that are
   *orthogonal* to level-sets in order to minimize the function, and
@@ -234,11 +238,11 @@ $$
   already described, let us continue with the first option and obtain
   the following algorithm:
 
-Initialization:
+  - Initialization:
 
   $$ p_0 = r_0 = b - Ax_0 $$
 
-Iteration:
+  - Iteration:
 
 $$
   \begin{align}
@@ -290,18 +294,18 @@ r_i^T MA p_j \alpha_j = \cases{
 # Preconditioning
   
   Preconditioning can be seen as a special case of the above:
-  $$\inv{B}A$$ is PSD for the inner-product $$B$$ and the above algorithm
-  then becomes the Preconditioned Conjugate Gradient. The $$p_k$$ will
-  be $$A$$-conjugate, and $$A$$ will be minimized along the way, but the
-  gradients $$r_k$$ will now be $$B$$-orthogonal and exploit
-  preconditioning, hopefully to obtain better convergence. A
-  straightforward adaptatation of the above gives:
+  $$\inv{B}A$$ is PSD for the inner-product $$B$$ and the above
+  algorithm then becomes the Preconditioned Conjugate Gradient. The
+  $$p_k$$ will be $$A$$-conjugate, and $$A$$ will be minimized along
+  the way, but the residuals $$r_k$$ will now be $$B$$-conjugate,
+  hopefully to follow a faster path towards the solution. A
+  straightforward adaptation of the above gives:
   
-  Initialization:
+  - Initialization:
   
   $$ p_0 = r_0 = \inv{B}\block{b - Ax_0} $$
 
-Iteration:
+ - Iteration:
 
 $$
   \begin{align}
@@ -314,11 +318,11 @@ $$
 It is probably more readable to use the residual for the original
   system instead, and introduce an extra variable $$z = \inv{B} r$$
 
-Initialization:
+ - Initialization:
 
   $$ r_0 = b - A x_0, \quad p_0 = z_0 = \inv{B} r_0 $$
 
-Iteration:
+ - Iteration:
 
 $$
   \begin{align}
@@ -346,10 +350,11 @@ $$
   This is exactly CG on $$A$$ with non-standard metric $$M = A^T$$. The
   residual norm is minimized, and the residuals are $$A^T$$-conjugate.
   
-  Initialization:
+  - Initialization:
+  
   $$ p_0 = r_0 = b - Ax_0 $$
   
-  Iteration:
+  - Iteration:
 
 $$
   \begin{align}
@@ -364,16 +369,55 @@ $$
   keep only one multiplication by $$A$$ per iteration.
 
 
+
 # Preconditioned Conjugate Residuals
 
-  Again, this is CG on $$\inv{B}A$$ with metric $$A^T$$. The $$\inv{B}$$-norm
+  This one is CG on $$\inv{B}A$$ using metric $$A^TB$$. The norm of the residual
+  is minimized, and the residuals are $$A^TB$$-conjugate:
+
+  - Initialization:
+
+  $$ p_0 = r_0 = b - \inv{B}Ax_0 $$
+
+  - Iteration:
+
+$$
+\begin{align}
+  x_{k+1} &= x_k + \alpha_k p_k  & \alpha_k &= \frac{p_k^T A^T Br_k}{p_k^TA^TAp_k} &= \frac{r_k^TA^TBr_k}{p_k^TA^TAp_k}\\
+  r_{k+1} &= r_k - \alpha_k \inv{B}Ap_k & & & \\
+  p_{k+1} &= r_{k+1} - \beta_k p_k & \beta_k &= \frac{r_{k+1}^TA^TAp_k}{p_k^TA^TAp_k} &= -\frac{ r_{k+1}^T A^TB r_{k+1} }{r_k^T A^TB r_k} \\
+  \end{align}
+  $$
+
+  Using an extra variable $$z = \inv{B} r$$:
+
+  - Initialization:
+
+  $$ r_0 = b - Ax_0, z_0 = p_0 = \inv{B} r_0 $$
+
+  - Iteration:
+
+$$
+\begin{align}
+  x_{k+1} &= x_k + \alpha_k p_k  & \alpha_k &= \frac{p_k^T A^T r_k}{p_k^TA^TAp_k} &= \frac{z_k^TA^Tr_k}{p_k^TA^TAp_k}\\
+  r_{k+1} &= r_k - \alpha_k Ap_k & & & \\
+  z_{k+1} &= \inv{B}r_{k+1} & & & \\
+  p_{k+1} &= z_{k+1} - \beta_k p_k & \beta_k &= \frac{z_{k+1}^TA^TAp_k}{p_k^TA^TAp_k} &= -\frac{ z_{k+1}^T A^T r_{k+1} }{z_k^T A^T r_k} \\
+  \end{align}
+  $$
+
+# Preconditioned Conjugate Residuals (alternate)
+
+  This is the one found on [wikipedia](https://en.wikipedia.org/wiki/Conjugate_residual_method#Preconditioning). Again,
+  this is CG on $$\inv{B}A$$ with metric $$A^T$$. The $$\inv{B}$$-norm
   of the residual is minimized, and the residuals are again
   $$A^T$$-conjugate.
 
-  Initialization:
+  - Initialization:
+
   $$ p_0 = r_0 = \inv{B}\block{b - Ax_0} $$
   
-  Iteration:
+  - Iteration:
 
 $$
   \begin{align}

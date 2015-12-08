@@ -65,8 +65,8 @@ equations.
 
 If $$R_{k+1}$$ is chosen so that $$R_k^T R_{k+1} =
 \exp\block{\alpha\mathcal{I}_b \omega_k^b}$$ for some $$\alpha \in
-\RR$$, for instance by projecting $$\omega_k$$ onto $$\mathcal{I}_b
-\omega_k$$, then:
+\RR$$, for instance by projecting $$\omega^b_k$$ onto $$\mathcal{I}_b
+\omega^b_k$$, then:
 
 $$\Ad_{R_k^TR_{k+1}}^T \mathcal{I}_b \omega_k^b =
 \mathcal{I}_b \omega_k^b$$

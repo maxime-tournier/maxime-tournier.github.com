@@ -21,6 +21,7 @@ $$
 \newcommand{\inv}[1]{ {#1}^{-1} }
 
 \newcommand{\block}[1]{\left(#1\right)}
+\newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\trace}[1]{\mathrm{tr}\block{#1}}
 
 \newcommand{\norm}[1]{ \left| \left| #1 \right| \right| }

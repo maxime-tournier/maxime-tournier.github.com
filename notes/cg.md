@@ -45,8 +45,10 @@ alternate Lanczos formulation can be found in the notes for
   \end{align}
   $$
   
-  Geometrically, the line-search along $$p_k$$ can be seen in terms of
-  the $$A$$-projection of $$x_k$$ along $$p_k$$:
+  The step size $$\alpha$$ is chosen such that the gradient becomes
+  orthogonal to the search line. Geometrically, the line-search can
+  also be seen in terms of the $$A$$-projection of $$x_k$$ along
+  $$p_k$$:
   
   $$ x_{k+1} = x_k - p_k \frac{p_k^TAx_k}{p_k^TAp_k} \quad + \quad p_k \frac{p_k^T b}{p_k^TAp_k} $$
   

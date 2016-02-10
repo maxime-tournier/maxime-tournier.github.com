@@ -8,9 +8,8 @@ defaults:
 
 
 markdown: kramdown
-highlighter: pygments
-
-
-
-
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
 

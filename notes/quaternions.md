@@ -134,7 +134,7 @@ the quaternion inverse:
 
 $$ \inv{q} = \frac{\bar{q}}{|q|^2} $$
 
-# Unit Quaternions: $$S^3$$
+# Unit Quaternions $$S^3$$
 
 The unit sphere $$S^3$$ is stable under quaternion multiplication and
 inverse, (and contains $$1$$) which makes it a multiplicative subgroup

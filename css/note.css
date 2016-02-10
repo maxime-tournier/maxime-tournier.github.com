@@ -112,6 +112,18 @@ h1:not(:first-of-type):before {
     content: counter(section) ". ";
 }
 
+
+#references {
+
+}
+
+li < #markdown-toc-references {
+    list-style-type: none;
+}
+#references:before {
+    content:"";
+}
+
 h2 {
 	margin: 2em 1em 0 0;
 }

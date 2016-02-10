@@ -326,7 +326,26 @@ function wrapped in a lambda (here ```g```), the fixpoint of the
 description is the recursive function itself (here ```f```, which acts
 like ```self```), which is what $$Y$$ returns.
 
-# TODO Typing
+# Typing
+
+If we consider a recursive function description of the form:
+
+```scheme
+(define g (lambda (self) (lambda (args) ... (self...))))
+```
+
+Then ```g``` has the following type scheme as a (poly-)type:
+
+$$ g: \forall \alpha, \alpha \to \alpha $$
+
+From this, we can deduce that a fixpoint combinator has the following
+type:
+
+$$ fix:  \forall \alpha, \block{\alpha \to \alpha} \to \alpha $$
+
+This can be used for infering the type of recursive definitions in
+let-bindings during Hindley-Milner type inference.
+
 
 # References 
 

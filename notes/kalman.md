@@ -25,7 +25,7 @@ The normal equations become:
 
 $$ \block{A_k^T M A_k + H_{k+1}^T R_{k+1} H_{k+1}} x = A_k^T M_k b_k + H_{k+1}^T R_{k+1} z_{k+1} $$
 
-where we assume $$M_{k+1} = \mat{M_k & \\ & R_{k+1}}$$. Luckily, the
+where we assumed $$M_{k+1} = \mat{M_k & \\ & R_{k+1}}$$. Luckily, the
 [Woodbury formula](https://en.wikipedia.org/wiki/Woodbury_matrix_identity)
 gives us an easy way to update the inverse of $$K = A^T M A$$:
 
@@ -89,7 +89,7 @@ Let us consider the following linear system:
 
 $$ \block{\inv{C} + H^T R H} x = H^T R z $$
 
-It is easy to see that the solution $$s$$ for the above system is also
+It is easy to see that the solution $$x$$ for the above system is also
 that of the following two augmented KKT systems:
 
 1. $$ \mat{ \inv{C} & H^T \\ H & -R } \mat{x \\ \lambda} = \mat{H^T R z \\ 0 }$$

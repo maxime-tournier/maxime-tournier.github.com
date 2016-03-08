@@ -80,7 +80,64 @@ x_{k+1} &= x_k + C_k H_{k+1}^T \inv{S_{k+1}} w_{k+1} \\
 \end{align}
 $$
 
-# TODO Non-stationary Process
+# Non-stationary Process
+
+We now suppose that the state $$x$$ changes as follows:
+
+$$ x_{k+1} = F_k x_k $$
+
+for some invertible linear mapping $$F_k$$. The incremental problem
+becomes:
+
+$$ \argmin{x} \quad \norm{ \mat{A_k \inv{F}_k \\ H_{k+1}} x - \mat{b_k \\ z_{k+1}} }^2_{M_{k+1}} $$
+
+*i.e.* we fit previous observations by taking one step backwards. The
+normal equations become:
+
+$$ \underbrace{\block{F_k^{-T} A_k^T M A_k \inv{F}_k + H_{k+1}^T R_{k+1} H_{k+1}}}_{K_{k+1}} x = F_k^{-T} A_k^T M_k b_k + H_{k+1}^T R_{k+1} z_{k+1} $$
+
+We obtain easily that $$C_{k+1} = \inv{K}_{k+1} = D_k - D_k H_{k+1}^T \inv{S_{k+1}}
+H_{k+1} D_k$$, where $$D_k = F_k C_k F_k^T$$ and $$S_{k+1} =
+\inv{R_{k+1}} + H_{k+1} D_k H_{k+1}^T$$. The right-hand side is:
+
+$$ y_{k+1} = F^{-T} y_k + H_{k+1}^TR_{k+1} z_{k+1} $$
+
+The solution update is:
+
+$$
+\begin{align}
+x_{k+1} &= D_k F^{-T} y_k - D_k H_{k+1}^T \inv{S_{k+1}} H_{k+1} D_k F^{-T} y_k + D_{k+1} H_{k+1}^T R_{k+1} z_{k+1} \\
+&= F_k x_k - D_k H_{k+1}^T \inv{S_{k+1}} H_{k+1} F_k x_k + D_{k+1} H_{k+1}^T R_{k+1} z_{k+1} \\
+&= F_k x_k + D_k H_{k+1}^T \inv{S_{k+1}} \block{ z_{k+1} - H_{k+1} F_k x_k } \\
+\end{align}
+$$
+
+where we used the appendix for the last line. The final update rules
+can be decomposed into two predition/correction phases:
+
+### Prediction
+
+$$
+\begin{align} 
+\tilde{x}_k &= F_k x_k \\
+\tilde{C}_k &= F_k C_k F_k^T
+\end{align}
+$$
+
+### Correction
+
+$$
+\begin{align} 
+w_{k+1} &= z_{k+1} - H_{k+1} \tilde{x}_k \\ 
+
+W_{k+1} &= \inv{R_{k+1}} + H_{k+1} \tilde{C}_k H_{k+1}^T \\
+C_{k+1} &= \tilde{C}_k - \tilde{C}_k H_{k+1}^T \inv{S_{k+1}} H_{k+1} \tilde{C}_k \\
+        &= \block{I - \tilde{C}_k H_{k+1}^T \inv{S_{k+1}} H_{k+1}} \tilde{C}_k \\
+x_{k+1} &= \tilde{x}_k + \tilde{C}_k H_{k+1}^T \inv{S_{k+1}} w_{k+1} \\		
+\end{align}
+$$
+
+# TODO Process Noise
 
 
 # Appendix: $$C_{k+1} H_{k+1}^T R_{k+1} = C_k H_{k+1}^T \inv{S}_{k+1}$$
@@ -95,7 +152,7 @@ that of the following two augmented KKT systems:
 1. $$ \mat{ \inv{C} & H^T \\ H & -R } \mat{x \\ \lambda} = \mat{H^T R z \\ 0 }$$
 2. $$ \mat{ \inv{C} & H^T \\ H & -R } \mat{x \\ \lambda} = \mat{0 \\ z}$$
 
-Now the solution $$x$$ for the first one is $$x = \block{C -
+Now the solution for the first one is $$x = \block{C -
 CH^T\inv{S}HC}H^TRz$$, where $$S = HCH^T + \inv{R}$$ is the Schur
 complement, and the solution for the second is $$x = CH^T\inv{S}z$$.
 Both solutions are equal since both KKT systems are equivalent to the

@@ -130,7 +130,7 @@ $$
 \begin{align} 
 w_{k+1} &= z_{k+1} - H_{k+1} \tilde{x}_k \\ 
 
-W_{k+1} &= \inv{R_{k+1}} + H_{k+1} \tilde{C}_k H_{k+1}^T \\
+S_{k+1} &= \inv{R_{k+1}} + H_{k+1} \tilde{C}_k H_{k+1}^T \\
 C_{k+1} &= \tilde{C}_k - \tilde{C}_k H_{k+1}^T \inv{S_{k+1}} H_{k+1} \tilde{C}_k \\
         &= \block{I - \tilde{C}_k H_{k+1}^T \inv{S_{k+1}} H_{k+1}} \tilde{C}_k \\
 x_{k+1} &= \tilde{x}_k + \tilde{C}_k H_{k+1}^T \inv{S_{k+1}} w_{k+1} \\		

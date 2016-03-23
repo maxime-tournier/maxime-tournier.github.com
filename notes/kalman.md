@@ -60,7 +60,7 @@ x_{k+1} &= x_k + C_{k+1} H_{k+1}^T R_{k+1} w_{k+1} \\
 \end{align}
 $$
 
-Alternatively, the appendix show that $$C_{k+1} H_{k+1}^T R_{k+1} =
+Alternatively, the appendix shows that $$C_{k+1} H_{k+1}^T R_{k+1} =
 C_k H_{k+1} S_{k+1}^{-1}$$, so that the solution update can also be
 obtained as:
 

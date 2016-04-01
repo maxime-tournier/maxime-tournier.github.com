@@ -3,7 +3,7 @@ title: Kalman Filter
 categories: [math]
 ---
 
-A purely geometric take on Kalman filtering.
+A purely geometric take on [Kalman filtering](https://en.wikipedia.org/wiki/Kalman_filter).
 
 # Incremental Least Squares
 
@@ -107,14 +107,13 @@ $$
 ### Correction
 
 $$
-\begin{align} 
-w_{k+1} &= z_{k+1} - H_{k+1} \tilde{x}_k \\ 
-
+\begin{align}
+w_{k+1} &= z_{k+1} - H_{k+1} \tilde{x}_k \\
 S_{k+1} &= R_{k+1}^{-1} + H_{k+1} \tilde{C}_k H_{k+1}^T \\
 C_{k+1} &= \tilde{C}_k - \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} H_{k+1} \tilde{C}_k \\
         &= \block{I - \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} H_{k+1}} \tilde{C}_k \\
 x_{k+1} &= \tilde{x}_k + \tilde{C}_{k+1} H_{k+1}^T R_{k+1} w_{k+1} \\
- &= \tilde{x}_k + \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} w_{k+1} \\		
+ &= \tilde{x}_k + \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} w_{k+1} \\
 \end{align}
 $$
 

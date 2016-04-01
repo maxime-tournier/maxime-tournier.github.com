@@ -9,17 +9,12 @@ These are random research notes, generally providing quick reference
 on recurring mathematical issues. Hopefully they can be helpful to
 others :)
 
-
-# Pages
-
 <ul>
-{% for page in site.pages %}
-<li><a href="{{page.url}}">{{page.title}}</a></li>
+{% for p in site.pages %}
+{% if page.url != p.url %}
+<li><a href="{{p.url}}">{{p.title}}</a></li>
+{% endif %}
 {% endfor %}
 </ul>
 
-
-# TODO
-
-- tags ?
 

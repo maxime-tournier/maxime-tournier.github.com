@@ -147,7 +147,7 @@ complex coefficients, *i.e.* the group $$SU(2)$$.
 
 $$S^3$$ is a closed, $$3$$-dimensional smooth sub-manifold of $$\RR^4$$
 as the inverse image of $$0$$ by the smooth function $$f(q) =
-\norm{q}^2 - 1$$. It is also compact and simply connex, meaning that
+\norm{q}^2 - 1$$. It is also compact and simply connected, meaning that
 every smooth closed path can be deformed to a point.
 
 

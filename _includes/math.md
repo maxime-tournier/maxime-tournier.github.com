@@ -26,6 +26,7 @@ $$
 
 \newcommand{\norm}[1]{ \left| \left| #1 \right| \right| }
 \newcommand{\argmin}[1]{ \underset{#1}{\mathrm{argmin}} }
+\newcommand{\argmax}[1]{ \underset{#1}{\mathrm{argmax}} }
 
 \newcommand{\half}{\frac{1}{2}}
 \newcommand{\inner}[2]{ \langle #1, #2 \rangle }

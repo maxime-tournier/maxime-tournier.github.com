@@ -78,7 +78,7 @@ are the eigenvectors corresponding to decreasing eigenvalues.
 
 # Summary
 
-PCA computes an $$M$$-orthogonal matrix $$P$$ in which the samples
+PCA computes an $$M$$-orthonormal basis $$P$$ in which the samples
 have a diagonal covariance matrix:
 
 $$ \inv{P} X^T X P^{-T} = S $$

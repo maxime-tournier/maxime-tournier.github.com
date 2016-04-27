@@ -3,7 +3,7 @@ title: Principal Component Analysis
 categories: [math]
 ---
 
-A geometric take on PCA.
+A geometric take on [PCA](https://en.wikipedia.org/wiki/Principal_component_analysis).
 
 # First Component 
 

@@ -590,14 +590,38 @@ computation for a unit quaternion as the following (reversed) steps:
 So the square root can be expressed in terms of $$Cay$$ and other
 simple operations. In particular, we have:
 
-$$q^{\half} = \pi_{S^3} \block{ 1 - \frac{1 - q}{1 + q} }$$
+$$ q^{\half} = \pi_{S^3} \block{ 1 - \frac{1 - q}{1 + q} } $$
 
 A much simpler formula can also be obtained:
 
-$$q^\half = \pi_{S^3} \block{q + \norm{q}^2}$$
+$$ 1 - \frac{1 - q}{1 + q} = \frac{2q}{1+q} = 2 \frac{q + \norm{q}^2}{ \norm{1 + q}^2 }$$
 
-That is: add the squared norm of a quaternion to its real part, then
-normalize the result. Sweet.
+so that:
+
+$$q^\half = \pi_{S^3} \block{q + 1}$$
+
+That is: add $$1$$ to the real part, then normalize. Sweet!
+
+For non-unit quaternions, one can always take the square-root of the
+norm separately and reduce to the case above:
+
+$$ q^\half = \sqrt{\norm{q}} \pi_{S^3} \block{q + \norm{q}} $$
+
+## Rotation between Vectors
+
+The quaternion product for imaginary quaternions is:
+
+$$ x y = x \times y - x^T y = \norm{x}\norm{y} \block{-\cos \theta + n \sin \theta} $$
+
+which, once normalized, gives us *twice* the rotation from $$y$$ to
+$$x$$. But we just saw how to obtain square roots efficiently, so the
+following procedure should work:
+
+$$ q_{x \mapsto y} = \pi_{S^3} \block{1 + \pi_{S^3} \block{y x}} $$
+
+Or even simpler:
+
+$$ q_{x \mapsto y} = \pi_{S^3} \block{ y x + \norm{y x} } $$
 
 ## Geodesic Projection
 

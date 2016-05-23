@@ -614,14 +614,15 @@ The quaternion product for imaginary quaternions is:
 $$ x y = x \times y - x^T y = \norm{x}\norm{y} \block{-\cos \theta + n \sin \theta} $$
 
 which, once normalized, gives us *twice* the rotation from $$y$$ to
-$$x$$. But we just saw how to obtain square roots efficiently, so the
-following procedure should work:
+$$-x$$. So instead, we want to consider the product $$-yx$$. We have
+just seen how to obtain square roots efficiently, so the following
+procedure should work:
 
-$$ q_{x \mapsto y} = \pi_{S^3} \block{1 + \pi_{S^3} \block{y x}} $$
+$$ q_{x \mapsto y} = \pi_{S^3} \block{1 + \pi_{S^3} \block{-y x}} $$
 
 Or even simpler:
 
-$$ q_{x \mapsto y} = \pi_{S^3} \block{ y x + \norm{y x} } $$
+$$ q_{x \mapsto y} = \pi_{S^3} \block{ -y x + \norm{y x} } $$
 
 ## Geodesic Projection
 

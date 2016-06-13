@@ -48,7 +48,7 @@
 	</h1>
 
 
-	<div id="publications">
+	<div id="publications" class="break">
 	  <h2>Publications</h2>
 
 	  <!-- start publis -->
@@ -218,12 +218,31 @@
 
 	  <!-- end publis -->
 	</div>
+
+
+
 	
 	<div id="experience">
-	  <h2>Expérience</h2>
+	  <h2>Expérience Professionnelle</h2>
 
 	  <table class="work">
 
+		<tr>
+		  <td>
+			Mar. - Juil. 2016
+		  </td>
+		  
+		  <td> <ul class="strong"> <li>Ingénieur de Recherche</li>
+			  <li><em>Mise à niveau du logiciel d'analyse posturale PersoBalance</em></li>
+			  <li> Développement C++/C#/Python, interfaces Kinect2 et Wii BalanceBoard </li>
+			  <li> Équipe <a href="http://www.inria.fr/equipes/camin">INRIA - CAMIN</a>, Montpellier, France
+			  </li>
+			</ul>
+		  </td>
+		</tr>
+
+
+		
 		<tr>
 		  <td>
 			Avril 2015
@@ -348,6 +367,10 @@
 		  </td>
 		</tr>
 
+		<tr style="height:2em">
+		  
+		</tr>
+		
 		<tr>
 		  <td>
 			2005 <em>(1 mois)</em>
@@ -363,9 +386,13 @@
 		</tr>
 	  </table>
 	</div>
+
+
+
+
 	
 	<div id="education">
-	  <h2 class="break">Formation</h2>
+	  <h2>Formation</h2>
 	  <table class="work">
 		<tr>
 		  <td>
@@ -429,7 +456,8 @@
 		  <td>
 			<ul>
 			  <li>Animation de personnages virtuels</li>
-			  <li>Simulation physique d'objets rigides articulés</li>
+			  <li>Simulation physique d'objets solides sous contraintes</li>
+			  <li>Contact frottant</li>
 			</ul>
 		  </td>
 		</tr>
@@ -440,7 +468,7 @@
 			<ul>
 			  <li>Anglais <em>(courant)</em></li>
 			  <li>Allemand <em>(basique)</em></li>
-			  <li>Japonais <em>(notions)</em></li>
+			  <li>Japonais, Espagnol <em>(notions)</em></li>
 			</ul>
 		  </td>
 		</tr>
@@ -449,32 +477,44 @@
 		  <td> Programmation </td>
 		  <td>
 			<ul>
-			  <li>C/C++11, Python, Lua, OCaml, Java</li>
-			  <li>HTML/CSS, JavaScript, SQL</li>
+			  <li>C++11, Python, C#, Scheme, Lua, OCaml, Java</li>
+			  <li>Librairies Boost, Qt, Eigen, OpenGL, OpenCV, Numpy/Scipy</li>
+			  <li>Systèmes d'exploitation Linux, OSX, Windows</li>
+			  <!-- <li>Programmation web HTML/CSS, JavaScript</li> -->
 			</ul>
 		  </td>
 		</tr>
 
 		<tr>
-		  <td> Librairies </td>
+		  <td> Théorie </td>
 		  <td>
 			<ul>
-			  <li>Boost, Qt, Eigen, OpenGL, OpenCV, simulateur <a href="http://www.sofa-framework.org">SOFA</a></li>
+			  <li>Optimisation Convexe (QP, LCP)
+			  <li>Groupes de Lie</li>
+			  <li>Statistiques Riemanniennes</li>
 			</ul>
-		  </td>
 		</tr>
+
+		<!-- <tr> -->
+		<!--   <td> Librairies </td> -->
+		<!--   <td> -->
+		<!-- 	<ul> -->
+		<!-- 	  <li>Boost, Qt, Eigen, OpenGL, OpenCV, simulateur <a href="http://www.sofa-framework.org">SOFA</a></li> -->
+		<!-- 	</ul> -->
+		<!--   </td> -->
+		<!-- </tr> -->
 
 
 		
-		<tr>
-		  <td> Systèmes <br/>d'exploitation </td>
-		  <td>
-			<ul>
-			  <li>Unix <em>(Linux, FreeBSD, MacOS)</em></li>
-			  <li>Windows (bases)</li>
-			</ul>
-		  </td>
-		</tr>
+		<!-- <tr> -->
+		<!--   <td> Systèmes <br/>d'exploitation </td> -->
+		<!--   <td> -->
+		<!-- 	<ul> -->
+		<!-- 	  <li>Unix <em>(Linux, FreeBSD, MacOS)</em></li> -->
+		<!-- 	  <li>Windows (bases)</li> -->
+		<!-- 	</ul> -->
+		<!--   </td> -->
+		<!-- </tr> -->
 
 
 		<tr>
@@ -506,7 +546,7 @@
 		  <td>Hobbies</td>
 		  <td>
 			<ul>
-			  <li>Photographie, Musique, Guitare</li>
+			  <li>Photographie, Guitare</li>
 			</ul>
 		  </td>
 		</tr>
@@ -561,6 +601,7 @@
 
 
 	<script>
+	  <!-- reorder -->
 	  pub = document.getElementById( 'publications' );
 
 	  skills = document.getElementById( 'skills' );
@@ -568,7 +609,6 @@
 	  document.body.replaceChild(pub, skills)
 	  document.body.insertBefore( skills, pub )
 
-	  pub.className += 'break'
 	</script>
 
 	

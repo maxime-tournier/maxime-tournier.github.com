@@ -472,6 +472,11 @@ $$
 \end{align}
 $$
 
+It is worth having a closer look at this formula. For a given $$\dd x$$:
+
+- the part along $$n$$ is unchanged,
+- the part orthogonal to $$n$$ becomes $$\frac{\sin(\theta)}{\theta}\block{cI - s \hat{n}} \dd x^\bot = \frac{\sin(\theta)}{\theta} R_{\exp(x)} \dd x^\bot$$
+
 ## Conversion to Rotation Matrix 
 
 Let $$q = (w, v)$$ be a unit quaternion. The corresponding rotation

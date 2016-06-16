@@ -70,21 +70,28 @@ alternate Lanczos formulation can be found in the notes for
 
   $$ p_{k+1} = r_{k+1} - \sum_{i=1}^k p_i \frac{p_i^TAr_{k+1}}{p_i^T A p_i} $$
 
-  Since the $$p_i$$ are now mutually $$A$$-orthogonal, and from the
+  We let $$\beta_{ik} = p_i^TAr_k$$ if $$i < k$$, $$\beta_{ii} = 1$$
+  and $$\beta_{ik} = 0$$ if $$i > k$$, so that the recurrence relation
+  becomes $$r_{k+1} = \sum_{i=1}^{i = k+1} p_i \beta_{ik}$$ or, in
+  matrix form:
+
+  $$R_k = P_k B_k$$
+
+  where the matrix $$B_k = \block{\beta_{ij}}_{i, j \leq k}$$ is
+  upper-triangular with unit diagonal (hence invertible). Now, since
+  the $$p_i$$ are now mutually $$A$$-orthogonal, and from the
   geometric interpretation above (or simply by induction over the
-  update formula for $$x_k$$), the $$A$$-projection of $$x_{k+1}$$ over the
-  previous $$\block{p_i}_{i\leq k} = P_k$$ gives:
+  update formula for $$x_k$$), the $$A$$-projection of $$x_{k+1}$$
+  over the previous $$\block{p_i}_{i\leq k} = P_k$$ gives:
 
   $$ P_k^T A x_{k+1} = P_k^T b $$
 
   Grouping both sides, we obtain:
   
-  $$ P_k^T r_{k+1} = 0 $$
+  $$\underbrace{P_k^T}_{B_k^{-T} R_k^T} r_{k+1} = 0$$
 
-  Now, since each $$p_k$$ is of the form $$p_k = r_k + \sum_{i < k}
-  \beta_{ik} p_i$$ and each of the $$\block{p_i}_{i \leq k}$$ is
-  orthogonal to $$r_{k+1}$$, we have the following important property:
-
+  Which implies the following important property:
+  
   $$ R_k^T r_{k+1} = 0 $$
 
   That is, the $$r_k$$ are mutually orthogonal. Before moving on, we
@@ -208,19 +215,19 @@ $$
   $$MA$$-conjugate directions by $$q_k$$. We still obtain:
   
   - $$\alpha_k = \frac{z_k^T q_k}{q_k^TMAq_k}$$,
-  - $$Q_k^Tz_{k+1} = Q_k^T M r_{k+1} = 0$$.
+  - $$Q_k^Tz_{k+1} = Q_k^T M r_{k+1} = 0$$,
 	
-  Now we can make a choice regarding who should span the $$q_k$$. If the
-  $$q_k$$ are spanned by $$r_k$$, we get:
-  
+  Now we are faced with a choice regarding who should span the
+  $$q_k$$. If the $$q_k$$ are spanned by $$r_k$$, we get:
+
   - $$R_k^T M r_{k+1} = 0$$,
   - $$q_0 = r_0 \Rightarrow x_k \in \Krylov_k\block{A, b}$$.
 
   In contrast, if the $$q_k$$ are spanned by the $$z_k$$ (which would be
   vanilla CG on the modified system), we get:
-  
+
   - $$Z_k^T z_{k+1} = 0$$,
-  - $$R_k^T M^2 r_{k+1} = 0$$,
+  - $$R_k^T M^T M r_{k+1} = 0$$,
   - $$q_0 = z_0 \Rightarrow x_k \in \Krylov_k\block{MA, Mb}$$.
 	
   It is not immediately clear why one should adopt one over the other
@@ -260,38 +267,25 @@ $$
 ## Note {#note}
    
    In fact, except when taking squared norms for alternate update
-   formulas for $$\alpha$$ and $$\beta$$, we never actually assumed that
-   $$M$$ was an inner product. All that matters is that $$MA$$ remains
-   positive definite, so $$M$$ could as well be indefinite, or not even
-   symmetric.
-   
-   In particular, the following holds regardless of $$M$$ being
-   positive-definite:
+   formulas for $$\alpha$$ and $$\beta$$, we never actually assumed
+   that $$M$$ was an inner product. All that matters is that $$MA$$
+   remains positive definite, so $$M$$ could as well be indefinite, or
+   not even symmetric, couldn't it ?. The problem however is that
+   $$r_k$$ is not guaranteed to be a descent direction of the
+   quadratic form when $$M$$ is not an inner product: it might happen
+   that the quadratic simply stagnates along $$r_k \neq 0$$:
 
-   $$ 
-   \alpha_k = \frac{p_k^T M r_k}{p_k^T MA p_k} 
-   $$
+   $$r_{k+1}^T M r_{k+1} = 0 $$ 
 
-$$
-   \begin{align}
-   P_k^T MA x_{k+1} &= P_k^T Mb \\ 
+   Should this happen, the subsequent $$p_{k+1}$$ will also be a
+   direction of stagnation since it always holds that $$P_k^T M
+   r_{k+1} = 0$$, meaning:
 
-   P_k^T M r_{k+1} &= 0 \\
+   $$p_{k+1}^T M r_{k+1} = 0 $$ 
 
-   R_k^T M r_{k+1} &= 0 \\
-   \end{align}
- $$
-   
-   Redefining $$\phi_k = r_k^T M r_k$$, we still have:
-
-$$
-r_i^T MA p_j \alpha_j = \cases{ 
-\phi_i  & if $i = j$ \\
--\phi_i & if $j = i - 1$ \\
- 0 & otherwise}
-   $$
-
-   and the update formulas for $$\beta$$ and $$\alpha$$ remain correct.
+   At this point, the algorithm will simply stagnate since $$\alpha$$
+   will be zero.
+	
 
 # Preconditioning
   

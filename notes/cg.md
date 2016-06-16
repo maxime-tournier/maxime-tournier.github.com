@@ -278,7 +278,7 @@ $$
 
    Should this happen, the subsequent $$p_{k+1}$$ will also be a
    direction of stagnation since it always holds that $$P_k^T M
-   r_{k+1} = 0$$, meaning:
+   r_{k+1} = 0$$, implying that:
 
    $$p_{k+1}^T M r_{k+1} = 0 $$ 
 

@@ -266,14 +266,13 @@ $$
 
 ## Note {#note}
    
-   In fact, except when taking squared norms for alternate update
-   formulas for $$\alpha$$ and $$\beta$$, we never actually assumed
-   that $$M$$ was an inner product. All that matters is that $$MA$$
-   remains positive definite, so $$M$$ could as well be indefinite, or
-   not even symmetric, couldn't it? The problem however is that
-   $$r_k$$ is not guaranteed to be a descent direction of the
-   quadratic form when $$M$$ is not an inner product: it might happen
-   that the quadratic simply stagnates along $$r_k \neq 0$$:
+   In the above, we never actually assumed that $$M$$ was an inner
+   product. All that matters is that $$MA$$ remains positive definite,
+   so $$M$$ could as well be indefinite, or not even symmetric,
+   couldn't it? The problem however is that $$r_k$$ is not guaranteed
+   to be a descent direction of the quadratic form when $$M$$ is not
+   an inner product: it might happen that the quadratic form simply
+   stagnates along $$r_k \neq 0$$:
 
    $$r_{k+1}^T M r_{k+1} = 0 $$ 
 
@@ -283,8 +282,8 @@ $$
 
    $$p_{k+1}^T M r_{k+1} = 0 $$ 
 
-   At this point, the algorithm will simply stagnate since $$\alpha$$
-   will be zero.
+   At this point, the algorithm will stop makin any progress since
+   $$\alpha$$ will be zero.
 	
 
 # Preconditioning

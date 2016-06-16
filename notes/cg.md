@@ -283,7 +283,11 @@ $$
    $$p_{k+1}^T M r_{k+1} = 0 $$ 
 
    At this point, the algorithm will stop makin any progress since
-   $$\alpha$$ will be zero.
+   $$\alpha$$ will be zero. It
+   [seems](https://en.wikipedia.org/wiki/Positive-definite_matrix#Extension_for_non_symmetric_matrices)
+   that it is necessary and sufficient to require that the symmetric
+   part of the metric is positive definite, so that the above
+   breakdown scenario can never happen.
 	
 
 # Preconditioning
@@ -310,7 +314,7 @@ $$
   \end{align}
 $$
 
-It is probably more readable to use the residual for the original
+  It is probably more readable to use the residual for the original
   system instead, and introduce an extra variable $$z = \inv{B} r$$
 
  - Initialization:
@@ -342,8 +346,9 @@ $$
 
 # Conjugate Residuals
 
-  This is exactly CG on $$A$$ with non-standard metric $$M = A^T$$. The
-  residual norm is minimized, and the residuals are $$A^T$$-conjugate.
+  This is exactly CG on $$A$$ with non-standard metric $$M =
+  A^T$$. The residual norm is minimized, and the residuals are
+  $$A^T$$-conjugate.
   
   - Initialization:
   
@@ -364,11 +369,37 @@ $$
   keep only one multiplication by $$A$$ per iteration.
 
 
-
 # Preconditioned Conjugate Residuals
 
-  This one is CG on $$\inv{B}A$$ using metric $$A^TB$$. The norm of the residual
-  is minimized, and the residuals are $$A^TB$$-conjugate:
+  This is the one found on [wikipedia](https://en.wikipedia.org/wiki/Conjugate_residual_method#Preconditioning). Again,
+  this is CG on $$\inv{B}A$$ with metric $$A^T$$. The $$\inv{B}$$-norm
+  of the residual is minimized, and the residuals are again
+  $$A^T$$-conjugate.
+
+  - Initialization:
+
+  $$ p_0 = r_0 = \inv{B}\block{b - Ax_0} $$
+  
+  - Iteration:
+
+$$
+  \begin{align}
+  x_{k+1} &= x_k + \alpha_k p_k  & \alpha_k &= \frac{p_k^T A^T r_k}{p_k^TA^T\inv{B} Ap_k} &= \frac{r_k^T A r_k}{p_k^TA^T\inv{B} Ap_k}\\
+  r_{k+1} &= r_k - \alpha_k \inv{B} Ap_k & & \\
+  p_{k+1} &= r_{k+1} - \beta_k p_k & \beta_k &= \frac{r_{k+1}^TA^T \inv{B} A p_k}{p_k^TA^T \inv{B} A p_k} &= -\frac{ r_{k+1}^T A r_{k+1} }{r_k^T A r_k} \\
+  \end{align}
+  $$
+  
+$$Ap$$ can be obtained from $$Ar$$ at each iteration to keep only one
+multiplication by $$A$$ per iteration.
+
+
+# Preconditioned Conjugate Residuals (alternate)
+
+  This one is CG on $$\inv{B}A$$ using metric $$A^TB$$. In praticular,
+  $$A$$ does not need to be symmetric, only $$A^TB$$ has to be
+  positive definite. The norm of the residual is minimized, and the
+  residuals are $$A^TB$$-conjugate:
 
   - Initialization:
 
@@ -400,28 +431,3 @@ $$
   p_{k+1} &= z_{k+1} - \beta_k p_k & \beta_k &= \frac{z_{k+1}^TA^TAp_k}{p_k^TA^TAp_k} &= -\frac{ z_{k+1}^T A^T r_{k+1} }{z_k^T A^T r_k} \\
   \end{align}
   $$
-
-# Preconditioned Conjugate Residuals (alternate)
-
-  This is the one found on [wikipedia](https://en.wikipedia.org/wiki/Conjugate_residual_method#Preconditioning). Again,
-  this is CG on $$\inv{B}A$$ with metric $$A^T$$. The $$\inv{B}$$-norm
-  of the residual is minimized, and the residuals are again
-  $$A^T$$-conjugate.
-
-  - Initialization:
-
-  $$ p_0 = r_0 = \inv{B}\block{b - Ax_0} $$
-  
-  - Iteration:
-
-$$
-  \begin{align}
-  x_{k+1} &= x_k + \alpha_k p_k  & \alpha_k &= \frac{p_k^T A^T r_k}{p_k^TA^T\inv{B} Ap_k} &= \frac{r_k^T A r_k}{p_k^TA^T\inv{B} Ap_k}\\
-  r_{k+1} &= r_k - \alpha_k \inv{B} Ap_k & & \\
-  p_{k+1} &= r_{k+1} - \beta_k p_k & \beta_k &= \frac{r_{k+1}^TA^T \inv{B} A p_k}{p_k^TA^T \inv{B} A p_k} &= -\frac{ r_{k+1}^T A r_{k+1} }{r_k^T A r_k} \\
-  \end{align}
-  $$
-  
-$$Ap$$ can be obtained from $$Ar$$ at each iteration to keep only one
-multiplication by $$A$$ per iteration.
-

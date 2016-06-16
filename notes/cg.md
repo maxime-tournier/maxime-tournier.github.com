@@ -270,7 +270,7 @@ $$
    formulas for $$\alpha$$ and $$\beta$$, we never actually assumed
    that $$M$$ was an inner product. All that matters is that $$MA$$
    remains positive definite, so $$M$$ could as well be indefinite, or
-   not even symmetric, couldn't it ?. The problem however is that
+   not even symmetric, couldn't it? The problem however is that
    $$r_k$$ is not guaranteed to be a descent direction of the
    quadratic form when $$M$$ is not an inner product: it might happen
    that the quadratic simply stagnates along $$r_k \neq 0$$:

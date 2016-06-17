@@ -45,28 +45,24 @@ alternate Lanczos formulation can be found in the notes for
   \end{align}
   $$
   
-  The step size $$\alpha$$ is chosen such that the gradient becomes
-  orthogonal to the search line. Geometrically, the line-search can
-  also be seen in terms of the $$A$$-projection of $$x_k$$ along
-  $$p_k$$:
+  Geometrically, the line-search can also be interpreted in terms of
+  the $$A$$-projection of $$x_k$$ onto $$p_k$$:
   
   $$ x_{k+1} = x_k - p_k \frac{p_k^TAx_k}{p_k^TAp_k} \quad + \quad p_k \frac{p_k^T b}{p_k^TAp_k} $$
   
   At each iteration, the $$A$$-projection of $$x_k$$ along $$p_k$$ is
   replaced with that of the solution $$\inv{A}b = x^\star$$ to obtain
-  $$x_{k+1}$$.
-  
-  Consequently, an interesting choice for descent directions
-  $$\block{p_k}_k$$ is to use mutually $$A$$-orthogonal directions, so
-  that the solution is found in maximum $$n$$ steps (in exact
-  arithmetic). This is precisely the idea behind the Conjugate
-  Gradient (CG) method.
+  $$x_{k+1}$$. Consequently, an interesting choice for descent
+  directions $$\block{p_k}_k$$ is to use mutually $$A$$-orthogonal
+  ("$$A$$-conjugate", or simply "conjugate") directions, so that the solution is found in
+  maximum $$n$$ steps in exact arithmetic. This is precisely the
+  idea behind the Conjugate Gradient (CG) method.
 
 # Conjugate Directions
 
   The CG algorithm chooses $$p_{k+1}$$ by $$A$$-orthogonalizing the
-  gradient $$r_{k+1}$$ against the previous $$p_k$$, so that the family
-  $$\block{p_k}_k$$ is $$A$$-orthogonal:
+  gradient $$r_{k+1}$$ against the previous $$p_k$$, so that the
+  family $$\block{p_k}_k$$ is $$A$$-orthogonal:
 
   $$ p_{k+1} = r_{k+1} - \sum_{i=1}^k p_i \frac{p_i^TAr_{k+1}}{p_i^T A p_i} $$
 
@@ -262,7 +258,7 @@ $$
   \end{align}
   $$
   
-  ...which is exactly the standard CG algorithm using $$M$$ as
+  which is exactly the standard CG algorithm using $$M$$ as
   inner-product, as one could expect.
 
 ## Note {#note}
@@ -284,13 +280,11 @@ $$
    $$p_{k+1}^T M r_{k+1} = 0 $$ 
 
    At this point, the algorithm will stop making any progress since
-   $$\alpha$$ will be zero.
-
-   It
-	[seems](https://en.wikipedia.org/wiki/Positive-definite_matrix#Extension_for_non_symmetric_matrices)
-	that it is necessary and sufficient to require that the symmetric
-	part of the metric is positive definite, so that the above
-	breakdown scenario can never happen.
+   $$\alpha$$ will be zero. It
+   [seems](https://en.wikipedia.org/wiki/Positive-definite_matrix#Extension_for_non_symmetric_matrices)
+   that it is necessary and sufficient to require that the symmetric
+   part of the metric is positive definite, so that the above
+   breakdown scenario can never happen.
 	
 
 # Examples

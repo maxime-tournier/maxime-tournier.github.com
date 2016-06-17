@@ -304,10 +304,10 @@ suitable choice of metric $$M$$.
   The matrix $$\inv{B}A$$ is trivially positive definite for the
   inner-product $$B$$, and we immediately obtain the Preconditioned
   Conjugate Gradient algorithm. The $$p_k$$ will be $$A$$-conjugate,
-  and $$A$$ will be minimized along the way, but the residuals $$r_k$$
-  will now be $$B$$-conjugate, hopefully to follow a faster path
-  towards the solution. A straightforward adaptation of the above
-  gives:
+  and the energy norm will be minimized along the way, but the
+  residuals $$r_k$$ will now be $$B$$-conjugate, hopefully to follow a
+  faster path towards the solution. A straightforward adaptation of
+  the above gives:
   
   - Initialization:
   

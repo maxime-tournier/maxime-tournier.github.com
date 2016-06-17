@@ -223,7 +223,7 @@ $$
   - $$R_k^T M r_{k+1} = 0$$,
   - $$q_0 = r_0 \Rightarrow x_k \in \Krylov_k\block{A, b}$$.
 
-  In contrast, if the $$q_k$$ are spanned by the $$z_k$$ (which would be
+  In contrast, if the $$q_k$$ are spanned by the $$z_k$$ (which is
   vanilla CG on the modified system), we get:
 
   - $$Z_k^T z_{k+1} = 0$$,
@@ -283,11 +283,13 @@ $$
    $$p_{k+1}^T M r_{k+1} = 0 $$ 
 
    At this point, the algorithm will stop makin any progress since
-   $$\alpha$$ will be zero. It
-   [seems](https://en.wikipedia.org/wiki/Positive-definite_matrix#Extension_for_non_symmetric_matrices)
-   that it is necessary and sufficient to require that the symmetric
-   part of the metric is positive definite, so that the above
-   breakdown scenario can never happen.
+   $$\alpha$$ will be zero.
+
+   It
+	[seems](https://en.wikipedia.org/wiki/Positive-definite_matrix#Extension_for_non_symmetric_matrices)
+	that it is necessary and sufficient to require that the symmetric
+	part of the metric is positive definite, so that the above
+	breakdown scenario can never happen.
 	
 
 # Preconditioning
@@ -431,3 +433,10 @@ $$
   p_{k+1} &= z_{k+1} - \beta_k p_k & \beta_k &= \frac{z_{k+1}^TA^TAp_k}{p_k^TA^TAp_k} &= -\frac{ z_{k+1}^T A^T r_{k+1} }{z_k^T A^T r_k} \\
   \end{align}
   $$
+
+
+
+# Mixed Conjugate Gradient/Residual
+
+Any convex combination of $$I, A^T$$ as a metric will minimize the
+corresponding weighted sum of energy and residual norm.

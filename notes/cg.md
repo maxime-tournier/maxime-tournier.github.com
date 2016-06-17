@@ -272,7 +272,7 @@ $$
    couldn't it? The problem however is that $$r_k$$ is not guaranteed
    to be a descent direction of the quadratic form when $$M$$ is not
    an inner product: it might happen that the quadratic form simply
-   stagnates along $$r_k \neq 0$$:
+   stagnates along $$r_{k+1} \neq 0$$:
 
    $$r_{k+1}^T M r_{k+1} = 0 $$ 
 

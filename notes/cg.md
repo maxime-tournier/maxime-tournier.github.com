@@ -194,14 +194,14 @@ $$
   
 # Non-Standard Inner Product
 
-Let $$A$$ be self-adjoint with respect to an inner product $$M$$, and be
-also positive-definite for $$M$$, that is:
+Let $$A$$ be self-adjoint and positive definite with respect to an
+inner product $$M$$, that is:
 
 - $$A^T M = M A$$,
 - $$x^TMAx > 0$$ for all $$x > 0$$. 
 
-Or simpler: $$MA$$ is symmetric positive definite. Then the following
-quadratic form is positive-definite (thus convex):
+(or simply: let $$MA$$ be symmetric positive definite). The
+following quadratic form is positive-definite (thus convex):
 
 $$
 \begin{align}
@@ -211,8 +211,9 @@ E_M(x) &= \half \inner{x}{A x - b}_M \\
 $$
   
   So again, we look for its minimum. We apply the CG algorithm to the
-  modified system $$MA x = Mb$$, letting $$z_k = M r_k$$ and denoting the
-  $$MA$$-conjugate directions by $$q_k$$. We still obtain:
+  modified system $$MA x = Mb$$, letting $$z_k = M r_k$$ with $$r_k =
+  b - Ax_k$$ as before, and denoting the $$MA$$-conjugate directions
+  by $$q_k$$. We still obtain:
   
   - $$\alpha_k = \frac{z_k^T q_k}{q_k^TMAq_k}$$,
   - $$Q_k^Tz_{k+1} = Q_k^T M r_{k+1} = 0$$,
@@ -223,8 +224,8 @@ $$
   - $$R_k^T M r_{k+1} = 0$$,
   - $$q_0 = r_0 \Rightarrow x_k \in \Krylov_k\block{A, b}$$.
 
-  In contrast, if the $$q_k$$ are spanned by the $$z_k$$ (which is
-  vanilla CG on the modified system), we get:
+  In contrast, if the $$q_k$$ are spanned by the $$z_k$$ (*i.e.* standard CG on
+  the modified system), we get:
 
   - $$Z_k^T z_{k+1} = 0$$,
   - $$R_k^T M^T M r_{k+1} = 0$$,
@@ -243,9 +244,9 @@ $$
   *orthogonal* to level-sets in order to minimize the function, and
   orthogonality depends on the metric. Different metrics will yield
   different trajectories across level-sets, hopefully to obtain faster
-  convergence towards the minimum. Anyways, since the second case was
-  already described, let us continue with the first option and obtain
-  the following algorithm:
+  convergence towards the minimum. Since the second case was already
+  described, let us continue with the first option and obtain the
+  following algorithm:
 
   - Initialization:
 
@@ -261,8 +262,8 @@ $$
   \end{align}
   $$
   
-  which is exactly the standard CG algorithm using $$M$$ as
-  inner-product.
+  ...which is exactly the standard CG algorithm using $$M$$ as
+  inner-product, as one could expect.
 
 ## Note {#note}
    
@@ -274,15 +275,15 @@ $$
    an inner product: it might happen that the quadratic form simply
    stagnates along $$r_{k+1} \neq 0$$:
 
-   $$r_{k+1}^T M r_{k+1} = 0 $$ 
+   $$ r_{k+1}^T z_{k+1} = r_{k+1}^T M r_{k+1} = 0$$ 
 
    Should this happen, the subsequent $$p_{k+1}$$ will also be a
-   direction of stagnation since it always holds that $$P_k^T M
-   r_{k+1} = 0$$, implying that:
+   direction of stagnation since $$P_k^T M r_{k+1} = 0$$ always
+   holds, resulting in:
 
    $$p_{k+1}^T M r_{k+1} = 0 $$ 
 
-   At this point, the algorithm will stop makin any progress since
+   At this point, the algorithm will stop making any progress since
    $$\alpha$$ will be zero.
 
    It
@@ -292,15 +293,21 @@ $$
 	breakdown scenario can never happen.
 	
 
-# Preconditioning
+# Examples
+
+It is now straightforward to derive most classical symmetric Krylov
+methods as instances of the conjugate gradient algorithm for a
+suitable choice of metric $$M$$.
+
+## Preconditioned Conjugate Gradient
   
-  Preconditioning can be seen as a special case of the above:
-  $$\inv{B}A$$ is PSD for the inner-product $$B$$ and the above
-  algorithm then becomes the Preconditioned Conjugate Gradient. The
-  $$p_k$$ will be $$A$$-conjugate, and $$A$$ will be minimized along
-  the way, but the residuals $$r_k$$ will now be $$B$$-conjugate,
-  hopefully to follow a faster path towards the solution. A
-  straightforward adaptation of the above gives:
+  The matrix $$\inv{B}A$$ is trivially positive definite for the
+  inner-product $$B$$, and we immediately obtain the Preconditioned
+  Conjugate Gradient algorithm. The $$p_k$$ will be $$A$$-conjugate,
+  and $$A$$ will be minimized along the way, but the residuals $$r_k$$
+  will now be $$B$$-conjugate, hopefully to follow a faster path
+  towards the solution. A straightforward adaptation of the above
+  gives:
   
   - Initialization:
   
@@ -346,7 +353,7 @@ $$
   displacement proportionally.
 
 
-# Conjugate Residuals
+## Conjugate Residuals
 
   This is exactly CG on $$A$$ with non-standard metric $$M =
   A^T$$. The residual norm is minimized, and the residuals are
@@ -371,7 +378,7 @@ $$
   keep only one multiplication by $$A$$ per iteration.
 
 
-# Preconditioned Conjugate Residuals
+## Preconditioned Conjugate Residuals
 
   This is the one found on [wikipedia](https://en.wikipedia.org/wiki/Conjugate_residual_method#Preconditioning). Again,
   this is CG on $$\inv{B}A$$ with metric $$A^T$$. The $$\inv{B}$$-norm
@@ -396,7 +403,7 @@ $$Ap$$ can be obtained from $$Ar$$ at each iteration to keep only one
 multiplication by $$A$$ per iteration.
 
 
-# Preconditioned Conjugate Residuals (alternate)
+## Preconditioned Conjugate Residuals (alternate)
 
   This one is CG on $$\inv{B}A$$ using metric $$A^TB$$. In praticular,
   $$A$$ does not need to be symmetric, only $$A^TB$$ has to be
@@ -436,7 +443,7 @@ $$
 
 
 
-# Mixed Conjugate Gradient/Residual
+## Mixed Conjugate Gradient/Residual
 
 Any convex combination of $$I, A^T$$ as a metric will minimize the
 corresponding weighted sum of energy and residual norm.

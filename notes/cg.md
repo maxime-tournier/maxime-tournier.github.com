@@ -306,8 +306,7 @@ suitable choice of metric $$M$$.
   Conjugate Gradient algorithm. The $$p_k$$ will be $$A$$-conjugate,
   and the energy norm will be minimized along the way, but the
   residuals $$r_k$$ will now be $$B$$-conjugate, hopefully to follow a
-  faster path towards the solution. A straightforward adaptation of
-  the above gives:
+  faster path towards the solution.
   
   - Initialization:
   
@@ -323,8 +322,9 @@ $$
   \end{align}
 $$
 
-  It is probably more readable to use the residual for the original
-  system instead, and introduce an extra variable $$z = \inv{B} r$$
+  It is generally more convenient to use the residual for the original
+  system instead, and introduce an extra variable $$z = \inv{B} r$$ as
+  follows:
 
  - Initialization:
 
@@ -342,15 +342,15 @@ $$
   $$
   
 
-  Intuitively, the metric $$B$$ should ease motion where the curvature
-  is low, and damp it where the curvature is high. By assigning a high
-  cost to highly-curved directions, the gradient in these directions
-  will become small (since you don't have to move a lot to get energy
-  decrease, due to the high associated energy cost), and
-  conversely. In this respect, the diagonal preconditioner $$B =
-  \diag(A)$$ approximates the curvature along each axis in a
-  Levernberg-Marquardt fashion, and damps the corresponding
-  displacement proportionally.
+  Intuitively, the metric $$B$$ should ease displacements where the
+  curvature is low, and damp it where the curvature is high. By
+  assigning a high cost to highly-curved directions, the gradient in
+  these directions will become small (since you don't have to move a
+  lot to get energy decrease, due to the high associated energy cost),
+  and conversely. In this respect, the diagonal metric $$B =
+  \diag(A)$$ approximates the curvature along each axis (similar to
+  the Levernberg-Marquardt algorithm), and damps the corresponding
+  displacements accordingly.
 
 
 ## Conjugate Residuals
@@ -443,7 +443,7 @@ $$
 
 
 
-## Mixed Conjugate Gradient/Residual
+## Mixed Conjugate Gradient/Residuals
 
 Any convex combination of $$I, A^T$$ as a metric will minimize the
 corresponding weighted sum of energy and residual norm.

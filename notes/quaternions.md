@@ -406,6 +406,7 @@ $$
 \begin{align}
 \dd \theta &= n^T \db q\\
 \dd n &= \frac{1}{\sin(\theta)} \block{cI + s \hat{n}} \block{I - nn^T}\db q\\
+&= \frac{1}{\tan \theta}\block{I - n n^T} \db q + \hat{n} \db q \\
 \end{align}
 $$
 
@@ -720,7 +721,35 @@ $$ \cos(\alpha) v_q^T n - w_q \sin(\alpha) = 0 $$
 	$$
   
 TODO figure out whether Said et al[^Said07] got the same formula.
-  
+
+## Gnomonic Projection Derivative
+
+The gnomonic projection is useful for geodesic projection and is given
+by:
+
+$$\pi(q) = \frac{q}{w} = \frac{q}{\cos \theta} = 1 + \tan(\theta) n$$
+
+The derivative is given by:
+
+$$
+\begin{align}
+\dd \pi(q).\dd q &= \frac{\dd q}{w} + \frac{\sin(\theta)}{w^2}\dd \theta \\
+&= n\block{1 + \tan^2(\theta)}.\dd \theta + \tan(\theta).\dd n \\
+\end{align}
+$$
+
+where the two equivalent expressions for $$\pi$$ were used on each
+line. Using body-fixed coordinates for $$\dd q$$ and the derivative
+formula for polar coordinates yields in both cases:
+
+$$
+\begin{align}
+
+\dd \pi(q).\db q &= \pi(q) \block{\tan(\theta) n^T \db q + \db q} \\
+&= \db q + \pi(q) \times \db q + \pi(q) \pi(q)^T \db q \\
+&= \block{I + \tan(\theta) \hat{n} + \tan^2(\theta) n n^T} \db q \\
+\end{align}
+$$
 
 [^Fletcher04]: Fletcher, P. Thomas, et al. *"Principal geodesic analysis for the study of nonlinear statistics of shape."* Medical Imaging, IEEE Transactions on 23.8 (2004): 995-1005.
 
@@ -729,3 +758,4 @@ TODO figure out whether Said et al[^Said07] got the same formula.
 ## Conversion to/from Euler Angles
 
 # References
+  

@@ -606,23 +606,24 @@ so that:
 
 $$q^\half = \pi_{S^3} \block{q + 1}$$
 
-That is: add $$1$$ to the real part, then normalize. Sweet!
-
-For non-unit quaternions, one can always take the square-root of the
-norm separately and reduce to the case above:
+That is: add $$1$$ to the real part, then normalize. Sweet! For
+non-unit quaternions, one can always take the square-root of the norm
+separately and reduce to the case above:
 
 $$ q^\half = \sqrt{\norm{q}} \pi_{S^3} \block{q + \norm{q}} $$
+
+
 
 ## Rotation between Vectors
 
 The quaternion product for imaginary quaternions is:
 
-$$ x y = x \times y - x^T y = \norm{x}\norm{y} \block{-\cos \theta + n \sin \theta} $$
+$$ x y = x \times y - x^T y = \norm{x} \norm{y} \block{-\cos \theta + n \sin \theta} $$
 
 which, once normalized, gives us *twice* the rotation from $$y$$ to
 $$-x$$. So instead, we want to consider the product $$-yx$$. We have
 just seen how to obtain square roots efficiently, so the following
-procedure should work:
+does what we need:
 
 $$ q_{x \mapsto y} = \pi_{S^3} \block{1 + \pi_{S^3} \block{-y x}} $$
 
@@ -635,11 +636,9 @@ $$ q_{x \mapsto y} = \pi_{S^3} \block{ -y x + \norm{y x} } $$
 There is a closed-form solution to the problem of the geodesic
 projection of a unit quaternion to a geodesic. This problem arises in
 non-Euclidean generalizations[^Fletcher04] of the Principal Component
-Analysis.
-
-Assuming we are given a geodesic curve starting at $$1$$, with
-(normalized) direction $$n \in S^2$$, and a unit quaternion $$q$$, we
-consider the following optimization problem:
+Analysis. Assuming we are given a geodesic curve starting at $$1$$,
+with (normalized) direction $$n \in S^2$$, and a unit quaternion
+$$q$$, we consider the following optimization problem:
 
 $$ \argmin{\alpha \in \RR}\quad f(\alpha) = \half d\block{\exp\block{\alpha n}^{-1}, q}^2 $$
 
@@ -706,11 +705,6 @@ $$ \cos(\alpha) v_q^T n - w_q \sin(\alpha) = 0 $$
     [gnomonic projection](http://en.wikipedia.org/wiki/Gnomonic_projection)
     for $$S^3$$, as one could expect.
 
-	It seems that the action of unprojecting from the tangent space is
-    exactly the square root of the Cayley transform, which would be
-    awesome since geodesic projections would then be kinda
-    Cayley-invariant. This needs more work though.
-
 - if $$v_q^T n \neq 0$$:
 
 	$$
@@ -751,11 +745,70 @@ $$
 \end{align}
 $$
 
-[^Fletcher04]: Fletcher, P. Thomas, et al. *"Principal geodesic analysis for the study of nonlinear statistics of shape."* Medical Imaging, IEEE Transactions on 23.8 (2004): 995-1005.
-
-[^Said07]: Said, Salem, et al. *"Exact principal geodesic analysis for data on so (3)."* 15th European Signal Processing Conference (EUSIPCO-2007). EURASIP, 2007.
-
 ## Conversion to/from Euler Angles
+
+Here is a purely geometric take on finding the Euler angles
+corresponding to a unit quaternion. We look for the following decomposition:
+
+$$q \in S^3 = \exp(\theta_x e_x) \exp(\theta_y e_y) \exp(\theta_z
+e_z)$$
+
+for some Euler angles $$\theta_x, \theta_y, \theta_z$$. The gnomonic
+projection is useful in this context since it maps geodesics to
+straight lines: the geodesic along $$e_z$$ has body-fixed velocity
+$$e_z$$ at $$q$$, which in gnomonic projection corresponds to a line
+passing through $$\pi(q)$$ with direction:
+
+$$u = e_z + \pi(q)\times e_z + \pi(q) \pi(q)^T e_z$$
+
+On the other hand, the geodesic along $$e_x$$ starts at $$0$$ with
+direction $$e_x$$, and finally the geodesic along $$e_y$$ corresponds
+to a line starting at some point $$p_x = \lambda_x e_x =
+\pi\block{\exp(\theta_x ex)}$$ with a direction corresponding to a
+body-fixed velocity $$e_y$$:
+
+$$
+\begin{align}
+v &= e_y + p_x \times e_y + p_x p_x^T e_y \\
+&= e_y + \lambda_x e_z \\
+\end{align}
+$$
+
+for some real $$\lambda_x$$. We want the geodesic along $$e_y$$ and
+the one along $$e_z$$ to meet, so we look for some point satisfying:
+
+$$ \pi(q) + \lambda_u u = p_x + \lambda_v v $$
+
+Expanding the right-hand side, this gives:
+
+$$ \pi(q) + \lambda_u u = \lambda_x e_x + \lambda_v\block{e_y + \lambda_x e_z}
+	= \mat{\lambda_x \\ \lambda_v \\ \lambda_x \lambda v} $$
+
+Geometrically, we look for the intersection of an affine line with the
+hyperbolic paraboloid $$z = x y$$. An easy way to solve this equation
+is to convert the paraboloid to the normal form:
+
+$$ \block{x + y}^2 - \block{x - y}^2 = 4z $$
+
+then substitute $$x, y, z$$ with their coordinates taken from
+$$\pi(q) + \lambda_u u$$. One finally obtains a quadratic equation in
+$$\lambda_u$$, which *should* always have real solution(s). Solving
+for $$\lambda_u$$ gives the quaternion:
+
+$$\pi^{-1}\block{\pi(q) + \lambda_u u} = \exp(\theta_x e_x) \exp(\theta_y e_y)$$
+
+Likewise $$\lambda_x$$ gives the quaternion:
+
+$$\pi^{-1}\block{\lambda_x e_x} = \exp(\theta_x e_x)$$
+
+It is then easy to obtain the Euler angles $$\theta_x, \theta_y,
+\theta_z$$. It is remarkable that the above method obtains the 2
+intermediate quaternions using purely geometric operations. In
+particular, no trigonometric functions were used.
+
 
 # References
   
+[^Fletcher04]: Fletcher, P. Thomas, et al. *"Principal geodesic analysis for the study of nonlinear statistics of shape."* Medical Imaging, IEEE Transactions on 23.8 (2004): 995-1005.
+
+[^Said07]: Said, Salem, et al. *"Exact principal geodesic analysis for data on so (3)."* 15th European Signal Processing Conference (EUSIPCO-2007). EURASIP, 2007.

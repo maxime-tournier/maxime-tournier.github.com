@@ -59,9 +59,13 @@ $$ \exp\mat{\omega & v \\ 0 & 0} = \mat{ \exp(\omega) & \dd\exp(\omega) v \\ 0 &
 See the page on [quaternions](quaternions.html) for the corresponding
 formula (modulo a factor $$2$$).
 
-
-
 ## Logarithm
+
+From the above formula for the exponential, the logarithm (where
+defined) is the inverse matrix and is given by:
+
+$$ \log\mat{R & t \\ 0 & 1} = \mat{ \log(R) & \dd\log(R) t \\ 0 & 0} $$
+
 
 # Rigid Bodies
 

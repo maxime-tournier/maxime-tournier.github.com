@@ -37,6 +37,30 @@ $$\ad \mat{\omega\\ v} = \mat{ \hat{\omega} & \\ \hat{v} & \hat{\omega} }$$
 
 ## Exponential
 
+Given a Lie algebra element:
+
+$$\mat{\omega & v \\ 0 & 0}$$
+
+It is easy to see that:
+
+$$\mat{\omega & v \\ 0 & 0}^i = \mat{\omega^i & \omega^{i-1} v \\ 0 & 0}$$
+
+for $$i \geq 1$$. So the exponential power series becomes:
+
+$$ \sum_{i=0} \frac{1}{i!} \mat{\omega & v \\ 0 & 0}^i = \mat{ \sum_i \frac{\omega^i}{i!} & \sum_i \frac{\omega^i}{(i + 1)!} v \\ 0 & 0}$$
+
+One can recognize $$\sum_i \frac{\omega^i}{(i + 1)!}$$ as the power
+series for the exponential derivative in $$SO(3)$$, while $$ \sum_i
+\frac{\omega^i}{i!}$$ is the $$SO(3)$$ exponential. In the end, we
+obtain:
+
+$$ \exp\mat{\omega & v \\ 0 & 0} = \mat{ \exp(\omega) & \dd\exp(\omega) v \\ 0 & 0} $$
+
+See the page on [quaternions](quaternions.html) for the corresponding
+formula (modulo a factor $$2$$).
+
+
+
 ## Logarithm
 
 # Rigid Bodies

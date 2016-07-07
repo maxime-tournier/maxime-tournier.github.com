@@ -63,16 +63,6 @@ $$ \omega^b_{k+1} = \mathcal{I}_b^{-1} \Ad_{R_k^TR_{k+1}}^T \mathcal{I}_b \omega
 Note: differentiating at $$R_{k+1} = R_k$$ gives the Newton-Euler
 equations.
 
-If $$R_{k+1}$$ is chosen so that $$R_k^T R_{k+1} =
-\exp\block{\alpha\mathcal{I}_b \omega_k^b}$$ for some $$\alpha \in
-\RR$$, for instance by projecting $$\omega^b_k$$ onto $$\mathcal{I}_b
-\omega^b_k$$, then:
-
-$$\Ad_{R_k^TR_{k+1}}^T \mathcal{I}_b \omega_k^b =
-\mathcal{I}_b \omega_k^b$$
-
-and the kinetic energy is also conserved.
-
 # Kinematics
 
 While choosing a body-fixed or spatial reference frame has advantages

@@ -7,7 +7,7 @@ Quick notes.
 
 {% include toc.md %}
 
-# Lie Group
+# Lie Group Structure
 
 As a subgroup of $$GL(4)$$:
 
@@ -27,11 +27,27 @@ As a subalgebra of $$\alg{gl(4)}$$:
 	
 $$\alg{se(3)} = \left\{ \mat{ \omega & v \\ 0 & 0 }, \quad \omega \in \alg{so(3)}, \ v\in\RR^3 \right \} $$
 
+## Twists
+
+Twists are $$\RR^6$$ coordinates for $$\alg{se(3)}$$ as follows:
+
+$$\mat{\omega \\ v} \simeq \mat{ \hat{\omega} & v \\ 0 & 0}$$
+
+where $$\hat{\omega} x = \omega \times x$$ is the cross-product matrix
+(see [quaternions](quaternions.html)).
+
+## Wrenches
+
+Similarly, wrenches are $$\RR^6$$ coordinates for the Lie coalgebra
+$$\alg{se(3)}^\star$$.
+
 ## Adjoint Representations
 
-Using $$\RR^6$$ coordinates for $$\alg{se(3)}$$:
+Group adjoint representation on twists:
 
 $$\Ad_{R, t} = \mat{ R & \\ \hat{t}R & R } $$
+
+Algebra adjoint representation on twists:
 
 $$\ad \mat{\omega\\ v} = \mat{ \hat{\omega} & \\ \hat{v} & \hat{\omega} }$$
 
@@ -50,9 +66,8 @@ for $$i \geq 1$$. So the exponential power series becomes:
 $$ \sum_{i=0} \frac{1}{i!} \mat{\omega & v \\ 0 & 0}^i = \mat{ \sum_i \frac{\omega^i}{i!} & \sum_i \frac{\omega^i}{(i + 1)!} v \\ 0 & 1}$$
 
 One can recognize $$\sum_i \frac{\omega^i}{(i + 1)!}$$ as the power
-series for the exponential derivative in $$SO(3)$$, while $$ \sum_i
-\frac{\omega^i}{i!}$$ is the $$SO(3)$$ exponential. In the end, we
-obtain:
+series for the $$SO(3)$$ exponential derivative, while $$ \sum_i
+\frac{\omega^i}{i!}$$ is the $$SO(3)$$ exponential, which gives:
 
 $$ \exp\mat{\omega & v \\ 0 & 0} = \mat{ \exp(\omega) & \dd\exp(\omega) v \\ 0 & 1} $$
 
@@ -62,7 +77,7 @@ formula (modulo a factor $$2$$).
 ## Logarithm
 
 From the above formula for the exponential, the logarithm (where
-defined) is the inverse matrix and is given by:
+defined) is the inverse function:
 
 $$ \log\mat{R & t \\ 0 & 1} = \mat{ \log(R) & \dd\log(R) t \\ 0 & 0} $$
 
@@ -71,11 +86,15 @@ $$ \log\mat{R & t \\ 0 & 1} = \mat{ \log(R) & \dd\log(R) t \\ 0 & 0} $$
 
 ## Inertia Tensor
 
+TODO
+
 ## Newton-Euler Equations
+
+TODO
 
 ## Time Integration
 
-Parallel transport the spatial angular momentum $$\mu_k^s$$ from
+Parallel transport of the spatial angular momentum $$\mu_k^s$$ from
 $$R_k$$ to $$R_{k+1}$$. Constant spatial angular momentum gives:
 
 $$ \mu_{k+1}^s = \mu_k^s$$
@@ -95,9 +114,9 @@ equations.
 
 While choosing a body-fixed or spatial reference frame has advantages
 for a theoretic study of $$SE(3)$$, it is not ideal for simulating
-rigid bodies because it ties the linear and angular dynamics
-together. But as seen before, these two dynamics can be decoupled when
-the reference frame is chosen appropriately.
+rigid bodies in practice because it ties the linear and angular
+dynamics together. But as seen before, these two dynamics can be
+decoupled when the reference frame is chosen appropriately.
 
 ## Reference Frame
 

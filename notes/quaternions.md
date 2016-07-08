@@ -714,7 +714,7 @@ by:
 
 $$\pi(q) = \frac{q}{w} = \frac{q}{\cos \theta} = 1 + \tan(\theta) n$$
 
-The derivative is given by:
+The derivative is thus:
 
 $$
 \begin{align}

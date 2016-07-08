@@ -222,7 +222,7 @@ x$$. Finally, $$\ad$$ preserves the Lie bracket:
 $$ \ad( [x, y] ) = [\ad(x), \ad(y)] $$
 
 
-### Exponential Map
+### Exponential
 
 The classical characterization of the exponential (due to Euler)
 conveys pretty well what the exponential does:
@@ -250,8 +250,12 @@ $$
 $$
 
 The injectivity radius is $$2\pi$$, but we start getting the same
-rotations again after a radius of $$\pi$$. The *logarithm* is the
-inverse operation, defined inside the injectivity radius:
+rotations again after a radius of $$\pi$$.
+
+### Logarithm
+
+The *logarithm* is the inverse operation, defined inside the
+injectivity radius:
 
 $$ \log(q) = \theta n $$
 
@@ -276,8 +280,8 @@ q & \text{if} &  w_q \geq 0\\
 $$
 
 Doing so ensures the arc-cosine is well defined, and that the rotation
-interpolated along the logarithm by $$\exp\block{\alpha \log(q)},\
-\alpha \in [0, 1]$$ takes the *short way*.
+interpolated along the logarithm by $$\exp\block{\alpha
+\log(q)},\,\alpha \in [0, 1]$$ takes the *short way*.
 
 ## Rotation Correspondence
 
@@ -410,19 +414,6 @@ $$
 \end{align}
 $$
 
-
-
-<!-- One can verify that $$(c - s n) \dd n = R_{-\theta, n} \dd n$$, so -->
-<!-- that: -->
-
-<!-- $$ -->
-<!-- \begin{align} -->
-<!-- \db q &= R_{-\theta, n}\block{n\ \dd \theta + s\ \dd n} -->
-<!-- \end{align} -->
-<!-- $$ -->
-
-<!-- When $$q \neq 1, -1$$, the formula above provides the orthogonal -->
-<!-- decomposition: -->
 
 
 ## Logarithm Derivative

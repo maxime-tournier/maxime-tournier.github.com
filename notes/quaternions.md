@@ -795,7 +795,9 @@ $$\pi^{-1}\block{\lambda_x e_x} = \exp(\theta_x e_x)$$
 It is then easy to obtain the Euler angles $$\theta_x, \theta_y,
 \theta_z$$. It is remarkable that the above method obtains the 2
 intermediate quaternions using purely geometric operations. In
-particular, no trigonometric functions were used.
+particular, no trigonometric functions were used. A similar procedure
+can also be used to find Euler angles along arbitrary (orthogonal)
+rotation axis.
 
 
 # References

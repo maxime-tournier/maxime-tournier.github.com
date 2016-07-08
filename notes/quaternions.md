@@ -305,7 +305,7 @@ Now hopefully that double covering thing makes more sense.
 
 ## Riemannian Manifold
 
-The ambient metric in $$\RR^4$$ induces a Riemannian manifold
+The standard metric in $$\RR^4$$ induces a Riemannian manifold
 structure on $$S^3$$, which plays nicely with the Lie group structure
 as we shall see.
 

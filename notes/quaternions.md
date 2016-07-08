@@ -35,8 +35,8 @@ a *field*, the complex numbers, noted $$\CC$$.
 
 ## Quaternions
 
-We repeat this construction, this time with *complex* matrices of the
-form:
+Let us repeat this construction, this time with *complex* matrices of
+the form:
 
 $$ \mat{ x & \bar{y} \\ -y & \bar{x} } $$
 

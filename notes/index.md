@@ -1,5 +1,5 @@
 ---
-title: Notes
+title: Research Notes
 ---
 
 ![yo euclid](euclid.png)

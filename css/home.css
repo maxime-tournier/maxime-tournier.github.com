@@ -14,8 +14,9 @@
 
 
 #me { float:right;
-      width:250px;
-      margin-left:3em; }
+      width:220px;
+      margin-left:2em;
+	margin-bottom:1em}
 
 .header { text-align: left; }
 
@@ -40,6 +41,7 @@ h1 {  padding-top:.5em ; white-space:nowrap; }
     
 }
 
+
 #publications {
     list-style-type:none;
     padding-left: 0;
@@ -62,4 +64,4 @@ ul#misc {list-style-type:square; }
 #video-left {  width:300px; height:300px; float:left; border: 0; margin:auto}
 #video-right {  width:300px; height:300px; float:right; border: 0; margin:auto}
 
-h2#news { clear:both; }
+h2#news { clear:none; }

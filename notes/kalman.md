@@ -3,7 +3,10 @@ title: Kalman Filter
 categories: [math]
 ---
 
-A purely geometric take on [Kalman filtering](https://en.wikipedia.org/wiki/Kalman_filter).
+A geometric take on
+[Kalman filtering](https://en.wikipedia.org/wiki/Kalman_filter). In
+the absence of process noise, Kalman filtering really boils down to
+the Recursive Least Squares algorithm.
 
 # Incremental Least Squares
 
@@ -68,6 +71,13 @@ $$x_{k+1} = x_k + C_k H_{k+1}^T S_{k+1}^{-1} w_{k+1}$$
 
 which might be more convenient to use in practice.
 
+## Forgetting Factor
+
+One can easily incorporate a geometrically decreasing weight for
+previous measurements by scaling $$K_k$$ by $$\lambda \in
+[0, 1[$$, which corrdesponds to scaling $$C_k$$ by $$\frac{1}{\lambda}$$ before computing the next iterate.
+
+
 # Non-stationary Process
 
 We now suppose that the state $$x$$ changes linearly as follows:
@@ -93,7 +103,7 @@ Woodbury formula as before, we obtain $$C_{k+1} = K_{k+1}^{-1} = D_k -
 D_k H_{k+1}^T S_{k+1}^{-1} H_{k+1} D_k$$, where $$D_k = F_k C_k
 F_k^T$$ and $$S_{k+1} = R_{k+1}^{-1} + H_{k+1} D_k H_{k+1}^T$$. The
 solution update is traditionally decomposed into two
-prediction/correction phases:
+prediction/update phases:
 
 ### Prediction
 
@@ -104,7 +114,7 @@ $$
 \end{align}
 $$
 
-### Correction
+### Update
 
 $$
 \begin{align}
@@ -129,25 +139,21 @@ vectors.
 
 # TODO Lie Groups
 
-Start from the non-linear Kalman filter, trivialize tangent vectors +
-express solution update using group exponential. The group adjoint
-must account for change of (body/spatial) coordinates between steps
-according to trivialization.
+This one is more difficult as one has to linearize the group at
+different points using *e.g.* the exponential map, and linearize the
+change of coordinates as well.
 
 # Appendix
 
-Let us consider the following linear system:
+Consider the following linear system:
 
 $$ \block{\inv{C} + H^T R H} x = H^T R z $$
 
-It is easy to see that the solution $$x$$ for the above system is also
-that of the following two augmented KKT systems:
+One can verify that the solution $$x$$ for the above system is also that of the following two augmented KKT systems:
 
-1. $$ \mat{ \inv{C} & H^T \\ H & -R } \mat{x \\ \lambda} = \mat{H^T R z \\ 0 }$$
-2. $$ \mat{ \inv{C} & H^T \\ H & -R } \mat{x \\ \lambda} = \mat{0 \\ z}$$
+1. $$ \mat{ \inv{C} & H^T \\ H & -R^{-1} } \mat{x \\ \lambda} = \mat{H^T R z \\ 0 }$$
+2. $$ \mat{ \inv{C} & H^T \\ H & -R^{-1} } \mat{x \\ \lambda} = \mat{0 \\ z}$$
 
 Now the solution for the first one is $$x = \block{C -
 CH^T\inv{S}HC}H^TRz$$, where $$S = HCH^T + \inv{R}$$ is the Schur
 complement, and the solution for the second is $$x = CH^T\inv{S}z$$.
-Both solutions are equal since both KKT systems are equivalent to the
-initial system and since $$z$$ is arbitrary, the proof is complete.

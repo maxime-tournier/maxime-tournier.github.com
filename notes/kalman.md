@@ -10,7 +10,7 @@ the Recursive Least Squares algorithm.
 
 # Recursive Least Squares
 
-Our problem is to solve the following least-squares problem: 
+Our goal is to solve the following least-squares problem: 
 
 $$\argmin{x} \quad \norm{Ax - b}_M^2$$
 

@@ -5,7 +5,7 @@ categories: [math]
 
 A geometric take on
 [Kalman filtering](https://en.wikipedia.org/wiki/Kalman_filter). In
-the absence of process noise, Kalman filtering really boils down to
+the absence of process noise, Kalman filtering simply boils down to
 the Recursive Least Squares algorithm.
 
 # Recursive Least Squares

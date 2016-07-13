@@ -8,7 +8,7 @@ A geometric take on
 the absence of process noise, Kalman filtering really boils down to
 the Recursive Least Squares algorithm.
 
-# Incremental Least Squares
+# Recursive Least Squares
 
 Our problem is to solve the following least-squares problem: 
 
@@ -75,7 +75,7 @@ which might be more convenient to use in practice.
 
 One can easily incorporate a geometrically decreasing weight for
 previous measurements by scaling $$K_k$$ by $$\lambda \in
-[0, 1[$$, which corrdesponds to scaling $$C_k$$ by $$\frac{1}{\lambda}$$ before computing the next iterate.
+[0, 1[$$, which corresponds to scaling $$C_k$$ by $$\frac{1}{\lambda}$$ before computing the next iterate.
 
 
 # Non-stationary Process

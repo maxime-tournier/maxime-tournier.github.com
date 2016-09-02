@@ -162,7 +162,7 @@ div.algorithm {
 	/* width:%; */
 }
 
-div.algorithm i {
+div.algorithm em {
 	margin: 0 auto;
 	float:right;
 	color: grey;

@@ -25,16 +25,17 @@ for more details. Note that the algorithm presented here works on the
 
 <div class="algorithm" markdown="1">
   - for $$i = 1, \ldots n$$ 
-    - for $$k = i − 1, \ldots  1$$  *$$k \in$$ processed*
-      - $$H_{ii} \gets H_{ii} -  H_{ki}^T H_{kk} H_{ki}$$<br/>
+    - for $$k = 1, \ldots i − 1$$  *$$k \in$$ processed*
+      - $$H_{ii} \gets H_{ii} -  H_{ik} H_{kk} H_{ik}^T$$<br/>
+
     - for $$j = i + 1, \ldots n$$  *$$j \in$$ remaining*
       - for $$k = i − 1, \ldots 1$$ *$$k \in$$ processed*
-	    - $$H_{ij} \gets H_{ij} - H_{ki}^T H_{kk} H_{kj}$$ *fill-in !*
-      - $$H_{ij} \gets \inv{H_{ii}} H_{ij}$$ <br />
+	    - $$H_{ji} \gets H_{ji} - H_{jk} H_{kk} H_{ik}^T$$ *fill-in !*
+      - $$H_{ji} \gets H_{ji} \inv{H_{ii}}$$ <br />
 </div>
 
 
-## System Solve
+## Solving
 
 We solve the system $$Hx = z$$ using the following algorithm, which
 essentially performs two back-substitutions on triangular systems and
@@ -44,13 +45,13 @@ a diagonal scaling:
    - for $$i = 1, \ldots n$$
      - $$x_i \gets z_i$$ <br/>
      - for $$j = 1, \ldots i − 1$$  *$$j \in$$ processed*
-       - $$x_i \gets x_i – H_{ij}^T x_j$$ <br/>
+       - $$x_i \gets x_i – H_{ij} x_j$$ <br/>
 
 
    - for $$i = n, \ldots 1$$ 
        - $$x_i \gets \inv{H_{ii}} x_i$$ <br/>
      - for $$j = i + 1, \ldots n$$ *$$j \in$$ processed*
-       - $$x_i \gets x_i – H_{ij} x_j$$ <br/>
+       - $$x_i \gets x_i – H_{ji}^T x_j$$ <br/>
 </div>
  
 
@@ -81,13 +82,14 @@ current node:
 
 <div class="algorithm" markdown="1">
   - for each vertex $$i$$ in **postfix** order:
-    - for each **child** vertex $$k$$ of $$i$$ *otherwise $$H_{ki}$$ is zero*
-      - $$H_{ii} \gets H_{ii} -  H_{ki}^T H_{kk} H_{ki}$$ <br />
+    - for each **child** vertex $$k$$ of $$i$$ *otherwise $$H_{ik}$$ is zero*
+      - $$H_{ii} \gets H_{ii} -  H_{ik} H_{kk} H_{ik}^T$$ <br />
+
     - for each **remaining** vertex $$j$$:
-      - for each **common** child $$k$$ of $$i$$ and $$j$$: *otherwise either $$H_{ki}$$ or $$H_{kj}$$ is zero*
-	    - $$H_{ij} \gets H_{ij} - H_{ki}^T H_{kk} H_{kj}$$ *may add a new edge !*
+      - for each **common child** $$k$$ of $$i$$ and $$j$$:   *otherwise either $$H_{ik}$$ or $$H_{jk}$$ is zero*
+	    - $$H_{ji} \gets H_{ji} - H_{jk} H_{kk} H_{ik}^T$$    *may add a new edge !*
     - for each **parent** vertex $$j$$ of $$i$$: *otherwise $$H_{ij}$$ is zero*
-      - $$H_{ij} \gets \inv{H_{ii}} H_{ij}$$ <br />
+      - $$H_{ji} \gets  H_{ji} \inv{H_{ii}}$$ <br />
 </div>
 
 Should fill-in happend between $$i$$ and $$j$$, the added edge is oriented
@@ -95,7 +97,7 @@ such that $$i$$ becomes a new child of $$j$$, which does not alter the
 topological ordering.
 
 
-## System Solve
+## Solving
 
 This is a straightforward adaptation of the dense case:
 
@@ -103,12 +105,77 @@ This is a straightforward adaptation of the dense case:
    - for each vertex $$i$$ in **postfix** order:
      - $$x_i \gets z_i$$ <br />
      - for each **child** vertex $$j$$ of $$i$$:
-       - $$x_i \gets x_i – H_{ij}^T x_j$$ <br />
+       - $$x_i \gets x_i – H_{ij} x_j$$ <br />
    - for each vertex $$i$$ in **prefix** order:
        - $$x_i \gets \inv{H_{ii}} x_i$$ <br />
      - for each **parent** vertex $$j$$ of $$i$$:
-       - $$x_i \gets x_i – H_{ij} x_j$$ <br/>
+       - $$x_i \gets x_i – H_{ji}^T x_j$$ <br/>
 </div>
+
+
+# Using Graph Edges
+
+In practice, it is convenient to implement the algorithm by
+associating matrix blocks $$H_{ij}$$ with edges $$(i, j)$$ in the
+adjacency graph. We will assume that the initial set of edges only
+contains edges corresponding to the lower triangular part of $$H$$.
+
+The process of orienting the adjacency graph as a DAG will **reverse**
+some edges in the graph, which corresponds to **transposing** their
+matrix block. After the DAG is obtained, operations on
+predecessor/successor vertices will be achieved using the in/out edges
+of each vertex. Depending on which matrix block is needed, some matrix
+transposing might be required, for instance:
+
+<div class="algorithm" markdown="1">
+  - for each vertex $$i$$:
+    - for each **child** vertex $$k$$ of $$i$$
+      - do something with $$H_{ik}$$
+</div>
+
+becomes:
+
+<div class="algorithm" markdown="1">
+  - for each vertex $$i$$:
+    - for each **in-edge** $$e$$ of $$i$$:
+      - do something with $$H_e^T$$ *since $$H_e$$ stores $$H_{ki}$$*
+</div>
+
+The corresponding algorithms for factorization and solving are given
+below.
+
+## Factorization
+
+<div class="algorithm" markdown="1">
+  - for each vertex $$i$$ in **postfix** order:
+    - for each **in-edge** $$e=(k, i)$$ of $$i$$:
+      - $$H_{ii} \gets H_{ii} -  H_e^T H_{kk} H_e$$ <br />
+  
+    - for each **remaining** vertex $$j$$:
+      - for each edge pair $$e =(k, i), f=(k, j)$$:   *$$k$$ is a common child to $$i$$ and $$j$$*
+	    - $$H_{(i, j)} \gets H_{(i, j)} - H_e^T H_{kk} H_f$$  *may add a new edge $$(i, j)$$*
+    - for each **out-edge** $$e = (i, j)$$ of $$i$$:
+      - $$H_e \gets  \inv{H_{ii}} H_e$$ <br />
+</div>
+
+Note: the fill-in line has been transposed to ensure that added edges
+that will be further processed by the algorithm.
+
+## Solving
+
+<div class="algorithm" markdown="1">
+   - for each vertex $$i$$ in **postfix** order:
+     - $$x_i \gets z_i$$ <br />
+     - for each **in-edge** $$e=(j, i)$$ of $$i$$:
+       - $$x_i \gets x_i – H_e^T x_j$$ <br />
+
+   - for each vertex $$i$$ in **prefix** order:
+       - $$x_i \gets \inv{H_{ii}} x_i$$ <br />
+
+     - for each **out-edge** $$e = (i, j)$$ of $$i$$:
+       - $$x_i \gets x_i – H_e x_j$$ <br/>
+</div>
+
 
 
 # Acyclic Graphs
@@ -123,9 +190,9 @@ factor algorithm reduces to the following:
 <div class="algorithm" markdown="1">
   - for each vertex $$i$$ in **postfix** order:
     - for each **child** vertex $$k$$ of $$i$$:
-      - $$H_{ii} \gets H_{ii} -  H_{ki}^T H_{kk} H_{ki}$$ <br />
+      - $$H_{ii} \gets H_{ii} -  H_{ik} H_{kk} H_{ik}^T$$ <br />
     - for **the** parent vertex $$j$$ of $$i$$, if any:
-      - $$H_{ij} \gets \inv{H_{ii}} H_{ij}$$ <br />
+      - $$H_{ji} \gets  H_{ji} \inv{H_{ii}}$$ <br />
 </div>
     
 For some applications, it can be useful to perform an *incomplete*

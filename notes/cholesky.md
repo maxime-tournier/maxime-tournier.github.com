@@ -58,9 +58,9 @@ a diagonal scaling:
 # Sparse Algorithm
 
 When many blocks are zero in matrix $$H$$, the algorithm may be
-simplified based on an undirected *adjacency graph* structure, where
-an edge $$(i, j)$$ indicates a non-zero matrix block between coordinates
-$$i$$ and $$j$$.
+simplified based on an undirected *graph* structure, where
+an edge $$(i, j)$$ indicates a non-zero matrix block between
+coordinates $$i$$ and $$j$$.
 
 By traversing the (undirected) graph in a depth-first *postfix*
 (children first) fashion, one can orient the graph as a *Directed
@@ -117,15 +117,15 @@ This is a straightforward adaptation of the dense case:
 
 In practice, it is convenient to implement the algorithm by
 associating matrix blocks $$H_{ij}$$ with edges $$(i, j)$$ in the
-adjacency graph. We will assume that the initial set of edges only
-contains edges corresponding to the lower triangular part of $$H$$.
+graph. We will assume that the initial set of edges only contains
+edges corresponding to the lower triangular part of $$H$$.
 
-The process of orienting the adjacency graph as a DAG will **reverse**
-some edges in the graph, which corresponds to **transposing** their
-matrix block. After the DAG is obtained, operations on
-predecessor/successor vertices will be achieved through the in/out
-edge sets. Depending on which matrix block is needed, some matrix
-transposing might be required, for instance:
+The process of orienting the graph as a DAG will **reverse** some
+edges in the graph, which corresponds to **transposing** their matrix
+block. After the DAG is obtained, operations on predecessor/successor
+vertices will be achieved through the in/out edge sets. Depending on
+which matrix block is needed, some matrix transposing might be
+required, for instance:
 
 <div class="algorithm" markdown="1">
   - for each vertex $$i$$:
@@ -167,10 +167,8 @@ will be further processed by the algorithm.
      - $$x_i \gets z_i$$ <br />
      - for each **in-edge** $$e=(j, i)$$ of $$i$$:
        - $$x_i \gets x_i – H_e^T x_j$$ <br />
-
    - for each vertex $$i$$ in **prefix** order:
        - $$x_i \gets \inv{H_{ii}} x_i$$ <br />
-
      - for each **out-edge** $$e = (i, j)$$ of $$i$$:
        - $$x_i \gets x_i – H_e x_j$$ <br/>
 </div>
@@ -179,9 +177,10 @@ will be further processed by the algorithm.
 
 # Acyclic Graphs
 
-We see that when the DAG is a *tree*, there is never any common child
-between two vertices. Therefore, no fill-in can ever happen, and the
-factor algorithm reduces to the following:
+When the DAG forms a *tree*, which is the case for acyclic graphs,
+there is never any common child between two vertices. Therefore, no
+fill-in can ever happen, and the factor algorithm reduces to the
+following:
 
 
 ## Linear-Time Factorization
@@ -193,21 +192,22 @@ factor algorithm reduces to the following:
     - for **the** parent vertex $$j$$ of $$i$$, if any:
       - $$H_{ji} \gets  H_{ji} \inv{H_{ii}}$$ <br />
 </div>
-    
-For some applications, it can be useful to perform an *incomplete*
-factorization by preventing off-diagonal fill-in. The associated solve
-algorithm can then act as a *preconditioner* for iterative methods.
+
 
 It is easy to show that such factorization has $$O(n)$$
 complexity. Similarly, the solve procedure will have linear-time
 complexity with respect to the number of vertices.
 
+Even when the adjacency graph contains cycles, it can be useful to
+perform an *incomplete* factorization by computing a spanning tree and
+using the algorithm above. The associated solve algorithm can then act
+as a *preconditioner* for iterative methods.
+
 # Incremental Tridiagonal Factorization
 
-The incidence graph of a tridiagonal matrix $$T_k = \block{\alpha_k,
-\beta_k}$$ is a line, hence a tree. We consider the last coordinate to
-be the root of the tree, and get the following simple incremental
-algorithm:
+The graph of a tridiagonal matrix $$T_k = \block{\alpha_k, \beta_k}$$
+is a line, hence a tree. We consider the last coordinate to be the
+root of the tree, and get the following simple incremental algorithm:
 
 $$
    \begin{align}

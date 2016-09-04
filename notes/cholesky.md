@@ -123,8 +123,8 @@ contains edges corresponding to the lower triangular part of $$H$$.
 The process of orienting the adjacency graph as a DAG will **reverse**
 some edges in the graph, which corresponds to **transposing** their
 matrix block. After the DAG is obtained, operations on
-predecessor/successor vertices will be achieved using the in/out edges
-of each vertex. Depending on which matrix block is needed, some matrix
+predecessor/successor vertices will be achieved through the in/out
+edge sets. Depending on which matrix block is needed, some matrix
 transposing might be required, for instance:
 
 <div class="algorithm" markdown="1">
@@ -141,8 +141,7 @@ becomes:
       - do something with $$H_e^T$$ *since $$H_e$$ stores $$H_{ki}$$*
 </div>
 
-The corresponding algorithms for factorization and solving are given
-below.
+The adapted algorithms for factorization and solving are given below.
 
 ## Factorization
 
@@ -159,7 +158,7 @@ below.
 </div>
 
 Note: the fill-in line has been transposed to ensure that added edges
-that will be further processed by the algorithm.
+will be further processed by the algorithm.
 
 ## Solving
 

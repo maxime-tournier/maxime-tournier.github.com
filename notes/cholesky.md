@@ -3,6 +3,9 @@ title: Cholesky Decomposition
 categories: [math]
 ---
 
+Some notes on the Cholesky decomposition with a focus on the sparse
+case.
+
 # Theory TODO
 
 Every positive definite (and some indefinite) matrix $$H$$ has a

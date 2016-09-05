@@ -745,10 +745,10 @@ $$q \in S^3 = \exp(\theta_x e_x) \exp(\theta_y e_y) \exp(\theta_z
 e_z)$$
 
 for some Euler angles $$\theta_x, \theta_y, \theta_z$$. The gnomonic
-projection is useful in this context since it maps geodesics to
-straight lines: the geodesic along $$e_z$$ has body-fixed velocity
-$$e_z$$ at $$q$$, which in gnomonic projection corresponds to a line
-passing through $$\pi(q)$$ with direction:
+projection $$\pi: S^3 \to \alg{s^3}$$ is useful in this context since
+it maps geodesics to straight lines: the geodesic along $$e_z$$ has
+body-fixed velocity $$e_z$$ at $$q$$, which in gnomonic projection
+corresponds to a line passing through $$\pi(q)$$ with direction:
 
 $$u = e_z + \pi(q)\times e_z + \pi(q) \pi(q)^T e_z$$
 
@@ -777,7 +777,7 @@ $$ \pi(q) + \lambda_u u = \lambda_x e_x + \lambda_v\block{e_y + \lambda_x e_z}
 
 Geometrically, we look for the intersection of an affine line with the
 hyperbolic paraboloid $$z = x y$$. An easy way to solve this equation
-is to convert the paraboloid to the normal form:
+is to convert the paraboloid to the implicit equation (normal form):
 
 $$ \block{x + y}^2 - \block{x - y}^2 = 4z $$
 

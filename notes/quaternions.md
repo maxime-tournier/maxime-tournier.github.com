@@ -799,6 +799,38 @@ particular, no trigonometric functions were used. A similar procedure
 can also be used to find Euler angles along arbitrary (orthogonal)
 rotation axis.
 
+## Quaternion Power Derivative
+
+For an imaginary quaternion $$x$$, one can easily check that the
+following formula holds:
+
+$$\dd \block{x^n}. \dd x = n\ x^{n-1} \dd x^\parallel + \sum_{i=n-1}^{i = 0} x^{n-1} \dd x^\perp$$
+
+where $$\dd x^\parallel$$ is the projection of $$\dd x$$ onto $$x$$ and
+$$\dd x^\perp = x - \dd x^\parallel$$. The above
+
+$$
+\begin{align}
+
+\dd \block{x^{2n}}.\dd x &= (2n) x^{2n-1} \dd x^\parallel \\
+\dd \block{x^{2n+1}}.\dd x &= (2n+1) x^{2n} \dd x^\parallel + x^{2n} \dd x^\perp \\
+
+\end{align}
+$$
+
+Note: the quaternionic product is used. This formula can be used to
+compute the derivative of the exponential map:
+
+$$
+\begin{align}
+\dd \exp(x).\dd x &= \sum_i \frac{\dd \block{x^i}}{i!} \dd x \\
+&= \sum_i \frac{x^i}{i!} \dd x^\parallel + \sum_i \frac{x^{2i}}{ (2i+1)!} \dd x^\perp \\
+&= \exp(x)\ \dd x^\parallel + \frac{\sin \theta}{\theta} \dd x^\perp \\
+\end{align}
+$$
+
+The body-fixed derivative corresponds to the formula obtained
+previously.
 
 # References
   

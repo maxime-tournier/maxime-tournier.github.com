@@ -805,7 +805,7 @@ following formula holds:
 $$\dd \block{x^n}. \dd x = n\ x^{n-1} \dd x^\parallel + \sum_{i=n-1}^{i = 0} x^{n-1} \dd x^\perp$$
 
 where $$\dd x^\parallel$$ is the projection of $$\dd x$$ onto $$x$$ and
-$$\dd x^\perp = x - \dd x^\parallel$$. The above
+$$\dd x^\perp = x - \dd x^\parallel$$. The above is equivalent to:
 
 $$
 \begin{align}

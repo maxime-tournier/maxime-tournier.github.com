@@ -38,7 +38,7 @@ a *field*, the complex numbers, noted $$\CC$$.
 Let us repeat this construction, this time with *complex* matrices of
 the form:
 
-$$ \mat{ x & \bar{y} \\ -y & \bar{x} } $$
+$$ \mat{ x & y \\ -\bar{y} & \bar{x}} $$
 
 We end up with a 2-dimensional *complex* vector-space, that is also
 a 4-dimensional *real* vector space, given by real $$4 \times
@@ -52,11 +52,10 @@ $$ \mat{
    }
    $$
 
-*(notice the $$2\times 2$$ complex blocks)* (TODO some signs are wrong :-/)
-
-This space is again closed under matrix multiplication, but the
-multiplication is no longer commutative. Together with the matrix
-product, this space forms the quaternions, noted $$\HH$$.
+in which we recognize $$2\times 2$$ complex blocks. This space is
+again closed under matrix multiplication, but the multiplication is no
+longer commutative. Together with the matrix product, this space forms
+the quaternion group, noted $$\HH$$.
 
 We will generally use the *real* vector space structure, and identify
 a quaternion with its coordinates $$(w, x, y, z)$$ in the canonical
@@ -829,8 +828,9 @@ $$
 \end{align}
 $$
 
-The body-fixed derivative corresponds to the formula obtained
-previously.
+Again, note that the quaternion product is used. The body-fixed
+derivative corresponds to the formula obtained
+[previously](#exponential-derivative).
 
 # References
   

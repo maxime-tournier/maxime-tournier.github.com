@@ -69,18 +69,17 @@ noted $$(1, i, j, k)$$ and verify:
 $$ i^2 = j^2 = k^2 = ijk = -1 $$
 
 
-These formula are actually sufficient to define the quaternions, and
-were carved on *Brougham (Broom) Bridge* in Dublin by **Hamilton**, on
-the 16th of October 1843 (yay wikipedia).
-  
-In the remaining of this document, we will denote quaternions using
-the following notations:
+This formula is actually sufficient to define the quaternions, and was
+carved on a bridge in Dublin by **Hamilton** in October 1843 (*cf*
+[Wikipedia](https://en.wikipedia.org/wiki/Quaternion#History)). In the
+remaining of these notes, we will denote quaternions using the
+following notations:
   
 $$ q = (w, x, y, z) =: w + v $$
   
-where $$v$$ is a pure imaginary quaternion with coordinates $$(0, x,
-y, z)$$, which we will happily identify with the corresponding vector
-in $$\RR^3$$ when needed. $$w$$ is called the *real* part, and $$v$$
+where $$v$$ is an imaginary quaternion with coordinates $$(0, x, y,
+z)$$, which we will happily identify with the corresponding vector in
+$$\RR^3$$ whenever needed. $$w$$ is called the *real* part, and $$v$$
 the *imaginary* part, just like for complex numbers.
 
 ## Product

@@ -939,7 +939,7 @@ f\block{\frac{x}{2}}$$ instead to match the exponential on
 $$SO(3)$$. Given an end force $$\lambda \in \RR^3$$, the associated
 geometric stiffness is:
 
-$$\lambda^T \dd^2 \tilde{f}_y (0).\dd x_1.\dd x_2 = \dd x_1^T \block{\frac{y^T\lambda + \lambda^T y}{2} - \lambda^T y I} \dd x_2$$
+$$\lambda^T \dd^2 \tilde{f}_y (0).\dd x_1.\dd x_2 = \dd x_1^T \block{\frac{y\lambda^T + \lambda y^T}{2} - \lambda^T y I} \dd x_2$$
 
 
 

@@ -46,6 +46,8 @@ $$
 
 \newcommand{\diag}{\mathrm{diag}}
 \newcommand{\tr}{\mathrm{tr}}
+
+\newcommand{\sinc}{\mathrm{sinc}}
 $$
 
 </div>

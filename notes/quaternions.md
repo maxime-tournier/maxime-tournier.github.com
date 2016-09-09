@@ -802,16 +802,16 @@ rotation axis.
 For an imaginary quaternion $$x$$, one can easily check that the
 following formula holds:
 
-$$\dd \block{x^n}. \dd x = n\ x^{n-1} \dd x^\parallel + \sum_{i=n-1}^{i = 0} x^{n-1} \dd x^\perp$$
+$$\dd \block{x^n}. \dd x = n\ x^{n-1} \dd x_\parallel + \sum_{i=n-1}^{i = 0} x^{n-1} \dd x_\perp$$
 
-where $$\dd x^\parallel$$ is the projection of $$\dd x$$ onto $$x$$ and
-$$\dd x^\perp = x - \dd x^\parallel$$. The above is equivalent to:
+where $$\dd x_\parallel$$ is the projection of $$\dd x$$ onto $$x$$ and
+$$\dd x_\perp = x - \dd x_\parallel$$. The above is equivalent to:
 
 $$
 \begin{align}
 
-\dd \block{x^{2n}}.\dd x &= (2n) x^{2n-1} \dd x^\parallel \\
-\dd \block{x^{2n+1}}.\dd x &= (2n+1) x^{2n} \dd x^\parallel + x^{2n} \dd x^\perp \\
+\dd \block{x^{2n}}.\dd x &= (2n) x^{2n-1} \dd x_\parallel \\
+\dd \block{x^{2n+1}}.\dd x &= (2n+1) x^{2n} \dd x_\parallel + x^{2n} \dd x_\perp \\
 
 \end{align}
 $$
@@ -822,14 +822,123 @@ compute the derivative of the exponential map:
 $$
 \begin{align}
 \dd \exp(x).\dd x &= \sum_i \frac{\dd \block{x^i}}{i!} \dd x \\
-&= \sum_i \frac{x^i}{i!} \dd x^\parallel + \sum_i \frac{x^{2i}}{ (2i+1)!} \dd x^\perp \\
-&= \exp(x)\ \dd x^\parallel + \frac{\sin \theta}{\theta} \dd x^\perp \\
+&= \sum_i \frac{x^i}{i!} \dd x_\parallel + \sum_i \frac{x^{2i}}{ (2i+1)!} \dd x_\perp \\
+&= \exp(x)\ \dd x_\parallel + \frac{\sin \theta}{\theta} \dd x_\perp \\
 \end{align}
 $$
 
 Again, note that the quaternion product is used. The body-fixed
 derivative corresponds to the formula obtained
 [previously](#exponential-derivative).
+
+## Exponential Map Second Derivative
+
+As we have [seen](#exponential-derivative)
+[before](#quaternion-power-derivative), the body-fixed derivative for
+the exponential map is the following:
+
+$$ \db \exp(x).\dd x = \dd x_\parallel + \exp(-x) \sinc(\theta) \dd x_\perp $$
+
+Our goal is to obtain a nicer-behaved expression in order to derive a
+second time. Let us rewrite the above using only $$\dd_\perp$$:
+
+$$ \db \exp(x).\dd x = \dd x + \block{\exp(-x) \sinc(\theta) - 1} \dd x_\perp$$
+
+Now, a bit of trigonometry shows that:
+
+$$\exp(-x) \sinc{\theta} = \frac{1}{2} \block{1 - \exp(-2x)} \inv{x}$$
+
+So that:
+
+$$\exp(-x) \sinc{\theta} - 1 = \block{1 -2x - \exp(-2x)} \frac{\inv{x}}{2}$$
+
+which we rewrite using the exponential power series:
+
+$$\begin{align}
+
+1 -2x - \exp(-2x) &= -\sum_{i \geq 2} \frac{(-2x)^i}{i!} \\
+&=-\sum_{i \geq 0} \frac{(-2x)^{i + 2}}{(i + 2)!} \\
+&=-(2x)^2\sum_{i \geq 0} \frac{(-2x)^i}{(i + 2)!} \\
+&= 4 \norm{x}^2 \sum_{i \geq 0} \frac{(-2x)^i}{(i + 2)!} \\
+
+\end{align}$$
+
+Considering the half-turn around $$x$$, we may rewrite the projection
+$$\dd x_\perp$$ as:
+
+$$\dd x_\perp = \frac{\dd x - x.\dd x.\inv{x}}{2}$$
+
+And we obtain:
+
+$$\begin{align}
+\inv{x} \dd x_\perp &= \frac{\inv{x}\dd x - \dd x.\inv{x}}{2}\\
+&=-\frac{x\ \dd x - \dd x\ x}{2 \norm{x}^2} \\
+&=-\frac{x \times \dd x}{\norm{x}^2} \\
+\end{align}$$
+
+since $$\inv{x} = -\frac{x}{\norm{x}^2}$$. We can finally assemble
+everything into:
+
+$$\db \exp(x).\dd x = \dd x - 2 \block{\sum_{i \geq 0} \frac{(-2x)^i}{(i + 2)!}} x \times \dd x$$
+
+which strongly resembles
+[Hausdorff's formula](https://en.wikipedia.org/wiki/Derivative_of_the_exponential_map#Statement)
+for the exponential map derivative. Now, the second derivative is:
+
+$$\begin{align}
+\dd^{b2} \exp(x).\dd x_1.\dd x_2 = -2 \block{ \underbrace{\block{\sum_{i \geq 0} \frac{\dd (-2x)^i.\dd x_2}{(i + 2)!}}}_{R\block{x, \dd x_2}} x\times \dd x_1 +  \underbrace{\block{\sum_{i \geq 0} \frac{(-2x)^i}{(i + 2)!}}}_{S(x)} \dd x_2 \times \dd x_1} \\
+\end{align}$$
+
+which is pretty horrible to expand, but doable using the
+[formula](#quaternion-power-derivative) for imaginary quaternion power
+derivatives. In practice, one is almost always interested in the
+second derivative at the origin. In this case, one can check that the
+above expression has the following limit as $$x \to 0$$:
+
+$$\dd^{b2}\exp(0).\dd x_1.\dd x_2 = - \dd x_2 \times \dd x_1$$
+
+
+## Geometric Stiffness for the Rotation Exponential
+
+To simulate rigid bodies in a stable manner, one needs to compute the
+second derivative of the following mapping, for a given $$y \in
+\RR^3$$:
+
+$$ f_y: x \mapsto R_{\exp(x)} y = \Ad_{\exp(x)} y$$
+
+$$\begin{align}
+\dd f_y(x).\dd x &= \Ad_{\exp(x)} \ad \block{\db \exp(x).\dd x} y \\
+&= -2R_{\exp(x)} \underbrace{\block{y \times \db \exp(x). \dd x}}_z \\
+\end{align}
+$$
+
+The second derivative is:
+
+$$\begin{align}
+\dd^2 f_y(x).\dd x_1.\dd x_2 &= -2\block{ \dd f_{z_1}(x).\dd x_2 + R_{\exp(x)} \block{y\times\dd^{b2} \exp(x).\dd x_1.\dd x_2}} \\
+&= -2 R_{\exp(x)} \block{ -2z_1\times \db \exp(x).\dd x_2 + \block{y\times\dd^{b2} \exp(x).\dd x_1.\dd x_2}} \\
+&= -2 R_{\exp(x)} \block{-2 \block{y\times \db \exp(x).\dd x_1} \times \db \exp(x).\dd x_2 + \block{y\times\dd^{b2} \exp(x).\dd x_1.\dd x_2}} \\
+\end{align}
+$$
+
+which at $$x = 0$$ reduces to:
+
+$$\begin{align}
+\dd^2 f_y(0).\dd x_1.\dd x_2 &= 4 \block{y \times \dd x_1} \times \dd x_2 + 2 y \times \block{\dd x_2 \times \dd x_1} \\
+&= -4 \dd x_2 \times \block{y \times \dd x_1} + 2 y \times \block{\dd x_2 \times \dd x_1} \\
+&= -4 y \dd x_2^T \dd x_1 + 4 \dd x_1 \dd x_2^T y + 2 \dd x_2 y^T \dd x_1 - 2 \dd x_1 y^T \dd x_2 \\
+&= 2 \dd x_1 y^T \dd x_2 + 2 \dd x_2 y^T \dd x_1 - 4 y \dd x_1^T \dd x_2 \\
+\end{align}
+$$
+
+In practice, one generally considers $$\tilde{f}(x) =
+f\block{\frac{x}{2}}$$ instead to match the exponential on
+$$SO(3)$$. Given an end force $$\lambda \in \RR^3$$, the associated
+geometric stiffness is:
+
+$$\lambda^T \dd^2 \tilde{f}_y (0).\dd x_1.\dd x_2 = \dd x_1^T \block{\frac{y^T\lambda + \lambda^T y}{2} - \lambda^T y I} \dd x_2$$
+
+
 
 # References
   

@@ -906,6 +906,9 @@ second derivative of the following mapping, for a given $$y \in
 
 $$ f_y: x \mapsto R_{\exp(x)} y = \Ad_{\exp(x)} y$$
 
+where $$f_y$$ maps the local coordinates of a point to the absolute
+frame through a rotation. The derivative is:
+
 $$\begin{align}
 \dd f_y(x).\dd x &= \Ad_{\exp(x)} \ad \block{\db \exp(x).\dd x} y \\
 &= -2R_{\exp(x)} \underbrace{\block{y \times \db \exp(x). \dd x}}_z \\

@@ -846,11 +846,11 @@ $$ \db \exp(x).\dd x = \dd x + \block{\exp(-x) \sinc(\theta) - 1} \dd x_\perp$$
 
 Now, a bit of trigonometry shows that:
 
-$$\exp(-x) \sinc{\theta} = \frac{1}{2} \block{1 - \exp(-2x)} \inv{x}$$
+$$\exp(-x) \sinc\block{\theta} = \frac{1}{2} \block{1 - \exp(-2x)} \inv{x}$$
 
 So that:
 
-$$\exp(-x) \sinc{\theta} - 1 = \block{1 -2x - \exp(-2x)} \frac{\inv{x}}{2}$$
+$$\exp(-x) \sinc\block{\theta} - 1 = \block{1 -2x - \exp(-2x)} \frac{\inv{x}}{2}$$
 
 which we rewrite using the exponential power series:
 
@@ -912,7 +912,7 @@ definition of the adjoint representation, we get:
 
 $$ \dd \Ad_q.\dd q = \Ad_q.\ad_{\db q} $$
 
-and the second serivative is:
+and the second derivative is:
 
 $$ \dd^2 \Ad_q.\dd q_1.\dd q_2 = \Ad_q\block{ \ad_{\db q_2} \ad_{\db q_1} + \ad_{\dd^{b2} q}} $$
 
@@ -922,7 +922,8 @@ $$
 \begin{align}
 \dd^2 \Ad_{\exp(0)}.\dd x_1.\dd x_2 &= \ad_{\dd x_2} \ad_{\dd x_1} + \ad_{\dd^{b2} \exp(0).\dd x_1.\dd x_2}\\
 &= 4 \hat{\dd x_2} \hat{ \dd x_1} - 2 \hat{\dd x_2 \times \dd x_1} \\
-&= 2\block{\dd x_1 \dd x_2^T + \dd x_2 \dd x_1^T} - 4 \dd x_1^T\dd x_2 I
+&= 2\block{\dd x_1 \dd x_2^T + \dd x_2 \dd x_1^T} - 4 \dd x_1^T\dd x_2 I \\
+&= 2 \block{ \hat{\dd x_2} \hat{ \dd x_1} + \hat{ \dd x_1 } \hat{ \dd x_2 } } \\
 \end{align}$$
 
 In practice, one generally considers $$\tilde{f}(x) =

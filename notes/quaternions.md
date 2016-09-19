@@ -904,44 +904,33 @@ To simulate rigid bodies in a stable manner, one needs to compute the
 second derivative of the following mapping, for a given $$y \in
 \RR^3$$:
 
-$$ f_y: x \mapsto R_{\exp(x)} y = \Ad_{\exp(x)} y$$
+$$ f_y: x \mapsto \Ad_{\exp(x)} y$$
 
 where $$f_y$$ maps the local coordinates of a point to the absolute
-frame through a rotation. The derivative is:
+frame through a rotation in exponential coordinates. From the
+definition of the adjoint representation, we get:
 
-$$\begin{align}
-\dd f_y(x).\dd x &= \Ad_{\exp(x)} \ad \block{\db \exp(x).\dd x} y \\
-&= -2R_{\exp(x)} \underbrace{\block{y \times \db \exp(x). \dd x}}_z \\
-\end{align}
+$$ \dd \Ad_q.\dd q = \Ad_q.\ad_{\db q} $$
+
+and the second serivative is:
+
+$$ \dd^2 \Ad_q.\dd q_1.\dd q_2 = \Ad_q\block{ \ad_{\db q_2} \ad_{\db q_1} + \ad_{\dd^{b2} q}} $$
+
+In our case, $$q = \exp(x)$$ hence the second derivative at $$x = 0$$ is:
+
 $$
-
-The second derivative is:
-
-$$\begin{align}
-\dd^2 f_y(x).\dd x_1.\dd x_2 &= -2\block{ \dd f_{z_1}(x).\dd x_2 + R_{\exp(x)} \block{y\times\dd^{b2} \exp(x).\dd x_1.\dd x_2}} \\
-&= -2 R_{\exp(x)} \block{ -2z_1\times \db \exp(x).\dd x_2 + \block{y\times\dd^{b2} \exp(x).\dd x_1.\dd x_2}} \\
-&= -2 R_{\exp(x)} \block{-2 \block{y\times \db \exp(x).\dd x_1} \times \db \exp(x).\dd x_2 + \block{y\times\dd^{b2} \exp(x).\dd x_1.\dd x_2}} \\
-\end{align}
-$$
-
-which at $$x = 0$$ reduces to:
-
-$$\begin{align}
-\dd^2 f_y(0).\dd x_1.\dd x_2 &= 4 \block{y \times \dd x_1} \times \dd x_2 + 2 y \times \block{\dd x_2 \times \dd x_1} \\
-&= -4 \dd x_2 \times \block{y \times \dd x_1} + 2 y \times \block{\dd x_2 \times \dd x_1} \\
-&= -4 y \dd x_2^T \dd x_1 + 4 \dd x_1 \dd x_2^T y + 2 \dd x_2 y^T \dd x_1 - 2 \dd x_1 y^T \dd x_2 \\
-&= 2 \dd x_1 y^T \dd x_2 + 2 \dd x_2 y^T \dd x_1 - 4 y \dd x_1^T \dd x_2 \\
-\end{align}
-$$
+\begin{align}
+\dd^2 \Ad_{\exp(0)}.\dd x_1.\dd x_2 &= \ad_{\dd x_2} \ad_{\dd x_1} + \ad_{\dd^{b2} \exp(0).\dd x_1.\dd x_2}\\
+&= 4 \hat{\dd x_2} \hat{ \dd x_1} - 2 \hat{\dd x_2 \times \dd x_1} \\
+&= 2\block{\dd x_1 \dd x_2^T + \dd x_2 \dd x_1^T} - 4 \dd x_1^T\dd x_2 I
+\end{align}$$
 
 In practice, one generally considers $$\tilde{f}(x) =
 f\block{\frac{x}{2}}$$ instead to match the exponential on
-$$SO(3)$$. Given an end force $$\lambda \in \RR^3$$, the associated
-geometric stiffness is:
+$$SO(3)$$. Given an end force $$\lambda \in \RR^3$$ applied on
+$$\tilde{f}_y(0)$$, the associated geometric stiffness is:
 
 $$\lambda^T \dd^2 \tilde{f}_y (0).\dd x_1.\dd x_2 = \dd x_1^T \block{\frac{y\lambda^T + \lambda y^T}{2} - \lambda^T y I} \dd x_2$$
-
-
 
 # References
   

@@ -40,7 +40,8 @@ $$ \underbrace{\block{A_k^T M A_k + H_{k+1}^T R_{k+1} H_{k+1}}}_{K_{k+1}} \delta
 
 since $$x_k$$ solves the problem at step $$k$$. Luckily, the
 [Woodbury formula](https://en.wikipedia.org/wiki/Woodbury_matrix_identity)
-provides a simple way to update the inverse $$C_{k+1}$$ of $$K_{k+1}$$ as follows:
+provides a simple way to update the inverse $$C_{k+1}$$ of $$K_{k+1}$$
+as follows:
 
 $$
 \begin{align} 
@@ -74,8 +75,9 @@ which might be more convenient to use in practice.
 ## Forgetting Factor
 
 One can easily incorporate a geometrically decreasing weight for
-previous measurements by scaling $$K_k$$ by $$\lambda \in
-[0, 1[$$, which corresponds to scaling $$C_k$$ by $$\frac{1}{\lambda}$$ before computing the next iterate.
+previous measurements by scaling $$K_k$$ by $$0 \leq \lambda < 1$$,
+which corresponds to scaling $$C_k$$ by $$\frac{1}{\lambda}$$ before
+computing the next iterate.
 
 
 # Non-stationary Process
@@ -127,21 +129,119 @@ x_{k+1} &= \tilde{x}_k + \tilde{C}_{k+1} H_{k+1}^T R_{k+1} w_{k+1} \\
 \end{align}
 $$
 
+## Affine update
+
+We now suppose that the state $$x$$ changes *affinely* as follows:
+
+$$ x_k \longmapsto F_k x_{k+1} + u_k $$
+
+The incremental problem becomes:
+
+$$ \argmin{x} \quad \norm{ \mat{A_k \inv{F}_k \\ H_{k+1}} x - \mat{b_k + A_k \inv{F}_k u_k \\ z_{k+1}} }^2_{M_{k+1}} $$
+
+Terms once again cancel each other in the normal equations, for the
+solution update $$\delta = x - \block{F_k x_k + u_k}$$:
+
+$$K_{k+1} \delta = H_{k+1}^T R_{k+1} \underbrace{\block{z_{k+1} - H_{k+1}\block{F_k x_k + u_k}}}_{w_{k+1}}$$
+
+So the prediction phase simply changes to:
+
+$$
+\tilde{x}_k = F_k x_k + u_k
+$$
+
+and all the rest remains the same.
+
 # TODO Process Noise
 
 Not quite sure how to obtain this one, looks like some kind of dual
 regularization.
 
-# TODO Non-linear Kalman Filter
+# Extended Kalman Filter
 
-A linearization of the problem is is solved at each step on tangent
-vectors.
+Consider the following incremental *non-linear* least-squares problem:
 
-# TODO Lie Groups
+$$\argmin{x} \ \sum_k \norm{f_k(x) - y_k}^2_{R_k}$$
 
-This one is more difficult as one has to linearize the group at
-different points using *e.g.* the exponential map, and linearize the
-change of coordinates as well.
+Each term of the problem is linearized using the most up-to-date
+estimate for the state, yielding:
+
+$$x_{k+1} = \argmin{x} \ \sum_k \norm{f_{k+1}\block{x_k} + \dd f_{k+1}\block{x_k}.\block{x - x_k} - y_{k+1}}^2_{R_{k+1}}$$
+
+A straightforward adaptation of the linear Kalman filter to the
+linearized problem gives:
+
+$$
+\begin{align}
+H_{k+1} &= \dd f_{k+1} \block{x_k} \\
+z_{k+1} &= y_{k+1} + \dd f_{k+1} x_k - f_{k+1}\block{x_k} \\
+w_{k+1} &= y_{k+1} - f_{k+1}\block{x_k} \\
+\end{align}
+$$
+
+and the rest is the same as before. A similar linearization for
+non-stationary processes can be obtained, again by linearizing the
+non-linear transition function at the most up-to-date estimate for the
+state. See
+[wikipedia](https://en.wikipedia.org/wiki/Extended_Kalman_filter#Discrete-time_predict_and_update_equations)
+for details.
+
+
+# Lie Groups
+
+Now consider an incremental non-linear least-squares problem on a Lie
+group $$G$$:
+
+$$\argmin{g \in G} \ \sum_k \norm{f_k(g) - y_k}^2_{R_k}$$
+
+where $$f: G \to E$$ maps to an Euclidean space $$E$$. Again, each
+term is linearized using the most up-to-date estimate for the state,
+and the group exponential map:
+
+$$g_{k+1} = \argmin{g} \ \sum_k \norm{f_{k+1}\block{g_k} + \db f_{k+1}\block{g_k}.\log\block{g_k^{-1}g} - y_{k+1}}^2_{R_{k+1}}$$
+
+where $$\db f$$ is the body-fixed differential of $$f$$. Let $$\omega
+= \log\block{g_k^{-1} g}$$ be the state update viewed from state
+$$k$$, then the state update viewed from state $$k-1$$ is:
+
+$$
+\begin{align}
+\log\block{g_{k-1}^{-1} g} &= \log\block{g_{k-1}^{-1}g_k g_k^{-1} g} \\
+&= \log\block{ \exp\block{\omega_k} \exp\block{\omega} } \\
+&\approx \omega_k + \db \log{\block{\exp\block{\omega_k}}}.\omega \\
+&= \omega_k + \block{\db \exp\block{\omega_k}}^{-1}.\omega \\
+
+\end{align}
+$$
+
+where we linearized at $$\omega = 0$$. The above is an affine
+coordinate change whose inverse is the following:
+
+$$ \omega \mapsto \db \exp\block{\omega_k}.\omega - \underbrace{\db
+\exp\block{\omega_k}.\omega_k}_{\omega_k} $$
+
+The linearized problem can be rewritten as a linear Kalman filter in
+$$\omega$$ using the following update rules:
+
+$$
+\begin{align}
+F_k &= \db \exp\block{g_k} \\
+\tilde{\omega}_k &= 0 \\
+\tilde{C}_k &= F_k C_k F_k^T \\
+\\
+w_{k+1} &= y_{k+1} - f_{k+1}\block{g_k} \\ 
+H_{k+1} &= \db f_{k+1}\block{g_k} \\
+S_{k+1} &= R_{k+1}^{-1} + H_{k+1} \tilde{C}_k H_{k+1}^T \\
+C_{k+1} &= \tilde{C}_k - \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} H_{k+1} \tilde{C}_k \\
+        &= \block{I - \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} H_{k+1}} \tilde{C}_k \\
+\omega_{k+1} &=  \tilde{C}_{k+1} H_{k+1}^T R_{k+1} w_{k+1} \\
+ &=  \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} w_{k+1} \\
+ g_{k+1} &= g_k \exp\block{\omega_{k+1} } \\
+\end{align}
+$$
+
+
+
 
 # Appendix
 
@@ -149,7 +249,8 @@ Consider the following linear system:
 
 $$ \block{\inv{C} + H^T R H} x = H^T R z $$
 
-One can verify that the solution $$x$$ for the above system is also that of the following two augmented KKT systems:
+One can verify that the solution $$x$$ for the above system is also
+that of the following two augmented KKT systems:
 
 1. $$ \mat{ \inv{C} & H^T \\ H & -R^{-1} } \mat{x \\ \lambda} = \mat{H^T R z \\ 0 }$$
 2. $$ \mat{ \inv{C} & H^T \\ H & -R^{-1} } \mat{x \\ \lambda} = \mat{0 \\ z}$$
@@ -157,3 +258,8 @@ One can verify that the solution $$x$$ for the above system is also that of the 
 Now the solution for the first one is $$x = \block{C -
 CH^T\inv{S}HC}H^TRz$$, where $$S = HCH^T + \inv{R}$$ is the Schur
 complement, and the solution for the second is $$x = CH^T\inv{S}z$$.
+
+
+
+
+

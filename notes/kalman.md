@@ -161,12 +161,12 @@ regularization.
 
 Consider the following incremental *non-linear* least-squares problem:
 
-$$\argmin{x} \ \sum_k \norm{f_k(x) - y_k}^2_{R_k}$$
+$$x_{k+1} = \argmin{x} \ \sum_k \norm{f_k(x) - y_k}^2_{R_k}$$
 
 Each term of the problem is linearized using the most up-to-date
 estimate for the state, yielding:
 
-$$x_{k+1} = \argmin{x} \ \sum_k \norm{f_{k+1}\block{x_k} + \dd f_{k+1}\block{x_k}.\block{x - x_k} - y_{k+1}}^2_{R_{k+1}}$$
+$$x_{k+1} = \argmin{x} \ \sum_{i=0}^k \norm{f_{i+1}\block{x_i} + \dd f_{i+1}\block{x_i}.\block{x - x_i} - y_{i+1}}^2_{R_{i+1}}$$
 
 A straightforward adaptation of the linear Kalman filter to the
 linearized problem gives:
@@ -174,7 +174,7 @@ linearized problem gives:
 $$
 \begin{align}
 H_{k+1} &= \dd f_{k+1} \block{x_k} \\
-z_{k+1} &= y_{k+1} + \dd f_{k+1} x_k - f_{k+1}\block{x_k} \\
+z_{k+1} &= y_{k+1} + \dd f_{k+1}\block{x_k}.x_k - f_{k+1}\block{x_k} \\
 w_{k+1} &= y_{k+1} - f_{k+1}\block{x_k} \\
 \end{align}
 $$
@@ -185,6 +185,50 @@ non-linear transition function at the most up-to-date estimate for the
 state. See
 [wikipedia](https://en.wikipedia.org/wiki/Extended_Kalman_filter#Discrete-time_predict_and_update_equations)
 for details.
+
+## Variant
+
+Alternatively, one can consider the linearized least-squares problem
+in terms of the solution update directly:
+
+$$\dd x_{k+1} = \argmin{\dd x} \ \sum_{i=0}^k \norm{f_{i+1}\block{x_i} + \dd f_{i+1}\block{x_i}.\block{\dd x + x_k - x_i} - y_{i+1}}^2_{R_{i+1}}$$
+
+Each change of linearization from point $$k-1$$ to $$k$$ is affine:
+
+$$ \dd x \mapsto \dd x - (x_k - x_{k-1}) $$
+
+so we can exploit the affine prediction update as seen before:
+
+### Prediction
+
+$$
+\begin{align} 
+\tilde{\dd x}_k &= \dd x_k - \block{x_k - x_{k-1}} \\
+\tilde{C}_k &= F_k C_k F_k^T
+\end{align}
+$$
+
+### Update
+
+$$
+\begin{align}
+H_{k+1} &= \dd f_{k+1} \block{x_k} \\
+z_{k+1} &= y_{k+1} - f_{k+1}\block{x_k} \\
+w_{k+1} &= z_{k+1} - H_{k+1} \tilde{\dd x}_k \\
+
+S_{k+1} &= R_{k+1}^{-1} + H_{k+1} \tilde{C}_k H_{k+1}^T \\
+C_{k+1} &= \tilde{C}_k - \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} H_{k+1} \tilde{C}_k \\
+        &= \block{I - \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} H_{k+1}} \tilde{C}_k \\
+\dd x_{k+1} &= \tilde{\dd x}_k + \tilde{C}_{k+1} H_{k+1}^T R_{k+1} w_{k+1} \\
+ &= \tilde{\dd x}_k + \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} w_{k+1} \\
+x_{k+1} &= x_k + \dd x_k
+\end{align}
+$$
+
+The first prediction line seems a bit silly as it appears to always
+evaluate to zero, but it comes useful when incorporating state
+constraints into the filter. In this case, $$x_{k+1} = x_k + \dd x_k +
+\ldots$$ therefore the predicted $$\dd x$$ is not always zero.
 
 
 # Lie Groups
@@ -225,7 +269,7 @@ $$\omega$$ using the following update rules:
 
 $$
 \begin{align}
-F_k &= \db \exp\block{g_k} \\
+F_k &= \db \exp\block{\omega_k} \\
 \tilde{\omega}_k &= 0 \\
 \tilde{C}_k &= F_k C_k F_k^T \\
 \\

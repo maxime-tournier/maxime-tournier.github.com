@@ -94,7 +94,7 @@ use:
 
 $$\sum_i \frac{\omega^i}{(i + 1)!} v = \exp(\omega).\db \exp\block{\omega}.v$$
 
-using the body-fixed $$SO(3)$$ exponential in $$\alg{s^3}$$
+using the body-fixed $$SO(3)$$ exponential in $$\alg{so(3)}$$
 coordinates. The final formula is surprisingly simple:
 
 $$ \exp\mat{\omega & v \\ 0 & 0} = \mat{ \exp(\omega) & \dd \exp(\omega).v \\ 0 & 1} $$

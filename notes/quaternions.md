@@ -457,7 +457,7 @@ coordinates gives:
 
 $$
 \begin{align}
-\dd \exp(x).\dd x = \db q &= n \dd \theta + s(c - sn) \dd n \\
+\db \exp(x).\dd x = \db q &= n \dd \theta + s(c - sn) \dd n \\
 &= nn^T \dd x + \frac{\sin(\theta)}{\theta}\block{cI - s \hat{n}} \block{I - nn^T} \dd x \\
 \end{align}
 $$

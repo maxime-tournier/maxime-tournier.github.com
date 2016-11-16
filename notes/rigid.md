@@ -3,7 +3,7 @@ title: Rigid Bodies
 categories: [math, lie group]
 ---
 
-Quick notes.
+Quick reference notes on rigid transformations.
 
 {% include toc.md %}
 
@@ -61,18 +61,46 @@ It is easy to see that:
 
 $$\mat{\omega & v \\ 0 & 0}^i = \mat{\omega^i & \omega^{i-1} v \\ 0 & 0}$$
 
-for $$i \geq 1$$. So the exponential power series becomes:
+for $$i \geq 1$$. Therefore the exponential power series becomes:
 
 $$ \sum_{i=0} \frac{1}{i!} \mat{\omega & v \\ 0 & 0}^i = \mat{ \sum_i \frac{\omega^i}{i!} & \sum_i \frac{\omega^i}{(i + 1)!} v \\ 0 & 1}$$
 
-One can recognize $$\sum_i \frac{\omega^i}{(i + 1)!}$$ as the power
-series for the $$SO(3)$$ exponential derivative, while $$ \sum_i
-\frac{\omega^i}{i!}$$ is the $$SO(3)$$ exponential, which gives:
 
-$$ \exp\mat{\omega & v \\ 0 & 0} = \mat{ \exp(\omega) & \dd\exp(\omega) v \\ 0 & 1} $$
+One can immediately recognize $$ \sum_i \frac{\omega^i}{i!}$$ as the
+$$SO(3)$$ exponential. Due to the group being non-commutative, the
+term $$\sum_i \frac{\omega^i}{(i + 1)!}$$ can not be identified with
+the derivative of the exponential map (at least not
+trivally). The
+[derivative of the exponential map](https://en.wikipedia.org/wiki/Derivative_of_the_exponential_map) formula
+tells us that:
 
-See the page on [quaternions](quaternions.html) for the corresponding
-formula (modulo a factor $$2$$).
+$$\db \exp(x).\dd x = \sum_{i \geq 0} \frac{ (-1)^i}{(i + 1)!} \ad^i(x) . \dd x$$
+
+When applied in $$\alg{s^3}$$, we obtain:
+
+$$\db \exp\block{-\frac{\omega}{2}} = -\frac{1}{2} \sum_{i \geq 0} \frac{ \hat{\omega}^i}{(i + 1)!}$$
+
+since $$\ad(\omega) = 2 \hat{\omega}$$. On the other hand, since
+$$\exp(-x) = \exp^{-1}(x)$$, we also have:
+
+$$\db \exp\block{-\frac{\omega}{2}} = -\frac{1}{2}\Ad_{\exp\block{ \frac{\omega}{2} } }.\db \exp\block{\frac{\omega}{2}}$$
+
+and finally:
+
+$$\sum_i \frac{\omega^i}{(i + 1)!} v = \Ad_{\exp\block{ \frac{\omega}{2} } }.\db \exp\block{\frac{\omega}{2}}. v$$
+
+where the **quaternion** exponential is used. Alternatively, one can
+use:
+
+$$\sum_i \frac{\omega^i}{(i + 1)!} v = \exp(\omega).\db \exp\block{\omega}.v$$
+
+using the body-fixed $$SO(3)$$ exponential in $$\alg{s^3}$$
+coordinates. The final formula is surprisingly simple:
+
+$$ \exp\mat{\omega & v \\ 0 & 0} = \mat{ \exp(\omega) & \dd \exp(\omega).v \\ 0 & 1} $$
+
+An equivalent (but slightly faster) way is to express both $$\ad$$ and
+$$\exp$$ in $$\alg{so(3)}$$ coordinates.
 
 ## Logarithm
 

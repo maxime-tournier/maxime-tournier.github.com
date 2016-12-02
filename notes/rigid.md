@@ -92,12 +92,13 @@ $$\sum_i \frac{\omega^i}{(i + 1)!} v = \Ad_{\exp\block{ \frac{\omega}{2} } }.\db
 where the **quaternion** exponential is used. Alternatively, one can
 use:
 
-$$\sum_i \frac{\omega^i}{(i + 1)!} v = \exp(\omega).\db \exp\block{\omega}.v$$
+$$\sum_i \frac{\omega^i}{(i + 1)!} v = \exp(\omega) \block{\db \exp\block{\omega}.v}$$
 
 using the body-fixed $$SO(3)$$ exponential in $$\alg{so(3)}$$
 coordinates. The final formula is surprisingly simple:
 
-$$ \exp\mat{\omega & v \\ 0 & 0} = \mat{ \exp(\omega) & \dd \exp(\omega).v \\ 0 & 1} $$
+$$ \exp\mat{\omega & v \\ 0 & 0} = \mat{ \exp(\omega) & \ds
+\exp(\omega).v \\ 0 & 1} $$
 
 An equivalent (but slightly faster) way is to express both $$\ad$$ and
 $$\exp$$ in $$\alg{so(3)}$$ coordinates.

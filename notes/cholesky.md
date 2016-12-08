@@ -69,8 +69,8 @@ By traversing the (undirected) graph in a depth-first *postfix*
 (children first) fashion, one can orient the graph as a *Directed
 Acyclic Graph* (DAG) and number the vertices accordingly. Using such
 numbering, every vertex has an index greater than all its predecessors
-(children) according to the topological sort. Edges go from children
-to parents.
+(children) according to the topological sort, assuming edges are
+oriented from children to parents.[^1]
 
 In other words, processing nodes by *increasing* indices corresponds
 to a **postfix** (*i.e* children first) traversal, while processing
@@ -116,67 +116,6 @@ This is a straightforward adaptation of the dense case:
 </div>
 
 
-# Using Graph Edges
-
-In practice, it is convenient to implement the algorithm by
-associating matrix blocks $$H_{ij}$$ with edges $$(i, j)$$ in the
-graph. We will assume that the initial set of edges only contains
-edges corresponding to the lower triangular part of $$H$$.
-
-The process of orienting the graph as a DAG will **reverse** some
-edges in the graph, which corresponds to **transposing** their matrix
-block. After the DAG is obtained, operations on predecessor/successor
-vertices will be achieved through the in/out edge sets. Depending on
-which matrix block is needed, some matrix transposing might be
-required, for instance:
-
-<div class="algorithm" markdown="1">
-  - for each vertex $$i$$:
-    - for each **child** vertex $$k$$ of $$i$$
-      - do something with $$H_{ik}$$
-</div>
-
-becomes:
-
-<div class="algorithm" markdown="1">
-  - for each vertex $$i$$:
-    - for each **in-edge** $$e$$ of $$i$$:
-      - do something with $$H_e^T$$ *since $$H_e$$ stores $$H_{ki}$$*
-</div>
-
-The adapted algorithms for factorization and solving are given below.
-
-## Factorization
-
-<div class="algorithm" markdown="1">
-  - for each vertex $$i$$ in **postfix** order:
-    - for each **in-edge** $$e=(k, i)$$ of $$i$$:
-      - $$H_{ii} \gets H_{ii} -  H_e^T H_{kk} H_e$$ <br />
-  
-    - for each **remaining** vertex $$j$$:
-      - for each edge pair $$e =(k, i), f=(k, j)$$:   *$$k$$ is a common child to $$i$$ and $$j$$*
-	    - $$H_{(i, j)} \gets H_{(i, j)} - H_e^T H_{kk} H_f$$  *may add a new edge $$(i, j)$$*
-    - for each **out-edge** $$e = (i, j)$$ of $$i$$:
-      - $$H_e \gets  \inv{H_{ii}} H_e$$ <br />
-</div>
-
-Note: the fill-in line has been transposed to ensure that added edges
-will be further processed by the algorithm.
-
-## Solving
-
-<div class="algorithm" markdown="1">
-   - for each vertex $$i$$ in **postfix** order:
-     - $$x_i \gets z_i$$ <br />
-     - for each **in-edge** $$e=(j, i)$$ of $$i$$:
-       - $$x_i \gets x_i – H_e^T x_j$$ <br />
-   - for each vertex $$i$$ in **prefix** order:
-       - $$x_i \gets \inv{H_{ii}} x_i$$ <br />
-     - for each **out-edge** $$e = (i, j)$$ of $$i$$:
-       - $$x_i \gets x_i – H_e x_j$$ <br/>
-</div>
-
-
 
 # Acyclic Graphs
 
@@ -205,6 +144,55 @@ Even when the adjacency graph contains cycles, it can be useful to
 perform an *incomplete* factorization by computing a spanning tree and
 using the algorithm above. The associated solve algorithm can then act
 as a *preconditioner* for iterative methods.
+
+# Transposing Edges
+
+In practice, it is convenient to implement the algorithm by
+associating matrix blocks $$H_{ij}$$ with edges $$(i, j)$$ in the
+graph, and work with the initial vertex numbering. We will assume that
+the user-provided data correspond to the lower triangular part of
+$$H$$, *i.e.* to edges with $$i \geq j$$, which is natural for solving
+saddle-point systems.
+
+The process of orienting the graph as a DAG may produce edges that are
+no longer lower-diagonal, which is akin to processing matrix blocks
+$$H_{ij}$$ with $$i < j$$. Should this happen, the matrix block must
+be replaced with the one available, which in our case is $$H_{ji}^T =
+H_{ij}$$. For instance:
+
+<div class="algorithm" markdown="1">
+  - for each vertex $$i$$ in **postfix** order:
+    - for each **child** vertex $$k$$ of $$i$$: *otherwise $$H_{ik}$$ is zero*
+      - $$H_{ii} \gets H_{ii} -  H_{ik} H_{kk} H_{ik}^T$$ <br />
+</div>
+
+should become:
+
+<div class="algorithm" markdown="1">
+  - for each vertex $$i$$ in **postfix** order:
+	- for each **child** vertex $$k$$ of $$i$$: *otherwise $$H_{ik}$$ is zero*
+	  - if $$k < i$$ then: $$H_{ii} \gets H_{ii} - H_{ik} H_{kk} H_{ik}^T$$
+      - if $$k > i$$ then: $$H_{ii} \gets H_{ii} - H_{ki}^T H_{kk} H_{ki}$$
+</div>
+
+The corresponding operation may need to be transposed accordingly, as
+for instance:
+
+<div class="algorithm" markdown="1">
+  - for **the** parent vertex $$j$$ of $$i$$, if any:
+    - $$H_{ji} \gets  H_{ji} \inv{H_{ii}}$$ <br/>
+</div>
+
+should become:
+
+<div class="algorithm" markdown="1">
+  - for **the** parent vertex $$j$$ of $$i$$, if any:
+    - if $$j > i$$ then: $$H_{ji} \gets  H_{ji} \inv{H_{ii}}$$
+	- if $$j < i$$ then: $$H_{ij} \gets \inv{H_{ii}} H_{ij}$$
+</div>
+
+To summarize, every operation involving $$H_{ij}$$ with $$i < j$$ should
+be transposed in the original algorithm.
 
 # Incremental Tridiagonal Factorization
 
@@ -247,4 +235,10 @@ $$x_k^{(k)} + l_k x_{k-1}^{(k-1)} = y_k^{(k)}$$
 
 This procedure is used in the Lanczos formulation of the Conjugate
 Gradient algorithm.
+
+# Notes
+
+[^1]: Of course one could choose to orient edges from parents to
+    children and number vertices accordingly.
+
 

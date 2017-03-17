@@ -215,7 +215,14 @@ $$ \ad(x) = 2 \hat{x} $$
 where $$\hat{\omega} = \mat{0 & -\omega_3 & \omega_2 \\ \omega_3 & 0 &
 -\omega_1 \\ -\omega_2 & \omega_1 & 0}$$ is the cross-product
 anti-symmetric matrix, such that $$\hat{\omega}x = \omega \times
-x$$. Finally, $$\ad$$ preserves the Lie bracket:
+x$$. The *Killing form* for $$\alg{s^3}$$ satisfies:
+
+$$\left\langle \hat{\omega}_1, \hat{\omega}_2 \right\rangle = -\half \tr\block{\hat{\omega}^T_1\hat{\omega}_2} 
+    = \omega_1^T \omega_2$$
+
+
+Finally, as a Lie algebra isomorphism, $$\ad$$ preserves the Lie
+bracket:
 
 $$ \ad( [x, y] ) = [\ad(x), \ad(y)] $$
 

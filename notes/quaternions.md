@@ -751,8 +751,8 @@ $$
 
 ## Conversion to/from Euler Angles
 
-Here is a purely geometric take on finding the Euler angles
-corresponding to a unit quaternion. We look for the following decomposition:
+Here is a geometric approach to finding the Euler angles corresponding
+to a unit quaternion. We look for the following decomposition:
 
 $$q \in S^3 = \exp(\theta_x e_x) \exp(\theta_y e_y) \exp(\theta_z
 e_z)$$

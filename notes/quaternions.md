@@ -313,7 +313,7 @@ conjugation operation, one can obtain
 the
 [Euler-Rodrigues](https://en.wikipedia.org/wiki/Euler%E2%80%93Rodrigues_formula) formula:
 
-$$q x \bar{q} = x + 2 w \hat{v} x + \hat{v}^2 x$$
+$$q x \bar{q} = x + 2 w \hat{v} x + 2 \hat{v}^2 x$$
 
 
 ## Riemannian Manifold

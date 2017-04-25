@@ -880,10 +880,10 @@ coordinates. As [before](#exponential-map-second-derivative), we get:
 $$\dd^2 \exp\block{x}.\hat{\dd x_2}.\hat{\dd x_1} = \frac{\hat{\dd x_1}.\hat{\dd x_2} + \hat{\dd x_2}.\hat{\dd x_1}}{2} + O\block{\hat{x}}$$
 
 Given a force $$\lambda \in \RR^3$$ applied on
-$$\tilde{f}_y(0)$$, the associated geometric stiffness is:
+$$f_y(0)$$, the associated geometric stiffness is:
 
 $$\begin{align}
-\lambda^T \dd^2 \tilde{f}_y (0).\dd x_1.\dd x_2 &= \lambda^T\frac{\hat{\dd x_1}.\hat{\dd x_2} + \hat{\dd x_2}.\hat{\dd x_1}}{2} y\\
+\lambda^T \dd^2 f_y (0).\dd x_1.\dd x_2 &= \lambda^T\frac{\hat{\dd x_1}.\hat{\dd x_2} + \hat{\dd x_2}.\hat{\dd x_1}}{2} y\\
 &= \dd x_1^T \frac{ \hat{y} \hat{\lambda} + \hat{\lambda}  \hat{y}}{2} \dd x_2
 \end{align}
 $$

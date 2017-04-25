@@ -874,31 +874,20 @@ second derivative of the following mapping, for a given $$y \in
 $$ f_y: x \mapsto \Ad_{\exp(x)} y$$
 
 where $$f_y$$ maps the local coordinates of a point to the absolute
-frame through a rotation in exponential coordinates. From the
-definition of the adjoint representation, we get:
+frame through a rotation in exponential
+coordinates. As [before](#exponential-map-second-derivative), we get:
 
-$$ \dd \Ad_q.\dd q = \Ad_q.\ad_{\db q} $$
+$$\dd^2 \exp\block{x}.\hat{\dd x_2}.\hat{\dd x_1} = \frac{\hat{\dd x_1}.\hat{\dd x_2} + \hat{\dd x_2}.\hat{\dd x_1}}{2} + O\block{\hat{x}}$$
 
-and the second derivative is:
-
-$$ \dd^2 \Ad_q.\dd q_1.\dd q_2 = \Ad_q\block{ \ad_{\db q_2} \ad_{\db q_1} + \ad_{\dd^{b2} q}} $$
-
-In our case, $$q = \exp(x)$$ hence the second derivative at $$x = 0$$ is:
-
-$$
-\begin{align}
-\dd^2 \Ad_{\exp(0)}.\dd x_1.\dd x_2 &= \ad_{\dd x_2} \ad_{\dd x_1} + \ad_{\dd^{b2} \exp(0).\dd x_1.\dd x_2}\\
-&= 4 \hat{\dd x_2} \hat{ \dd x_1} - 2 \hat{\dd x_2 \times \dd x_1} \\
-&= 2\block{\dd x_1 \dd x_2^T + \dd x_2 \dd x_1^T} - 4 \dd x_1^T\dd x_2 I \\
-&= 2 \block{ \hat{\dd x_2} \hat{\dd x_1} + \hat{ \dd x_1 } \hat{ \dd x_2 } } \\
-\end{align}$$
-
-In practice, one generally considers $$\tilde{f}(x) =
-f\block{\frac{x}{2}}$$ instead to match the exponential on
-$$SO(3)$$. Given an end force $$\lambda \in \RR^3$$ applied on
+Given a force $$\lambda \in \RR^3$$ applied on
 $$\tilde{f}_y(0)$$, the associated geometric stiffness is:
 
-$$\lambda^T \dd^2 \tilde{f}_y (0).\dd x_1.\dd x_2 = \dd x_1^T \frac{ \hat{y} \hat{\lambda} + \hat{\lambda}  \hat{y}}{2} \dd x_2$$
+$$\begin{align}
+\lambda^T \dd^2 \tilde{f}_y (0).\dd x_1.\dd x_2 &= \lambda^T\frac{\hat{\dd x_1}.\hat{\dd x_2} + \hat{\dd x_2}.\hat{\dd x_1}}{2} y\\
+&= \dd x_1^T \frac{ \hat{y} \hat{\lambda} + \hat{\lambda}  \hat{y}}{2} \dd x_2
+\end{align}
+$$
+
 
 # References
   

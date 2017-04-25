@@ -6,8 +6,8 @@ categories: [math, lie group]
 Quaternions are primarily used as a representation of 3D rotations.
 They are convenient to use due to their compact size and their nice
 geometric properties. Most operations on rotations can be expressed by
-means of quaternion representation, which generally offers a somewhat
-more intuitive point of view.
+means of quaternion representation, which generally offers a more
+intuitive point of view.
 
 {% include toc.md %}
 

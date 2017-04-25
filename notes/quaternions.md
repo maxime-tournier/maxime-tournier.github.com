@@ -288,7 +288,7 @@ Doing so ensures the arc-cosine is well defined, and that the rotation
 interpolated along the logarithm by $$\exp\block{\alpha
 \log(q)},\,\alpha \in [0, 1]$$ takes the *short way*.
 
-## Rotation Correspondence
+## Connection with Rotations
 
 At this point, we still do not know which rotation corresponds to the
 conjugation by a unit quaternion. From the Taylor series, we see that
@@ -309,12 +309,27 @@ $$ R_{n, \theta} \simeq \cos \block{\frac{\theta}{2}} + \sin\block{\frac{\theta}
 Now hopefully that double covering story starts making sense: a
 half-hemisphere of $$S^3$$ covers the whole $$SO(3)$$, and the whole
 $$S^3$$ covers $$SO(3)$$ twice. After working out the complete
-conjugation operation, one can obtain
+conjugation operation[^double-cross-product], one can obtain
 the
 [Euler-Rodrigues](https://en.wikipedia.org/wiki/Euler%E2%80%93Rodrigues_formula) formula:
 
 $$q x \bar{q} = x + 2 w \hat{v} x + 2 \hat{v}^2 x$$
 
+The exponential map for $$SO(3)$$ and $$S^3$$ are related by:
+
+$$\exp_{SO(3)}\block{\hat{x}} = \Ad\block{ \exp_{S^3}\block{\frac{x}{2}}}$$
+
+The derivatives (here in body-fixed coordinates) are related by:
+
+$$
+\begin{align}
+\db \exp_{SO(3)}\block{\hat{x}}.\dd \hat{x} &= \half \ad_{\alg{s^3}}\block{\db \exp_{S^3}\block{\frac{x}{2}}}.\dd x\\
+&= \block{\db \exp_{S^3}\block{\frac{x}{2}}.\dd x}^{\hat{}}
+\end{align}
+$$
+
+
+[^double-cross-product]: The derivation uses the double cross-product identity: $$v \times (v \times x) = v.v^Tx - x.v^T v$$
 
 ## Riemannian Manifold
 
@@ -447,9 +462,10 @@ $$ \db \log(q).\db q = nn^T \db q + \frac{\theta}{\tan(\theta)}\block{I - nn^T}\
 
 Note that this formula can be extended by continuity at $$q=1$$. See
 Bullo et al.[^Bullo95] for a similar formula in the case of $$SO(3)$$,
-up to a factor $$2$$ due to the double covering.
+replacing $$\block{\theta, \log(q)}$$ by $$\block{\theta/2,
+\log(q)/2}$$ to account for the double covering.
 
-[^Bullo95]: F. Bullo , R. M. Murray, *Proportional Derivative (PD) Control On The Euclidean Group*, European Control Conference, 1995.
+[^Bullo95]: F. Bullo , R. M. Murray, *Proportional Derivative (PD) Control On The Euclidean Group*, European Control Conference, 1995. (Lemma 3)
 
 ## Exponential Derivative
 
@@ -481,37 +497,6 @@ It is worth having a closer look at this formula. For a given $$\dd x$$:
 
 - the part along $$n$$ is unchanged,
 - the part orthogonal to $$n$$ becomes $$\frac{\sin(\theta)}{\theta}\block{cI - s \hat{n}} \dd x^\bot = \frac{\sin(\theta)}{\theta} R_{\exp(x)} \dd x^\bot$$
-
-## Conversion to Rotation Matrix 
-
-Let $$q = (w, v)$$ be a unit quaternion. The corresponding rotation
-$$\Ad_g$$ is:
-
-$$
-\begin{align}
-\Ad_g x &=q x \bar{q} \\
-&= (w + v) x ( w - v) \\
-&= w^2 x + w \block{vx - xv} - vxv\\
-&= w^2 x + w \ad(v) x - vxv\\
-\end{align}
-$$
-
-One can check that:
-
-$$ -vxv = v v^T x + \hat{v}^2 x $$
-
-and we have seen that $$\ad(v) = 2 \hat{v} $$, so the final formula
-is:
-
-$$
-\begin{align}
-\Ad_g &= w^2 I + 2w \hat{v} + v v^T + \hat{v}^2 \\
-&= I + 2w \hat{v} + \norm{v}^2\block{ \frac{v v^T}{\norm{v}^2} - I} + \hat{v}^2 \\
-\end{align}
-$$
-
-Note the similarity with Rodrigues' formula (except it's written using
-$$\frac{\theta}{2}$$).
 
 
 ## Interpolation
@@ -889,8 +874,10 @@ $$\begin{align}
 $$
 
 
-# References
+# Notes and References
   
 [^Fletcher04]: Fletcher, P. Thomas, et al. *"Principal geodesic analysis for the study of nonlinear statistics of shape."* Medical Imaging, IEEE Transactions on 23.8 (2004): 995-1005.
 
 [^Said07]: Said, Salem, et al. *"Exact principal geodesic analysis for data on so (3)."* 15th European Signal Processing Conference (EUSIPCO-2007). EURASIP, 2007.
+
+

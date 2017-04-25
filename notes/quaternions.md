@@ -290,9 +290,9 @@ interpolated along the logarithm by $$\exp\block{\alpha
 
 ## Rotation Correspondence
 
-At this point, we still do not know which rotation is represented by a
-given unit quaternion. From the Taylor series, we see that $$\exp(v)$$
-and $$v$$ commute, so that:
+At this point, we still do not know which rotation corresponds to the
+conjugation by a unit quaternion. From the Taylor series, we see that
+$$\exp(v)$$ and $$v$$ commute, so that:
 
 $$\Ad_{\exp(v)} = \exp(v)v\exp(-v) = \exp(v)\exp(-v)v = v$$
 
@@ -304,9 +304,17 @@ n) = -1$$ for a unit vector $$n$$, which corresponds to the identity
 rotation (or $$2\pi$$), so the rotation angle for $$\exp(v)$$ is
 $$2\norm{v}$$. Equivalently:
 
-$$ R_{n, \theta} \simeq \cos \frac{\theta}{2} + \sin \frac{\theta}{2} n $$
+$$ R_{n, \theta} \simeq \cos \block{\frac{\theta}{2}} + \sin\block{\frac{\theta}{2}} n $$
 
-Now hopefully that double covering thing makes more sense.
+Now hopefully that double covering story starts making sense: a
+half-hemisphere of $$S^3$$ covers the whole $$SO(3)$$, and the whole
+$$S^3$$ covers $$SO(3)$$ twice. After working out the complete
+conjugation operation, one can obtain
+the
+[Euler-Rodrigues](https://en.wikipedia.org/wiki/Euler%E2%80%93Rodrigues_formula) formula:
+
+$$q x \bar{q} = x + 2 w \hat{v} x + \hat{v}^2 x$$
+
 
 ## Riemannian Manifold
 

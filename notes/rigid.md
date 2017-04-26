@@ -132,7 +132,7 @@ The unscaled inertia tensor $$\mathcal{I}$$ satisfies:
 $$
 \begin{align}
 \mathcal{I}_{xx} &= \int_\Omega \rho(p)\block{y^2 + z^2}.dV \\
-\mathcal{I}_{xy} &= \int_\Omega \rho(p) \block{xy}.dV
+\mathcal{I}_{xy} &= -\int_\Omega \rho(p) \block{xy}.dV
 \end{align}
 $$
 
@@ -142,8 +142,8 @@ $$
 \begin{align}
 \mathcal{I'}_{xx} &= \int_{S\Omega} \rho\block{S^{-1}p} \block{y^2 + z^2}.dV \\
 &= \int_{\Omega} \rho\block{p} \block{s_y^2 y^2 + s_z^2 z^2}.dV.\det(S)\\
-\mathcal{I'}_{xy} &= \int_{S\Omega} \rho\block{S^{-1}p} \block{xy}.dV \\
-&= \int_\Omega \rho(p) \block{s_x x s_y y}.dV.\det(S)
+\mathcal{I'}_{xy} &= -\int_{S\Omega} \rho\block{S^{-1}p} \block{xy}.dV \\
+&= -\int_\Omega \rho(p) \block{s_x x s_y y}.dV.\det(S)
 \end{align}
 $$
 

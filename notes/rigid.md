@@ -121,6 +121,38 @@ TODO
 
 TODO
 
+## Scaling Inertia Tensors
+
+Consider body-fixed diagonal scaling: 
+
+$$S = (s_x, s_y, s_z)$$
+
+The unscaled inertia tensor $$\mathcal{I}$$ satisfies:
+
+$$
+\begin{align}
+\mathcal{I}_{xx} &= \int_\Omega \rho(p)\block{y^2 + z^2}.dV \\
+\mathcal{I}_{xy} &= \int_\Omega \rho(p) \block{xy}.dV
+\end{align}
+$$
+
+Scaling off-diagonal terms is easy: 
+
+$$\mathcal{I'}_{xy} = s_x s_y \mathcal{I}_{xy}$$
+
+Scaling inertia diagonal requires more work: first, one need to obtain
+scatter around axes from the unscaled tensor diagonal:
+
+$$w = \mat{0 & 1 & 1\\1 & 0 & 1 \\ 1 & 1 & 0}^{-1} \diag\block{\mathcal{I}}$$
+
+So that: $$w_x = \int_\Omega \rho(p) x^2.dV$$ and so on for $$w_y,
+w_z$$. Then, the scaled diagonal is computed based on scaled scattering:
+
+$$\diag\block{I'} = \mat{0 & 1 & 1\\1 & 0 & 1 \\ 1 & 1 & 0} S^2 w$$
+
+
+
+
 ## Time Integration
 
 Parallel transport of the spatial angular momentum $$\mu_k^s$$ from

@@ -136,9 +136,20 @@ $$
 \end{align}
 $$
 
+What we seek to compute is:
+
+$$
+\begin{align}
+\mathcal{I'}_{xx} &= \int_{S\Omega} \rho\block{S^{-1}p} \block{y^2 + z^2}.dV \\
+&= \int_{\Omega} \rho\block{p} \block{s_y^2 y^2 + s_z^2 z^2}.dV.\det(S)\\
+\mathcal{I'}_{xy} &= \int_{S\Omega} \rho\block{S^{-1}p} \block{xy}.dV \\
+&= \int_\Omega \rho(p) \block{s_x x s_y y}.dV.\det(S)
+\end{align}
+$$
+
 Scaling off-diagonal terms is easy: 
 
-$$\mathcal{I'}_{xy} = s_x s_y \mathcal{I}_{xy}$$
+$$\mathcal{I'}_{xy} = \frac{1}{\det(S)} s_x s_y \mathcal{I}_{xy} = \frac{\mathcal{I}_{xy}}{s_z}$$
 
 Scaling inertia diagonal requires more work: first, one need to obtain
 scatter around axes from the unscaled tensor diagonal:
@@ -148,9 +159,7 @@ $$w = \mat{0 & 1 & 1\\1 & 0 & 1 \\ 1 & 1 & 0}^{-1} \diag\block{\mathcal{I}}$$
 So that: $$w_x = \int_\Omega \rho(p) x^2.dV$$ and so on for $$w_y,
 w_z$$. Then, the scaled diagonal is computed based on scaled scattering:
 
-$$\diag\block{I'} = \mat{0 & 1 & 1\\1 & 0 & 1 \\ 1 & 1 & 0} S^2 w$$
-
-
+$$\diag\block{I'} = \frac{1}{\det(S)}\mat{0 & 1 & 1\\1 & 0 & 1 \\ 1 & 1 & 0} S^2 w $$
 
 
 ## Time Integration

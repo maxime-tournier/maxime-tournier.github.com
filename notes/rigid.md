@@ -43,17 +43,17 @@ $$\alg{se(3)}^\star$$.
 
 ## Adjoint Representations
 
-Group adjoint representation on twists:
+Adjoint representation of the **group** on its Lie algebra:
 
 $$\Ad_{R, t} = \mat{ R & \\ \hat{t}R & R } $$
 
-Algebra adjoint representation on twists:
+Adjoint representation of the **algebra** on itself:
 
 $$\ad \mat{\omega\\ v} = \mat{ \hat{\omega} & \\ \hat{v} & \hat{\omega} }$$
 
 ## Exponential
 
-Given a Lie algebra element:
+Given $$(\omega, v) \in \alg{se(3)}$$ of the Lie algebra:
 
 $$\mat{\omega & v \\ 0 & 0}$$
 
@@ -115,7 +115,102 @@ $$ \log\mat{R & t \\ 0 & 1} = \mat{ \log(R) & \dd\log(R) t \\ 0 & 0} $$
 
 ## Inertia Tensor
 
-TODO
+Given a point attached to a rigid frame $$g = (R, t)$$ with local
+coordinates $$p \in \RR^3$$, the position of the point in the world
+frame is:
+
+$$x = R.p + t$$
+
+and its velocity is:
+
+$$\dd x = \dd R.p + \dd t$$
+
+If the point is given a mass $$m > 0$$, the corresponding kinetic
+energy is:
+
+$$
+\begin{align}
+T(g, \dd g) &= \half m \norm{\dd x}^2 \\
+&= \half m \norm{R \hat{\omega}^b.p + \dd t}^2 \\
+&= \half m \norm{\hat{\omega}^b.p + v^b}^2 \\
+&= \half m \norm{-\hat{p}.\omega^b + v^b}^2 \\
+&= \half m \mat{ {\omega^b}^T & {v^b}^T} \mat{-\hat{p}^T\hat{p} & \hat{p} \\ -\hat{p} & I} \mat{\omega^b \\ v^b}
+\end{align}
+$$
+
+The symmetric matrix $$\hat{p}^T\hat{p}$$ decomposes as:
+
+$$\hat{p}^T\hat{p} = -\hat{p}^2 = \norm{p}^2 I - p p^T$$
+
+using the double cross-product formula. We end up with the following
+inertia tensor for a single point mass, in body-fixed coordinates:
+
+$$\mathcal{M} = m \mat{\norm{p}^2 I - p p^T & \hat{p} \\ -\hat{p} & I}$$
+
+If we now use more than one point, the total kinetic energy is the sum
+of the kinetic energies, and the total inertia tensor is the sum of
+all the individual tensors:
+
+$$\mathcal{M} = \sum_i m_i \mat{\norm{p_i}^2 I - p_i p_i^T & \hat{p_i} \\ -\hat{p_i} & I}$$
+
+For a continuous object, the sum becomes an integral and the point
+masses become mass densities:
+
+$$\mathcal{M} = \int_\Omega \rho(p) \mat{\norm{p}^2 I - p p^T & \hat{p} \\ -\hat{p} & I}.\dd p$$
+
+Coming back to discrete sums, we see that the top-right off-diagonal
+term is $$\block{\sum_i m_i p_i}^{\hat{}}$$. If we now let $$m =
+\sum_i m_i$$ the total mass of the object and $$c = \frac{\sum_i m_i
+p_i}{m}$$ the coordinates of its center of mass, we see that the
+off-diagonal terms $$m \hat{c}$$ become zero when the coordinate
+system origin is chosen at the center of mass (since $$c = 0$$). From
+now on, we will assume that this is indeed the case and that the
+inertia tensor is block-diagonal:
+
+$$\mathcal{M} = \mat{ \sum_i m_i\block{\norm{p_i}^2 I - p_i p_i^T} &&  \\ && m I }$$
+
+The rotational inertia tensor $$\mathcal{I} = \sum_i
+m_i\block{\norm{p_i}^2 I - p_i p_i^T}$$ is symmetric positive
+semidefinite, and positive definite as long as the object has non-zero
+volume. As such, it can be diagonalized in some orthogonal basis $$U \in SO(3)$$,
+called the principal axes of inertia:
+
+$$\mathcal{I} = U S U^T$$
+
+## Parallel Axis Theorem
+
+We now consider the following problem: *how do inertia tensors vary
+under changes of coordinates?* A body-fixed coordinate change is
+described using a right-translation by an constant element $$h\in
+SE(3)$$:
+
+$$R_h: g \mapsto g h$$
+
+Now, assuming we know the inertia tensor $$\mathcal{M}$$ in $$g h$$,
+we have:
+
+$$T(gh, \dd(gh)) = \db (gh)^T.\mathcal{M}.\db (gh)$$
+
+We obtain the expression in terms of $$\db g$$ by differentiating:
+
+$$\db(gh).\dd g = \db R_h(g).\db g = \Ad_{\inv{g}}.\db g$$
+
+Finally:
+
+$$T(g, \db g) = \db g^T \underbrace{\Ad_h^{-T}.\mathcal{M}.\Ad_h^{-1}}_{\mathcal{M'}} \db g$$
+
+$$\mathcal{M'}$$ is known as the *pullback* of the inertia tensor
+$$\mathcal{M}$$ by $$R_h$$. The pulled-back tensor is the following,
+again in body-fixed coordinates:
+
+$$\mathcal{M'} = \mat{R_h.\mathcal{I}.R_h^T + m \block{ \norm{t_h}^2 I  - t_h t_h^T}& m \hat{t}_h \\ - m \hat{t}_h & m I}$$
+
+It corresponds to the the rotation tensor $$\mathcal{I}$$ expressed in
+the old coordinate frame, in addition to the inertia tensor for a
+single point located at the center of mass. This result is known as
+the
+[parallel axis theorem](https://en.wikipedia.org/wiki/Parallel_axis_theorem).
+
 
 ## Newton-Euler Equations
 

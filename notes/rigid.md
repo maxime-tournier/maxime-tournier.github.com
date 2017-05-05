@@ -181,7 +181,7 @@ $$\mathcal{I} = U S U^T$$
 
 We now consider the following problem: *how do inertia tensors vary
 under changes of coordinates?* A body-fixed coordinate change is
-described using a right-translation by an constant element $$h\in
+described using a right-translation by some constant element $$h\in
 SE(3)$$:
 
 $$R_h: g \mapsto g h$$

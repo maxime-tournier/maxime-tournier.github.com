@@ -184,7 +184,7 @@ under changes of coordinates?* A body-fixed coordinate change is
 described using a right-translation by some constant element $$h\in
 SE(3)$$:
 
-$$R_h: g \mapsto g h$$
+$$\mathrm{R}_h: g \mapsto g h$$
 
 Now, assuming we know the inertia tensor $$\mathcal{M}$$ in $$g h$$,
 we have:
@@ -193,7 +193,7 @@ $$T(gh, \dd(gh)) = \db (gh)^T.\mathcal{M}.\db (gh)$$
 
 We obtain the expression in terms of $$\db g$$ by differentiating:
 
-$$\db(gh).\dd g = \db R_h(g).\db g = \Ad_{\inv{g}}.\db g$$
+$$\db(gh).\dd g = \db \mathrm{R}_h(g).\db g = \Ad_{\inv{g}}.\db g$$
 
 Finally:
 
@@ -244,7 +244,7 @@ $$
 
 Scaling off-diagonal terms is easy: 
 
-$$\mathcal{I'}_{xy} = \frac{1}{\det(S)} s_x s_y \mathcal{I}_{xy} = \frac{\mathcal{I}_{xy}}{s_z}$$
+$$\mathcal{I'}_{xy} = \det(S) s_x s_y \mathcal{I}_{xy}$$
 
 Scaling inertia diagonal requires more work: first, one need to obtain
 scatter around axes from the unscaled tensor diagonal:
@@ -254,7 +254,7 @@ $$w = \mat{0 & 1 & 1\\1 & 0 & 1 \\ 1 & 1 & 0}^{-1} \diag\block{\mathcal{I}}$$
 So that: $$w_x = \int_\Omega \rho(p) x^2.dV$$ and so on for $$w_y,
 w_z$$. Then, the scaled diagonal is computed based on scaled scattering:
 
-$$\diag\block{I'} = \frac{1}{\det(S)}\mat{0 & 1 & 1\\1 & 0 & 1 \\ 1 & 1 & 0} S^2 w $$
+$$\diag\block{I'} = \det(S)\mat{0 & 1 & 1\\1 & 0 & 1 \\ 1 & 1 & 0} S^2 w $$
 
 
 ## Time Integration

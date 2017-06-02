@@ -24,9 +24,11 @@ $$
 \newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\trace}[1]{\mathrm{tr}\block{#1}}
 
-\newcommand{\norm}[1]{ \left| \left| #1 \right| \right| }
+\newcommand{\norm}[1]{ \left\| #1 \right\| }
 \newcommand{\argmin}[1]{ \underset{#1}{\mathrm{argmin}} }
 \newcommand{\argmax}[1]{ \underset{#1}{\mathrm{argmax}} }
+\newcommand{\st}{\ \mathrm{s.t.}\ }
+\newcommand{\sign}[1]{\mathrm{sign}\block{#1}}
 
 \newcommand{\half}{\frac{1}{2}}
 \newcommand{\inner}[2]{ \langle #1, #2 \rangle }

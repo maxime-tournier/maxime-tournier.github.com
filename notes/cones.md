@@ -101,21 +101,26 @@ which under our assumptions has always a solution given by:
 
 $$\lambda = \frac{\norm{p}^2 \pm 2 \norm{p_T}\norm{p_N}}{\norm{p_T}^2 - \norm{p_N}^2}$$
 
-Now it is easy to see that when both roots give negative $$x_N$$, the
-solution to the projection is $$0$$ (since $$x_N \geq 0$$ becomes
-active). Otherwise, exactly one root gives a positive $$x_N$$ and is
-the one corresponding to the orthogonal projection. More precisely,
-the sign of $$x_N$$ is given by:
-
-$$\sign{s_N} = \sign{p_N}\sign{1 - \lambda}$$
+Now if we are to use this formula for solving the original orthogonal
+projection problem, we need to consider the sign of $$x_N$$
+corresponding to $$\lambda$$ in order to rule out critical
+points. More precisely, we have: $$\sign{x_N} = \sign{p_N}\sign{1 -
+\lambda}$$
 
 where:
 
 $$1-\lambda = \frac{ 2 \norm{p_N}^2 \pm 2 \norm{p_T}\norm{p_N} } {\norm{p_T}^2 - \norm{p_N}^2}$$
 
-Depending on the sign of $$\norm{p_T}^2 - \norm{p_N}^2$$, each root
-gives us exactly one positive and negative value for $$(1 -
-\lambda)$$. The final projection procedure is the following:
+Depending on the sign of $$\norm{p_T}^2 - \norm{p_N}^2$$ and that of
+$$p_N$$, each $$\lambda$$ pair will result in either two positive, two
+negative, or exactly one positive and one negative values for
+$$x_N$$. One can verify that:
+
+- $$\x_{N1} \geq 0, \x_{N2} \geq 0 \iff p \in K$$, in which case $$\pi_K(x) = x$$ 
+- $$\x_{N1} \leq 0, \x_{N2} \leq 0 \iff p \in K^-$$, in which case $$\pi_K(x) = 0$$ 
+
+In other cases, the solution is obtained from the root resulting in a
+positive $$\x_N$$. The final projection procedure is the following:
 
 - if $$\norm{p_N} = \norm{p_T}$$, $$x = p$$ or $$x = 0$$ based on $$\sign{p_N}$$
 - else 

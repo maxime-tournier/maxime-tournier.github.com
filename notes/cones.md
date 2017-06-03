@@ -116,8 +116,8 @@ $$p_N$$, each $$\lambda$$ pair will result in either two positive, two
 negative, or exactly one positive and one negative values for
 $$x_N$$. One can verify that:
 
-- $$x_{N1} \geq 0, x_{N2} \geq 0 \iff p \in K$$, in which case $$\pi_K(x) = x$$ 
-- $$x_{N1} \leq 0, x_{N2} \leq 0 \iff p \in K^-$$, in which case $$\pi_K(x) = 0$$ 
+- $$x_{N1} \geq 0, x_{N2} \geq 0 \iff p \in K$$, in which case $$\pi_K(p) = p$$ 
+- $$x_{N1} \leq 0, x_{N2} \leq 0 \iff p \in K^-$$, in which case $$\pi_K(p) = 0$$ 
 
 In other cases, the solution is obtained from the root resulting in a
 positive $$x_N$$. The final projection procedure is the following:

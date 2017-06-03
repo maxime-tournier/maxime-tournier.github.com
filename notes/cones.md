@@ -64,21 +64,24 @@ x_T &= p_T - \lambda x_N  \\
 \end{align}
 $$
 
-Since $$\pi_K(x) = x$$ if $$x \in K$$ and testing whether $$x \in K$$
-is easy, we will focus on the case where the first constraint is
-active (which implies $$\norm{p_N}^2 \neq \norm{p_T}^2$$) and the
-second is not ($$\mu = 0$$) and obtain the following conditions:
+Now dealing with complementarity problems is difficult to solve
+analytically, therefore we will look for critical points for the
+following non-convex problem instead:
+
+$$\argmin{\norm{x_N}^2 = \norm{x_T}^2}  \norm{x - p}^2$$
+
+whose KKT conditions are:
 
 $$ 
 \begin{align}
 (1 - \lambda) x_N &= p_N \\
 (1 + \lambda) x_T &= p_T   \\
 \norm{x_N}^2 - \norm{x_T}^2 &= 0 \\
-0 \leq \mu \ &\bot \  x_N \geq 0
 \end{align}
 $$
 
-Let us assume for now that $$\norm{\lambda} \neq 1$$ and obtain:
+Let us assume for now that $$\norm{\lambda} \neq 1$$ and that our
+constraint is active, we obtain:
 
 $$ 
 \begin{align}
@@ -99,7 +102,8 @@ $$\block{1 + \lambda^2}\block{ \norm{p_N}^2 - \norm{p_T}^2} + 2
 
 which under our assumptions has always a solution given by:
 
-$$\lambda = \frac{\norm{p}^2 \pm 2 \norm{p_T}\norm{p_N}}{\norm{p_T}^2 - \norm{p_N}^2}$$
+$$\lambda = \frac{\norm{p}^2 \pm 2
+\norm{p_T}\norm{p_N}}{\norm{p_T}^2 - \norm{p_N}^2}$$
 
 Now if we are to use this formula for solving the original orthogonal
 projection problem, we need to consider the sign of $$x_N$$

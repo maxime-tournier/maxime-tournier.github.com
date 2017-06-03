@@ -64,9 +64,9 @@ x_T &= p_T - \lambda x_N  \\
 \end{align}
 $$
 
-Now dealing with complementarity problems is difficult to solve
-analytically, therefore we will look for critical points for the
-following non-convex problem instead:
+Now, since complementarity problems are difficult to solve
+analytically, we will look for critical points for the following
+non-convex problem instead:
 
 $$\argmin{\norm{x_N}^2 = \norm{x_T}^2}  \norm{x - p}^2$$
 

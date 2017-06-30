@@ -260,8 +260,14 @@ $$p = \argmin{x \in f^\bot} \norm{ \tau^\bot + f \times x}^2 $$
 One can easily check that this problem has a closed-form solution
 given by:
 
-$$p = \frac{f \times \tau^\bot}{\norm{f}^2 = \frac{f \times \tau}{\norm{f}^2}$$
+$$p = \frac{f \times \tau^\bot}{\norm{f}^2} = \frac{f \times \tau}{\norm{f}^2}$$
 
+Now, the center of pressure generally satisfies extra conditions, for
+instance it should lie in the ground plane: 
+
+$$n^T(p + \lambda f) = 0$$
+
+which allows to compute $$\lambda$$ and the actual CoP.
 
 ## Newton-Euler Equations
 

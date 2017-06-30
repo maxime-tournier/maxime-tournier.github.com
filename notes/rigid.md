@@ -260,7 +260,7 @@ $$p = \argmin{x \in f^\bot} \norm{ \tau^\bot + f \times x}^2 $$
 One can easily check that this problem has a closed-form solution
 given by:
 
-$$p = \frac{f \times \tau^\bot}{\norm{f}^2}$$
+$$p = \frac{f \times \tau^\bot}{\norm{f}^2 = \frac{f \times \tau}{\norm{f}^2}$$
 
 
 ## Newton-Euler Equations

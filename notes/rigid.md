@@ -212,6 +212,28 @@ the
 [parallel axis theorem](https://en.wikipedia.org/wiki/Parallel_axis_theorem).
 
 
+## Moving Wrenches Around
+
+Consider the right-translation by a constant translation:
+
+$$\mathcal{R}_h: h = \mat{I & \delta \\ 0 & 1 }$$
+
+We differentiate the right-translation using spatial coordinates at
+$$g = (R, t)$$:
+
+$$\dd \mathcal{R}(g) = \mat{ \dd R & \dd R \delta + \dd t \\ 0 & 0}$$
+
+Then the pullback of a wrench $$\kappa = (\tau, f)$$ by $$\mathcal{R}_h$$ gives:
+
+$$\dd^\star \mathcal{R}_h(g).\kappa = \mat{\tau + \hat{R\delta} \times f \\ f }$$
+
+Calling $$A$$ the center of the translated frame and $$B$$ that the
+original frame, we obtain for torques:
+
+$$\tau_B = \tau_A + \vec{BA} \times f$$
+
+which is known as the *Varignon* formula.
+
 ## Newton-Euler Equations
 
 TODO

@@ -234,6 +234,35 @@ $$\tau_B = \tau_A + \vec{BA} \times f$$
 
 which is known as the *Varignon* formula.
 
+## Center of Pressure
+
+We look to find a point in space where the equivalent wrench has
+minimal torque. Assuming we are given a wrench $$\kappa = (\tau, f)$$
+in spatial coordinates, the equivalent torque translated at $$x$$ is:
+
+$$\tau_x = \tau + f \times x$$
+
+Henceforth, we look to minimize the following function:
+
+$$p = \argmin{x} \norm{ \tau + f \times x}^2 $$
+
+We first notice that for any solution $$p$$, $$p + \lambda f$$ is also
+solution, so it only makes sense to look for a solution that is
+orthogonal to $$f$$:
+
+$$x \in f^\bot$$
+
+As a consequence, we also have $$f \times x \in f^\bot$$ and the
+objective function can be replaced with:
+
+$$p = \argmin{x \in f^\bot} \norm{ \tau^\bot + f \times x}^2 $$
+
+One can easily check that this problem has a closed-form solution
+given by:
+
+$$p = \frac{\tau^\bot \times f}{\norm{f}^2}$$
+
+
 ## Newton-Euler Equations
 
 TODO

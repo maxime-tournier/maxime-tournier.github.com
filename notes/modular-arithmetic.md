@@ -19,7 +19,7 @@ by".
 # Euclid's Algorithm
 
 Given the Eulidean division $$a = b q + r, 0 \leq r < b$$, one can
-easily show that $\gcd(a, b) = \gcd(b, r)$$, which gives a simple
+easily show that $$\gcd(a, b) = \gcd(b, r)$$, which gives a simple
 algorithm for computing $$gcd(a, b)$$ by successive Euclidean
 divisions. The last non-zero remainder is the GCD.
 

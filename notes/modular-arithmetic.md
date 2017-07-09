@@ -19,9 +19,14 @@ by".
 # Euclid's Algorithm
 
 Given the Eulidean division $$a = b q + r, 0 \leq r < b$$, one can
-easily show that $$\gcd(a, b) = \gcd(b, r)$$, which gives a simple
-algorithm for computing $$gcd(a, b)$$ by successive Euclidean
-divisions. The last non-zero remainder is the GCD.
+easily show that $$\gcd(a, b) = \gcd(b, r)$$ by showing that $$\gcd(a,
+b)$$ divides $$\gcd(b, r)$$ and conversely. This gives a simple
+algorithm for computing $$\gcd(a, b)$$ using successive Euclidean
+divisions:
+
+$$r_{k-1} = q_k r_k + r_{k+1},\  0\leq r_{k+1} < r_k$$
+
+The last non-zero remainder is the GCD.
 
 
 # Bezout's Theorem
@@ -46,10 +51,11 @@ We may rewrite $$r$$ as:
 
 $$r = ax' + by' - qd = a(x' - qx) + b(y' - qy)$$
 
-so that $$r \in S$$ and by definition of $$d$$, we are left with $$r =
-0$$. Therefore, $$d$$ divides $$n$$ for all $$n \in S$$. In
-particular, $$a, b \in S$$ so $$d$$ is a common divisor of $$a, b$$ that
-lies in $$S$$, which concludes the proof.
+so that $$r \in S$$.  By the definition of $$d$$, we are left with the
+only possibility $$r = 0$$, otherwise we would have found a smaller
+positive element in $$S$$. Therefore, $$d$$ divides $$n$$ for all $$n
+\in S$$. In particular, $$a, b \in S$$ so $$d$$ is a common divisor of
+$$a, b$$ that lies in $$S$$, which concludes the proof.
 
 Note: we just shown that $$S = a\ZZ + b\ZZ = \gcd(a, b)\ZZ$$. This
 shows that converse of the theorem is false, but that the following
@@ -91,11 +97,11 @@ $$x = a_i \mod n_i,\ \forall\, i \leq k $$
 
 Moreover, $$x$$ is unique modulo $$n = \prod_i n_i$$. In other words,
 given remainders modulo coprime integers, it is possible to
-"reconstruct" the initial integer $$x$$.
+"reconstruct" the initial integer $$x$$. 
 
-Let us consider $$\hat{n}_i = \frac{n}{n_i}$$, then we have that
-$$\gcd\block{n_i, \hat{n_i}} = 1$$ and by Bezout's theorem, there
-exists $$u_i, v_i$$ such that:
+The reconstruction goes as follows: let us consider $$\hat{n}_i =
+\frac{n}{n_i}$$, then we have $$\gcd\block{n_i, \hat{n_i}} = 1$$
+and by Bezout's theorem, there exists $$u_i, v_i$$ such that:
 
 $$1 = u_i n_i + \underbrace{v_i \hat{n}_i}_{e_i}$$
 

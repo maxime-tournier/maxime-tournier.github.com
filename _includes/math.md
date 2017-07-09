@@ -7,6 +7,7 @@ $$
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\PP}{\mathbb{P}}
 \newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\HH}{\mathbb{H}}
 \newcommand{\alg}[1]{\mathfrak{#1}}
@@ -50,6 +51,7 @@ $$
 \newcommand{\tr}{\mathrm{tr}}
 
 \newcommand{\sinc}{\mathrm{sinc}}
+
 $$
 
 </div>

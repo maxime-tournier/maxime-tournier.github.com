@@ -874,7 +874,7 @@ $$\begin{align}
 $$
 
 
-## Reflections
+## Reflections & Projections
 
 Consider a reflection $$M_n$$ by a plane whose normal is unit vector $$n$$:
 

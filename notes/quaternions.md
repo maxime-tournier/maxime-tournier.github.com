@@ -876,10 +876,10 @@ $$
 
 ## Reflections
 
-Consider a reflection by a plane whose normal is unit vector $$n$$:
+Consider a reflection $$M_n$$ by a plane whose normal is unit vector $$n$$:
 
 $$\begin{align}
-f(x) &= x^\parallel - x^\bot \\
+M_n(x) &= x^\parallel - x^\bot \\
 &= \block{I - n n^T} x - n n^T x \\
 &= \block{I - 2 n n^T} x
 \end{align}
@@ -888,10 +888,21 @@ $$
 This is *almost* the half-turn around $$n$$ as given by the Rodrigues
 formula:
 
-$$g(x) = x + 2 \hat{n}^2 x = \block{2 n n^T - I}x$$
+$$\Ad_n(x) = x + 2 \hat{n}^2 x = \block{2 n n^T - I}x$$
 
-so that $$f(x) = -g(x) = n^2 n^{-1} x n = n x n$$.
+We immediately obtain:
 
+$$\begin{align}
+M_n(x) &= -\Ad_n(x) \\
+&= n^2 n^{-1} x n \\
+&= n x n
+\end{align}$$ 
+
+Similarly, we can derive expressions for orthogonal projections:
+
+$$x^\parallel = \frac{x - n x n}2$$
+
+$$x^\bot = \frac{x + n x n}2$$
 
 
 # Notes and References

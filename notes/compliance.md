@@ -94,7 +94,52 @@ h.\lambda$$ to obtain:
 
 $$\mat{M - h^2 G_k & -J_k^T \\ -J_k & -\frac{C}{h^2}} \mat{v_{k+1} \\ \mu_{k+1}} = \mat{M v_k \\ \frac{f_k}{h}}$$
 
-# Geometric Stiffness
+# Composing Geometric Stiffnesses
+
+The Geometric Stiffness being a second derivative, it follows the
+associated composition rules. More precisely, let us now consider a
+composed kinematic mapping $$f \circ g$$. The Jacobian matrix is given
+by:
+
+$$J_k = J_{f \circ g}\block{q_k} = \dd f\block{g\block{q_k}}.\dd g\block{q_k}$$
+
+The Geometric Stiffness is a bit more involved:
+
+$$\begin{align}
+G_k &= \ddd{}{q_k} J_k^T\lambda_k\\
+    &= \ddd{}{q_k}\dd g\block{q_k}^T.\dd f\block{g\block{q_k}}^T\lambda_k \\
+    &= \block{\ddd{}{q_k} \dd g\block{q_k}^T }\dd f\block{g\block{q_k}}^T\lambda_k + \dd g\block{q_k}^T.\ddd{}{q_k}\dd f\block{g\block{q_k}}^T\lambda_k\\
+\end{align}
+$$
+
+Now, if we note $$\gamma = J_f^T \lambda$$ the pullback of $$\lambda$$
+by $$f$$, the left part is simply the geometric stiffness of $$g$$ at
+$$\block{q_k, \gamma_k}$$:
+
+$$\block{\ddd{}{q_k} \dd g\block{q_k}^T }\dd f\block{g\block{q_k}}^T\lambda_k = G_g\block{q_k, \gamma_k}$$
+
+The right part requires more care:
+
+$$\begin{align}
+\dd g\block{q_k}^T.\ddd{}{q_k}\dd f\block{g\block{q_k}}^T\lambda_k 
+&= \dd g\block{q_k}^T.\block{\ddd{}{q_k}\dd f\block{g\block{q_k}}^T\lambda_k}.\dd g\block{q_k} \\
+&= J_g\block{q_k}^T G_f\block{g\block{q_k}, \lambda_k} J_g\block{q_k} \\
+\end{align}$$
+
+Finally, we obtain:
+
+$$G_{f \circ g}\block{q_k, \lambda_k} = G_g\block{q_k, \gamma_k} + J_g\block{q_k}^T G_f\block{g\block{q_k}, \lambda_k} J_g\block{q_k}$$
+
+where $$\gamma_k = J_f\block{g\block{q_k}}^T\lambda_k$$. This gives a
+general algorithm for computing geometric stiffnesses (or their
+product with a vector):
+
+1. push 
+   - compute $$g\block{q_k}, J_g\block{q_k}$$
+   - compute $$f\block{g\block{q_k}}, J_f\block{g\block{q_k}}$$, ...
+2. pull
+   - compute $$G_f\block{g\block{q_k}, \lambda_k}$$
+   - compute $$J_g\block{q_k}^T G_f\block{g\block{q_k}, \lambda_k} J_g\block{q_k}$$, then add $$G_g\block{q_k, \gamma_k}$$, ...
 
 
 # Lie Groups

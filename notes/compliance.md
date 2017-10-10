@@ -7,7 +7,7 @@ categories: [phys]
 
 # Equations of Motion
 
-Consider a conservative mechanical system given by the following
+Consider a conservative mechanical system described by the following
 Lagrangian:
 
 $$\LL\block{q, \dot{q}} = \half \dot{q}^T M \dot{q}$$
@@ -138,6 +138,7 @@ product with a vector):
    - compute $$g\block{q_k}, J_g\block{q_k}$$
    - compute $$f\block{g\block{q_k}}, J_f\block{g\block{q_k}}$$, ...
 2. pull
+   - compute $$\gamma_k = J_f\block{g\block{q_k}}^T\lambda_k$$
    - compute $$G_f\block{g\block{q_k}, \lambda_k}$$
    - compute $$J_g\block{q_k}^T G_f\block{g\block{q_k}, \lambda_k} J_g\block{q_k}$$, then add $$G_g\block{q_k, \gamma_k}$$, ...
 

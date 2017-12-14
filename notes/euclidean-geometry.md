@@ -76,14 +76,14 @@ whose Lagrangian partial derivatives are:
 
 $$
 \begin{align}
-\ddd{\LL}{n} &= -n^T \underbrace{\block{p - \Sigma_i p_i}^T\block{p - \Sigma_i p_i}}_W + 2\lambda n^T \\
+\ddd{\LL}{n} &= -n^T \underbrace{\sum_i\block{p - p_i}^T\block{p - p_i}}_W + 2\lambda n^T \\
 
 \ddd{\LL}{\lambda} &= \norm{n}^2 - 1 \\
 \end{align}
 $$
 
 These conditions exactly state that $$n$$ must be a normalized
-eigenvector of the positive semidefinite matrix $$W$$. Our
+eigenvector of the positive semidefinite dispertion matrix $$W$$. Our
 optimization problem is thus reduced to:
 
 $$\argmin{Wn = \lambda n, \norm{n} = 1} \quad -n^TWn = -\lambda$$

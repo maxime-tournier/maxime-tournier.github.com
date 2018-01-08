@@ -24,7 +24,7 @@ b)$$ divides $$\gcd(b, r)$$ and conversely. This gives a simple
 algorithm for computing $$\gcd(a, b)$$ using successive Euclidean
 divisions:
 
-$$r_{k-1} = q_k r_k + r_{k+1},\  0\leq r_{k+1} < r_k$$
+$$r_{k-1} = r_k q_{k+1}  + r_{k+1},\  0\leq r_{k+1} < r_k$$
 
 The last non-zero remainder is the GCD.
 
@@ -67,12 +67,12 @@ Rather than discarding the $$q_k$$ in Euclid's algorithm, one can
 exploit them to construct Bezout's decomposition. The $$k$$-th
 iteration is given by:
 
-$$r_{k-1} = q_k r_k + r_{k+1},\  0\leq r_{k+1} < r_k$$
+$$r_{k-1} = r_k q_{k+1} + r_{k+1},\  0\leq r_{k+1} < r_k$$
 
 Now, assuming we have the decomposition $$r_k = s_k a + t_k b$$, we
 obtain the new decomposition for $$r_{k+1}$$ as:
 
-$$r_{k-1} - q_k r_k =  r_{k+1} = a\underbrace{\block{s_{k-1} - q_k s_k}}_{s_{k+1}} + b \underbrace{\block{t_{k-1} - q_k t_k}}_{t_{k+1}}$$
+$$r_{k+1} = r_{k-1} - r_k q_{k+1} = a\underbrace{\block{s_{k-1} - s_k q_{k+1}}}_{s_{k+1}} + b \underbrace{\block{t_{k-1} - t_k q_{k+1}}}_{t_{k+1}}$$
 
 Euclid's algorithm starts with $$s_0 = 1, t_0 = 0, s_1 = 0, t_1 = 1$$.
 

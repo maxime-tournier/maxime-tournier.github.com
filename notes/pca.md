@@ -139,8 +139,20 @@ eigendecomposition of the covariance as:
 
 $$C = USU^T$$
 
-we see that the rotated covariance satisfies $$RCR^T = C = USU^T$$ and
-that $$C = R^TUSU^TR$$ is another valid eigendecomposition of
-$$C$$. In other words, the eigenspaces of $$C$$ are also stable by
-$$R$$. This tells us that one eigenvector of $$C$$ has to be the
-rotation axis of $$R$$.
+we see that the rotated covariance satisfies $$RCR^T = C$$. Let $$u$$
+be an eigenvector with eigenvalue $$\lambda$$, *i.e.* $$Cu = \lambda
+u$$, then $$CRv = \lambda Rv$$ for $$v = R^T u$$, which means:
+
+$$RCR^T R v = \lambda Rv$$
+
+and $$v = R^T u$$ is also an eigenvector with eigenvalue
+$$\lambda$$. In other words: the stable subspaces associated with a
+given eigenvalue are also stable by $$R$$. This yields the following
+requirements:
+
+- (if the dimension is odd) one eigenvector of $$C$$ is the rotation axis of $$R$$
+- $$C$$ has eigenvalues of multiplicity 2 whose eigenspaces are the
+  2-dimensional stable subspaces of $$R$$
+  
+
+

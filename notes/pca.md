@@ -5,6 +5,8 @@ categories: [math]
 
 A geometric take on [PCA](https://en.wikipedia.org/wiki/Principal_component_analysis).
 
+{% include toc.md %}
+
 # First Component 
 
 We consider a $$n$$-dimensional Euclidean space $$E$$ with inner
@@ -85,4 +87,42 @@ $$ \inv{P} X^T X P^{-T} = S $$
 
 It is found by diagonalizing $$X^T X M = P S \inv{P}$$, or using $$P =
 L^{-T}U$$, where $$M = L L^T$$ and $$L^T X^T X L = USU^T$$.
+
+# Symmetries
+
+Let us assume our data set $$\Omega$$ has a plane symmetry, *i.e.*
+$$\Omega$$ is invariant by a plane reflection:
+
+$$\Omega = \underbrace{\block{I - 2nn^T}}_G\Omega$$
+
+for some normal vector $$n$$, and where operator $$G$$ implements the
+reflection by $$n$$. We immediately remark that:
+
+- $$G^T = G$$,
+- $$G n = -n$$.
+
+The covariance matrix $$C = X^T X$$ is left unchanged when
+applying our reflection $$G$$ to the data (we just sum process points
+in a different order), so that the transformed covariance satisfies:
+
+$$G C G^T = C$$
+
+We immediately get:
+
+$$ Cn = G C G^T n = G C G n = - G C n$$
+
+from which we obtain, replacing $$G$$ with its definition:
+
+$$ Cn = 2 nn^TCn - Cn$$
+
+or, equivalently:
+
+$$ Cn = n (n^T C n)$$
+
+and $$n$$ is an eigenvector of the covariance matrix, with eigenvalue
+equal to the projected variance on $$n$$.
+
+
+
+
 

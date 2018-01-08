@@ -90,6 +90,10 @@ L^{-T}U$$, where $$M = L L^T$$ and $$L^T X^T X L = USU^T$$.
 
 # Symmetries
 
+We now examine how symmetries in the data set may influence the PCA.
+
+## Reflections
+
 Let us assume our data set $$\Omega$$ has a plane symmetry, *i.e.*
 $$\Omega$$ is invariant by a plane reflection:
 
@@ -125,9 +129,18 @@ or, equivalently:
 $$ Cn = n (n^T C n)$$
 
 and $$n$$ is an eigenvector of the covariance matrix, with eigenvalue
-equal to the projected variance on $$n$$.
+equal to the projected variance on $$n$$. 
 
+## Rotations
 
+Now, let us assume $$\Omega$$ has a rotation symmetry: $$R(\Omega) =
+\Omega$$ for some rotation matrix $$R$$. Assuming we are given an
+eigendecomposition of the covariance as:
 
+$$C = USU^T$$
 
-
+we see that the rotated covariance satisfies $$RCR^T = C = USU^T$$ and
+that $$C = R^TUSU^TR$$ is another valid eigendecomposition of
+$$C$$. In other words, the eigenspaces of $$C$$ are also stable by
+$$R$$. This tells us that one eigenvector of $$C$$ has to be the
+rotation axis of $$R$$.

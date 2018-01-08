@@ -308,14 +308,8 @@ $$ R_{n, \theta} \simeq \cos \block{\frac{\theta}{2}} + \sin\block{\frac{\theta}
 
 Now hopefully that double covering story starts making sense: a
 half-hemisphere of $$S^3$$ covers the whole $$SO(3)$$, and the whole
-$$S^3$$ covers $$SO(3)$$ twice. After working out the complete
-conjugation operation[^double-cross-product], one can obtain
-the
-[Euler-Rodrigues](https://en.wikipedia.org/wiki/Euler%E2%80%93Rodrigues_formula) formula:
-
-$$q x \bar{q} = x + 2 w \hat{v} x + 2 \hat{v}^2 x$$
-
-The exponential map for $$SO(3)$$ and $$S^3$$ are related by:
+$$S^3$$ covers $$SO(3)$$ twice. The exponential map for $$SO(3)$$ and
+$$S^3$$ are related by:
 
 $$\exp_{SO(3)}\block{\hat{x}} = \Ad\block{ \exp_{S^3}\block{\frac{x}{2}}}$$
 
@@ -403,6 +397,27 @@ would expect from vectors on a unit sphere.
 
 # Misc.
 
+
+## Euler-Rodrigues Formula
+
+After working out the complete conjugation
+operation[^double-cross-product], one can obtain
+the
+[Euler-Rodrigues](https://en.wikipedia.org/wiki/Euler%E2%80%93Rodrigues_formula) formula:
+
+$$q x \bar{q} = x + 2 w \hat{v} x + 2 \hat{v}^2 x$$
+
+Conversely, a rotation matrix back can be easily converted back to its
+corresponding unit quaternion. From the above formula, the
+antisymmetric part of a rotation $$R$$ is:
+
+$$
+\begin{align}
+\frac{R - R^T}{2} &= 2 w \hat{v} \\
+    &= 2 \cos\block{\frac{\theta}2} \sin \block{\frac{\theta}2}\hat{n} \\
+    &= \sin(\theta) \hat{n} \\
+\end{align}
+$$
 
 ## Polar Decomposition Derivative
 
@@ -872,6 +887,37 @@ $$\begin{align}
 &= \dd x_1^T \frac{ \hat{y} \hat{\lambda} + \hat{\lambda}  \hat{y}}{2} \dd x_2
 \end{align}
 $$
+
+
+## Reflections & Projections
+
+Consider a reflection $$M_n$$ by a plane whose normal is unit vector $$n$$:
+
+$$\begin{align}
+M_n(x) &= x^\parallel - x^\bot \\
+&= \block{I - n n^T} x - n n^T x \\
+&= \block{I - 2 n n^T} x
+\end{align}
+$$
+
+This is *almost* the half-turn around $$n$$ as given by the Rodrigues
+formula:
+
+$$\Ad_n(x) = x + 2 \hat{n}^2 x = \block{2 n n^T - I}x$$
+
+We immediately obtain:
+
+$$\begin{align}
+M_n(x) &= -\Ad_n(x) \\
+&= n^2 n^{-1} x n \\
+&= n x n
+\end{align}$$ 
+
+Similarly, we can derive expressions for orthogonal projections:
+
+$$x^\parallel = \frac{x - n x n}2$$
+
+$$x^\bot = \frac{x + n x n}2$$
 
 
 # Notes and References

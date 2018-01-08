@@ -96,14 +96,19 @@ $$\Omega$$ is invariant by a plane reflection:
 $$\Omega = \underbrace{\block{I - 2nn^T}}_G\Omega$$
 
 for some normal vector $$n$$, and where operator $$G$$ implements the
-reflection by $$n$$. We immediately remark that:
+reflection by some unit vector $$n$$:
+
+$$G = (I - nn^T) - n n^T$$
+
+We immediately remark that:
 
 - $$G^T = G$$,
 - $$G n = -n$$.
 
-The covariance matrix $$C = X^T X$$ is left unchanged when
-applying our reflection $$G$$ to the data (we just sum process points
-in a different order), so that the transformed covariance satisfies:
+The covariance matrix $$C = X^T X$$ is left unchanged when applying
+our reflection $$G$$ to the data (we just process points in a
+different order when computing $$C = \sum_i x_i^T x_i$$), so that the
+transformed covariance satisfies:
 
 $$G C G^T = C$$
 

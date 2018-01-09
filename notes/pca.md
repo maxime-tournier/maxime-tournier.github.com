@@ -156,5 +156,8 @@ requirements:
   the 2-dimensional stable subspaces of $$R$$ corresponding to its
   complex conjugate eigenvalues
   
+## Non-standard Metric
 
+The above results naturally extend to a non-standard metric, provided
+we consider $$M$$-orthogonal rotations and reflections. (TODO show it)
 

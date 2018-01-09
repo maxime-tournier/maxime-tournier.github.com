@@ -90,29 +90,30 @@ L^{-T}U$$, where $$M = L L^T$$ and $$L^T X^T X L = USU^T$$.
 
 # Symmetries
 
-We now examine how symmetries in the data set may influence the PCA.
+We now examine how symmetries in the data set influence the PCA.
 
 ## Reflections
 
 Let us assume our data set $$\Omega$$ has a plane symmetry, *i.e.*
 $$\Omega$$ is invariant by a plane reflection:
 
-$$\Omega = \underbrace{\block{I - 2nn^T}}_G\Omega$$
+$$\Omega = G(\Omega)$$
 
-for some normal vector $$n$$, and where operator $$G$$ implements the
-reflection by some unit vector $$n$$:
+More precisely, $$G$$ implements the reflection by some unit normal
+vector $$n$$ by flipping the normal component:
 
-$$G = (I - nn^T) - n n^T$$
+$$G = \underbrace{\block{I - nn^T}}_{\text{tangent}} - \underbrace{n n^T}_{\text{normal}} = \block{I - 2nn^T}$$
 
-We immediately remark that:
+Some immediate properties of $$G$$:
 
 - $$G^T = G$$,
 - $$G n = -n$$.
 
-The covariance matrix $$C = X^T X$$ is left unchanged when applying
-our reflection $$G$$ to the data (we just process points in a
-different order when computing $$C = \sum_i x_i^T x_i$$), so that the
-transformed covariance satisfies:
+Since the data set is invariant by $$G$$, the covariance matrix $$C =
+X^T X$$ is left unchanged when applying our reflection $$G$$ to the
+data (we just process the same points in a different order when
+computing $$C = \sum_i x_i^T x_i$$), so that the transformed
+covariance satisfies:
 
 $$G C G^T = C$$
 
@@ -134,14 +135,13 @@ equal to the projected variance on $$n$$.
 ## Rotations
 
 Now, let us assume $$\Omega$$ has a rotation symmetry: $$R(\Omega) =
-\Omega$$ for some rotation matrix $$R$$. Assuming we are given an
-eigendecomposition of the covariance as:
+\Omega$$ for some rotation matrix $$R$$. Then the rotated covariance
+satisfies:
 
-$$C = USU^T$$
+$$RCR^T = C$$
 
-we see that the rotated covariance satisfies $$RCR^T = C$$. Let $$u$$
-be an eigenvector with eigenvalue $$\lambda$$, *i.e.* $$Cu = \lambda
-u$$, then $$CRv = \lambda Rv$$ for $$v = R^T u$$, which means:
+Let $$u$$ be an eigenvector with eigenvalue $$\lambda \geq 0$$, *i.e.* $$Cu =
+\lambda u$$, then $$CRv = \lambda Rv$$ for $$R v = u$$, which means:
 
 $$RCR^T R v = \lambda Rv$$
 
@@ -150,9 +150,11 @@ $$\lambda$$. In other words: the stable subspaces associated with a
 given eigenvalue are also stable by $$R$$. This yields the following
 requirements:
 
-- (if the dimension is odd) one eigenvector of $$C$$ is the rotation axis of $$R$$
-- $$C$$ has eigenvalues of multiplicity 2 whose eigenspaces are the
-  2-dimensional stable subspaces of $$R$$
+- *(if the dimension is odd)* one eigenvector of $$C$$ is the rotation
+  axis of $$R$$
+- $$C$$ has (real) eigenvalues of multiplicity 2 whose eigenspaces are
+  the 2-dimensional stable subspaces of $$R$$ corresponding to its
+  complex conjugate eigenvalues
   
 
 

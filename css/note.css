@@ -7,7 +7,7 @@ body {
 	color: #222;
 	background: #fafafa;
 
-	font-family: Palatino, Georgia, Serif;
+	font-family: Bitstream Charter, Georgia, Serif;
         font-size: 13pt;
 	line-height: 150%;
 	text-align: justify;
@@ -124,6 +124,7 @@ li < #markdown-toc-references {
 #references:before {
     content:"";
 }
+
 
 h2 {
 	margin: 2em 1em 0 0;

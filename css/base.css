@@ -114,7 +114,7 @@ table.publis td { vertical-align: top;  }
 
 
 
-div.video { width: 470px; margin: 0 auto; }
+div.video { width: 100%; margin: 0 auto; }
 
 img.icon { width:1em; height:1em; padding:.1em; margin:0 0; vertical-align: middle; }
 img.pop:hover {  width:1.1em; height:1.1em; padding: 0 ; }

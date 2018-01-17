@@ -62,7 +62,8 @@ h2 {
 sup { font-size: 90%; }
 
 a.paper {
-          font-style: italic;
+    font-style: italic;
+    /* font-weight:bold; */
           /* display:block; */
 }
 
@@ -114,6 +115,6 @@ table.publis td { vertical-align: top;  }
 
 div.video { width: 470px; margin: 0 auto; }
 
-img.icon { width:1em; height:1em; padding:.1em .1em; margin:0 .1em; vertical-align: middle; }
+img.icon { width:1em; height:1em; padding:.1em; margin:0 0; vertical-align: middle; }
 img.pop:hover {  width:1.1em; height:1.1em; padding: 0 ; }
 

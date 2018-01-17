@@ -48,15 +48,14 @@ applications $$U$$ such that:
 
 $$\inner{Ux, Uy} = \inner{x, y}$$
 
-By choosing $$x = e_i, y = e_j$$, one can easily see that $$U$$
-satisfies:
+By choosing $$x = e_i, y = e_j$$, one can see that $$U$$ satisfies:
 
 $$U^TMU = M$$
 
-One can easily show that the above set forms a group under matrix
-multiplication, called the *orthogonal group*. It depends on the inner
-product $$M$$, even though one is generally interested in the standard
-Euclidean norm on $$E$$, corresponding to $$M = I$$, in which case:
+The above set forms a group under matrix multiplication, called the
+*orthogonal group*. It depends on the inner product $$M$$, even though
+one is generally interested in the standard Euclidean norm on $$E$$,
+corresponding to $$M = I$$, in which case:
 
 $$U^T U = I$$
 

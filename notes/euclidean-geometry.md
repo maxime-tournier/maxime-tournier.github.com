@@ -7,6 +7,59 @@ A couple of elementary (and useful) results in Euclidean geometry.
 
 {% include toc.md %}
 
+# Inner Product
+
+We consider a finite-dimensional real vector space $$E$$ of dimension
+$$n \in \NN$$. An *inner product* on $$E$$ is a bilinear form
+$$\inner{.,.}$$ that is:
+
+- symmetric: $$\inner{x, y} = \inner{y, x}$$
+- positive: $$\inner{x, x} \geq 0$$
+- definite: $$\inner{x, x} = 0 \iff x = 0$$
+
+One can show that an inner product uniquely corresponds to a matrix
+$$M$$ that is symmetric, positive definite so that:
+
+$$\inner{x, y} = x^T M y$$
+
+We will happily abuse notations and use $$M$$ to designate the
+corresponding inner product and conversely.
+
+# Euclidean Norm
+
+One can verify that the Euclidean norm, defined by:
+
+$$\norm{x}_M^2 = \inner{x, x}$$
+
+is actually a norm:
+
+- positive: $$\norm{x} \geq 0$$
+- separation: $$\norm{x} = 0 \Rightarrow x = 0$$
+- multiplicative: $$\norm{\lambda x} = \lvert \lambda \rvert \norm{x}$$
+- triangle inequality: $$\norm{x + y} \leq \norm{x} + \norm{y}$$
+
+(TODO) triangle inequality
+
+# Orthogonal Group
+
+Given an inner product $$M$$ on $$E$$, it is natural to ask which
+linear applications preserve it. That is, we look for (non-degenerate)
+applications $$U$$ such that:
+
+$$\inner{Ux, Uy} = \inner{x, y}$$
+
+By choosing $$x = e_i, y = e_j$$, one can easily see that $$U$$
+satisfies:
+
+$$U^TMU = M$$
+
+One can easily show that the above set forms a group under matrix
+multiplication, called the *orthogonal group*. It depends on the inner
+product $$M$$, even though one is generally interested in the standard
+Euclidean norm on $$E$$, corresponding to $$M = I$$, in which case:
+
+$$U^T U = I$$
+
 
 # TODO Orthogonal Projection
 

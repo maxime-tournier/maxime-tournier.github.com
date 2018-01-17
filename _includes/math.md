@@ -32,7 +32,7 @@ $$
 \newcommand{\sign}[1]{\mathrm{sign}\block{#1}}
 
 \newcommand{\half}{\frac{1}{2}}
-\newcommand{\inner}[2]{ \langle #1, #2 \rangle }
+\newcommand{\inner}[1]{\langle #1 \rangle}
 
 \newcommand{\dd}{\mathrm{d}}
 \newcommand{\ddd}[2]{\frac{\partial #1}{\partial #2} }

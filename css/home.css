@@ -14,7 +14,7 @@
 
 
 #me { float:right;
-      width:220px;
+      max-width:12em;
       margin-left:2em;
 	margin-bottom:1em}
 

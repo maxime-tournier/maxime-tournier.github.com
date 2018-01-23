@@ -164,9 +164,10 @@ Jv - \underbrace{\block{\beta CD + \gamma I}^{-1}C}_W\lambda &= \eta \block{\bet
 \end{align}
 $$
 
-Note that matrix $$W$$ is always symmetric and remains well-defined as
-$$K \to +\infty$$. This formulation, combined with an LCP solver,
-provides unilateral constraints with arbitrary stiffness/damping.
+Note that matrix $$W$$ is always symmetric, positive semi-definite
+and remains well-defined as $$K \to +\infty$$. This formulation,
+combined with an LCP solver, provides unilateral constraints with
+arbitrary stiffness/damping.
 
 # Notes
 

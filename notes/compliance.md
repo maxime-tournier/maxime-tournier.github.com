@@ -152,8 +152,8 @@ Consider the following primal first-order time-discretization:
 $$\alpha M + J^T\block{\beta D + \gamma K}J v = \delta p + \eta J^T K f$$
 
 where $$\alpha, \beta, \gamma, \delta, \eta$$ are constants depending
-on the integration method. Letting $$C = \inv{K}$$, the compliance
-system for the above is obtained as follows:
+on the integration method[^1]. Letting $$C = \inv{K}$$, the
+compliance system for the above is obtained as follows:
 
 $$\begin{align}
 \alpha M + J^T \lambda &= \delta p \\
@@ -168,4 +168,7 @@ Note that matrix $$W$$ is always symmetric and remains well-defined as
 $$K \to +\infty$$. This formulation, combined with an LCP solver,
 provides unilateral constraints with arbitrary stiffness/damping.
 
+# Notes
 
+[^1]: For Implicit Euler: $$\alpha = 1, \beta = h, \gamma = h^2,
+    \delta = 1, \eta = h$$ where $$h$$ is the time step.

@@ -20,8 +20,8 @@ $$S: \mathcal{C}^\infty\block{[0, 1], \RR^n} \to \RR, \quad S(q) = \int_{t=0}^{t
 
 The action $$S$$ computes the cost associated with a given path
 $$q$$. Assuming the end-points are kept fixed, it is natural to ask
-which trajectory minimizes the cost. As usual, a necessary condition
-for a minimizer is to be a critical point of the action:
+which curve minimizes the cost. As usual, a necessary condition for a
+minimizer is to be a critical point of the action:
 
 $$ \delta S(q) = 0 $$
 

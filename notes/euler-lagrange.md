@@ -74,6 +74,9 @@ equation, rewritten below with more details:
 
 $$\frac{\dd}{\dd t}\ddd{\LL}{v}\block{t, q(t), \dot{q}(t)} = \ddd{\LL}{q}\block{t, q(t), \dot{q}(t)}$$
 
+# TODO Change of Coordinates
+
+
 # Notes
 
 [^1]: by the [fundamental lemma of calculus of variations](https://en.wikipedia.org/wiki/Fundamental_lemma_of_calculus_of_variations)

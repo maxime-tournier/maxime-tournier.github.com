@@ -3,6 +3,8 @@ title: Euler-Lagrange Equations
 categories: [math, phys]
 ---
 
+{% include toc.md %}
+
 # Lagrangian
 
 $$\LL(t, q, v) : \RR \times \RR^n \times \RR^n \to \RR$$
@@ -75,6 +77,10 @@ equation, rewritten below with more details:
 $$\frac{\dd}{\dd t}\ddd{\LL}{v}\block{t, q(t), \dot{q}(t)} = \ddd{\LL}{q}\block{t, q(t), \dot{q}(t)}$$
 
 # TODO Change of Coordinates
+
+# TODO Hamilton-Pontryagin Principle
+
+$$S(q, v, \lambda) = \int_{t=0}^{t=1}\LL\block{t, q(t), v(t)} - \lambda(t)^T\block{\dot{q}(t) - v(t)}.\dd t$$
 
 
 # Notes

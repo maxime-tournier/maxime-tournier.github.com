@@ -156,11 +156,11 @@ on the integration method[^1]. Letting $$C = \inv{K}$$, the
 compliance system for the above is obtained as follows:
 
 $$\begin{align}
-\alpha M + J^T \lambda &= \delta p \\
-\lambda &= \block{\beta D + \gamma K} J v - \eta K f \\
+\alpha M - J^T \lambda &= \delta p \\
+-\lambda &= \block{\beta D + \gamma K} J v - \eta K f \\
 &= K\block{\beta CD + \gamma I} J v - \eta K f \\
-\block{\beta CD + \gamma I}^{-1}C\lambda &= Jv - \eta \block{\beta CD + \gamma I}^{-1} f \\
-Jv - \underbrace{\block{\beta CD + \gamma I}^{-1}C}_W\lambda &= \eta \block{\beta CD + \gamma I}^{-1} f \\
+-\block{\beta CD + \gamma I}^{-1}C\lambda &= Jv - \eta \block{\beta CD + \gamma I}^{-1} f \\
+Jv + \underbrace{\block{\beta CD + \gamma I}^{-1}C}_W\lambda &= \eta \block{\beta CD + \gamma I}^{-1} f \\
 \end{align}
 $$
 

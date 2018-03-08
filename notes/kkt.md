@@ -37,3 +37,18 @@ $$\begin{align}
   &=   \mat{L_K & \\ -A L_K^{-T} & L_S} \mat{D_K & \\ & -D_S}  \mat{L_K^T & -L_K^{-1} A^T \\ & L_S^T} \\
 \end{align}
 $$
+
+
+## Misc.
+
+The inverted system is:
+
+$$\mat{K & -A^T\\ -A & -C}^{-1} = 
+\mat{I & \inv{K}A^T \\ & I} \mat{K^{-1} & \\ & -\block{A\inv{K}A^T + C}^{-1} } \mat{I & \\ A\inv{K} & I}$$
+
+Also:
+
+$$\mat{K & -A^T \\ -A & -C} \mat{0 \\ -z} = \mat{A^Tz \\ Cz}$$
+
+can be used to optimize solves where the right-hand side has the above
+form in order to optimize $$A^Tz$$ computation.

@@ -28,20 +28,22 @@ At this point, it is convenient to rewrite the incremental system in
 terms of the solution update $$\delta_{k+1}$$ defined such that
 $$x_{k+1} = x_k + \delta_{k+1}$$:
 
-$$\delta_{k+1} = \argmin{\delta} \quad \norm{ \mat{A_k \\ H_{k+1}} \block{x_k + \delta} - \mat{b_k \\ z_{k+1}} }_{M^2_{k+1}}$$
+$$\delta_{k+1} = \argmin{\delta} \quad \norm{ \mat{A_k \\ H_{k+1}} \block{x_k + \delta} - \mat{b_k \\ z_{k+1}} }_{M_{k+1}}^2$$
 
 where we assumed $$M_{k+1} = \mat{M_k & \\ & R_{k+1}}$$. Equivalently:
 
-$$\delta_{k+1} = \argmin{\delta} \quad \norm{ \mat{A_k \\ H_{k+1}} \delta - \mat{ b_k - A_k x_k \\ z_{k+1} - H_{k+1} x_k} }_{M^2_{k+1}}$$
+$$\delta_{k+1} = \argmin{\delta} \quad \norm{ \mat{A_k \\ H_{k+1}} \delta - \mat{ b_k - A_k x_k \\ z_{k+1} - H_{k+1} x_k} }_{M_{k+1}}^2$$
 
 The normal equations become:
 
 $$ \underbrace{\block{A_k^T M A_k + H_{k+1}^T R_{k+1} H_{k+1}}}_{K_{k+1}} \delta = \underbrace{A_k^T M_k\block{b_k - A_k x_k}}_0 + H_{k+1}^T R_{k+1} \underbrace{\block{z_{k+1} - H_{k+1}x_k}}_{w_{k+1}}$$
 
-since $$x_k$$ solves the problem at step $$k$$. Luckily, the
-[Woodbury formula](https://en.wikipedia.org/wiki/Woodbury_matrix_identity)
-provides a simple way to update the inverse $$C_{k+1}$$ of $$K_{k+1}$$
-as follows:
+where the first part in the right-hand side is zero since $$x_k$$
+solves the problem at step
+$$k$$. The
+[Woodbury formula](https://en.wikipedia.org/wiki/Woodbury_matrix_identity) provides
+a nice way to update the inverse $$C_{k+1}$$ of $$K_{k+1}$$ from the
+previously computed $$C_k$$ as follows:
 
 $$
 \begin{align} 
@@ -64,13 +66,13 @@ x_{k+1} &= x_k + C_{k+1} H_{k+1}^T R_{k+1} w_{k+1} \\
 \end{align}
 $$
 
-Alternatively, the appendix shows that $$C_{k+1} H_{k+1}^T R_{k+1} =
+Alternatively, the [appendix](#appendix) shows that $$C_{k+1} H_{k+1}^T R_{k+1} =
 C_k H_{k+1} S_{k+1}^{-1}$$, so that the solution update can also be
 obtained as:
 
 $$x_{k+1} = x_k + C_k H_{k+1}^T S_{k+1}^{-1} w_{k+1}$$
 
-which might be more convenient to use in practice.
+which may be more convenient to use in practice.
 
 ## Forgetting Factor
 

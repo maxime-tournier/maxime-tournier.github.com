@@ -419,6 +419,15 @@ $$
 \end{align}
 $$
 
+So if $$\theta$$ is close to $$\pi$$, we cannot recover the axis from the
+skew-symmetric part alone. In the case of $$\theta=\pi$$, we have $$\norm{v}=1$$
+and the formula degenerates to:
+
+$$R = I + 2\hat{v}^2 = I + 2\block{v v^T - I} = 2 v v^T - I$$
+
+So by adding $$I$$ to $$R$$, we get $$v v^T$$ which we can use to obtain $$\pm
+n$$.
+
 ## Polar Decomposition Derivative
 
 As seen before, any unit quaternion may be written as:

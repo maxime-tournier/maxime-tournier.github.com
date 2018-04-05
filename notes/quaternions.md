@@ -407,9 +407,15 @@ the
 
 $$q x \bar{q} = x + 2 w \hat{v} x + 2 \hat{v}^2 x$$
 
-Conversely, a rotation matrix back can be easily converted back to its
-corresponding unit quaternion. From the above formula, the
-antisymmetric part of a rotation $$R$$ is:
+Using the identity $$1 - 2 \sin^2\block{\frac{\theta}{2}}=\cos(\theta)$$ and $$2
+\cos\block{\frac{\theta}2} \sin \block{\frac{\theta}2}=\sin(\theta)$$, we obtain
+the equivalent formula:
+
+$$R = \cos(\theta) I + \sin(\theta) \hat{n} + \block{1 - \cos\block{\theta}}n n^T$$
+
+Conversely, a rotation matrix can be converted back to its corresponding unit
+quaternion. From the above formula, the skew-symmetric part of a rotation $$R$$
+is:
 
 $$
 \begin{align}
@@ -425,8 +431,9 @@ and the formula degenerates to:
 
 $$R = I + 2\hat{v}^2 = I + 2\block{v v^T - I} = 2 v v^T - I$$
 
-So by adding $$I$$ to $$R$$, we get $$v v^T$$ which we can use to obtain $$\pm
-n$$.
+So by substracting $$I$$ from $$R$$, we get $$v v^T - I$$ which we can use to
+obtain $$\pm n$$. 
+
 
 ## Polar Decomposition Derivative
 

@@ -101,49 +101,51 @@ associated composition rules. More precisely, let us now consider a
 composed kinematic mapping $$f \circ g$$. The Jacobian matrix is given
 by:
 
-$$J_k = J_{f \circ g}\block{q_k} = \dd f\block{g\block{q_k}}.\dd g\block{q_k}$$
+$$J_{f \circ g}\block{q} = \dd f\block{g\block{q}}.\dd g\block{q}$$
 
 The Geometric Stiffness is a bit more involved:
 
 $$\begin{align}
-G_k &= \ddd{}{q_k} J_k^T\lambda_k\\
-    &= \ddd{}{q_k}\dd g\block{q_k}^T.\dd f\block{g\block{q_k}}^T\lambda_k \\
-    &= \block{\ddd{}{q_k} \dd g\block{q_k}^T }\dd f\block{g\block{q_k}}^T\lambda_k + \dd g\block{q_k}^T.\ddd{}{q_k}\dd f\block{g\block{q_k}}^T\lambda_k\\
+G_{f \circ g} &= \ddd{}{q} J^T\lambda\\
+    &= \ddd{}{q}\dd g\block{q}^T.\dd f\block{g\block{q}}^T\lambda \\
+    &= \block{\ddd{}{q} \dd g\block{q}^T }\dd f\block{g\block{q}}^T\lambda + \dd g\block{q}^T.\ddd{}{q}\dd f\block{g\block{q}}^T\lambda\\
 \end{align}
 $$
 
 Now, if we note $$\gamma = J_f^T \lambda$$ the pullback of $$\lambda$$
 by $$f$$, the left part is simply the geometric stiffness of $$g$$ at
-$$\block{q_k, \gamma_k}$$:
+$$\block{q, \gamma}$$:
 
-$$\block{\ddd{}{q_k} \dd g\block{q_k}^T }\dd f\block{g\block{q_k}}^T\lambda_k = G_g\block{q_k, \gamma_k}$$
+$$\block{\ddd{}{q} \dd g\block{q}^T }\dd f\block{g\block{q}}^T\lambda = G_g\block{q, \gamma}$$
 
 The right part requires more care:
 
 $$\begin{align}
-\dd g\block{q_k}^T.\ddd{}{q_k}\dd f\block{g\block{q_k}}^T\lambda_k 
-&= \dd g\block{q_k}^T.\block{\ddd{}{q_k}\dd f\block{g\block{q_k}}^T\lambda_k}.\dd g\block{q_k} \\
-&= J_g\block{q_k}^T G_f\block{g\block{q_k}, \lambda_k} J_g\block{q_k} \\
+\dd g\block{q}^T.\ddd{}{q}\dd f\block{g\block{q}}^T\lambda 
+&= \dd g\block{q}^T.\block{\ddd{}{q}\dd f\block{g\block{q}}^T\lambda}.\dd g\block{q} \\
+&= J_g\block{q}^T G_f\block{g\block{q}, \lambda} J_g\block{q} \\
 \end{align}$$
 
 Finally, we obtain:
 
-$$G_{f \circ g}\block{q_k, \lambda_k} = G_g\block{q_k, \gamma_k} + J_g\block{q_k}^T G_f\block{g\block{q_k}, \lambda_k} J_g\block{q_k}$$
+$$G_{f \circ g}\block{q, \lambda} = G_g\block{q, \gamma} + J_g\block{q}^T G_f\block{g\block{q}, \lambda} J_g\block{q}$$
 
-where $$\gamma_k = J_f\block{g\block{q_k}}^T\lambda_k$$. This gives a
+where $$\gamma = J_f\block{g\block{q}}^T\lambda$$. This gives a
 general algorithm for computing geometric stiffnesses (or their
 product with a vector):
 
 1. push 
-   - compute $$g\block{q_k}, J_g\block{q_k}$$
-   - compute $$f\block{g\block{q_k}}, J_f\block{g\block{q_k}}$$, ...
+   - compute $$g\block{q}, J_g\block{q}$$
+   - compute $$f\block{g\block{q}}, J_f\block{g\block{q}}$$, ...
 2. pull
-   - compute $$\gamma_k = J_f\block{g\block{q_k}}^T\lambda_k$$
-   - compute $$G_f\block{g\block{q_k}, \lambda_k}$$
-   - compute $$J_g\block{q_k}^T G_f\block{g\block{q_k}, \lambda_k} J_g\block{q_k}$$, then add $$G_g\block{q_k, \gamma_k}$$, ...
+   - compute $$\gamma = J_f\block{g\block{q}}^T\lambda$$
+   - compute $$G_f\block{g\block{q}, \lambda}$$
+   - compute $$J_g\block{q}^T G_f\block{g\block{q}, \lambda} J_g\block{q}$$, then add $$G_g\block{q, \gamma}$$, ...
 
 
 # Lie Groups
+
+TODO
 
 # Damping
 

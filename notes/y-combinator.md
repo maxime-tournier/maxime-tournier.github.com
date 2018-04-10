@@ -36,7 +36,7 @@ some comments adapted from various (excellent) sources.[^ayanonagon]
 
 (echo (fact fact 10))
 
-;; 3. and let's also curry the "f" parameter out
+;; 3. and let's also curry the "f" parameter out while we're at it:
 (define fact
   (lambda (f)
     (lambda (n)
@@ -45,107 +45,114 @@ some comments adapted from various (excellent) sources.[^ayanonagon]
 
 (echo ((fact fact) 10))
 
-;; 4. then we name the self-application function "s"
+;; 4. then we name the self-application of "f" as "self":
 (define fact
   (lambda (f)
-    (let ((s (lambda (x) ((f f) x))))
+    (let ((self (lambda (x) ((f f) x))))
       (lambda (n)
         (if (= 0 n) 1
-            (* n (s (- n 1))))))))
+            (* n (self (- n 1))))))))
 
 (echo ((fact fact) 10))
 
-;; 5. transform the let into a lambda: pass "s" as an argument
+;; 5. transform the let into a lambda: pass "self" as an argument:
 (define fact
   (lambda (f)
-    ((lambda (s)
+    ((lambda (self)
        (lambda (n)
          (if (= 0 n) 1
-             (* n (s (- n 1))))))
+             (* n (self (- n 1))))))
      (lambda (x) ((f f) x)))))
 
 (echo ((fact fact) 10))
 
-;; 6. now we name "g" that nice lambda defining factorial the way
-;; we like. in this representation, the self parameter will be
-;; replaced with the self-application function.
+;; now, the inner lambda:
+(lambda (self)
+    (lambda (n)
+      (if (= 0 n) 1
+          (* n (self (- n 1))))))
+;; looks like a nice way of defining a recursive functions!
+
+;; 6. let us now name "g" that nice lambda defining factorial the way
+;; we like. when using this representation, the "self" parameter will be
+;; replaced with the self-application function when called:
 (define fact
   (lambda (f)
-    (let ((g (lambda (s)
+    (let ((g (lambda (self)
               (lambda (n)
                 (if (= 0 n) 1
-                    (* n (s (- n 1))))))))
+                    (* n (self (- n 1))))))))
       (g (lambda (x) ((f f) x))))))
 
 (echo ((fact fact) 10))
 
-;; 7. again, replace let with a lambda
+;; 7. again, replace that let with a lambda:
 (define fact
   (lambda (f)
     ((lambda (g)
        (g (lambda (x) ((f f) x))))
-     (lambda (s)
+     (lambda (self)
        (lambda (n)
          (if (= 0 n) 1
-             (* n (s (- n 1)))))))))
+             (* n (self (- n 1)))))))))
 
 (echo ((fact fact) 10))
 
-;; 8. now we don't want to call ourselves (fact fact) all the time, so we
-;; wrap everything in a function that does it for us
+;; 8. now we don't want to be calling ourselves "(fact fact)" all the time, 
+;; so we wrap that into a function that does it for us:
 (define fact
   (lambda (x)
     (let ((res (lambda (f)
                 ((lambda (g)
                    (g (lambda (x) ((f f) x))))
-                 (lambda (s)
+                 (lambda (self)
                    (lambda (n)
                      (if (= 0 n) 1
-                         (* n (s (- n 1))))))))))
+                         (* n (self (- n 1))))))))))
       ((res res) x))))
       
 (echo (fact 10))
 
-;; 9. we name the self-application, then let->lambda again
+;; 9. we name "omega" the self-application, and pass it "res":
 (define fact
   (lambda (x)
-    (let ((s (lambda (f) (lambda (x) ((f f) x)))))
-      ((s 
+    (let ((omega (lambda (f) (lambda (x) ((f f) x)))))
+      ((omega 
         (lambda (f)
           ((lambda (g)
              (g (lambda (x) ((f f) x))))
-           (lambda (s)
+           (lambda (self)
              (lambda (n)
                (if (= 0 n) 1
-                   (* n (s (- n 1)))))))))
+                   (* n (self (- n 1)))))))))
        x))))
        
 (echo (fact 10))
 
-;; 10. let->lambda once more
+;; 10. let->lambda once more, this time on "omega":
 (define fact
   (lambda (x)
     (((lambda (f) (lambda (x) ((f f) x))) 
       (lambda (f)
         ((lambda (g)
            (g (lambda (x) ((f f) x))))
-         (lambda (s)
+         (lambda (self)
            (lambda (n)
              (if (= 0 n) 1
-                 (* n (s (- n 1)))))))))
+                 (* n (self (- n 1)))))))))
      x)))
      
 (echo (fact 10))
 
-;; 11. now we isolate the actual definition of factorial, and pass it as a
-;; parameter
+;; 11. now we isolate the nice definition of factorial, and pass it as a
+;; parameter:
 (define fact
-  (lambda (s)
+  (lambda (self)
     (lambda (n)
       (if (= 0 n) 1
-          (* n (s (- n 1)))))))
+          (* n (self (- n 1)))))))
 
-;; 12. this is the Y-combinator in disguise !
+;; 12. this is the Y-combinator in disguise!
 (define Y
   (lambda (h)
     (lambda (x)
@@ -158,7 +165,7 @@ some comments adapted from various (excellent) sources.[^ayanonagon]
 
 (echo ((Y fact) 10))
 
-;; 13. (lambda (x) (f x)) is simply f
+;; 13. simplify: (lambda (x) (f x)) is simply f:
 (define Y
   (lambda (h)
     ((lambda (f) (lambda (x) ((f f) x))) 
@@ -170,7 +177,7 @@ some comments adapted from various (excellent) sources.[^ayanonagon]
 (echo ((Y fact) 10))
 
 ;; 14. ((lambda (x) (f x)) y) is simply (f y) (here we substitute g for h to
-;; get rid of the enclosing lambda)
+;; get rid of the enclosing lambda):
 (define Y
   (lambda (h)
     ((lambda (f) (lambda (x) ((f f) x))) 

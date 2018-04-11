@@ -71,8 +71,8 @@ $$
 \mat{M v_{k+1} \\ 0} = \mat{M v_k + h \block{ \block{h.\dd J\block{q_k}.v_{k+1}}^T \lambda_k + J^T\block{q_k}.\lambda_{k+1}} \\ f\block{q_k} + h.J\block{q_k}.v_{k+1} + C \lambda_{k+1}}
 $$
 
-Let us introduce $$G_k = \ddd{}{q_k}\dd J\block{q_k}^T \lambda_k$$ the
-*Geometric Stiffness* of mapping $$f$$ at $$\block{q_k,
+Let us introduce the *Geometric Stiffness* $$G_k = \ddd{}{q_k}\dd
+J\block{q_k}^T \lambda_k$$ of mapping $$f$$ at $$\block{q_k,
 \lambda_k}$$. We may rewrite the above system as:
 
 $$
@@ -108,20 +108,20 @@ The Geometric Stiffness is a bit more involved:
 $$\begin{align}
 G_{f \circ g} &= \ddd{}{q} J^T\lambda\\
     &= \ddd{}{q}\dd g\block{q}^T.\dd f\block{g\block{q}}^T\lambda \\
-    &= \block{\ddd{}{q} \dd g\block{q}^T }\dd f\block{g\block{q}}^T\lambda + \dd g\block{q}^T.\ddd{}{q}\dd f\block{g\block{q}}^T\lambda\\
+    &= \block{\ddd{}{q} \dd g\block{q}^T }\dd f\block{g\block{q}}^T\lambda\  + \ \dd g\block{q}^T.\ddd{}{q}\block{\dd f\block{g\block{q}}^T\lambda}\\
 \end{align}
 $$
 
-Now, if we note $$\gamma = J_f^T \lambda$$ the pullback of $$\lambda$$
-by $$f$$, the left part is simply the geometric stiffness of $$g$$ at
-$$\block{q, \gamma}$$:
+Now, if we denote by $$\gamma = J_f^T \lambda$$ the pullback of
+$$\lambda$$ by $$f$$, we recognize the left-hand side as the geometric
+stiffness of $$g$$ at $$\block{q, \gamma}$$:
 
 $$\block{\ddd{}{q} \dd g\block{q}^T }\dd f\block{g\block{q}}^T\lambda = G_g\block{q, \gamma}$$
 
 The right part requires more care:
 
 $$\begin{align}
-\dd g\block{q}^T.\ddd{}{q}\dd f\block{g\block{q}}^T\lambda 
+\dd g\block{q}^T.\ddd{}{q}\block{\dd f\block{g\block{q}}^T\lambda}
 &= \dd g\block{q}^T.\block{\ddd{}{q}\dd f\block{g\block{q}}^T\lambda}.\dd g\block{q} \\
 &= J_g\block{q}^T G_f\block{g\block{q}, \lambda} J_g\block{q} \\
 \end{align}$$

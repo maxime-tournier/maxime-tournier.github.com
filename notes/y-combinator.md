@@ -204,47 +204,51 @@ into lambdas in order to access their own name:
 (lambda (self) (lambda (args) ... (self...)))
 ```
 
-This is nice, however we could not use this definition directly in
-actual computations, since we had to self-apply our function to itself
-prior to calling it:
+This is nice and sweet, however we cannot use this definition directly in actual
+computations, since we must self-apply our function to itself prior to calling
+it:
 
 ```scheme
 ;; v2
 (lambda (self) (lambda (args) ... ((self self)...)))
 ```
 
-So, somewhere along the way we used the $$\Omega$$ combinator, which
-self-applies a function to itself:
+What we first did was to patch $$v_1$$ so that occurences of `self` in $$v_1$$
+body are replaced with self-applications or the form `(self self)`. In other
+words, the patched function is:
+
+```scheme
+(lambda (self) (v1 (self self)))
+```
+
+We used the $$\Omega$$ combinator, which self-applies a function to itself:
 
 ```scheme 
 (define omega (lambda (f) (f f)))
 ```
 
-In some sense, the $$Y$$ combinator as defined above is equivalent to:
-
-```scheme
-(define Y
-  (lambda (h)
-    (omega (lambda (f) (h (omega f))))))
-```
-
-If we consider the two versions of our function $$v_1$$ and $$v_2$$
-above, then we could as well have said:
+And we obtained the second version $$v_2$$:
 
 ```scheme
 (define v2 (lambda (self) (v1 (omega self)))
 ```
 
-But as we saw, $$v_2$$ is not really convenient to work with since we
-don't want to self-apply ourselves all the time, so we can again wrap
-the self-application to obtain something which behaves like the
-recursive function *described* by $$v_1$$:
+At this point, we patched every self-applications *inside* $$v_1$$'s body, but
+we still need to self-apply ourselves at every *outer* call site:
+
+```scheme
+((v2 v2) 10)
+```
+
+To fix this, we ended up wrapping $$v_2$$ with self-application in order to
+obtain something which behaves exactly like the recursive function *described*
+by $$v_1$$:
 
 ```scheme
 ;; v3
 (define fact (omega v2))
 
-;; now I can use it as intended
+;; now we can use it as intended
 (fact 10)
 ```
 

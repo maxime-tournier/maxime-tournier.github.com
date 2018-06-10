@@ -6,6 +6,7 @@ src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
 $$
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\PP}{\mathbb{P}}
+\newcommand{\PS}{\mathcal{P}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\CC}{\mathbb{C}}

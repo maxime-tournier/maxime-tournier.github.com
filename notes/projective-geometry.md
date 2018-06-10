@@ -60,10 +60,10 @@ equal. Equivalently:
 
 $$\sum_i \lambda_i e_i \sim \sum_i e_i$$
 
-So for our reconstruction to be well-defined, we need to make sure
-that we pick representent that satisfy the above formula. Therefore,
-we need to store an extra vector line alongside with our basis
-vectors: the one spanned by $$\sum_i e_i$$.
+So for our reconstruction to be well-defined, we need to make sure to
+pick representants that satisfy the above formula. Therefore, we need
+to store an extra vector line alongside with our basis vectors: the
+one spanned by $$\sum_i e_i$$.
 
 In fact, since what we did is independent of the basis we picked for
 $$E$$, one can show that storing *any* combination of the $$e_i$$ as

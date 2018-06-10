@@ -106,8 +106,8 @@ and by Bezout's theorem, there exists $$u_i, v_i$$ such that:
 $$1 = u_i n_i + \underbrace{v_i \hat{n}_i}_{e_i}$$
 
 So we have $$e_i = 1 \mod n_i$$, and also $$e_i = 0 \mod n_j$$ for $$j
-\neq i$$ since $$n_j$$ appears in $$\hat{n}_i$$. Finally, the $$e_i$$
-provide a basis for expressing the solution as:
+\neq i$$ since $$n_j$$ appears in $$\hat{n}_i$$[^1]. Finally, the
+$$e_i$$ provide a basis for expressing the solution as:
 
 $$x = \sum_i a_i e_i$$
 
@@ -116,3 +116,7 @@ $$x = \sum_i a_i e_i$$
 
 - quotient ring, ideals
 
+# Notes
+
+[^1]: Alternatively, one may consider $$e_i = \hat{n}_i^{-1}
+    \hat{n}_i$$ where the inverse is taken modulo $$n_i$$.

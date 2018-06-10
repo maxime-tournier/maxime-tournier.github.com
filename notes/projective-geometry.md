@@ -88,4 +88,6 @@ $$\vec{H}$$ corresponds to a unique point of $$H$$, obtained by
 dividing by the last coordinate.
 
 
+# Homographies
+
 

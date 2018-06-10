@@ -6,7 +6,7 @@ categories: [math]
 # Projective Space
 
 Consider non-zero elements of a real vector space $$E\simeq\RR^n$$,
-equipped with the *colinearily* equivalence relation:
+equipped with the *colinearity* equivalence relation:
 
 $$x \sim y \iff \exists \lambda \in \RR^\star,\quad x = \lambda y$$
 

@@ -68,7 +68,7 @@ one spanned by $$\sum_i e_i$$.
 In fact, since what we did is independent of the basis we picked for
 $$E$$, one can show that storing *any* combination of the $$e_i$$ as
 extra information will also work. Projective frames are thus defined
-as a combination of $$n+1$$ vectors of $$E$$, $$n$$ of which are
+as combinations of $$n+1$$ vectors of $$E$$, $$n$$ of which are
 linearly independent.
 
 # Projective Coordinates

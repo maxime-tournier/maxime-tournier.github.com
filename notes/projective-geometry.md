@@ -91,7 +91,7 @@ we need to somehow store the direction of $$B\ones$$ alongside $$BL$$ in order
 to "calibrate" $$L$$. Conversely, given any set of $$n$$ lines $$BL$$ and a
 direction vector $$d$$ for $$B\ones$$, one can recalibrate matrix $$L$$ as above
 to enforce the colinearity condition. It is then possible to recover any vector
-line from its $$x_i$$, called the *projective coordinates*.
+line from its $$\block{x_i}_i$$, called the *projective coordinates*.
 
 # Homographies
 

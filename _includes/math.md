@@ -11,6 +11,7 @@ $$
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\HH}{\mathbb{H}}
+\newcommand{\ones}{\mathbb{1\hspace{-0.4em}1}}
 \newcommand{\alg}[1]{\mathfrak{#1}}
 
 

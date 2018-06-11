@@ -36,44 +36,6 @@ Equivalently, up to isomorphism:
 
 $$\PS^n \simeq \RR^n \cup \PS^{n-1}$$
 
-
-# Projective Frame
-
-Given $$n$$ linearly independent lines in $$E=\RR^n$$, one can extract
-a basis $$\block{e_i}_i$$ of $$E$$ by picking an *arbitrary* non-zero
-vector on each line. Given this basis, one can reconstruct any vector
-from its coordinates, and therefore any vector line. However, it is
-important that the reconstructed line does not depend on which basis
-vector was chosen to represent each line. For instance, given a line
-$$\lambda v$$, one may choose $$v$$ or $$2v$$ as a representant, which
-changes the reconstructed vector corresponding to a fixed set of
-coordinates, thus affecting the reconstructed line as well.
-
-Formally, a reconstructed vector is $$x = \sum_i x_i \lambda_i e_i$$
-and we would like to make sure that changing any $$\lambda_i$$
-produces a result colinear with $$x$$:
-
-$$\sum_i x_i \lambda_i e_i \sim \sum_i x_i e_i$$
-
-which amounts to saying that all $$\lambda_i$$ should be
-equal. Equivalently:
-
-$$\sum_i \lambda_i e_i \sim \sum_i e_i$$
-
-So for our reconstruction to be well-defined, we need to make sure to
-pick representants that satisfy the above formula. Therefore, we need
-to store an extra vector line alongside with our basis vectors: the
-one spanned by $$\sum_i e_i$$.
-
-In fact, since what we did is independent of the basis we picked for
-$$E$$, one can show that storing *any* combination of the $$e_i$$ as
-extra information will also work. Projective frames are thus defined
-as combinations of $$n+1$$ vectors of $$E$$, $$n$$ of which are
-linearly independent.
-
-# Projective Coordinates
-
-
 # Homogeneous Coordinates
 
 For $$E\simeq\RR^n$$, consider the affine hyperplane where the last
@@ -88,6 +50,44 @@ $$\vec{H}$$ corresponds to a unique point of $$H$$, obtained by
 dividing by the last coordinate.
 
 
-# Homographies
+# Projective Frame
 
+Given $$n$$ linearly independent lines in $$E=\RR^n$$, one can extract a basis
+$$\block{e_i}_i$$ of $$E$$ by picking an *arbitrary* non-zero vector on each
+line. Given this basis, one can reconstruct any vector from its coordinates, and
+therefore any vector line. However, it is important that the reconstructed line
+does not depend on which basis vector was chosen to represent each line. For
+instance, given a line $$\lambda v$$, one may choose $$v$$ or $$2v$$ as a
+representant, which would change the reconstructed vector (assuming fixed
+coordinates), thus affecting the reconstructed line as well. In other words, a
+system of $$n$$ lines is insufficient to reconstruct any other given line: we
+need more information.
 
+Formally, a reconstructed vector is $$x = \sum_i x_i \lambda_i e_i$$
+and we would like to make sure that changing any $$\lambda_i$$
+produces a result colinear with $$x$$:
+
+$$\sum_i x_i \lambda_i e_i \sim \sum_i x_i e_i$$
+
+In block notation, if we assemble the $$\block{\lambda_i}_i$$ into a diagonal
+matrix $$L=\diag\block{\lambda_i}$$ and the basis vectors into a matrix $$B$$,
+we require that there exists some non-zero $$\lambda$$ such that, for all
+non-zero $$x$$:
+
+$$BLx = \lambda Bx$$
+
+Since the above must hold for all non-zero $$x$$ and $$B$$ is invertible, the
+only solution is to have all $$\lambda_i$$ equal to $$\lambda$$. It can be
+checked that the condition:
+
+$$\forall x \neq 0 \quad Lx = \lambda x$$
+
+is equivalent to:
+
+$$L\ones = \lambda \ones$$
+
+and it suffices to enforce our colinearity condition on $$B\ones$$. Therefore,
+we need to somehow store the direction of $$B\ones$$ alongside $$BL$$ in order
+to "calibrate" $$L$$. Conversely, given any set of $$n$$ lines $$BL$$ and a
+direction vector $$d$$ for $$B\ones$$, one can recalibrate matrix $$L$$ as above
+to enforce the colinearity condition.

@@ -63,9 +63,9 @@ coordinates), thus affecting the reconstructed line as well. In other words, a
 system of $$n$$ lines is insufficient to reconstruct any other given line: we
 need more information.
 
-Formally, a reconstructed vector is $$x = \sum_i x_i \lambda_i e_i$$
-and we would like to make sure that changing any $$\lambda_i$$
-produces a result colinear with $$x$$:
+Formally, given coordinates $$x_i$$ and a basis $$\block{e_i}_i$$, a
+reconstructed vector is $$x = \sum_i x_i \lambda_i e_i$$ and we would like to
+make sure that changing any $$\lambda_i$$ produces a result colinear with $$x$$:
 
 $$\sum_i x_i \lambda_i e_i \sim \sum_i x_i e_i$$
 
@@ -90,4 +90,9 @@ and it suffices to enforce our colinearity condition on $$B\ones$$. Therefore,
 we need to somehow store the direction of $$B\ones$$ alongside $$BL$$ in order
 to "calibrate" $$L$$. Conversely, given any set of $$n$$ lines $$BL$$ and a
 direction vector $$d$$ for $$B\ones$$, one can recalibrate matrix $$L$$ as above
-to enforce the colinearity condition.
+to enforce the colinearity condition. It is then possible to recover any vector
+line from its $$x_i$$, called the *projective coordinates*.
+
+# Homographies
+
+# Duality

@@ -465,7 +465,8 @@ $$\begin{align}
 $$
 
 Now one can easily see that $$n \sim \sum_i \hat{e_i}\block{R - I}e_i$$, and the
-rotation angle is obtained from $$\tr\block{R}=1 + 2\cos(\theta)$$.
+rotation angle is obtained from $$\tr\block{R}=1 + 2\cos(\theta)$$. As an added
+benefit, this formula is easily differentiable without special cases.
 
 ## Polar Decomposition Derivative
 

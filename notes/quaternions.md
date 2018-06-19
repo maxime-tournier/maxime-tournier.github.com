@@ -413,6 +413,8 @@ the equivalent formula:
 
 $$R = \cos(\theta) I + \sin(\theta) \hat{n} + \block{1 - \cos\block{\theta}}n n^T$$
 
+### Inverse Formula
+
 Conversely, a rotation matrix can be converted back to its corresponding unit
 quaternion. From the above formula, the skew-symmetric part of a rotation $$R$$
 is:
@@ -435,7 +437,7 @@ So by substracting $$I$$ from $$R$$, we get $$v v^T - I$$ which we can use to
 obtain $$\pm n$$. 
 
 
-###  Alternate Formula
+### Alternate Formula
 
 The above formula has the major drawback of having special cases to deal
 with. Instead, the rotation angle is easily obtained from the matrix trace, and

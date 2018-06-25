@@ -15,6 +15,13 @@ Quick cheat sheet.
 [more](https://www.gnu.org/software/emacs/manual/html_node/emacs/Save-Keyboard-Macro.html)
 
 
+# Mark
+
+- `C-SPC` set the mark
+- `C-x C-SPC` pop global mark
+- `C-u C-SPC` pop local mark
+- `C-x C-x` switch point/mark + select
+
 # Registers `C-x r`
 
 - `C-x r s <i>` save text to register `<i>`

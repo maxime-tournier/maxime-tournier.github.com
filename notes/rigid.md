@@ -572,15 +572,19 @@ Expanding the dual part gives:
 
 $$
 \begin{align}
-\frac{1}{\norm{q}}\block{I - \frac{q q^T}{\norm{q}^2}}\dd q &= \block{\dd q.\inv{q} - \frac{\overbrace{q^T \dd q}^{0}}{\norm{q}^2}} \frac{q}{\norm{q}}\\
-&= \omega_q^s \frac{q}{\norm{q}} \\
+\frac{1}{\norm{q}}\block{I - \frac{q q^T}{\norm{q}^2}}\dd q 
+&= \block{\dd q.\inv{q} - \frac{q^T \dd q}{\norm{q}^2}} \frac{q}{\norm{q}}\\
+&= \frac{1}{\norm{q}^2}\block{\dd q.\bar{q} - q^T \dd q} \frac{q}{\norm{q}}\\
+&= \frac{1}{\norm{q}^2}\mathrm{Im}\block{\dd q.\bar{q}} \frac{q}{\norm{q}}\\
+&= \mathrm{Im}\block{\dd q.\inv{q}} \frac{q}{\norm{q}}\\
 \end{align}
 $$
 
-where $$\omega_q^s = \dd q.\inv{q} \in \mathfrak{s^3} \simeq
-\RR^3$$. So the translation part of the blended rigid transform is
-exactly the spatial velocity of the blended quaternion (in the sense
-of the multiplicative quaternion Lie group $$\HH$$).
+So the translation part of the blended rigid transform is the
+imaginary part of the spatial velocity of the blended quaternion, in
+the sense of the multiplicative quaternion Lie group $$\HH$$ (watch
+out: the Lie algebra is the whole quaternion space $$\HH$$ in this
+case).
 
 ### Dual Quaternion Blending
 
@@ -593,9 +597,8 @@ goes as follows:
    q + \epsilon \dd q$$
 
 3. normalize the real part to obtain the blended rotation, and compute
-   the spatial velocity $$\omega_q^s = \dd q.\inv{q}$$ to obtain the
-   blended translation[^sanity]. 
-
+   the imaginary part of the spatial velocity $$\mathrm{Im}\block{\dd
+   q.\inv{q}}$$ to obtain the blended translation[^sanity].
 
 # Notes & References
 

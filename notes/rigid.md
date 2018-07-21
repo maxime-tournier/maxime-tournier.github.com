@@ -564,7 +564,7 @@ $$
 where $$\omega_q^s = \dd q.\inv{q} \in \mathfrak{s^3} \simeq
 \RR^3$$. So the translation part of the blended rigid transform is
 exactly the spatial velocity of the blended quaternion (in the sense
-of the full multiplicative quaternion Lie group $$\HH$$).
+of the multiplicative quaternion Lie group $$\HH$$).
 
 
 

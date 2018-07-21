@@ -581,8 +581,8 @@ $$
 $$
 
 So the translation part of the blended rigid transform is the
-imaginary part of the spatial velocity of the blended quaternion, in
-the sense of the multiplicative quaternion Lie group $$\HH$$ (watch
+imaginary part of the blended quaternion spatial velocity, in the
+sense of the full multiplicative quaternion Lie group $$\HH$$ (watch
 out: the Lie algebra is the whole quaternion space $$\HH$$ in this
 case).
 

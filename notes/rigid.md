@@ -542,7 +542,7 @@ Now, the whole point of using unit dual quaternions at all is that it
 provides a cheap projection operator on $$SE(3)$$ by the means of dual
 quaternion normalization: from a series of unit dual quaternions $$g_i
 = q_i + \epsilon t_i q_i$$ we may blend them however we like to obtain
-some (possibly non-unit) dual quaternion $$\bar{g} = f\block{g_i}$$,
+some (possibly non-unit) dual quaternion $$\tilde{g} = f\block{g_i}$$,
 which we can then normalize to obtain a rigid transform:
 
 $$g = \frac{\bar{g}}{\norm{\bar{g}}}$$
@@ -566,6 +566,21 @@ where $$\omega_q^s = \dd q.\inv{q} \in \mathfrak{s^3} \simeq
 exactly the spatial velocity of the blended quaternion (in the sense
 of the multiplicative quaternion Lie group $$\HH$$).
 
+### Dual Quaternion Blending
+
+From the above, the general algorithm for dual quaternion blending
+goes as follows:
+
+1. encode rigid transformations $$(q, t)_i$$ as unit dual quaternions $$g_i = q_i + \epsilon \underbrace{t_i q_i}_{\dd q_i}$$
+
+2. blend real/dual parts as needed[^blending] to obtain a dual quaternion $$g = q + \epsilon \dd q$$
+
+3. normalize the real part to obtain the blended rotation, and compute
+   the spatial velocity $$\omega_q^s = \dd q.\inv{q}$$ to obtain the
+   blended translation.
 
 
+# Notes & References
 
+[^blending]: will probably work best if the dual blending is obtained
+    by differentiation of the real part blending

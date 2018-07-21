@@ -521,7 +521,7 @@ $$q + \epsilon \dd q = q + \epsilon q \omega^b = q + \epsilon \omega^sq$$
 using the body velocity $$\omega^b$$ or spatial velocity $$\omega^s$$,
 both taken in the Lie algebra $$\mathfrak{s^3}\simeq\RR^3$$.
 
-### Unit Quaternion Product and Rigid Transformations
+### Connection with Rigid Transformations
 
 From the spatial derivative of the quaternion product (in fact, any
 Lie group will do):
@@ -550,7 +550,22 @@ $$g = \frac{\bar{g}}{\norm{\bar{g}}}$$
 From the [usual](differential-geometry#normalization) formula, dual
 quaternion normalization is: 
 
-$$\frac{g}{\norm{g}} = \frac{q}{\norm{q}} - \epsilon \frac{q^T\dd q}{\norm{q}^3}$$
+$$\frac{g}{\norm{g}} = \frac{q}{\norm{q}} + \epsilon \frac{1}{\norm{q}}\block{I - \frac{q q^T}{\norm{q}^2}}\dd q$$
+
+Expanding the dual part gives:
+
+$$
+\begin{align}
+\frac{1}{\norm{q}}\block{I - \frac{q q^T}{\norm{q}^2}}\dd q &= \block{\dd q.\inv{q} - \frac{\overbrace{q^T \dd q}^{0}}{\norm{q}^2}} \frac{q}{\norm{q}}\\
+&= \omega_q^s \frac{q}{\norm{q}} \\
+\end{align}
+$$
+
+where $$\omega_q^s = \dd q.\inv{q} \in \mathfrak{s^3} \simeq
+\RR^3$$. So the translation part of the blended rigid transform is
+exactly the spatial velocity of the blended quaternion (in the sense
+of the full multiplicative quaternion Lie group $$\HH$$).
+
 
 
 

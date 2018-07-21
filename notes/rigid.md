@@ -598,16 +598,11 @@ goes as follows:
 
 3. normalize the real part to obtain the blended rotation, and compute
    the imaginary part of the spatial velocity $$\mathrm{Im}\block{\dd
-   q.\inv{q}}$$ to obtain the blended translation[^sanity].
+   q.\inv{q}}$$ to obtain the blended translation.
 
 # Notes & References
 
 [^blending]: For the formula to make sense, the dual blending must be
     the differentiation of the real blending. Otherwise, the blended
-    dual part will *not* be a tangent vector at $$q$$, and the spatial
-    velocity computation will *not* yield an element of the Lie algebra
-    (the quaternion $$dq.\inv{q}$$ will have a non-zero real part)
+    dual part will *not* be a tangent vector at $$q$$.
 
-[^sanity]: Sanity check: $$\omega_q^s$$ should be a pure imaginary
-    quaternion, up to machine precision. Otherwise, the dual blending
-    is probably wrong (see [^blending] above).

@@ -473,3 +473,84 @@ $$
 $$ \dd_b^2 \block{\inv{a}b}^T \tau = \mat{ -\ad^T(\mu) & \ad^T(\mu) \Ad_{\inv{a}b} \\ 0 & 0 } $$
 
 
+# Dual Quaternion Blending
+
+## Dual Numbers
+
+Consider numbers of the form:
+
+$$a = a_0 + \epsilon a_\epsilon$$
+
+with $$\epsilon^2 = 0$$, with sum/product distributive as usual.
+
+Synthetic differential geometry: *analytic* function $$f$$ extend to
+dual numbers naturally:
+
+$$a = a_0 + \dd a_0 \Rightarrow f(a) = f\block{a_0} + \epsilon \dd f\block{a_0}.\dd a_0$$
+
+(check that it works for sum, product and so on, then by induction on power series).
+
+### Dual Inverse
+
+$$\block{x + \epsilon \dd x}^{-1} = \inv{x} - \epsilon \frac{\dd x}{x^2}$$
+
+## Dual Quaternions
+
+Again, consider numbers of the form:
+
+$$q = q_0 + \epsilon q_\epsilon$$
+
+with $$q_{0,\epsilon}$$ quaternions and the dual unit as
+before. Again, we will use $$q_\epsilon=\dd q_0$$ and extend functions
+from quaternions to dual quaternions as needed.
+
+### Dual Norm
+
+From the usual norm [formula](differential-geometry#norm):
+
+$$\norm{q + \epsilon \dd q}^2 = \norm{q} + \epsilon \frac{q^T\dd q}{\norm{q}}$$
+
+## Unit Dual Quaternions
+
+If we normalize a dual quaternion, we obtain a real part with unit
+norm, so the dual part is a tangent vector to $$S^3$$ which is
+(left, right)-trivializable:
+
+$$q + \epsilon \dd q = q + \epsilon q \omega^b = q + \epsilon \omega^sq$$ 
+
+using the body velocity $$\omega^b$$ or spatial velocity $$\omega^s$$,
+both taken in the Lie algebra $$\mathfrak{s^3}\simeq\RR^3$$.
+
+### Unit Quaternion Product and Rigid Transformations
+
+From the spatial derivative of the quaternion product (in fact, any
+Lie group will do):
+
+$$\dd^s ab = \dd^s a + \Ad_a \dd^s b$$
+
+which is this case is exactly the translation of the rigid composition
+of $$\block{a, \dd^s_a}$$ with $$\block{b, \dd^s_b}$$. Therefore, if
+we encode our rigid transformations as the spatial derivatives of unit
+quaternions (expressed as dual quaternions accordingly), we get rigid
+transformation composition from the product of unit dual quaternions:
+
+$$\block{a + \epsilon \omega_a^s a}\block{b + \epsilon \omega_b^s b} = ab + \epsilon \block{ \omega_a^s + \Ad_a \omega_b^s}ab$$
+
+### Unit Dual Quaternion Normalization
+
+Now, the whole point of using unit dual quaternions at all is that it
+provides a cheap projection operator on $$SE(3)$$ by the means of dual
+quaternion normalization: from a series of unit dual quaternions $$g_i
+= q_i + \epsilon t_i q_i$$ we may blend them however we like to obtain
+some (possibly non-unit) dual quaternion $$\bar{g} = f\block{g_i}$$,
+which we can then normalize to obtain a rigid transform:
+
+$$g = \frac{\bar{g}}{\norm{\bar{g}}}$$
+
+From the [usual](differential-geometry#normalization) formula, dual
+quaternion normalization is: 
+
+$$\frac{g}{\norm{g}} = \frac{q}{\norm{q}} - \epsilon \frac{q^T\dd q}{\norm{q}^3}$$
+
+
+

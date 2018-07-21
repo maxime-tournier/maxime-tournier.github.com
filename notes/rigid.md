@@ -475,22 +475,34 @@ $$ \dd_b^2 \block{\inv{a}b}^T \tau = \mat{ -\ad^T(\mu) & \ad^T(\mu) \Ad_{\inv{a}
 
 # Dual Quaternion Blending
 
+Rigid transformations may be blended efficiently by the use of dual
+quaternions.
+
 ## Dual Numbers
 
 Consider numbers of the form:
 
 $$a = a_0 + \epsilon a_\epsilon$$
 
-with $$\epsilon^2 = 0$$, with sum/product distributive as usual.
+for some magic constant $$\epsilon$$ satisfying $$\epsilon^2 = 0$$,
+with sum/product distributive as usual. $$\epsilon$$ may be seen as
+spanning *infinitesimal numbers*, *i.e.* cancelling anything of order
+2 and more (which is in fact the basis of *synthetic* differential
+geometry). For instance, consider the product of dual numbers:
 
-Synthetic differential geometry: *analytic* function $$f$$ extend to
-dual numbers naturally:
+$$\block{a + \epsilon \dd a}\block{b + \epsilon \dd b} = a b + \epsilon \block{a.\dd b + \dd a.b}$$
 
-$$a = a_0 + \dd a_0 \Rightarrow f(a) = f\block{a_0} + \epsilon \dd f\block{a_0}.\dd a_0$$
+The above gives exactly the formula for the derivative of a
+product. In fact, any *analytic* function $$f$$ extends naturally to
+dual numbers:
 
-(check that it works for sum, product and so on, then by induction on power series).
+$$f\block{a + \epsilon \dd a} = f\block{a} + \epsilon \dd f(a).\dd a$$
+
+In short, dual numbers provide an algebra for tangent vectors.
 
 ### Dual Inverse
+
+From the usual formula for the derivative of the inverse, we get:
 
 $$\block{x + \epsilon \dd x}^{-1} = \inv{x} - \epsilon \frac{\dd x}{x^2}$$
 
@@ -498,23 +510,26 @@ $$\block{x + \epsilon \dd x}^{-1} = \inv{x} - \epsilon \frac{\dd x}{x^2}$$
 
 Again, consider numbers of the form:
 
-$$q = q_0 + \epsilon q_\epsilon$$
+$$q + \epsilon \dd q$$
 
-with $$q_{0,\epsilon}$$ quaternions and the dual unit as
-before. Again, we will use $$q_\epsilon=\dd q_0$$ and extend functions
-from quaternions to dual quaternions as needed.
+with $$q, \dd q \in \HH$$ quaternions and the dual unit as
+before. Again, functions on quaternions extend naturally on dual
+quaternions. Note that for $$\dd q$$ to be a legitimate tangent vector
+at $$q$$, it must be of the form $$\dd q = q \omega^b = \omega^s q$$,
+for some pure unit quaternions $$\omega^b, \omega^s\in \mathfrak{\HH}\simeq\RR^3$$.
 
 ### Dual Norm
 
 From the usual norm [formula](differential-geometry#norm):
 
-$$\norm{q + \epsilon \dd q}^2 = \norm{q} + \epsilon \frac{q^T\dd q}{\norm{q}}$$
+$$\norm{q + \epsilon \dd q} = \norm{q} + \epsilon \frac{q^T\dd q}{\norm{q}}$$
 
 ## Unit Dual Quaternions
 
-If we normalize a dual quaternion, we obtain a real part with unit
-norm, so the dual part is a tangent vector to $$S^3$$ which is
-(left, right)-trivializable:
+If we normalize a dual quaternion $$q + \epsilon \dd q$$ by extending
+the quaternion normalization, we will obtain a real part with unit
+norm. Therefore, the corresponding dual part will be a tangent vector
+to $$S^3$$, which is again (left, right)-trivializable:
 
 $$q + \epsilon \dd q = q + \epsilon q \omega^b = q + \epsilon \omega^sq$$ 
 
@@ -523,16 +538,17 @@ both taken in the Lie algebra $$\mathfrak{s^3}\simeq\RR^3$$.
 
 ### Connection with Rigid Transformations
 
-From the spatial derivative of the quaternion product (in fact, any
-Lie group will do):
+The spatial derivative of the quaternion product (in fact, any Lie
+group will do) gives:
 
 $$\dd^s ab = \dd^s a + \Ad_a \dd^s b$$
 
-which is this case is exactly the translation of the rigid composition
+which in our case is exactly the translation of the rigid composition
 of $$\block{a, \dd^s_a}$$ with $$\block{b, \dd^s_b}$$. Therefore, if
-we encode our rigid transformations as the spatial derivatives of unit
-quaternions (expressed as dual quaternions accordingly), we get rigid
-transformation composition from the product of unit dual quaternions:
+we encode our rigid transformations as spatial derivatives of unit
+quaternions (expressed as dual quaternions accordingly), we obtain the
+composition of rigid transformations from the product of unit dual
+quaternions:
 
 $$\block{a + \epsilon \omega_a^s a}\block{b + \epsilon \omega_b^s b} = ab + \epsilon \block{ \omega_a^s + \Ad_a \omega_b^s}ab$$
 
@@ -573,14 +589,22 @@ goes as follows:
 
 1. encode rigid transformations $$(q, t)_i$$ as unit dual quaternions $$g_i = q_i + \epsilon \underbrace{t_i q_i}_{\dd q_i}$$
 
-2. blend real/dual parts as needed[^blending] to obtain a dual quaternion $$g = q + \epsilon \dd q$$
+2. blend real/dual parts[^blending] to obtain a dual quaternion $$g =
+   q + \epsilon \dd q$$
 
 3. normalize the real part to obtain the blended rotation, and compute
    the spatial velocity $$\omega_q^s = \dd q.\inv{q}$$ to obtain the
-   blended translation.
+   blended translation[^sanity]. 
 
 
 # Notes & References
 
-[^blending]: will probably work best if the dual blending is obtained
-    by differentiation of the real part blending
+[^blending]: For the formula to make sense, the dual blending must be
+    the differentiation of the real blending. Otherwise, the blended
+    dual part will *not* be a tangent vector at $$q$$, and the spatial
+    velocity computation will *not* yield an element of the Lie algebra
+    (the quaternion $$dq.\inv{q}$$ will have a non-zero real part)
+
+[^sanity]: Sanity check: $$\omega_q^s$$ should be a pure imaginary
+    quaternion, up to machine precision. Otherwise, the dual blending
+    is probably wrong (see [^blending] above).

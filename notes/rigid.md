@@ -476,7 +476,7 @@ $$ \dd_b^2 \block{\inv{a}b}^T \tau = \mat{ -\ad^T(\mu) & \ad^T(\mu) \Ad_{\inv{a}
 # Dual Quaternion Blending
 
 Rigid transformations may be blended efficiently by the use of dual
-quaternions. This can be used for skinning 3D models from an
+quaternions. This can be used for skinning 3D models on an
 articulated rigid body[^kavan07].
 
 ## Dual Numbers

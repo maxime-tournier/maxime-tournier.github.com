@@ -548,8 +548,8 @@ composition of $$\block{a, \dd^s a} \simeq \mat{Ad_a & \dd^s a\\ 0 &
 1}$$ with $$\block{b, \dd^s b} \simeq \mat{Ad_b & \dd^s b\\ 0 &
 1}$$. Therefore, if we encode our rigid transformations as spatial
 derivatives of unit quaternions (expressed as dual quaternions
-accordingly), we obtain the composition of rigid transformations from
-the product of unit dual quaternions:
+accordingly), we can obtain the composition of rigid transformations
+from the product of unit dual quaternions:
 
 $$\block{a + \epsilon \dd^s a. a}\block{b + \epsilon \dd^s b.b} = ab + \epsilon \block{ \dd^s a + \Ad_a \dd^s b}ab$$
 

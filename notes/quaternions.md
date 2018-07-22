@@ -97,12 +97,15 @@ $$ x y = x \times y - x^Ty $$
 
 The left multiplication by $$a$$ can be put in matrix form as:
 
-$$a b = \mat{w_a & -v_a^T\\ v_a & w_a I + \hat{v}_a} \mat{w_b\\v_b}$$
+$$a b = \underbrace{\mat{w_a & -v_a^T\\ v_a & w_a I + \hat{v}_a}}_{L_a} \mat{w_b\\v_b}$$
 
 Similarly, the right multiplication by $$b$$ can be put in matrix form
 as:
 
-$$a b = \mat{w_b & -v_b^T\\ v_b & w_b I - \hat{v}_b} \mat{w_a\\v_a}$$
+$$a b = \underbrace{\mat{w_b & -v_b^T\\ v_b & w_b I - \hat{v}_b}}_{R_b} \mat{w_a\\v_a}$$
+
+The associativity of the quaternion product implies that $$L_a$$ and
+$$R_b$$ commute for any quaternions $$a, b$$.
 
 ## Conjugate
 

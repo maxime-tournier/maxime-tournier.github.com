@@ -543,14 +543,18 @@ Lie group will do) gives:
 
 $$\dd^s ab = \dd^s a + \Ad_a \dd^s b$$
 
-which in our case is exactly the translation of the rigid composition
-of $$\block{a, \dd^s_a}$$ with $$\block{b, \dd^s_b}$$. Therefore, if
-we encode our rigid transformations as spatial derivatives of unit
-quaternions (expressed as dual quaternions accordingly), we obtain the
-composition of rigid transformations from the product of unit dual
-quaternions:
+which in our case is exactly the translation part of the rigid
+composition of $$\block{a, \dd^s a} \simeq \mat{Ad_a & \dd^s a\\ 0 &
+1}$$ with $$\block{b, \dd^s b} \simeq \mat{Ad_b & \dd^s b\\ 0 &
+1}$$. Therefore, if we encode our rigid transformations as spatial
+derivatives of unit quaternions (in turn, expressed as dual
+quaternions accordingly), we obtain the composition of rigid
+transformations from the product of unit dual quaternions:
 
-$$\block{a + \epsilon \omega_a^s a}\block{b + \epsilon \omega_b^s b} = ab + \epsilon \block{ \omega_a^s + \Ad_a \omega_b^s}ab$$
+$$\block{a + \epsilon \dd^s a. a}\block{b + \epsilon \dd^s b.b} = ab + \epsilon \block{ \dd^s a + \Ad_a \dd^s b}ab$$
+
+In other words, we have a nice Lie group isomorphism between unit dual
+quaternions and rigid transformations.
 
 ### Unit Dual Quaternion Normalization
 
@@ -609,3 +613,4 @@ goes as follows:
 [^kavan07]: Kavan, Ladislav, et al. *"Skinning with dual quaternions."*
     Proceedings of the 2007 symposium on Interactive 3D graphics and
     games. ACM, 2007.
+

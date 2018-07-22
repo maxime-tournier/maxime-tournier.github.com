@@ -607,6 +607,6 @@ goes as follows:
     the differentiation of the real blending. Otherwise, the blended
     dual part will *not* be a tangent vector at $$q$$.
 
-[^kavan07]: Kavan, Ladislav, et al. "Skinning with dual quaternions."
-    *Proceedings of the 2007 symposium on Interactive 3D graphics and
-    games.* ACM, 2007.
+[^kavan07]: Kavan, Ladislav, et al. *"Skinning with dual quaternions."*
+    Proceedings of the 2007 symposium on Interactive 3D graphics and
+    games. ACM, 2007.

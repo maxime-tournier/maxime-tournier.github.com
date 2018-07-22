@@ -606,6 +606,17 @@ goes as follows:
    the imaginary part of the spatial velocity $$\mathrm{Im}\block{\dd
    q.\inv{q}}$$ to obtain the blended translation.
 
+### Differential
+
+For a linear blending $$q = \sum_i \alpha_i q_i$$, the dual part is:
+
+$$\dd q = \sum_i \alpha_i \dd q_i = \sum_i \alpha_i t_i q_i$$
+
+Let $$a=\dd q, b=q$$, the blended rotation is $$\frac{b}{\norm{b}}$$
+and the blended translation is $$t=\mathrm{Im}\block{a \inv{b}}$$
+
+
+
 # Notes & References
 
 [^blending]: For the formula to make sense, the dual blending must be

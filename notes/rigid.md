@@ -608,7 +608,7 @@ goes as follows:
 # Notes & References
 
 [^blending]: For the formula to make sense, the dual blending must be
-    the differentiation of the real blending. Otherwise, the blended
+    the derivative of the real blending. Otherwise, the blended
     dual part will *not* be a tangent vector at $$q$$.
 
 [^kavan07]: Kavan, Ladislav, et al. *"Skinning with dual quaternions."*

@@ -970,6 +970,12 @@ $$x^\parallel = \frac{x - n x n}2$$
 $$x^\bot = \frac{x + n x n}2$$
 
 
+## Dual Quaternions
+
+Please see the [dedicated section](rigid#dual-quaternion-blending) in
+the rigid transformation notes.
+
+
 # Notes and References
   
 [^Fletcher04]: Fletcher, P. Thomas, et al. *"Principal geodesic analysis for the study of nonlinear statistics of shape."* Medical Imaging, IEEE Transactions on 23.8 (2004): 995-1005.

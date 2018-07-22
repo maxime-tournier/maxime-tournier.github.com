@@ -563,7 +563,8 @@ provides a cheap projection operator on $$SE(3)$$ by the means of dual
 quaternion normalization: from a series of unit dual quaternions $$g_i
 = q_i + \epsilon t_i q_i$$ we may blend them however we like to obtain
 some (possibly non-unit) dual quaternion $$\tilde{g} = f\block{g_i}$$,
-which we can then normalize to obtain a rigid transform:
+which we can then normalize to obtain a unit dual quaternion, and a
+corresponding rigid transformation:
 
 $$g = \frac{\bar{g}}{\norm{\bar{g}}}$$
 

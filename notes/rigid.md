@@ -515,9 +515,7 @@ $$q + \epsilon \dd q$$
 
 with $$q, \dd q \in \HH$$ quaternions and the dual unit as
 before. Again, functions on quaternions extend naturally on dual
-quaternions. Note that for $$\dd q$$ to be a legitimate tangent vector
-at $$q$$, it must be of the form $$\dd q = q \omega^b = \omega^s q$$,
-for some pure unit quaternions $$\omega^b, \omega^s\in \mathfrak{\HH}\simeq\RR^3$$.
+quaternions.
 
 ### Dual Norm
 
@@ -530,17 +528,18 @@ $$\norm{q + \epsilon \dd q} = \norm{q} + \epsilon \frac{q^T\dd q}{\norm{q}}$$
 If we normalize a dual quaternion $$q + \epsilon \dd q$$ by extending
 the quaternion normalization, we will obtain a real part with unit
 norm. Therefore, the corresponding dual part will be a tangent vector
-to $$S^3$$, which is again (left, right)-trivializable:
+to $$S^3$$:
 
 $$q + \epsilon \dd q = q + \epsilon q \omega^b = q + \epsilon \omega^sq$$ 
 
-using the body velocity $$\omega^b$$ or spatial velocity $$\omega^s$$,
-both taken in the Lie algebra $$\mathfrak{s^3}\simeq\RR^3$$.
+where the dual part has been left-(resp. right)-trivialized using the
+body velocity $$\omega^b$$ (resp. spatial velocity $$\omega^s$$),
+taken in the Lie algebra $$\mathfrak{s^3}\simeq\RR^3$$.
 
 ### Connection with Rigid Transformations
 
-The spatial derivative of the quaternion product (in fact, any Lie
-group will do) gives:
+The spatial derivative of the unit quaternion product (in fact, any
+Lie group will do) gives:
 
 $$\dd^s ab = \dd^s a + \Ad_a \dd^s b$$
 

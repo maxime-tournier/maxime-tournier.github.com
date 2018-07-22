@@ -566,7 +566,7 @@ some (possibly non-unit) dual quaternion $$\tilde{g} = f\block{g_i}$$,
 which we can then normalize to obtain a unit dual quaternion, and a
 corresponding rigid transformation:
 
-$$g = \frac{\bar{g}}{\norm{\bar{g}}}$$
+$$g = \frac{\tilde{g}}{\norm{\tilde{g}}}$$
 
 From the [usual](differential-geometry#normalization) formula, dual
 quaternion normalization is: 

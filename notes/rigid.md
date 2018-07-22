@@ -584,9 +584,9 @@ $$
 \end{align}
 $$
 
-As expected, the dual part is that of a unit dual quaternion (*i.e.* a
+As expected, the dual part is that of a unit dual quaternion *i.e.* a
 pure imaginary quaternion representing the translation, times the real
-part). The translation part of the blended rigid transform is the
+part. The translation part of the blended rigid transform is the
 imaginary part of the blended quaternion spatial velocity in the sense
 of the full multiplicative quaternion Lie group $$\HH$$ (watch out:
 the Lie algebra is the whole quaternion space $$\HH$$ in this case).

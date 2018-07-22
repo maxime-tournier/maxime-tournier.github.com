@@ -95,6 +95,15 @@ In particular, for pure imaginary quaternions $$x$$ and $$y$$ this gives:
 
 $$ x y = x \times y - x^Ty $$
 
+The left multiplication by $$a$$ can be put in matrix form as:
+
+$$a b = \mat{w_a & -v_a^T\\ v_a & w_a I + \hat{v}_a} \mat{w_b\\v_b}$$
+
+Similarly, the right multiplication by $$b$$ can be put in matrix form
+as:
+
+$$a b = \mat{w_b & -v_b^T\\ v_b & w_b I - \hat{v}_b} \mat{w_a\\v_a}$$
+
 ## Conjugate
 
 As for the complex numbers, this corresponds to the transpose of the

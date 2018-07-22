@@ -476,7 +476,8 @@ $$ \dd_b^2 \block{\inv{a}b}^T \tau = \mat{ -\ad^T(\mu) & \ad^T(\mu) \Ad_{\inv{a}
 # Dual Quaternion Blending
 
 Rigid transformations may be blended efficiently by the use of dual
-quaternions.
+quaternions. This can be used for skinning 3D models from an
+articulated rigid body[^kavan07].
 
 ## Dual Numbers
 
@@ -606,3 +607,6 @@ goes as follows:
     the differentiation of the real blending. Otherwise, the blended
     dual part will *not* be a tangent vector at $$q$$.
 
+[^kavan07]: Kavan, Ladislav, et al. "Skinning with dual quaternions."
+    *Proceedings of the 2007 symposium on Interactive 3D graphics and
+    games.* ACM, 2007.

@@ -34,7 +34,7 @@ Twists are $$\RR^6$$ coordinates for $$\alg{se(3)}$$ as follows:
 $$\mat{\omega \\ v} \simeq \mat{ \hat{\omega} & v \\ 0 & 0}$$
 
 where $$\hat{\omega} x = \omega \times x$$ is the cross-product matrix
-(see [quaternions](quaternions.html)).
+(see [quaternions](quaternions)).
 
 ## Wrenches
 
@@ -474,5 +474,5 @@ $$ \dd_b^2 \block{\inv{a}b}^T \tau = \mat{ -\ad^T(\mu) & \ad^T(\mu) \Ad_{\inv{a}
 
 # Blending
 
-See [dual quaternions](dual-quaternion).
+See [dual quaternions](dual-quaternions).
 

@@ -1,11 +1,12 @@
 ---
-title: Rigid Bodies
+title: Dual Quaternions
 categories: [math, lie group]
 ---
 
 Rigid transformations may be blended efficiently by the use of dual
-quaternions. This can be used for skinning 3D models on an
-articulated rigid body[^kavan07].
+quaternions. This can be used for skinning 3D models on an articulated rigid
+body[^kavan07]. Before reading these notes you'll probably want to get familiar
+with [regular quaternions](quaternions) first.
 
 # Dual Numbers
 

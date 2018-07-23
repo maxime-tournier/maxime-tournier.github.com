@@ -993,8 +993,7 @@ $$x^\bot = \frac{x + n x n}2$$
 
 ## Dual Quaternions
 
-Please see the [dedicated section](rigid#dual-quaternion-blending) in
-the rigid transformation notes.
+Please see the [dedicated page](dual-quaternion).
 
 
 # Notes and References

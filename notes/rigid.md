@@ -606,15 +606,60 @@ goes as follows:
    the imaginary part of the spatial velocity $$\mathrm{Im}\block{\dd
    q.\inv{q}}$$ to obtain the blended translation.
 
-### Differential
+### Jacobian Matrix
 
 For a linear blending $$q = \sum_i \alpha_i q_i$$, the dual part is:
 
 $$\dd q = \sum_i \alpha_i \dd q_i = \sum_i \alpha_i t_i q_i$$
 
-Let $$a=\dd q, b=q$$, the blended rotation is $$\frac{b}{\norm{b}}$$
-and the blended translation is $$t=\mathrm{Im}\block{a \inv{b}}$$
+Let $$a=\dd q, b=q$$, the blended rotation is $$\frac{b}{\norm{b}}$$ and the
+blended translation is $$t=\mathrm{Im}\block{a \inv{b}}$$. As before, we have:
 
+$$
+\begin{align}
+\dd^s \frac{b}{\norm{b}}.\dd b &= \mathrm{Im}\block{\dd b.\inv{b}}\\
+&= \mat{0 && I} R_{\inv{b}} \dd b\\
+\end{align}
+$$
+
+for the rotation part, where $$R_q$$ is the [matrix form](quaternions#product) of
+the right-multiplication by $$q$$. Now, the translation part is a little messier:
+
+$$\begin{align}
+\dd \block{a \inv{b}} &= \dd a.\inv{b} - a.\inv{b}.\dd b.\inv{b}\\
+&= R_{\inv{b}}\block{\dd a - L_{a \inv{b}}\dd b} \\
+\\
+\dd a &= \sum_i \alpha_i \block{\dd t_i q_i + t_i \dd q_i} \\
+&= \sum_i \alpha_i \block{\dd t_i q_i + t_i \omega^s_i q_i} \\
+&= \sum_i \alpha_i \block{\dd t_i + t_i \omega^s_i}q_i \\
+&= \sum_i \alpha_i R_{q_i}\block{\mat{0^T\\I} \dd t_i + L_{t_i}\mat{0^T\\I}\omega^s_i} \\
+\\
+\dd b &= \sum_i \alpha_i \dd q_i \\
+&= \sum_i \alpha_i \omega^s_i q_i \\
+&= \sum_i \alpha_i R_{q_i}\mat{0^T\\I}\omega^s_i\\
+\end{align}$$
+
+In the end, the $$i$$-th translation Jacobian block is:
+
+$$
+\begin{align}
+\ddd{t}{t_i} &= \alpha_i \mat{0 && I}R_{\inv{b}} R_{q_i}\mat{0^T\\ I} \\
+&= \alpha_i \mat{0 && I}R_{q_i\inv{b}}\mat{0^T\\ I} \\
+\\
+\ddd{t}{\omega^s_i} &= \alpha_i \mat{0 && I}R_{\inv{b}}\block{R_{q_i} L_{t_i}\mat{0^T\\ I} - L_{a\inv{b}}R_{q_i}\mat{0^T\\ I}}\\
+&= \alpha_i \mat{0 && I}R_{\inv{b}} R_{q_i} \block{L_{t_i} - L_{a\inv{b}}}\mat{0^T\\ I}\\
+&= \alpha_i \mat{0 && I}R_{q_i\inv{b}} L_{t_i - a\inv{b}}\mat{0^T\\ I}\\
+\end{align}
+$$
+
+and the $$i$$-th rotation block is:
+
+$$
+\begin{align}
+\ddd{^s\frac{b}{\norm{b}}}{\omega^s_i} &= \alpha_i \mat{0 && I} R_{\inv{b}} R_{q_i} \mat{0^T\\I} \\
+&= \alpha_i \mat{0 && I} R_{q_i\inv{b}} \mat{0^T\\I} \\
+\end{align}
+$$
 
 
 # Notes & References

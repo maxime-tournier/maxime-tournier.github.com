@@ -104,8 +104,17 @@ as:
 
 $$a b = \underbrace{\mat{w_b & -v_b^T\\ v_b & w_b I - \hat{v}_b}}_{R_b} \mat{w_a\\v_a}$$
 
-The associativity of the quaternion product implies that $$L_a$$ and
-$$R_b$$ commute for any quaternions $$a, b$$.
+The associativity of the quaternion product implies that $$L_a$$ and $$R_b$$
+commute for any quaternions $$a, b$$. Finally, one can easily check the
+following identities:
+
+$$\begin{align}
+R_{a + b} &= R_a + R_b \\
+L_{a + b} &= L_a + L_b \\
+R_{\lambda q} &= \lambda R_q\\
+L_{\lambda q} &= \lambda L_q\\
+\end{align}
+$$
 
 ## Conjugate
 

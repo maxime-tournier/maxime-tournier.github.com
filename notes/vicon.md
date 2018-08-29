@@ -44,6 +44,7 @@ A few notes on using Vicon Nexus for biomechanics.
 3. you may also want to run the "auto-intelligent gap fill" if your
    captures were a bit messy
    
+   
 # Region of Interest
 
 1. for each capture, adjust the region of interest, right click and
@@ -61,6 +62,11 @@ cleanest session
 3. select all the trials in this session
 4. run the "reconstruct and label", then "auto-intelligent gap-fil"
 
+# Trajectory Swap
+
+sometimes the labeling is confused and two trajectories swap with each other
+each time you try to label one. in this case, switch labeling mode to
+"forward/backward" instead of "whole" and fill the gap.
 
 # Missing Markers
 
@@ -72,3 +78,5 @@ cleanest session
 
 - right-click on the timeline, zoom-to-trial, reset start/end time,
   then run reconstruct or recontruct/label
+
+

@@ -161,3 +161,56 @@ requirements:
 The above results naturally extend to a non-standard metric, provided
 we consider $$M$$-orthogonal rotations and reflections. (TODO show it)
 
+# Pulling back Principal Components
+
+Let us now suppose that we have a set of samples $$X$$ in some output space
+$$F$$ and a linear mapping $$P: w \mapsto x \in F$$ from some input space
+$$E$$. We now look for the direction in the input space $$E$$ that maximizes the
+projected variance in the output space $$F$$:
+
+$$\argmax{\norm{w}=1} \quad \sum_i \block{x_i^T Pw}^2 = \norm{XPw}^2 = w^T P^T X^T X P w$$
+
+We see that this amounts to diagonalizing the covariance matrix $$P^T X^T X P$$,
+which is the pullback of output covariance $$X^T X$$ by $$P$$.
+
+# Dual Metric
+
+So far we only considered a metric $$M$$ in the *feature* space, *i.e.* the
+metric used to compare features for two given individuals. However, it is also
+natural consider the dual problem of comparing individuals for two given
+features, for instance in order to give more weight to some individuals than to
+others or even give different weights to arbitraty linear subspaces of
+individuals. Let us recall the projection equation:
+
+$$\argmax{\norm{w}=1} \quad \sum_i \block{x_i^T w}^2 = \norm{Xw}^2$$
+
+Here we see that the canonical Euclidean norm is used in the right-hand side
+term, but any Euclidean norm could be used instead: the projection of each
+sample $$x_i$$ onto feature $$w$$ gives each individual a *score* (how similar
+to feature $$w$$ the individual is), and we may choose to measure scores using a
+different metric $$W$$:
+
+$$\argmax{\norm{w}=1} \quad \sum_i \norm{Xw}_W^2$$
+
+Using such a dual metric yields a correlation matrix $$X^TWX$$. In particular,
+choosing $$W=XX^T$$ does not change the eigenvector basis (but it does square
+the eigenvalues), thus producing the same principal components. More precisely,
+the metric $$W=XX^T$$ takes a score, then produces a feature by weighting all
+individuals by their score, and finally measures the resulting feature using the
+(here implicit) feature metric.
+
+But let's say we also have another set of features $$Y$$ over the same
+individuals: we can then use the metric $$YY^T$$ over the same individuals to
+weight scores when looking for principal components. This means that a
+$$X$$-feature must produce a score that agrees with $$Y$$-features to be
+selected as a principal component. This allows us to *correlate* $$X$$-features
+to $$Y$$-features: the obtained principal components in $$X$$ will have to be
+representative of both $$X$$ and $$Y$$.
+
+## Partial Least Squares
+
+
+
+
+
+

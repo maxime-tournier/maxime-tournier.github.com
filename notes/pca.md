@@ -209,6 +209,29 @@ representative of both $$X$$ and $$Y$$.
 
 ## Partial Least Squares
 
+Some good introductory material can be found in [^0][^3]. The whole field feels
+like a mess, with at least three main versions competing with each other: 
+
+- Bookstein PLS: obtained by an SVD of $$X^TY$$, as suggested by the above
+  analysis
+- PLS1, PLS2: start with first eigenvector of $$\mathrm{cov}(X^TY, X^TY)$$, then
+  various deflation schemes (removing contributions of principal components)
+- Consistency issues[^1][^2], use bidiagonalization formulation of PLSR
+  instead
+
+The SciKit page
+on
+[cross decomposition](http://scikit-learn.org/stable/modules/cross_decomposition.html#cross-decomposition) is
+also a good start.
+
+# Notes & References
+
+[^0]: http://vision.cse.psu.edu/seminars/talks/PLSpresentation.pdf
+[^1]: https://onlinelibrary.wiley.com/doi/pdf/10.1002/cem.1067
+[^2]: https://onlinelibrary.wiley.com/doi/abs/10.1002/cem.1181
+[^3]: http://users.cecs.anu.edu.au/~kee/pls.pdf
+
+
 
 
 

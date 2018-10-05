@@ -195,29 +195,30 @@ $$\argmax{\norm{w}=1} \quad \sum_i \norm{Xw}_W^2$$
 Using such a dual metric yields a correlation matrix $$X^TWX$$. In particular,
 choosing $$W=XX^T$$ does not change the eigenvector basis (but it does square
 the eigenvalues), thus producing the same principal components. More precisely,
-the metric $$W=XX^T$$ takes a score, then produces a feature by weighting all
-individuals by their score, and finally measures the resulting feature using the
-(here implicit) feature metric.
+the metric $$W=XX^T$$ takes a score as an input, then produces a feature by
+weighting all individual features by their score, and finally measures the
+resulting feature using the (here implicit) feature metric.
 
 But let's say we also have another set of features $$Y$$ over the same
 individuals: we can then use the metric $$YY^T$$ over the same individuals to
 weight scores when looking for principal components. This means that a
 $$X$$-feature must produce a score that agrees with $$Y$$-features to be
-selected as a principal component. This allows us to *correlate* $$X$$-features
-to $$Y$$-features: the obtained principal components in $$X$$ will have to be
-representative of both $$X$$ and $$Y$$.
+selected as a principal component. In other words, variations of $$X$$-features
+must correspond to variations of $$Y$$ features.
 
 ## Partial Least Squares
 
 Some good introductory material can be found in [^0][^3]. The whole field feels
 like a mess, with at least three main versions competing with each other: 
 
+- PLS1, PLS2: start with first eigenvector of $$\mathrm{cov}(X^TY, X^TY)$$, then
+  various deflation schemes (removing contributions of principal components) and
+  iterate
+   - some consistency issues have been noted[^1][^2], use bidiagonalization
+  formulation of PLSR instead
 - Bookstein PLS: obtained by an SVD of $$X^TY$$, as suggested by the above
   analysis
-- PLS1, PLS2: start with first eigenvector of $$\mathrm{cov}(X^TY, X^TY)$$, then
-  various deflation schemes (removing contributions of principal components)
-- Consistency issues[^1][^2], use bidiagonalization formulation of PLSR
-  instead
+
 
 The SciKit page
 on

@@ -59,8 +59,26 @@ corresponding to $$M = I$$, in which case:
 
 $$U^T U = I$$
 
+# TODO Orthogonal Basis
+
+Linear subspaces have a basis, and it is always possible to compute an
+orthogonal basis from an arbitraty basis.
+
+## TODO Graham-Schmidt Orthogonalization
+
 
 # TODO Orthogonal Projection
+
+The Euclidean metric can be used to find the closest point to a given linear
+subspace: let us consider a linear subspace $$V$$ which we identify with its
+orthogonal basis $$\block{V_i}_i$$. We may complete this basis into a basis of
+the full Euclidean space, which we can again orthogonalize using the
+Graham-Schmidt process: 
+
+$$\block{U_i}_i=\block{\block{V_i}_{i\leq n}, \block{W_i}_{i\leq m}} $$ 
+
+In particular, any vector in $$W_i$$ is orthogonal to all $$V_i$$ vectors and
+conversely. We call $$W$$ the orthogonal complement of $$V$$.
 
 
 # Line Fitting

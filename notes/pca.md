@@ -192,12 +192,15 @@ different metric $$W$$:
 
 $$\argmax{\norm{w}=1} \quad \sum_i \norm{Xw}_W^2$$
 
-Using such a dual metric yields a correlation matrix $$X^TWX$$. In particular,
-choosing $$W=XX^T$$ does not change the eigenvector basis (but it does square
-the eigenvalues), thus producing the same principal components. More precisely,
-the metric $$W=XX^T$$ takes a score as an input, then produces a feature by
-weighting all individual features by their score, and finally measures the
-resulting feature using the (here implicit) feature metric.
+Using such a dual metric yields a correlation matrix $$X^TWX$$ (See
+also
+[Generalized Least Squares](https://en.wikipedia.org/wiki/Generalized_least_squares) which
+exploits the same idea). In particular, choosing $$W=XX^T$$ does not change the
+eigenvector basis (but it does square the eigenvalues), thus producing the same
+principal components. More precisely, the metric $$W=XX^T$$ takes a score as an
+input, then produces a feature by weighting all individual features by their
+score, and finally measures the resulting feature using the (here implicit)
+feature metric.
 
 But let's say we also have another set of features $$Y$$ over the same
 individuals: we can then use the metric $$YY^T$$ over the same individuals to

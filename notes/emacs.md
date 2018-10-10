@@ -27,6 +27,11 @@ Quick cheat sheet.
 - `C-x r s <i>` save text to register `<i>`
 - `C-x r i <i>` insert text from register `<i>`
 
+## Position Registers
+
+- `C-x r SPC <i>` save point to register `<i>`
+- `C-x r j <i>` jump to register `<i>`
+
 [more](https://www.gnu.org/software/emacs/manual/html_node/emacs/Text-Registers.html#Text-Registers)
 
 

@@ -93,6 +93,8 @@ $$R_- = ZS - SZ^T = \mat{0 & \block{-s_1 - s_2} z_3 & \block{s_3 + s_1} z_2 \\
                                    -\star & 0 & \block{-s_2 - s_3} z_1\\ 
                                    -\star & -\star & 0}$$
 
+We remark that the identification is well-defined as long as $$S>0$$.
+
 # Polar Decomposition
 
 We want to compute $$f: A \mapsto UV^T$$ to get the closest orientation to a
@@ -112,7 +114,10 @@ Y &= W + Z + \block{W - Z}^T\\
 \end{align}
 $$
 
-and we end up with:
+so that we only have to identify $$Z$$ from the skew-symmetric part $$R_-$$,
+which is well-defined when $$S > 0$$. We end up with:
 
-$$\dd f(A).\dd A &= 2 U Z V^T$$
+$$\dd f(A).\dd A = 2 U Z V^T$$
+
+
 

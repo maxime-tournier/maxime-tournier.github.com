@@ -77,13 +77,10 @@ $$R_- = \mat{0 & \block{-s_1 - s_2} w_3 & \block{s_3 + s_1} w_2 \\
              -\star & 0 & \block{-s_2 - s_3} w_1\\ 
              -\star & -\star & 0}$$
 
-## Jacobian Matrix
-TODO
-
 # Polar Decomposition
 
-We want to compute $$f: A \mapsto UV^T$$ (for instance to get the closest
-orientation to a given invertible linear map).
+We want to compute $$f: A \mapsto UV^T$$ to get the closest orientation to a
+given invertible linear map. The derivative gives:
 
 $$\begin{align}
 \dd f(A).\dd A &= \dd U\ V^T + U\ \dd V^T \\

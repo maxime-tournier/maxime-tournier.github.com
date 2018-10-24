@@ -66,9 +66,21 @@ $$\begin{align}
 
 ## Symmetric Identification $$(n = 3)$$
 
-$$R_+ = \mat{0 & \block{s_1 - s_2} w_3 & \block{s_3 - s_1} w_2 \\
-             \star & 0 & \block{s_2 - s_3} w_1\\ 
-             \star & \star & 0}$$
+$$W = \mat{0 & -w_3 & w_2 \\ 
+           w_3 & 0 & -w_1 \\ 
+           -w_2 & w_1 & 0}$$
+
+$$WS = \mat{0 & -s_2 w_3 & s_3 w_2 \\ 
+            s_1 w_3 & 0 & -s_3 w_1 \\
+            -s_1 w_2 & s_2 w_1 & 0}$$
+
+$$SW^T = \mat{0 & s_1 w_3 & -s_1 w_2 \\ 
+            -s_2 w_3 & 0 & s_2 w_1 \\
+            s_3 w_2 & -s_3 w_1 & 0}$$
+
+$$R_+ = WS + SW^T = \mat{0 & \block{s_1 - s_2} w_3 & \block{s_3 - s_1} w_2 \\
+                        \star & 0 & \block{s_2 - s_3} w_1\\ 
+                        \star & \star & 0}$$
 
 
 ## Skew-Symmetric Identification $$(n = 3)$$

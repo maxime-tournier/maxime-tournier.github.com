@@ -2,6 +2,7 @@ body {
     background-color: #fff; 
     color: #222; 		/* easy on the eyes */
     font-family: Bitstream Charter, Georgia, serif;
+    font-kerning: normal;
     /* font-size: 100%; */
     /* font-size:smaller; */
     text-align:center;

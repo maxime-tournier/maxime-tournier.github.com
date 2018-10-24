@@ -43,38 +43,52 @@ $$
 
 from which we already obtain $$\dd S$$. Let us now call $$R=\db U\ S + S\ \db
 V^T$$ and decompose $$R$$ orthogonally over symmetric and skew-symmetric
-matrices as $$R = R^+ \oplus R^-$$. For the symmetric part $$R^+$$, we obtain:
+matrices as $$R = R_+ \oplus R_-$$. For the symmetric part $$R_+$$, we obtain:
 
 $$\begin{align}
-R^+ &= \half\block{R + R^T}\\
+R_+ &= \half\block{R + R^T}\\
     &= \half\block{\db U\ S + S\ \db V^T + \db V S + S \db U^T}\\
-    &= \half\block{\underbrace{\block{\db U + \db V}}_{W}S + S\block{\db U + \db V}^T}\\
-    &= \half\block{WS + SW^T}\\
+    &= \half\block{\underbrace{\block{\db U + \db V}}_{2W}S + S\block{\db U + \db V}^T}\\
+    &= \block{WS + SW^T}\\
 \end{align}$$
 
-where $$W=\db U + \db V$$. Similarly, the skew-symmetric part is:
+where $$W=\half\block{\db U + \db V}$$. Similarly, the skew-symmetric part is:
 
-$$R^- = \half\block{ZS - SZ^T}$$
+$$R_- = \block{ZS - SZ^T}$$
 
-where $$Z = \db U - \db V$$. We can now identify $$W, Z$$ from the values of
-$$R^+, R^-$$, from which we obtain $$\db U, \db V$$ as:
+where $$Z = \half\block{\db U - \db V}$$. We can now identify $$W, Z$$ from the values of
+$$R_+, R_-$$, from which we obtain $$\db U, \db V$$ as:
 
 $$\begin{align}
-    \db U &= \half(W + Z) \\
-    \db V &= \half(W - Z) \\
+    \db U &= W + Z \\
+    \db V &= W - Z \\
 \end{align}$$
 
 ## Symmetric Identification $$(n = 3)$$
 
-$$R^+ = \mat{0 & \block{s_1 - s_2} w_3 & \block{s_3 - s_1} w_2 \\
+$$R_+ = \mat{0 & \block{s_1 - s_2} w_3 & \block{s_3 - s_1} w_2 \\
              \star & 0 & \block{s_2 - s_3} w_1\\ 
              \star & \star & 0}$$
 
+
 ## Skew-Symmetric Identification $$(n = 3)$$
 
-$$R^- = \mat{0 & \block{-s_1 - s_2} w_3 & \block{s_3 + s_1} w_2 \\
+$$R_- = \mat{0 & \block{-s_1 - s_2} w_3 & \block{s_3 + s_1} w_2 \\
              -\star & 0 & \block{-s_2 - s_3} w_1\\ 
              -\star & -\star & 0}$$
 
+## Jacobian Matrix
+TODO
 
+# Polar Decomposition
 
+We want to compute $$f: A \mapsto UV^T$$ (for instance to get the closest
+orientation to a given invertible linear map).
+
+$$\begin{align}
+\dd f(A).\dd A &= \dd U\ V^T + U\ \dd V^T \\
+&= 2 U W V^T \\
+\end{align}$$
+
+where $$W$$ is as defined previously. Therefore we only have to identify the
+symmetric part of $$U^T\ \dd A\ V$$.

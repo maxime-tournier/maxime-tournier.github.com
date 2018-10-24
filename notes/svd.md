@@ -4,6 +4,7 @@ categories: [math]
 ---
 
 Mostly about the SVD/polar decomposition differentiation.
+{% include toc.md %}
 
 # SVD
 
@@ -118,6 +119,20 @@ so that we only have to identify $$Z$$ from the skew-symmetric part $$R_-$$,
 which is well-defined when $$S > 0$$. We end up with:
 
 $$\dd f(A).\dd A = 2 U Z V^T$$
+
+which we can express as a spatial derivative as:
+
+$$\ds f(A).\dd A = 2 U Z U^T = 2 \Ad_U Z$$
+
+## Jacobian Matrix
+
+The whole sequence of computations can be decomposed as follows:
+
+$$\dd A \overset{G}{\mapsto} U^T\ \dd A\ V \overset{\pi}{\mapsto} R_- \overset{F}{\mapsto} Z \overset{2\Ad_U} \mapsto \ds f(A).\dd A$$
+
+The operator $$G$$ is simply $$\dd L_{U^T}\ \dd R_V$$. The operator $$\pi$$
+projects orthogonally over the set of skew-symmetric matrices, and the operator
+$$F$$ selects/identifies $$z_1, z_2, z_3$$ from the coordinates of $$R_-$$.
 
 
 

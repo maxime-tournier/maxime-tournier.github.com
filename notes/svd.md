@@ -64,6 +64,8 @@ $$\begin{align}
     \db V &= W - Z \\
 \end{align}$$
 
+Note that both $$W, Z$$ are skew-symmetric.
+
 ## Symmetric Identification $$(n = 3)$$
 
 $$\begin{align}
@@ -98,8 +100,19 @@ given invertible linear map. The derivative gives:
 
 $$\begin{align}
 \dd f(A).\dd A &= \dd U\ V^T + U\ \dd V^T \\
-&= 2 U W V^T \\
+&= U\ \db U V^T + U\ \db V^T V^T \\
+&= U\underbrace{\block{\db U + \db V^T}}_Y V^T \\
 \end{align}$$
 
-where $$W$$ is as defined previously. Therefore we only have to identify the
-symmetric part of $$U^T\ \dd A\ V$$.
+from the above, we obtain $$Y$$ as:
+
+$$\begin{align}
+Y &= W + Z + \block{W - Z}^T\\
+    &= 2Z
+\end{align}
+$$
+
+and we end up with:
+
+$$\dd f(A).\dd A &= 2 U Z V^T$$
+

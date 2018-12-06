@@ -29,26 +29,32 @@ Let us start by constructing the complex numbers as the real $$\small{2 \times
 The above set is a $$2$$-dimensional vector space, whose basis is
 noted $$(1, i)$$. One can check that $$i^2 = -1$$.
 
-This space is closed under matrix multiplication, and one can show
-that this space, together with this (commutative) multiplication, form
-a *field*, the complex numbers, noted $$\CC$$.
+This space is closed under matrix multiplication, and one can show that this
+space, together with this (commutative) multiplication, form a *field*, the
+complex numbers, noted $$\CC$$. The complex conjugate $$\bar{x + iy} = x - i y$$
+corresponds to the matrix transposition:
+
+$$\bar{x + iy} \simeq 
+    \mat{ x  & -y  \\
+    y & x  \\
+}^T$$ 
 
 ## Quaternions
 
 Let us repeat this construction, this time with *complex* matrices of
 the form:
 
-$$ \mat{ x & y \\ \bar{y} & -\bar{x}} $$
+$$ \mat{c & d \\ \-bar{d} & \bar{c}} $$
 
-We end up with a 2-dimensional *complex* vector-space, that is also
-a 4-dimensional *real* vector space, given by real $$4 \times
-4$$ matrices of the form:
+where $$c = w + i x$$ and $$d = y + iz$$. We end up with a 2-dimensional
+*complex* vector-space, that is also a 4-dimensional *real* vector space, given
+by real $$4 \times 4$$ matrices of the form:
 
 $$ \mat{ 
-	w &  x &  y &  -z \\
-	-x &  w & z &  y \\
-	y & -z &  w & -x \\
-	z & y &  x &  w \\ 
+	w & -x &  y & -z \\
+	x &  w &  z &  y \\
+	-y & -z &  w & x \\
+	 z & -y & -x & w \\ 
    }
    $$
 

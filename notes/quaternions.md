@@ -162,12 +162,12 @@ $$ \inv{q} = \frac{\bar{q}}{|q|^2} $$
 
 # Unit Quaternions $$S^3$$
 
-The unit sphere $$S^3$$ is stable under quaternion multiplication and
-inverse, (and contains $$1$$) which makes it a multiplicative subgroup
-of $$\HH$$. As we shall see, this space is particularly interesting
-for representing rotations. The unit sphere, together with quaternion
-multiplication, is isomorphic to the complex representation with unit
-complex coefficients, *i.e.* the group $$SU(2)$$.
+The unit sphere $$S^3$$ is closed under quaternion multiplication and inverse,
+and it contains the identity element $$1$$: this makes it a multiplicative
+subgroup of $$\HH$$. As we shall see, this space is particularly interesting for
+representing rotations. The unit real 4-sphere with quaternion multiplication is
+isomorphic to the quaternion representation using unit complex coefficients,
+*i.e.* the group $$SU(2)$$.
 
 ## Smooth Manifold 
 
@@ -178,10 +178,10 @@ curve from $$S^1$$ to $$S^3$$ can be shrunk into a point.
 
 ## Lie Group
 
-$$S^3$$ is closed under quaternion multiplication and inverse, both operations
-are smooth and since $$1 \in S^3$$, the unit quaternion sphere forms a Lie
-group. It provides the connection with rotations in $$\RR^3$$ through the
-adjoint representation.
+$$S^3$$ is a multiplicative subgroup of $$\HH$$ and since both multiplication
+and the inverse are smooth, it also forms a Lie group. The Lie group structure
+provides the connection with rotations in $$\RR^3$$ through the adjoint
+representation.
 
 ### Adjoint Representation
 

@@ -42,8 +42,8 @@ $$\bar{x + iy} \simeq
 
 ## Quaternions
 
-Let us repeat this construction, this time with *complex* matrices of
-the form:
+Let us now repeat this construction, this time using *complex* matrices of the
+form:
 
 $$ \mat{c & d \\ -\bar{d} & \bar{c}} $$
 
@@ -59,10 +59,10 @@ $$ \mat{
    }
    $$
 
-in which we recognize $$2\times 2$$ complex blocks. This space is
-again closed under matrix multiplication, but the multiplication is no
-longer commutative. Together with the matrix product, this space forms
-the quaternion group, noted $$\HH$$.
+in which we recognize $$2\times 2$$ complex blocks. This space is again closed
+under matrix multiplication, but the multiplication is no longer
+commutative. Together with the matrix product, this space forms the quaternion
+group, noted $$\HH$$.
 
 We will generally use the *real* vector space structure, and identify
 a quaternion with its coordinates $$(w, x, y, z)$$ in the canonical

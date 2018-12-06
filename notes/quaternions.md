@@ -179,13 +179,13 @@ curve from $$S^1$$ to $$S^3$$ can be shrunk into a point.
 ## Lie Group
 
 $$S^3$$ is closed under quaternion multiplication and inverse, both operations
-are both smooth and since $$1 \in S^3$$, the unit quaternion sphere has a Lie
-group structure under quaternion multiplication. It provides the connection with
-rotations in $$\RR^3$$ through the adjoint representation.
+are smooth and since $$1 \in S^3$$, the unit quaternion sphere forms a Lie
+group. It provides the connection with rotations in $$\RR^3$$ through the
+adjoint representation.
 
 ### Adjoint Representation
 
-The tangent space at $$1$$ is the space of imaginary quaternions,
+The tangent space at the identity $$1$$ is the space of imaginary quaternions,
 which we identify with $$\RR^3$$. The inner automorphism $$\Psi_q$$:
 
 $$ \Psi_q: S^3 \to S^3 \quad h \mapsto q h \bar{q} $$

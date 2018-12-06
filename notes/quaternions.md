@@ -420,8 +420,8 @@ d(a, b) &= \arccos\block{w_{\inv{a}b}} \\
 \end{align}
 $$
 
-which is exactly the *angle* between vectors $$a$$ and $$b$$, as one
-would expect from vectors on a unit sphere.
+which is exactly the *angle* between 4-vectors $$a$$ and $$b$$, as one would
+expect from vectors on a unit sphere.
 
 # Misc.
 

@@ -102,7 +102,8 @@ In particular, for pure imaginary quaternions $$x$$ and $$y$$ this gives:
 
 $$ x y = x \times y - x^Ty $$
 
-The left multiplication by $$a$$ can be put in matrix form as:
+This is the formula you'll want to remember, since nearly all the rest follows
+from it. The left multiplication by $$a$$ can be put in matrix form as:
 
 $$a b = \underbrace{\mat{w_a & -v_a^T\\ v_a & w_a I + \hat{v}_a}}_{L_a} \mat{w_b\\v_b}$$
 

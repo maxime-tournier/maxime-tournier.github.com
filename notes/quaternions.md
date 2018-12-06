@@ -44,7 +44,7 @@ $$\bar{x + iy} \simeq
 Let us repeat this construction, this time with *complex* matrices of
 the form:
 
-$$ \mat{c & d \\ \-bar{d} & \bar{c}} $$
+$$ \mat{c & d \\ -\bar{d} & \bar{c}} $$
 
 where $$c = w + i x$$ and $$d = y + iz$$. We end up with a 2-dimensional
 *complex* vector-space, that is also a 4-dimensional *real* vector space, given

@@ -102,8 +102,8 @@ In particular, for pure imaginary quaternions $$x$$ and $$y$$ this gives:
 
 $$ x y = x \times y - x^Ty $$
 
-This is the formula you'll want to remember, since nearly all the rest follows
-from it. The left multiplication by $$a$$ can be put in matrix form as:
+This is the formula you'll want to remember, since almost everything else
+follows from it. The left multiplication by $$a$$ can be put in matrix form as:
 
 $$a b = \underbrace{\mat{w_a & -v_a^T\\ v_a & w_a I + \hat{v}_a}}_{L_a} \mat{w_b\\v_b}$$
 
@@ -131,12 +131,11 @@ matrix representation. This immediately implies that:
   
 $$ \bar{p q} = \bar{q} \ \bar{p} $$
 
-In coordinates, the conjugation is simply given by:
+In the canonical basis, conjugation is simply given by:
 
 $$ \bar{q} = w_q - v_q $$
   
-The real and imaginary parts of a quaternion may be expressed using
-conjugation:
+The real and imaginary parts of a quaternion may be obtained using conjugation:
 
 $$ w_q = \frac{q + \bar{q}}{2} $$
 
@@ -172,16 +171,16 @@ complex coefficients, *i.e.* the group $$SU(2)$$.
 
 ## Smooth Manifold 
 
-$$S^3$$ is a closed, $$3$$-dimensional smooth sub-manifold of $$\RR^4$$
-as the inverse image of $$0$$ by the smooth function $$f(q) =
-\norm{q}^2 - 1$$. It is also compact and simply connected, meaning that
-every smooth closed path can be deformed to a point.
-
+As the inverse image of $$0$$ by the smooth function $$f(q) = \norm{q}^2 - 1$$,
+the unit hypersphere $$S^3$$ is a closed, $$3$$-dimensional smooth sub-manifold
+of $$\RR^4$$. It is also compact and simply connected, meaning that every smooth
+curve from $$S^1$$ to $$S^3$$ can be shrunk into a point.
 
 ## Lie Group
 
-The multiplication and inverse are smooth (and $$1 \in S^3$$) so
-$$S^3$$ has a Lie group structure, which provides the connection with
+$$S^3$$ is closed under quaternion multiplication and inverse, both operations
+are both smooth and since $$1 \in S^3$$, the unit quaternion sphere has a Lie
+group structure under quaternion multiplication. It provides the connection with
 rotations in $$\RR^3$$ through the adjoint representation.
 
 ### Adjoint Representation

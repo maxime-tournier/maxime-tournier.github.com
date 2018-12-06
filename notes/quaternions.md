@@ -26,8 +26,9 @@ Let us start by constructing the complex numbers as the real $$\small{2 \times
    y & x  \\
    } $$
    
-The above set is a $$2$$-dimensional vector space, whose basis is
-noted $$(1, i)$$. One can check that $$i^2 = -1$$.
+The above set is a $$2$$-dimensional vector space, whose basis is denoted by
+$$(1, i)$$. Under this convention, one can readily check that $$i^2 = -1$$ as
+expected.
 
 This space is closed under matrix multiplication, and one can show that this
 space, together with this (commutative) multiplication, form a *field*, the
@@ -70,7 +71,7 @@ basis.
 ## Canonical Basis
 
 The 4 basis vectors for the *real* vector space structure are commonly
-noted $$(1, i, j, k)$$ and verify:
+denoted by $$(1, i, j, k)$$ and satisfy the following formula:
 
 $$ i^2 = j^2 = k^2 = ijk = -1 $$
 
@@ -83,10 +84,10 @@ following notations:
   
 $$ q = (w, x, y, z) =: w + v $$
   
-where $$v$$ is an imaginary quaternion with coordinates $$(0, x, y,
-z)$$, which we will happily identify with the corresponding vector in
-$$\RR^3$$ whenever needed. $$w$$ is called the *real* part, and $$v$$
-the *imaginary* part, just like for complex numbers.
+where $$v$$ is an imaginary quaternion with coordinates $$(0, x, y, z)$$ that we
+will happily identify with the corresponding vector in $$\RR^3$$ when
+needed. $$w$$ is called the *real* part, and $$v$$ the *imaginary* part, just
+like for complex numbers.
 
 ## Product
 

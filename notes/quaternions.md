@@ -1000,7 +1000,7 @@ $$x^\bot = \frac{x + n x n}2$$
 
 ## Dual Quaternions
 
-Please see the [dedicated page](dual-quaternions).
+Please refer to the [dedicated page](dual-quaternions).
 
 
 # Notes and References

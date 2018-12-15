@@ -45,3 +45,15 @@ Quick cheat sheet.
 
 - `M-x smerge-ediff` resolve conflicts using ediff
 
+# python-mode
+- start interpreter: `C-c C-p`
+- run buffer: `C-c C-c`
+
+## elpy-mode: 
+  - `sudo apt-get install elpa-elpy`
+  - `M-x elpy-config`
+  - `M-x elpy-mode`
+  - run buffer/region: `C-c C-c`
+  - start interpreter: `C-c C-z`
+  
+

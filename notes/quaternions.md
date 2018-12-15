@@ -13,49 +13,56 @@ intuitive point of view.
 
 # Construction and Properties
 
-In this section, we give a simple construction of the quaternions and
-list their basic properties (product, inverse, norm, etc...).
+This section presents a quick construction of the quaternions together with
+their basic properties (product, inverse, norm, etc...).
 
 ## Complex Numbers
    
-We start by building the complex numbers as the real $$\small{2 \times 2}$$
-matrices of the form:
+Let us start by constructing the complex numbers as the real $$\small{2 \times
+2}$$ matrices of the form:
 
    $$ \mat{ 
-   x  & y  \\
-   -y & x  \\
+   x  & -y  \\
+   y & x  \\
    } $$
    
-The above set is a $$2$$-dimensional vector space, whose basis is
-noted $$(1, i)$$. One can check that $$i^2 = -1$$.
-   
-This space is closed under matrix multiplication, and one can show
-that this space, together with this (commutative) multiplication, form
-a *field*, the complex numbers, noted $$\CC$$.
+The above set is a $$2$$-dimensional vector space, whose basis is denoted by
+$$(1, i)$$. Under this convention, one can readily check that $$i^2 = -1$$ as
+expected.
+
+This space is closed under matrix multiplication, and one can show that this
+space, together with this (commutative) multiplication, form a *field*, the
+complex numbers, noted $$\CC$$. The complex conjugate $$\bar{x + iy} = x - i y$$
+corresponds to the matrix transposition:
+
+$$\bar{x + iy} \simeq 
+    \mat{ x  & -y  \\
+    y & x  \\
+}^T$$ 
 
 ## Quaternions
 
-Let us repeat this construction, this time with *complex* matrices of
-the form:
+Let us now repeat this construction, this time using *complex* matrices of the
+form:
 
-$$ \mat{ x & y \\ -\bar{y} & \bar{x}} $$
+$$ \mat{c & d \\ -\bar{d} & \bar{c}} $$
 
-We end up with a 2-dimensional *complex* vector-space, that is also
-a 4-dimensional *real* vector space, given by real $$4 \times
-4$$ matrices of the form:
+where $$c = w + i x$$ and $$d = y + iz$$. We end up with a 2-dimensional
+*complex* vector-space, that is also a 4-dimensional *real* vector space, given
+by real $$4 \times 4$$ matrices of the form:
 
 $$ \mat{ 
-	w &  x &  y &  z \\
-	-x &  w & -z &  y \\
-	-y &  z &  w & -x \\
-	-z & -y &  x &  w \\ 
+	w & -x &  y & -z \\
+	x &  w &  z &  y \\
+	-y & -z &  w & x \\
+	 z & -y & -x & w \\ 
    }
    $$
 
-in which we recognize $$2\times 2$$ complex blocks. This space is
-again closed under matrix multiplication, but the multiplication is no
-longer commutative. Together with the matrix product, this space forms
-the quaternion group, noted $$\HH$$.
+in which we recognize $$2\times 2$$ complex blocks. This space is again closed
+under matrix multiplication, but the multiplication is no longer
+commutative. Together with the matrix product, this space forms the quaternion
+group, noted $$\HH$$.
 
 We will generally use the *real* vector space structure, and identify
 a quaternion with its coordinates $$(w, x, y, z)$$ in the canonical
@@ -64,7 +71,7 @@ basis.
 ## Canonical Basis
 
 The 4 basis vectors for the *real* vector space structure are commonly
-noted $$(1, i, j, k)$$ and verify:
+denoted by $$(1, i, j, k)$$ and satisfy the following formula:
 
 $$ i^2 = j^2 = k^2 = ijk = -1 $$
 
@@ -77,10 +84,10 @@ following notations:
   
 $$ q = (w, x, y, z) =: w + v $$
   
-where $$v$$ is an imaginary quaternion with coordinates $$(0, x, y,
-z)$$, which we will happily identify with the corresponding vector in
-$$\RR^3$$ whenever needed. $$w$$ is called the *real* part, and $$v$$
-the *imaginary* part, just like for complex numbers.
+where $$v$$ is an imaginary quaternion with coordinates $$(0, x, y, z)$$ that we
+will happily identify with the corresponding vector in $$\RR^3$$ when
+needed. $$w$$ is called the *real* part, and $$v$$ the *imaginary* part, just
+like for complex numbers.
 
 ## Product
 
@@ -95,7 +102,8 @@ In particular, for pure imaginary quaternions $$x$$ and $$y$$ this gives:
 
 $$ x y = x \times y - x^Ty $$
 
-The left multiplication by $$a$$ can be put in matrix form as:
+This is the formula you'll want to remember, since almost everything else
+follows from it. The left multiplication by $$a$$ can be put in matrix form as:
 
 $$a b = \underbrace{\mat{w_a & -v_a^T\\ v_a & w_a I + \hat{v}_a}}_{L_a} \mat{w_b\\v_b}$$
 
@@ -123,12 +131,11 @@ matrix representation. This immediately implies that:
   
 $$ \bar{p q} = \bar{q} \ \bar{p} $$
 
-In coordinates, the conjugation is simply given by:
+In the canonical basis, conjugation is simply given by:
 
 $$ \bar{q} = w_q - v_q $$
   
-The real and imaginary parts of a quaternion may be expressed using
-conjugation:
+The real and imaginary parts of a quaternion may be obtained using conjugation:
 
 $$ w_q = \frac{q + \bar{q}}{2} $$
 
@@ -155,30 +162,30 @@ $$ \inv{q} = \frac{\bar{q}}{|q|^2} $$
 
 # Unit Quaternions $$S^3$$
 
-The unit sphere $$S^3$$ is stable under quaternion multiplication and
-inverse, (and contains $$1$$) which makes it a multiplicative subgroup
-of $$\HH$$. As we shall see, this space is particularly interesting
-for representing rotations. The unit sphere, together with quaternion
-multiplication, is isomorphic to the complex representation with unit
-complex coefficients, *i.e.* the group $$SU(2)$$.
+The unit sphere $$S^3$$ is closed under quaternion multiplication and inverse,
+and it contains the identity element $$1$$: this makes it a multiplicative
+subgroup of $$\HH$$. As we shall see, this space is particularly interesting for
+representing rotations. The unit real 4-sphere with quaternion multiplication is
+isomorphic to the quaternion representation using unit complex coefficients,
+*i.e.* the group $$SU(2)$$.
 
 ## Smooth Manifold 
 
-$$S^3$$ is a closed, $$3$$-dimensional smooth sub-manifold of $$\RR^4$$
-as the inverse image of $$0$$ by the smooth function $$f(q) =
-\norm{q}^2 - 1$$. It is also compact and simply connected, meaning that
-every smooth closed path can be deformed to a point.
-
+As the inverse image of $$0$$ by the smooth function $$f(q) = \norm{q}^2 - 1$$,
+the unit hypersphere $$S^3$$ is a closed, $$3$$-dimensional smooth sub-manifold
+of $$\RR^4$$. It is also compact and simply connected, meaning that every smooth
+curve from $$S^1$$ to $$S^3$$ can be shrunk into a point.
 
 ## Lie Group
 
-The multiplication and inverse are smooth (and $$1 \in S^3$$) so
-$$S^3$$ has a Lie group structure, which provides the connection with
-rotations in $$\RR^3$$ through the adjoint representation.
+$$S^3$$ is a multiplicative subgroup of $$\HH$$ and since both multiplication
+and the inverse are smooth, it also forms a Lie group. The Lie group structure
+provides the connection with rotations in $$\RR^3$$ through the adjoint
+representation.
 
 ### Adjoint Representation
 
-The tangent space at $$1$$ is the space of imaginary quaternions,
+The tangent space at the identity $$1$$ is the space of imaginary quaternions,
 which we identify with $$\RR^3$$. The inner automorphism $$\Psi_q$$:
 
 $$ \Psi_q: S^3 \to S^3 \quad h \mapsto q h \bar{q} $$
@@ -413,8 +420,8 @@ d(a, b) &= \arccos\block{w_{\inv{a}b}} \\
 \end{align}
 $$
 
-which is exactly the *angle* between vectors $$a$$ and $$b$$, as one
-would expect from vectors on a unit sphere.
+which is exactly the *angle* between 4-vectors $$a$$ and $$b$$, as one would
+expect from vectors on a unit sphere.
 
 # Misc.
 
@@ -993,7 +1000,7 @@ $$x^\bot = \frac{x + n x n}2$$
 
 ## Dual Quaternions
 
-Please see the [dedicated page](dual-quaternions).
+Please refer to the [dedicated page](dual-quaternions).
 
 
 # Notes and References

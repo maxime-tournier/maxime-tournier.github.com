@@ -108,7 +108,7 @@ $$\exp$$ in $$\alg{so(3)}$$ coordinates.
 From the above formula for the exponential, the logarithm (where
 defined) is the inverse function:
 
-$$ \log\mat{R & t \\ 0 & 1} = \mat{ \log(R) & \dd\log(R) t \\ 0 & 0} $$
+$$ \log\mat{R & t \\ 0 & 1} = \mat{ \log(R) & \ds\log(R) t \\ 0 & 0} $$
 
 
 # Rigid Bodies

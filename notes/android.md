@@ -19,7 +19,8 @@ sudo apt-get install heimdall-flash-frontend
 ```sh
 heimdall-frontend
 ```
-6. flash the `RECOVERY` partition with twrp recovery image
+6. flash the `RECOVERY` partition with the downloaded TWRP recovery
+   image
    - note: the device will quickly reboot so **be prepared to hold
      `vol-up + home`** when clicking "start"
 

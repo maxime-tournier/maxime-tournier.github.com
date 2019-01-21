@@ -835,19 +835,21 @@ to a unit quaternion. We look for the following decomposition:
 $$q \in S^3 = \exp(\theta_x e_x) \exp(\theta_y e_y) \exp(\theta_z
 e_z)$$
 
-for some Euler angles $$\theta_x, \theta_y, \theta_z$$. The gnomonic
-projection $$\pi: S^3 \to \alg{s^3}$$ is useful in this context since
-it maps geodesics to straight lines: the geodesic along $$e_z$$ has
-body-fixed velocity $$e_z$$ at $$q$$, which in gnomonic projection
-corresponds to a line passing through $$\pi(q)$$ with direction:
+for some Euler angles $$\theta_x, \theta_y, \theta_z$$. The gnomonic projection
+$$\pi: S^3 \to \alg{s^3}$$ is useful in this context since it maps geodesics to
+straight lines: the geodesic along $$e_z$$ has body-fixed velocity $$e_z$$ at
+$$q$$, which in gnomonic projection corresponds to a line passing through
+$$\pi(q)$$. The line direction is given by the gnomonic projection derivative
+formula derived above:
 
 $$u = e_z + \pi(q)\times e_z + \pi(q) \pi(q)^T e_z$$
 
-On the other hand, the geodesic along $$e_x$$ starts at $$0$$ with
-direction $$e_x$$, and finally the geodesic along $$e_y$$ corresponds
-to a line starting at some point $$p_x = \lambda_x e_x =
-\pi\block{\exp(\theta_x ex)}$$ with a direction corresponding to a
-body-fixed velocity $$e_y$$:
+By the same token, the geodesic along $$e_x$$ corresponds to a line starting at
+$$0$$ with direction $$e_x$$, and finally the geodesic along $$e_y$$ corresponds
+to a line starting at some point along the first geodesic projection $$p_x =
+\lambda_x e_x = \pi\block{\exp(\theta_x ex)}$$, with a direction corresponding
+to a body-fixed velocity $$e_y$$ at $$\exp(\theta_x ex)$$. The direction is
+again given by the gnomonic projection derivative formula above:
 
 $$
 \begin{align}

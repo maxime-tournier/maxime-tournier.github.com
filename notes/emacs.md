@@ -11,6 +11,7 @@ Quick cheat sheet.
 
 - `C-x C-k b <i>` bind macro to key `<i>`
 - `C-x C-k <i>` replay macro with key `<i>`
+- `C-x C-k n` name last macro (use with `M-x insert-kbd-macro` to save macros)
 
 [more](https://www.gnu.org/software/emacs/manual/html_node/emacs/Save-Keyboard-Macro.html)
 

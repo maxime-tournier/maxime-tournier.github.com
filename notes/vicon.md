@@ -1,5 +1,5 @@
 ---
-title: Vicon Nexus Workflow
+title: Vicon Nexus
 ---
 
 A few notes on using Vicon Nexus for biomechanics.

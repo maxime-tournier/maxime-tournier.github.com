@@ -1007,11 +1007,11 @@ the rotation matrix that best aligns $$x$$ over $$y$$:
 
 $$\argmin{R \in SO(3)}\quad \half \norm{Rx - y}^2$$
 
-which we can be rewritten as the equivalent problem:
+which we can rewrite as the following problem:
 
 $$\argmin{R \in SO(3)}\quad -\tr\block{y^T R x}$$
 
-or, as a maximization over unit quaternions:
+or, equivalently, as a maximization over unit quaternions:
 
 $$\argmax{q \in S^3}\quad \sum_i \inner{y_i, q x_i \bar{q}}_{\RR^4}$$
 

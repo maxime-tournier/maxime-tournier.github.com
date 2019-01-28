@@ -365,21 +365,21 @@ The ambient metric on $$\RR^4$$ induces a metric on each fiber
 (tangent space) of the tangent bundle $$TS^3$$. This metric is
 left-invariant:
 
-$$ \inner{u}{v}_{\RR^4} = \inner{qu}{qv} $$
+$$ \inner{u, v}_{\RR^4} = \inner{qu, qv} $$
 
 It is also right invariant (and thus also $$\Ad$$-invariant):
 
-$$ \inner{u}{v}_{\RR^4} = \inner{uq}{vq} $$
+$$ \inner{u, v}_{\RR^4} = \inner{uq, vq} $$
 
 To see both of these, it is useful to come back to the matrix
 representation of quaternions, in which the metric is:
 
-$$ \inner{u}{v} = \trace{u^Tv} $$
+$$ \inner{u, v} = \trace{u^Tv} $$
 
-So the Lie algebra metric, extended to the whole manifold by left or
-right translation, is a *Riemannian metric* (the one induced by the
-ambient space), called a bi-invariant metric. An interesting
-consequence is that the Lie group exponential can be used to compute
+and the $$q, q^T$$ cancel each other nicely. Therefore, the Lie algebra metric
+extended to the whole manifold by left or right translation, is a *Riemannian
+metric* (the one induced by the ambient space), called a bi-invariant metric. An
+interesting consequence is that the Lie group exponential can be used to compute
 geodesics for this metric.
 
 More generally, compact Lie groups (such as $$S^3$$) always have a
@@ -999,6 +999,43 @@ $$x^\parallel = \frac{x - n x n}2$$
 
 $$x^\bot = \frac{x + n x n}2$$
 
+
+## Point Registration
+
+We consider two sets of $$n$$ 3-dimensional points $$x$$ and $$y$$, and look for
+the rotation matrix that best aligns $$x$$ over $$y$$:
+
+$$\argmin{R \in SO(3)}\quad \half \norm{Rx - y}^2$$
+
+which we can be rewritten as the equivalent problem:
+
+$$\argmin{R \in SO(3)}\quad -\tr\block{y^T R x}$$
+
+or, as a maximization over unit quaternions:
+
+$$\argmax{q \in S^3}\quad \sum_i \inner{y_i, q x_i \bar{q}}_{\RR^4}$$
+
+Now, we can exploit the bi-invariance of the Euclidean metric to rewrite each
+term of the sum as:
+
+$$
+\begin{align}
+\inner{y_i, q x_i \bar{q}} &= \inner{y_i q, q x_i} \\
+&= \inner{L_{y_i} q, R_{x_i} q} \\
+&= q^T \underbrace{L_{y_i}^T R_{x_i}}_{M_i} q \\
+\end{align}
+$$
+
+so that our initial problem is reduced to that of maximizing:
+
+$$\argmax{q \in S^3}\quad q^T \underbrace{\block{\sum_i M_i}}_M q$$
+
+As usual, the stationary condition give:
+
+$$\exists \lambda \in \RR, \quad Mx = \lambda x$$
+
+Since we are maximizing $$x^TMx = \lambda$$, the solution quaternion is given by
+the largest eigenvector of matrix $$M$$.
 
 ## Dual Quaternions
 

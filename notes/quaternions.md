@@ -165,7 +165,7 @@ the quaternion inverse:
 
 $$ \inv{q} = \frac{\bar{q}}{|q|^2} $$
 
-# Unit Quaternions $$S^3$$
+# Unit Quaternions
 
 The unit sphere $$S^3$$ is closed under quaternion multiplication and inverse,
 and it contains the identity element $$1$$: this makes it a multiplicative

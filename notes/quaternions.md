@@ -18,8 +18,8 @@ their basic properties (product, inverse, norm, etc...).
 
 ## Complex Numbers
    
-Let us start by constructing the complex numbers as the real $$\small{2 \times
-2}$$ matrices of the form:
+Let us start by constructing the complex numbers as real $$\small{2 \times 2}$$
+matrices of the form:
 
    $$ \mat{ 
    x  & -y  \\
@@ -32,8 +32,8 @@ expected.
 
 This space is closed under matrix multiplication, and one can show that this
 space, together with this (commutative) multiplication, form a *field*, the
-complex numbers, noted $$\CC$$. The complex conjugate $$\bar{x + iy} = x - i y$$
-corresponds to the matrix transposition:
+complex numbers, denoted by $$\CC$$. The complex conjugate $$\bar{x + iy} = x - i
+y$$ corresponds to the matrix transposition:
 
 $$\bar{x + iy} \simeq 
     \mat{ x  & -y  \\
@@ -47,9 +47,9 @@ form:
 
 $$ \mat{c & d \\ -\bar{d} & \bar{c}} $$
 
-where $$c = w + i x$$ and $$d = y + iz$$. We end up with a 2-dimensional
-*complex* vector-space, that is also a 4-dimensional *real* vector space, given
-by real $$4 \times 4$$ matrices of the form:
+(TODO: check the order) where $$c = w + i x$$ and $$d = y + iz$$. We end up with
+a 2-dimensional *complex* vector-space, that is also a 4-dimensional *real*
+vector space, given by real $$4 \times 4$$ matrices of the form:
 
 $$ \mat{ 
 	w & -x &  y & -z \\
@@ -60,9 +60,9 @@ $$ \mat{
    $$
 
 in which we recognize $$2\times 2$$ complex blocks. This space is again closed
-under matrix multiplication, but the multiplication is no longer
+under matrix multiplication, but this time multiplication is no longer
 commutative. Together with the matrix product, this space forms the quaternion
-group, noted $$\HH$$.
+group, denoted by $$\HH$$.
 
 We will generally use the *real* vector space structure, and identify
 a quaternion with its coordinates $$(w, x, y, z)$$ in the canonical

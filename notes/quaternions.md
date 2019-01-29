@@ -1002,8 +1002,9 @@ $$x^\bot = \frac{x + n x n}2$$
 
 ## Point Registration
 
-We consider two sets of $$n$$ 3-dimensional points $$x$$ and $$y$$, and look for
-the rotation matrix that best aligns $$x$$ over $$y$$:
+Let us consider two sets of $$n$$ 3-dimensional points arranged as flat matrices
+$$x, y \in \mathcal{M}_{3, n}$$, and look for the rotation matrix that best
+aligns $$x$$ over $$y$$:
 
 $$\argmin{R \in SO(3)}\quad \half \norm{Rx - y}^2$$
 
@@ -1032,9 +1033,9 @@ $$\argmax{q \in S^3}\quad q^T \underbrace{\block{\sum_i M_i}}_M q$$
 
 As usual, the stationary condition give:
 
-$$\exists \lambda \in \RR, \quad Mx = \lambda x$$
+$$\exists \lambda \in \RR, \quad Mq = \lambda q$$
 
-Since we are maximizing $$x^TMx = \lambda$$, the solution quaternion is given by
+Since we are maximizing $$q^TMq = \lambda$$, the solution quaternion is given by
 the largest eigenvector of matrix $$M$$.
 
 ## Dual Quaternions

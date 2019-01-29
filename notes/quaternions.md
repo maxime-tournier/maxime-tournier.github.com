@@ -76,14 +76,13 @@ denoted by $$(1, i, j, k)$$ and satisfy the following formula:
 $$ i^2 = j^2 = k^2 = ijk = -1 $$
 
 
-This formula is actually sufficient to define the quaternions, and was
-carved on a bridge in Dublin by **Hamilton** in October 1843 (*cf*
-[Wikipedia](https://en.wikipedia.org/wiki/Quaternion#History)). In the
-remaining of these notes, we will denote quaternions using the
-following notations:
+This formula is actually sufficient to *define* the quaternions, and was carved
+on a bridge in Dublin by **Hamilton** in October 1843
+(*cf* [Wikipedia](https://en.wikipedia.org/wiki/Quaternion#History)). In the
+remaining of these notes, we will be using the following notation:
   
 $$ q = (w, x, y, z) =: w + v $$
-  
+
 where $$v$$ is an imaginary quaternion with coordinates $$(0, x, y, z)$$ that we
 will happily identify with the corresponding vector in $$\RR^3$$ when
 needed. $$w$$ is called the *real* part, and $$v$$ the *imaginary* part, just
@@ -102,8 +101,12 @@ In particular, for pure imaginary quaternions $$x$$ and $$y$$ this gives:
 
 $$ x y = x \times y - x^Ty $$
 
-This is the formula you'll want to remember, since almost everything else
-follows from it. The left multiplication by $$a$$ can be put in matrix form as:
+This is *the* formula you'll want to remember, since almost everything else
+follows from it.
+
+### Translations
+
+The left multiplication by $$a$$ can be put in matrix form as:
 
 $$a b = \underbrace{\mat{w_a & -v_a^T\\ v_a & w_a I + \hat{v}_a}}_{L_a} \mat{w_b\\v_b}$$
 
@@ -126,12 +129,14 @@ $$
 
 ## Conjugate
 
-As for the complex numbers, this corresponds to the transpose of the
+As for the complex numbers, the conjugate corresponds to the transpose in the
 matrix representation. This immediately implies that:
   
 $$ \bar{p q} = \bar{q} \ \bar{p} $$
 
-In the canonical basis, conjugation is simply given by:
+As for complex numbers, $$\bar{1}=1$$, $$\bar{i} = -i$$ and furthermore
+$$\bar{j} = -j$$, $$\bar{k} = -k$$ so that conjugation of an arbirary quaternion
+is simply given by:
 
 $$ \bar{q} = w_q - v_q $$
   
@@ -143,9 +148,9 @@ $$ v_q = \frac{q - \bar{q}}{2} $$
 
 ## Norm
 
-As for the complex numbers, the conjugation induces a norm over the
-quaternions (the Frobenius norm on the matrix representation), which
-coincides with the Euclidean norm on $$\RR^4$$:
+As for the complex numbers, conjugation induces a norm over the quaternions
+(through the Frobenius norm on the matrix representation), which coincides with
+the Euclidean norm on $$\RR^4$$:
   
 $$ |q|^2 = q \bar{q} = \bar{q} q = ||q||_{\RR^4}^2 \geq 0 $$
 

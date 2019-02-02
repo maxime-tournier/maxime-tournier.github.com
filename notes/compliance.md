@@ -171,6 +171,18 @@ and remains well-defined as $$K \to +\infty$$. This formulation,
 combined with an LCP solver, provides unilateral constraints with
 arbitrary stiffness/damping.
 
+## composing 
+
+$$L = \half v^T M v - \norm{f(q)}_K^2 + g\block{f(q)}^T \lambda + \half \lambda^T C \lambda$$
+
+
+$$\ddd{L}{v} = Mv$$
+
+$$\ddd{L}{q, \lambda} = \mat{-J_f^T(q)^TKf(q) + J_f^TJ_g^T\lambda\\ g(f(q)) + C\lambda}$$
+
+$$\ddd{L}{q, \lambda} = \mat{J_f^T(q)^T\block{ -Kf(q) + J_g^T\lambda}\\ g(f(q)) + C\lambda}$$
+
+
 # Notes
 
 [^1]: For Implicit Euler: $$\alpha = 1, \beta = h, \gamma = h^2,

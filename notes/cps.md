@@ -3,6 +3,9 @@ title: Continuation Passing Style
 categories: [functional programming]
 ---
 
+Quick notes on basic CPS conversion after struggling to understand
+[^2] and finally getting it thanks to [^1] (+countless others).
+
 # Lambda-calculus
 
 We start with the pure lambda calculus syntax with variables,
@@ -42,10 +45,11 @@ we want to $$\beta$$-reduce $$\app{\kappa}{\lambda k.\app{k}{x}}$$ to
 $$\app{\kappa}{x}$$ directly.
 
 To do so, the conversion function will need to return *static*
-abstractions. Its type becomes: `cps : expr -> (expr -> expr) ->
-expr`, where the function parameter is to be replaced with static
-continuations (denoted $$\kappa$$ in the above). Applications of
-static continuations will become static too. Variables are easy:
+abstractions instead of CPS terms. Its type becomes: `cps : expr ->
+(expr -> expr) -> expr`, where the function parameter is to be
+replaced with static continuations (denoted $$\kappa$$ in the
+above). Applications of static continuations will become static
+too. Variables are easy:
 
 - ```cps (x: var) k = k x```
 
@@ -61,4 +65,11 @@ dynamic continuation when converting applications:
 
 (TODO)
 
+We obtained what is known as the single-pass, *higher-order* cps
+conversion.
 
+# References 
+
+[^1]: Danvy, O., & Filinski, A. (1992). Representing control: A study of the CPS transformation. Mathematical structures in computer science, 2(4), 361-391.
+  
+[^2]: Matt Might: [How to compile with continuations](http://matt.might.net/articles/cps-conversion/)

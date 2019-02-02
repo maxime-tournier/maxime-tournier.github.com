@@ -41,7 +41,24 @@ conversion for variables, when encountering $$\app{\cps{x}}{\kappa}$$,
 we want to $$\beta$$-reduce $$\app{\kappa}{\lambda k.\app{k}{x}}$$ to
 $$\app{\kappa}{x}$$ directly.
 
-To do so, the conversion function will return *static* abstractions:
-`cps : expr -> (expr -> expr) -> expr`, where the function parameter
-is to be replaced with static continuations (denoted $$\kappa$$ in the
-above).
+To do so, the conversion function will need to return *static*
+abstractions. Its type becomes: `cps : expr -> (expr -> expr) ->
+expr`, where the function parameter is to be replaced with static
+continuations (denoted $$\kappa$$ in the above). Applications of
+static continuations will become static too. Variables are easy:
+
+- ```cps (x: var) k = k x```
+
+For the rest, we just need to keep the type-checker happy. When
+converting abstractions, we need to name the extra continuation
+parameter $$k$$ and wrap it into a static continuation to be given to
+`cps`:
+
+(TODO)
+
+Finally, the static continuation $$\kappa$$ must be wrapped into a
+dynamic continuation when converting applications:
+
+(TODO)
+
+

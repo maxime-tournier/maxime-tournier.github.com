@@ -39,17 +39,17 @@ This conversion can be given type `cps : expr -> expr`. Unfortunately,
 it introduces many so-called *administrative redexes*, which we may
 get rid of by separating *static* (translate-time) and *dynamic*
 (runtime) abstractions/applications, and $$\beta$$-reducing static
-administrative redexes whenever possible. For instance, in the
-conversion for variables, when encountering $$\app{\cps{x}}{\kappa}$$,
-we want to $$\beta$$-reduce $$\app{\kappa}{\lambda k.\app{k}{x}}$$ to
-$$\app{\kappa}{x}$$ directly.
+administrative redexes whenever possible. For instance, when
+encountering $$\app{\cps{x}}{k}$$, we would like to $$\beta$$-reduce
+$$\app{\lambda \kappa.\app{\kappa}{x}}{k}$$ to $$\app{k}{x}$$ directly
+during translation.
 
-To do so, the conversion function will need to return *static*
+To do so, the conversion function needs to return *static*
 abstractions instead of CPS terms. Its type becomes: `cps : expr ->
 (expr -> expr) -> expr`, where the function parameter is to be
 replaced with static continuations (denoted $$\kappa$$ in the
 above). Applications of static continuations will become static
-too. Variables are easy:
+too. Variables are the easy part:
 
 - ```cps (x: var) k = k x```
 
@@ -67,6 +67,14 @@ dynamic continuation when converting applications:
 
 We obtained what is known as the single-pass, *higher-order* cps
 conversion.
+
+# TODO Partitioned CPS
+
+Since CPS effectively destroys the stack (which may or may not be
+desirable), it is often useful to separate CPS terms originating from
+source abstractions (for which we may want to keep a call stack) and
+the ones introduced by the conversion (which we may implement as
+jumps).
 
 # References 
 

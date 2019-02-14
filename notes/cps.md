@@ -49,24 +49,75 @@ abstractions instead of CPS terms. Its type becomes: `cps : expr ->
 (expr -> expr) -> expr`, where the function parameter is to be
 replaced with static continuations (denoted $$\kappa$$ in the
 above). Applications of static continuations will become static
-too. Variables are the easy part:
+too. Converting variables is straightforward:
 
-- ```cps (x: var) k = k x```
+> ```cps (x: var) kappa = kappa x```
 
-For the rest, we just need to keep the type-checker happy. When
-converting abstractions, we need to name the extra continuation
-parameter $$k$$ and wrap it into a static continuation to be given to
+For the rest, we mostly need to keep the type-checker happy. When
+converting abstractions, we bump into the following:
+
+> ```
+cps ({x; e}: abs) kappa = kappa abs{x; cps e ????}
+```
+
+We just need to name the extra continuation parameter `k` and wrap
+its application into a static continuation passed recursively to
 `cps`:
 
-(TODO)
+> ```
+cps ({x; e}: abs) kappa = 
+    let k = gensym () in 
+        kappa abs{x; abs{k; cps e (x => app{k; x})}}
+```
 
-Finally, the static continuation $$\kappa$$ must be wrapped into a
-dynamic continuation when converting applications:
+Similarly, when converting applications: 
 
-(TODO)
+> ```
+cps ({f; e}: app) kappa = 
+    cps f (f => cps e (e => f e (kappa ????)))
+```
+
+In this case, the application of static continuation `kappa` must be
+wrapped into a dynamic continuation:
+
+> ```
+cps ({f; e}: app) kappa = 
+    cps f (f => cps e (e => f e 
+        (let r = gensym() in abs{r; kappa r})))
+```
+
 
 We obtained what is known as the single-pass, *higher-order* cps
 conversion.
+
+## Properly tail-recursive CPS
+
+In the case of a *tail-call* (that is, when converting an abstraction
+whose body is an application), we see that we first introduce a static
+continuation wrapping a named dynamic continuation (when converting
+the abstraction), only to wrap it back into a dynamic continuation
+(when converting the application).
+
+Instead of wrapping twice, we could simply pass along the named
+dynamic continuation `k` when converting the application:
+
+> ```cps' ({f; e}: app) k = cps f (f => cps e (e => f e k))```
+
+and have the `cps` handle this special case when converting
+abstractions:
+
+> ```
+cps ({x; e}: abs) kappa = 
+    let k = gensym () in 
+        kappa abs{x; cps' e k}
+```
+
+The rest is pretty straightforward:
+
+> ```cps' (x: var) k = app{k; x}```
+
+> (TODO) ```cps' ({x; e}: abs) k = app{k; abs{}}```
+
 
 # TODO Partitioned CPS
 

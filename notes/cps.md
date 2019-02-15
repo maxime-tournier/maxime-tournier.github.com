@@ -93,10 +93,10 @@ conversion.
 ## Properly tail-recursive CPS
 
 In the case of a *tail-call* (that is, when converting an abstraction
-whose body is an application), we see that we first introduce a static
-continuation wrapping a named dynamic continuation (when converting
-the abstraction), only to wrap it back into a dynamic continuation
-(when converting the application).
+whose body is an application), we see that the conversion first
+introduces a static continuation wrapping a named dynamic continuation
+(when converting the abstraction), only to wrap it back into a dynamic
+continuation (when converting the application).
 
 Instead of wrapping twice, we could simply pass along the named
 dynamic continuation `k` when converting the application:

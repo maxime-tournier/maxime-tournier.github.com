@@ -116,7 +116,10 @@ The rest is pretty straightforward:
 
 > ```cps' (x: var) k = app{k; x}```
 
-> (TODO) ```cps' ({x; e}: abs) k = app{k; abs{}}```
+> ```
+cps' ({x; e}: abs) k = let c = gensym() in 
+     app{k; abs{x; abs{c; cps' e c}}}
+```
 
 
 # TODO Partitioned CPS
@@ -129,6 +132,6 @@ jumps).
 
 # References 
 
-[^1]: Danvy, O., & Filinski, A. (1992). Representing control: A study of the CPS transformation. Mathematical structures in computer science, 2(4), 361-391.
+[^1]: Danvy, O., & Filinski, A. (1992). [Representing control: A study of the CPS transformation](http://dotat.at/tmp/danvy-filinski-mscs92.pdf). Mathematical structures in computer science, 2(4), 361-391.
   
 [^2]: Matt Might: [How to compile with continuations](http://matt.might.net/articles/cps-conversion/)

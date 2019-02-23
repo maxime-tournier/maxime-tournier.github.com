@@ -201,7 +201,7 @@ following quadratic form is positive-definite (thus convex):
 
 $$
 \begin{align}
-E_M(x) &= \half \inner{x}{A x - b}_M \\
+E_M(x) &= \half \inner{x, A x - b}_M \\
 &= \half x^TMAx - x^TMb \\
 \end{align}
 $$
@@ -209,40 +209,36 @@ $$
   So again, we look for its minimum. We apply the CG algorithm to the
   modified system $$MA x = Mb$$, letting $$z_k = M r_k$$ with $$r_k =
   b - Ax_k$$ as before, and denoting the $$MA$$-conjugate directions
-  by $$q_k$$. We still obtain:
+  by $$q_k$$. We again obtain the following conditions for step length
+  and conjugation:
   
   - $$\alpha_k = \frac{z_k^T q_k}{q_k^TMAq_k}$$,
   - $$Q_k^Tz_{k+1} = Q_k^T M r_{k+1} = 0$$,
 	
-  Now we are faced with a choice regarding who should span the
-  $$q_k$$. If the $$q_k$$ are spanned by $$r_k$$, we get:
+  Now we are facing a choice as to whom should span the $$q_k$$. If
+  the $$q_k$$ are spanned by the residuals $$r_k$$ (*i.e.* the
+  gradient with respect to $$M$$), we get:
 
   - $$R_k^T M r_{k+1} = 0$$,
   - $$q_0 = r_0 \Rightarrow x_k \in \Krylov_k\block{A, b}$$.
 
-  In contrast, if the $$q_k$$ are spanned by the $$z_k$$ (*i.e.* standard CG on
-  the modified system), we get:
+  In contrast, if the $$q_k$$ are spanned by the preconditioned
+  residuals $$z_k$$ (*i.e.* the gradient of the preconditioned system
+  with respect to the standard inner product), we get:
 
   - $$Z_k^T z_{k+1} = 0$$,
   - $$R_k^T M^T M r_{k+1} = 0$$,
   - $$q_0 = z_0 \Rightarrow x_k \in \Krylov_k\block{MA, Mb}$$.
 	
-  It is not immediately clear why one should adopt one over the other
-  in the general case: it all depends on the problem at hand. However,
-  the definition of the *gradient*, which depends on the metric $$M$$
-  (in this case, the gradient of $$E_M$$ is the residual), plays in
-  favor of the first definition. Some particular choices of $$A$$ and
-  $$M$$ also allow to minimize the original quadratic form, by taking
-  alternate paths in order to improve convergence (*cf.*
-  preconditioning).
-  
-  Intuitively, the gradient descent follows directions that are
-  *orthogonal* to level-sets in order to minimize the function, and
-  orthogonality depends on the metric. Different metrics will yield
-  different trajectories across level-sets, hopefully to obtain faster
-  convergence towards the minimum. Since the second case was already
-  described, let us continue with the first option and obtain the
-  following algorithm:
+  which is vanilla CG on the preconditioned system. Using the gradient
+  with respect to $$M$$ provides an extra degree of freedom in the
+  algorithm: intuitively, the gradient descent follows directions that
+  are *orthogonal* to level-sets in order to minimize the function,
+  and orthogonality depends on the metric. Different metrics produce
+  different trajectories across level-sets, hopefully to converge
+  faster towards the solution. Since the second case was already
+  described before, we now consider the first and obtain the following
+  algorithm:
 
   - Initialization:
 
@@ -258,18 +254,16 @@ $$
   \end{align}
   $$
   
-  which is exactly the standard CG algorithm using $$M$$ as
-  inner-product, as one could expect.
+  which is exactly the standard CG algorithm using $$M$$ for all
+  inner-products, as one could expect.
 
 ## Note {#note}
    
-   In the above, we never actually assumed that $$M$$ was an inner
-   product. All that matters is that $$MA$$ remains positive definite,
-   so $$M$$ could as well be indefinite, or not even symmetric,
-   couldn't it? The problem however is that $$r_k$$ is not guaranteed
-   to be a descent direction of the quadratic form when $$M$$ is not
-   an inner product: it might happen that the quadratic form simply
-   stagnates along $$r_{k+1} \neq 0$$:
+   The above requires that $$MA$$ be symmetric, which could happen
+   even though $$M$$ is indefinite, or not even symmetric. However,
+   $$r_k$$ is not guaranteed to be a descent direction of the
+   quadratic form when $$M$$ is not an inner product: it might happen
+   that the quadratic form simply stagnates along $$r_{k+1} \neq 0$$:
 
    $$ r_{k+1}^T z_{k+1} = r_{k+1}^T M r_{k+1} = 0$$ 
 
@@ -280,11 +274,12 @@ $$
    $$p_{k+1}^T M r_{k+1} = 0 $$ 
 
    At this point, the algorithm will stop making any progress since
-   $$\alpha$$ will be zero. It
-   [seems](https://en.wikipedia.org/wiki/Positive-definite_matrix#Extension_for_non_symmetric_matrices)
-   that it is necessary and sufficient to require that the symmetric
-   part of the metric is positive definite, so that the above
-   breakdown scenario can never happen.
+   $$\alpha$$ will be
+   zero. It
+   [seems](https://en.wikipedia.org/wiki/Positive-definite_matrix#Extension_for_non_symmetric_matrices) that
+   it is necessary and sufficient that the symmetric part of the
+   metric is positive definite in order that the above breakdown
+   scenario can never happen.
 	
 
 # Examples

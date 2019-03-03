@@ -360,9 +360,9 @@ $$
 
 $$
   \begin{align}
-  x_{k+1} &= x_k + \alpha_k p_k  & \alpha_k &= \frac{p_k^T A^T r_k}{p_k^TA^TAp_k} &= \frac{r_k^TAr_k}{p_k^TA^TAp_k}\\
+  x_{k+1} &= x_k + \alpha_k p_k  & \alpha_k &= \frac{p_k^T A^T r_k}{p_k^TA^TAp_k} &= \frac{r_k^TA^Tr_k}{p_k^TA^TAp_k}\\
   r_{k+1} &= r_k - \alpha_k Ap_k & & \\
-  p_{k+1} &= r_{k+1} - \beta_k p_k & \beta_k &= \frac{r_{k+1}^TA^TAp_k}{p_k^TA^TAp_k} &= -\frac{ r_{k+1}^T A r_{k+1} }{r_k^T A r_k} \\
+  p_{k+1} &= r_{k+1} - \beta_k p_k & \beta_k &= \frac{r_{k+1}^TA^TAp_k}{p_k^TA^TAp_k} &= -\frac{ r_{k+1}^T A^T r_{k+1} }{r_k^T A^T r_k} \\
   \end{align}
 $$
 

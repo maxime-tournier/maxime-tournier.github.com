@@ -63,10 +63,6 @@ $$\dd g = g.\db g = \ds g.g$$
 For reasons that will become clear later, the tangent space at the identity
 $$T_e(G)$$ is called the *Lie algebra* of the group $$G$$, denoted $$\alg{g}$$.
 
-# Derivatives
-
-- TODO formula for product/inverse differential
-- TODO left/right trivialized tangents
 
 # Adjoint
 
@@ -164,6 +160,40 @@ $$\tau_g^{\star s} = \Ad_{\inv{g}}^\star.\tau_g^{\star b}$$
 Put succintly, while the adjoint representation maps body-fixed velocities to
 spatial velocities, the coadjoint representation maps body-fixed forces to
 spatial forces.
+
+
+# Derivatives
+
+As seen above, tangent vectors between Lie groups can be left/right trivialized
+over the corresponding Lie algebras. Likewise, tangent maps between tangent
+spaces can be left/right trivialized as linear maps between Lie algebras:
+
+$$f: G \to H$$
+
+$$\dd f(g): T_g(G) \to T_{f(g)} H$$
+
+$$\db f(g): \alg{g} \to \alg{h} = \dd L_{\inv{f(g)}}.\dd f(g).\dd L_g$$
+
+$$\ds f(g): \alg{g} \to \alg{h} = \dd R_{\inv{f(g)}}.\dd f(g).\dd R_g$$
+
+From the above it can be checked that:
+
+$$\db L_h = I$$
+
+$$\ds R_h = I$$
+
+Since left/right translation commute $$R_h \circ L_g = L_g \circ R_h$$, we also
+get the following:
+
+$$
+\begin{align}
+\ds L_h &= \Ad_h \\
+\db R_h &= \Ad_{\inv{h}}\\
+\end{align}
+$$
+
+
+- TODO differential for product/inverse
 
 
 # Lie Algebra

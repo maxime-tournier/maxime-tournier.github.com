@@ -104,7 +104,8 @@ The expression $$\block{\db g.x - x.\db g}$$ is called a *Lie bracket*, denoted
 by $$[\db g, x]$$. It is always an element of the Lie algebra. From the above,
 we see that the left-trivialized tangent of $$\Ad_g$$ is $$[\db g, .]$$, which
 we denote by $$\ad(\db g)$$. One can easily check that the right-trivialized
-tangent is $$\ad(\ds g)$$.
+tangent is $$\ad(\ds g)$$. The Lie bracket operator is what provides the Lie
+algebra structure on the tangent space at the identity.
 
 ## Coordinate Changes
 
@@ -159,7 +160,15 @@ $$\tau_g^{\star s} = \Ad_{\inv{g}}^\star.\tau_g^{\star b}$$
 
 Put succintly, while the adjoint representation maps body-fixed velocities to
 spatial velocities, the coadjoint representation maps body-fixed forces to
-spatial forces.
+spatial forces. 
+
+## Lie Coalgebra
+
+TODO
+
+- differentiating of the coadjoint representation at the identity gives a Lie
+  bracket on the cotangent space at the identity: the Lie coalgebra
+  
 
 
 # Derivatives
@@ -198,7 +207,7 @@ $$
 
 # Lie Algebra
 
-- TODO Lie bracket properties
+- TODO Lie bracket properties (skew-symmetric, Jacobi identity)
 - TODO Lie algebra properies, classifications
 
 # Exponential

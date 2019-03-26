@@ -8,25 +8,30 @@ A geometric take on
 the absence of process noise, Kalman filtering simply boils down to
 the Recursive Least Squares algorithm.
 
+{% include toc.md %}
+
+
 # Recursive Least Squares
 
 Our goal is to solve the following least-squares problem: 
 
 $$\argmin{x} \quad \norm{Ax - b}_M^2$$
 
-where $$M$$ is positive definite. Assuming that $$A$$ has full row
-rank, the normal equations for the above are:
+where $$M$$ is positive definite, and where the size of the system will grow
+over time. Assuming that $$A$$ has full row rank, the normal equations for the
+above are:
 
 $$ \underbrace{A^T M A}_K \ x = A^T M b $$
 
 and the solution is $$x = \block{A^T M A}^{-1} A^T M b$$. Now, let us
-add extra equations to our (overconstrained) system:
+add extra rows to our (overconstrained) system:
 
 $$A_{k+1} x_{k+1} = \mat{A_k \\ H_{k+1}} x_{k+1} = \mat{b_k \\ z_{k+1}} = b_{k+1}$$
 
-At this point, it is convenient to rewrite the incremental system in
-terms of the solution update $$\delta_{k+1}$$ defined such that
-$$x_{k+1} = x_k + \delta_{k+1}$$:
+At this point, it is convenient to rewrite the incremental system in terms of
+the solution update $$\delta_{k+1}$$ defined such that $$x_{k+1} = x_k +
+\delta_{k+1}$$, in order to express the next normal equations in terms of the
+previous ones:
 
 $$\delta_{k+1} = \argmin{\delta} \quad \norm{ \mat{A_k \\ H_{k+1}} \block{x_k + \delta} - \mat{b_k \\ z_{k+1}} }_{M_{k+1}}^2$$
 
@@ -38,23 +43,22 @@ The normal equations become:
 
 $$ \underbrace{\block{A_k^T M A_k + H_{k+1}^T R_{k+1} H_{k+1}}}_{K_{k+1}} \delta = \underbrace{A_k^T M_k\block{b_k - A_k x_k}}_0 + H_{k+1}^T R_{k+1} \underbrace{\block{z_{k+1} - H_{k+1}x_k}}_{w_{k+1}}$$
 
-where the first part in the right-hand side is zero since $$x_k$$
-solves the problem at step
-$$k$$. The
-[Woodbury formula](https://en.wikipedia.org/wiki/Woodbury_matrix_identity) provides
-a nice way to update the inverse $$C_{k+1}$$ of $$K_{k+1}$$ from the
+where the first part in the right-hand side is zero since $$x_k$$ solves the
+problem at step $$k$$. The [Woodbury
+formula](https://en.wikipedia.org/wiki/Woodbury_matrix_identity) provides a
+practical way to update the inverse $$C_{k+1}$$ of $$K_{k+1}$$ from the
 previously computed $$C_k$$ as follows:
 
 $$
 \begin{align} 
 C_{k+1} &= K_{k+1}^{-1} \\
 	&= \inv{\block{K_k + H_{k+1}^T R_{k+1} H_{k+1}}} \\
-	&= C_k - C_k H_{k+1}^T \block{ R_{k+1}^{-1} + H_{k+1} C_k H_{k+1}^T }^{-1} H_{k+1} C_k \\
+	&= C_k - C_k H_{k+1}^T {\underbrace{\block{ R_{k+1}^{-1} + H_{k+1} C_k H_{k+1}^T }}_{S_{k+1}}}^{-1} H_{k+1} C_k \\
 \end{align}
 $$
 
-Let us denote $$S_{k+1} = R_{k+1}^{-1} + H_{k+1} C_k H_{k+1}^T$$, the
-whole update process becomes:
+Let us denote $$S_{k+1} = R_{k+1}^{-1} + H_{k+1} C_k H_{k+1}^T$$, now the whole
+update process becomes:
 
 $$
 \begin{align} 
@@ -165,13 +169,14 @@ Consider the following incremental *non-linear* least-squares problem:
 
 $$x_{k+1} = \argmin{x} \ \sum_k \norm{f_k(x) - y_k}^2_{R_k}$$
 
-Each term of the problem is linearized using the most up-to-date
-estimate for the state, yielding:
+Starting from an initial estimate $$x_0$$, we linearize each new measurement
+$$f_{k+1}$$ at current estimate $$x_k$$ to obtain:
 
-$$x_{k+1} = \argmin{x} \ \sum_{i=0}^k \norm{f_{i+1}\block{x_i} + \dd f_{i+1}\block{x_i}.\block{x - x_i} - y_{i+1}}^2_{R_{i+1}}$$
+$$x_{k+1} = \argmin{x} \ \sum_k \norm{f_{k+1}\block{x_k} + \dd
+f_{k+1}\block{x_k}.\block{x - x_k} - y_{k+1}}^2_{R_{k+1}}$$
 
-A straightforward adaptation of the linear Kalman filter to the
-linearized problem gives:
+A straightforward adaptation of the linear Kalman filter to the linearized
+problem gives:
 
 $$
 \begin{align}
@@ -190,14 +195,18 @@ for details.
 
 ## Variant
 
-Alternatively, one can consider the linearized least-squares problem
-in terms of the solution update directly:
+Alternatively, one can consider the linearized least-squares problem expressed
+$$purely$$ in terms of the solution update $$\dd x = x - x_k$$, which will help
+us derive the equations for the Lie group case:
 
 $$\dd x_{k+1} = \argmin{\dd x} \ \sum_{i=0}^k \norm{f_{i+1}\block{x_i} + \dd f_{i+1}\block{x_i}.\block{\dd x + x_k - x_i} - y_{i+1}}^2_{R_{i+1}}$$
 
-Each change of linearization from point $$k-1$$ to $$k$$ is affine:
+In this version, the state at each iteration is the *displacement* $$\dd x$$,
+which will be predicted/corrected. The underlying position $$x_k$$ is maintained
+separately only to update matrices/vectors accordingly. Each change of
+linearization from point $$k-1$$ to $$k$$ is affine:
 
-$$ \dd x \mapsto \dd x - (x_k - x_{k-1}) $$
+$$\dd x \mapsto \dd x - (x_k - x_{k-1})$$
 
 so we can exploit the affine prediction update as seen before:
 

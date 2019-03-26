@@ -246,33 +246,33 @@ and the group exponential map:
 
 $$g_{k+1} = \argmin{g} \ \sum_k \norm{f_{k+1}\block{g_k} + \db f_{k+1}\block{g_k}.\log\block{g_k^{-1}g} - y_{k+1}}^2_{R_{k+1}}$$
 
-where $$\db f$$ is the body-fixed differential of $$f$$. Let $$\omega
+where $$\db f$$ is the body-fixed differential of $$f$$. Let $$v
 = \log\block{g_k^{-1} g}$$ be the state update viewed from state
 $$k$$, then the state update viewed from state $$k-1$$ is:
 
 $$
 \begin{align}
 \log\block{g_{k-1}^{-1} g} &= \log\block{g_{k-1}^{-1}g_k g_k^{-1} g} \\
-&= \log\block{ \exp\block{\omega_k} \exp\block{\omega} } \\
-&\approx \omega_k + \db \log{\block{\exp\block{\omega_k}}}.\omega \\
-&= \omega_k + \block{\db \exp\block{\omega_k}}^{-1}.\omega \\
+&= \log\block{ \exp\block{v_k} \exp\block{v} } \\
+&\approx v_k + \db \log{\block{\exp\block{v_k}}}.v \\
+&= v_k + \block{\db \exp\block{v_k}}^{-1}.v \\
 
 \end{align}
 $$
 
-where we linearized at $$\omega = 0$$. The above is an affine
+where we linearized at $$v = 0$$. The above is an affine
 coordinate change whose inverse is the following:
 
-$$ \omega \mapsto \db \exp\block{\omega_k}.\omega - \underbrace{\db
-\exp\block{\omega_k}.\omega_k}_{\omega_k} $$
+$$ v \mapsto \db \exp\block{v_k}.v - \underbrace{\db
+\exp\block{v_k}.v_k}_{v_k} $$
 
 The linearized problem can be rewritten as a linear Kalman filter in
-$$\omega$$ using the following update rules:
+$$v$$ using the following update rules:
 
 $$
 \begin{align}
-F_k &= \db \exp\block{\omega_k} \\
-\tilde{\omega}_k &= 0 \\
+F_k &= \db \exp\block{v_k} \\
+\tilde{v}_k &= 0 \\
 \tilde{C}_k &= F_k C_k F_k^T \\
 \\
 w_{k+1} &= y_{k+1} - f_{k+1}\block{g_k} \\ 
@@ -280,9 +280,9 @@ H_{k+1} &= \db f_{k+1}\block{g_k} \\
 S_{k+1} &= R_{k+1}^{-1} + H_{k+1} \tilde{C}_k H_{k+1}^T \\
 C_{k+1} &= \tilde{C}_k - \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} H_{k+1} \tilde{C}_k \\
         &= \block{I - \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} H_{k+1}} \tilde{C}_k \\
-\omega_{k+1} &=  \tilde{C}_{k+1} H_{k+1}^T R_{k+1} w_{k+1} \\
+v_{k+1} &=  \tilde{C}_{k+1} H_{k+1}^T R_{k+1} w_{k+1} \\
  &=  \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} w_{k+1} \\
- g_{k+1} &= g_k \exp\block{\omega_{k+1} } \\
+ g_{k+1} &= g_k \exp\block{v_{k+1} } \\
 \end{align}
 $$
 

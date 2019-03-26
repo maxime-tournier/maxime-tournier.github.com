@@ -264,7 +264,7 @@ where we linearized at $$v = 0$$. The above is an affine
 coordinate change whose inverse is the following:
 
 $$ v \mapsto \db \exp\block{v_k}.v - \underbrace{\db
-\exp\block{v_k}.v_k}_{v_k} $$
+\exp\block{v_k}.v_k}_{=v_k} $$
 
 The linearized problem can be rewritten as a linear Kalman filter in
 $$v$$ using the following update rules:

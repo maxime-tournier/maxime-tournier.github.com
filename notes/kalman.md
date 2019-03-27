@@ -43,7 +43,7 @@ $$\delta_{k+1} = \argmin{\delta} \quad \norm{ \mat{A_k \\ H_{k+1}} \delta - \mat
 
 The normal equations become:
 
-$$ \underbrace{\block{A_k^T M_k A_k + H_{k+1}^T R_{k+1} H_{k+1}}}_{K_{k+1}} \delta = \underbrace{A_k^T M_k\block{b_k - A_k x_k}}_0 + H_{k+1}^T R_{k+1} \underbrace{\block{z_{k+1} - H_{k+1}x_k}}_{w_{k+1}}$$
+$$ \underbrace{\block{A_k^T M_k A_k + H_{k+1}^T R_{k+1} H_{k+1}}}_{K_{k+1}} \delta = \underbrace{A_k^T M_k\block{b_k - A_k x_k}}_{= 0} + H_{k+1}^T R_{k+1} \underbrace{\block{z_{k+1} - H_{k+1}x_k}}_{w_{k+1}}$$
 
 where the first part in the right-hand side is zero since $$x_k$$ solves the
 problem at step $$k$$. The [Woodbury
@@ -90,14 +90,18 @@ computing the next iterate.
 
 # Non-stationary Process
 
-We now suppose that the state $$x$$ changes linearly as follows:
+Let us now assume that the state $$x$$ changes between steps according to a
+linear map, for instance as a result of some dynamic process:
 
-$$ x_k \overset{F_k}{\longmapsto} x_{k+1} $$
+$$ x^{(k)} \overset{F_k}{\longmapsto} x^{(k+1)} $$
 
-for some invertible linear mapping $$F_k$$. Think of it as a change of
-coordinates at each step. The incremental problem becomes:
+for some invertible linear mapping $$F_k$$. One can also think of $$F_k$$ as a
+change of coordinates occurring after each step, and we need to express the
+previous system in terms of the new coordinates $$x^{(k+1)}$$. The incremental
+problem becomes:
 
-$$ \argmin{x} \quad \norm{ \mat{A_k \inv{F}_k \\ H_{k+1}} x - \mat{b_k \\ z_{k+1}} }^2_{M_{k+1}} $$
+$$ \argmin{x} \quad \norm{ \mat{A_k \inv{F}_k \\ H_{k+1}} x - \mat{b_k \\
+z_{k+1}} }^2_{M_{k+1}}$$
 
 *i.e.* we fit previous observations by reverting to the previous
 coordinate system. The normal equations become:
@@ -106,13 +110,15 @@ $$ \underbrace{\block{F_k^{-T} A_k^T M A_k \inv{F}_k + H_{k+1}^T R_{k+1} H_{k+1}
 
 which in terms of the solution update $$\delta = x - F_k x_k$$ gives:
 
-$$ K_{k+1} \delta = F_k^{-T} \underbrace{A_k^T M_k \block{b_k - A_k x_k}}_0 + H_{k+1}^T R_{k+1} \underbrace{\block{z_{k+1} - H_{k+1}F_kx_k}}_{w_{k+1}} $$
+$$ K_{k+1} \delta = F_k^{-T} \underbrace{A_k^T M_k \block{b_k - A_k x_k}}_{=0} + H_{k+1}^T R_{k+1} \underbrace{\block{z_{k+1} - H_{k+1}F_kx_k}}_{w_{k+1}} $$
 
 since once again, $$x_k$$ solves the problem at step $$k$$. Using the
-Woodbury formula as before, we obtain $$C_{k+1} = K_{k+1}^{-1} = D_k -
-D_k H_{k+1}^T S_{k+1}^{-1} H_{k+1} D_k$$, where $$D_k = F_k C_k
-F_k^T$$ and $$S_{k+1} = R_{k+1}^{-1} + H_{k+1} D_k H_{k+1}^T$$. The
-solution update is traditionally decomposed into two
+Woodbury formula as before, we obtain:
+
+$$C_{k+1} = K_{k+1}^{-1} = D_k - D_k H_{k+1}^T S_{k+1}^{-1} H_{k+1} D_k$$
+
+where $$D_k = F_k C_k F_k^T$$ and $$S_{k+1} = R_{k+1}^{-1} + H_{k+1} D_k
+H_{k+1}^T$$. The solution update is traditionally decomposed into two
 prediction/update phases:
 
 ### Prediction
@@ -132,7 +138,7 @@ w_{k+1} &= z_{k+1} - H_{k+1} \tilde{x}_k \\
 S_{k+1} &= R_{k+1}^{-1} + H_{k+1} \tilde{C}_k H_{k+1}^T \\
 C_{k+1} &= \tilde{C}_k - \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} H_{k+1} \tilde{C}_k \\
         &= \block{I - \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} H_{k+1}} \tilde{C}_k \\
-x_{k+1} &= \tilde{x}_k + \tilde{C}_{k+1} H_{k+1}^T R_{k+1} w_{k+1} \\
+x_{k+1} &= \tilde{x}_k + C_{k+1} H_{k+1}^T R_{k+1} w_{k+1} \\
  &= \tilde{x}_k + \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} w_{k+1} \\
 \end{align}
 $$
@@ -147,7 +153,7 @@ The incremental problem becomes:
 
 $$ \argmin{x} \quad \norm{ \mat{A_k \inv{F}_k \\ H_{k+1}} x - \mat{b_k + A_k \inv{F}_k u_k \\ z_{k+1}} }^2_{M_{k+1}} $$
 
-Terms once again cancel each other in the normal equations, for the
+Terms once again cancel each other in the normal equations, this time for the
 solution update $$\delta = x - \block{F_k x_k + u_k}$$:
 
 $$K_{k+1} \delta = H_{k+1}^T R_{k+1} \underbrace{\block{z_{k+1} - H_{k+1}\block{F_k x_k + u_k}}}_{w_{k+1}}$$
@@ -184,33 +190,69 @@ $$
 \begin{align}
 H_{k+1} &= \dd f_{k+1} \block{x_k} \\
 z_{k+1} &= y_{k+1} + \dd f_{k+1}\block{x_k}.x_k - f_{k+1}\block{x_k} \\
-w_{k+1} &= y_{k+1} - f_{k+1}\block{x_k} \\
 \end{align}
 $$
 
-and the rest is the same as before. A similar linearization for
-non-stationary processes can be obtained, again by linearizing the
-non-linear transition function at the most up-to-date estimate for the
-state. See
+In particular, we obtain the following update for $$w$$:
+
+$$w_{k+1} = y_{k+1} - f_{k+1}\block{x_k}$$
+
+and the rest is the same as before. A similar linearization for non-stationary
+processes can be obtained, again by linearizing the non-linear transition
+function at the most up-to-date estimate for the state. See
 [wikipedia](https://en.wikipedia.org/wiki/Extended_Kalman_filter#Discrete-time_predict_and_update_equations)
 for details.
+
+### Prediction
+
+$$
+\begin{align} 
+\tilde{x}_k &= F_k x_k + u_k\\
+\tilde{C}_k &= F_k C_k F_k^T
+\end{align}
+$$
+
+### Update
+
+$$
+\begin{align}
+H_{k+1} &= \dd f_{k+1} \block{x_k} \\
+z_{k+1} &= y_{k+1} + H_{k+1}x_k - f_{k+1}\block{x_k} \\
+w_{k+1} &= z_{k+1} - H_{k+1} \tilde{x}_k \\
+S_{k+1} &= R_{k+1}^{-1} + H_{k+1} \tilde{C}_k H_{k+1}^T \\
+C_{k+1} &= \tilde{C}_k - \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} H_{k+1} \tilde{C}_k \\
+        &= \block{I - \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} H_{k+1}} \tilde{C}_k \\
+x_{k+1} &= \tilde{x}_k + C_{k+1} H_{k+1}^T R_{k+1} w_{k+1} \\
+ &= \tilde{x}_k + \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} w_{k+1} \\
+\end{align}
+$$
+
 
 ## Variant
 
 Alternatively, one can consider the linearized least-squares problem expressed
-$$purely$$ in terms of the solution update $$\dd x = x - x_k$$, which will help
-us derive the equations for the Lie group case:
+$$purely$$ in terms of the solution update $$\delta x = x - x_k$$, which will
+help us derive the equations for the Lie group case. Assuming $$x_k$$ is our
+lastest estimate, we get $$x - x_i = \delta _x + x_k - x_i$$, which we plug into
+the Extended Kalman Filter equation above to obtain:
 
-$$\dd x_{k+1} = \argmin{\dd x} \ \sum_{i=0}^k \norm{f_{i+1}\block{x_i} + \dd f_{i+1}\block{x_i}.\block{\dd x + x_k - x_i} - y_{i+1}}^2_{R_{i+1}}$$
+$$\delta x_{k+1} = \argmin{\delta} \ \sum_{i=0}^k \norm{f_{i+1}\block{x_i} + \dd
+f_{i+1}\block{x_i}.\block{\delta x + x_k - x_i} - y_{i+1}}^2_{R_{i+1}}$$
 
-In this version, the state at each iteration is the *displacement* $$\dd x$$,
+In this version, the state at each iteration is the *displacement* $$\delta x$$,
 which will be predicted/corrected. The underlying position $$x_k$$ is maintained
 separately only to update matrices/vectors accordingly. Each change of
-linearization from point $$k-1$$ to $$k$$ is affine:
+linearization point can be seen as a coordinate change on the solution update
+$$\delta x$$:
 
-$$\dd x \mapsto \dd x - (x_k - x_{k-1})$$
+$$x = \delta x^{(k)} + x_k = \delta x^{(k-1)} + x_{k-1}$$
 
-so we can exploit the affine prediction update as seen before:
+where the same $$x$$ is expressed in two coordinate systems $$\delta x^{(k)}$$
+and $$\delta x^{(k-1)}$$, related by:
+
+$$\delta x^{(k)} = \delta x^{(k-1)} - \block{x_k - x_{k-1}}$$
+
+and now we can exploit the affine prediction update as seen before.
 
 ### Prediction
 
@@ -246,57 +288,53 @@ constraints into the filter. In this case, $$x_{k+1} = x_k + \dd x_k +
 
 # Lie Groups
 
-Now consider an incremental non-linear least-squares problem on a Lie
+We now consider an incremental non-linear least-squares problem on a Lie
 group $$G$$:
 
 $$\argmin{g \in G} \ \sum_k \norm{f_k(g) - y_k}^2_{R_k}$$
 
-where $$f: G \to E$$ maps to an Euclidean space $$E$$. Again, each
-term is linearized using the most up-to-date estimate for the state,
-and the group exponential map:
+where $$f: G \to E$$ maps to an Euclidean space $$E$$. Instead of solving for
+$$g$$ directly (which may involve non-linear constraints), we express it as a
+body-fixed update from current estimate $$g_k$$ using the group exponential:
 
-$$g_{k+1} = \argmin{g} \ \sum_k \norm{f_{k+1}\block{g_k} + \db f_{k+1}\block{g_k}.\log\block{g_k^{-1}g} - y_{k+1}}^2_{R_{k+1}}$$
+$$g = g_k.\exp\block{\delta g^{(k)}}$$
 
-where $$\db f$$ is the body-fixed differential of $$f$$. Let $$v
-= \log\block{g_k^{-1} g}$$ be the state update viewed from state
-$$k$$, then the state update viewed from state $$k-1$$ is:
+and reformulate our problem in terms of the solution update:
+
+$$\delta g_{k+1} = \argmin{\delta g^{(k)} \in \alg{g}} \ \sum_k \norm{f_{k+1}\block{g_k.\exp\block{\delta g^{(k)}}} - y_{k+1}}_{R_{k+1}}^2$$
+
+As before, we linearize the above at current estimate $$g_k$$ to obtain:
 
 $$
-\begin{align}
-\log\block{g_{k-1}^{-1} g} &= \log\block{g_{k-1}^{-1}g_k g_k^{-1} g} \\
-&= \log\block{ \exp\block{v_k} \exp\block{v} } \\
-&\approx v_k + \db \log{\block{\exp\block{v_k}}}.v \\
-&= v_k + \block{\db \exp\block{v_k}}^{-1}.v \\
+\delta g_{k+1} = \argmin{\delta g^{(k)} \in \alg{g}} \ \sum_k \norm{f_{k+1}\block{g_k} +
+\db f_{k+1} \block{g_k}{\delta g^{(k)}} - y_{k+1}}_{R_{k+1}}^2$$
 
+Coordinates at steps $$k-1$$ and $$k$$ are related by:
+
+$$g = g_k.\exp\block{\delta g^{(k)}} = g_{k-1}.\exp\block{\delta g^{(k-1)}}$$
+
+Therefore, the coordinate change is:
+
+$$\delta g^{(k)} = \log\block{g_k^{-1} g_{k-1}.\exp\block{\delta g^{(k-1)}}}$$
+
+which we linearize at $$\delta g^{(k-1)} = 0$$. We obtain:
+ 
+$$
+\begin{align}
+\delta g^{(k)} &\approx \underbrace{-\delta g_{k-1}}_{u_k} + \underbrace{\db \log\block{g_k^{-1} g_{k-1}}}_{F_k}.\delta g^{(k-1)}\\
 \end{align}
 $$
 
-where we linearized at $$v = 0$$. The above is an affine
-coordinate change whose inverse is the following:
-
-$$ v \mapsto \db \exp\block{v_k}.v - \underbrace{\db
-\exp\block{v_k}.v_k}_{=v_k} $$
-
-The linearized problem can be rewritten as a linear Kalman filter in
-$$v$$ using the following update rules:
-
+Another convenient alternative is to linearize the coordinate change at $$\delta
+g_{k-1}$$, *i.e.* the previous computed solution update:
+ 
 $$
 \begin{align}
-F_k &= \db \exp\block{v_k} \\
-\tilde{v}_k &= 0 \\
-\tilde{C}_k &= F_k C_k F_k^T \\
-\\
-w_{k+1} &= y_{k+1} - f_{k+1}\block{g_k} \\ 
-H_{k+1} &= \db f_{k+1}\block{g_k} \\
-S_{k+1} &= R_{k+1}^{-1} + H_{k+1} \tilde{C}_k H_{k+1}^T \\
-C_{k+1} &= \tilde{C}_k - \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} H_{k+1} \tilde{C}_k \\
-        &= \block{I - \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} H_{k+1}} \tilde{C}_k \\
-v_{k+1} &=  \tilde{C}_{k+1} H_{k+1}^T R_{k+1} w_{k+1} \\
- &=  \tilde{C}_k H_{k+1}^T S_{k+1}^{-1} w_{k+1} \\
- g_{k+1} &= g_k \exp\block{v_{k+1} } \\
+\delta g^{(k)} &\approx \log\block{I} + \db \log\block{I}.\db \exp\block{\delta g_{k-1}}.\block{\delta g^{(k-1)} - \delta g_{k-1}}\\
+&= \underbrace{\db \exp\block{\delta g_{k-1}}}_{F_k}.\delta g^{(k-1)} \ \underbrace{\ -\delta g_{k-1}}_{u_k}\\
 \end{align}
 $$
-
+ 
 
 
 

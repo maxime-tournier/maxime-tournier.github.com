@@ -23,15 +23,17 @@ above are:
 
 $$ \underbrace{A^T M A}_K \ x = A^T M b $$
 
-and the solution is $$x = \block{A^T M A}^{-1} A^T M b$$. Now, let us
-add extra rows to our (overconstrained) system:
+and the solution is $$x = \block{A^T M A}^{-1} A^T M b$$. Assuming we computed
+the solution $$x_k$$ at step $$k$$, we now add extra rows to our
+(overconstrained) system:
 
-$$A_{k+1} x_{k+1} = \mat{A_k \\ H_{k+1}} x_{k+1} = \mat{b_k \\ z_{k+1}} = b_{k+1}$$
+$$A_{k+1} x_{k+1} = \mat{A_k \\ H_{k+1}} x_{k+1}$$
 
-At this point, it is convenient to rewrite the incremental system in terms of
-the solution update $$\delta_{k+1}$$ defined such that $$x_{k+1} = x_k +
-\delta_{k+1}$$, in order to express the current normal equations in terms of the
-previous ones:
+$$b_{k+1} = \mat{b_k \\ z_{k+1}}$$
+
+At this point, it is convenient to rewrite the current system in terms of the
+solution update $$\delta_{k+1}$$ such that $$x_{k+1} = x_k + \delta_{k+1}$$ in
+order to express the current normal equations in terms of the previous ones:
 
 $$\delta_{k+1} = \argmin{\delta} \quad \norm{ \mat{A_k \\ H_{k+1}} \block{x_k + \delta} - \mat{b_k \\ z_{k+1}} }_{M_{k+1}}^2$$
 

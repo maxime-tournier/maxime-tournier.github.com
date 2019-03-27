@@ -307,7 +307,7 @@ As before, we linearize the above at current estimate $$g_k$$ to obtain:
 
 $$
 \delta g_{k+1} = \argmin{\delta g^{(k)} \in \alg{g}} \ \sum_k \norm{f_{k+1}\block{g_k} +
-\db f_{k+1} \block{g_k}{\delta g^{(k)}} - y_{k+1}}_{R_{k+1}}^2$$
+\db f_{k+1} \block{g_k}.\delta g^{(k)} - y_{k+1}}_{R_{k+1}}^2$$
 
 Coordinates at steps $$k-1$$ and $$k$$ are related by:
 

@@ -30,7 +30,7 @@ $$A_{k+1} x_{k+1} = \mat{A_k \\ H_{k+1}} x_{k+1} = \mat{b_k \\ z_{k+1}} = b_{k+1
 
 At this point, it is convenient to rewrite the incremental system in terms of
 the solution update $$\delta_{k+1}$$ defined such that $$x_{k+1} = x_k +
-\delta_{k+1}$$, in order to express the next normal equations in terms of the
+\delta_{k+1}$$, in order to express the current normal equations in terms of the
 previous ones:
 
 $$\delta_{k+1} = \argmin{\delta} \quad \norm{ \mat{A_k \\ H_{k+1}} \block{x_k + \delta} - \mat{b_k \\ z_{k+1}} }_{M_{k+1}}^2$$
@@ -41,7 +41,7 @@ $$\delta_{k+1} = \argmin{\delta} \quad \norm{ \mat{A_k \\ H_{k+1}} \delta - \mat
 
 The normal equations become:
 
-$$ \underbrace{\block{A_k^T M A_k + H_{k+1}^T R_{k+1} H_{k+1}}}_{K_{k+1}} \delta = \underbrace{A_k^T M_k\block{b_k - A_k x_k}}_0 + H_{k+1}^T R_{k+1} \underbrace{\block{z_{k+1} - H_{k+1}x_k}}_{w_{k+1}}$$
+$$ \underbrace{\block{A_k^T M_k A_k + H_{k+1}^T R_{k+1} H_{k+1}}}_{K_{k+1}} \delta = \underbrace{A_k^T M_k\block{b_k - A_k x_k}}_0 + H_{k+1}^T R_{k+1} \underbrace{\block{z_{k+1} - H_{k+1}x_k}}_{w_{k+1}}$$
 
 where the first part in the right-hand side is zero since $$x_k$$ solves the
 problem at step $$k$$. The [Woodbury

@@ -169,7 +169,11 @@ and all the rest remains the same.
 # TODO Process Noise
 
 Not quite sure how to obtain this one, looks like some kind of dual
-regularization.
+regularization: 
+
+$$\argmin_{x, y} \norm{Ax - b}^2_M + \norm{Fx - y}_{Q^{-1}}^2 + \norm{Hy - z}_R^2$$
+
+with limit case where prediction is certain (compliance $$Q=0$$).
 
 # Extended Kalman Filter
 
@@ -317,7 +321,7 @@ Therefore, the coordinate change is:
 
 $$\delta g^{(k)} = \log\block{g_k^{-1} g_{k-1}.\exp\block{\delta g^{(k-1)}}}$$
 
-which we linearize at $$\delta g^{(k-1)} = 0$$. We obtain:
+which we linearize at $$\delta g^{(k-1)} = 0$$ to obtain:
  
 $$
 \begin{align}

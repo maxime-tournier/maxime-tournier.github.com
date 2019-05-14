@@ -201,6 +201,19 @@ $$
 \end{align}
 $$
 
+## Inverse 
+
+From $$g.\inv{g} = e$$, we get:
+
+$$\dd g.\inv{g} + g.\dd\inv{g} = 0$$
+
+In other words:
+
+$$\dd\inv{g} = -\inv{g}.\dd g.\inv{g}$$
+
+The left/right trivialization are given by:
+
+$$\db\inv{g} = -g.\db g.\inv{g} = -\Ad_g.\db g$$
 
 - TODO differential for product/inverse
 

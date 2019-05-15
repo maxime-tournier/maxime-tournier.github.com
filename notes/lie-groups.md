@@ -201,6 +201,10 @@ $$
 \end{align}
 $$
 
+Probably the most useful to remember in practice is $$\ds L_h = \Ad_h$$, and
+recover the others from it. It also provides the interpretation of the group
+adjoint as a coordinate change.
+
 ## Inverse 
 
 From $$g.\inv{g} = e$$, we get:
@@ -215,7 +219,16 @@ The left/right trivialization are given by:
 
 $$\db\inv{g} = -g.\db g.\inv{g} = -\Ad_g.\db g$$
 
-- TODO differential for product/inverse
+$$\ds\inv{g} = -\inv{g}.\ds g.g = -\Ad_{\inv{g}}.\ds g$$
+
+## Product 
+
+$$\dd\block{a.b} = \dd a.b + a.\dd b = \dd R_b.\dd a + \dd L_a.\dd b$$
+
+$$\db\block{a.b} = \Ad_{\inv{b}}.\db a + \db b$$
+
+$$\ds\block{a.b} = \ds a + \Ad_a.\ds b$$
+
 
 
 # Lie Algebra

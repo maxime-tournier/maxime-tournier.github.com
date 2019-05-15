@@ -215,19 +215,27 @@ In other words:
 
 $$\dd\inv{g} = -\inv{g}.\dd g.\inv{g}$$
 
-The left/right trivialization are given by:
+The left/right trivializations are given by:
 
-$$\db\inv{g} = -g.\db g.\inv{g} = -\Ad_g.\db g$$
-
-$$\ds\inv{g} = -\inv{g}.\ds g.g = -\Ad_{\inv{g}}.\ds g$$
+$$\begin{align}
+\db\inv{g} &= -g.\db g.\inv{g} = -\Ad_g.\db g \\
+\ds\inv{g} &= -\inv{g}.\ds g.g = -\Ad_{\inv{g}}.\ds g\\
+\end{align}
+$$
 
 ## Product 
 
-$$\dd\block{a.b} = \dd a.b + a.\dd b = \dd R_b.\dd a + \dd L_a.\dd b$$
+Product is bilinear, hence:
 
-$$\db\block{a.b} = \Ad_{\inv{b}}.\db a + \db b$$
-
-$$\ds\block{a.b} = \ds a + \Ad_a.\ds b$$
+$$
+\begin{align}
+\dd\block{a.b} &= \dd a.b + a.\dd b \\
+&= \dd R_b.\dd a + \dd L_a.\dd b \\
+\\
+\db\block{a.b} &= \Ad_{\inv{b}}.\db a + \db b \\
+\ds\block{a.b} &= \ds a + \Ad_a.\ds b \\
+\end{align}
+$$
 
 
 

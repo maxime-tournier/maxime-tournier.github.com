@@ -213,7 +213,12 @@ $$\dd g.\inv{g} + g.\dd\inv{g} = 0$$
 
 In other words:
 
-$$\dd\inv{g} = -\inv{g}.\dd g.\inv{g}$$
+$$
+\begin{align}
+\dd\inv{g} &= -\inv{g}.\dd g.\inv{g} \\
+           &= -\dd L_{\inv{g}}.\dd R_{\inv{g}}.\dd g \\
+\end{align}
+$$
 
 The left/right trivializations are given by:
 

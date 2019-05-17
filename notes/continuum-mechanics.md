@@ -116,8 +116,7 @@ $$\epsilon = \half\block{F^T + F} - I$$
 
 ## Neo-Hookean Materials
 
-$$W = k\tr{F^T F - I}$$
-
+$$W = k.\tr\block{F^T F - I}$$
 
 
 

@@ -12,8 +12,8 @@ time, starting at $$p(x, 0) = x$$.
 
 If our deformation is smooth (meaning we don't tear or pinch the object), we can
 obtain at any given time $$t \geq 0$$ some information about the deformation
-around each point $$x \in \Omega$$ by studying the *deformation gradient tensor*,
-generally denoted by $$F$$:
+around each point $$x \in \Omega$$ by studying the *deformation gradient*
+tensor, generally denoted by $$F$$:
 
 $$F(x, t) = \ddd{p}{x}(x, t)$$
 
@@ -78,7 +78,7 @@ will need $$W$$ to satisfy the following:
 
 Rather than defining the energy density directly on $$F$$, one generally
 computes a so-called *deformation tensor* meeting the above requirements. Then,
-a *stain tensor* is obtained that quantifies how much the deformation tensor
+a *stain tensor* is obtained which quantifies how much the deformation tensor
 deviates from the identity. Finally, an energy density is associated to the
 strain tensor.
 
@@ -89,6 +89,14 @@ Use the polar decomposition of $$F=QR$$, where $$Q\in SO(3)$$ and $$R \in
 pure deformation part:
 
 $$C = R$$
+
+$$R$$ can be diagonalized as $$R=USU^T$$, and the eigenvalues are known as the
+*principal stretches*. These eigenvalues depend solely on the coefficients of
+the characteristic polynomial of $$R$$, which are known as its *principal
+invariants*. Therefore, one can formulate rotationnally invariant energy
+densities either as a function of the eigenvalues directly, or as a function of
+the principal invariants. The latter generally have a more physical
+interpretation.
 
 ## Cauchy-Green Deformation Tensor (Right) 
 
@@ -103,6 +111,19 @@ $$E = \half(C - I)$$
 For small displacements only (not rotationally invariant):
 
 $$\epsilon = \half\block{F^T + F} - I$$
+
+# Energy Densities
+
+## Neo-Hookean Materials
+
+$$W = k\tr{F^T F - I}$$
+
+
+
+
+# Energy Integration
+
+TODO quadrature rules, shape functions
 
 
 

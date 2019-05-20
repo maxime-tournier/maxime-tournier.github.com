@@ -101,5 +101,6 @@ functors are the morphisms.
 
 [^1]:
     [classes](https://en.wikipedia.org/wiki/Von_Neumann%E2%80%93Bernays%E2%80%93G%C3%B6del_set_theory)
-    are a syntactic tool to avoid logical paradoxes arising when considering
-    *e.g.* the set of all sets not containing themselves (Russel's paradox)
+    are a syntactic restriction to avoid logical paradoxes arising when
+    considering *e.g.* the set of all sets not containing themselves (Russel's
+    paradox)

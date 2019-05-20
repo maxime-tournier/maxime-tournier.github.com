@@ -27,7 +27,9 @@ mathematical issues. Please let me know if you find anything useful in there :)
         {% if p.categories %}
         
         {% else %}
-        <li> <a href="{{p.url}}">{{p.title}}</a> </li>
+        {% if p.url != page.url: %}
+            <li> <a href="{{p.url}}">{{p.title}}</a> </li>
+        {% endif %}
         {% endif %}
     {% endfor %}
 </ul>

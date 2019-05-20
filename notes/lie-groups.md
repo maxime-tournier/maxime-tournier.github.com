@@ -1,6 +1,6 @@
 ---
 title: Lie Groups
-categories: [math, lie group]
+categories: [math]
 ---
 
 # Definition

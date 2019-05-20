@@ -1,6 +1,6 @@
 ---
 title: Continuation Passing Style
-categories: [functional programming]
+categories: [prog]
 ---
 
 Quick notes on basic CPS conversion after struggling to understand

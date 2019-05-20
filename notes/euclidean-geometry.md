@@ -1,6 +1,6 @@
 ---
 title: Euclidean Geometry
-categories: [math, lie group]
+categories: [math]
 ---
 
 A couple of elementary (and useful) results in Euclidean geometry.

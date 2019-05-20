@@ -1,6 +1,6 @@
 ---
 title: Conic Optimization
-categories: [math, optimization]
+categories: [math]
 ---
 
 

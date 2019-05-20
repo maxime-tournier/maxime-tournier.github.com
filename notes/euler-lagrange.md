@@ -1,6 +1,6 @@
 ---
 title: Euler-Lagrange Equations
-categories: [math, phys]
+categories: [phys]
 ---
 
 {% include toc.md %}

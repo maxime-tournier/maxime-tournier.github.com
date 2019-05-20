@@ -1,6 +1,6 @@
 ---
 title: Y Combinator
-categories: [math]
+categories: [prog]
 ---
 
 The $$Y$$ combinator makes it possible to define recursive function

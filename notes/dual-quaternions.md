@@ -1,6 +1,6 @@
 ---
 title: Dual Quaternions
-categories: [math, lie group]
+categories: [math]
 ---
 
 Rigid transformations may be blended efficiently by the use of dual

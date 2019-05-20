@@ -1,6 +1,6 @@
 ---
 title: Quaternions
-categories: [math, lie group]
+categories: [math]
 ---
 
 Quaternions are primarily used as a representation of 3D rotations.

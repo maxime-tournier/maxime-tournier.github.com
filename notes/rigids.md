@@ -1,6 +1,6 @@
 ---
 title: Rigid Bodies
-categories: [math, lie group]
+categories: [math]
 ---
 
 Quick reference notes on rigid transformations.

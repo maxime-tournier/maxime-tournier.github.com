@@ -55,6 +55,14 @@ $$
 
 \newcommand{\sinc}{\mathrm{sinc}}
 
+\newcommand{\cat}[1]{\mathcal{#1}}
+\newcommand{\Ob}[1]{\mathrm{Ob}\block{\cat{#1}}}
+\newcommand{\Hom}[1]{\mathrm{Hom}\block{\cat{#1}}}
+
+\newcommand{\hom}[2]{\cat{#1}\block{#2}}
+
+\block{#2}}
+
 $$
 
 </div>

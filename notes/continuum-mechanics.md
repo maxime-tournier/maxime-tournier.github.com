@@ -10,8 +10,8 @@ Let us consider a geometric object represented as a domain $$\Omega \subset
 points as a function $$p(x, t)$$ of the material coordinates and time, starting
 at $$p(x, 0) = x$$.
 
-If our deformation is smooth (meaning we don't tear or pinch the object), we can
-obtain at any given time $$t \geq 0$$ some information about the deformation
+If the deformation is smooth (meaning we don't tear or pinch the object), one
+can obtain at any given time $$t \geq 0$$ some information about the deformation
 around each point $$x \in \Omega$$ by studying the *deformation gradient*
 tensor, generally denoted by $$F$$:
 
@@ -35,7 +35,7 @@ gradient:
 $$F(x, t) = A(t)$$
 
 On the contrary, if the deformation depends on $$x$$, the deformation gradient
-tells us how the deformation looks like locally around $$x$$, as a linear map.
+tells us how the deformation looks like locally around $$x$$ as a linear map.
 
 ## Displacement Field
 

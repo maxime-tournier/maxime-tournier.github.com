@@ -3,12 +3,12 @@ title: Continuum Mechanics
 categories: [phys]
 ---
 
-# Deformation Gradient Tensor
+# Deformation Gradient
 
 Let us consider a geometric object represented as a domain $$\Omega \subset
-\RR^3$$. If the object evolves over time, we describe the trajectory of some
-point of the object as a function $$p(x, t)$$ of material coordinates and
-time, starting at $$p(x, 0) = x$$.
+\RR^3$$. If the object evolves over time, we describe the trajectory of some of
+its points as a function $$p(x, t)$$ of the material coordinates and time,
+starting at $$p(x, 0) = x$$.
 
 If our deformation is smooth (meaning we don't tear or pinch the object), we can
 obtain at any given time $$t \geq 0$$ some information about the deformation
@@ -22,18 +22,19 @@ the identity:
 
 $$F(x, t) = I$$
 
-which tells us that that the initial configuration is undeformed
-everywhere. Likewise, an object not moving $$p(x, t) = x$$ has a deformation
+which tells us that that the initial configuration is everywhere
+undeformed. Likewise, an object not moving $$p(x, t) = x$$ has a deformation
 gradient everywhere the identity. If we now apply a linear transformation to the
-whole object as a function of time:
+whole object as a function of time, as:
 
 $$p(x, t) = A(t) x$$
 
-for instance, by scaling it $$A(t) = tI$$, we get:
+(for instance, by scaling it $$A(t) = tI$$) we obtain the following deformation
+gradient:
 
 $$F(x, t) = A(t)$$
 
-On the contrary, if the deformation depends on $$x$$ the deformation gradient
+On the contrary, if the deformation depends on $$x$$, the deformation gradient
 tells us how the deformation looks like locally around $$x$$, as a linear map.
 
 ## Displacement Field
@@ -62,9 +63,9 @@ $$F(x, t) = \ddd{u}{x}(x, t) + I$$
 The deformation tensor gives a nice local representation of an arbitrary (but
 smooth) object deformation. Now, if we want to simulate elastic materials, we
 will need to associate a potential energy to a deformed object. Since we have a
-local measure of deformation $$F$$, we can obtain a deformation energy by
-summing some energy associated to the deformation gradient $$F(x, t)$$ over the
-object:
+local measure of deformation $$F$$, we can obtain a deformation *energy* by
+summing infinitesimal energies associated with the deformation gradient $$F(x,
+t)$$ at each point of the object:
 
 $$V(t) = \int_\Omega W(F(x, t)).\dd x$$
 
@@ -76,7 +77,7 @@ will need $$W$$ to satisfy the following:
   $$W(I) = 0$$
 - rotational-invariance: $$W(UF) = W(F)$$ for any rotation matrix $$U\in SO(3)$$
 
-Rather than defining the energy density directly on $$F$$, one generally
+Rather than defining the energy density directly on $$F$$, one generally 
 computes a so-called *deformation tensor* meeting the above requirements. Then,
 a *stain tensor* is obtained which quantifies how much the deformation tensor
 deviates from the identity. Finally, an energy density is associated to the

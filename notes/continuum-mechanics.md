@@ -6,9 +6,9 @@ categories: [phys]
 # Deformation Gradient
 
 Let us consider a geometric object represented as a domain $$\Omega \subset
-\RR^3$$. If the object evolves over time, we describe the trajectory of some of
-its points as a function $$p(x, t)$$ of the material coordinates and time,
-starting at $$p(x, 0) = x$$.
+\RR^3$$. As the object evolves over time, we describe the trajectory of its
+points as a function $$p(x, t)$$ of the material coordinates and time, starting
+at $$p(x, 0) = x$$.
 
 If our deformation is smooth (meaning we don't tear or pinch the object), we can
 obtain at any given time $$t \geq 0$$ some information about the deformation

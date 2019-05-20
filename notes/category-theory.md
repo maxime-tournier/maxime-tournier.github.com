@@ -3,12 +3,12 @@ title: Category Theory
 categories: [math]
 ---
 
-# Category
+# Categories
 
 A category $$\mathcal{C}$$ is given by the following:
 
-- a class[^1] of objects $$\Ob{C}$$
-- a class of morphisms $$\Hom{C}$$, whose elements $$f$$ have a *source object*
+- a class[^1] of *objects* $$\Ob{C}$$
+- a class of *morphisms* $$\Hom{C}$$, whose elements $$f$$ have a *source object*
   and a *target object*, denoted by $$f: a \to b$$. The class of morphisms from
   $$a$$ to $$b$$ is denoted by $$\hom{C}{a, b}$$.
   
@@ -29,7 +29,39 @@ When $$\hom{C}{a, b}$$ are all sets, the category $$\cat{C}$$ is said *locally
 small*, which is generally the case for all practical purposes. Likewise, when
 $$\Hom{C}$$ is a set, the category is said *small*.
 
+## Opposite Category
+
+Given one category $$\cat{C}$$, one can construct its *opposite category*
+$$\op{C}$$, obtained from the same objects and reversing all morphisms:
+
+$$f^{op} \in \hom{\op{C}}{b, a} \iff f \in \hom{C}{a, b}$$
+
+## Examples
+
 # Functors
+
+Functors are structure-preserving maps between categories. Let us consider two
+categories $$\cat{C}$$ and $$\cat{D}$$, a functor $$F$$ between them is given
+by:
+
+- for each object $$c \in \Ob{C}$$, a unique object $$F(c) = d\in\Ob{D}$$
+- for each morphism $$f: a \to b \in \Ob{C}$$, a unique morphism $$F(f): F(a) \to F(b)$$
+
+satisfying the following properties:
+
+- for all objects $$c \in \Ob{C}$$, identities are preserved: 
+
+$$F(1_c) = 1_{F(c)}$$
+
+- for all morphisms $$f: a \to b$$ and $$g: b \to c$$, composition is preserved: 
+
+$$F\block{g \circ f} = F(g) \circ F(f)$$
+
+There is a category $$\mathrm{Cat}$$ of locally small categories, in which
+functors are the morphisms.
+
+## Diagrams
+
 
 # Natural Transformations
 

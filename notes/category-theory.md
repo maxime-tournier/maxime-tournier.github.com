@@ -38,6 +38,12 @@ $$f^{op} \in \hom{\op{C}}{b, a} \iff f \in \hom{C}{a, b}$$
 
 ## Examples
 
+### Preorders
+    
+### Graph Paths
+
+### Monoids
+
 # Functors
 
 Functors are structure-preserving maps between categories: they preserve
@@ -62,16 +68,20 @@ functors are the morphisms.
 
 ## Diagrams
 
-
 # Natural Transformations
 
-# Initial and Terminal Objects
-
-# Products and Coproducts
-
-# Pushouts and Pullbacks
-
 # Limits and Colimits
+
+## Initial and Terminal Objects
+
+## Products and Coproducts
+
+## Pushouts and Pullbacks
+
+## Equalizer and Coequalizers
+
+## Cones and Cocones
+
 
 # Exponentials
 

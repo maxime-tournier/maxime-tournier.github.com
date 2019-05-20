@@ -3,6 +3,8 @@ title: Category Theory
 categories: [math]
 ---
 
+Some more general abstract nonsense.
+
 # Categories
 
 A category $$\mathcal{C}$$ is given by the following:

@@ -54,9 +54,23 @@ A sufficient condition is then:
 
 $$ P + P^T - M > 0 $$
 
-This criterion can be used to show the convergence of the Gauss-Seidel
-iteration. For the Jacobi iteration (diagonal $$P$$), the condition
-reduces to $$2P > M$$.
+## Jacobi Iteration
+
+Given a diagonal preconditioner $$P$$ and a positive definite matrix
+$$M$$, the above sufficient condition reduces to:
+
+$$2P > M$$
+
+
+## Gauss-Seidel Iteration
+
+Given a positive definite matrix $$M = L + D + L^T$$, where $$D$$ is
+diagonal, the Gauss-Seidel preconditioner is $$P = L + D$$ and the
+sufficient convergence condition is:
+
+$$L + 2D + L^T - M = D + M - M = D > 0$$
+
+which is always true for $$M$$ positive definite.
 
 
 

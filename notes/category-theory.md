@@ -10,8 +10,8 @@ Some more general abstract nonsense.
 A category $$\mathcal{C}$$ is given by the following:
 
 - a class[^1] of *objects* $$\Ob{C}$$
-- a class of *morphisms* $$\Hom{C}$$, whose elements $$f$$ have a *source object*
-  and a *target object*, denoted by $$f: a \to b$$. The class of morphisms from
+- a class of *morphisms* $$\Hom{C}$$, whose elements $$f$$ have a *source* object
+  and a *target* object, denoted by $$f: a \to b$$. The class of morphisms from
   $$a$$ to $$b$$ is denoted by $$\hom{C}{a, b}$$.
   
 satisfying the following properties:

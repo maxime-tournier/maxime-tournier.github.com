@@ -52,7 +52,7 @@ Functors are structure-preserving maps between categories: they preserve
 identities and composition. Let us consider two categories $$\cat{C}$$ and
 $$\cat{D}$$, a functor $$F$$ between them is given by:
 
-- for each object $$c \in \Ob{C}$$, a unique object $$F(c) = d\in\Ob{D}$$
+- for each object $$c \in \Ob{C}$$, a unique object $$F(c) \in\Ob{D}$$
 - for each morphism $$f: a \to b \in \Ob{C}$$, a unique morphism $$F(f): F(a) \to F(b)$$
 
 satisfying the following properties:

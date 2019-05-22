@@ -59,7 +59,7 @@ satisfying the following properties:
 
 - for all objects $$c \in \Ob{C}$$, identities are preserved: 
 
-$$F(1_c) = 1_{F(c)}$$
+$$F\block{1_c} = 1_{F(c)}$$
 
 - for all morphisms $$f: a \to b$$ and $$g: b \to c$$, composition is preserved: 
 

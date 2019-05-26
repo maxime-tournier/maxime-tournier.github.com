@@ -5,6 +5,8 @@ categories: [math]
 
 Some more general abstract nonsense.
 
+{% include toc.md %}
+
 # Categories
 
 A category $$\mathcal{C}$$ is given by the following:
@@ -22,10 +24,11 @@ satisfying the following properties:
   
    $$h \circ \block{g  \circ g} = \block{h \circ g} \circ f$$
 
-- for all objects $$c \in \Ob{c}$$, there exists an *identity morphism* $$1_c \in
-  \hom{C}{c, c}$$ such that for any morphism $$f: a \to b$$, the following holds:
+- for all objects $$c \in \Ob{c}$$, there exists an *identity
+  morphism* $$\id_c \in \hom{C}{c, c}$$ such that for any morphism
+  $$f: a \to b$$, the following holds:
   
-  $$1_b \circ f = f = f \circ 1_a$$
+  $$\id_b \circ f = f = f \circ \id_a$$
   
 When $$\hom{C}{a, b}$$ are all sets, the category $$\cat{C}$$ is said *locally
 small*, which is generally the case for all practical purposes. Likewise, when
@@ -46,6 +49,8 @@ $$f^{op} \in \hom{\op{C}}{b, a} \iff f \in \hom{C}{a, b}$$
 
 ### Monoids
 
+## Product Category
+
 # Functors
 
 Functors are structure-preserving maps between categories: they preserve
@@ -53,24 +58,95 @@ identities and composition. Let us consider two categories $$\cat{C}$$ and
 $$\cat{D}$$, a functor $$F$$ between them is given by:
 
 - for each object $$c \in \Ob{C}$$, a unique object $$F(c) \in\Ob{D}$$
-- for each morphism $$f: a \to b \in \Ob{C}$$, a unique morphism $$F(f): F(a) \to F(b)$$
+- for each morphism $$f: a \to b \in \Ob{C}$$, a unique morphism
+  $$F(f): F(a) \to F(b)$$
 
 satisfying the following properties:
 
-- for all objects $$c \in \Ob{C}$$, identities are preserved: 
+- for all objects $$c \in \Ob{C}$$, identity morphisms are preserved:
 
-$$F\block{1_c} = 1_{F(c)}$$
+$$F\block{\id_c} = \id_{F(c)}$$
 
-- for all morphisms $$f: a \to b$$ and $$g: b \to c$$, composition is preserved: 
+- for all morphisms $$f: a \to b$$ and $$g: b \to c$$, their
+  composition is preserved:
 
 $$F\block{g \circ f} = F(g) \circ F(f)$$
 
-There is a category $$\mathrm{Cat}$$ of locally small categories, in which
-functors are the morphisms.
+In particular, functors can never "disconnect" connected
+objects. There is a category $$\mathrm{Cat}$$ of locally small
+categories, in which functors are the morphisms, which justifies the
+notation of functors as morphisms:
+
+$$F: \cat{C} \to \cat{D}$$
 
 ## Diagrams
 
 # Natural Transformations
+
+Natural transformations are the categorical equivalent of homotopies:
+given two categories $$\cat{C}$$ and $$\cat{D}$$ and two functors $$F:
+\cat{C} \to \cat{D}$$ and $$G: \cat{C} \to \cat{D}$$, a *natural
+transformation* between $$F$$ and $$G$$ is a functor:
+
+$$\alpha: \cat{C} \times \cat{I} \to \cat{D}$$
+
+where $$\cat{I}$$ is the so-called *interval category* with a unique
+non-trivial morphism between two objects:
+
+$$\cat{I} = \overset{0}\cdot \overset{!}\to \overset{1}\cdot$$
+
+and where $$\alpha$$ satisfies the following property:
+
+$$
+\begin{align}
+	\alpha\block{-, 0} &= F \\
+	\alpha\block{-, 1} &= G \\
+\end{align}
+$$
+
+Let us fix an object $$x \in \Ob{C}$$, the image of morphism
+$$\block{\id_x, !}$$ by $$\alpha$$ is a morphism:
+
+$$\alpha\block{\id_x, !}: F(x) \to G(x)$$
+
+called the *component* of $$\alpha$$ at $$x$$. Since there is a unique
+such morphism $$\block{\id_x, !}$$ for each $$x$$, its image by
+$$\alpha$$ is denoted by $$\alpha_x$$. Now let $$f: x \to y$$ be a
+morphism in $$\Hom{C}$$, we consider the following morphism in
+$$\Hom{C \times I}$$:
+
+$$(f, !): (x, 0) \to (y, 1)$$
+
+This morphism decomposes as:
+
+$$\begin{align}
+	(f, !) &= \block{f, \id_1} \circ \block{\id_x, !} \\
+	       &= \block{\id_y, !} \circ \block{f, \id_0} \\
+\end{align}$$
+
+hence its image by $$\alpha$$ satisfies:
+
+$$\begin{align}
+\alpha(f, !) 
+&= \alpha\block{f, \id_1} \circ \alpha\block{\id_x, !} \\
+&= \alpha\block{\id_y, !} \circ \alpha\block{f, \id_0} \\
+\end{align}$$
+
+which can be rewritten succintly as:
+
+$$\block{G(f), \id_1} \circ \alpha_x = \alpha_y \circ \block{F(f), \id_0}$$
+
+In other words, the following diagram commutes:
+
+$$\begin{matrix}
+	F(x) & \overset{F(f)}\longrightarrow & F(y)  \\
+	\alpha(x) \downarrow &  & \downarrow \alpha(y) \\
+	G(x) & \underset{G(f)}\longrightarrow & G(y) \\
+\end{matrix}$$
+
+This diagram is called the *naturality square* for $$\alpha$$. The
+natural transformation $$\alpha$$ is completely determined by its
+components (and associated naturality squares).
 
 # Limits and Colimits
 

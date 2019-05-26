@@ -61,8 +61,7 @@ $$
 \newcommand{\op}[1]{\cat{#1}^{op}}
 
 \newcommand{\hom}[2]{\cat{#1}\block{#2}}
-
-\block{#2}}
+\newcommand{\id}{\mathrm{id}}
 
 $$
 

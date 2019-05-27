@@ -157,10 +157,47 @@ $$\begin{matrix}
 	& G(x) & \underset{G(f)}\longrightarrow & G(y) & \\
 \end{matrix}$$
 
-This commutative diagram is called the *naturality square* for $$\alpha$$. The
-natural transformation $$\alpha$$ is completely determined by its components
-(and associated naturality squares), which are generally used for definitions
-instead of the homotopical point of view.
+This commutative diagram is called the *naturality square* for
+$$\alpha$$. The natural transformation $$\alpha$$ is completely
+determined by its components (and associated naturality squares),
+which are generally used as its definition.
+
+## Functor Categories
+
+Given three functors $$F, G, H: \cat{C} \to \cat{D}$$ and natural
+transformations $$\alpha: F \to G$$ and $$\beta: G \to H$$, their
+*vertical composition* $$\beta \circ \alpha$$ has components:
+
+$$(\beta \circ \alpha)(x) = \beta(x) \circ \alpha(x)$$
+
+One can easily check the naturality conditions from those of
+$$\alpha$$ and $$\beta$$:
+
+$$\begin{matrix}
+	& F(x) & \overset{F(f)}\longrightarrow & F(y) & \\
+	\alpha(x) \hspace{-1.5em} &\downarrow &  & \downarrow & \hspace{-1.5em} \alpha(y) \\
+	& G(x) & \overset{G(f)}\longrightarrow & G(y) & \\
+	\beta(x) \hspace{-1.5em} &\downarrow &  & \downarrow & \hspace{-1.5em} \beta(y) \\
+	& H(x) & \underset{H(f)}\longrightarrow & H(y) & \\
+\end{matrix}$$
+
+Moreover, for any functor $$F: \cat{C} \to \cat{D}$$ there exists an
+*identity* natural transformation $$\id_F$$ from $$F$$ to itself,
+whose components are the identity morphisms:
+
+$$(\id_F)(x): F(x) \to F(x) = \id_{F(x)}$$
+
+Therefore, we just obtained another category called the *functor
+category*, denoted by $$[\cat{C}, \cat{D}]$$, where objects are
+functors from $$\cat{C}$$ to $$\cat{D}$$ and morphisms are natural
+transformations.
+
+
+
+
+# Yoneda's Lemma
+
+
 
 # Limits and Colimits
 
@@ -182,7 +219,6 @@ instead of the homotopical point of view.
 # Monads
 
 
-# Yoneda's Lemma
 
 
 

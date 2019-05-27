@@ -30,9 +30,10 @@ satisfying the following properties:
   
   $$\id_b \circ f = f = f \circ \id_a$$
   
-When $$\hom{C}{a, b}$$ are all sets, the category $$\cat{C}$$ is said *locally
-small*, which is generally the case for all practical purposes. Likewise, when
-$$\Hom{C}$$ is a set, the category is said *small*.
+One can easily check that identity morphisms are unique. When $$\hom{C}{a, b}$$
+are all sets, the category $$\cat{C}$$ is said *locally small*, which is
+generally the case for all practical purposes. Likewise, when $$\Hom{C}$$ is a
+set, the category is said *small*.
 
 ## Opposite Category
 
@@ -40,6 +41,9 @@ Given one category $$\cat{C}$$, one can construct its *opposite category*
 $$\op{C}$$, obtained from the same objects and reversing all morphisms:
 
 $$f^{op} \in \hom{\op{C}}{b, a} \iff f \in \hom{C}{a, b}$$
+
+## Product Category
+
 
 ## Examples
 
@@ -49,7 +53,6 @@ $$f^{op} \in \hom{\op{C}}{b, a} \iff f \in \hom{C}{a, b}$$
 
 ### Monoids
 
-## Product Category
 
 # Functors
 
@@ -136,17 +139,19 @@ which can be rewritten succintly as:
 
 $$\block{G(f), \id_1} \circ \alpha_x = \alpha_y \circ \block{F(f), \id_0}$$
 
-In other words, the following diagram commutes:
+In other words, the following diagram is *commutative*, meaning that all
+parallel arrows are equal:
 
 $$\begin{matrix}
-	F(x) & \overset{F(f)}\longrightarrow & F(y)  \\
-	\alpha(x) \downarrow &  & \downarrow \alpha(y) \\
-	G(x) & \underset{G(f)}\longrightarrow & G(y) \\
+	& F(x) & \overset{F(f)}\longrightarrow & F(y) & \\
+	\alpha(x) \hspace{-1.5em} &\downarrow &  & \downarrow & \hspace{-1.5em} \alpha(y) \\
+	& G(x) & \underset{G(f)}\longrightarrow & G(y) & \\
 \end{matrix}$$
 
-This diagram is called the *naturality square* for $$\alpha$$. The
-natural transformation $$\alpha$$ is completely determined by its
-components (and associated naturality squares).
+This commutative diagram is called the *naturality square* for $$\alpha$$. The
+natural transformation $$\alpha$$ is completely determined by its components
+(and associated naturality squares), which are generally used for definitions
+instead of the homotopical point of view.
 
 # Limits and Colimits
 

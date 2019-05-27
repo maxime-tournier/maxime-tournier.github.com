@@ -19,9 +19,9 @@ The class of morphisms from $$a$$ to $$b$$ is denoted by $$\hom{C}{a,
   b}$$. For $$\cat{C}$$ to be a category, it must satisfy the
   following properties:
 
-- for all morphisms $$f: a \to b$$ and $$g: b \to c$$, there exists a unique
-  morphism $$g \circ f:a \to c$$ called the *composition* of $$g$$ and $$f$$,
-  and the composition is *associative*:
+- for all morphisms $$f: a \to b$$ and $$g: b \to c$$, there exists a
+  morphism $$g \circ f:a \to c$$ called the *composition* of $$g$$ and
+  $$f$$, and the composition is *associative*:
   
    $$h \circ \block{g  \circ f} = \block{h \circ g} \circ f$$
 

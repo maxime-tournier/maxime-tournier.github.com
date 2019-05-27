@@ -13,16 +13,17 @@ A category $$\mathcal{C}$$ is given by the following:
 
 - a class[^1] of *objects* $$\Ob{C}$$
 - a class of *morphisms* $$\Hom{C}$$, whose elements $$f$$ have a *source* object
-  and a *target* object, denoted by $$f: a \to b$$. The class of morphisms from
-  $$a$$ to $$b$$ is denoted by $$\hom{C}{a, b}$$.
+  and a *target* object, denoted by $$f: a \to b$$. 
   
-satisfying the following properties:
+The class of morphisms from $$a$$ to $$b$$ is denoted by $$\hom{C}{a,
+  b}$$. For $$\cat{C}$$ to be a category, it must satisfy the
+  following properties:
 
 - for all morphisms $$f: a \to b$$ and $$g: b \to c$$, there exists a unique
   morphism $$g \circ f:a \to c$$ called the *composition* of $$g$$ and $$f$$,
   and the composition is *associative*:
   
-   $$h \circ \block{g  \circ g} = \block{h \circ g} \circ f$$
+   $$h \circ \block{g  \circ f} = \block{h \circ g} \circ f$$
 
 - for all objects $$c \in \Ob{c}$$, there exists an *identity
   morphism* $$\id_c \in \hom{C}{c, c}$$ such that for any morphism
@@ -86,8 +87,7 @@ $$F\block{g \circ f} = F(g) \circ F(f)$$
 
 In particular, functors can never "disconnect" connected
 objects. There is a category $$\mathrm{Cat}$$ of locally small
-categories, in which functors are the morphisms, which justifies the
-notation of functors as morphisms:
+categories, in which functors are the morphisms:
 
 $$F: \cat{C} \to \cat{D}$$
 

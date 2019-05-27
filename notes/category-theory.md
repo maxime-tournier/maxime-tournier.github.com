@@ -33,7 +33,16 @@ satisfying the following properties:
 One can easily check that identity morphisms are unique. When $$\hom{C}{a, b}$$
 are all sets, the category $$\cat{C}$$ is said *locally small*, which is
 generally the case for all practical purposes. Likewise, when $$\Hom{C}$$ is a
-set, the category is said *small*.
+set, the category is said *small*. 
+
+
+## Morphisms
+
+A morphism $$f: a \to b$$ is:
+
+- a *monomorphism* when $$f \circ g_1 = f \circ g_2 \Rightarrow g_1 = g_2$$ for all $$g_1, g_2: x \to a$$
+- an *epimorphism* when  $$g_1 \circ f = g_2 \circ f \Rightarrow g_1 = g_2$$ for all $$g_1, g_2: b \to y$$
+- an *isomorphism* when there exists $$g: b \to a$$ such that $$\id_a = g \circ f$$ and $$\id_b = f \circ g$$
 
 ## Opposite Category
 
@@ -48,10 +57,10 @@ $$f^{op} \in \hom{\op{C}}{b, a} \iff f \in \hom{C}{a, b}$$
 ## Examples
 
 ### Preorders
-    
-### Graph Paths
 
 ### Monoids
+
+### Graphs
 
 
 # Functors

@@ -62,7 +62,7 @@ $$
 
 \newcommand{\hom}[2]{\cat{#1}\block{#2}}
 \newcommand{\id}{\mathrm{id}}
-
+\newcommand{\Set}{\mathrm{Set}}
 $$
 
 </div>

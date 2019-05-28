@@ -191,11 +191,32 @@ functors from $$\cat{C}$$ to $$\cat{D}$$ and morphisms are natural
 transformations.
 
 
-
-
 # Yoneda's Lemma
 
+## Hom-Functors
 
+Let $$\cat{C}$$ be a locally small category and $$\Set$$ be the
+category of sets. Let us also fix some object $$a \in \Ob{C}$$, and
+consider the two following functors:
+
+### Covariant
+
+$$\begin{align}
+H^a: \cat{C} &\to \mathrm{Set}\\
+x &\mapsto \hom{C}{a, x} \\
+(f: x \to y) &\mapsto H^a(f): \hom{C}{a, x} \to \hom{C}{a, y} = (g \mapsto f \circ g) \\
+\end{align}$$
+
+### Contravariant
+
+$$\begin{align}
+H_a: \op{C} &\to \mathrm{Set}\\
+x &\mapsto \hom{C}{x, a} \\
+(f: y \to x) &\mapsto H_a(f): \hom{C}{x, a} \to \hom{C}{y, a} = (g \mapsto g \circ f) \\
+\end{align}$$
+
+One can easily check that both $$H^a$$ and $$H_a$$ are indeed
+functors.
 
 # Limits and Colimits
 

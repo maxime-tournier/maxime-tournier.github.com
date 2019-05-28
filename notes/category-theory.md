@@ -87,9 +87,7 @@ $$F\block{g \circ f} = F(g) \circ F(f)$$
 
 In particular, functors can never "disconnect" connected
 objects. There is a category $$\mathrm{Cat}$$ of locally small
-categories, in which functors are the morphisms:
-
-$$F: \cat{C} \to \cat{D}$$
+categories, in which functors are the morphisms.
 
 ## Diagrams
 

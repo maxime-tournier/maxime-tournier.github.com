@@ -242,7 +242,7 @@ $$\begin{matrix}
 	& H_b(x) & \underset{H_b(f)}\longrightarrow & H_b(y) & \\
 \end{matrix}$$
 
-Given any morphism $$g: x \to a \in H_a(x) = \hom{C}{x, a}$$, we obtain:
+Given any morphism $$g: x \to a \in H_a(x)$$, we obtain:
 
 $$\begin{align}
 g &\overset{H_a(f)}\mapsto g \circ f \\

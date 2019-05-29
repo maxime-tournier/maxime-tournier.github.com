@@ -151,7 +151,7 @@ parallel arrows are equal:
 
 $$\begin{matrix}
 	& F(x) & \overset{F(f)}\longrightarrow & F(y) & \\
-	\alpha(x) \hspace{-1.5em} &\downarrow &  & \downarrow & \hspace{-1.5em} \alpha(y) \\
+	\alpha_x \hspace{-1.5em} &\downarrow &  & \downarrow & \hspace{-1.5em} \alpha_y \\
 	& G(x) & \underset{G(f)}\longrightarrow & G(y) & \\
 \end{matrix}$$
 
@@ -166,16 +166,16 @@ Given three functors $$F, G, H: \cat{C} \to \cat{D}$$ and natural
 transformations $$\alpha: F \to G$$ and $$\beta: G \to H$$, their
 *vertical composition* $$\beta \circ \alpha$$ has components:
 
-$$(\beta \circ \alpha)(x) = \beta(x) \circ \alpha(x)$$
+$$(\beta \circ \alpha)_x = \beta_x \circ \alpha_x$$
 
 One can easily check the naturality conditions from those of
 $$\alpha$$ and $$\beta$$:
 
 $$\begin{matrix}
 	& F(x) & \overset{F(f)}\longrightarrow & F(y) & \\
-	\alpha(x) \hspace{-1.5em} &\downarrow &  & \downarrow & \hspace{-1.5em} \alpha(y) \\
+	\alpha_x \hspace{-1.5em} &\downarrow &  & \downarrow & \hspace{-1.5em} \alpha_y \\
 	& G(x) & \overset{G(f)}\longrightarrow & G(y) & \\
-	\beta(x) \hspace{-1.5em} &\downarrow &  & \downarrow & \hspace{-1.5em} \beta(y) \\
+	\beta_x \hspace{-1.5em} &\downarrow &  & \downarrow & \hspace{-1.5em} \beta_y \\
 	& H(x) & \underset{H(f)}\longrightarrow & H(y) & \\
 \end{matrix}$$
 
@@ -183,7 +183,7 @@ Moreover, for any functor $$F: \cat{C} \to \cat{D}$$ there exists an
 *identity* natural transformation $$\id_F$$ from $$F$$ to itself,
 whose components are the identity morphisms:
 
-$$(\id_F)(x): F(x) \to F(x) = \id_{F(x)}$$
+$$(\id_F)_x: F(x) \to F(x) = \id_{F(x)}$$
 
 Therefore, we just obtained another category called the *functor
 category*, denoted by $$[\cat{C}, \cat{D}]$$, where objects are
@@ -216,7 +216,45 @@ x &\mapsto \hom{C}{x, a} \\
 \end{align}$$
 
 One can easily check that both $$H^a$$ and $$H_a$$ are indeed
-functors.
+functors. Now, let us consider the *Yoneda embedding*, which is the
+following functor:
+
+$$\begin{align}
+Y: \cat{C} &\to [\op{C}, \Set]\\
+a &\mapsto H_a \\
+(f: a \to b) &\mapsto Y(f): H_a \to H_b \\
+\end{align}$$
+
+For $$Y(f)$$ to be a natural transformation from $$H_a$$ to $$H_b$$,
+it must have components $$Y(f)_x: H_a(x) \to H_b(x)$$, that is:
+
+$$Y(f)_x: \hom{C}{x, a} \to \hom{C}{x, b}$$
+
+The obvious choice given $$f: a \to b$$ is to have:
+
+$$Y(f)_x = (g \mapsto f \circ g)$$
+
+The naturality square for $$Y(f)$$ is the following:
+
+$$\begin{matrix}
+	& H_a(x) & \overset{H_a(f)}\longrightarrow & H_a(y) & \\
+	Y(f)_x \hspace{-1.5em} &\downarrow &  & \downarrow & \hspace{-1.5em} Y(f)_y \\
+	& H_b(x) & \underset{H_b(f)}\longrightarrow & H_b(y) & \\
+\end{matrix}$$
+
+Given any morphism $$g: x \to a \in \hom{C}{x, a} = H_a(x)$$, we obtain:
+
+$$\begin{align}
+g &\overset{H_a(f)}\mapsto g \circ f \\
+g &\overset{Y(f)_x}\mapsto f \circ g \\
+f \circ g &\overset{H_b(f)}\mapsto (f \circ g) \circ f \\
+g \circ f &\overset{Y(f)_y}\mapsto f \circ (g \circ f) \\
+\end{align}$$
+
+where the two last lines are equal by associativity of morphism
+composition, showing the naturality square above indeed commutes and
+the Yoneda embedding is indeed a functor.
+
 
 # Limits and Colimits
 

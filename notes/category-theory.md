@@ -263,9 +263,9 @@ functor.
 
 ## Yoneda
 
-Let us finally consider some functor $$F: \op{C} \to \Set$$ and some
-natural transformation $$\alpha: H_a \to F$$, with naturality square
-as follows, with $$h: y \to x$$:
+Let us finally consider some functor $$F: \op{C} \to \Set$$, a
+morphism $$h: y \to x$$ and some natural transformation $$\alpha: H_a
+\to F$$ with naturality square as follows:
 
 $$\natsq{\alpha}{H_a}{F}{x}{y}{h}$$
 

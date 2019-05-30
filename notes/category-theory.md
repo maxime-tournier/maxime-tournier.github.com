@@ -191,7 +191,7 @@ functors from $$\cat{C}$$ to $$\cat{D}$$ and morphisms are natural
 transformations.
 
 
-# Yoneda's Lemma
+# The Yoneda Lemma
 
 ## Hom-Functors
 
@@ -201,19 +201,27 @@ consider the two following functors:
 
 ### Covariant
 
+$$H^a$$ connects set of morphisms starting at $$a$$ by post-composition:
+
 $$\begin{align}
 H^a: \cat{C} &\to \mathrm{Set}\\
 x &\mapsto \hom{C}{a, x} \\
 (f: x \to y) &\mapsto H^a(f): \hom{C}{a, x} \to \hom{C}{a, y} = (g \mapsto f \circ g) \\
 \end{align}$$
 
+
 ### Contravariant
+
+$$H_a$$ connects set of morphisms ending at $$a$$ by pre-composition:
 
 $$\begin{align}
 H_a: \op{C} &\to \mathrm{Set}\\
 x &\mapsto \hom{C}{x, a} \\
 (f: y \to x) &\mapsto H_a(f): \hom{C}{x, a} \to \hom{C}{y, a} = (g \mapsto g \circ f) \\
 \end{align}$$
+
+
+## Yoneda Embedding
 
 One can easily check that both $$H^a$$ and $$H_a$$ are indeed
 functors. Now, let us consider the *Yoneda embedding*, which is the
@@ -230,30 +238,31 @@ it must have components $$Y(f)_x: H_a(x) \to H_b(x)$$, that is:
 
 $$Y(f)_x: \hom{C}{x, a} \to \hom{C}{x, b}$$
 
-The obvious choice given $$f: a \to b$$ is to have:
+The obvious choice given $$f: a \to b$$ is to post-compose by $$f$$:
 
 $$Y(f)_x = (g \mapsto f \circ g)$$
 
-The naturality square for $$Y(f)$$ is the following:
+Given a morphism $$h: y \to x$$, the naturality square for $$Y(f)$$ is
+the following:
 
 $$\begin{matrix}
-	& H_a(x) & \overset{H_a(f)}\longrightarrow & H_a(y) & \\
+	& H_a(x) & \overset{H_a(h)}\longrightarrow & H_a(y) & \\
 	Y(f)_x \hspace{-1.5em} &\downarrow &  & \downarrow & \hspace{-1.5em} Y(f)_y \\
-	& H_b(x) & \underset{H_b(f)}\longrightarrow & H_b(y) & \\
+	& H_b(x) & \underset{H_b(h)}\longrightarrow & H_b(y) & \\
 \end{matrix}$$
 
-Given any morphism $$g: x \to a \in H_a(x)$$, we obtain:
+To check that this diagram is indeed commutative, we start from any
+morphism $$g: x \to a \in H_a(x)$$ and follow both sides of the
+diagram:
 
-$$\begin{align}
-g &\overset{H_a(f)}\mapsto g \circ f \\
-g &\overset{Y(f)_x}\mapsto f \circ g \\
-f \circ g &\overset{H_b(f)}\mapsto (f \circ g) \circ f \\
-g \circ f &\overset{Y(f)_y}\mapsto f \circ (g \circ f) \\
-\end{align}$$
+$$\begin{matrix}
+g &\overset{H_a(h)}\longmapsto & g \circ h &\overset{Y(f)_y}\longmapsto & f \circ (g \circ h)  \\
+g &\overset{Y(f)_x}\longmapsto & f \circ g &\overset{H_b(h)}\longmapsto & (f \circ g) \circ h  \\
+\end{matrix}$$
 
-where the two last lines are equal by associativity of morphism
-composition, showing the naturality square above indeed commutes and
-the Yoneda embedding is indeed a functor.
+The associativity of morphism composition shows that the naturality
+square above indeed commutes and that the Yoneda embedding is indeed a
+functor.
 
 
 # Limits and Colimits

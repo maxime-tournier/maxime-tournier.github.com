@@ -149,11 +149,7 @@ $$\block{G(f), \id_1} \circ \alpha_x = \alpha_y \circ \block{F(f), \id_0}$$
 In other words, the following diagram is *commutative*, meaning that all
 parallel arrows are equal:
 
-$$\begin{matrix}
-	& F(x) & \overset{F(f)}\longrightarrow & F(y) & \\
-	\alpha_x \hspace{-1.5em} &\downarrow &  & \downarrow & \hspace{-1.5em} \alpha_y \\
-	& G(x) & \underset{G(f)}\longrightarrow & G(y) & \\
-\end{matrix}$$
+$$\natsq{\alpha}{F}{G}{x}{y}{f}$$
 
 This commutative diagram is called the *naturality square* for
 $$\alpha$$. The natural transformation $$\alpha$$ is completely
@@ -190,6 +186,8 @@ category*, denoted by $$[\cat{C}, \cat{D}]$$, where objects are
 functors from $$\cat{C}$$ to $$\cat{D}$$ and morphisms are natural
 transformations.
 
+## Natural Isomorphisms
+
 
 # The Yoneda Lemma
 
@@ -199,7 +197,7 @@ Let $$\cat{C}$$ be a locally small category and $$\Set$$ be the
 category of sets. Let us also fix some object $$a \in \Ob{C}$$, and
 consider the two following functors:
 
-### Covariant
+### Covariant Hom-Functor
 
 $$H^a$$ connects set of morphisms starting at $$a$$ by post-composition:
 
@@ -210,7 +208,7 @@ x &\mapsto \hom{C}{a, x} \\
 \end{align}$$
 
 
-### Contravariant
+### Contravariant Hom-Functor
 
 $$H_a$$ connects set of morphisms ending at $$a$$ by pre-composition:
 
@@ -220,6 +218,9 @@ x &\mapsto \hom{C}{x, a} \\
 (f: y \to x) &\mapsto H_a(f): \hom{C}{x, a} \to \hom{C}{y, a} = (g \mapsto g \circ f) \\
 \end{align}$$
 
+$$H_a$$ and $$H^a$$ are sometimes called *the* (covariant,
+contravariant) representable functors, and any functor naturally
+isomorphic to one of them is called representable as well.
 
 ## Yoneda Embedding
 
@@ -245,11 +246,7 @@ $$Y(f)_x = (g \mapsto f \circ g)$$
 Given a morphism $$h: y \to x$$, the naturality square for $$Y(f)$$ is
 the following:
 
-$$\begin{matrix}
-	& H_a(x) & \overset{H_a(h)}\longrightarrow & H_a(y) & \\
-	Y(f)_x \hspace{-1.5em} &\downarrow &  & \downarrow & \hspace{-1.5em} Y(f)_y \\
-	& H_b(x) & \underset{H_b(h)}\longrightarrow & H_b(y) & \\
-\end{matrix}$$
+$$\natsq{Y(f)}{H_a}{H_b}{x}{y}{h}$$
 
 To check that this diagram is indeed commutative, we start from any
 morphism $$g: x \to a \in H_a(x)$$ and follow both sides of the
@@ -264,7 +261,15 @@ The associativity of morphism composition shows that the naturality
 square above indeed commutes and that the Yoneda embedding is indeed a
 functor.
 
+## Yoneda
 
+Let us finally consider some functor $$F: \op{C} \to \Set$$ and some
+natural transformation $$\alpha: H_a \to F$$, with naturality square
+as follows, with $$h: y \to x$$:
+
+$$\natsq{\alpha}{H_a}{F}{x}{y}{h}$$
+
+ 
 # Limits and Colimits
 
 ## Initial and Terminal Objects

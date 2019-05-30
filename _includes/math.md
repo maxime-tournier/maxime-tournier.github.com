@@ -63,6 +63,15 @@ $$
 \newcommand{\hom}[2]{\cat{#1}\block{#2}}
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\Set}{\mathrm{Set}}
+
+\newcommand{\natsq}[6]{
+\begin{matrix}
+	& #2\block{#4} & \overset{#2\block{#6}}\longrightarrow & #2\block{#5} & \\
+	#1_{#4} \hspace{-1.5em} &\downarrow &  & \downarrow & \hspace{-1.5em} #1_{#5}\\
+	& #3\block{#4} & \underset{#3\block{#6}}\longrightarrow & #3\block{#5} & \\
+\end{matrix}
+}
+
 $$
 
 </div>

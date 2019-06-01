@@ -348,7 +348,7 @@ category of contravariant functors from itself to sets (*presheaves*).
 ## Covariant Case
 
 All of the above translates fairly directly to the covariant case,
-yielding:
+giving:
 
 $$F(a) \simeq \hom{\funcat{C, \Set}}{H^a, F}$$
 

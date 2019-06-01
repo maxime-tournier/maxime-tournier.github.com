@@ -59,9 +59,27 @@ $$f^{op} \in \hom{\op{C}}{b, a} \iff f \in \hom{C}{a, b}$$
 
 ### Preorders
 
+A preorder on a set can be seen as a locally small category
+$$\cat{C}$$ where the objects are elements of the set and there is
+exactly one morphism between any two comparable objects:
+
+$$f: a \to b \iff a \leq b$$
+
+Reflexivity and transitivity axioms of the preorder provide the
+requirements for $$\cat{C}$$ to be a category. Associativity comes
+from the fact that there is *at most* one morphism between any two
+objects.
+
 ### Monoids
 
-### Graphs
+A monoid can be seen as a category with a single object, and where
+morphisms are the elements of the monoid.
+
+### Groups 
+
+A group is a monoid, so it can also be seen as a category with a
+single objects and where morphism are the group elements but in this
+case, every morphism is an isomorphism.
 
 
 # Functors
@@ -89,7 +107,21 @@ In particular, functors can never "disconnect" connected
 objects. There is a category $$\mathrm{Cat}$$ of locally small
 categories, in which functors are the morphisms.
 
-## Full and Faithful functors
+## Full and Faithful Functors
+
+Functors between locally small categories induce functions between
+hom-sets. Let $$F: \cat{C} \to \cat{D}$$ be a functor between such
+categories $$\cat{C}$$ and $$\cat{D}$$, we have:
+
+$$F_{x, y}: \hom{C}{x, y} \to \hom{D}{F(x), F(y)}$$
+
+The functor $$F$$ is said to be:
+
+- *faithful* if $$F_{x, y}$$ is injective
+- *full* if $$F_{x, y}$$ is surjective
+- *fully faithful* if $$F_{x, y}$$ is bijective
+
+for every object $$x, y \in \Ob{C}$$.
 
 ## Diagrams
 

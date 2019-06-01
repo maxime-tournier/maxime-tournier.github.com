@@ -39,7 +39,7 @@ set, the category is said *small*.
 
 ## Morphisms
 
-A morphism $$f: a \to b$$ is:
+A morphism $$f: a \to b$$ is called:
 
 - a *monomorphism* when $$f \circ g_1 = f \circ g_2 \Rightarrow g_1 = g_2$$ for all $$g_1, g_2: x \to a$$
 - an *epimorphism* when  $$g_1 \circ f = g_2 \circ f \Rightarrow g_1 = g_2$$ for all $$g_1, g_2: b \to y$$

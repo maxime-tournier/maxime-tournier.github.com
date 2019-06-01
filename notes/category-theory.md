@@ -234,7 +234,8 @@ consider the two following functors:
 
 ### Covariant Hom-Functor
 
-$$H^a$$ connects set of morphisms starting at $$a$$ by post-composition:
+$$H^a$$ connects sets of morphisms starting at $$a$$ by mapping a
+morphism to its post-composition:
 
 $$\begin{align}
 H^a: \cat{C} &\to \mathrm{Set}\\
@@ -245,7 +246,8 @@ x &\mapsto \hom{C}{a, x} \\
 
 ### Contravariant Hom-Functor
 
-$$H_a$$ connects set of morphisms ending at $$a$$ by pre-composition:
+$$H_a$$ connects sets of morphisms ending at $$a$$ by mapping a
+morphism to its pre-composition:
 
 $$\begin{align}
 H_a: \op{C} &\to \mathrm{Set}\\
@@ -269,7 +271,8 @@ a &\mapsto H_a \\
 (f: a \to b) &\mapsto H_{f}: H_a \to H_b \\
 \end{align}$$
 
-For $$H_f$$ to be a natural transformation from $$H_a$$ to $$H_b$$,
+For $$H_f$$ to be a natural transformation (*i.e.* a morphism of the
+functor category $$\funcat{\op{C}, \Set}$$) from $$H_a$$ to $$H_b$$,
 it must have components $$\block{H_f}_x: H_a(x) \to H_b(x)$$, that is:
 
 $$\block{H_f}_x: \hom{C}{x, a} \to \hom{C}{x, b}$$
@@ -283,9 +286,9 @@ the following:
 
 $$\natsq{\block{H_f}}{H_a}{H_b}{x}{y}{h}$$
 
-To check that this diagram is indeed commutative, we start from any
-morphism $$g: x \to a \in H_a(x)$$ and follow both sides of the
-diagram:
+In order to check that this diagram is indeed commutative, we start
+from any morphism $$g: x \to a \in H_a(x)$$ and follow both sides of
+the diagram:
 
 $$\begin{matrix}
 g &\overset{H_a(h)}\longmapsto & g \circ h &\overset{\block{H_f}_y}\longmapsto & f \circ (g \circ h)  \\
@@ -293,9 +296,10 @@ g &\overset{\block{H_f}_x}\longmapsto & f \circ g &\overset{H_b(h)}\longmapsto &
 \end{matrix}$$
 
 The associativity of morphism composition shows that the naturality
-square above indeed commutes and that the Yoneda embedding is indeed a
-functor. The Yoneda *lemma* will establish that this functor is *fully
-faithful*, *i.e.* that the Yoneda embedding is indeed an embedding.
+square above indeed commutes, and that the Yoneda embedding is indeed
+a functor. The Yoneda *lemma* will establish that this functor is
+*fully faithful*, *i.e.* that the Yoneda embedding is indeed an
+embedding.
 
 ## Lemma and Consequence
 

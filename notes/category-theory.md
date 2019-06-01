@@ -196,7 +196,7 @@ transformations.
 ## Representable Functors
 
 Let $$\cat{C}$$ be a locally small category and $$\Set$$ be the
-category of sets. Let us also fix some object $$a \in \Ob{C}$$, and
+category of sets. Let us also fix an object $$a \in \Ob{C}$$, and
 consider the two following functors:
 
 ### Covariant Hom-Functor
@@ -237,26 +237,26 @@ a &\mapsto H_a \\
 \end{align}$$
 
 For $$H_f$$ to be a natural transformation from $$H_a$$ to $$H_b$$,
-it must have components $${H_f}_x: H_a(x) \to H_b(x)$$, that is:
+it must have components $$\block{H_f}_x: H_a(x) \to H_b(x)$$, that is:
 
-$${H_f}_x: \hom{C}{x, a} \to \hom{C}{x, b}$$
+$$\block{H_f}_x: \hom{C}{x, a} \to \hom{C}{x, b}$$
 
 The obvious choice given $$f: a \to b$$ is to post-compose by $$f$$:
 
-$${H_f}_x = (g \mapsto f \circ g)$$
+$$\block{H_f}_x = (g \mapsto f \circ g)$$
 
-Given a morphism $$h: y \to x$$, the naturality square for $$Y(f)$$ is
+Given a morphism $$h: y \to x$$, the naturality square for $$H_f$$ is
 the following:
 
-$$\natsq{H_f}{H_a}{H_b}{x}{y}{h}$$
+$$\natsq{\block{H_f}}{H_a}{H_b}{x}{y}{h}$$
 
 To check that this diagram is indeed commutative, we start from any
 morphism $$g: x \to a \in H_a(x)$$ and follow both sides of the
 diagram:
 
 $$\begin{matrix}
-g &\overset{H_a(h)}\longmapsto & g \circ h &\overset{\ {H_f}_y}\longmapsto & f \circ (g \circ h)  \\
-g &\overset{\ {H_f}_x}\longmapsto & f \circ g &\overset{H_b(h)}\longmapsto & (f \circ g) \circ h  \\
+g &\overset{H_a(h)}\longmapsto & g \circ h &\overset{\block{H_f}_y}\longmapsto & f \circ (g \circ h)  \\
+g &\overset{\block{H_f}_x}\longmapsto & f \circ g &\overset{H_b(h)}\longmapsto & (f \circ g) \circ h  \\
 \end{matrix}$$
 
 The associativity of morphism composition shows that the naturality

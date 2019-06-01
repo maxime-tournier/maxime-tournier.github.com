@@ -310,7 +310,7 @@ morphism $$h: x \to y$$ and a natural transformation $$\alpha: H_a
 $$\natsq{\alpha}{H_a}{F}{y}{x}{h}$$
 
 In particular, let us consider the case where $$y = a$$ and $$h: x \to
-a$$ is *any* element of $$H_a(x)$$ and follow the image of the
+a$$ is *any* element of $$H_a(x)$$ then follow the image of the
 identity morphism $$\id_a \in H_a(a)$$ along both sides of the
 naturality square:
 
@@ -326,9 +326,9 @@ is:
 
 $$\alpha_x = F(-) \block{\alpha_a\block{\id_a}}$$
 
-which is determined by the value of $$\alpha_a\block{\id_a} \in
-F(a)$$. Again, this holds for any $$x \in \op{C}$$, meaning $$\alpha$$
-itself is completely determined by the value of
+which is completely determined by the value of $$\alpha_a\block{\id_a}
+\in F(a)$$. Again, this holds for any $$x \in \op{C}$$, meaning
+$$\alpha$$ itself is completely determined by the value of
 $$\alpha_a\block{\id_a}$$. Conversely, any value in $$F(a)$$ can be
 used to *define* a natural transformation $$\alpha$$ by specifying the
 value $$\alpha_a\block{\id_a}$$. Therefore, we obtain the following

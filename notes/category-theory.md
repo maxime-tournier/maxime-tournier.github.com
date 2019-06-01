@@ -89,6 +89,8 @@ In particular, functors can never "disconnect" connected
 objects. There is a category $$\mathrm{Cat}$$ of locally small
 categories, in which functors are the morphisms.
 
+## Full and Faithful functors
+
 ## Diagrams
 
 # Natural Transformations
@@ -182,7 +184,7 @@ whose components are the identity morphisms:
 $$(\id_F)_x: F(x) \to F(x) = \id_{F(x)}$$
 
 Therefore, we just obtained another category called the *functor
-category*, denoted by $$[\cat{C}, \cat{D}]$$, where objects are
+category*, denoted by $$\funcat{\cat{C}, \cat{D}}$$, where objects are
 functors from $$\cat{C}$$ to $$\cat{D}$$ and morphisms are natural
 transformations.
 
@@ -191,7 +193,7 @@ transformations.
 
 # The Yoneda Lemma
 
-## Hom-Functors
+## Representable Functors
 
 Let $$\cat{C}$$ be a locally small category and $$\Set$$ be the
 category of sets. Let us also fix some object $$a \in \Ob{C}$$, and
@@ -229,45 +231,97 @@ functors. Now, let us consider the *Yoneda embedding*, which is the
 following functor:
 
 $$\begin{align}
-Y: \cat{C} &\to [\op{C}, \Set]\\
+H_{-}: \cat{C} &\to \funcat{\op{C}, \Set}\\
 a &\mapsto H_a \\
-(f: a \to b) &\mapsto Y(f): H_a \to H_b \\
+(f: a \to b) &\mapsto H_{f}: H_a \to H_b \\
 \end{align}$$
 
-For $$Y(f)$$ to be a natural transformation from $$H_a$$ to $$H_b$$,
-it must have components $$Y(f)_x: H_a(x) \to H_b(x)$$, that is:
+For $$H_f$$ to be a natural transformation from $$H_a$$ to $$H_b$$,
+it must have components $${H_f}_x: H_a(x) \to H_b(x)$$, that is:
 
-$$Y(f)_x: \hom{C}{x, a} \to \hom{C}{x, b}$$
+$${H_f}_x: \hom{C}{x, a} \to \hom{C}{x, b}$$
 
 The obvious choice given $$f: a \to b$$ is to post-compose by $$f$$:
 
-$$Y(f)_x = (g \mapsto f \circ g)$$
+$${H_f}_x = (g \mapsto f \circ g)$$
 
 Given a morphism $$h: y \to x$$, the naturality square for $$Y(f)$$ is
 the following:
 
-$$\natsq{Y(f)}{H_a}{H_b}{x}{y}{h}$$
+$$\natsq{H_f}{H_a}{H_b}{x}{y}{h}$$
 
 To check that this diagram is indeed commutative, we start from any
 morphism $$g: x \to a \in H_a(x)$$ and follow both sides of the
 diagram:
 
 $$\begin{matrix}
-g &\overset{H_a(h)}\longmapsto & g \circ h &\overset{Y(f)_y}\longmapsto & f \circ (g \circ h)  \\
-g &\overset{Y(f)_x}\longmapsto & f \circ g &\overset{H_b(h)}\longmapsto & (f \circ g) \circ h  \\
+g &\overset{H_a(h)}\longmapsto & g \circ h &\overset{\ {H_f}_y}\longmapsto & f \circ (g \circ h)  \\
+g &\overset{\ {H_f}_x}\longmapsto & f \circ g &\overset{H_b(h)}\longmapsto & (f \circ g) \circ h  \\
 \end{matrix}$$
 
 The associativity of morphism composition shows that the naturality
 square above indeed commutes and that the Yoneda embedding is indeed a
-functor.
+functor. The Yoneda *lemma* will establish that this functor is *fully
+faithful*, *i.e.* that the Yoneda embedding is indeed an embedding.
 
-## Yoneda
+## Lemma and Consequence
 
 Let us finally consider some functor $$F: \op{C} \to \Set$$, a
-morphism $$h: y \to x$$ and some natural transformation $$\alpha: H_a
+morphism $$h: x \to y$$ and some natural transformation $$\alpha: H_a
 \to F$$ with naturality square as follows:
 
-$$\natsq{\alpha}{H_a}{F}{x}{y}{h}$$
+$$\natsq{\alpha}{H_a}{F}{y}{x}{h}$$
+
+In particular, let us consider the case where $$y = a$$ and $$h: x \to
+a$$ is *any* element of $$H_a(x)$$ and follow the image of the
+identity morphism $$\id_a \in H_a(a)$$ along both sides of the
+naturality square:
+
+$$
+\begin{matrix}
+	\id_a &\longmapsto& \alpha_a\block{\id_a} &\longmapsto & F(h)\block{\alpha_a\block{\id_a}} \\
+	\id_a &\longmapsto& \id_a \circ h &\longmapsto & \alpha_x(h) \\
+\end{matrix}
+$$
+
+Since this holds for any $$h\in H_a(x)$$, the component $$\alpha_x$$
+is:
+
+$$\alpha_x = F(-) \block{\alpha_a\block{\id_a}}$$
+
+which is determined by the value of $$\alpha_a\block{\id_a} \in
+F(a)$$. Again, this holds for any $$x \in \op{C}$$, meaning $$\alpha$$
+itself is completely determined by the value of
+$$\alpha_a\block{\id_a}$$. Conversely, any value in $$F(a)$$ can be
+used to *define* a natural transformation $$\alpha$$ by specifying the
+value $$\alpha_a\block{\id_a}$$. Therefore, we obtain the following
+isomorphism of sets:
+
+$$F(a) \simeq \hom{\funcat{\op{C}, \Set}}{H_a, F}$$
+
+which is the Yoneda lemma for the contravariant representable functor
+$$H_a$$. In particular, taking $$F=H_b$$ yields:
+
+$$H_b(a) = \hom{C}{a, b} \simeq \hom{\funcat{\op{C}, \Set}}{H_a, H_b}$$
+
+This shows that the Yoneda embedding is fully faithful (thus indeed an
+*embedding*): morphisms in $$\hom{C}{a, b}$$ are in one-to-one
+correspondence with natural transformations in $$\hom{\funcat{\op{C},
+\Set}}{H_a, H_b}$$. As a consequence, any locally small category
+$$\cat{C}$$ can be viewed as a subcategory of *(embedded in)* the
+category of contravariant functors from itself to sets (*presheaves*).
+
+ 
+## Covariant Case
+
+All of the above translates fairly directly to the covariant case,
+yielding:
+
+$$F(a) \simeq \hom{\funcat{C, \Set}}{H^a, F}$$
+
+Note that the Yoneda embedding becomes contravariant:
+
+$$H^{-}: \op{C} \to \funcat{C, \Set}$$
 
  
 # Limits and Colimits
@@ -297,7 +351,7 @@ $$\natsq{\alpha}{H_a}{F}{x}{y}{h}$$
 # Notes & References
 
 [^1]:
-    [classes](https://en.wikipedia.org/wiki/Von_Neumann%E2%80%93Bernays%E2%80%93G%C3%B6del_set_theory)
-    are a syntactic restriction to avoid logical paradoxes arising when
-    considering *e.g.* the set of all sets not containing themselves (Russel's
-    paradox)
+    [classes](https://en.wikipedia.org/wiki/Von_Neumann%E2%80%93Bernays%E2%80%93G%C3%B6del_set_theory) are
+    a syntactic restriction to avoid logical paradoxes arising when
+    considering *e.g.* the set of all sets not containing themselves
+    (Russel's paradox)

@@ -111,7 +111,7 @@ categories, in which functors are the morphisms.
 
 Functors between locally small categories induce functions between
 hom-sets. Let $$F: \cat{C} \to \cat{D}$$ be a functor between such
-categories $$\cat{C}$$ and $$\cat{D}$$, we have:
+categories $$\cat{C}$$ and $$\cat{D}$$, hom-sets are related by:
 
 $$F_{x, y}: \hom{C}{x, y} \to \hom{D}{F(x), F(y)}$$
 

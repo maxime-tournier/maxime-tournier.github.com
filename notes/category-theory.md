@@ -303,8 +303,8 @@ embedding.
 
 ## Lemma and Consequence
 
-Let us finally consider some functor $$F: \op{C} \to \Set$$, a
-morphism $$h: x \to y$$ and some natural transformation $$\alpha: H_a
+Let us finally consider some other functor $$F: \op{C} \to \Set$$, a
+morphism $$h: x \to y$$ and a natural transformation $$\alpha: H_a
 \to F$$ with naturality square as follows:
 
 $$\natsq{\alpha}{H_a}{F}{y}{x}{h}$$

@@ -209,8 +209,9 @@ $$\begin{matrix}
 	& H(x) & \underset{H(f)}\longrightarrow & H(y) & \\
 \end{matrix}$$
 
-Moreover, for any functor $$F: \cat{C} \to \cat{D}$$ there exists an
-*identity* natural transformation $$\id_F$$ from $$F$$ to itself,
+Vertical composition is associative since component composition
+is. Moreover, for any functor $$F: \cat{C} \to \cat{D}$$ there exists
+an *identity* natural transformation $$\id_F$$ from $$F$$ to itself,
 whose components are the identity morphisms:
 
 $$(\id_F)_x: F(x) \to F(x) = \id_{F(x)}$$

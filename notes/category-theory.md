@@ -219,7 +219,9 @@ $$(\id_F)_x: F(x) \to F(x) = \id_{F(x)}$$
 Therefore, we just obtained another category called the *functor
 category*, denoted by $$\funcat{\cat{C}, \cat{D}}$$, where objects are
 functors from $$\cat{C}$$ to $$\cat{D}$$ and morphisms are natural
-transformations.
+transformations. We conclude by noting that functor categories
+are [exponentials](#exponentials) in $$\mathrm{Cat}$$, and as such are
+sometimes denoted by $$\cat{D}^\cat{C}$$.
 
 ## Natural Isomorphisms
 
@@ -375,6 +377,8 @@ $$H^{-}: \op{C} \to \funcat{C, \Set}$$
 
 
 # Exponentials
+
+
 
 # Adjunctions
 

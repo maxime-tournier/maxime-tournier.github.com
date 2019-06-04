@@ -134,6 +134,7 @@ $$\cat{C}$$ are just functors between $$\cat{J}$$ and $$\cat{C}$$:
 
 $$D: \cat{J} \to \cat{C}$$
 
+
 # Natural Transformations
 
 Natural transformations are the categorical equivalent of homotopies:
@@ -377,18 +378,36 @@ $$H^{-}: \op{C} \to \funcat{C, \Set}$$
 
 ## Initial and Terminal Objects
 
-## Products and Coproducts
+## (Co)Products
 
 ## Pushouts and Pullbacks
 
-## Equalizer and Coequalizers
+## (Co)Equalizer
 
-## Cones and Cocones
+## Exponentials
 
+## (Co)Cones
 
-# Exponentials
+In every example above, we had the following:
 
+- some diagram $$D: \cat{J} \to \cat{C}$$ representing a particular,
+  pattern $$\cat{J}$$ in $$\cat{C}$$
+- some object of interest $$u \in \Ob{C}$$
+- all triangles between objects of the diagram and  $$u$$ must commute.
 
+This set of requirements can be expressed very concisely by a natural
+transformation $$\alpha$$ between the constant functor: $$\Delta_u:
+\cat{J} \to \cat{C}$$ and $$D$$:
+
+$$\alpha: \Delta_u \to D$$
+
+For every vertex $$j \in \Ob{J}$$ the components of $$\alpha$$ are:
+
+$$\alpha_j: \Delta_u(j) = u \to D(j)$$
+
+And the naturality square gives us precisely the commutative triangles:
+
+$$\natsq{\alpha}{\Delta_u}{D}{i}{j}{f}$$
 
 # Adjunctions
 

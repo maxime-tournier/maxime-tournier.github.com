@@ -125,6 +125,15 @@ for every object $$x, y \in \Ob{C}$$.
 
 ## Diagrams
 
+Diagrams let us select patterns (*shapes*) of interest from a category
+$$\cat{C}$$. Let $$\cat{J}$$ be a small or finite category
+representing our pattern, then an occurence of this pattern in
+$$\cat{C}$$ is simply a structure-preserving mapping from $$\cat{J}$$
+to $$\cat{C}$$. In other words, diagrams $$D$$ of shape $$\cat{J}$$ in
+$$\cat{C}$$ are just functors between $$\cat{J}$$ and $$\cat{C}$$:
+
+$$D: \cat{J} \to \cat{C}$$
+
 # Natural Transformations
 
 Natural transformations are the categorical equivalent of homotopies:
@@ -350,6 +359,7 @@ correspondence with natural transformations in $$\hom{\funcat{\op{C},
 $$\cat{C}$$ can be viewed as a subcategory of *(embedded in)* the
 category of contravariant functors from itself to sets (*presheaves*).
 
+TODO the Yoneda lemma is natural in $$a$$ and $$F$$
  
 ## Covariant Case
 

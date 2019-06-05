@@ -235,6 +235,7 @@ sometimes denoted by $$\cat{D}^\cat{C}$$.
 
 ## Natural Isomorphisms
 
+TODO: natural transformations where every component is an isomorphism. 
 
 # The Yoneda Lemma
 
@@ -388,12 +389,14 @@ $$H^{-}: \op{C} \to \funcat{C, \Set}$$
 
 ## (Co)Cones
 
-In every example above, we had the following:
+In every example above, we had the following ingredients:
 
-- some diagram $$D: \cat{J} \to \cat{C}$$ representing a particular,
-  pattern $$\cat{J}$$ in $$\cat{C}$$
-- some object of interest $$u \in \Ob{C}$$
-- all triangles between objects of the diagram and  $$u$$ must commute.
+- some diagram $$D: \cat{J} \to \cat{C}$$ representing a particular
+  pattern $$\cat{J}$$ in $$\cat{C}$$,
+- some object of interest $$u \in \Ob{C}$$ connected to every object
+  in $$D$$,
+- all triangles between connected objects of the diagram and $$u$$
+  must commute.
 
 This set of requirements can be expressed very concisely by a natural
 transformation $$\alpha$$ between the constant functor: $$\Delta_u:
@@ -405,9 +408,30 @@ For every vertex $$j \in \Ob{J}$$ the components of $$\alpha$$ are:
 
 $$\alpha_j: \Delta_u(j) = u \to D(j)$$
 
-And the naturality square gives us precisely the commutative triangles:
+Therefore $$u$$ is connected to any object in $$D$$. For this reason
+$$u$$ is called the *apex* of the cone. The naturality square for
+$$\alpha$$ gives us precisely the commutative triangles we need:
 
 $$\natsq{\alpha}{\Delta_u}{D}{i}{j}{f}$$
+
+So a cone of shape $$\cat{J}$$ and apex $$v$$ is an element of
+$$\hom{\funcat{J, C}}{\Delta_v, D}$$. Coming back to the examples
+above, in each case we had a special cone with the property that any
+cone of the same shape factorizes though it by a *unique* morphism. In
+other words, every cone of this shape is in one-to-one correspondence
+with the morphism used in its factorization. This can be expressed by
+the following bijection:
+
+$$\hom{C}{v, u} \simeq \hom{\funcat{J, C}}{\Delta_v, D}$$
+
+This makes $$u$$ the apex of the special cone, and $$\Delta_u \to D$$
+the limit cone we're looking for. However, a mere bijection is not
+enough since all the examples above also require that any triangle
+factored through $$u$$ must be commutative. This suggests that we're
+in fact looking for a natural isomophism whose naturality condititions
+will make these triangles commute.
+
+
 
 # Adjunctions
 

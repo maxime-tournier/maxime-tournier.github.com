@@ -428,7 +428,7 @@ This makes $$u$$ the apex of the special cone, and $$\Delta_u \to D$$
 the limit cone we're looking for. However, a mere bijection is not
 enough since all the examples above also require that any triangle
 factored through $$u$$ must be commutative. This suggests that we're
-in fact looking for a natural isomophism whose naturality condititions
+in fact looking for a natural isomophism whose naturality conditions
 will make these triangles commute.
 
 

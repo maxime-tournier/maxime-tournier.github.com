@@ -103,8 +103,22 @@ $$F\block{\id_c} = \id_{F(c)}$$
 
 $$F\block{g \circ f} = F(g) \circ F(f)$$
 
-In particular, functors can never "disconnect" connected
-objects. There is a category $$\mathrm{Cat}$$ of locally small
+In particular, functors can never "disconnect" connected objects. For
+any category $$\cat{C}$$, there exists an *identity* functor
+$$\id_{\cat{C}}$$ sending every object to itself and acting similarly
+on morphisms. Likewise, functors can be composed:
+
+$$\begin{align}
+(F \circ G)(x) &= F(G(x)) \\
+(F \circ G)(f: x \to y) &= F(G(f): G(x) \to G(y)): (F \circ G)(x) \to (F \circ G)(y) \\
+\end{align}$$
+
+and we immediately check:
+
+- identity: $$(F \circ G)\block{\id_x} = \id_{F(G(x))}$$
+- associativity: $$(F \circ G)\block{f \circ g} = F(G(f) \circ G(g)) = \block{F \circ G}(f) \circ \block{F \circ G}(g)$$
+
+In other words, there is a category $$\mathrm{Cat}$$ of locally small
 categories, in which functors are the morphisms.
 
 ## Full and Faithful Functors
@@ -379,15 +393,15 @@ $$H^{-}: \op{C} \to \funcat{C, \Set}$$
 
 ## Initial and Terminal Objects
 
-## (Co)Products
+## Products and Coproducts
 
 ## Pushouts and Pullbacks
 
-## (Co)Equalizer
+## Equalizers and Coequalizers
 
 ## Exponentials
 
-## (Co)Cones
+## Cones
 
 In every example above, we had the following ingredients:
 
@@ -415,23 +429,27 @@ $$\alpha$$ gives us precisely the commutative triangles we need:
 $$\natsq{\alpha}{\Delta_u}{D}{i}{j}{f}$$
 
 So a cone of shape $$\cat{J}$$ and apex $$v$$ is an element of
-$$\hom{\funcat{J, C}}{\Delta_v, D}$$. Coming back to the examples
-above, in each case we had a special cone with the property that any
-cone of the same shape factorizes though it by a *unique* morphism. In
-other words, every cone of this shape is in one-to-one correspondence
-with the morphism used in its factorization. This can be expressed by
-the following bijection:
+$$\hom{\funcat{J, C}}{\Delta_v, D}$$. 
 
-$$\hom{C}{v, u} \simeq \hom{\funcat{J, C}}{\Delta_v, D}$$
+## Cone Category
 
-This makes $$u$$ the apex of the special cone, and $$\Delta_u \to D$$
-the limit cone we're looking for. However, a mere bijection is not
-enough since all the examples above also require that any triangle
-factored through $$u$$ must be commutative. This suggests that we're
-in fact looking for a natural isomophism whose naturality conditions
-will make these triangles commute.
+Every morphism $$f: v \to u$$ trivially induces a natural
+transformation $$\alpha(f): \Delta_u \to \Delta_v$$ between constant
+functors:
 
+$$\natsq{\alpha}{\Delta_u}{\Delta_v}{i}{j}{g}$$
 
+This gives us a way to map between cones by (vertical) precomposition:
+
+$$K_u = \block{\Delta_u \to D} \mapsto \block{\Delta_v \to D} = K_u \circ \alpha(f) = K_v$$
+
+We now have a way to map between cones, which turns the set of cones
+into a category. It also provides the following contravariant functor:
+
+$$\begin{align}
+K: \op{C} &\to \funcat{J, C} \\
+v &\mapsto \block{\Delta_v \to D}
+\end{align}$$
 
 # Adjunctions
 

@@ -103,8 +103,22 @@ $$F\block{\id_c} = \id_{F(c)}$$
 
 $$F\block{g \circ f} = F(g) \circ F(f)$$
 
-In particular, functors can never "disconnect" connected
-objects. There is a category $$\mathrm{Cat}$$ of locally small
+In particular, functors can never "disconnect" connected objects. For
+any category $$\cat{C}$$, there exists an *identity* functor
+$$\id_{\cat{C}}$$ sending every object to itself and acting similarly
+on morphisms. Likewise, functors can be composed:
+
+$$\begin{align}
+(F \circ G)(x) &= F(G(x)) \\
+(F \circ G)(f: x \to y) &= F(G(f): G(x) \to G(y)): (F \circ G)(x) \to (F \circ G)(y) \\
+\end{align}$$
+
+and we immediately check:
+
+- identity: $$(F \circ G)\block{\id_x} = \id_{F(G(x))}$$
+- associativity: $$(F \circ G)\block{f \circ g} = F(G(f) \circ G(g)) = \block{F \circ G}(f) \circ \block{F \circ G}(g)$$
+
+In other words, there is a category $$\mathrm{Cat}$$ of locally small
 categories, in which functors are the morphisms.
 
 ## Full and Faithful Functors
@@ -379,15 +393,15 @@ $$H^{-}: \op{C} \to \funcat{C, \Set}$$
 
 ## Initial and Terminal Objects
 
-## (Co)Products
+## Products and Coproducts
 
 ## Pushouts and Pullbacks
 
-## (Co)Equalizer
+## Equalizers and Coequalizers
 
 ## Exponentials
 
-## (Co)Cones
+## Cones
 
 In every example above, we had the following ingredients:
 

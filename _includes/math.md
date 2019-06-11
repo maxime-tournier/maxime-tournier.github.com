@@ -63,8 +63,9 @@ $$
 \newcommand{\hom}[2]{\cat{#1}\block{#2}}
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\Set}{\mathrm{Set}}
+\newcommand{\lim}{\mathrm{lim}\ }
 
-\newcommand{\funcat}[1]{\left[#1\right]}
+\newcommand{\funcat}[1]{\left[\cat{#1}\right]}
 
 \newcommand{\natsq}[6]{
 \begin{matrix}
@@ -73,6 +74,15 @@ $$
 	& #3\block{#4} & \underset{#3\block{#6}}\longrightarrow & #3\block{#5} & \\
 \end{matrix}
 }
+
+\newcommand{\natism}[6]{
+\begin{matrix}
+	& #2\block{#4} & \overset{#2\block{#6}}\longrightarrow & #2\block{#5} & \\
+	{#1}_{#4} \hspace{-1.5em} &\downarrow \uparrow &  & \downarrow \uparrow & \hspace{-1.5em} {#1}_{#5}\\
+	& #3\block{#4} & \underset{#3\block{#6}}\longrightarrow & #3\block{#5} & \\
+\end{matrix}
+}
+
 
 $$
 

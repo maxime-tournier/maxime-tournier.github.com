@@ -424,14 +424,34 @@ the following bijection:
 
 $$\hom{C}{v, u} \simeq \hom{\funcat{J, C}}{\Delta_v, D}$$
 
-This makes $$u$$ the apex of the special cone, and $$\Delta_u \to D$$
-the limit cone we're looking for. However, a mere bijection is not
-enough since all the examples above also require that any triangle
-factored through $$u$$ must be commutative. This suggests that we're
-in fact looking for a natural isomophism whose naturality conditions
-will make these triangles commute.
+But remember that all the examples above also require commutative
+triangles for the factoring morphism. This suggests that a mere
+bijection between hom-sets is not enough, and that we instead require
+some kind of natural isomorphism. The bijection above relates the two
+following presheaves:
 
+$$\begin{align}
+H_u: v &\mapsto \hom{C}{v, u} \\
+H_D\circ\Delta: v &\mapsto \hom{\funcat{J, C}}{\Delta_v, D} \\
+\end{align}$$
 
+The first one is our trusty representable functor, which we already
+encountered in the [Yoneda lemma](#the-yoneda-lemma). It is easy to
+check that the second one is also a functor: $$\Delta: \cat{C} \to
+\funcat{J, C}$$ is a covariant functor obtained by post-composing
+morphisms, then we apply the representable functor in $$\funcat{J,
+C}$$. A natural isomorphism between $$H_u$$ and $$H_D\circ\Delta$$
+has the following naturality square:
+
+$$\natism{\alpha}{H_u}{H_D\circ\Delta}{v}{w}{f}$$
+
+Let us follow the images for $$\id_u$$, given some morphism $$f: v \to
+u$$:
+
+$$\begin{matrix}
+\id_U &\longmapsto& f &\longmapsto& \alpha_v(f)\\
+\id_U &\longmapsto& \alpha_u(u): \Delta_u \to D & \longmapsto & \alpha_u(u) \circ \Delta_f\\
+\end{matrix}$$
 
 # Adjunctions
 

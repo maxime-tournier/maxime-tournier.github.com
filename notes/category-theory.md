@@ -459,13 +459,23 @@ has the following naturality square:
 
 $$\natism{\alpha}{H_u}{H_D\circ\Delta}{v}{w}{f}$$
 
-Let us follow the images for $$\id_u$$, given some morphism $$f: v \to
-u$$:
+where $$H_u(f) = (-) \circ f$$ and $$\block{H_D \circ \Delta}(f) = H_D\block{\Delta_f} = (-)
+\circ \Delta_f$$. Let us follow the images for $$\id_u$$, given some
+morphism $$f: v \to u$$:
 
 $$\begin{matrix}
 \id_U &\longmapsto& f &\longmapsto& \alpha_v(f)\\
-\id_U &\longmapsto& \alpha_u(u): \Delta_u \to D & \longmapsto & \alpha_u(u) \circ \Delta_f\\
+\id_U &\longmapsto& \alpha_u\block{\id_u} & \longmapsto & \alpha_u\block{\id_u} \circ \Delta_f\\
 \end{matrix}$$
+
+Both right-hand sides refer to the same cone *i.e.* natural
+transformation $$\Delta_v \to D$$, so the components must match:
+
+$$\begin{align}
+\block{\alpha_v(f)}_i &= \block{\alpha_u\block{\id_u} \circ \Delta_f}_i \\
+&= \alpha_u(u)_i \circ \block{\Delta_f}_i \\
+\end{align}$$
+
 
 # Adjunctions
 

@@ -42,12 +42,10 @@ whenever possible. For instance, when encountering $$\app{\cps{x}}{k}$$, we
 would like to $$\beta$$-reduce $$\app{\lambda \kappa.\app{\kappa}{x}}{k}$$ to
 $$\app{k}{x}$$ during translation.
 
-To do so, the conversion function needs to return *static*
-abstractions instead of CPS terms. Its type becomes: `cps : expr ->
-(expr -> expr) -> expr`, where the function parameter is to be
-replaced with static continuations (denoted $$\kappa$$ in the
-above). Applications of static continuations will become static
-too. Converting variables is straightforward:
+To do so, the conversion function needs to return *static* abstractions instead
+of just CPS terms: these static abstractions will produce the terms given a
+static continuation $$\kappa$$. The conversion function type thus becomes:
+`cps : expr -> (expr -> expr) -> expr`. Converting variables is straightforward:
 
 > ```cps (x: var) kappa = kappa x```
 

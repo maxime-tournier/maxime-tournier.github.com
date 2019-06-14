@@ -80,8 +80,9 @@ cps ({f; e}: app) kappa =
     cps f (f => cps e (e => f e (kappa ????)))
 ```
 
-In this case, the application of static continuation `kappa` must be
-wrapped into a dynamic continuation:
+Here again, the result of function application `f e` is not known until runtime,
+so we introduce a dynamic continuation to name the result `r`, and apply `kappa`
+to it:
 
 > ```
 cps ({f; e}: app) kappa = 
@@ -90,7 +91,7 @@ cps ({f; e}: app) kappa =
 ```
 
 
-We obtained what is known as the single-pass, *higher-order* cps
+We just obtained what is known as the single-pass, *higher-order* cps
 conversion.
 
 ## Properly tail-recursive CPS

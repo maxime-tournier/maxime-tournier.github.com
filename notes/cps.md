@@ -40,7 +40,7 @@ by separating *static* (translate-time) and *dynamic* (runtime)
 abstractions/applications, and $$\beta$$-reducing static administrative redexes
 whenever possible. For instance, when encountering $$\app{\cps{x}}{k}$$, we
 would like to $$\beta$$-reduce $$\app{\lambda \kappa.\app{\kappa}{x}}{k}$$ to
-$$\app{k}{x}$$ directly during translation.
+$$\app{k}{x}$$ during translation.
 
 To do so, the conversion function needs to return *static*
 abstractions instead of CPS terms. Its type becomes: `cps : expr ->

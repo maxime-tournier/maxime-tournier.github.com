@@ -56,13 +56,16 @@ too. Converting variables is straightforward:
 For the rest, we mostly need to keep the type-checker happy. When
 converting abstractions, we bump into the following issue:
 
-> ```
+> 
+```
 cps ({x; e}: abs) kappa = kappa abs{x; cps e ????}
 ```
 
-We just need to name the extra continuation parameter `k` and wrap
-its application into a static continuation passed recursively to
-`cps`:
+The static continuation `kappa` is applied on the converted abstraction,
+fine. But we still need a continuation to apply to the converted function body!
+This (dynamic) continuation will be passed to the converted abstraction on
+runtime, so we just need to give it a name and `cps` the function body using
+this named continuation:
 
 > ```
 cps ({x; e}: abs) kappa = 

@@ -64,7 +64,7 @@ converting abstractions, we bump into the following issue:
 cps ({x; e}: abs) kappa = kappa abs{x; cps e ????}
 ```
 
-The static continuation `kappa` is applied on the converted abstraction,
+The static continuation `kappa` is applied to the converted abstraction,
 fine. But we still need a continuation to apply to the converted function body!
 This (dynamic) continuation will be passed to the converted abstraction on
 runtime, so we just need to give it a name and `cps` the function body using

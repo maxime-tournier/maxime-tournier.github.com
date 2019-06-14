@@ -478,11 +478,11 @@ $$\begin{align}
 \end{align}$$
 
 Now, it is easily checked that $$\block{\Delta_f}_i$$ is simply $$f$$ in
-disguise. $$\alpha_v(f)$$ is any cone with vertex $$v$$, so its $$i$$-th
+disguise. $$\alpha_v(f)$$ can be any cone with vertex $$v$$, so its $$i$$-th
 component is a morphism $$\block{\alpha_v(f)}_i: v \to D(i)$$. Finally,
-$$\alpha_u\block{\id_u}$$ is our universal cone, and its $$i$$-th component is a
-morphism: $$\block{\alpha_u\block{\id_u}_i}: u \to D(i)$$. In other words, the
-following triangles are all commutative:
+$$\alpha_u\block{\id_u}$$ is our special cone, and its $$i$$-th component is a
+morphism: $$\block{\alpha_u\block{\id_u}_i}: u \to D(i)$$. In other words, we
+have the following commutative triangle:
 
 $$\comtri{v}{u}{D(i)}{f}{\block{\alpha_u\block{\id_u}_i}}{\block{\alpha_v(f)}_i}$$
 

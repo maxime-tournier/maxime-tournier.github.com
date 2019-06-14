@@ -127,6 +127,16 @@ li < #markdown-toc-references {
     content:"";
 }
 
+a.footnote:before {
+    content: "(";
+    color: #666;
+}
+
+a.footnote:after {
+    content: ")";
+    color: #666;    
+}
+
 
 h2 {
 	margin: 2em 1em 0 0;

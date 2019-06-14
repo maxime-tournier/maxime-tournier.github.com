@@ -388,16 +388,15 @@ Note that the Yoneda embedding becomes contravariant:
 
 $$H^{-}: \op{C} \to \funcat{C, \Set}$$
 
+# Initial and Terminal Objects
  
-# Limits and Colimits
+# Limits
 
-## Initial and Terminal Objects
+## Products
 
-## Products and Coproducts
+## Pushouts
 
-## Pushouts and Pullbacks
-
-## Equalizers and Coequalizers
+## Equalizers
 
 ## Exponentials
 
@@ -428,13 +427,14 @@ $$\alpha$$ gives us precisely the commutative triangles we need:
 
 $$\natsq{\alpha}{\Delta_u}{D}{i}{j}{f}$$
 
-So a cone of shape $$\cat{J}$$ and apex $$v$$ is an element of
-$$\hom{\funcat{J, C}}{\Delta_v, D}$$. Coming back to the examples
-above, in each case we had a special cone with the property that any
-cone of the same shape factorizes though it by a *unique* morphism. In
-other words, every cone of this shape is in one-to-one correspondence
-with the morphism used in its factorization. This can be expressed by
-the following bijection:
+## Limits
+
+We just saw that a cone of shape $$\cat{J}$$ and apex $$v$$ is an element of
+$$\hom{\funcat{J, C}}{\Delta_v, D}$$. Coming back to the examples above, in each
+case we had a special cone with the property that any cone of the same shape
+factorizes though it by a *unique* morphism. In other words, every cone of this
+shape is in one-to-one correspondence with the morphism used in its
+factorization. This can be expressed by the following bijection:
 
 $$\hom{C}{v, u} \simeq \hom{\funcat{J, C}}{\Delta_v, D}$$
 
@@ -465,8 +465,8 @@ let us follow the images of $$\id_u$$, given some morphism $$f: v \to
 u$$:
 
 $$\begin{matrix}
-\id_U &\longmapsto& f &\longmapsto& \alpha_v(f)\\
-\id_U &\longmapsto& \alpha_u\block{\id_u} & \longmapsto & \alpha_u\block{\id_u} \circ \Delta_f\\
+\id_u &\longmapsto& f &\longmapsto& \alpha_v(f)\\
+\id_u &\longmapsto& \alpha_u\block{\id_u} & \longmapsto & \alpha_u\block{\id_u} \circ \Delta_f\\
 \end{matrix}$$
 
 Both right-hand sides refer to the same cone *i.e.* natural
@@ -487,7 +487,28 @@ following triangles are all commutative:
 
 $$\comtri{v}{u}{D(i)}{f}{\block{\alpha_u\block{\id_u}_i}}{\block{\alpha_v(f)}_i}$$
 
-which are exactly the commutativity conditions we're looking for.
+which are exactly the commutativity conditions we're looking for, leading to the
+following definition:
+
+> A *limit* for diagram $$D: \cat{J} \to \cat{C}$$ is an object $$u \in \Ob{C}$$
+together with a natural isomorphism $$\hom{C}{v, u} \simeq \hom{\funcat{J,
+C}}{\Delta_v, D}$$ natural in $$v$$. The *universal cone* for the limit is the
+one corresponding to $$\id_u$$.
+
+In a nutshell:
+ 
+- for every cone $$\Delta_v \to D$$ we get a *unique* morphism $$f: v \to u$$
+  that factors any morphism $$h: v \to D(i)$$ through $$u$$ as $$h = g \circ
+  f$$, where $$g: u \to D(i)$$
+  
+- conversely, for every morphism $$f: v \to u$$ there is a cone $$\Delta_v \to
+  D$$ factored as above.
+  
+Equivalently, we can use this property to define morphisms of cones, leading to
+a cone category, in which the universal cones are the terminal objects.
+
+# Colimits
+
 
 # Adjunctions
 

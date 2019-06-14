@@ -22,10 +22,9 @@ $$\begin{align}
 # CPS (call-by-value)
 
 Converting from the Direct Style (DS) call-by-value lambda calculus to
-Continuation-Passing-Style (CPS) is pretty straightforward: each
-converted term is an abstraction that accepts a *continuation*
-$$\kappa$$ representing the rest of the program, and applies it where
-needed:
+Continuation-Passing-Style (CPS) is pretty straightforward: each converted term
+is an abstraction that accepts an extra *continuation* parameter $$\kappa$$
+representing the rest of the program, and applies it where needed:
 
 $$\newcommand{cps}[1]{[\![#1]\!]}
 \newcommand{app}[2]{\left(#1\ #2\right)}

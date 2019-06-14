@@ -34,14 +34,13 @@ $$\newcommand{cps}[1]{[\![#1]\!]}
     \cps{\app{f}{e}} &= \lambda \kappa.\app{\cps{f}}{\lambda f.\app{\cps{e}}{\lambda e.\block{f\ e\ \kappa}}} \\
 \end{align}$$
 
-This conversion can be given type `cps : expr -> expr`. Unfortunately,
-it introduces many so-called *administrative redexes*, which we may
-get rid of by separating *static* (translate-time) and *dynamic*
-(runtime) abstractions/applications, and $$\beta$$-reducing static
-administrative redexes whenever possible. For instance, when
-encountering $$\app{\cps{x}}{k}$$, we would like to $$\beta$$-reduce
-$$\app{\lambda \kappa.\app{\kappa}{x}}{k}$$ to $$\app{k}{x}$$ directly
-during translation.
+This conversion can be given type `cps : expr -> expr`. Unfortunately, it
+introduces a lot of so-called *administrative redexes*, which we may get rid of
+by separating *static* (translate-time) and *dynamic* (runtime)
+abstractions/applications, and $$\beta$$-reducing static administrative redexes
+whenever possible. For instance, when encountering $$\app{\cps{x}}{k}$$, we
+would like to $$\beta$$-reduce $$\app{\lambda \kappa.\app{\kappa}{x}}{k}$$ to
+$$\app{k}{x}$$ directly during translation.
 
 To do so, the conversion function needs to return *static*
 abstractions instead of CPS terms. Its type becomes: `cps : expr ->

@@ -75,6 +75,14 @@ $$
 \end{matrix}
 }
 
+\newcommand{\comtri}[6]{
+	\begin{matrix}
+	#1 & \overset{#4}\longrightarrow & #2 & \\
+	 #6 \hspace{-1em} & \searrow & \downarrow & \hspace{-1em} #5 \\
+	 & & #3 &
+	\end{matrix}
+}
+
 \newcommand{\natism}[6]{
 \begin{matrix}
 	& #2\block{#4} & \overset{#2\block{#6}}\longrightarrow & #2\block{#5} & \\

@@ -459,9 +459,10 @@ has the following naturality square:
 
 $$\natism{\alpha}{H_u}{H_D\circ\Delta}{v}{w}{f}$$
 
-where $$H_u(f) = (-) \circ f$$ and $$\block{H_D \circ \Delta}(f) = H_D\block{\Delta_f} = (-)
-\circ \Delta_f$$. Let us follow the images for $$\id_u$$, given some
-morphism $$f: v \to u$$:
+where $$H_u(f) = (-) \circ f$$ and $$\block{H_D \circ \Delta}(f) =
+H_D\block{\Delta_f} = (-) \circ \Delta_f$$. As for the Yoneda lemma,
+let us follow the images of $$\id_u$$, given some morphism $$f: v \to
+u$$:
 
 $$\begin{matrix}
 \id_U &\longmapsto& f &\longmapsto& \alpha_v(f)\\
@@ -473,9 +474,20 @@ transformation $$\Delta_v \to D$$, so the components must match:
 
 $$\begin{align}
 \block{\alpha_v(f)}_i &= \block{\alpha_u\block{\id_u} \circ \Delta_f}_i \\
-&= \alpha_u(u)_i \circ \block{\Delta_f}_i \\
+&= \block{\alpha_u\block{\id_u}_i} \circ \block{\Delta_f}_i \\
 \end{align}$$
 
+Now, $$\block{\Delta_f}_i$$ is simply $$f$$ in
+disguise. $$\alpha_v(f)$$ is any cone with vertex $$v$$, so its
+$$i$$-th component is a morphism $$\block{\alpha_v(f)}_i: v \to
+D(i)$$. Finally, $$\alpha_u\block{\id_u}$$ is our universal cone, and
+its $$i$$-th component is a morphism:
+$$\block{\alpha_u\block{\id_u}_i}: u \to D(i)$$. In other words, the
+following triangles are all commutative:
+
+$$\comtri{v}{u}{D(i)}{f}{\block{\alpha_u\block{\id_u}_i}}{\block{\alpha_v(f)}_i}$$
+
+which are exactly the commutativity conditions we're looking for.
 
 # Adjunctions
 

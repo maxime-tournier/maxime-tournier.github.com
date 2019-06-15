@@ -47,9 +47,10 @@ encountering $$\app{\cps{x}}{k}$$, we would like to $$\beta$$-reduce
 $$\app{\lambda \kappa.\app{\kappa}{x}}{k}$$ to $$\app{k}{x}$$ during
 translation.
 
-To do so, the conversion function needs to return *static* abstractions instead
-of just CPS terms: these static abstractions will produce the terms given a
-static continuation $$\kappa$$. The conversion function type thus becomes:
+To do so, the conversion function needs to return *static*
+abstractions instead of CPS terms: these static abstractions will
+produce the terms given a static continuation $$\kappa$$. The
+conversion function type thus becomes:
 
 > `cps : expr -> (expr -> expr) -> expr`
 

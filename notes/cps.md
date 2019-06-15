@@ -85,9 +85,10 @@ cps ({f; e}: app) kappa =
     cps f (f => cps e (e => f e (kappa ????)))
 ```
 
-Here again, the result of function application `f e` is not known until runtime,
-so we introduce a dynamic continuation to name the result `r`, and apply `kappa`
-to it:
+Here again, we need to pass a continuation to the function application
+`f e` which will accept the application result. Again, we introduce a
+dynamic continuation to name this result `r`, and continue with
+`kappa`:
 
 > ```
 cps ({f; e}: app) kappa = 

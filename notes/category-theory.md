@@ -436,6 +436,12 @@ As with terminal objects, products (if they exist) are unique up to
 unique isomorphism and the proof is similar. In particular, there is a
 unique morphism $$\id_{a\times b}$$ from the product to itself.
 
+### Examples
+
+- in $$\Set$$, products are the usual catesian product of sets
+- in a preorder, products are *meets* (greatest lower bound)
+
+
 ## Equalizers
 
 ## Pushouts

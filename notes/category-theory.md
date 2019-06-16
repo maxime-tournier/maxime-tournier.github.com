@@ -390,26 +390,25 @@ $$H^{-}: \op{C} \to \funcat{C, \Set}$$
 
 # Initial and Terminal Objects
 
-An object $$x \in \Ob{c}$$ is called *initial* if there exists a
+An object $$1 \in \Ob{c}$$ is called *initial* if there exists a
 unique morphism *from* this object to any object $$y \in \Ob{C}$$ in
 the category:
 
-$$x \overset{!}\longrightarrow y$$
+$$1 \overset{!}\longrightarrow y$$
 
-From this definition, one can immediately check that initial object,
-should they exist, are *unique up to unique isomorphism*. To see why,
-let us consider two initial objects $$x_1$$ and $$x_2$$. Since both
-are initial, all the morphisms on the following diagram are unique:
+From this definition, one can immediately check that initial objects
+(provided they exist) are *unique up to unique isomorphism*. To see
+why, let us consider two initial objects $$x_1$$ and $$x_2$$. Since
+both are initial, all the morphisms on the following diagram are
+unique:
 
 $$\underset{\underset{\id_{x_1}}\circlearrowright}{x_1} \overset{f}{\underset{g}{\rightleftharpoons}} \underset{\underset{\id_{x_2}}\circlearrowleft}{x_2}$$
 
 Therefore, $$f \circ g = \id_{x_2}$$ and $$g \circ f = \id_{x_1}$$,
 which provides the isomorphism. Moreover, both $$f$$ and $$g$$ are
-unique, so the isomorphism is unique.
-
-Dually, a *terminal* object is an initial object in $$\op{C}$$: an
-object is terminal if there exists a unique morphism from every object
-*to* the terminal object.
+unique, so the isomorphism is unique. Dually, a *terminal* object is
+an initial object in $$\op{C}$$: an object $$0$$ is terminal if there
+exists a unique morphism from every object *to* the terminal object.
  
 # Limits
 
@@ -433,12 +432,13 @@ $$
 \end{matrix}
 $$
 
-
-
-
-## Pushouts
+As with terminal objects, products (if they exist) are unique up to
+unique isomorphism and the proof is similar. In particular, there is a
+unique morphism $$\id_{a\times b}$$ from the product to itself.
 
 ## Equalizers
+
+## Pushouts
 
 ## Exponentials
 
@@ -547,6 +547,11 @@ In a nutshell:
   
 Equivalently, we can use this property to define morphisms of cones, leading to
 a cone category, in which the universal cones are the terminal objects.
+
+## Examples
+
+- Terminal objects are limits on the empty diagram $$\cat{0} \to \cat{C}$$
+- Products are limits on the two objects diagram $\cat{2} \to \cat{C}$$
 
 # Colimits
 

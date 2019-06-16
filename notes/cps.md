@@ -132,15 +132,16 @@ cps' ({x; e}: abs) k = let c = gensym() in
 ```
 
 
-# TODO Partitioned CPS
+# Partitioned CPS
 
-In CPS form, all calls are tail calls, which can be implemented as
+In CPS form all calls are tail calls, which can be implemented as
 jumps: we can execute CPS programs without a stack. However, we may
 want to keep a stack *e.g.* for separate compilation. In this case, it
 is often useful to separate CPS terms originating from source
 abstractions (for which we may want to keep a call stack) and the ones
 introduced by the conversion, representing control flow (which we may
-implement as jumps).
+implement as jumps). Symmetrically, applications can be partitioned
+into user calls (function calls) and continuation calls (jumps).
 
 # References 
 

@@ -434,7 +434,7 @@ the following *universal property*:
 
 $$
 \begin{matrix}
-      & & \raise{-2em}{c} &  & \\
+      & & c &  & \\
       & \overset{f}\swarrow & \downarrow & \overset{g}\searrow & \\
     a &\underset{\pi_1}\longleftarrow& a \times b & \underset{\pi_2}\longrightarrow& b \\
 \end{matrix}
@@ -447,7 +447,7 @@ itself. Dually, *coproducts* are products in $$\op{C}$$:
 
 $$
 \begin{matrix}
-      & & \raise{-2em}{c} &  & \\
+      & & c &  & \\
       & \overset{f}\nearrow & \uparrow & \overset{g}\nwarrow & \\
     a &\underset{i_1}\longrightarrow& a + b & \underset{i_2}\longleftarrow& b \\
 \end{matrix}
@@ -455,8 +455,10 @@ $$
 
 ### Examples
 
-- in $$\Set$$, products are the usual catesian product of sets
-- in a preorder, products are *meets* (greatest lower bound)
+- in $$\Set$$, products are the usual catesian product of sets, and
+  coproducts are disjoint unions
+- in a preorder, products are *meets* (greatest lower bound) and
+  coproducts are *joins* (lowest upper bound)
 
 
 ## Equalizers
@@ -578,7 +580,6 @@ terminal objects. Dually, colimits are limits in $$\op{C}$$.
 
 - Terminal(initial) objects are (co)limits on the empty diagram $$\cat{0} \to \cat{C}$$
 - (co)products are (co)limits on the two object diagram $$\cat{2} \to \cat{C}$$
-
 
 
 # Adjunctions

@@ -389,10 +389,52 @@ Note that the Yoneda embedding becomes contravariant:
 $$H^{-}: \op{C} \to \funcat{C, \Set}$$
 
 # Initial and Terminal Objects
+
+An object $$x \in \Ob{c}$$ is called *initial* if there exists a
+unique morphism *from* this object to any object $$y \in \Ob{C}$$ in
+the category:
+
+$$x \overset{!}\longrightarrow y$$
+
+From this definition, one can immediately check that initial object,
+should they exist, are *unique up to unique isomorphism*. To see why,
+let us consider two initial objects $$x_1$$ and $$x_2$$. Since both
+are initial, all the morphisms on the following diagram are unique:
+
+$$\underset{\underset{\id_{x_1}}\circlearrowright}{x_1} \overset{f}{\underset{g}{\rightleftharpoons}} \underset{\underset{\id_{x_2}}\circlearrowleft}{x_2}$$
+
+Therefore, $$f \circ g = \id_{x_2}$$ and $$g \circ f = \id_{x_1}$$,
+which provides the isomorphism. Moreover, both $$f$$ and $$g$$ are
+unique, so the isomorphism is unique.
+
+Dually, a *terminal* object is an initial object in $$\op{C}$$: an
+object is terminal if there exists a unique morphism from every object
+*to* the terminal object.
  
 # Limits
 
 ## Products
+
+Let us consider a locally small category $$\cat{C}$$, three objects
+$$a, b, a \times b \in \Ob{C}$$ and two morphisms $$\pi_1: a \times b
+\to a$$ and $$\pi_2: a \times b \to b$$. The object $$a \times b$$ is
+called the *product* of $$a$$ and $$b$$ if, and only if, it satisifies
+the following *universal property*:
+
+> For every object $$c \in \Ob{C}$$ with morphisms $$f: c \to a$$ and
+> $$g: c \to b$$, there exists a *unique* morphism $$\inner{f, g}: c \to a \times
+> b$$ such that the following diagram commutes:
+
+$$
+\begin{matrix}
+      & & c &  & \\
+      & \overset{f}\swarrow & \downarrow & \overset{g}\searrow & \\
+    a &\underset{\pi_1}\longleftarrow& a \times b & \underset{\pi_2}\longrightarrow& b \\
+\end{matrix}
+$$
+
+
+
 
 ## Pushouts
 

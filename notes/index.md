@@ -4,7 +4,6 @@ title: Research Notes
 
 ![yo euclid](euclid.png)
 
-
 These are random research notes, providing quick reference on recurring
 mathematical issues. Please let me know if you find anything useful in there :)
 
@@ -27,7 +26,7 @@ mathematical issues. Please let me know if you find anything useful in there :)
         {% if p.categories %}
         
         {% else %}
-        {% if p.url != page.url: %}
+        {% if p.url != page.url %}
             <li> <a href="{{p.url}}">{{p.title}}</a> </li>
         {% endif %}
         {% endif %}

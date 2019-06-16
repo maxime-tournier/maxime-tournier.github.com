@@ -410,7 +410,15 @@ unique, so the isomorphism is unique. Dually, a *terminal* object is
 an initial object in $$\op{C}$$: an object $$0$$ is terminal if there
 exists a unique morphism from every object *to* the terminal object.
  
-# Limits
+### Examples
+
+- in $$\Set$$, the initial object is the empty set, and terminal
+  objects are the singleton sets.
+- in a preorder, an initial object is a least element, and a terminal
+  object is a greatest element
+ 
+ 
+# Limits and Colimits
 
 ## Products
 
@@ -426,7 +434,7 @@ the following *universal property*:
 
 $$
 \begin{matrix}
-      & & c &  & \\
+      & & \raise{-2em}{c} &  & \\
       & \overset{f}\swarrow & \downarrow & \overset{g}\searrow & \\
     a &\underset{\pi_1}\longleftarrow& a \times b & \underset{\pi_2}\longrightarrow& b \\
 \end{matrix}
@@ -434,7 +442,16 @@ $$
 
 As with terminal objects, products (if they exist) are unique up to
 unique isomorphism and the proof is similar. In particular, there is a
-unique morphism $$\id_{a\times b}$$ from the product to itself.
+unique morphism $$\id_{a\times b}$$ from the product to
+itself. Dually, *coproducts* are products in $$\op{C}$$:
+
+$$
+\begin{matrix}
+      & & \raise{-2em}{c} &  & \\
+      & \overset{f}\nearrow & \uparrow & \overset{g}\nwarrow & \\
+    a &\underset{i_1}\longrightarrow& a + b & \underset{i_2}\longleftarrow& b \\
+\end{matrix}
+$$
 
 ### Examples
 
@@ -474,6 +491,8 @@ $$u$$ is called the *apex* of the cone. The naturality square for
 $$\alpha$$ gives us precisely the commutative triangles we need:
 
 $$\natsq{\alpha}{\Delta_u}{D}{i}{j}{f}$$
+
+Dually, *cocones* are cones in $$\op{C}$$.
 
 ## Limits
 
@@ -551,15 +570,15 @@ In a nutshell:
 - conversely, for every morphism $$f: v \to u$$ there is a cone $$\Delta_v \to
   D$$ factored as above.
   
-Equivalently, we can use this property to define morphisms of cones, leading to
-a cone category, in which the universal cones are the terminal objects.
+Equivalently, we can use this property to define morphisms of cones,
+leading to a cone category, in which the universal cones are the
+terminal objects. Dually, colimits are limits in $$\op{C}$$.
 
 ## Examples
 
-- Terminal objects are limits on the empty diagram $$\cat{0} \to \cat{C}$$
-- Products are limits on the two objects diagram $\cat{2} \to \cat{C}$$
+- Terminal(initial) objects are (co)limits on the empty diagram $$\cat{0} \to \cat{C}$$
+- (co)products are (co)limits on the two object diagram $$\cat{2} \to \cat{C}$$
 
-# Colimits
 
 
 # Adjunctions

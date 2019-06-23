@@ -62,6 +62,27 @@ $$\beta_{k+1} q_{k+1} = A q_k - \alpha_k q_k - \beta_{k-1} q_{k-1}$$
 where $$\beta_{k+1}$$ is chosen so that $$\norm{q_{k+1}} = 1$$.
 
 
+## Gradient Methods
+
+Iterative methods for solving linear systems $$Ax=b$$ usually minimize
+some energy function $$E(x)$$ by taking steps along the gradient of
+$$E$$. For $$E(x) = \half x^T A x - b^T x$$, the update rule is of the
+form:
+
+$$x_{k+1} = x_k - \alpha_k \block{A x_k - b}$$
+
+One can easily check that $$x_k \in \Krylov_k \Rightarrow x_{k+1} \in
+\Krylov_{k+1}$$, and Krylov methods generalize gradient methods by
+projecting the solution onto nested Krylov subspaces. If one can build
+a sufficiently nice basis for these subspaces, one can hope to find a
+better approximation of the initial problem as we iterate. For
+instance, the [Congugate Gradient](cg.html) method satisfies:
+
+$$x_k = \argmin{x \in \Krylov_k}\ \half x^T A x - b^T x$$
+
+while the Minimum Residual method satisfies:
+
+$$x_k = \argmin{x \in \Krylov_k}\ \norm{A x - b}^2$$
 
 
 

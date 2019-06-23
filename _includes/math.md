@@ -15,7 +15,6 @@ $$
 \newcommand{\ones}{\mathbb{1\hspace{-0.4em}1}}
 \newcommand{\alg}[1]{\mathfrak{#1}}
 
-
 \newcommand{\mat}[1]{ \begin{pmatrix} #1 \end{pmatrix} }
 
 \renewcommand{\bar}{\overline}
@@ -49,6 +48,7 @@ $$
 
 \newcommand{\LL}{\mathcal{L}}
 \newcommand{\Krylov}{\mathcal{K}}
+\newcommand{\Span}[1]{\mathrm{Span}\block{#1}}
 
 \newcommand{\diag}{\mathrm{diag}}
 \newcommand{\tr}{\mathrm{tr}}

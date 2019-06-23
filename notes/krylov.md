@@ -3,6 +3,9 @@ title: Krylov Methods
 categories: [math]
 ---
 
+{% include toc.md %}
+
+
 # Krylov Subspace
 
 $$\Krylov_k(A, b) = \Span{b, Ab, \ldots, A^k b}$$
@@ -80,9 +83,42 @@ instance, the [Congugate Gradient](cg.html) method satisfies:
 
 $$x_k = \argmin{x \in \Krylov_k}\ \half x^T A x - b^T x$$
 
-while the Minimum Residual method satisfies:
+while the MINRES[^minres] method satisfies:
 
 $$x_k = \argmin{x \in \Krylov_k}\ \norm{A x - b}^2$$
 
+## Conjugate Gradients
 
+$$x_k = \argmin{x \in \Krylov_k}\ \half x^T A x - b^T x$$
+
+Since we constructed an orthogonal basis for $$\Krylov_k$$, let us use
+it by rewriting $$x_k = Q_k y_k$$. We obtain the following problem:
+
+$$y_k = \argmin{y}\ \half y^T Q_k^T A Q_k y - b^T Q_k y$$
+
+That is:
+
+$$y_k = \argmin{y}\ \half y^T T_k y - \underbrace{b^T Q_k} y$$
+
+or equivalently: $$T_k y_k = c_k$$. Now, $$Q_k b = \beta_1 e_1$$ and since
+$$T_k$$ is tridiagonal, we can maintain an [incremental $$LDL^T$$
+factorization](cholesky.html#incremental-tridiagonal-factorization) to
+efficiently update $$y$$'s coordinates.
+
+
+
+## MINRES
+
+$$y_k = \argmin{y}\ \norm{Q_k^T A Q_k y - Q_k^Tb}^2$$
+
+$$y_k = \argmin{y}\ \norm{T_k y - Q_k^Tb}^2$$
+
+Here, an incremental QR factorization of $$T_k$$ is maintained. See
+Choi's thesis[^choi06] for more details.
+
+# Notes & References
+
+[^minres]: C. C. Paige and M. A. Saunders (1975). [Solution of sparse indefinite systems of linear equations](https://web.stanford.edu/group/SOL/software/minres/), SIAM J. Numerical Analysis 12, 617-629.
+
+[^choi06]: S.-C. Choi (2006). [Iterative Methods for Singular Linear Equations and Least-Squares Problems](https://web.stanford.edu/group/SOL/dissertations/sou-cheng-choi-thesis.pdf), PhD thesis, Stanford University.
 

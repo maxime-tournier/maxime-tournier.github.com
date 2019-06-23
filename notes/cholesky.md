@@ -6,6 +6,8 @@ categories: [math]
 Some notes on the Cholesky decomposition with a focus on the sparse
 case.
 
+{% include toc.md %}
+
 # Theory TODO
 
 Every positive definite (and some indefinite) matrix $$H$$ has a
@@ -233,8 +235,8 @@ from $$y_k$$:
 
 $$x_k^{(k)} + l_k x_{k-1}^{(k-1)} = y_k^{(k)}$$
 
-This procedure is used in the Lanczos formulation of the Conjugate
-Gradient algorithm.
+This procedure is used in the [Lanczos formulation of the Conjugate
+Gradient](krylov.html#conjugate-gradients) algorithm.
 
 # Notes
 

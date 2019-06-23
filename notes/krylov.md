@@ -27,14 +27,29 @@ $$i>j + 1$$.  Clearly, $$T_{ij} = q_i^T A q_j$$ and $$Aq_j \in
 \Krylov_{j+1}(A, b)$$, of which $$Q_{j+1}$$'s columns form an
 orthogonal basis. But since $$Q_i$$'s columns are also orthogonal,
 $$q_i$$ is orthogonal to every column of $$Q_{j+1}$$. Therefore
-$$q_i^T A q_j = 0$$ and $$T$$ is tridiagonal. Now, an orthogonal basis
-$$Q \in O(n)$$ for the complete space $$\Krylov_n(A, b)$$ satisfies:
+$$q_i^T A q_j = 0$$ and $$T$$ is lower-Hessenberg. But since $$T$$ is
+also symmetric, $$T$$ is tridiagonal. Now, an orthogonal basis $$Q \in
+O(n)$$ for the complete space $$\Krylov_n(A, b)$$ satisfies:
 
 $$Q^T A Q = T$$
 
 or, equivalently:
 
 $$AQ = QT$$
+
+By the same token, if $$M$$ is a non-standard inner product and $$A$$
+is positive definite for $$M$$ (i.e. $$MA$$ is positive definite),
+then we have the following tridiagonalization:
+
+$$Q_k^T MA Q_k = T_k$$
+
+where $$T_k$$ is tridiagonal. The complete factorization satisfies:
+
+$$Q^T MA Q = T$$
+
+where $$Q^T M Q = I$$, and we again obtain:
+
+$$A Q = Q T$$
 
 # Lanczos Method
 
@@ -62,7 +77,16 @@ we obtain the following algorithm:
 
 $$\beta_{k+1} q_{k+1} = A q_k - \alpha_k q_k - \beta_{k-1} q_{k-1}$$
 
-where $$\beta_{k+1}$$ is chosen so that $$\norm{q_{k+1}} = 1$$.
+where $$\beta_{k+1}$$ is chosen so that $$\norm{q_{k+1}} =
+1$$. Likewise, using a non-standard inner product $$M$$ still yields:
+
+$$\beta_{k+1} q_{k+1} = A q_k - \alpha_k q_k - \beta_{k-1} q_{k-1}$$
+
+except this time:
+
+$$\alpha_k = q_k^T MA q_k$$
+
+and $$\beta_{k+1}$$ is chosen so that $$\norm{q_{k+1}}_M = 1$$.
 
 
 ## Gradient Methods

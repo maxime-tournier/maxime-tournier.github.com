@@ -75,18 +75,18 @@ where $$\alpha_k = q_k^T A q_k$$. This provides a way of computing
 $$q_{k+1}$$ from $$q_k, q_{k-1}$$. Let us define $$\beta_0 q_0 = 0$$,
 we obtain the following algorithm:
 
-$$\beta_{k+1} q_{k+1} = A q_k - \alpha_k q_k - \beta_{k-1} q_{k-1}$$
+$$\beta_k q_{k+1} = A q_k - \alpha_k q_k - \beta_{k-1} q_{k-1}$$
 
-where $$\beta_{k+1}$$ is chosen so that $$\norm{q_{k+1}} =
+where $$\beta_k$$ is chosen so that $$\norm{q_{k+1}} =
 1$$. Likewise, using a non-standard inner product $$M$$ still yields:
 
-$$\beta_{k+1} q_{k+1} = A q_k - \alpha_k q_k - \beta_{k-1} q_{k-1}$$
+$$\beta_k q_{k+1} = A q_k - \alpha_k q_k - \beta_{k-1} q_{k-1}$$
 
 except this time:
 
 $$\alpha_k = q_k^T MA q_k$$
 
-and $$\beta_{k+1}$$ is chosen so that $$\norm{q_{k+1}}_M = 1$$.
+and $$\beta_k$$ is chosen so that $$\norm{q_{k+1}}_M = 1$$.
 
 
 ## Gradient Methods

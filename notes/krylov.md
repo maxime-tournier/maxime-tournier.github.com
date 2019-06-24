@@ -62,7 +62,7 @@ $$T = \mat{\alpha_1 & \beta_1 &     \\
            \beta_1 & \alpha_2 & \beta_2 \\
                  & \beta_2 &\alpha_3 & \beta_3 \\
                  & & \ddots  & \ddots & \ddots \\
-                 & & & \beta_{n_1} & \alpha_n  }
+                 & & & \beta_{n-1} & \alpha_n  }
 $$
 
 The $$k$$-th column of $$T$$ satisfies:

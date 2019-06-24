@@ -41,7 +41,7 @@ $$AQ = QT$$
 
 By the same token, if $$M$$ is a non-standard inner product and $$A$$ is
 auto-adjoint for $$M$$ (i.e. $$MA$$ is symmetric), then we have the following
-tridiagonalization:
+factorization:
 
 $$Q_k^T MA Q_k = T_k$$
 

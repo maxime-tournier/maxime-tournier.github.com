@@ -55,7 +55,7 @@ $$A Q = Q T$$
 
 # The Lanczos Method
 
-The Lanczos Method is a simple iterative procedure to compute the
+The Lanczos Method is a simple iterative procedure to compute the above
 tridiagonal factorization columnwise. Let us rewrite $$T$$ as:
 
 $$T = \mat{\alpha_1 & \beta_1 &     \\
@@ -65,17 +65,17 @@ $$T = \mat{\alpha_1 & \beta_1 &     \\
                  & & & \beta_{n_1} & \alpha_n  }
 $$
 
-The $$k$$-th column satisfies:
+The $$k$$-th column of $$T$$ satisfies:
 
 $$Aq_k = Q t_k$$
 
-in other words:
+In other words:
 
 $$A q_k = \beta_{k-1} q_{k-1} + \alpha_k q_k + \beta_k q_{k+1}$$
 
-where $$\alpha_k = q_k^T A q_k$$. This provides a way of computing
-$$q_{k+1}$$ from $$q_k, q_{k-1}$$. Let us define $$\beta_0 q_0 = 0$$,
-we obtain the following algorithm:
+where $$\alpha_k = q_k^T A q_k$$. This gives the recursion scheme for computing
+$$q_{k+1}$$ from previous values $$q_k, q_{k-1}$$. Let us define $$\beta_0 q_0 =
+0$$ and rewrite the above as:
 
 $$\beta_k q_{k+1} = A q_k - \alpha_k q_k - \beta_{k-1} q_{k-1}$$
 

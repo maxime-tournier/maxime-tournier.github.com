@@ -49,6 +49,7 @@ Quick cheat sheet.
 # python-mode
 - start interpreter: `C-c C-p`
 - run buffer: `C-c C-c`
+- run region: `C-c C-r`
 
 ## elpy-mode: 
   - `sudo apt-get install elpa-elpy`

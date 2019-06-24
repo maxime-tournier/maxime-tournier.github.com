@@ -73,9 +73,9 @@ In other words:
 
 $$A q_k = \beta_{k-1} q_{k-1} + \alpha_k q_k + \beta_k q_{k+1}$$
 
-where $$\alpha_k = q_k^T A q_k$$. This gives the recursion scheme for computing
-$$q_{k+1}$$ from previous values $$q_k, q_{k-1}$$. Let us define $$\beta_0 q_0 =
-0$$ and rewrite the above as:
+where $$\alpha_k = q_k^T A q_k$$. This provides a recursion scheme for computing
+$$q_{k+1}$$ from previous values $$q_k, q_{k-1}$$. Let us introduce $$\beta_0
+q_0 = 0$$, the Lanczos iteration is defined as:
 
 $$\beta_k q_{k+1} = A q_k - \alpha_k q_k - \beta_{k-1} q_{k-1}$$
 
@@ -84,7 +84,7 @@ where $$\beta_k$$ is chosen so that $$\norm{q_{k+1}} =
 
 $$\beta_k q_{k+1} = A q_k - \alpha_k q_k - \beta_{k-1} q_{k-1}$$
 
-except this time:
+except this time $$\alpha_k$$ is given by:
 
 $$\alpha_k = q_k^T MA q_k$$
 

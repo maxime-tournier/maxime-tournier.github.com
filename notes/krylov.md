@@ -6,18 +6,20 @@ categories: [math]
 {% include toc.md %}
 
 
-# Krylov Subspace
+# Krylov Subspaces
 
-$$\Krylov_k(A, b) = \Span{b, Ab, \ldots, A^k b}$$
+$$\Krylov_k(A, b) = \Span{b, Ab, A^2b, \ldots, A^k b}$$
 
-TODO dimension
+The dimension of $$\Krylov_k(A, b)$$ is related to the the minimum polynomial of
+$$b$$ with respect to $$A$$, that is the lowest-degree non-zero polynomial $$p$$
+such that $$p(A)v = 0$$.
 
 # Tridiagonalization
 
 Let us construct an orthogonal basis for the family $$\left\{b, Ab,
 \ldots, A^k b\right\}$$ using the Graham-Schmidt process, and arrange
 the basis vectors $$q_0, q_1, \dots, q_k$$ by column in a matrix
-$$Q_k$$. If the matrix $$A$$ is positive definite, then $$Q_k$$
+$$Q_k$$. If the matrix $$A$$ is symmetric, then $$Q_k$$
 satisifies:
 
 $$Q_k^T A Q_k = T_k$$
@@ -37,9 +39,9 @@ or, equivalently:
 
 $$AQ = QT$$
 
-By the same token, if $$M$$ is a non-standard inner product and $$A$$
-is positive definite for $$M$$ (i.e. $$MA$$ is positive definite),
-then we have the following tridiagonalization:
+By the same token, if $$M$$ is a non-standard inner product and $$A$$ is
+auto-adjoint for $$M$$ (i.e. $$MA$$ is symmetric), then we have the following
+tridiagonalization:
 
 $$Q_k^T MA Q_k = T_k$$
 

@@ -53,7 +53,7 @@ where $$Q^T M Q = I$$, and we again obtain:
 
 $$A Q = Q T$$
 
-# Lanczos Method
+# The Lanczos Method
 
 The Lanczos Method is a simple iterative procedure to compute the
 tridiagonal factorization columnwise. Let us rewrite $$T$$ as:

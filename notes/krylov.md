@@ -105,7 +105,7 @@ One can easily check that $$x_k \in \Krylov_k \Rightarrow x_{k+1} \in
 projecting the solution onto nested Krylov subspaces. If one can build
 a sufficiently nice basis for these subspaces, one can hope to find a
 better approximation of the initial problem as we iterate. For
-instance, the [Congugate Gradient](cg.html) method satisfies:
+instance, the [Conjugate Gradient](cg.html) method satisfies:
 
 $$x_k = \argmin{x \in \Krylov_k}\ \half x^T A x - b^T x$$
 

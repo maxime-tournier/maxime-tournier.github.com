@@ -60,8 +60,8 @@ quaternion normalization, we will obtain a real part with unit norm. Therefore,
 the corresponding dual part will be a tangent vector to $$S^3$$:
 
 $$\begin{align}
-q + \epsilon \dd q &= q + \epsilon q \omega^b \\
-    &= q + \epsilon \omega^sq\\
+q + \epsilon \dd q &= q + \epsilon q.\omega^b \\
+    &= q + \epsilon \omega^s.q\\
 \end{align}$$ 
 
 where the dual part is left-(resp. right)-trivialized using the body

@@ -57,7 +57,8 @@ $$\norm{q + \epsilon \dd q} = \norm{q} + \epsilon \frac{q^T\dd q}{\norm{q}}$$
 
 If we normalize a dual quaternion $$q + \epsilon \dd q$$ by extending the
 quaternion normalization, we will obtain a real part with unit norm. Therefore,
-the corresponding dual part will be a tangent vector to $$S^3$$:
+the corresponding dual part will be a tangent vector to the unit quaternion
+sphere $$S^3$$:
 
 $$\begin{align}
 q + \epsilon \dd q &= q + \epsilon q.\omega^b \\

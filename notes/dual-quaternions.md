@@ -15,11 +15,11 @@ Consider numbers of the form:
 
 $$a = a_0 + \epsilon a_\epsilon$$
 
-for some magic constant $$\epsilon$$ satisfying $$\epsilon^2 = 0$$,
-with sum/product distributive as usual. $$\epsilon$$ may be seen as
-spanning *infinitesimal numbers*, *i.e.* cancelling anything of order
-2 and more (which is in fact the basis of *synthetic* differential
-geometry). For instance, consider the product of dual numbers:
+for some magic constant $$\epsilon$$ satisfying $$\epsilon^2 = 0$$, with
+sum/product distributive as usual. $$\epsilon$$ may be seen as spanning
+*infinitesimal numbers*, *i.e.* cancelling anything of order 2 and more (which
+forms the basis of *synthetic* differential geometry). For instance, consider
+the product of dual numbers:
 
 $$\block{a + \epsilon \dd a}\block{b + \epsilon \dd b} = a b + \epsilon \block{a.\dd b + \dd a.b}$$
 
@@ -47,7 +47,7 @@ with $$q, \dd q \in \HH$$ quaternions and the dual unit as
 before. Again, functions on quaternions extend naturally on dual
 quaternions.
 
-## Dual Norm
+## Dual Quaternion Norm
 
 From the usual norm [formula](differential-geometry#norm):
 
@@ -55,35 +55,41 @@ $$\norm{q + \epsilon \dd q} = \norm{q} + \epsilon \frac{q^T\dd q}{\norm{q}}$$
 
 # Unit Dual Quaternions
 
-If we normalize a dual quaternion $$q + \epsilon \dd q$$ by extending
-the quaternion normalization, we will obtain a real part with unit
-norm. Therefore, the corresponding dual part will be a tangent vector
-to $$S^3$$:
+If we normalize a dual quaternion $$q + \epsilon \dd q$$ by extending the
+quaternion normalization, we will obtain a real part with unit norm. Therefore,
+the corresponding dual part will be a tangent vector to $$S^3$$:
 
 $$q + \epsilon \dd q = q + \epsilon q \omega^b = q + \epsilon \omega^sq$$ 
 
-where the dual part has been left-(resp. right)-trivialized using the
-body velocity $$\omega^b$$ (resp. spatial velocity $$\omega^s$$),
-taken in the Lie algebra $$\mathfrak{s^3}\simeq\RR^3$$.
+where the dual part is left-(resp. right)-trivialized using the body
+velocity $$\omega^b$$ (resp. spatial velocity $$\omega^s$$), taken in the Lie
+algebra $$\mathfrak{s^3}\simeq\RR^3$$ of pure imaginary quaternions. (see
+[Quaternions](quaternions.html) and [Lie Groups](lie-groups.html) for details).
+
+In summary: normalizing regular quaternions extends to dual quaternions by
+differentiation as before, giving so-called unit dual quaternions. The real part
+is a unit regular quaternion, while the dual part is a tangent vector at the
+real part. This tangent vector has body/spatial coordinates in $$\RR^3$$, which
+can be used to encode translations.
 
 ## Connection with Rigid Transformations
 
-The spatial derivative of the unit quaternion product (in fact, any
-Lie group will do) gives:
+The spatial derivative of the unit quaternion product gives (as for any Lie
+group):
 
 $$\dd^s ab = \dd^s a + \Ad_a \dd^s b$$
 
-which in our case is exactly the translation part of the rigid
-composition of $$\block{a, \dd^s a} \simeq \mat{Ad_a & \dd^s a\\ 0 &
-1}$$ with $$\block{b, \dd^s b} \simeq \mat{Ad_b & \dd^s b\\ 0 &
-1}$$. Therefore, if we encode our rigid transformations as spatial
-derivatives of unit quaternions (expressed as dual quaternions
-accordingly), we can obtain the composition of rigid transformations
-from the product of unit dual quaternions:
+where in this case $$\Ad_a$$ is the rotation corresponding to quaternion
+$$a$$. The above formula is exactly the translation part of the rigid
+composition of $$\block{a, \dd^s a} \simeq \mat{Ad_a & \dd^s a\\ 0 & 1}$$ with
+$$\block{b, \dd^s b} \simeq \mat{Ad_b & \dd^s b\\ 0 & 1}$$. Therefore, if we
+encode our rigid transformations as spatial derivatives of unit quaternions
+(expressed as dual quaternions accordingly), we can obtain the composition of
+rigid transformations from the product of unit dual quaternions:
 
 $$\block{a + \epsilon \dd^s a. a}\block{b + \epsilon \dd^s b.b} = ab + \epsilon \block{ \dd^s a + \Ad_a \dd^s b}ab$$
 
-In other words, we have a nice Lie group isomorphism between unit dual
+In other words, there is a nice Lie group homomorphism between unit dual
 quaternions and rigid transformations.
 
 ## Dual Quaternion Normalization

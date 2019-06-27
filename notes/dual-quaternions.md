@@ -45,7 +45,7 @@ $$q + \epsilon \dd q$$
 
 with $$q, \dd q \in \HH$$ quaternions and the dual unit as
 before. Again, functions on quaternions extend naturally on dual
-quaternions.
+quaternions by differentiation.
 
 ## Dual Quaternion Norm
 

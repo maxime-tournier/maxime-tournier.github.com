@@ -84,8 +84,8 @@ $$\dd^s a.b = \dd^s a + \Ad_a \dd^s b$$
 
 where in this case $$\Ad_a$$ is the rotation corresponding to quaternion
 $$a$$. The above formula is exactly the translation part of the rigid
-composition of $$\block{a, \dd^s a} \simeq \mat{Ad_a & \dd^s a\\ 0 & 1}$$ with
-$$\block{b, \dd^s b} \simeq \mat{Ad_b & \dd^s b\\ 0 & 1}$$. Therefore, if we
+composition of $$\block{a, \dd^s a} \simeq \mat{\Ad_a & \dd^s a\\ 0 & 1}$$ with
+$$\block{b, \dd^s b} \simeq \mat{\Ad_b & \dd^s b\\ 0 & 1}$$. Therefore, if we
 encode our rigid transformations as spatial derivatives of unit quaternions
 (expressed as dual quaternions accordingly), we can obtain the composition of
 rigid transformations from the product of unit dual quaternions:

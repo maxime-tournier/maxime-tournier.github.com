@@ -59,7 +59,10 @@ If we normalize a dual quaternion $$q + \epsilon \dd q$$ by extending the
 quaternion normalization, we will obtain a real part with unit norm. Therefore,
 the corresponding dual part will be a tangent vector to $$S^3$$:
 
-$$q + \epsilon \dd q = q + \epsilon q \omega^b = q + \epsilon \omega^sq$$ 
+$$\begin{align}
+q + \epsilon \dd q &= q + \epsilon q \omega^b \\
+    &= q + \epsilon \omega^sq\\
+\end{align}$$ 
 
 where the dual part is left-(resp. right)-trivialized using the body
 velocity $$\omega^b$$ (resp. spatial velocity $$\omega^s$$), taken in the Lie

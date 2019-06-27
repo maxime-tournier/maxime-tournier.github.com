@@ -98,13 +98,12 @@ quaternions and rigid transformations.
 
 ## Dual Quaternion Normalization
 
-Now, the whole point of using unit dual quaternions at all is that it
-provides a cheap projection operator on $$SE(3)$$ by the means of dual
-quaternion normalization: from a series of unit dual quaternions $$g_i
-= q_i + \epsilon t_i q_i$$ we may blend them however we like to obtain
-some (possibly non-unit) dual quaternion $$\tilde{g} = f\block{g_i}$$,
-which we can then normalize to obtain a unit dual quaternion, and a
-corresponding rigid transformation:
+Now, the whole point of using unit dual quaternions is the cheap projection
+operator on $$SE(3)$$ by means of dual quaternion normalization: from a series
+of unit dual quaternions $$g_i = q_i + \epsilon t_i q_i$$ we may blend them
+however we like to obtain some (possibly non-unit) dual quaternion $$\tilde{g} =
+f\block{g_i}$$, which we can then normalize to obtain a unit dual quaternion,
+and a corresponding rigid transformation:
 
 $$g = \frac{\tilde{g}}{\norm{\tilde{g}}}$$
 

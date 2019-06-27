@@ -80,7 +80,7 @@ can be used to encode translations.
 The spatial derivative of the unit quaternion product gives (as for any Lie
 group):
 
-$$\dd^s ab = \dd^s a + \Ad_a \dd^s b$$
+$$\dd^s a.b = \dd^s a + \Ad_a \dd^s b$$
 
 where in this case $$\Ad_a$$ is the rotation corresponding to quaternion
 $$a$$. The above formula is exactly the translation part of the rigid
@@ -90,7 +90,7 @@ encode our rigid transformations as spatial derivatives of unit quaternions
 (expressed as dual quaternions accordingly), we can obtain the composition of
 rigid transformations from the product of unit dual quaternions:
 
-$$\block{a + \epsilon \dd^s a. a}\block{b + \epsilon \dd^s b.b} = ab + \epsilon \block{ \dd^s a + \Ad_a \dd^s b}ab$$
+$$\block{a + \epsilon \dd^s a. a}\block{b + \epsilon \dd^s b.b} = a.b + \epsilon \block{ \dd^s a + \Ad_a \dd^s b}ab$$
 
 In other words, there is a nice Lie group homomorphism between unit dual
 quaternions and rigid transformations.

@@ -12,7 +12,7 @@ We start with the pure lambda calculus syntax with variables,
 abstractions and applications:
 
 $$\begin{align}
-    e :=&
+    e :=\hspace{-.5em}&
        \quad x&\quad\textrm{(var)} \\
     &|\ \   \lambda x. e&\quad\textrm{(abs)} \\
     &|\ \   (e\ e)&\quad\textrm{(app)} \\
@@ -149,7 +149,7 @@ into functions calls and continuation calls (jumps).
 Let us add a few constructs to our language:
 
 $$\begin{align}
-    e :=&
+    e := \hspace{-.5em}&
        \quad x&\quad\textrm{(var)} \\
     &|\ \  \lambda x. e&\quad\textrm{(abs)} \\
     &|\ \  (e\ e)&\quad\textrm{(app)} \\

@@ -141,7 +141,32 @@ is often useful to separate CPS terms originating from source
 abstractions (for which we may want to keep a call stack) and the ones
 introduced by the conversion, representing control flow (which we may
 implement as jumps). Symmetrically, applications can be partitioned
-into user calls (function calls) and continuation calls (jumps).
+into functions calls and continuation calls (jumps).
+
+
+# Extensions
+
+Let us add a few constructs to our language:
+
+$$\begin{align}
+    e :=&
+       \quad x&\quad\textrm{(var)} \\
+    &|\ \  \lambda x. e&\quad\textrm{(abs)} \\
+    &|\ \  (e\ e)&\quad\textrm{(app)} \\
+    &|\ \  (\text{if}\ e\ e\ e) &\quad\textrm{(cond)}\\
+\end{align}$$
+
+## Conditionals
+
+> ```
+cps ({pred; then; else}: cond) kappa = 
+```
+
+> ```
+cps' ({pred; then; else}: cond) k = 
+```
+
+
 
 # References 
 

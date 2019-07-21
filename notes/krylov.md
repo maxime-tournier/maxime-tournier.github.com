@@ -6,18 +6,20 @@ categories: [math]
 {% include toc.md %}
 
 
-# Krylov Subspace
+# Krylov Subspaces
 
-$$\Krylov_k(A, b) = \Span{b, Ab, \ldots, A^k b}$$
+$$\Krylov_k(A, b) = \Span{b, Ab, A^2b, \ldots, A^k b}$$
 
-TODO dimension
+The dimension of $$\Krylov_k(A, b)$$ is related to the the minimum polynomial of
+$$b$$ with respect to $$A$$, that is the lowest-degree non-zero polynomial $$p$$
+such that $$p(A)v = 0$$.
 
 # Tridiagonalization
 
 Let us construct an orthogonal basis for the family $$\left\{b, Ab,
 \ldots, A^k b\right\}$$ using the Graham-Schmidt process, and arrange
 the basis vectors $$q_0, q_1, \dots, q_k$$ by column in a matrix
-$$Q_k$$. If the matrix $$A$$ is positive definite, then $$Q_k$$
+$$Q_k$$. If the matrix $$A$$ is symmetric, then $$Q_k$$
 satisifies:
 
 $$Q_k^T A Q_k = T_k$$
@@ -37,9 +39,9 @@ or, equivalently:
 
 $$AQ = QT$$
 
-By the same token, if $$M$$ is a non-standard inner product and $$A$$
-is positive definite for $$M$$ (i.e. $$MA$$ is positive definite),
-then we have the following tridiagonalization:
+By the same token, if $$M$$ is a non-standard inner product and $$A$$ is
+auto-adjoint for $$M$$ (*i.e.* $$MA$$ is symmetric), then we have the following
+factorization:
 
 $$Q_k^T MA Q_k = T_k$$
 
@@ -51,29 +53,29 @@ where $$Q^T M Q = I$$, and we again obtain:
 
 $$A Q = Q T$$
 
-# Lanczos Method
+# The Lanczos Method
 
-The Lanczos Method is a simple iterative procedure to compute the
+The Lanczos Method is a simple iterative procedure to compute the above
 tridiagonal factorization columnwise. Let us rewrite $$T$$ as:
 
 $$T = \mat{\alpha_1 & \beta_1 &     \\
            \beta_1 & \alpha_2 & \beta_2 \\
                  & \beta_2 &\alpha_3 & \beta_3 \\
                  & & \ddots  & \ddots & \ddots \\
-                 & & & \beta_{n_1} & \alpha_n  }
+                 & & & \beta_{n-1} & \alpha_n  }
 $$
 
-The $$k$$-th column satisfies:
+The $$k$$-th column of $$T$$ satisfies:
 
 $$Aq_k = Q t_k$$
 
-in other words:
+In other words:
 
 $$A q_k = \beta_{k-1} q_{k-1} + \alpha_k q_k + \beta_k q_{k+1}$$
 
-where $$\alpha_k = q_k^T A q_k$$. This provides a way of computing
-$$q_{k+1}$$ from $$q_k, q_{k-1}$$. Let us define $$\beta_0 q_0 = 0$$,
-we obtain the following algorithm:
+where $$\alpha_k = q_k^T A q_k$$. This provides a recursion scheme for computing
+$$q_{k+1}$$ from previous values $$q_k, q_{k-1}$$. Let us introduce $$\beta_0
+q_0 = 0$$, the Lanczos iteration is defined as:
 
 $$\beta_k q_{k+1} = A q_k - \alpha_k q_k - \beta_{k-1} q_{k-1}$$
 
@@ -82,7 +84,7 @@ where $$\beta_k$$ is chosen so that $$\norm{q_{k+1}} =
 
 $$\beta_k q_{k+1} = A q_k - \alpha_k q_k - \beta_{k-1} q_{k-1}$$
 
-except this time:
+except this time $$\alpha_k$$ is given by:
 
 $$\alpha_k = q_k^T MA q_k$$
 
@@ -103,7 +105,7 @@ One can easily check that $$x_k \in \Krylov_k \Rightarrow x_{k+1} \in
 projecting the solution onto nested Krylov subspaces. If one can build
 a sufficiently nice basis for these subspaces, one can hope to find a
 better approximation of the initial problem as we iterate. For
-instance, the [Congugate Gradient](cg.html) method satisfies:
+instance, the [Conjugate Gradient](cg.html) method satisfies:
 
 $$x_k = \argmin{x \in \Krylov_k}\ \half x^T A x - b^T x$$
 

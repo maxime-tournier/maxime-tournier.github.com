@@ -261,29 +261,26 @@ $$
   - the residuals $$r_k$$ are $$M$$-conjugate 
   - descent directions $$p_k$$ are $$MA$$-conjugate.
 
-## Note {#note}
+## Breakdown {#note}
    
-   The above requires that $$MA$$ be symmetric, which could happen
-   even though $$M$$ is indefinite, or not even symmetric. However,
-   $$r_k$$ is not guaranteed to be a descent direction of the
-   quadratic form when $$M$$ is not positive definite: it might happen
-   that the quadratic form simply stagnates along $$r_{k+1} \neq 0$$:
+The above requires that $$MA$$ be symmetric, which could happen even though
+$$M$$ is indefinite, or not even symmetric. However, $$r_k$$ is not guaranteed
+to be a descent direction of the quadratic form when $$M$$ is not positive
+definite: it might happen that the quadratic form simply stagnates along
+$$r_{k+1} \neq 0$$:
 
-   $$ r_{k+1}^T z_{k+1} = r_{k+1}^T M r_{k+1} = 0$$ 
+$$r_{k+1}^T z_{k+1} = r_{k+1}^T M r_{k+1} = 0$$
 
-   Should this happen, the subsequent $$p_{k+1}$$ will also be a
-   direction of stagnation since $$P_k^T M r_{k+1} = 0$$ always
-   holds, resulting in:
+Should this happen, the subsequent $$p_{k+1}$$ will also be a direction of
+stagnation since $$P_k^T M r_{k+1} = 0$$ always holds, resulting in:
 
-   $$p_{k+1}^T M r_{k+1} = 0 $$ 
+$$p_{k+1}^T M r_{k+1} = 0 $$ 
 
-   At this point, the algorithm will stop making any progress since
-   $$\alpha$$ will be
-   zero. It
-   [seems](https://en.wikipedia.org/wiki/Positive-definite_matrix#Extension_for_non_symmetric_matrices) that
-   it is necessary and sufficient that the symmetric part of the
-   metric is positive definite in order that the above breakdown
-   scenario can never happen.
+At this point, the algorithm will stop making any progress since
+$$\alpha_{k+1}$$ will be zero and $$r_{k+2} = r_{k+1}$$. It
+[seems](https://en.wikipedia.org/wiki/Positive-definite_matrix#Extension_for_non_symmetric_matrices)
+that it is necessary and sufficient that the symmetric part of the metric is
+positive definite in order that the above breakdown scenario can never happen.
 	
 
 # Examples

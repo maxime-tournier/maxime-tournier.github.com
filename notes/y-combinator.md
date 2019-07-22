@@ -15,23 +15,22 @@ some comments adapted from various (excellent) sources.[^ayanonagon]
 
 ```scheme
 ;; 0. start with our trusty factorial
-(define fact
-  (lambda (n)
-    (if (= 0 n) 1
-        (* n (fact (- n 1))))))
+(define (fact n)
+  (if (= n 0) 1
+      (* n (fact (- n 1))))))
 
 (echo (fact 10))
 
 ;; 1. but what if we don't make use of named functions?
 (define fact
   (lambda (n)
-    (if (= 0 n) 1
+    (if (= n 0) 1
         (* n (????? (- n 1))))))
 
 ;; 2. ok let's say we pass ourselves as an extra argument "f" then:
 (define fact
   (lambda (f n)
-    (if (= 0 n) 1
+    (if (= n 0) 1
         (* n (f f (- n 1))))))
 
 (echo (fact fact 10))
@@ -40,7 +39,7 @@ some comments adapted from various (excellent) sources.[^ayanonagon]
 (define fact
   (lambda (f)
     (lambda (n)
-      (if (= 0 n) 1
+      (if (= n 0) 1
           (* n ((f f) (- n 1)))))))
 
 (echo ((fact fact) 10))
@@ -50,7 +49,7 @@ some comments adapted from various (excellent) sources.[^ayanonagon]
   (lambda (f)
     (let ((self (lambda (x) ((f f) x))))
       (lambda (n)
-        (if (= 0 n) 1
+        (if (= n 0) 1
             (* n (self (- n 1))))))))
 
 (echo ((fact fact) 10))
@@ -60,7 +59,7 @@ some comments adapted from various (excellent) sources.[^ayanonagon]
   (lambda (f)
     ((lambda (self)
        (lambda (n)
-         (if (= 0 n) 1
+         (if (= n 0) 1
              (* n (self (- n 1))))))
      (lambda (x) ((f f) x)))))
 
@@ -69,7 +68,7 @@ some comments adapted from various (excellent) sources.[^ayanonagon]
 ;; now, the inner lambda:
 (lambda (self)
     (lambda (n)
-      (if (= 0 n) 1
+      (if (= n 0) 1
           (* n (self (- n 1))))))
 ;; looks like a nice way of defining a recursive functions!
 
@@ -80,7 +79,7 @@ some comments adapted from various (excellent) sources.[^ayanonagon]
   (lambda (f)
     (let ((g (lambda (self)
               (lambda (n)
-                (if (= 0 n) 1
+                (if (= n 0) 1
                     (* n (self (- n 1))))))))
       (g (lambda (x) ((f f) x))))))
 
@@ -93,7 +92,7 @@ some comments adapted from various (excellent) sources.[^ayanonagon]
        (g (lambda (x) ((f f) x))))
      (lambda (self)
        (lambda (n)
-         (if (= 0 n) 1
+         (if (= n 0) 1
              (* n (self (- n 1)))))))))
 
 (echo ((fact fact) 10))
@@ -107,7 +106,7 @@ some comments adapted from various (excellent) sources.[^ayanonagon]
                    (g (lambda (x) ((f f) x))))
                  (lambda (self)
                    (lambda (n)
-                     (if (= 0 n) 1
+                     (if (= n 0) 1
                          (* n (self (- n 1))))))))))
       ((res res) x))))
       
@@ -123,7 +122,7 @@ some comments adapted from various (excellent) sources.[^ayanonagon]
              (g (lambda (x) ((f f) x))))
            (lambda (self)
              (lambda (n)
-               (if (= 0 n) 1
+               (if (= n 0) 1
                    (* n (self (- n 1)))))))))
        x))))
        
@@ -138,7 +137,7 @@ some comments adapted from various (excellent) sources.[^ayanonagon]
            (g (lambda (x) ((f f) x))))
          (lambda (self)
            (lambda (n)
-             (if (= 0 n) 1
+             (if (= n 0) 1
                  (* n (self (- n 1)))))))))
      x)))
      
@@ -149,7 +148,7 @@ some comments adapted from various (excellent) sources.[^ayanonagon]
 (define fact
   (lambda (self)
     (lambda (n)
-      (if (= 0 n) 1
+      (if (= n 0) 1
           (* n (self (- n 1)))))))
 
 ;; 12. this is the Y-combinator in disguise!
@@ -352,7 +351,7 @@ $$ g: \forall \alpha, \alpha \to \alpha $$
 From this, we can deduce that a fixpoint combinator has the following
 type:
 
-$$ fix:  \forall \alpha, \block{\alpha \to \alpha} \to \alpha $$
+$$ \mathrm{fix}:  \forall \alpha, \block{\alpha \to \alpha} \to \alpha $$
 
 This can be used for infering the type of recursive definitions in
 let-bindings during Hindley-Milner type inference.

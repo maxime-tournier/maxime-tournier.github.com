@@ -6,18 +6,31 @@ categories: [prog]
 Quick notes on basic CPS conversion after struggling to understand
 [^2] and finally getting it thanks to [^1] (+countless others).
 
+{% include toc.md %}
+
+
 # Lambda-calculus
 
 We start with the pure lambda calculus syntax with variables,
 abstractions and applications:
 
 $$\begin{align}
+\newcommand{app}[2]{\left(#1\ #2\right)}
     e :=\hspace{-.5em}&
        \quad x&\quad\textrm{(var)} \\
     &|\ \   \lambda x. e&\quad\textrm{(abs)} \\
-    &|\ \   (e\ e)&\quad\textrm{(app)} \\
+    &|\ \   \app{e}{e}&\quad\textrm{(app)} \\
 \end{align}$$
 
+which we implement as:
+
+```haskell
+data Expr = Var String | Abs String Expr | App Expr Expr
+instance Show Expr where
+  show (Var v) = v
+  show (Abs arg body) = "λ" ++ arg ++ "." ++ (show body)
+  show (App func arg) = "(" ++ (show func) ++ " " ++ (show arg) ++ ")"
+```
 
 # CPS (call-by-value)
 
@@ -27,16 +40,66 @@ is an abstraction that accepts an extra *continuation* parameter $$\kappa$$
 representing the rest of the program, and applies it where needed:
 
 $$\newcommand{cps}[1]{[\![#1]\!]}
-\newcommand{app}[2]{\left(#1\ #2\right)}
+
 \begin{align}
     \cps{x} &= \lambda \kappa.\app{\kappa}{x} \\
     \cps{\lambda x.e} &= \lambda \kappa.\app{\kappa}{\lambda x.\cps{e}} \\
     \cps{\app{f}{e}} &= \lambda \kappa.\app{\cps{f}}{\lambda f.\app{\cps{e}}{\lambda e.\block{f\ e\ \kappa}}} \\
 \end{align}$$
 
-This conversion function can be given the following type:
+This conversion procedure can be given the following type:
 
-> `cps : expr -> expr`
+```haskell
+cps :: Expr -> Expr
+```
+
+However, we will need some bookkeeping for generating fresh variables
+during the conversion. For this reason, our conversion will require a
+`State` monad:
+
+```haskell
+-- cps state monad
+import Control.Monad.State
+
+type CPS a = State Int a
+
+-- generate unique name
+gensym :: String -> CPS String
+gensym prefix = do
+  counter <- get
+  put (counter + 1)
+  return (prefix ++ (show counter))
+```
+
+With that out of the picture, our conversion procedure becomes:
+
+```haskell
+-- continuation-passing-style conversion (naive)
+cps :: Expr -> CPS Expr
+
+-- var
+cps (Var name) = do
+  k <- gensym "k"
+  return (Abs k (App (Var k) (Var name)))
+
+-- abs
+cps (Abs arg body) = do
+  k <- gensym "k"
+  b <- cps body
+  return (Abs k (Abs arg b))
+
+-- app
+cps (App func arg) = do
+  k <- gensym "k"
+  f <- gensym "f"
+  a <- gensym "a"
+  func <- cps func
+  arg <- cps arg
+  return (Abs k
+          (App func (Abs f
+                     (App arg (Abs a
+                               (App (App (Var f) (Var a)) (Var k)))))))
+```
 
 Unfortunately, this *naive* conversion introduces quite a lot of
 so-called *administrative redexes*, which we may get rid of by
@@ -52,50 +115,49 @@ abstractions instead of CPS terms: these static abstractions will
 produce the terms given a static continuation $$\kappa$$. The
 conversion function type thus becomes:
 
-> `cps : expr -> (expr -> expr) -> expr`
+```haskell
+cps :: Expr -> (Expr -> CPS Expr) -> CPS Expr
+```
 
-Converting variables is straightforward:
+Converting variables is straightforward: we just need to apply the
+static continuation to our variable:
 
-> ```cps (x: var) kappa = kappa x```
+```haskell
+cps (Var name) k = k (Var name)
+```
 
 For the rest, we mostly need to keep the type-checker happy. When
 converting abstractions, we bump into the following issue:
 
-> 
-```
-cps ({x; e}: abs) kappa = kappa abs{x; cps e ????}
-```
-
-The static continuation `kappa` is applied to the converted abstraction,
-fine. But we still need a continuation to apply to the converted function body!
-This (dynamic) continuation will be passed to the converted abstraction on
-runtime, so we just need to give it a name and `cps` the function body using
-this named continuation:
-
-> ```
-cps ({x; e}: abs) kappa = 
-    let k = gensym () in 
-        kappa abs{x; abs{k; cps e (x => app{k; x})}}
+```haskell
+cps (Abs arg body) k = k (Abs arg (cps body ????))
 ```
 
-Similarly, when converting applications: 
+The static continuation `k` is applied to the converted abstraction,
+but we still need a (static) continuation to convert the function
+body. The converted function body will pass its result `r` to whatever
+(dynamic) continuation gets passed to the converted function on
+runtime, so we simply give it a name `c` and wrap its application in
+a static continuation:
 
-> ```
-cps ({f; e}: app) kappa = 
-    cps f (f => cps e (e => f e (kappa ????)))
+```haskell
+cps (Abs arg body) k = do
+  c <- gensym "c"
+  body <- cps body (\r -> return (App (Var c) r))
+  k (Abs arg (Abs c body))
 ```
 
-Here again, we need to pass a continuation to the function application
-`f e` which will accept the application result. Again, we introduce a
-dynamic continuation to name this result `r`, and continue with
-`kappa`:
+Similarly, when converting applications, we need to apply our static
+continuation `k` to the application result. So again, we name this result
+`r` and construct a dynamic continuation that will apply `k` to it:
 
-> ```
-cps ({f; e}: app) kappa = 
-    cps f (f => cps e (e => f e 
-        (let r = gensym() in abs{r; kappa r})))
+
+```haskell
+cps (App func arg) k = do
+  r <- gensym "r"
+  rest <- k (Var r)
+  cps func (\f -> cps arg (\a -> return (App (App f a) (Abs r rest))))
 ```
-
 
 We just obtained what is known as the single-pass, *higher-order* cps
 conversion.
@@ -105,32 +167,37 @@ conversion.
 In the case of a *tail-call* (that is, when converting an abstraction
 whose body is an application), we see that the conversion first
 introduces a static continuation wrapping a named dynamic continuation
-(when converting the abstraction), only to wrap it back into a dynamic
-continuation (when converting the application).
+(when converting the abstraction), only to wrap it a second time into
+a dynamic continuation (when converting the application).
 
 Instead of wrapping twice, we could simply pass along the named
 dynamic continuation `k` when converting the application:
 
-> ```cps' ({f; e}: app) k = cps f (f => cps e (e => f e k))```
+```haskell
+cps_tail :: Expr -> Expr -> CPS Expr
+cps_tail (App func arg) k = 
+  cps func (\f -> cps arg (\a -> return (App (App f a) k)))
+```
 
-and have the `cps` handle this special case when converting
-abstractions:
+and have `cps` handle this special case when converting abstractions:
 
-> ```
-cps ({x; e}: abs) kappa = 
-    let k = gensym () in 
-        kappa abs{x; cps' e k}
+```haskell
+cps (Abs arg body) k = do
+  c <- gensym "c"
+  body <- cps_tail body (Var c)
+  k (Abs arg (Abs c body))
 ```
 
 The rest is pretty straightforward:
 
-> ```cps' (x: var) k = app{k; x}```
+```haskell
+cps_tail (Var name) k = return (App k (Var name))
 
-> ```
-cps' ({x; e}: abs) k = let c = gensym() in 
-     app{k; abs{x; abs{c; cps' e c}}}
+cps_tail (Abs arg body) k = do
+  c <- gensym "c"
+  body <- cps_tail body (Var c)
+  return (App k (Abs arg (Abs c body)))
 ```
-
 
 # Partitioned CPS
 
@@ -149,23 +216,83 @@ into functions calls and continuation calls (jumps).
 Let us add a few constructs to our language:
 
 $$\begin{align}
+\newcommand{if}[3]{\block{\text{if}\ #1\ #2\ #3}}
     e := \hspace{-.5em}&
        \quad x&\quad\textrm{(var)} \\
     &|\ \  \lambda x. e&\quad\textrm{(abs)} \\
-    &|\ \  (e\ e)&\quad\textrm{(app)} \\
-    &|\ \  (\text{if}\ e\ e\ e) &\quad\textrm{(cond)}\\
+    &|\ \  \block{e\ e}&\quad\textrm{(app)} \\
+    &|\ \  \if{e}{e}{e} &\quad\textrm{(cond)}\\
 \end{align}$$
+
+And its implementation:
+
+```haskell
+-- lambda calculus + conditionals
+data Expr
+  = Var String
+  | Abs String Expr
+  | App Expr Expr
+  | Cond Expr Expr Expr
+
+instance Show Expr where
+  show (Var v) = v
+  show (Abs arg body) = "λ" ++ arg ++ "." ++ (show body)
+  show (App func arg) = "(" ++ (show func) ++ " " ++ (show arg) ++ ")"
+  show (Cond test conseq alt) = "(if "
+    ++ (show test) ++ " "
+    ++ (show conseq) ++ " "
+    ++ (show alt) ++ ")"
+```
 
 ## Conditionals
 
-> ```
-cps ({pred; then; else}: cond) kappa = 
+Conditionals are straightforward: we convert the condition, test its
+value, and convert branches continuing with our initial continuation:
+
+$$\cps{\if{p}{c}{a}} = \lambda \kappa.\app{\cps{p}}
+    {\lambda p.\if{p}{\app{\cps{c}}{\kappa}}{\app{\cps{a}}{\kappa}}}$$
+
+The implementation follows closely, but we do not want to duplicate
+the dynamic continuation (which may be large) in both branches of the
+test. At least, we do not want to duplicate it *yet*. So we give it a
+name:
+
+```haskell
+cps_tail (Cond pred conseq alt) k =
+  cps pred (\p -> do
+               c <- gensym "c"
+               conseq <- cps_tail conseq (Var c)
+               alt <- cps_tail alt (Var c)
+               return (App (Abs c (Cond p conseq alt)) k))
 ```
 
-> ```
-cps' ({pred; then; else}: cond) k = 
+For `cps`, we simply delegate to `cps_tail` by wrapping our static
+continuation behind a dynamic continuation, just like we did earlier
+for applications:
+
+```haskell
+-- wrap static continuation into dynamic continuation
+wrap :: (Expr -> CPS Expr) -> CPS Expr
+wrap k = do
+  r <- gensym "r"
+  rest <- k (Var r)
+  return (Abs r rest)
+
+cps (Cond pred conseq alt) k =
+  cps pred (\p -> do
+               k <- wrap k
+               conseq <- cps_tail conseq k
+               alt <- cps_tail alt k
+               return (Cond p conseq alt))
 ```
 
+In terms of `wrap`, converting applications becomes simply:
+
+```haskell
+cps (App func arg) k = do
+  k <- wrap k
+  cps_tail (App func arg) k
+```
 
 
 # References 

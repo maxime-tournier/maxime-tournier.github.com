@@ -17,6 +17,8 @@ body {
 }
 
 
+code { font-size: 11pt; }
+
 #home {
 	font-size: 0.7em;
 	text-align: right;
@@ -199,3 +201,6 @@ p img {
 	height: 20em;
 	width: auto;
 }
+
+
+

@@ -26,10 +26,6 @@ which we implement as:
 
 ```haskell
 data Expr = Var String | Abs String Expr | App Expr Expr
-instance Show Expr where
-  show (Var v) = v
-  show (Abs arg body) = "λ" ++ arg ++ "." ++ (show body)
-  show (App func arg) = "(" ++ (show func) ++ " " ++ (show arg) ++ ")"
 ```
 
 # CPS (call-by-value)
@@ -199,17 +195,6 @@ cps_tail (Abs arg body) k = do
   return (App k (Abs arg (Abs c body)))
 ```
 
-# Partitioned CPS
-
-In CPS form all calls are tail calls, which can be implemented as
-jumps: we can execute CPS programs without a stack. However, we may
-want to keep a stack *e.g.* for separate compilation. In this case, it
-is often useful to separate CPS terms originating from source
-abstractions (for which we may want to keep a call stack) and the ones
-introduced by the conversion, representing control flow (which we may
-implement as jumps). Symmetrically, applications can be partitioned
-into functions calls and continuation calls (jumps).
-
 
 # Extensions
 
@@ -233,15 +218,6 @@ data Expr
   | Abs String Expr
   | App Expr Expr
   | Cond Expr Expr Expr
-
-instance Show Expr where
-  show (Var v) = v
-  show (Abs arg body) = "λ" ++ arg ++ "." ++ (show body)
-  show (App func arg) = "(" ++ (show func) ++ " " ++ (show arg) ++ ")"
-  show (Cond test conseq alt) = "(if "
-    ++ (show test) ++ " "
-    ++ (show conseq) ++ " "
-    ++ (show alt) ++ ")"
 ```
 
 ## Conditionals
@@ -293,6 +269,17 @@ cps (App func arg) k = do
   k <- wrap k
   cps_tail (App func arg) k
 ```
+
+# Partitioned CPS
+
+In CPS form all calls are tail calls, which can be implemented as
+jumps: we can execute CPS programs without a stack. However, we may
+want to keep a stack *e.g.* for separate compilation. In this case, it
+is often useful to separate CPS terms originating from source
+abstractions (for which we may want to keep a call stack) and the ones
+introduced by the conversion, representing control flow (which we may
+implement as jumps). Symmetrically, applications can be partitioned
+into functions calls and continuation calls (jumps).
 
 
 # References 

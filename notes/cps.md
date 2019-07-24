@@ -297,7 +297,7 @@ is often useful to separate CPS terms originating from source
 abstractions (for which we may want to keep a call stack) and the ones
 introduced by the conversion, representing control flow (which we may
 implement as jumps). Symmetrically, applications can be partitioned
-into functions calls and continuation calls (jumps).
+into function calls and continuation calls.
 
 
 # References 

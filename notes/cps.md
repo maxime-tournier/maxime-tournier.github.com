@@ -93,9 +93,9 @@ cps (App func arg) = do
   func <- cps func
   arg <- cps arg
   return (Abs k
-          (App func (Abs f
-                     (App arg (Abs a
-                               (App (App (Var f) (Var a)) (Var k)))))))
+              (App func (Abs f
+                             (App arg (Abs a
+                                           (App (App (Var f) (Var a)) (Var k)))))))
 ```
 
 Unfortunately, this *naive* conversion introduces quite a lot of

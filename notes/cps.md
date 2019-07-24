@@ -22,7 +22,7 @@ $$\begin{align}
     &|\ \   \app{e}{e}&\quad\textrm{(app)} \\
 \end{align}$$
 
-which we implement as:
+which we implement in Haskell as:
 
 ```haskell
 data Expr = Var String | Abs String Expr | App Expr Expr
@@ -67,7 +67,8 @@ gensym prefix = do
   return (prefix ++ (show counter))
 ```
 
-With that out of the picture, our conversion procedure becomes:
+With that out of the picture, a straightforward adaptation of the
+above conversion gives:
 
 ```haskell
 -- continuation-passing-style conversion (naive)
@@ -98,18 +99,35 @@ cps (App func arg) = do
 ```
 
 Unfortunately, this *naive* conversion introduces quite a lot of
-so-called *administrative redexes*, which we may get rid of by
-separating *static* (translation-time) and *dynamic* (run-time)
-abstractions/applications, then $$\beta$$-reducing static
-administrative redexes whenever possible. For instance, when
-encountering $$\app{\cps{x}}{k}$$, we would like to $$\beta$$-reduce
-$$\app{\lambda \kappa.\app{\kappa}{x}}{k}$$ to $$\app{k}{x}$$ during
-translation.
+so-called *administrative redexes*. A first thing to notice is that
+all cases produce an abstraction (*dynamic* abstractions), so we can
+try to lift these to compile-time abstractions (*static*
+abstractions), and apply them during translation so they won't show up
+in the result. For instance, when encountering $$\app{\cps{x}}{k}$$,
+we would like to $$\beta$$-reduce
+$$\app{\lambda\kappa.\app{\kappa}{x}}{k}$$ to $$\app{k}{x}$$ during
+translation. Our procedure becomes:
 
-To do so, the conversion function needs to return *static*
-abstractions instead of CPS terms: these static abstractions will
-produce the terms given a static continuation $$\kappa$$. The
-conversion function type thus becomes:
+```haskell
+cps :: Expr -> Expr -> CPS Expr
+
+cps (Var name) k = return (App k (Var name))
+
+cps (Abs arg body) k = do
+  c <- gensym "c"
+  body <- cps body (Var c)
+  return (App k (Abs arg (Abs c body)))
+
+cps (App func arg) k = do
+  f <- gensym "f"
+  a <- gensym "a"
+  rest <- cps arg (Abs a (App (App (Var f) (Var a)) k))
+  cps func (Abs f rest)
+```
+
+The situation is improved, but we can do better: since we know that
+$$\kappa$$ is always a continuation, we can pass a static continuation
+instead. The conversion function type thus becomes:
 
 ```haskell
 cps :: Expr -> (Expr -> CPS Expr) -> CPS Expr

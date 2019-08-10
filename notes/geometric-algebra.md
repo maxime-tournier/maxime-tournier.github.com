@@ -82,9 +82,57 @@ Summarizing, we obtained that:
 
 # Basis
 
+Given an orthonormal orthogonal basis $$e_1, e_2, e_3$$ for $$\RR^3$$,
+we can quickly check than the following family forms a for $$\GG^3$$:
+
+$$
+\begin{matrix}
+1 & \text{scalars} \\
+e_1,\ e_2,\ e_3 &  \text{vectors} \\
+e_1 e_2,\ e_1 e_3,\ e_2 e_3 & \text{bi-vectors} \\
+e_1 e_2 e_3 & \text{tri-vectors} \\
+\end{matrix}$$
+
+This basis is called the *canonical* basis due to the arrangement of
+the indices in strict increasing order. Similarly, for $$\GG^4$$ one
+obtains:
+
+$$
+\begin{matrix}
+1 & \text{scalars} \\
+e_1,\ e_2,\ e_3,\ e_4 &  \text{vectors} \\
+e_1 e_2,\ e_1 e_3,\ e_1 e_4,\ e_2 e_3,\ e_2 e_4,\ e_3 e_4 & \text{bi-vectors} \\
+e_1 e_2 e_3,\ e_1 e_2 e_4,\ e_1 e_3 e_4,\ e_2 e_3 e_4 & \text{tri-vectors} \\
+e_1 e_2 e_3 e_4 & \text{quadri-vectors} \\
+\end{matrix}$$
+
+A quick induction shows that $$\GG^n$$ has dimension $$2^n$$.
+
+# Outer Product
+
+Since the symmetric part of the geometric product is the inner
+product, its anti-symmetric is logically called the *outer product*,
+denoted by $$\wedge$$[^wedge]:
+
+$$uv = u\cdot v + u \wedge v$$
+
+For two vectors $$u, v$$ in the plane $$e_1e_2$$, their product is:
+
+$$\underbrace{(a e_1 + b e_2)}_u\underbrace{(c e_1 + d e_2)}_v =
+\underbrace{(ac + bd)}_{u\cdot v} + \underbrace{(ac - bd) e_1 e_2}_{u
+\wedge v}$$
+
+and the outer product $$u\wedge v$$ had coefficient $$ac -
+bd=\norm{u}\norm{v}\sin(\alpha)$$, which is the signed area of the
+parallelogram delimited by $$u$$ and $$v$$ (where $$\alpha$$ is the
+angle between them).
 
 # References 
 
 [^1]: Alan MacDonald, *[A Survey of Geometric Algebra and Geometric
      Calculus](http://www.faculty.luther.edu/~macdonal/GA&GC.pdf)*,
      Adv. Appl. Cliff. Alg. 27, 853–891 (2017).
+     
+[^wedge]: It is a bit unfortunate to used the $$\wedge$$ symbol for
+    something acting like a *join* in lattice theory, which has
+    symbol $$\vee$$ (like a union)

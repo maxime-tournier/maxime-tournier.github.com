@@ -472,6 +472,57 @@ $$
 
 $$ \dd_b^2 \block{\inv{a}b}^T \tau = \mat{ -\ad^T(\mu) & \ad^T(\mu) \Ad_{\inv{a}b} \\ 0 & 0 } $$
 
+# Trackball
+
+Let us consider a picked point $$x$$ in world coordinates. Assuming
+the camera has projection matrix $$F$$, the projected point
+coordinates $$y$$ is:
+
+$$y = \pi \block{F x}$$
+
+where $$\pi\mat{x\\y\\z} = \mat{\frac{x}{z}\\\frac{y}{z}}$$ computes
+the perspective projection of a point onto the image plane. Now, we'll
+assume our point is in fact attached to frame a rotating around some
+pivot point $$p$$, with rotation $$\exp(\omega)$$. The coordinates of
+our point become:
+
+$$x(\omega) = \underbrace{\mat{I & p \\ 0 & 1}}_{T_p} \underbrace{\mat{\exp(\omega) & 0 \\ 0 & 1}}_{\exp(\kappa)} \underbrace{\mat{I & -p \\ 0 & 1}}_{T_p^{-1}} x_0$$
+
+where $$x_0$$ are the (fixed) homogeneous coordinates of our point in
+the rotating frame. Our projection equation becomes:
+
+$$y = \pi \block{F.T_p.\exp(\kappa).T_p^{-1}.x_0 }$$
+
+Differentating gives:
+
+$$\dd y = \dd \pi(F.x(\omega)).F.\dd x(\omega).\dd \omega$$
+
+$$\dd x(\omega).\dd \omega = T_p.\exp(\kappa).T_p^{-1}.\block{\Ad_{T_p}.\mat{\db \exp(\omega).\dd \omega & 0 \\ 0 & 0}}x_0$$
+
+using canonical coordinates for the Lie algebra, we get:
+
+$$\Ad_{T_p}.\mat{\db \exp(\omega).\dd \omega \\ 0} = \mat{\db \exp(\omega) \\ \hat{p}. \db \exp(\omega).\dd \omega}$$
+
+and finally:
+
+$$\begin{align}
+\dd x(\omega).\db \omega &= T_p.\exp(\kappa).T_p^{-1} \mat{\db \exp(\omega).\dd \omega & \hat{p}. \db \exp(\omega).\dd \omega \\ 0 & 0} \mat{x_0 \\ 1} \\
+&= T_p.\exp(\kappa).T_p^{-1} \mat{\hat{p - x_0}.\db \exp(\omega).\dd \omega\\ 0} \\
+&= \mat{\exp(\omega).\hat{p - x_0}.\db \exp(\omega).\dd \omega\\ 0}
+\end{align}
+$$
+
+On the other hand, differentiating $$\pi$$ gives:
+
+$$\dd \pi(x, y, z) = \mat{\frac{1}{z} & 0 & -\frac{x}{z^2} \\
+                                 0    & \frac{1}{z} & -\frac{y}{z^2}} \mat{\dd x\\ \dd y \\ \dd z}$$
+
+And we obtain:
+
+$$\dd y(\omega).\dd \omega = \dd \pi(x, y, z).F.\exp(\omega).\hat{p - x_0}.\db \exp(\omega).\dd \omega$$
+
+We may now pull 2D image space forces to rotation torques and update $$\omega$$ accordingly.
+
 # Blending
 
 See [dual quaternions](dual-quaternions).

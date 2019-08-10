@@ -5,6 +5,7 @@ src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
 
 $$
 \newcommand{\RR}{\mathbb{R}}
+\newcommand{\GG}{\mathbb{G}}
 \newcommand{\PP}{\mathbb{P}}
 \newcommand{\PS}{\mathcal{P}}
 \newcommand{\SS}{\mathbb{S}}

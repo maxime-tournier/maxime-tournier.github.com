@@ -123,7 +123,7 @@ $$\underbrace{(a e_1 + b e_2)}_u\underbrace{(c e_1 + d e_2)}_v =
 \underbrace{(ac + bd)}_{u\cdot v} + \underbrace{(ac - bd) e_1 e_2}_{u
 \wedge v}$$
 
-and the outer product $$u\wedge v$$ had coefficient $$ac -
+and the outer product $$u\wedge v$$ has coefficient $$ac -
 bd=\norm{u}\norm{v}\sin(\alpha)$$, which is the signed area of the
 parallelogram delimited by $$u$$ and $$v$$ (where $$\alpha$$ is the
 angle between them).

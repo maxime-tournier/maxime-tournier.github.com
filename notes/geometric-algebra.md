@@ -22,12 +22,11 @@ As mentioned in the introduction, the geometric product is essentially
 a *composition* operation on geometric objects. As such, it should
 enjoy a few basic properties to be [well-behaved](category-theory):
 
+- the composition should be associative: $$(ab) c = a (bc)$$
 - there should be an identity object, denoted $$1$$, such that for any
   object $$x$$:
 
 $$1 x = x 1 = x$$
-
-- the composition should be associative $$(ab) c = a (bc)$$
 
 Furthermore, the space of $$n$$-dimensional geometric objects
 $$\GG^n$$ (whatever they are, at this point) should be closed under
@@ -42,28 +41,26 @@ vectors pairwise:
 $$(u_1  v_1) + (u_2  v_2) \overset{\text{def}}= (u_1 + u_2)  (v_1 + v_2)$$ 
 
 This generalises to arbitrary geometric objects, and the geometric
-product is distributive over the sum as just defined (and the sum is
-commutative). Similarly, we can extend scalar multiplication on
-vectors as:
+product is distributive over the (commutative) sum as just
+defined. Similarly, we can extend scalar multiplication on vectors as:
 
 $$(\lambda u) v = \lambda (u v)$$
 
 One can easily check that the sum and scalar multiplication make
 $$\GG^n$$ a vector space. Also, we see that scalars end up being
 geometric objects in their own right, spanned by the unit element
-$$1$$. So far, we've seen how the geometric product should behave
-internally and in interaction with the vector space structure, but we
-have yet to see how to actually compute it: we only know that it
-should be bilinear, so it has a symmetric part and an antisymmetric
-part:
+$$1$$. So far, we've seen how the geometric product behaves internally
+and with respect to the vector space structure, but we still don't
+know how to compute it in practice. However, we *do* know that it is
+bilinear so it has a symmetric part and an antisymmetric part:
 
-$$uv = \half\block{uv + vu} + \half{uv - vu}$$
+$$uv = \half\block{uv + vu} + \half\block{uv - vu}$$
 
-Let us finally add that one bit of Euclidean geometry giving the
-geometric product all its power (and name). Consider an inner product
-$$\cdot$$ over $$\RR^n$$: it is a symmetric positive bilinear
-form. All that we're asking of the geometric product is that its
-symmetric part be the inner product:
+Let us now add that one bit of Euclidean geometry giving the geometric
+product all its power (and name). Consider an inner product $$\cdot$$
+over $$\RR^n$$: it is a symmetric positive bilinear form. All that
+we're asking of the geometric product is that its symmetric part be
+the inner product:
 
 $$\half\block{uv + vu} = u\cdot v$$
 
@@ -72,7 +69,8 @@ every non-zero vector $$u \neq 0$$ has an inverse:
 
 $$\quad u^{-1} = \frac{u}{\ \norm{u}^2}$$
 
-Likewise, when $$u\cdot v = 0$$, only the anti-symmetric part remains:
+Likewise, when $$u\cdot v = 0$$, only the anti-symmetric part remains,
+hence:
 
 $$uv = -vu$$
 

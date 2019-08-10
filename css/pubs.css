@@ -1,10 +1,11 @@
 
 p.abstract:first-letter{
                         font-weight: bold;
-                        font-size:3em;
+                        font-size:3.5em;
                         color:#222222;
                         margin:0;
                         margin-right:0.1em;
+                        padding-top:0.1em;
                         float        : left;
                         line-height: 90%;
 			text-shadow: #ddd 1px 1px 4px; 

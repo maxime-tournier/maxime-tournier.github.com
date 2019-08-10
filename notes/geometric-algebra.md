@@ -59,8 +59,8 @@ $$uv = \half\block{uv + vu} + \half\block{uv - vu}$$
 Let us now add that one bit of Euclidean geometry giving the geometric
 product all its power (and name). Consider an inner product $$\cdot$$
 over $$\RR^n$$: it is a symmetric positive bilinear form. All that
-we're asking of the geometric product is that its symmetric part be
-the inner product:
+we're asking of the geometric product of two vectors is that its
+symmetric part be the inner product:
 
 $$\half\block{uv + vu} = u\cdot v$$
 
@@ -78,7 +78,8 @@ Summarizing, we obtained that:
 
 - the geometric algebra $$\GG^n$$ is a vector space of geometric objects
 - $$\GG^n$$ is closed under the geometric product, which is bilinear
-- the symmetric part of the geometric product is the inner product
+- the symmetric part of the geometric product of two vector is their
+  inner product
 
 # Basis
 

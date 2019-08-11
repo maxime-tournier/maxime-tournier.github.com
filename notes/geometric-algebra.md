@@ -38,7 +38,7 @@ vectors can be added and scaled by real numbers to obtain new
 vectors. So we can *define* the sum of two parallelograms by summing
 their constituent vectors pairwise:
 
-$$(u_1  v_1) + (u_2  v_2) \overset{\text{def}}= (u_1 + u_2)  (v_1 + v_2)$$ 
+$$(u_1  v_1) + (u_2  v_2) \eqdef (u_1 + u_2)  (v_1 + v_2)$$ 
 
 This generalises to arbitrary geometric objects, and the geometric
 product is distributive over the (commutative) sum as just
@@ -49,10 +49,11 @@ $$(\lambda u) v = \lambda (u v)$$
 One can easily check that the sum and scalar multiplication make
 $$\GG^n$$ a vector space. Also, we see that scalars end up being
 geometric objects in their own right, spanned by the unit element
-$$1$$. So far, we've seen how the geometric product behaves internally
-and with respect to the vector space structure, but we still don't
-know how to compute it in practice. However, we *do* know that it is
-bilinear so it has a symmetric part and an antisymmetric part:
+$$1$$ (called $$0$$-vectors). So far, we've seen how the geometric
+product behaves internally and with respect to the vector space
+structure, but we still don't know how to compute it in
+practice. However, we *do* know that it is bilinear so it has a
+symmetric part and an antisymmetric part:
 
 $$uv = \half\block{uv + vu} + \half\block{uv - vu}$$
 
@@ -76,10 +77,11 @@ $$uv = -vu$$
 
 Summarizing, we obtained that:
 
-- the geometric algebra $$\GG^n$$ is a vector space of geometric objects
-- $$\GG^n$$ is closed under the geometric product, which is bilinear
-- the symmetric part of the geometric product of two vector is their
-  inner product
+- $$\GG^n$$ is a vector space of geometric objects, containing vectors
+  of $$\RR^n$$
+- $$\GG^n$$ is a monoid for the geometric product, which is bilinear
+- the symmetric part of the geometric product is the inner product for
+  vectors
 
 # Basis
 
@@ -95,9 +97,11 @@ e_1 e_2,\ e_1 e_3,\ e_2 e_3 & \text{bi-vectors} \\
 e_1 e_2 e_3 & \text{tri-vectors} \\
 \end{matrix}$$
 
-This basis is called the *canonical* basis due to the arrangement of
-the indices in strict increasing order. Similarly, for $$\GG^4$$ one
-obtains:
+Scalars are called $$0$$-vectors, vectors of $$\RR^n$$ are called
+$$1$$-vectors and so on. General elements of $$\GG^n$$ are called
+multi-vectors. This basis is called the *canonical* basis due to the
+arrangement of the indices in strict increasing order. Similarly, for
+$$\GG^4$$ one obtains:
 
 $$
 \begin{matrix}
@@ -114,8 +118,9 @@ $$k$$-vectors is easy:
 
 $$\block{e_{i_k} \ldots e_{i_1}}\block{e_{i_1} \ldots e_{i_k}} = 1$$
 
-The inverse is another $$k$$-vector, which can be reordered to the
-original canonical basis $$k$$-vector by a number $$m$$ of swaps, giving:
+The inverse is another $$k$$-vector which can be reordered to the
+original canonical basis $$k$$-vector by a number $$m$$ of swaps,
+giving:
 
 $$\block{e_{i_1} \ldots e_{i_k}}^{-1} = (-1)^{m} \block{e_{i_1} \ldots e_{i_k}}$$
 
@@ -127,13 +132,13 @@ which provides the connection with complex numbers and quaternions.
 
 # Outer Product
 
-Since the symmetric part of the geometric product is the inner
-product, its anti-symmetric is logically called the *outer product*,
-denoted by $$\wedge$$[^wedge]:
+Since the symmetric part of the geometric product is the inner product
+(for vectors), its anti-symmetric part is logically called the *outer
+product*, denoted by $$\wedge$$[^wedge]:
 
 $$uv = u\cdot v + u \wedge v$$
 
-For two vectors $$u, v$$ in the plane $$e_1e_2$$, their product is:
+For two $$1$$-vectors $$u, v$$ in the plane $$e_1e_2$$, their product is:
 
 $$\underbrace{(a e_1 + b e_2)}_u\underbrace{(c e_1 + d e_2)}_v =
 \underbrace{(ac + bd)}_{u\cdot v} + \underbrace{(ac - bd) e_1 e_2}_{u
@@ -142,12 +147,47 @@ $$\underbrace{(a e_1 + b e_2)}_u\underbrace{(c e_1 + d e_2)}_v =
 and the outer product $$u\wedge v$$ has coefficient $$ac -
 bd=\norm{u}\norm{v}\sin(\alpha)$$, which is the signed area of the
 parallelogram delimited by $$u$$ and $$v$$ (where $$\alpha$$ is the
-angle between them).
+angle between them). More generally, the product of $$1$$-vectors
+always have a scalar part and a bi-vector part.
 
 # Blades
 
+Blades are orthogonal basis for subspaces of $$\RR^n$$, arranged as
+the geometric product of the basis $$1$$-vectors: let $$B \subseteq
+\RR^n$$ be a vector space of dimension $$k$$ and $$\block{b_i}_{i\leq
+k}$$ an orthogonal basis of $$B$$, then the product
 
+$$b_1 \ldots b_k$$ 
 
+is called a *blade* of grade $$k$$, or $$k$$-blade. In particular,
+basis vectors are all blades. Of particular interest is *the* basis
+$$n$$-vector, called the *pseudo-scalar*:
+
+$$1^* \eqdef e_1 \ldots e_n$$
+
+An important property is that the pseudo-scalar does not depend on the
+orthonormal basis (modulo sign). If $$e'_1 \ldots e'_n$$ is another
+orthonormal basis for $$\RR^n$$, then $$e'_1 \ldots e'_n$$ is a unit
+$$n$$-vector, therefore:
+
+$$e'_1 \ldots e'_n = \pm 1^*$$ 
+
+The multiplication of a basis $$k$$-vector $$e$$ by $$1^*$$
+cancels-out every occurence of basis $$1$$-vector in $$e$$ and adds-in
+every missing basis $$1$$-vector, up to a sign. For instance, in
+$$\GG^3$$:
+
+$$e_1 e_3 1^* = e_2$$
+
+This operation defines the *dual* of a multi-vector $$x\in\GG^n$$:
+
+$$x^* = x 1^*$$
+
+One can easily show that the dual of a $$k$$-blade is an
+$$(n-k)$$-blade representing the orthogonal complement of the original
+subspace: our $$k$$-blade can be completed into an orthonormal basis
+of the whole space, and multiplication by the pseudo-scalar for this
+basis ($$\pm 1^*$$) gives the result.
 
 # References 
 

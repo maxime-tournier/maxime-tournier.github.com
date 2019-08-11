@@ -23,6 +23,7 @@ $$
 \renewcommand{\tilde}{\widetilde}
 
 \newcommand{\inv}[1]{ {#1}^{-1} }
+\newcommand{\eqdef}{\overset{\text{def}}=}
 
 \newcommand{\block}[1]{\left(#1\right)}
 \newcommand{\abs}[1]{\left|#1\right|}

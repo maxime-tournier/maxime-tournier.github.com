@@ -4,10 +4,10 @@ categories: [math]
 ---
 
 Vectors can be combined to build parallelograms, parallelograms can be
-combined with vectors to build parallelepipeds, and so on. And then
-you can scale all of these to obtain new objects of the same
+combined with vectors to build parallelepipeds, and so on. And then on
+can scale all of these to obtain new objects of the same
 kind. Geometric Algebra gives a precise meaning to this composition
-operation, called the *geometric product*, which can then serve as the
+operation, called the *geometric product*, which can serve as the
 basis for performing most geometric operations on geometric objects,
 in any dimension.
 
@@ -30,13 +30,13 @@ $$1 x = x 1 = x$$
 
 Furthermore, the space of $$n$$-dimensional geometric objects
 $$\GG^n$$ (whatever they are, at this point) should be closed under
-the geometric product, which makes $$\GG^n$$ a monoid.
+the geometric product, making $$\GG^n$$ a monoid. 
 
-Let us add more structure and examine how the geometric product plays
-with the existing composition on vectors: vectors in $$\RR^n$$ can be
-added and scaled by real numbers to obtain new vectors. So we can
-*define* the sum of two parallelograms by summing their constituent
-vectors pairwise:
+Let us populate $$\GG^n$$ with vectors from $$\RR^n$$, and examine how
+the geometric product plays with the existing composition on vectors:
+vectors can be added and scaled by real numbers to obtain new
+vectors. So we can *define* the sum of two parallelograms by summing
+their constituent vectors pairwise:
 
 $$(u_1  v_1) + (u_2  v_2) \overset{\text{def}}= (u_1 + u_2)  (v_1 + v_2)$$ 
 
@@ -56,20 +56,20 @@ bilinear so it has a symmetric part and an antisymmetric part:
 
 $$uv = \half\block{uv + vu} + \half\block{uv - vu}$$
 
-Let us now add that one bit of Euclidean geometry giving the geometric
-product all its power (and name). Consider an inner product $$\cdot$$
-over $$\RR^n$$: it is a symmetric positive bilinear form. All that
-we're asking of the geometric product of two vectors is that its
-symmetric part be the inner product:
+Let us now add that tiny bit of Euclidean geometry giving the
+geometric product all its power (and name). Consider an inner product
+$$\cdot$$ over $$\RR^n$$: it is a symmetric positive bilinear
+form. All that we're asking of the geometric product of two vectors is
+that its symmetric part be the inner product:
 
 $$\half\block{uv + vu} = u\cdot v$$
 
-From this we immediately obtain $$u^2 = u\cdot u = \norm{u}^2$$, and
+From this, we immediately obtain $$u^2 = u\cdot u = \norm{u}^2$$, and
 every non-zero vector $$u \neq 0$$ has an inverse:
 
 $$\quad u^{-1} = \frac{u}{\ \norm{u}^2}$$
 
-Likewise, when $$u\cdot v = 0$$, only the anti-symmetric part remains,
+Likewise, when $$u\cdot v = 0$$ only the anti-symmetric part remains,
 hence:
 
 $$uv = -vu$$
@@ -84,7 +84,8 @@ Summarizing, we obtained that:
 # Basis
 
 Given an orthonormal orthogonal basis $$e_1, e_2, e_3$$ for $$\RR^3$$,
-we can quickly check than the following family forms a for $$\GG^3$$:
+we can quickly check than the following family forms a basis for
+$$\GG^3$$:
 
 $$
 \begin{matrix}
@@ -107,7 +108,22 @@ e_1 e_2 e_3,\ e_1 e_2 e_4,\ e_1 e_3 e_4,\ e_2 e_3 e_4 & \text{tri-vectors} \\
 e_1 e_2 e_3 e_4 & \text{quadri-vectors} \\
 \end{matrix}$$
 
-A quick induction shows that $$\GG^n$$ has dimension $$2^n$$.
+A quick induction shows that $$\GG^n$$ has dimension $$2^n$$. Since
+the geometric product is associative, finding inverses for basis
+$$k$$-vectors is easy:
+
+$$\block{e_{i_k} \ldots e_{i_1}}\block{e_{i_1} \ldots e_{i_k}} = 1$$
+
+The inverse is another $$k$$-vector, which can be reordered to the
+original canonical basis $$k$$-vector by a number $$m$$ of swaps, giving:
+
+$$\block{e_{i_1} \ldots e_{i_k}}^{-1} = (-1)^{m} \block{e_{i_1} \ldots e_{i_k}}$$
+
+In particular, basis bi-vectors satisfy:
+
+$$\block{e_j e_k}^2 = -1$$
+
+which provides the connection with complex numbers and quaternions.
 
 # Outer Product
 
@@ -128,12 +144,17 @@ bd=\norm{u}\norm{v}\sin(\alpha)$$, which is the signed area of the
 parallelogram delimited by $$u$$ and $$v$$ (where $$\alpha$$ is the
 angle between them).
 
+# Blades
+
+
+
+
 # References 
 
 [^1]: Alan MacDonald, *[A Survey of Geometric Algebra and Geometric
      Calculus](http://www.faculty.luther.edu/~macdonal/GA&GC.pdf)*,
      Adv. Appl. Cliff. Alg. 27, 853–891 (2017).
      
-[^wedge]: It is a bit unfortunate to used the $$\wedge$$ symbol for
-    something acting like a *join* in lattice theory, which has
-    symbol $$\vee$$ (like a union)
+[^wedge]: It is quite unfortunate that the $$\wedge$$ symbol has been
+    used for something acting like a *join* in lattice theory, which
+    has symbol $$\vee$$ (like a union)

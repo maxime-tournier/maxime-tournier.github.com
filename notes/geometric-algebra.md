@@ -148,26 +148,29 @@ and the outer product $$u\wedge v$$ has coefficient $$ac -
 bd=\norm{u}\norm{v}\sin(\alpha)$$, which is the signed area of the
 parallelogram delimited by $$u$$ and $$v$$ (where $$\alpha$$ is the
 angle between them). More generally, the product of $$1$$-vectors
-always have a scalar part and a bi-vector part.
+always has a scalar part and a bi-vector part.
+
+# Metric
+
 
 # Blades
 
-Blades are orthogonal basis for subspaces of $$\RR^n$$, arranged as
-the geometric product of the basis $$1$$-vectors: let $$B \subseteq
+Blades represent orthogonal subspaces of $$\RR^n$$, arranged as the
+geometric product of orthogonal $$1$$-vectors. Let $$B \subseteq
 \RR^n$$ be a vector space of dimension $$k$$ and $$\block{b_i}_{i\leq
-k}$$ an orthogonal basis of $$B$$, then the product
+k}$$ an orthogonal basis of $$B$$, then the product:
 
-$$b_1 \ldots b_k$$ 
+$$b = b_1 \ldots b_k$$ 
 
-is called a *blade* of grade $$k$$, or $$k$$-blade. In particular,
-basis vectors are all blades. Of particular interest is *the* basis
-$$n$$-vector, called the *pseudo-scalar*:
+is called a *blade* of grade $$k$$, or $$k$$-blade. In particular, the
+canonical basis vectors are all blades. Of particular interest is
+*the* canonical $$n$$-vector, called the *pseudo-scalar*:
 
 $$1^* \eqdef e_1 \ldots e_n$$
 
 An important property is that the pseudo-scalar does not depend on the
-orthonormal basis (modulo sign). If $$e'_1 \ldots e'_n$$ is another
-orthonormal basis for $$\RR^n$$, then $$e'_1 \ldots e'_n$$ is a unit
+orthonormal basis (except for sign). If $$e'_1 \ldots e'_n$$ is another
+orthonormal basis for $$\RR^n$$, then $$e'_1 \ldots e'_n$$ is a unit[^norm]
 $$n$$-vector, therefore:
 
 $$e'_1 \ldots e'_n = \pm 1^*$$ 
@@ -189,6 +192,9 @@ subspace: our $$k$$-blade can be completed into an orthonormal basis
 of the whole space, and multiplication by the pseudo-scalar for this
 basis ($$\pm 1^*$$) gives the result.
 
+Finally, we note that the sum of $$k$$-blades is *not* generally a
+blade, except when $$k=1$$ and $$k=n-1$$[^blade].
+
 # References 
 
 [^1]: Alan MacDonald, *[A Survey of Geometric Algebra and Geometric
@@ -198,3 +204,6 @@ basis ($$\pm 1^*$$) gives the result.
 [^wedge]: It is quite unfortunate that the $$\wedge$$ symbol has been
     used for something acting like a *join* in lattice theory, which
     has symbol $$\vee$$ (like a union)
+
+[^blade]: Use the dual twice.
+

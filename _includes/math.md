@@ -26,6 +26,7 @@ $$
 \newcommand{\eqdef}{\overset{\text{def}}=}
 
 \newcommand{\block}[1]{\left(#1\right)}
+\newcommand{\set}[1]{\left\{#1\right\}}
 \newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\trace}[1]{\mathrm{tr}\block{#1}}
 

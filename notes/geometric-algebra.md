@@ -150,8 +150,16 @@ parallelogram delimited by $$u$$ and $$v$$ (where $$\alpha$$ is the
 angle between them). More generally, the product of $$1$$-vectors
 always has a scalar part and a bi-vector part.
 
-# Metric
+# Norm
 
+The Euclidean norm on vectors extends naturally to multi-vectors: let
+$$x = \sum x_I e_I$$, where $$e_I=\Pi_{i \in I} e_i$$ and $$I$$ ranges
+over the set of canonical basis index sets[^index], the norm of $$x$$ is:
+
+$$\norm{x}^2 = \sum x_I^2$$
+
+One can verify that it is indeed a norm, and that it does not depend
+on the choice of a canonical basis for $$\GG^n$$.
 
 # Blades
 
@@ -170,7 +178,7 @@ $$1^* \eqdef e_1 \ldots e_n$$
 
 An important property is that the pseudo-scalar does not depend on the
 orthonormal basis (except for sign). If $$e'_1 \ldots e'_n$$ is another
-orthonormal basis for $$\RR^n$$, then $$e'_1 \ldots e'_n$$ is a unit[^norm]
+orthonormal basis for $$\RR^n$$, then $$e'_1 \ldots e'_n$$ is a unit
 $$n$$-vector, therefore:
 
 $$e'_1 \ldots e'_n = \pm 1^*$$ 
@@ -190,10 +198,9 @@ One can easily show that the dual of a $$k$$-blade is an
 $$(n-k)$$-blade representing the orthogonal complement of the original
 subspace: our $$k$$-blade can be completed into an orthonormal basis
 of the whole space, and multiplication by the pseudo-scalar for this
-basis ($$\pm 1^*$$) gives the result.
-
-Finally, we note that the sum of $$k$$-blades is *not* generally a
-blade, except when $$k=1$$ and $$k=n-1$$[^blade].
+basis ($$\pm 1^*$$) gives the result. Finally, we note that the sum of
+$$k$$-blades is *not* generally a blade, except when $$k=1$$ and
+$$k=n-1$$[^blade].
 
 # References 
 
@@ -207,3 +214,4 @@ blade, except when $$k=1$$ and $$k=n-1$$[^blade].
 
 [^blade]: Use the dual twice.
 
+[^index]: *e.g.* for $$\GG^3$$: $$I \in \set{\set{0}, \set{1}, \set{2}, \set{3}, \set{1, 2}, \set{1, 3}, \set{2, 3}, \set{1, 2, 3}}$$

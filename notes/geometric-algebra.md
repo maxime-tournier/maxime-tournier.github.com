@@ -147,8 +147,13 @@ $$\underbrace{(a e_1 + b e_2)}_u\underbrace{(c e_1 + d e_2)}_v =
 and the outer product $$u\wedge v$$ has coefficient $$ac -
 bd=\norm{u}\norm{v}\sin(\alpha)$$, which is the signed area of the
 parallelogram delimited by $$u$$ and $$v$$ (where $$\alpha$$ is the
-angle between them). More generally, the product of $$1$$-vectors
-always has a scalar part and a bi-vector part.
+angle between them). The following formula hints at the connection
+with complex numbers and quaternions:
+
+$$uv = \norm{u}\norm{v}\block{\cos(\alpha) + \sin(\alpha) e_1e_2}$$
+
+More generally, the product of $$1$$-vectors always has a scalar part
+and a bi-vector part.
 
 # Norm
 

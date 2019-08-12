@@ -159,7 +159,8 @@ and a bi-vector part.
 
 The Euclidean norm on vectors extends naturally to multi-vectors: let
 $$x = \sum x_I e_I$$, where $$e_I=\Pi_{i \in I} e_i$$ and $$I$$ ranges
-over the set of canonical basis index sets[^index], the norm of $$x$$ is:
+over the set of canonical basis index sets[^index], the norm of $$x$$
+is defined by:
 
 $$\norm{x}^2 = \sum x_I^2$$
 

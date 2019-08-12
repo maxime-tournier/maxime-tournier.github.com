@@ -204,7 +204,7 @@ $$(n-k)$$-blade representing the orthogonal complement of the original
 subspace: our $$k$$-blade can be completed into an orthonormal basis
 of the whole space, and multiplication by the pseudo-scalar for this
 basis ($$\pm 1^*$$) gives the result. Finally, we note that the sum of
-$$k$$-blades is *not* generally a blade, except when $$k=1$$ and
+$$k$$-blades is generally *not* a blade, except when $$k=1$$ and
 $$k=n-1$$[^blade].
 
 # References 

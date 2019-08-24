@@ -11,8 +11,8 @@ operation, called the *geometric product*, which can serve as the
 basis for performing most geometric operations on geometric objects,
 in any dimension.
 
-Most of the following is adapted from the excellent online resource by
-Alan MacDonald[^1].
+Most of the following is adapted from the online resource by Alan
+MacDonald[^1].
 
 {% include toc.md %}
 
@@ -132,13 +132,15 @@ which provides the connection with complex numbers and quaternions.
 
 # Outer Product
 
-Since the symmetric part of the geometric product is the inner product
-(for vectors), its anti-symmetric part is logically called the *outer
-product*, denoted by $$\wedge$$[^wedge]:
+Since the symmetric part of the geometric product for two vectors is
+the inner product, the anti-symmetric part is logically called the
+*outer product* (or *exterior product*), denoted by
+$$\wedge$$[^wedge]:
 
 $$uv = u\cdot v + u \wedge v$$
 
-For two $$1$$-vectors $$u, v$$ in the plane $$e_1e_2$$, their product is:
+For two vectors $$u, v$$ in the plane $$e_1e_2$$, their geometric
+product is:
 
 $$\underbrace{(a e_1 + b e_2)}_u\underbrace{(c e_1 + d e_2)}_v =
 \underbrace{(ac + bd)}_{u\cdot v} + \underbrace{(ac - bd) e_1 e_2}_{u
@@ -153,7 +155,16 @@ with complex numbers and quaternions:
 $$uv = \norm{u}\norm{v}\block{\cos(\alpha) + \sin(\alpha) e_1e_2}$$
 
 More generally, the product of $$1$$-vectors always has a scalar part
-and a bi-vector part.
+and a bi-vector part. The outer product can be extended inductively
+from vectors to the whole geometric algebra by defining:
+
+$$x \wedge y = \inner{x y}_{m + n}$$
+
+for a $$m$$-vector $$x$$ and an $$n$$-vector $$y$$, and where
+$$\inner{z}_k$$ is the *grade projection* operator giving the
+$$k$$-vector part of multivector $$z$$. The outer product as defined
+remains associative, antisymmetric and bilinear. In particular, the
+outer product of linearly dependent vectors is zero.
 
 # Norm
 
@@ -169,10 +180,17 @@ on the choice of a canonical basis for $$\GG^n$$.
 
 # Blades
 
-Blades represent orthogonal subspaces of $$\RR^n$$, arranged as the
-geometric product of orthogonal $$1$$-vectors. Let $$B \subseteq
-\RR^n$$ be a vector space of dimension $$k$$ and $$\block{b_i}_{i\leq
-k}$$ an orthogonal basis of $$B$$, then the product:
+Blades represent linear subspaces of $$\RR^n$$, and can be defined
+equivalently as:
+
+- exterior products of linearly independent $$1$$-vectors
+- geometric products of orthogonal $$1$$-vectors
+
+
+
+Let $$B \subseteq \RR^n$$ be a vector space of dimension $$k$$ and
+$$\block{b_i}_{i\leq k}$$ an orthogonal basis of $$B$$, then the
+product:
 
 $$b = b_1 \ldots b_k$$ 
 

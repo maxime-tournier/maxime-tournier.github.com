@@ -146,21 +146,20 @@ $$\underbrace{(a e_1 + b e_2)}_u\underbrace{(c e_1 + d e_2)}_v =
 \underbrace{(ac + bd)}_{u\cdot v} + \underbrace{(ac - bd) e_1 e_2}_{u
 \wedge v}$$
 
-hence the outer product $$u\wedge v$$ has coefficient $$ac -
-bd=\norm{u}\norm{v}\sin(\alpha)$$, which is the signed area of the
-parallelogram delimited by $$u$$ and $$v$$ (where $$\alpha$$ is the
-angle between them). The following formula hints at the connection
-with complex numbers and quaternions:
+hence the outer product $$u\wedge v$$ has coordinate $$ac -
+bd=\norm{u}\norm{v}\sin(\alpha)$$ along $$e_1e_2$$, which is the
+signed area of the parallelogram delimited by $$u$$ and $$v$$ (where
+$$\alpha$$ is the angle between them). The following formula hints at
+the connection with complex numbers and quaternions:
 
 $$uv = \norm{u}\norm{v}\block{\cos(\alpha) + \sin(\alpha) e_1e_2}$$
 
-More generally, the product of $$1$$-vectors always has a scalar part
-and a bi-vector part. The outer product can be extended inductively
-from vectors to the whole geometric algebra by defining:
+The outer product can be extended from vectors to the whole geometric
+algebra by defining:
 
 $$x \wedge y = \inner{x y}_{m + n}$$
 
-for a $$m$$-vector $$x$$ and an $$n$$-vector $$y$$, and where
+for an $$m$$-vector $$x$$ and an $$n$$-vector $$y$$, and where
 $$\inner{z}_k$$ is the *grade projection* operator selecting the
 $$k$$-vector part of a multivector $$z$$. The outer product as defined
 remains associative, antisymmetric and bilinear. In particular, the

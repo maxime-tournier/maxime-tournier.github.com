@@ -179,17 +179,10 @@ on the choice of a canonical basis for $$\GG^n$$.
 
 # Blades
 
-Blades represent linear subspaces of $$\RR^n$$, and can be defined
-equivalently as:
-
-- exterior products of linearly independent $$1$$-vectors
-- geometric products of orthogonal $$1$$-vectors
-
-
-
-Let $$B \subseteq \RR^n$$ be a vector space of dimension $$k$$ and
-$$\block{b_i}_{i\leq k}$$ an orthogonal basis of $$B$$, then the
-product:
+Blades represent linear subspaces of $$\RR^n$$, and are defined as
+geometric products of orthogonal $$1$$-vectors. Let $$B \subseteq
+\RR^n$$ be a vector space of dimension $$k$$ and $$\block{b_i}_{i\leq
+k}$$ an orthogonal basis of $$B$$, then the product:
 
 $$b = b_1 \ldots b_k$$ 
 

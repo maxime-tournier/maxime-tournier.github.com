@@ -161,8 +161,8 @@ from vectors to the whole geometric algebra by defining:
 $$x \wedge y = \inner{x y}_{m + n}$$
 
 for a $$m$$-vector $$x$$ and an $$n$$-vector $$y$$, and where
-$$\inner{z}_k$$ is the *grade projection* operator giving the
-$$k$$-vector part of multivector $$z$$. The outer product as defined
+$$\inner{z}_k$$ is the *grade projection* operator selecting the
+$$k$$-vector part of a multivector $$z$$. The outer product as defined
 remains associative, antisymmetric and bilinear. In particular, the
 outer product of linearly dependent vectors is zero.
 

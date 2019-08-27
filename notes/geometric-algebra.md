@@ -4,7 +4,7 @@ categories: [math]
 ---
 
 Vectors can be combined to build parallelograms, parallelograms can be
-combined with vectors to build parallelepipeds, and so on. And then on
+combined with vectors to build parallelepipeds, and so on. And then one
 can scale all of these to obtain new objects of the same
 kind. Geometric Algebra gives a precise meaning to this composition
 operation, called the *geometric product*, which can serve as the

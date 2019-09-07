@@ -265,7 +265,9 @@ and in particular, natural transformations are functors $$\cat{I} \to
 functor categories be exponential objects in $$\mathrm{Cat}$$, in
 which case we get an isomorphism between functors $$\cat{I}
 \to\cat{D}^\cat{C}$$ and $$\cat{I} \times \cat{C} \to \cat{D}$$ via
-Currying, and recover the definition of natural transformations.
+Currying, and recover the definition of natural transformations. In
+other words, the definition of natural transformations is the one that
+makes $$\mathrm{Cat}$$ a cartesian closed category.
 
 # The Yoneda Lemma
 

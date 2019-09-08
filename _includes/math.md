@@ -68,6 +68,7 @@ $$
 
 \newcommand{\Set}{\mathbb{Set}}
 \newcommand{\Cat}{\mathbb{Cat}}
+\newcommand{\Hask}{\mathbb{Hask}}
 
 \newcommand{\lim}{\mathrm{lim}\ }
 

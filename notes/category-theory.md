@@ -431,7 +431,6 @@ $$
 
 (TODO show this)
 
-
 ## Covariant Case
 
 All of the above translates fairly directly to the covariant case,
@@ -442,6 +441,19 @@ $$F(a) \simeq \hom{\funcat{C, \Set}}{H^a, F}$$
 Note that the Yoneda embedding becomes contravariant:
 
 $$H^{-}: \op{C} \to \funcat{C, \Set}$$
+
+### Haskell
+
+The Yoneda lemma applied to the category of Haskell types $$\Hask$$
+(where objects are types, morphisms are functions, functors are type
+constructors and natural transformations are polymorphic functions)
+gives the following:
+
+- $$F a \simeq \forall x.(a \to x) \to F x$$ (covariant)
+- $$F a \simeq \forall x.(x \to a) \to F x$$ (contravariant)
+
+The covariant version essentially states that values are equivalent to
+their [CPS](cps.html) transformation.
 
 # Initial and Terminal Objects
 

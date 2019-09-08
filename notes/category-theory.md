@@ -254,18 +254,18 @@ TODO: natural transformations where every component is an isomorphism.
 
 ### On Naturality
 
-One might easily question the naturality in the definition of natural
-transformations: after all, it all seems pretty artificial on first
-sight.
+One might easily question the "naturality" in the definition of
+natural transformations: after all, it all seems pretty artificial on
+first sight.
 [This](https://ncatlab.org/nlab/show/natural+transformation+%28discussion%29)
-discussion provides the answer: morphisms in a category $$\cat{C}$$
-can be seen as functors $$\cat{I} \to \cat{C}$$ selecting morphisms
-and in particular, natural transformations are functors $$\cat{I} \to
+discussion provides an answer: morphisms in a category $$\cat{C}$$ can
+be seen as functors $$\cat{I} \to \cat{C}$$ (selecting morphisms) and
+in particular, natural transformations are functors $$\cat{I} \to
 \cat{D}^\cat{C}$$. Now, a pretty *natural* thing to ask is that
 functor categories be exponential objects in $$\mathrm{Cat}$$, in
 which case we get an isomorphism between functors $$\cat{I}
 \to\cat{D}^\cat{C}$$ and $$\cat{I} \times \cat{C} \to \cat{D}$$ via
-Currying, and recover the definition of natural transformations. In
+Currying and recover the definition of natural transformations. In
 other words, the definition of natural transformations is the one that
 makes $$\mathrm{Cat}$$ a cartesian closed category.
 

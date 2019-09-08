@@ -118,7 +118,7 @@ and we immediately check:
 - identity: $$(F \circ G)\block{\id_x} = \id_{F(G(x))}$$
 - associativity: $$(F \circ G)\block{f \circ g} = F(G(f) \circ G(g)) = \block{F \circ G}(f) \circ \block{F \circ G}(g)$$
 
-In other words, there is a category $$\mathrm{Cat}$$ of locally small
+In other words, there is a category $$\Cat$$ of locally small
 categories, in which functors are the morphisms.
 
 ## Full and Faithful Functors
@@ -243,13 +243,13 @@ $$(\id_F)_x: F(x) \to F(x) = \id_{F(x)}$$
 Therefore, we just obtained another category called the *functor
 category*, denoted by $$\funcat{\cat{C}, \cat{D}}$$, where objects are
 functors from $$\cat{C}$$ to $$\cat{D}$$ and morphisms are natural
-transformations. We conclude by noting that functor categories
-are [exponentials](#exponentials) in $$\mathrm{Cat}$$, and as such are
-sometimes denoted by $$\cat{D}^\cat{C}$$.
+transformations. 
 
 ## Natural Isomorphisms
 
-TODO: natural transformations where every component is an isomorphism. 
+A natural isomorphism is an isomorphism in $$\funcat{\cat{C},
+\cat{D}}$$: an invertible natural transformation. This is equivalent
+to requiring that all components are isomorphisms in $$\cat{D}$$.
 
 
 ### On Naturality
@@ -262,16 +262,31 @@ discussion provides an answer: morphisms in a category $$\cat{C}$$ can
 be seen as functors $$\cat{I} \to \cat{C}$$ (selecting morphisms) and
 in particular, natural transformations are functors $$\cat{I} \to
 \cat{D}^\cat{C}$$. Now, a pretty *natural* thing to ask is that
-functor categories be exponential objects in $$\mathrm{Cat}$$, in
-which case we get an isomorphism between functors $$\cat{I}
-\to\cat{D}^\cat{C}$$ and $$\cat{I} \times \cat{C} \to \cat{D}$$ via
-Currying and recover the definition of natural transformations. In
-other words, the definition of natural transformations is the one that
-makes $$\mathrm{Cat}$$ a cartesian closed category.
+functor categories be [exponential objects](#exponentials) in
+$$\Cat$$, in which case we get an isomorphism between functors
+$$\cat{I} \to\cat{D}^\cat{C}$$ and $$\cat{I} \times \cat{C} \to
+\cat{D}$$ via Currying and recover the definition of natural
+transformations. In other words, the definition of natural
+transformations is the one that makes $$\Cat$$ a cartesian closed
+category.
 
 # The Yoneda Lemma
 
-## Representable Functors
+The Yoneda *lemma* is a fundamental result connecting a (locally
+small) category to the category of sets through its Hom-sets. As such,
+it makes it possible to use results in $$\Set$$ which is very
+well-known. Its main motivation is to prove the Yoneda *embedding*,
+which relates the set of morphisms between two elements to the
+Hom-functors of both elements:
+
+$$\hom{C}{a, b} \simeq \hom{\funcat{C, \Set}}{\hom{C}{a, -}, \hom{C}{b, -}}$$
+
+In particular, two elements are isomorphic whenever their Hom-functors
+are naturally isomorphic *i.e.* whenever their Hom-sets are
+isomorphic. In other words, knowing an object is really the same as
+knowning how it releates to other objects.
+
+## Hom Functors
 
 Let $$\cat{C}$$ be a locally small category and $$\Set$$ be the
 category of sets. Let us also fix an object $$a \in \Ob{C}$$, and
@@ -279,11 +294,11 @@ consider the two following functors:
 
 ### Covariant Hom-Functor
 
-$$H^a$$ connects sets of morphisms starting at $$a$$ by mapping a
-morphism to its post-composition:
+$$H^a = \hom{C}{a, -}$$ connects sets of morphisms starting at $$a$$
+by mapping a morphism to its post-composition:
 
 $$\begin{align}
-H^a: \cat{C} &\to \mathrm{Set}\\
+H^a: \cat{C} &\to \Set\\
 x &\mapsto \hom{C}{a, x} \\
 (f: x \to y) &\mapsto H^a(f): \hom{C}{a, x} \to \hom{C}{a, y} = (g \mapsto f \circ g) \\
 \end{align}$$
@@ -291,24 +306,27 @@ x &\mapsto \hom{C}{a, x} \\
 
 ### Contravariant Hom-Functor
 
-$$H_a$$ connects sets of morphisms ending at $$a$$ by mapping a
-morphism to its pre-composition:
+$$H_a = \hom{C}{-, a}$$ connects sets of morphisms ending at $$a$$ by
+mapping a morphism to its pre-composition:
 
 $$\begin{align}
-H_a: \op{C} &\to \mathrm{Set}\\
+H_a: \op{C} &\to \Set\\
 x &\mapsto \hom{C}{x, a} \\
 (f: y \to x) &\mapsto H_a(f): \hom{C}{x, a} \to \hom{C}{y, a} = (g \mapsto g \circ f) \\
 \end{align}$$
 
+
+### Representable Functors 
+
 $$H_a$$ and $$H^a$$ are sometimes called *the* (covariant,
 contravariant) representable functors, and any functor naturally
-isomorphic to one of them is called representable as well.
+isomorphic to one of them is called *a* representable functor.
 
 ## Yoneda Embedding
 
 One can easily check that both $$H^a$$ and $$H_a$$ are indeed
-functors. Now, let us consider the *Yoneda embedding*, which is the
-following functor:
+functors. Now, let us consider the Yoneda *embedding*, which is
+defined as the following functor:
 
 $$\begin{align}
 H_{-}: \cat{C} &\to \funcat{\op{C}, \Set}\\
@@ -348,9 +366,9 @@ embedding.
 
 ## Lemma and Consequence
 
-Let us finally consider some other functor $$F: \op{C} \to \Set$$, a
-morphism $$h: x \to y$$ and a natural transformation $$\alpha: H_a
-\to F$$ with naturality square as follows:
+Let us consider some other functor $$F: \op{C} \to \Set$$, a morphism
+$$h: x \to y$$ and a natural transformation $$\alpha: H_a \to F$$ with
+naturality square as follows:
 
 $$\natsq{\alpha}{H_a}{F}{y}{x}{h}$$
 
@@ -365,6 +383,7 @@ $$
 	\id_a &\longmapsto& \id_a \circ h &\longmapsto & \alpha_x(h) \\
 \end{matrix}
 $$
+
 
 Since this holds for any $$h\in H_a(x)$$, the component $$\alpha_x$$
 is:
@@ -393,8 +412,26 @@ correspondence with natural transformations in $$\hom{\funcat{\op{C},
 $$\cat{C}$$ can be viewed as a subcategory of *(embedded in)* the
 category of contravariant functors from itself to sets (*presheaves*).
 
-TODO the Yoneda lemma is natural in $$a$$ and $$F$$
- 
+Finally, the Yoneda lemma is natural in both $$a$$ and $$F$$, meaning
+that the two following squares commute:
+
+$$
+\begin{matrix}
+ 	F(a) & \longrightarrow & \hom{\funcat{\op{C}, \Set}}{H_a, F} \\
+    \downarrow &  & \downarrow \\
+ 	F(b) & \longrightarrow & \hom{\funcat{\op{C}, \Set}}{H_b, F} \\ 
+\end{matrix}
+\quad\quad\quad
+\begin{matrix}
+ 	F(a) & \longrightarrow & \hom{\funcat{\op{C}, \Set}}{H_a, F} \\
+    \downarrow &  & \downarrow \\
+ 	G(a) & \longrightarrow & \hom{\funcat{\op{C}, \Set}}{H_a, G} \\ 
+\end{matrix} 
+$$
+
+(TODO show this)
+
+
 ## Covariant Case
 
 All of the above translates fairly directly to the covariant case,

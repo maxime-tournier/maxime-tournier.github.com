@@ -693,7 +693,45 @@ T^3 & \overset{T\mu}\longrightarrow & T^2 \\
 T^2 & \underset{\mu}\longrightarrow & T
 \end{matrix}$$
 
+### Haskell
 
+The unit for a monad $$M$$ is called `return`: 
+
+```haskell
+return :: Monad m => a -> m a
+```
+
+The multiplication is called `join`:
+
+```haskell
+join :: Monad m => m (m a) -> m a
+```
+
+## Algebras
+
+An algebra for a monad $$\block{T: \cat{C} \to \cat{C}, \eta, \mu}$$
+is given by:
+
+- some object $$A \in \cat{C}$$
+- a morphism $$\theta: TA \to A$$
+
+such that the two following diagrams commute:
+
+$$
+\begin{matrix}
+	A & \overset{\eta_A}\longrightarrow & T A \\
+	& {}_1\searrow & \downarrow_\theta \\
+	& & A 
+\end{matrix}
+$$
+
+$$
+\begin{matrix}
+	T^2A & \overset{\mu_A}\longrightarrow & T A \\
+	{}_{T\theta}\downarrow&  & \downarrow_\theta \\
+	TA& \underset{\theta}\longrightarrow& A 
+\end{matrix}
+$$
 
 # Notes & References
 

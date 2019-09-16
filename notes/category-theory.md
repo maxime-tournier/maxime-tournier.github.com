@@ -270,6 +270,22 @@ transformations. In other words, the definition of natural
 transformations is the one that makes $$\Cat$$ a cartesian closed
 category.
 
+## Whiskering
+
+Given the following functors:
+
+$$\cat{A} \overset{F}\longrightarrow \cat{B} \overset{G}{\underset{H}\rightrightarrows} \cat{D} \overset{E} \longrightarrow \cat{E}$$
+
+and a natural transformation $$\alpha: G \to H$$, one can obtain the
+two following natural transformations:
+
+- $$\alpha F: GF \to HF$$ whose components are $$\block{\alpha F}_x = \alpha_{Fx}$$
+- $$E \alpha: EG \to EH$$ whose components are $$\block{E \alpha}_x = E \alpha_x$$
+
+One can immediately check that the naturality squares of $$\alpha$$
+are preserved under left/right whiskering, and that both $$\alpha F$$
+and $$E\alpha$$ are indeed natural transformations.
+
 # The Yoneda Lemma
 
 The Yoneda *lemma* is a fundamental result connecting a (locally
@@ -653,8 +669,29 @@ terminal objects. Dually, colimits are limits in $$\op{C}$$.
 
 # Monads
 
+A monad on a category $$\cat{C}$$ is given by an endofunctor $$T:
+\cat{C} \to \cat{C}$$ together with two natural transformations:
 
+- $$\eta: 1 \to T$$ called the *unit*
+- $$\mu: T^2 \to T$$ called the *multiplication*
 
+such that the following diagrams commute:
+
+### Unit Triangle
+
+$$\begin{matrix}
+T &\overset{T\eta}\longrightarrow &T^2 & \overset{\eta T}\longleftarrow & T \\
+ & {}_1\searrow & \downarrow_\mu & \swarrow_1 \\
+ & & T & & \\
+\end{matrix}$$
+
+### Associativity Square
+
+$$\begin{matrix}
+T^3 & \overset{T\mu}\longrightarrow & T^2 \\
+{}_{\mu T}\downarrow & & \downarrow_\mu \\
+T^2 & \underset{\mu}\longrightarrow & T
+\end{matrix}$$
 
 
 

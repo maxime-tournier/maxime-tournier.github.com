@@ -12,8 +12,8 @@ Some more general abstract nonsense.
 A category $$\mathcal{C}$$ is given by the following:
 
 - a class[^1] of *objects* $$\Ob{C}$$
-- a class of *morphisms* $$\Hom{C}$$, whose elements $$f$$ have a *source* object
-  and a *target* object, denoted by $$f: a \to b$$. 
+- a class of *morphisms* $$\Hom{C}$$ denoted by $$f: a \to b$$, where
+  $$a$$ is the *source* object and $$b$$ is the *target* object.
   
 The class of morphisms from $$a$$ to $$b$$ is denoted by $$\hom{C}{a,
   b}$$. For $$\cat{C}$$ to be a category, it must satisfy the
@@ -119,7 +119,8 @@ and we immediately check:
 - associativity: $$(F \circ G)\block{f \circ g} = F(G(f) \circ G(g)) = \block{F \circ G}(f) \circ \block{F \circ G}(g)$$
 
 In other words, there is a category $$\Cat$$ of locally small
-categories, in which functors are the morphisms.
+categories, in which functors are the morphisms. Functor composition
+is sometimes written $$FG$$ instead of $$F \circ G$$ for short.
 
 ## Full and Faithful Functors
 
@@ -279,8 +280,8 @@ $$\cat{A} \overset{F}\longrightarrow \cat{B} \overset{G}{\underset{H}\rightright
 and a natural transformation $$\alpha: G \to H$$, one can obtain the
 two following natural transformations:
 
-- $$\alpha F: GF \to HF$$ whose components are $$\block{\alpha F}_x = \alpha_{Fx}$$
-- $$E \alpha: EG \to EH$$ whose components are $$\block{E \alpha}_x = E \alpha_x$$
+- $$\alpha F: GF \to HF$$, whose components are $$\block{\alpha F}_x = \alpha_{Fx}$$
+- $$E \alpha: EG \to EH$$, whose components are $$\block{E \alpha}_x = E \alpha_x$$
 
 One can immediately check that the naturality squares of $$\alpha$$
 are preserved under left/right whiskering, and that both $$\alpha F$$
@@ -542,7 +543,6 @@ $$
   coproducts are disjoint unions
 - in a preorder, products are *meets* (greatest lower bound) and
   coproducts are *joins* (lowest upper bound)
-
 
 ## Equalizers
 

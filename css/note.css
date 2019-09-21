@@ -39,6 +39,15 @@ img {
 
 }
 
+blockquote {
+	border-left: 0.5ex solid lightgray;
+	padding-left: 1ex;
+	font-style: italic;
+	color: #666;
+	margins: 0;
+	padding: 0 1em;
+}
+
 
 /* input[type=checkbox]:checked ~ div ul#markdown-toc { */
 /* 	display: block; */

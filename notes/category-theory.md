@@ -103,8 +103,12 @@ $$F\block{\id_c} = \id_{F(c)}$$
 
 $$F\block{g \circ f} = F(g) \circ F(f)$$
 
-In particular, functors can never "disconnect" connected objects. For
-any category $$\cat{C}$$, there exists an *identity* functor
+In particular, functors can never "disconnect" connected objects:
+
+> Functors preserve morphism composition, therefore map related
+> objects to related objects
+
+For any category $$\cat{C}$$, there exists an *identity* functor
 $$\id_{\cat{C}}$$ sending every object to itself and acting similarly
 on morphisms. Likewise, functors can be composed:
 
@@ -173,6 +177,11 @@ $$
 \end{align}
 $$
 
+In other words:
+
+> A natural transformation is the categorical equivalent of a
+> continuous transformation between functors (i.e. an homotopy)
+
 Let us fix an object $$x \in \Ob{C}$$, the image of morphism
 $$\block{\id_x, !}$$ by $$\alpha$$ is a morphism:
 
@@ -205,7 +214,7 @@ which can be rewritten succintly as:
 
 $$\block{G(f), \id_1} \circ \alpha_x = \alpha_y \circ \block{F(f), \id_0}$$
 
-In other words, the following diagram is *commutative*, meaning that all
+In other words, the following diagram *commutes*, meaning that all
 parallel arrows are equal:
 
 $$\natsq{\alpha}{F}{G}{x}{y}{f}$$
@@ -213,7 +222,11 @@ $$\natsq{\alpha}{F}{G}{x}{y}{f}$$
 This commutative diagram is called the *naturality square* for
 $$\alpha$$. The natural transformation $$\alpha$$ is completely
 determined by its components (and associated naturality squares),
-which are generally used as its definition.
+which are generally used as its definition:
+
+> A natural transformation is given by a morphism (component) between
+> each pair of mapped objects, such that this morphism plays nicely
+> with mapped morphisms.
 
 ## Functor Categories
 
@@ -486,7 +499,7 @@ why, let us consider two initial objects $$x_1$$ and $$x_2$$. Since
 both are initial, all the morphisms on the following diagram are
 unique:
 
-$$\underset{\underset{\id_{x_1}}\circlearrowright}{x_1} \overset{f}{\underset{g}{\rightleftharpoons}} \underset{\underset{\id_{x_2}}\circlearrowleft}{x_2}$$
+$$\underset{\underset{\id_{x_1}}\circlearrowright}{x_1} \overset{f}{\underset{g}{\rightleftarrows}} \underset{\underset{\id_{x_2}}\circlearrowleft}{x_2}$$
 
 Therefore, $$f \circ g = \id_{x_2}$$ and $$g \circ f = \id_{x_1}$$,
 which provides the isomorphism. Moreover, both $$f$$ and $$g$$ are
@@ -519,7 +532,7 @@ the following *universal property*:
 $$
 \begin{matrix}
       & & c &  & \\
-      & \overset{f}\swarrow & \downarrow & \overset{g}\searrow & \\
+      & {}^{f}\swarrow & \downarrow & \searrow^{g} & \\
     a &\underset{\pi_1}\longleftarrow& a \times b & \underset{\pi_2}\longrightarrow& b \\
 \end{matrix}
 $$
@@ -532,7 +545,7 @@ itself. Dually, *coproducts* are products in $$\op{C}$$:
 $$
 \begin{matrix}
       & & c &  & \\
-      & \overset{f}\nearrow & \uparrow & \overset{g}\nwarrow & \\
+      & {}^{f}\nearrow & \uparrow & \nwarrow^{g} & \\
     a &\underset{i_1}\longrightarrow& a + b & \underset{i_2}\longleftarrow& b \\
 \end{matrix}
 $$
@@ -667,6 +680,66 @@ terminal objects. Dually, colimits are limits in $$\op{C}$$.
 
 # Adjunctions
 
+Consider the following functors between two categories $$\cat{C}$$ and
+$$\cat{D}$$:
+
+$$\cat{C} \overset{F}{\underset{G}\leftrightarrows} \cat{D}$$
+
+$$F$$ and $$G$$ are called *adjoint* functors when there is a natural
+isomorphism:
+
+$$\hom{D}{Fx, y} \simeq \hom{C}{x, Gy}$$
+
+which is natural in $$x \in \Ob{C}$$ and $$y \in \Ob{D}$$. This
+adjunction between $$F$$ and $$G$$, ($$F$$ being the left
+adjoint and $$G$$ being the right adjoint), is denoted by:
+
+$$F \dashv G$$
+
+This means the vertical arrows are in one-to-one correspondance in
+this diagram:
+
+$$\begin{matrix}
+	x & \rightarrow & Fx \\
+	\downarrow & & \downarrow \\
+	Gy & \leftarrow& y\\
+\end{matrix}$$
+
+More precisely, given $$f: x' \to x$$ we have the following naturality
+square:
+
+$$
+\begin{matrix}
+   \hom{D}{Fx, y} & \overset{\hom{D}{Ff, y}}\longrightarrow & \hom{D}{Fx', y} \\
+   \simeq\ \downarrow \uparrow & & \downarrow \uparrow\  \simeq \\
+   \hom{C}{x, Gy} & \overset{\hom{C}{f, Gy}}\longrightarrow & \hom{C}{x', Gy} \\
+\end{matrix}
+$$
+
+Likewise, given $$g: y \to y'$$ we have the following naturality square:
+
+$$
+\begin{matrix}
+   \hom{D}{Fx, y} & \overset{\hom{D}{Fx, g}}\longrightarrow & \hom{D}{Fx, y'} \\
+   \simeq\ \downarrow \uparrow & & \downarrow \uparrow\  \simeq \\
+   \hom{C}{x, Gy} & \overset{\hom{C}{x, Gg}}\longrightarrow & \hom{C}{x, Gy'} \\
+\end{matrix}
+$$
+
+Alternatively, one can define the adjunction $$F \dashv G$$ using a
+pair of natural transformations:
+
+- $$\eta: 1_\cat{C} \to GF$$ *(unit)*
+- $$\epsilon: FG \to 1_\cat{D}$$ *(counit)*
+
+such that the following diagrams commute *(triangle equalities)*:
+
+$$\begin{matrix}
+	F & \overset{F\eta}\rightarrow & FGF & & GFG & \overset{\eta G}\leftarrow & G \\
+	& {}_{1_F}\searrow & \downarrow_{\epsilon F} & & {}_{G\epsilon}\downarrow & \swarrow_{1_G}& \\
+	& & F & & G & & \\
+\end{matrix}$$
+
 # Monads
 
 A monad on a category $$\cat{C}$$ is given by an endofunctor $$T:
@@ -692,6 +765,10 @@ T^3 & \overset{T\mu}\longrightarrow & T^2 \\
 {}_{\mu T}\downarrow & & \downarrow_\mu \\
 T^2 & \underset{\mu}\longrightarrow & T
 \end{matrix}$$
+
+Equivalently:
+
+> A monad is a monoid object in the category of endofunctors. 
 
 ### Haskell
 
@@ -732,6 +809,21 @@ $$
 	TA& \underset{\theta}\longrightarrow& A 
 \end{matrix}
 $$
+
+In a sense, monads provide syntax for a language built on the category
+$$\cat{C}$$, whereas algebra provide semantics by evaluating terms. A
+morphism between algebras $$\block{A, \theta}$$ and $$\block{B,
+\phi}$$ is defined by a morphism $$f: A \to B$$ such that the obvious
+square commutes:
+
+$$\begin{matrix}
+	TA & \overset{Tf}\longrightarrow & TB \\
+	{}_{\theta}\downarrow& & \downarrow_\phi \\
+	A & \overset{f} \longrightarrow & B
+\end{matrix}$$
+
+Equipped with such morphisms, the algebras for a monad $$T$$ form a
+category $$\mathbb{Alg}(T)$$.
 
 # Notes & References
 

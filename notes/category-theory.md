@@ -705,8 +705,9 @@ $$\begin{matrix}
 	Gy & \leftarrow& y\\
 \end{matrix}$$
 
-More precisely, given $$f: x' \to x$$ we have the following naturality
-square:
+and that this correspondance is stable by pre-composition on $$x$$ and
+post-composition on $$y$$. More precisely, given $$f: x' \to x$$ we
+have the following naturality square:
 
 $$
 \begin{matrix}
@@ -739,6 +740,10 @@ $$\begin{matrix}
 	& {}_{1_F}\searrow & \downarrow_{\epsilon F} & & {}_{G\epsilon}\downarrow & \swarrow_{1_G}& \\
 	& & F & & G & & \\
 \end{matrix}$$
+
+In other words, round-trips through both functors can be mapped from
+and into the identity functors, and round-and-forth trips amount to
+one-ways.
 
 # Monads
 

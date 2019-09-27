@@ -60,3 +60,10 @@ Quick cheat sheet.
   - start interpreter: `C-c C-z`
   
 
+# Projectile
+
+```elisp
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+```
+

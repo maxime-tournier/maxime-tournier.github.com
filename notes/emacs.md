@@ -65,5 +65,7 @@ Quick cheat sheet.
 ```elisp
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(helm-projectile)
+(helm-projectile-on)
 ```
 

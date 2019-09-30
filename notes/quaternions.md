@@ -717,7 +717,7 @@ $$ q_{x \mapsto y} = \pi_{S^3} \block{1 + \pi_{S^3} \block{-y x}} $$
 
 Or even simpler:
 
-$$ q_{x \mapsto y} = \pi_{S^3} \block{ \norm{y x} - norm{y x} } $$
+$$ q_{x \mapsto y} = \pi_{S^3} \block{ \norm{y x} - y x } $$
 
 Alternatively, one can simply normalize $$-(x+y)x$$ (resp. $$-y(x +
 y)$$), giving twice the rotation from $$x$$ to $$x+y$$ (resp. from

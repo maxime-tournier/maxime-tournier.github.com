@@ -693,12 +693,12 @@ so that:
 
 $$q^\half = \pi_{S^3} \block{q + 1}$$
 
-That is: add $$1$$ to the real part, then normalize. Sweet! For
-non-unit quaternions, one can always take the square-root of the norm
-separately and reduce to the case above:
+That is: add $$1$$ to the real part, then normalize. This is a direct
+extension of a similar formula for computing the square root of unit
+complex numbers. For non-unit quaternions, one can always take the
+square-root of the norm separately and reduce to the case above:
 
 $$ q^\half = \sqrt{\norm{q}} \pi_{S^3} \block{q + \norm{q}} $$
-
 
 
 ## Rotation between Vectors

@@ -721,7 +721,7 @@ $$ q_{x \mapsto y} = \pi_{S^3} \block{ \norm{y x} - y x } $$
 
 Alternatively, one can simply normalize $$-(x+y)x$$ (resp. $$-y(x +
 y)$$), giving twice the rotation from $$x$$ to $$x+y$$ (resp. from
-$$x + y$$ to $$y$$), which gives the result.
+$$x + y$$ to $$y$$).
 
 ## Geodesic Projection
 

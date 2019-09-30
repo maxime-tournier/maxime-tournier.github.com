@@ -707,8 +707,9 @@ The quaternion product for imaginary quaternions is:
 
 $$ x y = x \times y - x^T y = \norm{x} \norm{y} \block{-\cos \theta + n \sin \theta} $$
 
-which, once normalized, gives us *twice* the rotation from $$y$$ to
-$$-x$$. So instead, we want to consider the product $$-yx$$. We have
+where $$\theta$$ is the angle between $$x$$ and $$y$$. This
+expression, once normalized, gives us *twice* the rotation from $$y$$
+to $$-x$$, so we want to consider the product $$-yx$$ instead. We have
 just seen how to obtain square roots efficiently, so the following
 does what we need:
 
@@ -716,7 +717,11 @@ $$ q_{x \mapsto y} = \pi_{S^3} \block{1 + \pi_{S^3} \block{-y x}} $$
 
 Or even simpler:
 
-$$ q_{x \mapsto y} = \pi_{S^3} \block{ -y x + \norm{y x} } $$
+$$ q_{x \mapsto y} = \pi_{S^3} \block{ \norm{y x} - norm{y x} } $$
+
+Alternatively, one can simply normalize $$-(x+y)x$$ (resp. $$-y(x +
+y)$$), giving twice the rotation from $$x$$ to $$x+y$$ (resp. from
+$$x + y$$ to $$y$$), which gives the result.
 
 ## Geodesic Projection
 

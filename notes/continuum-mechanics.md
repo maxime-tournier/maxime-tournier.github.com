@@ -65,8 +65,8 @@ For numerical simulations, the displacement/deformation field is generally
 $$q_j$$ and the deformation at an arbitrary material coordinate $$x$$ is
 obtained by interpolating the deformation at the $$q_j$$. For instance, $$q_j$$
 can simply be composed of selected points in the solid, and a material point
-$$p(x)$$ is given *weights* $$w_j(x)$$ with respect to each of the material
-points, so that the deformed point is given by:
+$$p(x)$$ is given *weights* $$w_j(x)$$ with respect to each of the $$q_j$$, so
+that the deformed point is given by:
 
 $$p(x) = \sum_j w_j(x) q_j$$
 

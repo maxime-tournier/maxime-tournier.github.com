@@ -58,6 +58,30 @@ so that the deformation gradient is obtained as:
 
 $$F(x, t) = \ddd{u}{x}(x, t) + I$$
 
+## Space Discretization, Shape Functions
+
+For numerical simulations, the displacement/deformation field is generally
+*discretized* using a finite number of primitive degrees of freefom (DOFs)
+$$q_j$$ and the deformation at an arbitrary material coordinate $$x$$ is
+obtained by interpolating the deformation at the $$q_j$$. For instance, $$q_j$$
+can simply be composed of selected points in the solid, and a material point
+$$p(x)$$ is given *weights* $$w_j(x)$$ with respect to each of the material
+points, so that the deformed point is given by:
+
+$$p(x) = \sum_j w_j(x) q_j$$
+
+Generally, $$q_j$$ are the nodes in a tetrahedral/hexahedral grid and $$w(x)$$
+are the associated barycentric coordinates. More advanced interpolation schemes
+are possible, for instance using rigid frames for $$q_j$$ and [dual quaternion
+skinning](dual-quaternions) for interpolating the displacement field.
+
+In the case of a linear combination as above, the deformation gradient at
+material coordinates $$x$$ can be simply obtained by:
+
+$$F(x, t) = \ddd{p}{x}(x, t) = \sum_j \ddd{w_j}{x}(x) q_j(t)$$
+
+The function $$w: \RR^3 \to \RR$$ is called a *shape function*. 
+
 # Strain Tensor
 
 The deformation tensor gives a nice local representation of an arbitrary (but
@@ -125,8 +149,13 @@ $$W = k.\tr\block{F^T F - I}$$
 
 TODO quadrature rules, shape functions
 
+## Quadrature Rules
 
-
+Given a discretized deformation field with DOFs $$q_j$$, shape functions $$w_j$$
+and an energy density function $$W$$, there may exist efficient ways of
+integrating the deformation energy $$V$$. Such integration schemes are called
+*quadrature rules* and generally involve the evaluation of the deformation
+gradients at a finite number of points, called *integration points*.
 
 
 

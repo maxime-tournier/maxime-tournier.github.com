@@ -84,8 +84,8 @@ The function $$w: \RR^3 \to \RR$$ is called a *shape function*.
 
 # Strain Tensor
 
-The deformation tensor gives a nice local representation of an arbitrary (but
-smooth) object deformation. Now, if we want to simulate elastic materials, we
+The deformation tensor gives a nice local representation of an arbitrary
+(smooth) object deformation. Now, if we want to simulate elastic materials, we
 will need to associate a potential energy to a deformed object. Since we have a
 local measure of deformation $$F$$, we can obtain a deformation *energy* by
 summing infinitesimal energies associated with the deformation gradient $$F(x,

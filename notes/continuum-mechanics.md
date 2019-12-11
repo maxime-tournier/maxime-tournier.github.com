@@ -80,7 +80,7 @@ material coordinates $$x$$ can be simply obtained by:
 
 $$F(x, t) = \ddd{p}{x}(x, t) = \sum_j \ddd{w_j}{x}(x) q_j(t)$$
 
-The function $$w: \RR^3 \to \RR$$ is called a *shape function*. 
+The functions $$w_j: \RR^3 \to \RR$$ are called *shape functions*. 
 
 # Strain Tensor
 

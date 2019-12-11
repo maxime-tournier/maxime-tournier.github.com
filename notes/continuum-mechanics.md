@@ -70,7 +70,7 @@ that the deformed point is given by:
 
 $$p(x) = \sum_j w_j(x) q_j$$
 
-Generally, $$q_j$$ are the nodes in a tetrahedral/hexahedral grid and $$w(x)$$
+Generally, $$q_j$$ are the nodes of a tetrahedral/hexahedral grid and $$w(x)$$
 are the associated barycentric coordinates. More advanced interpolation schemes
 are possible, for instance using rigid frames for $$q_j$$ and [dual quaternion
 skinning](dual-quaternions) for interpolating the displacement field.

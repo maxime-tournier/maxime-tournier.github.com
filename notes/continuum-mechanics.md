@@ -144,10 +144,9 @@ $$\epsilon = \half\block{F^T + F} - I$$
 $$W = k.\tr\block{F^T F - I}$$
 
 
-
 # Energy Integration
 
-TODO quadrature rules, shape functions
+TODO gauss points etc
 
 ## Quadrature Rules
 

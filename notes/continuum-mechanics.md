@@ -58,7 +58,7 @@ so that the deformation gradient is obtained as:
 
 $$F(x, t) = \ddd{u}{x}(x, t) + I$$
 
-## Space Discretization, Shape Functions
+## Shape Functions
 
 For numerical simulations, the displacement/deformation field is generally
 *discretized* using a finite number of primitive degrees of freefom (DOFs)

@@ -78,7 +78,7 @@ skinning](dual-quaternions) for interpolating the displacement field.
 In the case of a linear combination as above, the deformation gradient at
 material coordinates $$x$$ can be simply obtained by:
 
-$$F(x, t) = \ddd{p}{x}(x, t) = \sum_j \ddd{w_j}{x}(x) q_j(t)$$
+$$F(x, t) = \ddd{p}{x}(x, t) = \sum_j q_j(t) \ddd{w_j}{x}(x) $$
 
 The functions $$w_j: \RR^3 \to \RR$$ are called *shape functions*. 
 

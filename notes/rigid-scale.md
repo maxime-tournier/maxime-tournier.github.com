@@ -5,9 +5,14 @@ categories: [math]
 
 Quick notes on Rigid-Scale kinematics.
 
-## Mapping
+{% include toc.md %}
+
+
+# Affine Transformation
 
 $$f: \RR^3 \times \RR^3 \times \RR^3 \to \mathrm{GA}(3)$$
+
+## Mapping
 
 $$f(\omega, s, t) = \block{\exp(\omega)RS, t}$$
 
@@ -65,3 +70,40 @@ $$
 $$
 
 (phhew!)
+
+# Deformation Field
+
+$$g: \RR^3 \times \RR^3 \times \RR^3 \times \RR^3 \to \RR^3$$
+
+## Mapping 
+
+$$g(\omega, s, t, x) = \exp(\omega)RSx + t = f(\omega, s, t)\mat{x\\ 1}$$
+
+## Jacobian
+
+$$\begin{align}
+\omega=0: \quad \dd g &= \dd f \mat{x\\ 1} + f(\omega, s, t) \mat{\dd x\\ 0} \\
+&=\block{\dd \omega\ RS + R\dd S}x + \dd t + \exp(\omega)RS \dd x \\
+\end{align}$$
+
+## Hessian
+
+$$\begin{align}
+\omega=0: \quad \dd^2 g &= \dd^2 f \mat{x\\ 1} + \dd f_1 \mat{\dd x_2\\ 0} + \dd f_2 \mat{\dd x_1\\ 0} \\
+&= 
+\end{align}$$
+
+## Geometric Stiffness
+
+$$\begin{align}
+\trace{\lambda^T \dd^2 g} &= \trace{\lambda^T \dd^2 f \mat{x\\ 1}} + \trace{\lambda^T \dd f_1 \mat{\dd x_2\\ 0}} + \trace{\lambda^T \dd f_2 \mat{\dd x_1\\ 0}} \\
+&= \trace{x\lambda^T \dd^2 f_{\omega, s}} + \trace{\lambda^T \dd f_1 \mat{\dd x_2\\ 0}} + \trace{\lambda^T \dd f_2 \mat{\dd x_1\\ 0}}
+\end{align}$$
+
+
+$$
+\begin{align}
+\trace{\lambda^T \dd f_2 \mat{\dd x_1\\ 0}} &= \trace{\lambda^T\block{\dd \hat{\omega_2} RS + R\dd S_2}.\dd x_1} \\
+&= -\dd \omega_2^T \hat{\lambda}RS\dd x_1 + \dd s_2^T \diag\block{R^T \lambda} \dd x_1 \\
+\end{align}
+$$

@@ -527,3 +527,5 @@ We may now pull 2D image space forces to rotation torques and update $$\omega$$ 
 
 See [dual quaternions](dual-quaternions).
 
+
+

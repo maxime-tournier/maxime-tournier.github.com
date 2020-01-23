@@ -82,16 +82,16 @@ $$g(\omega, s, t, x) = \exp(\omega)RSx + t = f(\omega, s, t)\mat{x\\ 1}$$
 ## Jacobian
 
 $$\begin{align}
-\omega=0: \quad \dd g &= \dd f \mat{x\\ 1} + f(\omega, s, t) \mat{\dd x\\ 0} \\
-&=\block{\dd \omega\ RS + R\dd S}x + \dd t + \exp(\omega)RS \dd x \\
+\dd g &= \dd f \mat{x\\ 1} + f(\omega, s, t) \mat{\dd x\\ 0} \\
+&=\block{\dd \omega\ RS + R\dd S}x + \dd t + RS \dd x \\
+&= -\hat{RSx}\ \dd \omega + R\diag(x)\ \dd s + \dd t + RS\ \dd x \\
 \end{align}$$
 
 ## Hessian
 
-$$\begin{align}
-\omega=0: \quad \dd^2 g &= \dd^2 f \mat{x\\ 1} + \dd f_1 \mat{\dd x_2\\ 0} + \dd f_2 \mat{\dd x_1\\ 0} \\
-&= 
-\end{align}$$
+$$
+\dd^2 g = \dd^2 f \mat{x\\ 1} + \dd f_1 \mat{\dd x_2\\ 0} + \dd f_2 \mat{\dd x_1\\ 0} 
+$$
 
 ## Geometric Stiffness
 

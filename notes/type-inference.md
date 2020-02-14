@@ -23,7 +23,7 @@ categories: [prog]
   - fail the skolem escape, *i.e.* if some free type variable
     $$\alpha$$ gets unified with it
   - basically, only $$\sigma$$ types that are equivalent modulo
-	variable renaming will unify.
+	variable renaming and substitution will unify.
 
 ## subsumption
 
@@ -43,6 +43,9 @@ the actual function argment type
 	- these may unify with the skolems, which is fine (quantified in $$\sigma_2$$)
   - unify instantiated types
   - check that no skolem escape through other $$\alpha$$ variables
+- $$\sigma_2$$ will get $$\sigma_1$$ skolems occurring at the same
+  places as in $$\sigma_1$$ possibly elsewhere too as long unification
+  agrees.
 	
 ### example
 

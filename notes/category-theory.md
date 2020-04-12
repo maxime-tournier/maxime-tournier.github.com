@@ -268,9 +268,8 @@ to requiring that all components are isomorphisms in $$\cat{D}$$.
 
 ### On Naturality
 
-One might easily question the "naturality" in the definition of
-natural transformations: after all, it all seems pretty artificial on
-first sight.
+One might wonder what makes natural transformations so natural in the
+above definition: after all, it seems a bit "bolted-on".
 [This](https://ncatlab.org/nlab/show/natural+transformation+%28discussion%29)
 discussion provides an answer: morphisms in a category $$\cat{C}$$ can
 be seen as functors $$\cat{I} \to \cat{C}$$ (selecting morphisms) and
@@ -745,17 +744,74 @@ In other words, round-trips through both functors can be mapped from
 and into the identity functors, and round-and-forth trips amount to
 one-ways.
 
-# Monads
+# Monoidal Categories, Monoids, Monads
 
-A monad on a category $$\cat{C}$$ is given by an endofunctor $$T:
-\cat{C} \to \cat{C}$$ together with two natural transformations:
+We'll start with the usual definition of a monoid on a set, and see
+how to generalize from there. A *monoid* on set $$M$$ is given by:
 
-- $$\eta: 1 \to T$$ called the *unit*
-- $$\mu: T^2 \to T$$ called the *multiplication*
+- a product operator $$*: M \times M \to M$$
+- an identity element $$e \in M$$
+
+subject to the following constraints:
+
+- unitality: $$e * x = x = x  * e$$ 
+- associativity: $$(x * y) * z = x * (y * z)$$
+
+In order to make $$M$$ a *monoid object* in the category of sets, we
+need to shift to a *pointfree* view of this definition. The unit $$e$$
+can be seen as a morphism $$e: 1 \to M$$, allowing us to express the
+unitality of $$e$$ using the following commutative diagrams:
+
+$$\begin{matrix}
+M &\overset{(\cdot, e)}\longrightarrow &M\times M & \overset{(e, \cdot)}\longleftarrow & M \\
+ & {}_1\searrow & \downarrow_* & \swarrow_1 \\
+ & & M & & \\
+\end{matrix}$$
+
+Notice that the singleton set $$1$$ is the unit for the cartesian
+product. Similarly, the associativity condition can be expressed using
+the following commutative square:
+
+$$\begin{matrix}
+M\times M\times M& \overset{(\cdot, *)}\longrightarrow & M\times M \\
+{}_{(*, \cdot)}\downarrow & & \downarrow_* \\
+M \times M  & \underset{*}\longrightarrow & M
+\end{matrix}$$
+
+A *monoidal structure* on a category $$\cat{C}$$ generalizes the above
+to any category:
+
+- it generalizes the cartesian product of sets $$\times$$ to a
+  bifunctor $$\otimes: \cat{C} \times \cat{C} \to \cat{C}$$
+  
+- it generalizes the singleton set $$1$$ to an object $$I$$ which is a
+  unit for the monoidal product $$\otimes$$. Equivalently, $$I$$ can
+  be seen as a functor $$I: 1 \to \cat{C}$$.
+
+As above, $$\otimes$$ and $$I$$ have to satisfy the unitality
+triangles and associativity square to behave like the cartesian
+product of sets. In this general setting, a monoid object in a
+monoidal category $$\cat{C}$$ becomes:
+
+- an object $$M$$ in $$\cat{C}$$
+- a morphism $$*: M \otimes M \to M$$
+- a morphism $$e: I \to M$$
+
+subject to the triangle equalities and associativity squares. Now,
+given any category $$\cat{C}$$, the category of endofunctors
+$$\funcat{C, C}$$ is always a monoidal category, where the product is
+given by functor composition, and the unit is the identity
+functor. *Monads* are monoids in this monoidal category:
+
+> A monad on a category $$\cat{C}$$ is given by an endofunctor $$T:
+> \cat{C} \to \cat{C}$$ together with two natural transformations:
+> 
+> - $$\eta: 1 \to T$$ called the *unit*
+> - $$\mu: T^2 \to T$$ called the *multiplication*
 
 such that the following diagrams commute:
 
-### Unit Triangle
+### Unit Triangles
 
 $$\begin{matrix}
 T &\overset{T\eta}\longrightarrow &T^2 & \overset{\eta T}\longleftarrow & T \\
@@ -771,9 +827,8 @@ T^3 & \overset{T\mu}\longrightarrow & T^2 \\
 T^2 & \underset{\mu}\longrightarrow & T
 \end{matrix}$$
 
-Equivalently:
-
-> A monad is a monoid object in the category of endofunctors. 
+In other words, a monad is a well-behaved way of collapsing nested
+functor applications $$\mu: T^2 \to T$$.
 
 ### Haskell
 

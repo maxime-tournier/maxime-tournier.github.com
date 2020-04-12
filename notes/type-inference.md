@@ -41,6 +41,7 @@ the actual function argment type
   - skolemize outermost quantifiers and instantiate $$\sigma_1$$ with them
   - instantiate $$\sigma_2$$ with fresh $$\alpha$$ variables 
 	- these may unify with the skolems, which is fine (quantified in $$\sigma_2$$)
+	- actually, skolems in $$\sigma_1$$ *must* unify with these variables for unification to succeed
   - unify instantiated types
   - check that no skolem escape through other $$\alpha$$ variables
 - $$\sigma_2$$ will get $$\sigma_1$$ skolems occurring at the same
@@ -58,6 +59,19 @@ the actual function argment type
 
 
 ## inference
+
+### var
+
+- lookup $$\sigma$$ type for variable in the typing context
+
+### abs
+
+- fresh $$\alpha$$ type variable for parameter
+- infer $$\sigma$$ type for function body with augmented typing context
+- instantiate body type with fresh outer quantifiers as $$\rho$$
+- generalize $$\alpha \to \rho$$
+
+
 
 ### app
 

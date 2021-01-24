@@ -33,11 +33,10 @@ so we need some way of publishing that we're rechecking
 accordingly:
 
 - the other side will not attempt to optimistically complete a
-  transaction currently being rechecked, fixing C1
+  transaction currently being rechecked, so C1 cannot happen
 - the other side will not consider a transaction currently being
-  rechecked during its own recheck phase, fixing C2
-
-(TODO) how to rollback C2
+  rechecked during its own recheck phase, so C2 cannot
+  happen. instead, we'll wait (spin) until recheck is over.
 
 
 to this end we introduce the following states:

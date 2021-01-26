@@ -94,12 +94,25 @@ categories: [prog]
 
 - met à jour un préfixe avec une substitution $$[\alpha := \sigma]$$
   ou une borne $$\alpha \geq \varphi$$
-- maintient l'invariant sur le prefixe
-
+- maintient l'invariant sur le prefixe $$Q$$
+- on suppose que le préfixe contient une borne sur $$\alpha \geq \hat{\phi}_1$$
+- on suppose que $$\alpha \notin ftv(\varphi)$$ (resp $$ftv(\sigma)$$)
+  - l'appel est toujours protégé par un `occurs-check`
+- on suppose que  $$\hat{\varphi_1} \leq \sigma$$ (resp) $$\hat{\varphi_1} \leq \varphi$$
+  - l'appel suit `subsume` (resp `unify-schemes`)
 ---
 
-- TODO
-
+- pour une substitution $$[\alpha := \sigma]$$
+  - on `split` selon les `ftv(\sigma)` (TODO pourquoi???)
+  - on vire la borne et on substitue
+  
+- pour une borne $$\alpha \geq \varphi$$
+  - on `split` selon les `ftv(\varphi)` (TODO pourquoi???)
+  - dans ce qui reste:
+    - si $\varphi$ n'est pas quantifié, on vire la borne et on
+      substitue pour maintenir l'invariant
+    - sinon, on remplace simplement la borne
+	
 
 ## occurs-check
 

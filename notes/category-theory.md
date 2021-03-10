@@ -304,9 +304,9 @@ and $$E\alpha$$ are indeed natural transformations.
 The Yoneda *lemma* is a fundamental result connecting a (locally
 small) category to the category of sets through its Hom-sets. As such,
 it makes it possible to use results in $$\Set$$ which is very
-well-known. Its main motivation is to prove the Yoneda *embedding*,
-which relates the set of morphisms between two elements to the
-Hom-functors of both elements:
+well-known. One of its main applications is to prove the Yoneda
+*embedding*, which relates the set of morphisms between two elements
+to the Hom-functors of both elements:
 
 $$\hom{C}{a, b} \simeq \hom{\funcat{C, \Set}}{\hom{C}{a, -}, \hom{C}{b, -}}$$
 

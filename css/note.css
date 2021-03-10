@@ -11,7 +11,7 @@ body {
     font-size: 14pt;
     font-kerning: normal;
     
-	line-height: 150%;
+	line-height: 140%;
 	text-align: justify;
 	
 }
@@ -90,7 +90,7 @@ blockquote {
 
 
 a:link {
-	color: #24a;
+	color: #34a;
 	text-decoration: none;
 	font-weight: bold;
 }
@@ -107,7 +107,9 @@ h1 {
 	margin: 1em 0;
 	line-height: 120%;
 	text-align:left;
-    
+    border-bottom: 1px solid lightgray;
+	padding-bottom: 0.1em;
+				   
 }
 
 h1:first-of-type {
@@ -151,10 +153,13 @@ a.footnote:after {
 
 h2 {
 	margin: 2em 1em 0 0;
+    border-bottom: 1px dotted lightgray;
+	padding-bottom: 0.3em;
 }
 
 h3 {
 	margin: 2em 1em 0 0;
+	padding-bottom: 0;
 }
 
 #postamble {

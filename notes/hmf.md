@@ -22,6 +22,7 @@ categories: [prog]
 - infère le type du corps avec le contexte mis à jour avec le paramètre
 - instancie le type du corps $$\sigma$$ en $$\rho$$
 - `generalize` $$\alpha \to \rho$$ et retourne
+  - (remonte les quantificateurs en position positive dans les fonctions)
 
 ## abs-ann
 
@@ -30,12 +31,16 @@ categories: [prog]
 
 ## app
 
+- toute la viande est là
 - infère le type de la fonction, instancie en $$\rho$$
-- matche $$\rho = \sigma_1 \to \sigma$$
-  - normalement on a $$\sigma = \rho_2$$ car les quantificateurs sont
-    remontés (attention aux annotations utilisateur par contre)
-- infère le type de l'argument $$\sigma_2$$
-- `subsume` $$\sigma_2$$ (offered) en $$\sigma_1$$ (expected)
+- matche $$\rho = \sigma_e \to \sigma$$
+  - normalement on a déjà $$\sigma = \rho_2$$ car les quantificateurs
+    sont remontés (par contre attention aux annotations utilisateur
+    qui ne respectent pas forcément cela)
+- infère le type de l'argument $$\sigma_o$$
+- `subsume` $$\sigma_e$$ (expected) en $$\sigma_o$$ (offered)
+   - *i.e.* trouve une substitution la plus générale possible telle
+     que $$\theta \sigma_o \leq \theta \sigma_e$$
 - `split` la substitution résultat en mono/polymorphe et vérifie que
   la substitution polymorphe ne concerne aucune variable du contexte
   - alternativement, on peut vérifier que le type de l'argument dans
@@ -44,14 +49,14 @@ categories: [prog]
 	
 ## subsume
 
-- instancie le type $$\sigma_2$$ pour matcher $$\sigma_1$$
+- instancie le type $$\sigma_o$$ pour matcher $$\sigma_e$$
 - suppose que les deux arguments sont en forme normale
   (quantificateurs dans l'ordre d'apparition des variables)
-- skolemize $$\sigma_1$$ en $$\rho_1$$
-- instancie $$\sigma_2$$ en $$\rho_2$$
-- `unify` $$\rho_1$$ et $$\rho_2$$
+- skolemize $$\sigma_e$$ en $$\rho_e$$
+- instancie $$\sigma_o$$ en $$\rho_o$$
+- `unify` $$\rho_e$$ et $$\rho_o$$
 - erreur si la substitution résultat (sauf les variables instanciées
-  pour $$\rho_2$$) continent des skolems
+  pour $$\rho_o$$) continent des skolems
   - on doit pouvoir améliorer en ayant des variables qui peuvent ou
     non unifier avec des skolems
 

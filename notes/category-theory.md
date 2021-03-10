@@ -311,9 +311,11 @@ to the Hom-functors of both elements:
 $$\hom{C}{a, b} \simeq \hom{\funcat{C, \Set}}{\hom{C}{a, -}, \hom{C}{b, -}}$$
 
 In particular, two elements are isomorphic whenever their Hom-functors
-are naturally isomorphic *i.e.* whenever their Hom-sets are
-isomorphic. In other words, knowing an object is really the same as
-knowning how it releates to other objects.
+are naturally isomorphic *i.e.* whenever their Hom-sets are isomorphic
+(TODO show this). In other words, knowing an object is really the same
+as knowning how it releates to other objects.
+
+But first things first: let's start with Hom-functors.
 
 ## Hom Functors
 
@@ -324,24 +326,24 @@ consider the two following functors:
 ### Covariant Hom-Functor
 
 $$H^a = \hom{C}{a, -}$$ connects sets of morphisms starting at $$a$$
-by mapping a morphism to its post-composition:
+by mapping a morphism $$f$$ to the post-composition by $$f$$:
 
 $$\begin{align}
 H^a: \cat{C} &\to \Set\\
 x &\mapsto \hom{C}{a, x} \\
-(f: x \to y) &\mapsto H^a(f): \hom{C}{a, x} \to \hom{C}{a, y} = (g \mapsto f \circ g) \\
+(f: x \to y) &\mapsto H^a(f): \hom{C}{a, x} \to \hom{C}{a, y} = (g \mapsto f \circ g) = f_*\\
 \end{align}$$
 
 
 ### Contravariant Hom-Functor
 
 $$H_a = \hom{C}{-, a}$$ connects sets of morphisms ending at $$a$$ by
-mapping a morphism to its pre-composition:
+mapping a morphism $$f$$ to the pre-composition by $$f$$:
 
 $$\begin{align}
 H_a: \op{C} &\to \Set\\
 x &\mapsto \hom{C}{x, a} \\
-(f: y \to x) &\mapsto H_a(f): \hom{C}{x, a} \to \hom{C}{y, a} = (g \mapsto g \circ f) \\
+(f: y \to x) &\mapsto H_a(f): \hom{C}{x, a} \to \hom{C}{y, a} = (g \mapsto g \circ f) = f^*\\
 \end{align}$$
 
 
@@ -401,8 +403,9 @@ naturality square as follows:
 
 $$\natsq{\alpha}{H_a}{F}{y}{x}{h}$$
 
-In particular, let us consider the case where $$y = a$$ and $$h: x \to
-a$$ is *any* element of $$H_a(x)$$ then follow the image of the
+At this point, there's not much we could do except to consider
+$$H_a(a)$$, which always contains the identity morphism
+$$\id_a$$. Therefore, let us set $$y = a$$ and follow the image of the
 identity morphism $$\id_a \in H_a(a)$$ along both sides of the
 naturality square:
 

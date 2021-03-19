@@ -69,3 +69,19 @@ Quick cheat sheet.
 (helm-projectile-on)
 ```
 
+
+# tramp
+
+beware of fancy prompts on the remote machine:
+
+```sh
+     case "$TERM" in
+        "dumb")
+            export PS1="> "
+            ;;
+        xterm*|rxvt*|eterm*|screen*)
+            tty -s && export PS1="some crazy prompt stuff"
+            ;;
+    esac
+```
+

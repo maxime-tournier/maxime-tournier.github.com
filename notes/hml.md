@@ -3,11 +3,34 @@ title: HML
 categories: [prog]
 ---
 
-## split
+([article](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/hml.pdf))
 
-- sépare un contexte selon des variables
-- généralement on splitte uniquement selon le domaine du préfixe
-  ambiant, donc on peut se baser sur le rang des variables pour le faire
+{% include toc.md %}
+
+# notes
+
+- on a en plus des types $$\sigma$$ de system-F des *types flexibles*
+  $$\varphi$$ qui correspondent à des types $$\sigma$$ avec des bornes
+  sur les quantificateurs. *les bornes sont elle-mêmes des types
+  flexibles.*
+- on a comme d'habitude un *contexte* qui associe une variable à son
+  type flexible $$\varphi$$
+- on a également un *préfixe* qui contient pour toutes les variables
+  libres du contexte la borne la plus spécifique inférée à ce stade
+  sur cette variable (i.e. cette variable devra être instanciée avec
+  un type qui sera une instance de la borne)
+  - pour éviter des problèmes (5.4) on maintient l'invariant que
+	toutes les bornes doivent être des types quantifiés
+- en fonction de l'utilisation des variables libres on devra parfois
+  raffiner les bornes, donc mettre à jour le préfixe qui sera retourné
+  par l'inférence
+  - ca correspond à une monade `reader` sur le contexte et `state` sur le
+	préfixe/substitution
+ - on a également une opération pour *"quantifier sous un préfixe"*, qui
+   quantifie un type en un scheme qui incorpore les meilleures bornes
+   connues.
+
+# type rules 
 
 ## var
 
@@ -23,14 +46,20 @@ categories: [prog]
 
 ## abs
 
+- relativement direct
 - infère le type flexible $$\varphi_1$$ du corps de l'abstraction en
-  ajoutant la borne et le type du paramètre (borné trivialement)
+  ajoutant la borne (triviale) et le type du paramètre $$\alpha$$ au préfixe/contexte
 - échec si on infère un type polymorphe pour le paramètre
-- `split` le préfixe mis à jour $$Q_1$$ entre la partie qui concerne le
+- [`split`](#split) le préfixe mis à jour $$Q_1$$ entre la partie qui concerne le
   contexte ambiant $$Q_2$$ et le reste $$Q_3$$ (i.e. les bornes qui
   concernent le corps de l'abstraction)
-- `extend` une borne $$\beta \geq \varphi_1$$ pour le type de retour à $$Q_3$$
-  et renvoie $$\alpha \to \beta$$ avec ces bornes.
+  - normalement $$Q_3$$ devrait concerner uniquement $$\alpha$$ si on
+    a correctement fait le ménage?
+- puisque le type inféré pour le type de retour est un type scheme, la
+  seule option pour l'exprimer c'est d'introduire une borne sur ce
+  type: on [`extend`](#extend) $$Q_3$$ avec une borne $$\beta \geq
+  \varphi_1$$ pour le type de retour, et quantifie sur ce préfixe le
+  type de l'abstraction $$\alpha \to \beta$$.
 
 ## abs-ann
 
@@ -44,11 +73,19 @@ categories: [prog]
 - infère le type de l'argument, met à jour le préfixe
 - ajoute les bornes $$\alpha_1 \geq \varphi_1$$ et $$\alpha_2 \leq \varphi_2$$
   (modulo sub) + $$\beta \geq \bot$$ pour le type du résultat
-- `unify` $$\alpha_1$$ et $$\alpha_2 \to \beta$$ sous ce préfixe
-- `split` le préfixe résultant entre ce qui concerne le préfixe
+- [`unify`](#unify) $$\alpha_1$$ et $$\alpha_2 \to \beta$$ sous ce préfixe
+- [`split`](#split) le préfixe résultant entre ce qui concerne le préfixe
   ambiant (mis à jour) et ce qui concerne purement cette application
   $$Q_5$$
 - ce dernier préfixe est quantifié dans le type du résultat
+
+# functions 
+
+## split
+
+- sépare un contexte selon des variables
+- généralement on splitte uniquement selon le domaine du préfixe
+  ambiant, donc on peut se baser sur le rang des variables pour le faire
 
 ## extend
 
@@ -67,8 +104,8 @@ categories: [prog]
 ----
 
 - skolemize $$\sigma$$ et instancie $$\varphi$$ (en ajoutant ses bornes au
-  contexte), puis `unify` les deux (sous ce contexte)
-- `split` le préfixe et la substitution résultant pour ne garder que
+  contexte), puis [`unify`](#unify) les deux (sous ce contexte)
+- [`split`](#split) le préfixe et la substitution résultant pour ne garder que
   ce qui concerne $$Q$$ 
 - vérifie qu'on n'a pas de skolems qui s'échappent dans la
   substitution et le préfixe résultat
@@ -84,9 +121,9 @@ categories: [prog]
 ----
 
 - si l'une des bornes est triviale, renvoie l'autre
-- sinon $$\varphi_i = \forall Q_i.\rho_i$$, et alors on `unify` les types
+- sinon $$\varphi_i = \forall Q_i.\rho_i$$, et alors on [`unify`](#unify) les types
   $$\rho_i$$ en prenant en compte *toutes* les bornes 
-- comme d'hab, on `split` le préfixe résultat selon ce qui concerne
+- comme d'hab, on [`split`](#split) le préfixe résultat selon ce qui concerne
   $$Q$$ et on quantifie le reste
 
 
@@ -97,17 +134,18 @@ categories: [prog]
 - maintient l'invariant sur le prefixe $$Q$$
 - on suppose que le préfixe contient une borne sur $$\alpha \geq \hat{\phi}_1$$
 - on suppose que $$\alpha \notin ftv(\varphi)$$ (resp $$ftv(\sigma)$$)
-  - l'appel est toujours protégé par un `occurs-check`
-- on suppose que  $$\hat{\varphi_1} \leq \sigma$$ (resp) $$\hat{\varphi_1} \leq \varphi$$
-  - l'appel suit `subsume` (resp `unify-schemes`)
+  - l'appel est toujours protégé par un [`occurs-check`](#occurs-check)
+- on suppose que $$\hat{\varphi_1} \leq \sigma$$ (resp) $$\hat{\varphi_1} \leq \varphi$$
+  - l'appel suit [`subsume`](#subsume) (resp [`unify-schemes`](#unify-schemes))
+  
 ---
 
 - pour une substitution $$[\alpha := \sigma]$$
-  - on `split` selon les `ftv(\sigma)` (TODO pourquoi???)
+  - on [`split`](#split) selon les `ftv(\sigma)` (TODO pourquoi???)
   - on vire la borne et on substitue
   
 - pour une borne $$\alpha \geq \varphi$$
-  - on `split` selon les `ftv(\varphi)` (TODO pourquoi???)
+  - on [`split`](#split) selon les `ftv(\varphi)` (TODO pourquoi???)
   - dans ce qui reste:
     - si $\varphi$ n'est pas quantifié, on vire la borne et on
       substitue pour maintenir l'invariant
@@ -138,18 +176,18 @@ categories: [prog]
   - application d'un constructeur
 
 - variable bornée $$\alpha \geq \varphi$$ avec type $$\sigma$$
-  - `occurs-check` $$\alpha \notin \sigma$$
-  - `subsume` le type en la borne (essaie d'instantier la borne pour obtenir le type)
+  - [`occurs-check`](#occurs-check) $$\alpha \notin \sigma$$
+  - [`subsume`](#subsume) le type en la borne (essaie d'instantier la borne pour obtenir le type)
   - `update` le prefixe pour incorporer la substitution $$[\alpha := \sigma]$$
   
 - variable $$\alpha_1 \geq \varphi_1$$ avec variable $$\alpha_2 \geq \varphi_2$$
-  - `occurs-check` $$\alpha_1$$ dans $$\varphi_2$$ et réciproquement
-  - `unify-schemes` $$\varphi_1, \varphi_2$$ pour donner $$\varphi$$
-  - `update` le préfixe avec $$\alpha_2 := \alpha_1$$ et  $$\alpha_2 \geq \varphi$$
+  - [`occurs-check`](#occurs-check) $$\alpha_1$$ dans $$\varphi_2$$ et réciproquement
+  - [`unify-schemes`](#unify-schemes) $$\varphi_1, \varphi_2$$ pour donner $$\varphi$$
+  - [`update`](#update) le préfixe avec $$\alpha_2 := \alpha_1$$ et  $$\alpha_2 \geq \varphi$$
   
 - type $$\forall \alpha.\sigma_1$$ avec type $$\forall \beta.\sigma_2$$
   - ajoute un skolem $$c$$
-  - `unify` $$\sigma_1, \sigma_2$$ skolemisés avec $$c$$
+  - [`unify`](#unify) $$\sigma_1, \sigma_2$$ skolemisés avec $$c$$
   - verifie que le skolem ne s'échappe ni dans le préfixe ni dans la
     substitution
   - (suppose que les quantificateurs sont dans l'ordre standard)

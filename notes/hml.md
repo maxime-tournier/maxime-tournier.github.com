@@ -9,26 +9,41 @@ categories: [prog]
 
 # notes
 
-- on a en plus des types $$\sigma$$ de system-F des *types flexibles*
+- on a en plus des types $$\sigma$$ de System-F des *types flexibles*
   $$\varphi$$ qui correspondent à des types $$\sigma$$ avec des bornes
   sur les quantificateurs. *les bornes sont elle-mêmes des types
   flexibles.*
-- on a comme d'habitude un *contexte* qui associe une variable à son
-  type flexible $$\varphi$$
-- on a également un *préfixe* qui contient pour toutes les variables
-  libres du contexte la borne la plus spécifique inférée à ce stade
-  sur cette variable (i.e. cette variable devra être instanciée avec
-  un type qui sera une instance de la borne)
+  - l'existence de types principaux assure que chaque nouvelle
+    utilisation (via le contexte) est nécéssairement une instance du
+    type inféré jusqu'ici (ou une erreur de type)
+  - les $$\sigma$$-types sont insuffisants dans le cas général pour
+	avoir des types principaux en présence de types de rang supérieur:
+	on peut donner à `(single id)` les deux types $$\forall
+	\alpha.[\alpha \to \alpha]$$ et $$[\forall \alpha. \alpha \to
+	\alpha]$$ sans qu'aucun ne soit une instance de l'autre au sens de
+	System-F.
+  - en revanche ces deux types sont instances du type flexible
+    $$\forall (\beta \geq \forall \alpha \to \alpha).[\beta]$$
+  - TODO est-ce que les types flexibles forment un genre de treillis?
+- on a comme d'habitude un *contexte* $$\Gamma$$ qui associe une
+  variable à son type flexible $$\varphi$$
+- on a également un *préfixe* $$Q$$ qui contient pour toutes les
+  variables libres du contexte la borne la plus spécifique inférée à
+  ce stade sur cette variable (i.e. cette variable devra être
+  instanciée avec un type qui sera une instance de la borne)
   - pour éviter des problèmes (5.4) on maintient l'invariant que
 	toutes les bornes doivent être des types quantifiés
+  - de toute manière si une borne ne contient pas de quantificateur on
+    peut l'inliner dans la substituion (il existe une seule
+    instantiation possible, de fait la plus générale)
 - en fonction de l'utilisation des variables libres on devra parfois
   raffiner les bornes, donc mettre à jour le préfixe qui sera retourné
   par l'inférence
   - ca correspond à une monade `reader` sur le contexte et `state` sur le
 	préfixe/substitution
- - on a également une opération pour *"quantifier sous un préfixe"*, qui
-   quantifie un type en un scheme qui incorpore les meilleures bornes
-   connues.
+ - on a également une opération pour quantifier *"sous un préfixe"*,
+   qui quantifie un les variables libres d'un type en y incorporant
+   les meilleures bornes connues d'après le préfixe.
 
 # type rules 
 
@@ -56,28 +71,38 @@ categories: [prog]
   - normalement $$Q_3$$ devrait concerner uniquement $$\alpha$$ si on
     a correctement fait le ménage?
 - puisque le type inféré pour le type de retour est un type scheme, la
-  seule option pour l'exprimer c'est d'introduire une borne sur ce
-  type: on [`extend`](#extend) $$Q_3$$ avec une borne $$\beta \geq
-  \varphi_1$$ pour le type de retour, et quantifie sur ce préfixe le
-  type de l'abstraction $$\alpha \to \beta$$.
-
+  seule manière de l'exprimer c'est d'introduire une borne sur la
+  variable correspondant au type de retour: on [`extend`](#extend)
+  $$Q_3$$ avec une borne $$\beta \geq \varphi_1$$ pour le type de
+  retour, et quantifie sous ce préfixe le type de l'abstraction
+  $$\alpha \to \beta$$.
+  - en particulier le type retourné incorpore les bornes éventuelles
+    déduites pour le type du paramètre $$\alpha$$
+	
 ## abs-ann
 
-- idem sauf qu'on passe directement $$x: \sigma$$ lors de l'inférence du
-  corps de l'abstraction
+- idem que [abs](#abs) sauf qu'on passe directement $$x: \sigma$$ dans
+  le contexte lors de l'inférence du corps de l'abstraction
 
 
 ## app
 
-- infère le type de la fonction, met à jour le préfixe
-- infère le type de l'argument, met à jour le préfixe
-- ajoute les bornes $$\alpha_1 \geq \varphi_1$$ et $$\alpha_2 \leq \varphi_2$$
-  (modulo sub) + $$\beta \geq \bot$$ pour le type du résultat
-- [`unify`](#unify) $$\alpha_1$$ et $$\alpha_2 \to \beta$$ sous ce préfixe
-- [`split`](#split) le préfixe résultant entre ce qui concerne le préfixe
-  ambiant (mis à jour) et ce qui concerne purement cette application
-  $$Q_5$$
-- ce dernier préfixe est quantifié dans le type du résultat
+- infère le type de la fonction $$\varphi_1$$, met à jour le préfixe
+- infère le type de l'argument $$\varphi_2$$, met à jour le préfixe
+- [`extend`](#extend) le préfixe avec les bornes $$\alpha_1 \geq
+  \varphi_1$$ et $$\alpha_2 \geq \varphi_2$$ (modulo substitution) +
+  $$\beta \geq \bot$$ pour le type du résultat. ce préfixe est utilisé
+  pour l'unification:
+  - [`unify`](#unify) $$\alpha_1$$ et $$\alpha_2 \to \beta$$ sous ce
+    préfixe
+- [`split`](#split) le préfixe résultant entre ce qui concerne le
+  préfixe ambiant (qu'on mettra à jour en passant) et ce qui concerne
+  purement cette application $$Q_5$$
+    - normalement ce dernier préfixe devrait concerner uniquement
+      $$\alpha_1, \alpha_2, \beta$$
+- on quantifie le type de retour $$\beta$$ sous ce préfixe
+  - en particulier le type de retour incorpore les bornes sur
+    $$\alpha_1, \alpha_2$$
 
 # functions 
 
@@ -147,7 +172,7 @@ categories: [prog]
 - pour une borne $$\alpha \geq \varphi$$
   - on [`split`](#split) selon les `ftv(\varphi)` (TODO pourquoi???)
   - dans ce qui reste:
-    - si $\varphi$ n'est pas quantifié, on vire la borne et on
+    - si $$\varphi$$ n'est pas quantifié, on vire la borne et on
       substitue pour maintenir l'invariant
     - sinon, on remplace simplement la borne
 	

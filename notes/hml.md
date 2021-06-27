@@ -32,10 +32,10 @@ categories: [prog]
   ce stade sur cette variable (i.e. cette variable devra être
   instanciée avec un type qui sera une instance de la borne)
   - pour éviter des problèmes (5.4) on maintient l'invariant que
-	toutes les bornes doivent être des types quantifiés (TODO sinon?)
-	- apparemment ca permet d'éviter que l'équivalence entre types
-      soit dépendante d'un préfixe, car sinon on pourrait "cacher" des
-      types polymorphes dans les bornes et se retrouver avec des types
+	toutes les bornes doivent être des types quantifiés
+	- ca permet d'éviter que l'équivalence entre types soit dépendante
+      d'un préfixe, car sinon on pourrait "cacher" des types
+      polymorphes dans les bornes et se retrouver avec des types
       d'arguments non-annotés équivalents à des types polymorphes
 	- si l'équivalence se fait sans référer au préfixe, les variables
       libres n'ont plus aucun moyen de se retrouver équivalentes à des
@@ -48,6 +48,10 @@ categories: [prog]
   - de toute manière si une borne ne contient pas de quantificateur on
     peut l'inliner dans la substituion (il existe une seule
     instantiation possible, de fait la plus générale)
+  - donc en pratique, plutôt que d'avoir des types non-quantifiés dans
+    les bornes on peut tout aussi bien substituer le type
+    non-quantifié dans le préfixe
+  - au final ca semble surtout une simplification bien pratique
 - en fonction de l'utilisation des variables libres on devra parfois
   raffiner les bornes, donc mettre à jour le préfixe qui sera retourné
   par l'inférence
@@ -157,7 +161,7 @@ categories: [prog]
 - variable $$\alpha_1 \geq \varphi_1$$ avec variable $$\alpha_2 \geq \varphi_2$$
   - [`occurs-check`](#occurs-check) $$\alpha_1$$ dans $$\varphi_2$$ et réciproquement
   - [`unify-schemes`](#unify-schemes) $$\varphi_1, \varphi_2$$ pour donner $$\varphi$$
-  - [`update`](#update) le préfixe avec $$\alpha_2 := \alpha_1$$ et  $$\alpha_2 \geq \varphi$$
+  - [`update`](#update) le préfixe avec $$[\alpha_2 := \alpha_1]$$ et  $$\alpha_2 \geq \varphi$$
   
 - type $$\forall \alpha.\sigma_1$$ avec type $$\forall \beta.\sigma_2$$
   - ajoute un skolem $$c$$
@@ -233,6 +237,10 @@ categories: [prog]
     - sinon, on remplace simplement la borne existante par la nouvelle
       borne, qui par hypothèse est une instance de la précédente
 	
+---
+
+- probablement on va pas tout substituer le préfixes splitté, mais
+  simplement substituer les bornes à chaque fois qu'on en a besoin
 
 ## occurs-check
 

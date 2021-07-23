@@ -459,7 +459,7 @@ From the above we easily obtain the formula for the trace of a rotation matrix:
 
 $$\trace{R} = 1 + 2\cos(\theta)$$
 
-since $$\trace{nn^T} = 1$$.
+since $$\trace{nn^T} = 1$$ and $$\tr{\hat{n}} = 0$$.
 
 ### Inverse Formula
 

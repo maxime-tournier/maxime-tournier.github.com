@@ -449,10 +449,17 @@ formula:
 
 $$R = \cos(\theta) I + \sin(\theta) \hat{n} + \block{1 - \cos\block{\theta}}n n^T$$
 
-Or, emphasizing the stable subspaces:
+Or, emphasizing the action on stable subspaces:
 
 $$R = nn^T + \cos(\theta) (I - nn^T) + \sin(\theta) \hat{n}$$
 
+### Trace of a Rotation Matrix
+
+From the above we easily obtain the formula for the trace of a rotation matrix:
+
+$$\trace{R} = 1 + 2\cos(\theta)$$
+
+since $$\trace{nn^T} = 1$$.
 
 ### Inverse Formula
 

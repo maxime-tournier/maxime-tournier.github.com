@@ -449,11 +449,16 @@ formula:
 
 $$R = \cos(\theta) I + \sin(\theta) \hat{n} + \block{1 - \cos\block{\theta}}n n^T$$
 
+Or, emphasizing the stable subspaces:
+
+$$R = nn^T + \cos(\theta) (I - nn^T) + \sin(\theta) \hat{n}$$
+
+
 ### Inverse Formula
 
-Conversely, a rotation matrix can be converted back to its corresponding unit
-quaternion. From the above formula, the skew-symmetric part of a rotation $$R$$
-is:
+Conversely, a rotation matrix can be converted back to one of its corresponding
+unit quaternion. From the above formula, the skew-symmetric part of a rotation
+$$R$$ is:
 
 $$
 \begin{align}

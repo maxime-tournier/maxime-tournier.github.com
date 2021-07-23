@@ -469,8 +469,8 @@ degenerates to:
 
 $$R = I + 2\hat{n}^2 = I + 2\block{n n^T - I} = 2 n n^T - I$$
 
-So by adding $$I$$ to $$R$$, we get $$2n n^T$$ which we can use to
-obtain $$n$$:
+which is symmetric. By adding $$I$$ to $$R$$, we get $$2n n^T$$ which we can use
+to obtain $$n$$:
 
 $$
 n n^T = \mat{n_x^2 & n_x n_y & n_x n_z \\

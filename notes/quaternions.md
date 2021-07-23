@@ -467,25 +467,25 @@ which we can use to recover $$n$$. But if $$\theta$$ is close to $$\pi$$, we
 cannot recover the axis from the skew-symmetric part alone, since the formula
 degenerates to:
 
-$$R = I + 2\hat{v}^2 = I + 2\block{v v^T - I} = 2 v v^T - I$$
+$$R = I + 2\hat{n}^2 = I + 2\block{n n^T - I} = 2 n n^T - I$$
 
-So by adding $$I$$ to $$R$$, we get $$2v v^T$$ which we can use to
-obtain $$v$$:
+So by adding $$I$$ to $$R$$, we get $$2n n^T$$ which we can use to
+obtain $$n$$:
 
 $$
-v v^T = \mat{v_x^2 & v_x v_y & v_x v_z \\
-             v_y v_x & v_y^2 & v_y v_z \\
-             v_z v_x & v_z v_y & v_z^2 }
+n n^T = \mat{n_x^2 & n_x n_y & n_x n_z \\
+             n_y n_x & n_y^2 & n_y n_z \\
+             n_z n_x & n_z n_y & n_z^2 }
 $$
 
-The diagonal provides absolute values for $$v_x, v_y, v_z$$. Since we're dealing
-with half-turns, $$v$$ is only defined up to sign so we may freely choose the
-one with positive $$v_x$$. In this case, we get the sign for $$v_y$$ using the
-entries of $$vv^T$$:
+The diagonal provides absolute values for $$n_x, n_y, n_z$$. Since we're dealing
+with half-turns, $$n$$ is only defined up to sign so we may freely choose the
+one with positive $$n_x$$. In this case, we get the sign for $$n_y$$ using the
+entries of $$nn^T$$:
 
-$$\mathrm{sign}\block{v_y} = \mathrm{sign}\block{v_x v_y}$$
+$$\mathrm{sign}\block{n_y} = \mathrm{sign}\block{n_x n_y}$$
 
-and similarly for $$v_z$$.
+and similarly for $$n_z$$.
 
 
 ## Polar Decomposition Derivative

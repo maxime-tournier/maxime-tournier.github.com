@@ -435,14 +435,17 @@ expect from vectors on a unit sphere.
 
 After working out the complete conjugation
 operation[^double-cross-product], one can obtain
-the
-[Euler-Rodrigues](https://en.wikipedia.org/wiki/Euler%E2%80%93Rodrigues_formula) formula:
+the following expression:
 
-$$q x \bar{q} = x + 2 w \hat{v} x + 2 \hat{v}^2 x$$
+$$\begin{align}
+q x \bar{q} &= x + 2 w \hat{v} x + 2 \hat{v}^2 x \\
+&= \block{I + 2 \cos\block{\frac{\theta}{2}} \sin\block{\frac{\theta}{2}} \hat{n} + 2 \sin^2\block{\frac{\theta}{2}} \hat{n}^2} x \\
+\end{align}$$
 
 Using the identity $$1 - 2 \sin^2\block{\frac{\theta}{2}}=\cos(\theta)$$ and $$2
 \cos\block{\frac{\theta}2} \sin \block{\frac{\theta}2}=\sin(\theta)$$, we obtain
-the equivalent formula:
+the [Euler-Rodrigues](https://en.wikipedia.org/wiki/Euler%E2%80%93Rodrigues_formula)
+formula:
 
 $$R = \cos(\theta) I + \sin(\theta) \hat{n} + \block{1 - \cos\block{\theta}}n n^T$$
 
@@ -460,47 +463,30 @@ $$
 \end{align}
 $$
 
-So if $$\theta$$ is close to $$\pi$$, we cannot recover the axis from the
-skew-symmetric part alone. In the case of $$\theta=\pi$$, we have $$\norm{v}=1$$
-and the formula degenerates to:
+which we can use to recover $$n$$. But if $$\theta$$ is close to $$\pi$$, we
+cannot recover the axis from the skew-symmetric part alone, since the formula
+degenerates to:
 
 $$R = I + 2\hat{v}^2 = I + 2\block{v v^T - I} = 2 v v^T - I$$
 
-So by substracting $$I$$ from $$R$$, we get $$v v^T - I$$ which we can use to
-obtain $$\pm n$$. 
+So by adding $$I$$ to $$R$$, we get $$2v v^T$$ which we can use to
+obtain $$v$$:
 
-
-### Alternate Formula
-
-The above formula has the major drawback of having special cases to deal
-with. Instead, the rotation angle is easily obtained from the matrix trace, and
-the axis may be obtained by remarking the following:
-
-$$n = \argmin{\norm{n} = 1} \quad \norm{R - I - \hat{n}}^2$$
-
-where the Frobenius norm is used. In other words: the cross-product by $$n$$ is
-the *best* approximation of the operator $$R-I$$ in the sense of the Frobenius
-norm (TODO *actually prove it from eigen decompositions*). The above may be
-rewritten as:
-
-$$\argmin{\norm{n}=1} \quad \underbrace{\tr\block{\hat{n}^T\hat{n}}}_{=2\norm{n}} - 2 \tr\block{\block{R - I}^T \hat{n}}$$
-
-and since $$\norm{n}=1$$ is constant we are left with minimizing a linear form
-over $$S^2$$:
-
-$$\argmin{\norm{n}=1} -2\tr\block{\block{R - I}^T \hat{n}}$$
-
-which we may now rewrite a bit:
-
-$$\begin{align}
--\tr\block{\block{R - I}^T \hat{n}} &= -\sum_i e_i^T\block{R - I}^T \hat{n} e_i \\
-&= \sum_i e_i^T\block{R - I}^T \hat{e_i}n\\
-&= -\block{\sum_i \hat{e_i}\block{R - I}e_i}^T n\\
-\end{align}
+$$
+v v^T = \mat{v_x^2 & v_x v_y & v_x v_z \\
+             v_y v_x & v_y^2 & v_y v_z \\
+             v_z v_x & v_z v_y & v_z^2 }
 $$
 
-Now one can easily see that $$n \sim \sum_i \hat{e_i}\block{R - I}e_i$$, and the
-rotation angle is obtained from $$\tr\block{R}=1 + 2\cos(\theta)$$.
+The diagonal provides absolute values for $$v_x, v_y, v_z$$. Since we're dealing
+with half-turns, $$v$$ is only defined up to sign so we may freely choose the
+one with positive $$v_x$$. In this case, we get the sign for $$v_y$$ using the
+entries of $$vv^T$$:
+
+$$\mathrm{sign}\block{v_y} = \mathrm{sign}\block{v_x v_y}$$
+
+and similarly for $$v_z$$.
+
 
 ## Polar Decomposition Derivative
 

@@ -481,7 +481,7 @@ $$
 The diagonal provides absolute values for $$n_x, n_y, n_z$$. Since we're dealing
 with half-turns, $$n$$ is only defined up to sign so we may freely choose the
 one with positive $$n_x$$. In this case, we get the sign for $$n_y$$ using the
-entries of $$nn^T$$:
+sign of off-diagonal entries in $$nn^T$$:
 
 $$\mathrm{sign}\block{n_y} = \mathrm{sign}\block{n_x n_y}$$
 

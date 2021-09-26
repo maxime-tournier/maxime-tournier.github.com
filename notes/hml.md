@@ -61,15 +61,12 @@ categories: [prog]
   - on quantifie l'unificateur $$\rho$$ selon les bornes dans $$Q_0,
     Q_1$$
 - subsumption de $$\sigma$$ en $$\varphi$$:
-  - instancie $$\varphi$$ en $$Q', \rho$$
+  - on instantie $$\varphi$$ en $$Q', \rho$$
   - skolémise $$\sigma$$ et unifie avec $$\rho$$ sous le préfixe $$Q, Q'$$
   - escape check sur les skolems
-  - idem que la subsumption de types sigma, sauf que l'unification
+  - *i.e.* idem que la subsumption de types F, sauf que l'unification
     s'effectue sur un préfixe qui incorpore les bornes
 
-ca donne l'allure générale de l'algo. il y a quelques aspects
-techniques liés à la mise-à-jour du préfixe avec une substitution
-et/ou une nouvelle borne pour maintenir les invariants.
 
 # type rules 
 

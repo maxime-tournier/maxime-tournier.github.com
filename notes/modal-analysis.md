@@ -4,9 +4,12 @@ categories: [phys]
 ---
 
 Consider a conservative $$n$$-dimensional linear mechanical system with mass
-matrix $$M > 0$$ and stiffness matrix $$K \geq 0$$. Then $$\inv{M} K$$ is
-self-adjoint[^1] for the inner-product $$M$$, which means there exists an
-$$M$$-orthogonal basis $$B$$ of eigenvectors:
+matrix $$M > 0$$ and stiffness matrix $$K \geq 0$$:
+
+$$M\ddot{x} + Kx = 0$$
+
+Then $$\inv{M} K$$ is self-adjoint[^1] for the inner-product $$M$$, which means
+there exists an $$M$$-orthogonal basis $$B$$ of eigenvectors:
 
 $$\inv{M}K = BS\inv{B}$$
 
@@ -20,7 +23,11 @@ In this basis, the stiffness matrix becomes diagonal:
 $$B^T K B = \underbrace{B^T M B}_I S \underbrace{\inv{B} B}_I = S$$
 
 and the linear system may be understood as a sum of *mechanically* independent
-(that is, $$M$$-orthogonal) one-dimensional subsystems.
+(that is, $$M$$-orthogonal) one-dimensional subsystems:
+
+$$\ddot{y} + S y = 0$$
+
+where $$y = Bx$$.
 
 ## TODO eigenfrequencies
 

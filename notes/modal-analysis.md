@@ -3,10 +3,10 @@ title: Modal Analysis
 categories: [phys]
 ---
 
-Consider a conservative $$n$$-dimensional linear system with mass matrix $$M >
-0$$ and stiffness matrix $$K \geq 0$$. Then $$\inv{M} K$$ is self-adjoint[^1]
-for the inner-product $$M$$, which means there exists an $$M$$-orthogonal basis
-$$B$$ of eigenvectors:
+Consider a conservative $$n$$-dimensional linear mechanical system with mass
+matrix $$M > 0$$ and stiffness matrix $$K \geq 0$$. Then $$\inv{M} K$$ is
+self-adjoint[^1] for the inner-product $$M$$, which means there exists an
+$$M$$-orthogonal basis $$B$$ of eigenvectors:
 
 $$\inv{M}K = BS\inv{B}$$
 

@@ -19,8 +19,12 @@ In this basis, the stiffness matrix becomes diagonal:
 
 $$B^T K B = \underbrace{B^T M B}_I S \underbrace{\inv{B} B}_I = S$$
 
-and the linear system may be understood as a sum of mechanically independent
-(that is, $$M$$-orthogonal) one-dimensional subsystems. 
+and the linear system may be understood as a sum of *mechanically* independent
+(that is, $$M$$-orthogonal) one-dimensional subsystems.
+
+## TODO eigenfrequencies
+
+## TODO mass-spring/mesh laplacian
 
 ## Computation 
 

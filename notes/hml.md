@@ -9,12 +9,15 @@ categories: [prog]
 
 # notes
 
-- on a donc les types de System-F $$\sigma$$ + les types *flexibles*
-  $$\varphi$$ qui ont des bornes (flexibles également) sur les
-  quantificateurs prénex. pour éviter certains problèmes (*cf* section
-  5.4) on s'assure que les bornes $$\hat{\varphi}$$ ont bien des
-  quantificateurs et que les variables quantifiées sont bien présentes
-  dans le corps du type
+- on a donc les types de Système F $$(\sigma)$$ + les types
+  *flexibles* $$(\varphi)$$ qui ont des bornes inférieures (flexibles
+  également) sur les quantificateurs prénex: $$\forall (\alpha \geq
+  \varphi)$$ signifie que $$\alpha$$ doit être une instance de
+  $$\varphi$$. pour éviter certains problèmes (*cf* section 5.4) on
+  s'assure que les bornes ont une forme particulière (dénotées
+  $$\hat{\varphi}$$) *i.e.* qu'elles ont bien des quantificateurs et
+  que les variables quantifiées sont bien présentes dans le corps du
+  type
 - l'existence de types principaux assure que chaque nouvelle
   utilisation est nécéssairement une instance du type inféré jusqu'ici
   (ou une erreur de type)
@@ -25,47 +28,57 @@ categories: [prog]
 	ne soit une instance de l'autre au sens de System-F.
   - en revanche ces deux types sont instances du type flexible
     $$\forall (\beta \geq \forall \alpha \to \alpha).[\beta]$$
-- en plus du contexte habituel $$\Gamma$$ on maintient également les
-  bornes $$\hat{\varphi}$$ les plus spécifiques inférées pour les
-  variables libres dans un *préfixe* $$Q$$, qu'on raffinera lors des
-  unifications. les restrictions sur les bornes forcent à être
-  soigneux lors des mises-à-jour du préfixe de manière à maintenir les
-  invariants.
-- le crux se situe au niveau de l'application pour laquelle on doit
-  unifier deux types, $$\gamma$$ et $$\alpha \to \beta$$ avec les
+- en plus du contexte habituel $$\Gamma$$ qui associe les noms de
+  variables à leur type, on maintient également les bornes
+  $$\hat{\varphi}$$ les plus spécifiques (*i.e.* grandes) inférées
+  jusqu'ici pour les variables de type libres dans un *préfixe* $$Q$$,
+  qu'on raffinera lors des unifications. les restrictions sur les
+  bornes nécéssitent d'être soigneux lors des mises-à-jour du préfixe
+  de manière à maintenir les invariants sur les bornes
+- l'unification habituelle est donc modifiée pour prendre en compte
+  les bornes maintenues dans le préfixe et les mettre à jour le cas
+  échéant, on parle alors [*d'unification sous un préfixe*](#unify)
+  $$Q$$
+- de même, le préfixe $$Q$$ est utilisé lors des généralisations pour
+  donner leurs bornes aux variables quantifiées, on parle de
+  *quantification sous un préfixe* $$Q$$
+- le crux se situe au niveau de [l'application](#app) pour laquelle on
+  doit unifier deux types, $$\gamma$$ et $$\alpha \to \beta$$ avec les
   bornes suivantes dans le préfixe $$Q$$:
-    - $$\gamma \geq \varphi_1$$ le type de la fonction 
+    - $$\gamma \geq \varphi_1$$ le type de la fonction
 	- $$\alpha \geq \varphi_2$$ le type de l'argument
 	- $$\beta \geq \bot$$ le type de retour
-- le problème est donc ramené à l'[unification](#unify) de deux types
-  F sous un préfixe $$Q$$, avec les cas suivants:
-    - types quantifiés: on skolemise en forme normale et on
-      [unifie](#unify) + escape check
-	- applications: on recurse en unifiant deux-à-deux les arguments
-	- variable contre variable: [occurs check](#occurs-check) de chaque
-      variable sur l'autre borne, calcul de la [borne
-      supérieure](#unify-schemes) des bornes puis mise à jour du
-      préfixe avec les bornes raffinées + substitution
-	- variable contre type F:
+- le problème est ramené à l'[unification](#unify) de deux types
+  Système F sous un préfixe $$Q$$, avec les cas suivants:
+    - types quantifiés: on skolemise les deux types en forme normale,
+      qu'on [unifie](#unify) ensuite + escape check sur les skolems
+	- applications de types: on unifie récursivement deux-à-deux les
+      arguments
+	- variable contre variable: [occurs check](#occurs-check) de
+      chaque variable sur l'autre borne, puis calcul de la [borne
+      supérieure](#unify-schemes) des bornes et enfin mise à jour du
+      préfixe avec les bornes raffinées/substitution
+	- variable (avec sa borne dans le préfixe $$Q$$) contre type
+      Système F:
 	   - [occurs check](#occurs-check) pour éviter les types infinis
 	   - on [subsume](#subsume) le type en la borne *i.e.* on cherche
-         une instantiation de la borne qui s'unifie avec le type
+         une instantiation de la borne qui s'unifie avec le type (ce
+         qui peut raffiner la borne)
 	   - on met à jour le préfixe pour incorporer la substitution
 - ca nous laisse donc avec les deux briques suivantes:
-  - [borne supérieure](#unify-schemes) de deux types flexibles
-  - [subsumer](#subsume) un type F en un type flexible
-- borne supérieure de deux types flexibles:
-  - si une borne est triviale, on renvoie l'autre
-  - sinon $$\phi_i = \forall Q_i \rho_i$$ et on unifie $$\rho_0,
-    \rho_1$$ sous le préfixe $$Q, Q_0, Q_1$$ (ce qui met à jour $$Q$$)
-  - on quantifie l'unificateur $$\rho$$ selon les bornes dans $$Q_0,
-    Q_1$$
-- subsumption de $$\sigma$$ en $$\varphi$$:
-  - on instantie $$\varphi$$ en $$Q', \rho$$
-  - skolémise $$\sigma$$ et unifie avec $$\rho$$ sous le préfixe $$Q, Q'$$
-  - escape check sur les skolems
-  - *i.e.* idem que la subsumption de types F, sauf que l'unification
-    s'effectue sur un préfixe qui incorpore les bornes
+  - [borne supérieure](#unify-schemes) de deux types flexibles:
+    - si une borne est triviale, on renvoie l'autre
+    - sinon $$\phi_i = \forall Q_i \rho_i$$ et on unifie $$\rho_0,
+      \rho_1$$ sous le préfixe $$Q, Q_0, Q_1$$ (ce qui met à jour $$Q$$)
+    - on quantifie l'unificateur $$\rho$$ selon les bornes dans $$Q_0,
+      Q_1$$ qui est la borne supérieure recherchée
+  - [subsumption](#subsume) de $$\sigma$$ en $$\varphi$$:
+    - on instantie $$\varphi$$ en $$Q', \rho$$
+    - skolémise $$\sigma$$ et unifie avec $$\rho$$ sous le préfixe $$Q, Q'$$
+    - escape check sur les skolems
+    - *i.e.* idem que la subsumption de types F, sauf que l'unification
+      s'effectue sous un préfixe qui incorpore les bornes quantifiées
+      dans $$\varphi$$
 
 
 # type rules 

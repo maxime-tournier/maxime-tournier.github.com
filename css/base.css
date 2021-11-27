@@ -1,8 +1,11 @@
 body { 
     background-color: #fff; 
     color: #222; 		/* easy on the eyes */
-    font-family: Bitstream Charter, Georgia, serif;
+    font-family: Bitstream Charter, Charter, Georgia, serif;
     font-kerning: normal;
+    font-feature-settings: "kern" 1;
+    font-optical-sizing: auto;
+    
     /* font-size: 100%; */
     /* font-size:smaller; */
     text-align:center;
@@ -14,7 +17,7 @@ body {
     margin-right: auto;
     margin-top: 3em;
     padding: 0 1em;
-    font-size: 14pt;
+    font-size: 13pt;
     /* line-height: 140%; */
 }
 

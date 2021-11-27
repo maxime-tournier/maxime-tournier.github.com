@@ -42,62 +42,40 @@ U^T \dd A V &= \db U\ S + \dd S + S\ \db V^T\\
 \end{align}
 $$
 
-from which we already obtain $$\dd S$$. Let us now call $$R=\db U\ S + S\ \db
-V^T$$ and decompose $$R$$ orthogonally over symmetric and skew-symmetric
-matrices as $$R = R_+ \oplus R_-$$. For the symmetric part $$R_+$$, we obtain:
+from which we may already obtain $$\dd S$$ from the diagonal. Let us now call
+$$R = \db U\ S + S\ \db V^T = \db U\ S - S \db V$$ and fiddle around a bit to
+obtain:
 
 $$\begin{align}
-R_+ &= \half\block{R + R^T}\\
-    &= \half\block{\db U\ S + S\ \db V^T + \db V S + S \db U^T}\\
-    &= \half\block{\underbrace{\block{\db U + \db V}}_{2W}S + S\block{\db U + \db V}^T}\\
-    &= \block{WS + SW^T}\\
+RS &= \db U\ S^2 - S\ \db V\ S \\
+(RS)^T &= S\ \db V\ S - S^2 \db U \\
 \end{align}$$
 
-where $$W=\half\block{\db U + \db V}$$. Similarly, the skew-symmetric part is:
+From this we obtain:
 
-$$R_- = \block{ZS - SZ^T}$$
+$$RS + (RS)^T = \db U\ S^2 - S^2 \db U$$
 
-where $$Z = \half\block{\db U - \db V}$$. We can now identify $$W, Z$$ from the values of
-$$R_+, R_-$$, from which we obtain $$\db U, \db V$$ as:
+which we may rewrite as:
 
-$$\begin{align}
-    \db U &= W + Z \\
-    \db V &= W - Z \\
-\end{align}$$
+$$RS + (RS)^T = \hat{S} \circ \db U$$
 
-Note that both $$W, Z$$ are skew-symmetric.
+where $$\hat{S} = \block{s_j^2 - s_i^2}_{i, j}$$ is skew-symmetric. We then
+obtain $$\db U$$ as:
 
-## Symmetric Identification $$(n = 3)$$
+$$\db U = \check{S}\circ \block{RS + (RS)^T}$$
 
-$$\begin{align}
-W &= \mat{0 & -w_2 & w_1 \\ 
-           w_2 & 0 & -w_0 \\ 
-           -w_1 & w_0 & 0} \\
-           \\
-WS &= \mat{0 & -s_1 w_2 & s_2 w_1 \\ 
-            s_0 w_2 & 0 & -s_2 w_0 \\
-            -s_0 w_1 & s_1 w_0 & 0} \\
-            \\
-SW^T &= \mat{0 & s_0 w_2 & -s_0 w_1 \\ 
-            -s_1 w_2 & 0 & s_1 w_0 \\
-            s_2 w_1 & -s_2 w_0 & 0}\\
-            \\
-R_+ = WS + SW^T &= \mat{0 & \block{s_0 - s_1} w_2 & \block{s_2 - s_0} w_1 \\
-                        \star & 0 & \block{s_1 - s_2} w_0\\ 
-                        \star & \star & 0}
-\end{align}$$
+where $$\check{S}_{i,j} = \begin{cases}\frac{1}{s_j^2 - s_i^2} & i \neq j \\ 0 & i = j\end{cases}$$
 
+TODO what if $$s_i = s_j$$
 
-## Skew-Symmetric Identification $$(n = 3)$$
+Similarly, we get $$\block{SR + (SR)^T} = \hat{S} \circ \db V$$ and obtain $$\db V$$ as
 
-$$R_- = ZS - SZ^T = \mat{0 & \block{-s_0 - s_1} z_2 & \block{s_0 + s_2} z_1 \\
-                                   -\star & 0 & \block{-s_1 - s_2} z_0\\ 
-                                   -\star & -\star & 0}$$
-
-We remark that the identification is well-defined as long as $$S>0$$.
+$$\db V = \check{S}\circ \block{SR + (SR)^T}$$
 
 # Polar Decomposition
-
+ 
+TODO REDO 
+ 
 We want to compute $$f: A \mapsto UV^T$$ to get the closest orientation to a
 given invertible linear map. The derivative gives:
 

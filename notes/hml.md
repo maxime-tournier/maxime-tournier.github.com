@@ -54,10 +54,12 @@ categories: [prog]
       qu'on [unifie](#unify) ensuite + escape check sur les skolems
 	- applications de types: on unifie récursivement deux-à-deux les
       arguments
-	- variable contre variable: [occurs check](#occurs-check) de
-      chaque variable sur l'autre borne, puis calcul de la [borne
-      supérieure](#unify-schemes) des bornes et enfin mise à jour du
-      préfixe avec les bornes raffinées/substitution
+	- variable contre variable: on commence par [occurs
+      check](#occurs-check) de chaque variable sur l'autre borne, puis
+      on cherche la meilleure borne qui inclue ("qui soit une instance
+      de") les deux autres, *i.e.*  la [borne
+      supérieure](#unify-schemes) et enfin mise à jour du préfixe avec
+      les bornes raffinées/substitution
 	- variable (avec sa borne dans le préfixe $$Q$$) contre type
       Système F:
 	   - [occurs check](#occurs-check) pour éviter les types infinis
@@ -79,7 +81,7 @@ categories: [prog]
     - *i.e.* idem que la subsumption de types F, sauf que l'unification
       s'effectue sous un préfixe qui incorpore les bornes quantifiées
       dans $$\varphi$$
-
+    - note: raffine potentiellement certaines bornes dans $$Q$$
 
 # type rules 
 

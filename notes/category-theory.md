@@ -320,13 +320,13 @@ But first things first: let's start with Hom-functors.
 ## Hom Functors
 
 Let $$\cat{C}$$ be a locally small category and $$\Set$$ be the
-category of sets. Let us also fix an object $$a \in \Ob{C}$$, and
+category of sets. Let us also fix some object $$a \in \Ob{C}$$, and
 consider the two following functors:
 
 ### Covariant Hom-Functor
 
-$$H^a = \hom{C}{a, -}$$ connects sets of morphisms starting at $$a$$
-by mapping a morphism $$f$$ to the post-composition by $$f$$:
+$$H^a = \hom{C}{a, -}$$ relates sets of morphisms *starting* at $$a$$
+by post-composition:
 
 $$\begin{align}
 H^a: \cat{C} &\to \Set\\
@@ -337,8 +337,8 @@ x &\mapsto \hom{C}{a, x} \\
 
 ### Contravariant Hom-Functor
 
-$$H_a = \hom{C}{-, a}$$ connects sets of morphisms ending at $$a$$ by
-mapping a morphism $$f$$ to the pre-composition by $$f$$:
+$$H_a = \hom{C}{-, a}$$ relates sets of morphisms *ending* at $$a$$ by
+pre-composition:
 
 $$\begin{align}
 H_a: \op{C} &\to \Set\\
@@ -393,47 +393,49 @@ The associativity of morphism composition shows that the naturality
 square above indeed commutes, and that the Yoneda embedding is indeed
 a functor. The Yoneda *lemma* will establish that this functor is
 *fully faithful*, *i.e.* that the Yoneda embedding is indeed an
-embedding.
+embedding. In other words, any category $$\cat{C}$$ can be seen as a
+subcategory of $$\funcat{\op{C}, \Set}$$, pretty much like any group
+can be seen as a subgroup of permutations of its underlying set.
 
 ## Lemma and Consequence
 
-Let us consider some other functor $$F: \op{C} \to \Set$$, a morphism
-$$h: x \to y$$ and a natural transformation $$\alpha: H_a \to F$$ with
-naturality square as follows:
+Let us consider some other functor $$F: \op{C} \to \Set$$ and a
+natural transformation $$\alpha: H_a \to F$$ with naturality square as
+follows:
 
 $$\natsq{\alpha}{H_a}{F}{y}{x}{h}$$
 
-At this point, there's not much we could do except to consider
-$$H_a(a)$$, which always contains the identity morphism
-$$\id_a$$. Therefore, let us set $$y = a$$ and follow the image of the
-identity morphism $$\id_a \in H_a(a)$$ along both sides of the
-naturality square:
+for some morphism $$h: x \to y$$.  We are looking for necessary
+conditions on $$\alpha$$ and at this point, the only information
+available is that $$H_a(a)$$ contains at least the identity morphism
+$$\id_a$$. Therefore, let us see how $$\alpha$$ acts on it along both
+sides of the naturality square:
 
 $$
 \begin{matrix}
-	\id_a &\longmapsto& \alpha_a\block{\id_a} &\longmapsto & F(h)\block{\alpha_a\block{\id_a}} \\
 	\id_a &\longmapsto& \id_a \circ h &\longmapsto & \alpha_x(h) \\
+	\id_a &\longmapsto& \alpha_a\block{\id_a} &\longmapsto & F(h)\block{\alpha_a\block{\id_a}} \\
 \end{matrix}
 $$
 
+In other words, we now know exactly how to compute $$\alpha_x: H_a(x)
+\to F(x)$$ for any object $$x$$ provided that we know where
+$$\alpha_a\block{\id_a}$$ ends up in $$F(a)$$: given a morphism $$h: a
+\to x$$, we map it by $$F$$ to obtain a map $$F(h): F(a) \to F(x)$$,
+and feed it with $$\alpha_a\block{\id_a}$$ to compute $$\alpha_x(h)$$.
 
-Since this holds for any $$h\in H_a(x)$$, the component $$\alpha_x$$
-is:
-
-$$\alpha_x = F(-) \block{\alpha_a\block{\id_a}}$$
-
-which is completely determined by the value of $$\alpha_a\block{\id_a}
-\in F(a)$$. Again, this holds for any $$x \in \op{C}$$, meaning
-$$\alpha$$ itself is completely determined by the value of
-$$\alpha_a\block{\id_a}$$. Conversely, any value in $$F(a)$$ can be
-used to *define* a natural transformation $$\alpha$$ by specifying the
-value $$\alpha_a\block{\id_a}$$. Therefore, we obtain the following
-isomorphism of sets:
+What this means is that a natural transformation $$\alpha: H_a \to F$$
+is *necessarily* entirely determined by the value of
+$$\alpha_a\block{\id_a} \in F(a)$$. We may easily check that this
+condition is also sufficient *i.e.* that $$\alpha$$ defined by picking
+*any* value for $$\alpha_a\block{\id_a} \in F(a)$$ does indeed define
+a natural transformation. What we obtained is a one-to-one
+correspondence between possible $$\alpha$$'s and elements of $$F(a)$$:
 
 $$F(a) \simeq \hom{\funcat{\op{C}, \Set}}{H_a, F}$$
 
-which is the Yoneda lemma for the contravariant representable functor
-$$H_a$$. In particular, taking $$F=H_b$$ yields:
+which is the Yoneda lemma, in this case for the contravariant
+representable functor $$H_a$$. In particular, taking $$F=H_b$$ yields:
 
 $$H_b(a) = \hom{C}{a, b} \simeq \hom{\funcat{\op{C}, \Set}}{H_a, H_b}$$
 

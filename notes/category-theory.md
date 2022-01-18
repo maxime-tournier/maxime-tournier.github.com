@@ -349,15 +349,76 @@ x &\mapsto \hom{C}{x, a} \\
 
 ### Representable Functors 
 
-$$H_a$$ and $$H^a$$ are sometimes called *the* (covariant,
+One can easily check that both $$H^a$$ and $$H_a$$ are indeed
+functors. $$H_a$$ and $$H^a$$ are sometimes called *the* (covariant,
 contravariant) representable functors, and any functor naturally
 isomorphic to one of them is called *a* representable functor.
 
+
+## The Lemma
+
+Let us consider some other functor $$F: \op{C} \to \Set$$ and a
+natural transformation $$\alpha: H_a \to F$$ with naturality square as
+follows:
+
+$$\natsq{\alpha}{H_a}{F}{y}{x}{h}$$
+
+for some morphism $$h: x \to y$$.  We are looking for necessary
+conditions on $$\alpha$$ and at this point, the only information
+available is that $$H_a(a)$$ contains at least the identity morphism
+$$\id_a$$. Therefore, let us see how $$\alpha$$ acts on it along both
+sides of the naturality square:
+
+$$
+\begin{matrix}
+	\id_a &\longmapsto& \id_a \circ h &\longmapsto & \alpha_x(h) \\
+	\id_a &\longmapsto& \alpha_a\block{\id_a} &\longmapsto & F(h)\block{\alpha_a\block{\id_a}} \\
+\end{matrix}
+$$
+
+In other words, once we know the value of $$\alpha_a\block{\id_a}$$ in
+$$F(a)$$ there is no choice left when computing $$\alpha_x: H_a(x) \to
+F(x)$$ for any object $$x$$. Given a morphism $$h: a \to x$$, we map
+it by $$F$$ to obtain a $$F(h): F(a) \to F(x)$$, and feed it with
+$$\alpha_a\block{\id_a}$$ to get $$\alpha_x(h)$$.
+
+This means that a natural transformation $$\alpha: H_a \to F$$ is
+*necessarily* entirely determined by the value of
+$$\alpha_a\block{\id_a} \in F(a)$$. We may easily check that this is
+also sufficient *i.e.* that some $$\alpha$$ with components computed
+as above by picking *any* value for $$\alpha_a\block{\id_a} \in F(a)$$
+does indeed define a natural transformation. So there is a one-to-one
+correspondence between possible $$\alpha$$'s and elements of $$F(a)$$:
+
+$$F(a) \simeq \hom{\funcat{\op{C}, \Set}}{H_a, F}$$
+
+This is the Yoneda lemma, in this case for the contravariant
+representable functor $$H_a$$. The argument is the same for the
+covariant case.
+
+Finally, the Yoneda lemma is natural in both $$a$$ and $$F$$, meaning
+that the two following squares commute:
+
+$$
+\begin{matrix}
+ 	F(a) & \longrightarrow & \hom{\funcat{\op{C}, \Set}}{H_a, F} \\
+    \downarrow &  & \downarrow \\
+ 	F(b) & \longrightarrow & \hom{\funcat{\op{C}, \Set}}{H_b, F} \\ 
+\end{matrix}
+\quad\quad\quad
+\begin{matrix}
+ 	F(a) & \longrightarrow & \hom{\funcat{\op{C}, \Set}}{H_a, F} \\
+    \downarrow &  & \downarrow \\
+ 	G(a) & \longrightarrow & \hom{\funcat{\op{C}, \Set}}{H_a, G} \\ 
+\end{matrix} 
+$$
+
+(TODO show this)
+
 ## Yoneda Embedding
 
-One can easily check that both $$H^a$$ and $$H_a$$ are indeed
-functors. Now, let us consider the Yoneda *embedding*, which is
-defined as the following functor:
+Now, let us consider the Yoneda *embedding*, which is defined as the
+following functor:
 
 $$\begin{align}
 H_{-}: \cat{C} &\to \funcat{\op{C}, \Set}\\
@@ -391,88 +452,25 @@ g &\overset{\block{H_f}_x}\longmapsto & f \circ g &\overset{H_b(h)}\longmapsto &
 
 The associativity of morphism composition shows that the naturality
 square above indeed commutes, and that the Yoneda embedding is indeed
-a functor. The Yoneda *lemma* will establish that this functor is
-*fully faithful*, *i.e.* that the Yoneda embedding is indeed an
-embedding. In other words, any category $$\cat{C}$$ can be seen as a
-subcategory of $$\funcat{\op{C}, \Set}$$, pretty much like any group
-can be seen as a subgroup of permutations of its underlying set.
-
-## Lemma and Consequence
-
-Let us consider some other functor $$F: \op{C} \to \Set$$ and a
-natural transformation $$\alpha: H_a \to F$$ with naturality square as
-follows:
-
-$$\natsq{\alpha}{H_a}{F}{y}{x}{h}$$
-
-for some morphism $$h: x \to y$$.  We are looking for necessary
-conditions on $$\alpha$$ and at this point, the only information
-available is that $$H_a(a)$$ contains at least the identity morphism
-$$\id_a$$. Therefore, let us see how $$\alpha$$ acts on it along both
-sides of the naturality square:
-
-$$
-\begin{matrix}
-	\id_a &\longmapsto& \id_a \circ h &\longmapsto & \alpha_x(h) \\
-	\id_a &\longmapsto& \alpha_a\block{\id_a} &\longmapsto & F(h)\block{\alpha_a\block{\id_a}} \\
-\end{matrix}
-$$
-
-In other words, we now know exactly how to compute $$\alpha_x: H_a(x)
-\to F(x)$$ for any object $$x$$ provided that we know where
-$$\alpha_a\block{\id_a}$$ ends up in $$F(a)$$: given a morphism $$h: a
-\to x$$, we map it by $$F$$ to obtain a map $$F(h): F(a) \to F(x)$$,
-and feed it with $$\alpha_a\block{\id_a}$$ to compute $$\alpha_x(h)$$.
-
-What this means is that a natural transformation $$\alpha: H_a \to F$$
-is *necessarily* entirely determined by the value of
-$$\alpha_a\block{\id_a} \in F(a)$$. We may easily check that this
-condition is also sufficient *i.e.* that $$\alpha$$ defined by picking
-*any* value for $$\alpha_a\block{\id_a} \in F(a)$$ does indeed define
-a natural transformation. What we obtained is a one-to-one
-correspondence between possible $$\alpha$$'s and elements of $$F(a)$$:
-
-$$F(a) \simeq \hom{\funcat{\op{C}, \Set}}{H_a, F}$$
-
-which is the Yoneda lemma, in this case for the contravariant
-representable functor $$H_a$$. In particular, taking $$F=H_b$$ yields:
+a functor. But now armed with the Yoneda lemma, we may take $$F=H_b$$
+and obtain:
 
 $$H_b(a) = \hom{C}{a, b} \simeq \hom{\funcat{\op{C}, \Set}}{H_a, H_b}$$
 
-This shows that the Yoneda embedding is fully faithful (thus indeed an
-*embedding*): morphisms in $$\hom{C}{a, b}$$ are in one-to-one
+which shows that the Yoneda embedding is fully faithful (thus indeed
+an *embedding*): morphisms in $$\hom{C}{a, b}$$ are in one-to-one
 correspondence with natural transformations in $$\hom{\funcat{\op{C},
 \Set}}{H_a, H_b}$$. As a consequence, any locally small category
 $$\cat{C}$$ can be viewed as a subcategory of *(embedded in)* the
-category of contravariant functors from itself to sets (*presheaves*).
+category of contravariant functors from itself to sets (*presheaves*),
+much like any group can be seen as a subgroup of permutations of its
+underlying set.
 
-Finally, the Yoneda lemma is natural in both $$a$$ and $$F$$, meaning
-that the two following squares commute:
 
-$$
-\begin{matrix}
- 	F(a) & \longrightarrow & \hom{\funcat{\op{C}, \Set}}{H_a, F} \\
-    \downarrow &  & \downarrow \\
- 	F(b) & \longrightarrow & \hom{\funcat{\op{C}, \Set}}{H_b, F} \\ 
-\end{matrix}
-\quad\quad\quad
-\begin{matrix}
- 	F(a) & \longrightarrow & \hom{\funcat{\op{C}, \Set}}{H_a, F} \\
-    \downarrow &  & \downarrow \\
- 	G(a) & \longrightarrow & \hom{\funcat{\op{C}, \Set}}{H_a, G} \\ 
-\end{matrix} 
-$$
+### Covariant Case
 
-(TODO show this)
-
-## Covariant Case
-
-All of the above translates fairly directly to the covariant case,
-giving:
-
-$$F(a) \simeq \hom{\funcat{C, \Set}}{H^a, F}$$
-
-Note that the Yoneda embedding becomes contravariant:
+All of the above translates directly to the covariant case, giving. We
+simply remark that the Yoneda embedding becomes contravariant:
 
 $$H^{-}: \op{C} \to \funcat{C, \Set}$$
 

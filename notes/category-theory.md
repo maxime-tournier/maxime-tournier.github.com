@@ -304,9 +304,9 @@ and $$E\alpha$$ are indeed natural transformations.
 The Yoneda *lemma* is a fundamental result connecting a (locally
 small) category to the category of sets through its Hom-sets. As such,
 it makes it possible to use results in $$\Set$$ which is very
-well-known. One of its main applications is to prove the Yoneda
-*embedding*, which relates the set of morphisms between two elements
-to the Hom-functors of both elements:
+well-known. One of its most immediate applications is to prove the
+Yoneda *embedding*, which relates the set of morphisms between two
+elements to the Hom-functors of both elements:
 
 $$\hom{C}{a, b} \simeq \hom{\funcat{C, \Set}}{\hom{C}{a, -}, \hom{C}{b, -}}$$
 
@@ -355,7 +355,7 @@ contravariant) representable functors, and any functor naturally
 isomorphic to one of them is called *a* representable functor.
 
 
-## The Lemma
+## Lemma
 
 Let us consider some other functor $$F: \op{C} \to \Set$$ and a
 natural transformation $$\alpha: H_a \to F$$ with naturality square as
@@ -363,11 +363,11 @@ follows:
 
 $$\natsq{\alpha}{H_a}{F}{y}{x}{h}$$
 
-for some morphism $$h: x \to y$$.  We are looking for necessary
-conditions on $$\alpha$$ and at this point, the only information
+for some morphism $$h: x \to y$$. Should $$\alpha$$ exist, what should
+it *necessarily* satisfy? At this point, the only information
 available is that $$H_a(a)$$ contains at least the identity morphism
-$$\id_a$$. Therefore, let us see how $$\alpha$$ acts on it along both
-sides of the naturality square:
+$$\id_a$$, so let us examine how $$\alpha$$ should act on it along
+both sides of the naturality square:
 
 $$
 \begin{matrix}
@@ -376,48 +376,63 @@ $$
 \end{matrix}
 $$
 
-In other words, once we know the value of $$\alpha_a\block{\id_a}$$ in
-$$F(a)$$ there is no choice left when computing $$\alpha_x: H_a(x) \to
-F(x)$$ for any object $$x$$. Given a morphism $$h: a \to x$$, we map
-it by $$F$$ to obtain a $$F(h): F(a) \to F(x)$$, and feed it with
-$$\alpha_a\block{\id_a}$$ to get $$\alpha_x(h)$$.
+That is: once we know the value of $$\alpha_a\block{\id_a}$$ in
+$$F(a)$$, there is no choice left when computing $$\alpha_x: H_a(x)
+\to F(x)$$ for *any* object $$x$$. Given *any* morphism $$h \in
+H_a(x)$$, we map it by $$F$$ to obtain a $$F(h): F(a) \to F(x)$$, and
+feed it with $$\alpha_a\block{\id_a}$$ to get $$\alpha_x(h)$$.
 
 This means that a natural transformation $$\alpha: H_a \to F$$ is
-*necessarily* entirely determined by the value of
-$$\alpha_a\block{\id_a} \in F(a)$$. We may easily check that this is
-also sufficient *i.e.* that some $$\alpha$$ with components computed
-as above by picking *any* value for $$\alpha_a\block{\id_a} \in F(a)$$
-does indeed define a natural transformation. So there is a one-to-one
-correspondence between possible $$\alpha$$'s and elements of $$F(a)$$:
+entirely determined by the value of $$\alpha_a\block{\id_a} \in
+F(a)$$. We may easily check that this is also sufficient *i.e.* that
+$$\alpha$$ with components computed as above by picking *any* value
+for $$\alpha_a\block{\id_a} \in F(a)$$ does indeed define a natural
+transformation. In other words, there is a one-to-one correspondence
+between possible $$\alpha$$'s and elements of $$F(a)$$:
 
 $$F(a) \simeq \hom{\funcat{\op{C}, \Set}}{H_a, F}$$
 
-This is the Yoneda lemma, in this case for the contravariant
+which is the Yoneda lemma, in this case for the contravariant
 representable functor $$H_a$$. The argument is the same for the
-covariant case.
-
-Finally, the Yoneda lemma is natural in both $$a$$ and $$F$$, meaning
-that the two following squares commute:
+covariant case. Finally, the isomorphism is natural in both $$a$$ and
+$$F$$, meaning that the two following squares commute:
 
 $$
 \begin{matrix}
- 	F(a) & \longrightarrow & \hom{\funcat{\op{C}, \Set}}{H_a, F} \\
+ 	F(a) & \overset{\simeq}{\longrightarrow} & \hom{\funcat{\op{C}, \Set}}{H_a, F} \\
     \downarrow &  & \downarrow \\
- 	F(b) & \longrightarrow & \hom{\funcat{\op{C}, \Set}}{H_b, F} \\ 
+ 	F(b) & \underset{\simeq}{\longrightarrow} & \hom{\funcat{\op{C}, \Set}}{H_b, F} \\ 
 \end{matrix}
 \quad\quad\quad
 \begin{matrix}
- 	F(a) & \longrightarrow & \hom{\funcat{\op{C}, \Set}}{H_a, F} \\
+ 	F(a) & \overset{\simeq}{\longrightarrow} & \hom{\funcat{\op{C}, \Set}}{H_a, F} \\
     \downarrow &  & \downarrow \\
- 	G(a) & \longrightarrow & \hom{\funcat{\op{C}, \Set}}{H_a, G} \\ 
+ 	G(a) & \underset{\simeq}{\longrightarrow} & \hom{\funcat{\op{C}, \Set}}{H_a, G} \\ 
 \end{matrix} 
 $$
 
-(TODO show this)
+To make sense of the vertical arrows in the first diagram, we first
+need to show that $$H$$ is itself a functor: this way a morphism $$f:
+a \to b$$ induces a morphism $$H_f: H_a \to H_b$$ and we may map
+hom-sets $$\hom{\funcat{\op{C}, \Set}}{H_a, F}$$ and
+$$\hom{\funcat{\op{C}, \Set}}{H_b, F}$$ by $$\block{H_f}_*$$
+(post-composition by $$H_f$$) as before, only this time in the functor
+category.
+
+Then we follow $$x_a \in F(a)$$ along both sides of the square:
+
+$$\begin{matrix}
+x_a &\longmapsto & F(-)(x_a) &\longmapsto &H_f \circ F(-)(x_a)\\
+x_a &\longmapsto & x_b &\longmapsto & F(-)(x_b)\\
+\end{matrix}$$
+
+Therefore we need to show that $$F(-)(x_b) = H_f F(-)(x_a)$$, and for
+this we need to make sense of $$H_f$$ first. So let us show that $$H$$
+is indeed a functor.
 
 ## Yoneda Embedding
 
-Now, let us consider the Yoneda *embedding*, which is defined as the
+Let us consider the Yoneda *embedding*, which is defined as the
 following functor:
 
 $$\begin{align}
@@ -432,7 +447,8 @@ it must have components $$\block{H_f}_x: H_a(x) \to H_b(x)$$, that is:
 
 $$\block{H_f}_x: \hom{C}{x, a} \to \hom{C}{x, b}$$
 
-The obvious choice given $$f: a \to b$$ is to post-compose by $$f$$:
+As before, the obvious choice given $$f: a \to b$$ is to post-compose by
+$$f$$:
 
 $$\block{H_f}_x = (g \mapsto f \circ g)$$
 

@@ -393,8 +393,8 @@ $$F(a) \simeq \hom{\funcat{\op{C}, \Set}}{H_a, F}$$
 
 which is the Yoneda lemma, in this case for the contravariant
 representable functor $$H_a$$. The argument is the same for the
-covariant case. Finally, the isomorphism is natural in both $$a$$ and
-$$F$$, meaning that the two following squares commute:
+covariant case. This isomorphism is natural in both $$a$$ and $$F$$,
+meaning that the two following squares commute:
 
 $$
 \begin{matrix}
@@ -414,9 +414,9 @@ To make sense of the vertical arrows in the first diagram, we first
 need to show that $$H$$ is itself a functor: this way a morphism $$f:
 b \to a$$ induces a morphism $$H_f: H_b \to H_a$$ and we may map
 hom-set $$\hom{\funcat{\op{C}, \Set}}{H_a, F}$$ to
-$$\hom{\funcat{\op{C}, \Set}}{H_b, F}$$ by pre-composition by $$H_f$$
-as before, only this time in the functor category. Then we follow an
-element $$x_a \in F(a)$$ along both sides of the square:
+$$\hom{\funcat{\op{C}, \Set}}{H_b, F}$$ using pre-composition by
+$$H_f$$ as before, only this time in the functor category. Then we
+follow an element $$x_a \in F(a)$$ along both sides of the square:
 
 $$\begin{matrix}
 x_a &\longmapsto & F(-)\block{x_a} &\longmapsto &F(-)\block{x_a} \circ H_f\\

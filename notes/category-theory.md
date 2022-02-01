@@ -301,12 +301,11 @@ and $$E\alpha$$ are indeed natural transformations.
 
 # The Yoneda Lemma
 
-The Yoneda *lemma* is a fundamental result connecting a (locally
-small) category to the category of sets through its Hom-sets. As such,
-it makes it possible to use results in $$\Set$$ which is very
-well-known. One of its most immediate applications is to prove the
-Yoneda *embedding*, which relates the set of morphisms between two
-elements to the Hom-functors of both elements:
+The Yoneda *lemma* is a fundamental result relating a (locally small)
+category to functors from the category to sets. It turns out that this
+functor category is quite useful since some results in $$\Set$$
+translate naturally to it, which in turn translate to the category we
+started with through the Yoneda *embedding*:
 
 $$\hom{C}{a, b} \simeq \hom{\funcat{C, \Set}}{\hom{C}{a, -}, \hom{C}{b, -}}$$
 
@@ -413,20 +412,22 @@ $$
 
 To make sense of the vertical arrows in the first diagram, we first
 need to show that $$H$$ is itself a functor: this way a morphism $$f:
-a \to b$$ induces a morphism $$H_f: H_a \to H_b$$ and we may map
-hom-sets $$\hom{\funcat{\op{C}, \Set}}{H_a, F}$$ and
-$$\hom{\funcat{\op{C}, \Set}}{H_b, F}$$ by $$\block{H_f}_*$$
-(post-composition by $$H_f$$) as before, only this time in the functor
-category.
-
-Then we follow $$x_a \in F(a)$$ along both sides of the square:
+b \to a$$ induces a morphism $$H_f: H_b \to H_a$$ and we may map
+hom-set $$\hom{\funcat{\op{C}, \Set}}{H_a, F}$$ to
+$$\hom{\funcat{\op{C}, \Set}}{H_b, F}$$ by pre-composition by $$H_f$$
+as before, only this time in the functor category. Then we follow an
+element $$x_a \in F(a)$$ along both sides of the square:
 
 $$\begin{matrix}
-x_a &\longmapsto & F(-)(x_a) &\longmapsto &H_f \circ F(-)(x_a)\\
-x_a &\longmapsto & x_b &\longmapsto & F(-)(x_b)\\
+x_a &\longmapsto & F(-)\block{x_a} &\longmapsto &F(-)\block{x_a} \circ H_f\\
+x_a &\longmapsto & x_b = F(f)\block{x_a} &\longmapsto & F(-)\block{x_b}\\
 \end{matrix}$$
 
-Therefore we need to show that $$F(-)(x_b) = H_f F(-)(x_a)$$, and for
+where $$F(-)\block{x_a}: H_a \to F$$ is the natural transformation
+corresponding to $$x_a$$ and the vertical composition between functors
+$$H_b \overset{H_f}{\longmapsto} H_a
+\overset{F(-)\block{x_a}}\longmapsto F$$ is used. Therefore we need to
+show that $$F(-)\block{x_b} = F(-)\block{x_a} \circ H_f$$, and for
 this we need to make sense of $$H_f$$ first. So let us show that $$H$$
 is indeed a functor.
 
@@ -447,10 +448,10 @@ it must have components $$\block{H_f}_x: H_a(x) \to H_b(x)$$, that is:
 
 $$\block{H_f}_x: \hom{C}{x, a} \to \hom{C}{x, b}$$
 
-As before, the obvious choice given $$f: a \to b$$ is to post-compose by
-$$f$$:
+As before we're mapping hom-sets, so the natural choice given $$f: a
+\to b$$ is to post-compose by $$f$$:
 
-$$\block{H_f}_x = (g \mapsto f \circ g)$$
+$$\block{H_f}_x = (g \mapsto f \circ g) = f_*$$
 
 Given a morphism $$h: y \to x$$, the naturality square for $$H_f$$ is
 the following:
@@ -462,14 +463,14 @@ from any morphism $$g: x \to a \in H_a(x)$$ and follow both sides of
 the diagram:
 
 $$\begin{matrix}
-g &\overset{H_a(h)}\longmapsto & g \circ h &\overset{\block{H_f}_y}\longmapsto & f \circ (g \circ h)  \\
-g &\overset{\block{H_f}_x}\longmapsto & f \circ g &\overset{H_b(h)}\longmapsto & (f \circ g) \circ h  \\
+g &\overset{H_a(h) = h^*}\longmapsto & g \circ h &\overset{\block{H_f}_y = f_*}\longmapsto & f \circ (g \circ h)  \\
+g &\overset{\block{H_f}_x = f_*}\longmapsto & f \circ g &\overset{H_b(h) = h^*}\longmapsto & (f \circ g) \circ h  \\
 \end{matrix}$$
 
 The associativity of morphism composition shows that the naturality
 square above indeed commutes, and that the Yoneda embedding is indeed
-a functor. But now armed with the Yoneda lemma, we may take $$F=H_b$$
-and obtain:
+a functor. But now equipped with the Yoneda lemma, we may take
+$$F=H_b$$ and obtain:
 
 $$H_b(a) = \hom{C}{a, b} \simeq \hom{\funcat{\op{C}, \Set}}{H_a, H_b}$$
 

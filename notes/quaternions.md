@@ -592,7 +592,7 @@ $$
 It is worth having a closer look at this formula. For a given $$\dd x$$:
 
 - the part along $$n$$ is unchanged,
-- the part orthogonal to $$n$$ becomes $$\frac{\sin(\theta)}{\theta}\block{cI - s \hat{n}} \dd x^\bot = \frac{\sin(\theta)}{\theta} R_{\exp(x)} \dd x^\bot$$
+- the part orthogonal to $$n$$ becomes $$\frac{\sin(\theta)}{\theta}\block{cI - s \hat{n}} \dd x^\bot = \frac{\sin(\theta)}{\theta} R^T_{\exp(x)} \dd x^\bot$$
 
 
 ## Interpolation
@@ -855,13 +855,13 @@ $$u = e_z + \pi(q)\times e_z + \pi(q) \pi(q)^T e_z$$
 By the same token, the geodesic along $$e_x$$ corresponds to a line starting at
 $$0$$ with direction $$e_x$$, and finally the geodesic along $$e_y$$ corresponds
 to a line starting at some point along the first geodesic projection $$p_x =
-\lambda_x e_x = \pi\block{\exp(\theta_x ex)}$$, with a direction corresponding
-to a body-fixed velocity $$e_y$$ at $$\exp(\theta_x ex)$$. The direction is
-again given by the gnomonic projection derivative formula above:
+\lambda_x e_x$$, with a direction corresponding to a body-fixed velocity $$e_y$$
+at $$p_x$$. This direction $$v$$ is again given by the gnomonic projection
+derivative formula above:
 
 $$
 \begin{align}
-v &= e_y + p_x \times e_y + p_x p_x^T e_y \\
+v &= e_y + \underbrace{p_x \times e_y}_{\lambda_x e_x \times e_y} + p_x \underbrace{p_x^T e_y}_0 \\
 &= e_y + \lambda_x e_z \\
 \end{align}
 $$
@@ -869,23 +869,19 @@ $$
 for some real $$\lambda_x$$. We want the geodesic along $$e_y$$ and
 the one along $$e_z$$ to meet, so we look for some point satisfying:
 
-$$ \pi(q) + \lambda_u u = p_x + \lambda_v v $$
+$$\pi(q) + \lambda_u u = \lambda_x e_x + \lambda_v v $$
 
-Expanding the right-hand side, this gives:
+Expanding the right-hand side, we obtain the following system of equations to
+solve for $$\lambda_x, \lambda_u, \lambda_v$$:
 
-$$ \pi(q) + \lambda_u u = \lambda_x e_x + \lambda_v\block{e_y + \lambda_x e_z}
+$$\pi(q) + \lambda_u u = \lambda_x e_x + \lambda_v\block{e_y + \lambda_x e_z}
 	= \mat{\lambda_x \\ \lambda_v \\ \lambda_x \lambda v} $$
 
-Geometrically, we look for the intersection of an affine line with the
-hyperbolic paraboloid $$z = x y$$. An easy way to solve this equation
-is to convert the paraboloid to the implicit equation (normal form):
-
-$$ \block{x + y}^2 - \block{x - y}^2 = 4z $$
-
-then substitute $$x, y, z$$ with their coordinates taken from
-$$\pi(q) + \lambda_u u$$. One finally obtains a quadratic equation in
-$$\lambda_u$$, which *should* always have real solution(s). Solving
-for $$\lambda_u$$ gives the quaternion:
+Geometrically, we are looking for the intersection of an affine line $$\pi(q) +
+\lambda_u u$$ with the hyperbolic paraboloid $$z = x y$$. Substituting $$x, y,
+z$$ with their values from $$\pi(q) + \lambda_u u$$, one finally obtains a
+quadratic equation in $$\lambda_u$$, which *should* always have real
+solution(s). Solving for $$\lambda_u$$ gives the quaternion:
 
 $$\pi^{-1}\block{\pi(q) + \lambda_u u} = \exp(\theta_x e_x) \exp(\theta_y e_y)$$
 

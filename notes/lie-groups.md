@@ -6,8 +6,8 @@ categories: [math]
 # Definition
 
 A Lie group is a group that is also a differentiable manifold, and where the
-product/inverse operations are smooth. We will only consider *matrix* Lie
-groups, that is: subgroups of $$GL_n(\RR)$$.
+product/inverse operations are smooth. We will only consider real *matrix* Lie
+groups, which are subgroups of $$GL_n(\RR)$$.
 
 # Translations
 
@@ -17,8 +17,9 @@ $$ L_h(g) = h.g$$
 
 $$ R_h(g) = g.h$$
 
-They are also invertible and their inverse is smooth, which make them
-diffeomorphisms:
+Note that $$L_g$$ and $$R_h$$ commute for any $$g, h$$ by associativity of the
+group product. They are also invertible and their inverse is smooth (which makes
+them diffeomorphisms), with inverses given by:
 
 $$\inv{L_h} = L_{\inv{h}}$$
 
@@ -26,9 +27,9 @@ $$\inv{R_h} = R_{\inv{h}}$$
 
 As such, their tangent maps induce isomorphisms between tangent spaces:
 
-$$\dd L_h(g): T_g(G) \to T_{hg}(G)$$
+$$\dd L_h(g): T_g(G) \simeq T_{hg}(G)$$
 
-$$\dd R_h(g): T_g(G) \to T_{gh}(G)$$
+$$\dd R_h(g): T_g(G) \simeq T_{gh}(G)$$
 
 where the inverses are given by:
 
@@ -37,11 +38,17 @@ $$\dd \inv{L_h} = \dd L_{\inv{h}}$$
 $$\dd \inv{R_h} = \dd R_{\inv{h}}$$
 
 In particular, the tangent space at each point $$g$$ is isomorphic to the
-tangent space at the identity element, and this isomorphism varies smoothly with
-$$g$$. In other words, the tangent bundle is *trivializable*: any tangent vector
-$$\dd g$$ is uniquely determined by its coordinates in the tangent space at the
-identity (together with the base point $$g$$). These coordinates are called the
-left/right trivializations of $$\dd g$$ and satisfy:
+tangent space at the identity element:
+
+$$\dd \inv{L_h}(e): T_e(G) \simeq T_g(G)$$
+
+$$\dd \inv{R_h}(e): T_e(G) \simeq T_g(G)$$
+
+These isomorphisms vary smoothly with $$g$$ so that the tangent bundle $$TG$$ is
+*globally* isomorphic to $$G \times T_e(G)$$ (it is said *trivializable*): any
+tangent vector $$\dd g$$ is uniquely determined by its coordinates in the
+tangent space at the identity (together with the base point $$g$$). These
+coordinates are called the left/right trivializations of $$\dd g$$ and satisfy:
 
 $$\dd g = \dd L_g.\db g$$
 

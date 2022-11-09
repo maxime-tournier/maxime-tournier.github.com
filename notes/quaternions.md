@@ -355,7 +355,6 @@ $$
 \end{align}
 $$
 
-
 [^double-cross-product]: The derivation uses the double cross-product identity: $$v \times (v \times x) = v.v^Tx - x.v^T v$$
 
 ## Riemannian Manifold
@@ -941,13 +940,14 @@ $$ \dd \exp(x).\dd x = \dd x + \frac{\dd x.x + x.\dd x}{2} + \frac{\dd x.x^2 + x
 
 $$\begin{align}
 \dd^2 \exp(x).\dd x_2.\dd x_1 &= \frac{\dd x_1.\dd x_2 + \dd x_2.\dd x_1}{2} + O(x) \\
-&= \dd x_1 \times \dd x_2 + O(x)
+&= -\dd x_1^T \dd x_2 + O(x)
 \end{align}$$
 
 which gives at $$x = 0$$:
 
-$$\dd^2 \exp(0).\dd x_1.\dd x_2 = \dd x_1 \times \dd x_2$$
+$$\dd^2 \exp(0).\dd x_1.\dd x_2 = -\dd x_1^T \dd x_2$$
 
+As expected, the expression is symmetric and orthogonal to the Lie algebra.
 
 ## Geometric Stiffness for the Rotation Exponential
 
@@ -967,8 +967,9 @@ From the double cross-product formula $$\hat{u} \hat{v} = vu^T - u^TvI$$, we get
 
 $$\frac{\hat{\dd x_1}\hat{\dd x_2} + \hat{\dd x_2}\hat{\dd x_1}}{2} = \frac{\dd x_1 \dd x_2^T + \dd x_2 \dd x_1^T}{2} - \dd x_1^T\dd x_2 I$$
 
-Given a force $$\lambda \in \RR^3$$ applied on $$f_y(0)$$, the associated
-geometric stiffness is:
+Again, the expression is symmetric and orthogonal to the Lie algebra. Given a
+force $$\lambda \in \RR^3$$ applied on $$f_y(0)$$, the associated geometric
+stiffness is:
 
 $$\begin{align}
 \lambda^T \dd^2 f_y (0).\dd x_1.\dd x_2 &= \lambda^T\frac{\hat{\dd x_1}.\hat{\dd x_2} + \hat{\dd x_2}.\hat{\dd x_1}}{2} y\\

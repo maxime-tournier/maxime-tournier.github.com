@@ -55,7 +55,7 @@ $$\dd g = \dd L_g.\db g$$
 $$\dd g = \dd R_g.\ds g$$
 
 where $$\db g, \ds g$$ are tangent vectors at the identity element, respectively
-called the *body-fixed* and *spatial* velocities in robotics. Since we are only
+called the *body-fixed* and *spatial* coordinates in robotics. Since we are only
 dealing with matrix Lie groups, left/right translation derivatives are given by
 matrix products:
 

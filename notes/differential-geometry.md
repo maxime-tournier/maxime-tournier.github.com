@@ -163,3 +163,24 @@ $$\begin{align}
 \end{align}
 $$
 
+## Cross Product Norm
+
+$$h(x, y) = \norm{x \times y} = (f \circ g) (x, y)$$
+
+where $$g(x, y) = x \times y$$ and $$f(z) = \norm{z}$$
+
+$$
+\begin{align}
+    \dd h(x, y).\dd x. \dd y &= \frac{z^T}{\norm{z}}.\mat{-\hat{y} & \hat{x}} \mat{\dd x \\ \dd y} \\
+\end{align}
+$$
+
+$$
+\begin{align}
+    \lambda^T \dd^2 h(x, y) &= \lambda^T \dd^2 f(z).\dd g_1.\dd g_2 + \lambda^T \dd f(z).\dd^2 g\\
+    &= \mat{\hat{y}^T K \hat{y} & -\hat{y}^T K \hat{x} \\
+            -\hat{x}^T K \hat{y} & \hat{x}^T K \hat{x} } +  \mat{0 & -\hat{\tau} \\ \hat{\tau} & 0}
+\end{align}
+$$
+
+where $$K = \lambda^T \dd^2 f(z)$$ and $$\tau^T = \lambda^T \dd f(z)$$ 

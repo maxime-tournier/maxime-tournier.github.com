@@ -110,7 +110,9 @@ $$\nabla^2 f(x) = 2I$$
 
 $$f(x) = \sqrt{x}$$
 
-$$\dd f(x).\dd x = \frac{1}{2 \sqrt{x}}.\dd x$$
+$$\dd f(x) = \frac{1}{2 \sqrt{x}}$$
+
+$$\dd^2 f(x) = -\frac{1}{4x\sqrt{x}}$$
 
 ## Norm
 
@@ -128,7 +130,9 @@ $$\nabla^2 f(x) = \frac{1}{\norm{x}} \block{I - \frac{x}{\norm{x}}\frac{x^T}{\no
 
 $$f(x) = \frac{1}{x}$$
 
-$$\dd f(x) = -\frac{1}{x^2}\dd x$$
+$$\dd f(x) = -\frac{1}{x^2}$$
+
+$$\dd^2 f(x) = \frac{2}{x^3}$$
 
 ## Normalization
 
@@ -140,3 +144,22 @@ $$
 &= \frac{1}{\norm{x}}\block{I - \frac{x}{\norm{x}}\frac{x^T}{\norm{x}}}.\dd x \\
 \end{align}
 $$
+
+## Cross Product
+
+$$f(x, y) = x \times y$$
+
+$$\begin{align}
+\dd f(x, y).\dd x.\dd y &= \dd x \times y + x \times \dd y \\
+&= \mat{-\hat{y} & \hat{x}} \mat{\dd x \\ \dd y}
+\end{align}
+$$
+
+$$\begin{align}
+\lambda^T\dd^2 f(x, y) &= \lambda^T \dd x_1 \times \dd y_2 + \lambda^T \dd x_2 \times \dd y_1 \\
+&= -\dd x_1^T \hat{\lambda} \dd y_2 - \dd x_2^T \hat{\lambda} \dd y_1 \\
+&= \dd y_2^T \hat{\lambda} \dd x_1 - \dd x_2^T \hat{\lambda} \dd y_1 \\
+&= \mat{\dd x_2^T & \dd y_2^T} \mat{0 & -\hat{\lambda} \\ \hat{\lambda} & 0} \mat{\dd x_1 \\ \dd y_1} \\
+\end{align}
+$$
+

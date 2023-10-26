@@ -69,12 +69,12 @@ blockquote {
 }
 
 /* mobile touchscreens */
-@media(pointer: coarse)  {
+@media (hover: none) {
 	/* ... */
 }
 
 /* desktop */
-@media (pointer: fine), (pointer: none) {
+@media (hover: hover) {
 	/* ... */
 
     #markdown-toc {

@@ -68,13 +68,13 @@ blockquote {
     /* overflow-y: scroll; */
 }
 
-/* touchscreens */
-@media (hover: none) {    
+/* mobile touchscreens */
+@media(pointer: coarse)  {
 	/* ... */
 }
 
-/* mouse */
-@media (hover: hover) {
+/* desktop */
+@media (pointer: fine), (pointer: none) {
 	/* ... */
 
     #markdown-toc {

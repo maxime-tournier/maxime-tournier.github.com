@@ -19,7 +19,7 @@ body {
     
     line-height: 150%;
     text-align: justify;
-    
+
 }
 
 
@@ -61,8 +61,33 @@ blockquote {
 /* } */
 
 #markdown-toc {
-    padding: 0 1em;
+    padding: 1em 1em;
+    /* margin-top: auto; */
+    /* margin-bottom: auto; */
+    /* right: -60%; */
+    /* overflow-y: scroll; */
 }
+
+/* touchscreens */
+@media (hover: none) {    
+	/* ... */
+}
+
+/* mouse */
+@media (hover: hover) {
+	/* ... */
+
+    #markdown-toc {
+        position: sticky;
+        float: left;
+        top: 0;
+        max-width: 20em;
+        margin-left: -25em;
+        margin-top: -3em;
+    }
+    
+}
+
 
 /* #markdown-toc { */
 /* 	height:0; */

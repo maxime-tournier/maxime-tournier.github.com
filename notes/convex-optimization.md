@@ -3,6 +3,9 @@ title: Convex Optimization
 categories: [math]
 ---
 
+{% include toc.md %}
+
+
 # Convexity
 
 TODO

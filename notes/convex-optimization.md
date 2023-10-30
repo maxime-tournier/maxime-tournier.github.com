@@ -8,7 +8,16 @@ categories: [math]
 
 # Convexity
 
-TODO
+A subset $$C$$ of a real vector space is *convex* when the segment between any
+two points of $$C$$ remains in $$C$$. Formally, this means that for all $$x,
+y\in C$$ and all $$\lambda \in [0, 1]$$
+
+$$(1 - \lambda) x + \lambda y \in C$$
+
+## Convex Combinations
+
+- TODO definition
+- TODO A convex set is stable by convex combination
 
 # Projection on a Convex Set
 
@@ -71,6 +80,26 @@ therefore $$\norm{x - y}^2 \geq \norm{x - c}^2$$ and $$c = \pi_C(x)$$.
 
 # Convex Cones
 
+A convex cone is a convex set that is stable by *non-negative* scalar multiplication:
+
+$$\forall x \in K, \lambda \geq 0\quad \lambda x \in K$$
+
+One generally deals with *closed* convex cones so that the projection $$\pi_K$$
+onto $$K$$ is well-defined. A convex cone $$K$$ is *pointed* when $$0 \in K$$,
+which induces a preorder defined as:
+
+$$x \leq_K y \iff y - x \in K$$
+
+This preorder can be made into a partial order by requiring $$K$$ to be *flat*,
+that is stable by negation.
+
+
+## Dual & Polar Cones
+
+TODO
+
 ## Moreau Decomposition
 
+The Moreau decomposition generalizes the direct sum decomposition between a
+linear subspace and its orthogonal complement to convex cones.
 

@@ -5,6 +5,25 @@ categories: [math]
 
 {% include toc.md %}
 
+When simulating rigid bodies, one generally ends up with non-symmetric Hessian
+matrices due to the curvature of $$SO(3)$$ (where Schwartz' theorem about the
+symmetry of Hessian does not hold), which do not play well with numerical
+solvers down the road. More generally, second derivatives are a pain to work
+with since there are several definitiions to choose from (e.g. Lie derivative,
+Levi-Civita connection) which do not always agree. Even though there is
+sometimes a natural choice for some spaces ($$SO(3)$$ which is compact and as
+such enjoys a bi-invariant Riemannian metric), for others there is none
+($$SE(3)$$ which does not have a bi-invariant Riemannian metric) and it is not
+always clear what to do in such situations.
+
+Putting theoretical considerations aside, one can simply remark that in
+practical applications like physics simulation, one generally uses local charts
+for these spaces anyways (for instance, using body-fixed velocity exponential
+for rotation integration), therefore an obvious solution is to work inside these
+charts, which side-steps the problem entirely. This means one must keep track of
+the local chart all along, together with their derivatives. These notes describe
+the procedure for exponential/logarithmic charts.
+
 # Functions from $$SO(3)$$
 
 Let $$f: SO(3) \to E$$, with $$E$$ some finite dimensional vector space. Let
@@ -15,8 +34,8 @@ $$\begin{align}
 \omega &\mapsto f(\exp(\omega)R) = \hat{f}^s(\omega)\\
 \end{align}$$
 
-We'll call this $$\hat{f}^s$$ the *spatial* parametrization of $$f$$ around
-$$R$$. Similarly, the *body-fixed* parametrization is:
+We'll call this $$\hat{f}^s$$ the *spatial* parametrization of $$f$$ at
+$$R$$. Similarly, the *body-fixed* parametrization at $$R$$ is:
 
 $$\begin{align}
 \hat{f}^b: \quad \RR^3 &\to E \\
@@ -134,3 +153,23 @@ $$\begin{align}
 &+ \dd^2 f(x).\dd x_2.\dd x_1.\inv{R}
 \end{align}$$
 
+# Examples
+
+## TODO Joint Logarithmic Coordinates
+
+(using spatial parametrizations at $$R_p, R_c$$)
+
+$$f\block{\omega_p, \omega_c} = \log\block{R_p^T\exp\block{-\omega_p}\exp\block{\omega_c}R_c}$$
+
+Let $$g\block{\omega_p, \omega_c} = \exp\block{-\omega_p}\exp\block{\omega_c}$$,
+we obtain the jacobian:
+
+$$\dd f\block{\omega_p, \omega_c}.\dd \omega_p.\dd \omega_c = 
+    \dd \log\block{R_p^T g\block{\omega_p, \omega_c}R_c}.R_p^T\block{\dd g\block{\omega_p, \omega_c}.\dd \omega_p.\dd \omega_c}R_c$$
+    
+where 
+
+$$\dd g\block{\omega_p, \omega_c}.\dd \omega_p.\dd \omega_c = 
+    -\dd \exp\block{-\omega_p}.\dd \omega_p.\exp\block{\omega_c} + \exp\block{-\omega_p}\dd \exp\block{\omega_c}.\dd \omega_c$$
+    
+    

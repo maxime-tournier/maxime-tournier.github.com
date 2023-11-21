@@ -31,6 +31,7 @@ $$
 \newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\trace}[1]{\mathrm{tr}\block{#1}}
 
+<!-- optimization -->
 \newcommand{\norm}[1]{ \left\| #1 \right\| }
 \newcommand{\argmin}[1]{ \underset{#1}{\mathrm{argmin}} }
 \newcommand{\argmax}[1]{ \underset{#1}{\mathrm{argmax}} }
@@ -40,6 +41,7 @@ $$
 \newcommand{\half}{\frac{1}{2}}
 \newcommand{\inner}[1]{\langle #1 \rangle}
 
+<!-- lie groups -->
 \newcommand{\dd}{\mathrm{d}}
 \newcommand{\ddd}[2]{\frac{\partial #1}{\partial #2} }
 \newcommand{\db}{\dd^b}
@@ -51,6 +53,8 @@ $$
 \newcommand{\ad}{\mathrm{ad}}
 
 \newcommand{\LL}{\mathcal{L}}
+
+<!-- krylov methods -->
 \newcommand{\Krylov}{\mathcal{K}}
 \newcommand{\Span}[1]{\mathrm{Span}\block{#1}}
 
@@ -59,6 +63,7 @@ $$
 
 \newcommand{\sinc}{\mathrm{sinc}}
 
+<!-- category theory -->
 \newcommand{\cat}[1]{\mathcal{#1}}
 \newcommand{\Ob}[1]{\mathrm{Ob}\block{\cat{#1}}}
 \newcommand{\Hom}[1]{\mathrm{Hom}\block{\cat{#1}}}
@@ -99,6 +104,9 @@ $$
 \end{matrix}
 }
 
+
+<!-- cones -->
+\newcommand{\cone}[1]{\mathcal{#1}}
 
 $$
 

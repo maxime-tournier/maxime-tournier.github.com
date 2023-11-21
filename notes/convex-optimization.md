@@ -5,19 +5,69 @@ categories: [math]
 
 {% include toc.md %}
 
+# Convex Sets
 
-# Convexity
-
-A subset $$C$$ of a real vector space is *convex* when the segment between any
-two points of $$C$$ remains in $$C$$. Formally, this means that for all $$x,
-y\in C$$ and all $$\lambda \in [0, 1]$$
-
-$$(1 - \lambda) x + \lambda y \in C$$
-
-## Convex Combinations
-
+- TODO context (vector space of finite dimension)
 - TODO definition
 - TODO A convex set is stable by convex combination
+
+# Convex Functions
+
+- TODO definition
+- TODO properties
+- TODO minimization
+
+# Cones
+
+A subset $$\cone{K}$$ of a vector space $$E$$ is a *cone* if it is stable by
+*positive* scalar multiplication:
+
+$$\forall x \in \cone{K}, \lambda > 0\quad \lambda x \in \cone{K}$$
+
+One generally deals with *closed* convex cones so that the projection
+$$\pi_\cone{K}$$ onto $$\cone{K}$$ is well-defined. A convex cone $$K$$ is
+*pointed* when $$0 \in \cone{K}$$, which induces a preorder defined as:
+
+$$x \leq_\cone{K} y \iff y - x \in \cone{K}$$
+
+This preorder can be made into a partial order by requiring $$\cone{K}$$ to be
+*flat*, that is stable by negation (*i.e.* it contains lines).
+
+## Dual Cone
+
+## Polar Cone
+
+## Moreau Decomposition
+
+
+# Optimality Conditions
+
+## Tangent Cone
+
+- admissible directions
+
+## Normal Cone
+
+- optimality for general/convex/cone constraint sets
+- normal cone to a closed convex cone
+
+# Farkas' Lemma
+
+$$A^{-1}\block{\cone{K}^*} = \block{A\block{K}}^*$$
+- closedness/openness issues (lorentz-cone projection counter-example)
+
+# KKT Conditions
+
+$$\min\ f(x) \st c(x) \in \cone{K}$$
+
+- admissible directions/normal cone
+- putting everything together
+
+# Duality
+
+- TODO lol
+
+-----
 
 # Projection on a Convex Set
 
@@ -80,23 +130,12 @@ therefore $$\norm{x - y}^2 \geq \norm{x - c}^2$$ and $$c = \pi_C(x)$$.
 
 # Convex Cones
 
-A convex cone is a convex set that is stable by *non-negative* scalar multiplication:
-
-$$\forall x \in K, \lambda \geq 0\quad \lambda x \in K$$
-
-One generally deals with *closed* convex cones so that the projection $$\pi_K$$
-onto $$K$$ is well-defined. A convex cone $$K$$ is *pointed* when $$0 \in K$$,
-which induces a preorder defined as:
-
-$$x \leq_K y \iff y - x \in K$$
-
-This preorder can be made into a partial order by requiring $$K$$ to be *flat*,
-that is stable by negation.
 
 
 ## Dual & Polar Cones
 
-TODO
+The *dual cone* to a cone is defined as
+
 
 ## Moreau Decomposition
 

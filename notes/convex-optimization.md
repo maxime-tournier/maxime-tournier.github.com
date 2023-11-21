@@ -42,14 +42,56 @@ This preorder can be made into a partial order by requiring $$\cone{K}$$ to be
 
 # Optimality Conditions
 
-## Tangent Cone
+Suppose we want to minimize a function $$f: E \to \RR$$ over some set $$C$$. For
+a given $$x \in C$$ to be a local minimizer means that $$f$$ can only increase
+locally around $$x$$ in $$C$$. If $$f$$ is differentiable, this means that the
+derivative of $$f$$ in any *admissible* direction $$v$$ should be positive:
 
-- admissible directions
+$$D_{v}f(x) = \lim_{\epsilon \underset{>0}{\to} 0}\ \frac{f(x + \epsilon v) - f(x)}\epsilon \geq 0$$
 
-## Normal Cone
+Now the set of admissible directions of $$C$$ at $$x$$ is obviously a subset of
+the full tangent space $$T_x(E)$$ of $$E$$ at $$x$$, and should restrict the set
+of tangent vectors to the ones that somehow remain in $$C$$ (to the first order).
 
-- optimality for general/convex/cone constraint sets
-- normal cone to a closed convex cone
+In the general case, the correct definition is a bit technical (the Bouligand
+tangent cone) but in the case where $$C$$ is convex, it suffices to consider the
+set of directions that intersect $$C$$ near $$x$$:
+
+$$T_x(C) = \left\{v \in T_x\block{E} :\ \exists \epsilon > 0 /\  x + \epsilon v \in C \right\}$$
+
+(TODO closed?)
+
+This subset is obviously a cone, called the *tangent cone* to $$C$$ at $$x$$. The
+optimality condition above can be rewritten as:
+
+$$\dd f(x).v \geq 0\quad \forall v \in T_x(C)$$
+
+Or, using the gradient of $$f$$:
+
+$$\inner{\nabla f(x), v} \geq 0\quad \forall v \in T_x(C)$$
+
+which is to say that $$\nabla f(x)$$ should belong to the *dual* of the tangent
+cone at $$x$$, called the (negative) *normal cone* $$N_x(C)$$:
+
+$$\nabla f(x) \in \block{T_x(C)}^* \triangleq -N_x(C)$$
+
+- TODO $$N_x(C) = -\block{C - x}^*$$ when $$C$$ is convex
+
+When $$\cone{K}$$ is a closed convex cone, this means that:
+
+$$y \in N_x(\cone{K}) \iff \inner{y, z - x} \leq 0 \quad \forall z \in \cone{K}$$
+
+Taking $$z = 0$$ and $$z = 2 x$$ yields $$\inner{y, x} = 0$$ hence $$y \in
+x^\bot$$, which itself implies that $$\inner{y, z} \leq 0$$ and we also get $$y
+\in -\cone{K}^*$$. The converse is easy to check and we obtain:
+
+$$N_x(\cone{K}) = -\cone{K}^* \cap x^\bot$$
+
+Putting everything together, this means that the optimality conditions for
+minimizing $$f$$ over a closed convex cone are:
+
+$$\cone{K} \ni x\ \bot\ \nabla f(x) \in \cone{K}^*$$
+
 
 # Farkas' Lemma
 

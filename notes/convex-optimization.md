@@ -209,17 +209,6 @@ $$\begin{aligned}
 therefore $$\norm{x - y}^2 \geq \norm{x - c}^2$$ and $$c = \pi_C(x)$$.
  
 
-# Convex Cones
-
-
-
-## Dual & Polar Cones
-
-The *dual cone* to a cone is defined as
-
-
-## Moreau Decomposition
-
 
 
 # Notes & References

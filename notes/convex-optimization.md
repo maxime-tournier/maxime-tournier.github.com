@@ -8,7 +8,7 @@ categories: [math]
 # Convex Sets
 
 Given a real vector space of finite dimensnion $$E$$, a subset $$C
-\subseteq E$$ is *convex* when the segment between any two points
+\subseteq E$$ is *convex* when the line segment between any two points
 remains in $$C$$. Formally, $$C$$ is convex if for all $$x, y \in C$$:
 
 $$\forall \lambda \in [0, 1]:\quad (1 - \lambda) x + \lambda y \in C$$
@@ -22,9 +22,21 @@ The space of convex weights $$\lambda \in \RR^{n+}, \mathbb{1}^T\lambda = 1$$ is
 
 # Convex Functions
 
-- TODO definition
+Given a convex subset $$X \subseteq E$$, a function $$f: X \to \RR$$
+is convex when its epigraph is convex:
+
+$$\forall x, y \in X: f\block{\block{1 - \lambda} x + \lambda y} \leq (1 - \lambda) f(x) + \lambda f(y)$$
+
+That is: the line segment between $$f(x)$$ and $$f(y)$$ remains
+*above* the graph of $$f$$.
+
 - TODO properties
+  - above its tangent iff differentiable & convex
+  - positive semidefinite hessian
+- TODO examples
+- TODO strong convexity?
 - TODO minimization
+
 
 # Cones
 

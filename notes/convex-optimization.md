@@ -56,10 +56,10 @@ This preorder can be made into a partial order by requiring $$\cone{K}$$ to be
 
 ## Dual Cone
 
-When $$E$$ is an Euclidean space, the inner product[^dual-cone]
-provides a generalization of the orthogonal complement for cones,
-called the *dual cone*. Given a subset $$X \subseteq E$$, its dual
-cone is defined as the set:
+When $$E$$ is an Euclidean space, the inner product
+provides[^dual-cone] a generalization of the orthogonal complement for
+cones, called the *dual cone*. Given a subset $$X \subseteq E$$, its
+dual cone is defined as the set:
 
 $$X^* = \left\{y \in E : \inner{y, x} \geq 0 \quad \forall x \in X\right\}$$
 

@@ -64,13 +64,19 @@ cone is defined as the set:
 $$X^* = \left\{y \in E : \inner{y, x} \geq 0 \quad \forall x \in X\right\}$$
 
 The dual cone is obviously a cone, and it is easy to check that it is
-convex even though $$X$$ might not be.
+convex even though $$X$$ might not be. As an intersection of closed
+half-spaces, it is also closed. The negative of the dual cone $$-X^*$$
+is called the *polar* (or negative-dual) cone of $$X$$, usually
+denoted $$X^\circ$$ (or $$X^-$$).
 
-- TODO closed
-
-## Polar Cone
+- TODO bidual
+- TODO bidual for closed convex cones
 
 ## Moreau Decomposition
+
+The Moreau decomposition generalizes the direct sum decomposition
+between a linear subspace and its orthogonal complement to a convex
+cone and its (negative) dual.
 
 
 # Optimality Conditions
@@ -214,8 +220,6 @@ The *dual cone* to a cone is defined as
 
 ## Moreau Decomposition
 
-The Moreau decomposition generalizes the direct sum decomposition between a
-linear subspace and its orthogonal complement to convex cones.
 
 
 # Notes & References

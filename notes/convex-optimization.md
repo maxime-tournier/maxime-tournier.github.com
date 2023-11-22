@@ -7,9 +7,18 @@ categories: [math]
 
 # Convex Sets
 
-- TODO context (vector space of finite dimension)
-- TODO definition
-- TODO A convex set is stable by convex combination
+Given a real vector space of finite dimensnion $$E$$, a subset $$C
+\subseteq E$$ is *convex* when the segment between any two points
+remains in $$C$$. Formally, $$C$$ is convex if for all $$x, y \in C$$:
+
+$$\forall \lambda \in [0, 1]:\quad (1 - \lambda) x + \lambda y \in C$$
+
+It is easy to see that the above is equivalent to $$C$$ being stable
+by (finite) convex combinations:
+
+$$\forall \block{x_i}_i \in C, \block{\lambda_i}_i \in \RR^+, \sum_i \lambda_i = 1: \sum_i \lambda_i x_i \in C$$
+
+The space of convex weights $$\lambda \in \RR^{n+}, \mathbb{1}^T\lambda = 1$$ is usually called the $$n$$-dimensional *unit simplex*, denoted by $$\Delta^n$$.
 
 # Convex Functions
 

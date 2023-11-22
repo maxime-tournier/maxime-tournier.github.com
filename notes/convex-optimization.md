@@ -11,7 +11,7 @@ Given a real vector space of finite dimensnion $$E$$, a subset $$C
 \subseteq E$$ is *convex* when the line segment between any two points
 remains in $$C$$. Formally, $$C$$ is convex if for all $$x, y \in C$$:
 
-$$\forall \lambda \in [0, 1]:\quad (1 - \lambda) x + \lambda y \in C$$
+$$\forall \lambda \in [0, 1] : (1 - \lambda) x + \lambda y \in C$$
 
 It is easy to see that the above is equivalent to $$C$$ being stable
 by (finite) convex combinations:
@@ -55,6 +55,18 @@ This preorder can be made into a partial order by requiring $$\cone{K}$$ to be
 *flat*, that is stable by negation (*i.e.* it contains lines).
 
 ## Dual Cone
+
+When $$E$$ is an Euclidean space, the inner product[^dual-cone]
+provides a generalization of the orthogonal complement for cones,
+called the *dual cone*. Given a subset $$X \subseteq E$$, its dual
+cone is defined as the set:
+
+$$X^* = \left\{y \in E : \inner{y, x} \geq 0 \quad \forall x \in X\right\}$$
+
+The dual cone is obviously a cone, and it is easy to check that it is
+convex even though $$X$$ might not be.
+
+- TODO closed
 
 ## Polar Cone
 
@@ -204,4 +216,10 @@ The *dual cone* to a cone is defined as
 
 The Moreau decomposition generalizes the direct sum decomposition between a
 linear subspace and its orthogonal complement to convex cones.
+
+
+# Notes & References
+
+[^dual-cone]: actually, the notion of dual cone can be expressed using
+    only the canonical pairing between $$E$$ and its dual $$E^*$$
 

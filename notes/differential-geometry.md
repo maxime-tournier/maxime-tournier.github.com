@@ -141,9 +141,31 @@ $$f(x) = \frac{x}{\norm{x}}$$
 $$
 \begin{align}
 \dd f(x).\dd x &= \frac{1}{\norm{x}}\dd x + x\block{-\frac{1}{\norm{x}^2}\frac{1}{\norm{x}} x^T \dd x}\\
-&= \frac{1}{\norm{x}}\block{I - \frac{x}{\norm{x}}\frac{x^T}{\norm{x}}}.\dd x \\
+&= \frac{1}{\norm{x}}\underbrace{\block{I - \frac{x}{\norm{x}}\frac{x^T}{\norm{x}}}}_{P(x)}.\dd x \\
 \end{align}
 $$
+
+
+$$
+\begin{align}
+\lambda^T\dd f(x).\dd x_1 &= \frac{1}{\norm{x}}\underbrace{\block{\lambda^T\dd x_1 - \lambda^T f(x) f(x)^T \dd x_1}}_{K(x)^T\dd x_1 = \lambda^T P(x).\dd x_1}\\
+\lambda^T \dd^2 f(x).\dd x_2.\dd x_1 &= -\frac{1}{\norm{x}^2}\frac{x^T\dd x_2}{\norm{x}} K(x)^T\dd x_1 + \frac{1}{\norm{x}}\dd K(x)^T.\dd x_2.\dd x_1 \\
+&= -\frac{1}{\norm{x}^2}\dd x_2^T f(x) K(x)^T\dd x_1 + \frac{1}{\norm{x}} \dd K(x)^T.\dd x_2.\dd x_1 \\
+
+\dd K(x)^T.\dd x_2.\dd x_1 &= -\lambda^T \dd f(x).\dd x_2. f(x)^T \dd x_1 - \lambda^T f(x) \block{\dd f(x).\dd x_2}^T.\dd x_1\\
+&= -\frac{1}{\norm{x}}K(x)^T.\dd x_2.f(x)^T \dd x_1 - \dd x_2^T \block{\lambda^T f(x)} \underbrace{\dd f(x)^T}_{\dd f(x)}.\dd x_1 \\
+
+\lambda^T \dd^2 f(x).\dd x_2.\dd x_1 &= -\frac{1}{\norm{x}^2} \dd x_2^T \block{f(x)K(x)^T + K(x)f(x)^T} \dd x_1
+ - \dd x_2^T \frac{\lambda^T f(x)}{\norm{x}} \dd f(x) \dd x_1 \\
+
+&= -\frac{1}{\norm{x}^3}\dd x_2^T \block{x \lambda^T P(x) + P(x) \lambda x^T + \lambda^Tx P(x)}\dd x_1 
+\end{align}
+$$
+
+*(phhhew.)*
+
+
+
 
 ## Cross Product
 

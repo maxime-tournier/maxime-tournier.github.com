@@ -85,7 +85,7 @@ a given $$x \in C$$ to be a local minimizer means that $$f$$ can only increase
 locally around $$x$$ in $$C$$. If $$f$$ is differentiable, this means that the
 derivative of $$f$$ in any *admissible* direction $$v$$ should be positive:
 
-$$D_{v}f(x) = \lim_{\epsilon \underset{>0}{\to} 0}\ \frac{f(x + \epsilon v) - f(x)}\epsilon \geq 0$$
+$$\dd f(x).v = \lim_{\epsilon \underset{>0}{\to} 0}\ \frac{f(x + \epsilon v) - f(x)}\epsilon \geq 0$$
 
 Now the set of admissible directions of $$C$$ at $$x$$ is obviously a subset of
 the full tangent space $$T_x(E)$$ of $$E$$ at $$x$$, and should restrict the set
@@ -95,11 +95,11 @@ In the general case, the correct definition is a bit technical (the Bouligand
 tangent cone) but in the case where $$C$$ is convex, it suffices to consider the
 set of directions that intersect $$C$$ near $$x$$:
 
-$$T_x(C) = \left\{v \in T_x\block{E} :\ \exists \epsilon > 0 /\  x + \epsilon v \in C \right\}$$
+$$T_x(C) = \left\{v \in T_x\block{E} :\ \exists \epsilon > 0 :  x + \lambda v \in C\quad\forall \lambda \in [0, \epsilon] \right\}$$
 
 This subset is obviously a cone, called the *tangent cone* to $$C$$ at
 $$x$$. It can be easily checked that for convex $$C$$, the tangent
-cone at $$x$$ is:
+cone at $$x$$ is given by:
 
 $$T_x(C) = \RR^+\block{C - x}$$
 
@@ -117,17 +117,19 @@ cone at $$x$$, called the (negative) *normal cone* $$N_x(C)$$:
 
 $$\nabla f(x) \in \block{T_x(C)}^* \triangleq -N_x(C)$$
 
-- TODO $$N_x(C) = -\block{C - x}^*$$ when $$C$$ is convex
+From our earlier expression for $$T_x(C)$$, we obtain its dual as:
 
-When $$\cone{K}$$ is a closed convex cone, this means that:
+$$-N_x(C) = \block{T_x(C)}^* = \left\{y \in E : \inner{y, z - x} \geq 0\quad  \forall z \in C \right\}$$
 
-$$y \in N_x(\cone{K}) \iff \inner{y, z - x} \leq 0 \quad \forall z \in \cone{K}$$
+When $$C=\cone{K}$$ is a closed convex cone, this means that:
+
+$$y \in -N_x(\cone{K}) \iff \inner{y, z - x} \geq 0 \quad \forall z \in \cone{K}$$
 
 Taking $$z = 0$$ and $$z = 2 x$$ yields $$\inner{y, x} = 0$$ hence $$y \in
-x^\bot$$, which itself implies that $$\inner{y, z} \leq 0$$ and we also get $$y
-\in -\cone{K}^*$$. The converse is easy to check and we obtain:
+x^\bot$$, which itself implies that $$\inner{y, z} \geq 0$$ and we also get $$y
+\in \cone{K}^*$$. The converse is easy to check and we obtain:
 
-$$N_x(\cone{K}) = -\cone{K}^* \cap x^\bot$$
+$$-N_x(\cone{K}) = \cone{K}^* \cap x^\bot$$
 
 Putting everything together, this means that the optimality conditions for
 minimizing $$f$$ over a closed convex cone are:

@@ -178,7 +178,7 @@ $$x$$ must satisfy:
 $$\dd c(x).\dd x \in T_{c(x)}(\cone{K})$$
 
 In other words, tangent vectors by $$c$$ must be admissible in
-$$T_{c(x)}\cone{K}$$. From the Farkas' lemma, we get 
+$$T_{c(x)}\cone{K}$$. From Farkas' lemma, we get 
 
 $$\dd c(x)^{-1}\block{T_{c(x)}(\cone{K})} = \block{\dd c(x)^T \block{T_{c(x)}\cone{K}}^*}^*$$
 

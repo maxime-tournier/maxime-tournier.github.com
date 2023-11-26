@@ -180,7 +180,7 @@ $$\dd c(x).\dd x \in T_{c(x)}(\cone{K})$$
 In other words, tangent vectors by $$c$$ must be admissible in
 $$T_{c(x)}\cone{K}$$. From the Farkas' lemma, we get 
 
-$$\dd c(x)^{-1} T_{c(x)}(\cone{K}) = \block{\dd c(x)^T \block{T_{c(x)}\cone{K}}^*}^*$$
+$$\dd c(x)^{-1}\block{T_{c(x)}(\cone{K})} = \block{\dd c(x)^T \block{T_{c(x)}\cone{K}}^*}^*$$
 
 where the inverse is meant as a preimage. One generally asks that
 $$\dd c(x)^T \cone{K}^*$$ to be closed (see the
@@ -188,7 +188,7 @@ $$\dd c(x)^T \cone{K}^*$$ to be closed (see the
 qualification* condition, so that the dual cone is:
 
 $$\begin{align}
-\block{\dd c(x)^{-1} T_{c(x)}(\cone{K})}^* &= \dd c(x)^T \block{T_{c(x)}\cone{K}}^*\\
+\block{\dd c(x)^{-1} \block{T_{c(x)}(\cone{K})}}^* &= \dd c(x)^T \block{T_{c(x)}\cone{K}}^*\\
 &= \dd c(x)^T \block{\cone{K}^* \cap c(x)^\bot}
 \end{align}$$
 

@@ -142,15 +142,89 @@ $$\cone{K} \ni x\ \bot\ \nabla f(x) \in \cone{K}^*$$
 
 # Farkas' Lemma
 
-$$A^{-1}\block{\cone{K}^*} = \block{A\block{K}}^*$$
-- closedness/openness issues (lorentz-cone projection counter-example)
+If we wish to impose constraints of the form $$Ax \in \cone{K}^*$$ for
+some dual cone $$\cone{K}^*$$, we'll need to compute the preimage of
+cone by a linear map. One can immediately check that
+$$A^{-1}\cone{K}^*$$ is a closed cone. Furthermore:
+
+$$\begin{align}
+x \in \inv{A}\cone{K}^* &\iff Ax \in \cone{K}^* \\
+&\iff \forall y \in \cone{K}\quad \inner{Ax, y} \geq 0 \\
+&\iff \forall y \in \cone{K}\quad \inner{x, A^Ty} \geq 0 \\
+&\iff \forall z \in A^T\cone{K}\quad \inner{x, z} \geq 0 \\
+&\iff x \in \block{A^T\cone{K}}^*
+\end{align}$$
+
+And we obtain $$\inv{A}\cone{K}^* = \block{A^T\cone{K}}^*$$, known as
+the (generalized) Farkas lemma. Note that we've been carefully
+avoiding adherence issues, in particular the image of a closed cone by
+a linear map in not necessarily closed[^farkas-lemma], which explains
+why the Farkas Lemma is sometimes given as:
+
+$$\block{\inv{A}\cone{K}}^* = \bar{\block{A^T\cone{K}^*}}$$
+
+The version above sidesteps the issue by taking duals, which are
+always closed, but this is something to keep in mind.
+
+- TODO alternative theorems
 
 # KKT Conditions
 
 $$\min\ f(x) \st c(x) \in \cone{K}$$
 
-- admissible directions/normal cone
-- putting everything together
+for some convex closed cone $$\cone{K}$$. The admissible directions at
+$$x$$ must satisfy:
+
+$$\dd c(x).\dd x \in T_{c(x)}(\cone{K})$$
+
+In other words, tangent vectors by $$c$$ must be admissible in
+$$T_{c(x)}\cone{K}$$. From the Farkas' lemma, we get 
+
+$$\dd c(x)^{-1} T_{c(x)}(\cone{K}) = \block{\dd c(x)^T \block{T_{c(x)}\cone{K}}^*}^*$$
+
+where the inverse is meant as a preimage. One generally asks that
+$$\dd c(x)^T \cone{K}^*$$ to be closed (see the
+[discussion](#farkas-lemma) above) via a *constraint
+qualification* condition, so that the dual cone is:
+
+$$\begin{align}
+\block{\dd c(x)^{-1} T_{c(x)}(\cone{K})}^* &= \dd c(x)^T \block{T_{c(x)}\cone{K}}^*\\
+&= \dd c(x)^T \block{\cone{K}^* \cap c(x)^\bot}
+\end{align}$$
+
+from the [discussion](#optimality-conditions) above on normal cones to
+convex closed cones. We are now ready to state the optimality
+conditions for the constrained problem:
+
+$$\nabla f(x) \in \dd c(x)^T \block{\cone{K}^* \cap c(x)^\bot}$$
+
+which expands to:
+
+$$\begin{align}
+\exists \lambda \in \cone{K}^*: \nabla f(x) &= \dd c(x)^T \lambda\\
+\cone{K} \ni c(x) &\ \bot\ \lambda \in \cone{K}^* \\
+\end{align}$$
+
+which are known as the Karush, Kuhn & Tucker (KKT) conditions.
+
+## Example: Quadratic Programming
+
+Here we minimize a quadratic function:
+
+$$f(x) = \frac{1}{2}x^T Q x + c^T x$$ 
+
+subject to constraints: 
+
+$$g(x) = Ax - b \geq 0$$
+
+The positive orthant cone $$\RR^n_+$$ is self-dual, and the KKT
+conditions are:
+
+$$\begin{align}
+\exists \lambda \geq 0: Qx + c &= A^T \lambda\\
+0 \leq Ax - b &\ \bot\ \lambda \geq 0 \\
+\end{align}$$
+
 
 # Duality
 
@@ -224,3 +298,10 @@ therefore $$\norm{x - y}^2 \geq \norm{x - c}^2$$ and $$c = \pi_C(x)$$.
 [^dual-cone]: actually, the notion of dual cone can be expressed using
     only the canonical pairing between $$E$$ and its dual $$E^*$$
 
+[^farkas-lemma]: consider the Lorentz cone projected on the plane with
+    normal $$\mathbb{1}$$: the projection is the union of slices of
+    the cone by planes parallel to the projection cone. The
+    intersection of each slice with the cone is the surface above a
+    parabola passing through the origin, whose shape flattens as the
+    slice gets further from the origin. The union of all these subsets
+    is the *open* half-plane plus the origin, which is not closed.

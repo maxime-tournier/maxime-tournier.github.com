@@ -45,14 +45,17 @@ A subset $$\cone{K}$$ of a vector space $$E$$ is a *cone* if it is stable by
 
 $$\forall x \in \cone{K}, \lambda > 0\quad \lambda x \in \cone{K}$$
 
-One generally deals with *closed* convex cones so that the projection
-$$\pi_\cone{K}$$ onto $$\cone{K}$$ is well-defined. A convex cone $$K$$ is
-*pointed* when $$0 \in \cone{K}$$, which induces a preorder defined as:
+A cone is *pointed* when $$0 \in \cone{K}$$. A non-empty closed cone
+is always pointed.  One generally deals with *closed* convex cones so
+that the projection $$\pi_\cone{K}$$ onto $$\cone{K}$$ is
+well-defined. A convex pointed cone $$K$$ induces a preorder defined
+as:
 
 $$x \leq_\cone{K} y \iff y - x \in \cone{K}$$
 
-This preorder can be made into a partial order by requiring $$\cone{K}$$ to be
-*flat*, that is stable by negation (*i.e.* it contains lines).
+This preorder can be made into a partial order by requiring
+$$\cone{K}$$ to be *flat*, that is stable by negation (*i.e.* it
+contains lines).
 
 ## Dual Cone
 

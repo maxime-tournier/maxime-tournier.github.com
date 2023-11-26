@@ -144,7 +144,7 @@ $$\cone{K} \ni x\ \bot\ \nabla f(x) \in \cone{K}^*$$
 
 If we wish to impose constraints of the form $$Ax \in \cone{K}^*$$ for
 some dual cone $$\cone{K}^*$$, we'll need to compute the preimage of
-cone by a linear map. One can immediately check that
+cone by a linear map. One can immediately check that the preimage
 $$A^{-1}\cone{K}^*$$ is a closed cone. Furthermore:
 
 $$\begin{align}
@@ -170,22 +170,25 @@ always closed, but this is something to keep in mind.
 
 # KKT Conditions
 
-$$\min\ f(x) \st c(x) \in \cone{K}$$
+We now consider the following optimization problem:
+
+$$\min_x \ f(x)\ \st \ c(x) \in \cone{K}$$
 
 for some convex closed cone $$\cone{K}$$. The admissible directions at
 $$x$$ must satisfy:
 
 $$\dd c(x).\dd x \in T_{c(x)}(\cone{K})$$
 
-In other words, tangent vectors by $$c$$ must be admissible in
-$$T_{c(x)}\cone{K}$$. From Farkas' lemma, we get 
+In other words, tangent vectors outputted by $$c$$ must be admissible
+in $$\cone{K}$$, that is: belong to $$T_{c(x)}\cone{K}$$. From Farkas'
+lemma, we get:
 
 $$\dd c(x)^{-1}\block{T_{c(x)}(\cone{K})} = \block{\dd c(x)^T \block{T_{c(x)}\cone{K}}^*}^*$$
 
-where the inverse is meant as a preimage. One generally asks that
+where the inverse is understood as a preimage. One generally asks that
 $$\dd c(x)^T \cone{K}^*$$ to be closed (see the
-[discussion](#farkas-lemma) above) via a *constraint
-qualification* condition, so that the dual cone is:
+[discussion](#farkas-lemma) above) via a *constraint qualification*
+condition, so that the dual cone is:
 
 $$\begin{align}
 \block{\dd c(x)^{-1} \block{T_{c(x)}(\cone{K})}}^* &= \dd c(x)^T \block{T_{c(x)}\cone{K}}^*\\

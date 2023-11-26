@@ -6,6 +6,7 @@
 body {
 
     margin: auto;
+    margin-left: 21em;
     max-width: 38em;
     padding: 0 1em;
     color: #222;
@@ -81,9 +82,10 @@ blockquote {
         position: sticky;
         float: left;
         top: 0;
-        max-width: 20em;
-        margin-left: -25em;
-        margin-top: -3em;
+        max-width: 16em;
+        margin-left: -19em;
+        margin-top: -6em;
+	marging-right: 0;
     }
     
 }
@@ -97,7 +99,7 @@ blockquote {
 /* } */
 
 #markdown-toc ol {
-    padding: 0 1.5em;
+    padding: 0 .5em;
 }
 
 

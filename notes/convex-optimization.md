@@ -134,8 +134,9 @@ x^\bot$$, which itself implies that $$\inner{y, z} \geq 0$$ and we also get $$y
 
 $$-N_x(\cone{K}) = \cone{K}^* \cap x^\bot$$
 
-Putting everything together, this means that the optimality conditions for
-minimizing $$f$$ over a closed convex cone are:
+Putting everything together, this means that the optimality conditions
+for minimizing $$f$$ over a closed convex cone $$\cone{K}$$ are the
+following:
 
 $$\cone{K} \ni x\ \bot\ \nabla f(x) \in \cone{K}^*$$
 
@@ -155,11 +156,11 @@ x \in \inv{A}\cone{K}^* &\iff Ax \in \cone{K}^* \\
 &\iff x \in \block{A^T\cone{K}}^*
 \end{align}$$
 
-And we obtain $$\inv{A}\cone{K}^* = \block{A^T\cone{K}}^*$$, known as
-the (generalized) Farkas lemma. Note that we've been carefully
-avoiding adherence issues, in particular the image of a closed cone by
-a linear map in not necessarily closed[^farkas-lemma], which explains
-why the Farkas Lemma is sometimes given as:
+And we obtain $$\inv{A}\cone{K}^* = \block{A^T\cone{K}}^*$$, a result
+known as the (generalized) Farkas lemma. Note that we've been
+carefully avoiding adherence issues, in particular the image of a
+closed cone by a linear map in not necessarily closed[^farkas-lemma],
+which explains why the Farkas Lemma is sometimes given as:
 
 $$\block{\inv{A}\cone{K}}^* = \bar{\block{A^T\cone{K}^*}}$$
 
@@ -186,7 +187,7 @@ lemma, we get:
 $$\dd c(x)^{-1}\block{T_{c(x)}(\cone{K})} = \block{\dd c(x)^T \block{T_{c(x)}\cone{K}}^*}^*$$
 
 where the inverse is understood as a preimage. One generally asks that
-$$\dd c(x)^T \cone{K}^*$$ to be closed (see the
+$$\dd c(x)^T \cone{K}^*$$ be closed (see the
 [discussion](#farkas-lemma) above) via a *constraint qualification*
 condition, so that the dual cone is:
 
@@ -195,8 +196,8 @@ $$\begin{align}
 &= \dd c(x)^T \block{\cone{K}^* \cap c(x)^\bot}
 \end{align}$$
 
-from the [discussion](#optimality-conditions) above on normal cones to
-convex closed cones. We are now ready to state the optimality
+(see the [discussion](#optimality-conditions) above on normal cones to
+convex closed cones). We are now ready to state the optimality
 conditions for the constrained problem:
 
 $$\nabla f(x) \in \dd c(x)^T \block{\cone{K}^* \cap c(x)^\bot}$$
@@ -208,7 +209,7 @@ $$\begin{align}
 \cone{K} \ni c(x) &\ \bot\ \lambda \in \cone{K}^* \\
 \end{align}$$
 
-which are known as the Karush, Kuhn & Tucker (KKT) conditions.
+These are known as the Karush, Kuhn & Tucker (KKT) conditions.
 
 ## Example: Quadratic Programming
 
@@ -298,13 +299,14 @@ therefore $$\norm{x - y}^2 \geq \norm{x - c}^2$$ and $$c = \pi_C(x)$$.
 
 # Notes & References
 
-[^dual-cone]: actually, the notion of dual cone can be expressed using
+[^dual-cone]: Actually, the notion of dual cone can be expressed using
     only the canonical pairing between $$E$$ and its dual $$E^*$$
 
-[^farkas-lemma]: consider the Lorentz cone projected on the plane with
-    normal $$\mathbb{1}$$: the projection is the union of slices of
-    the cone by planes parallel to the projection cone. The
-    intersection of each slice with the cone is the surface above a
-    parabola passing through the origin, whose shape flattens as the
-    slice gets further from the origin. The union of all these subsets
-    is the *open* half-plane plus the origin, which is not closed.
+[^farkas-lemma]: Consider the Lorentz cone projected on the plane of
+    normal $$(1, 1, \ldots, 1)^T$$: the projection is the union of
+    slices of the cone by planes parallel to the projection
+    plane. Each slice is delimited by a parabola passing through
+    the origin of the slicing plane, and whose shape flattens as the
+    slicing plane gets further from the origin. The union of all these
+    slices is the *open* half-plane plus the origin, which is not
+    closed.

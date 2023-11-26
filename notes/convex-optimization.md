@@ -78,7 +78,6 @@ The Moreau decomposition generalizes the direct sum decomposition
 between a linear subspace and its orthogonal complement to a convex
 cone and its (negative) dual.
 
-
 # Optimality Conditions
 
 Suppose we want to minimize a function $$f: E \to \RR$$ over some set $$C$$. For
@@ -98,10 +97,14 @@ set of directions that intersect $$C$$ near $$x$$:
 
 $$T_x(C) = \left\{v \in T_x\block{E} :\ \exists \epsilon > 0 /\  x + \epsilon v \in C \right\}$$
 
-(TODO closed?)
+This subset is obviously a cone, called the *tangent cone* to $$C$$ at
+$$x$$. It can be easily checked that for convex $$C$$, the tangent
+cone at $$x$$ is:
 
-This subset is obviously a cone, called the *tangent cone* to $$C$$ at $$x$$. The
-optimality condition above can be rewritten as:
+$$T_x(C) = \RR^+\block{C - x}$$
+
+which makes the cone structure even more explicit. The optimality
+condition above can be rewritten as:
 
 $$\dd f(x).v \geq 0\quad \forall v \in T_x(C)$$
 

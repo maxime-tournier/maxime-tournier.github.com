@@ -140,6 +140,31 @@ following:
 
 $$\cone{K} \ni x\ \bot\ \nabla f(x) \in \cone{K}^*$$
 
+## Example: Linear Complementarity Problem
+
+We consider the problem of minimizing a quadratic function over some closed
+convex cone $$\cone{K}$$:
+
+$$\min_{x \in \cone{K}} \quad \frac{1}{2}x^TMx + q^Tx$$
+
+The optimality conditions are the following (linear) *Cone Complementarity
+Problem*:
+
+$$\begin{align}
+\quad Mx + q &= \lambda \\
+\cone{K} \ni x&\ \bot\ \lambda \in \cone{K}^*
+\end{align}$$
+
+When $$\cone{K}=\RR^n_+$$ is the positive orthant (self-dual), these conditions
+are known as a Linear Complementarity Problem (LCP):
+
+$$\begin{align}
+\quad Mx + q &= \lambda \\
+0 \leq x&\ \bot\ \lambda \geq 0
+\end{align}$$
+
+
+
 
 # Farkas' Lemma
 
@@ -205,7 +230,7 @@ $$\nabla f(x) \in \dd c(x)^T \block{\cone{K}^* \cap c(x)^\bot}$$
 which expands to:
 
 $$\begin{align}
-\exists \lambda \in \cone{K}^*: \nabla f(x) &= \dd c(x)^T \lambda\\
+\nabla f(x) &= \dd c(x)^T \lambda\\
 \cone{K} \ni c(x) &\ \bot\ \lambda \in \cone{K}^* \\
 \end{align}$$
 
@@ -225,7 +250,7 @@ The positive orthant cone $$\RR^n_+$$ is self-dual, and the KKT
 conditions are:
 
 $$\begin{align}
-\exists \lambda \geq 0: Qx + c &= A^T \lambda\\
+Qx + c &= A^T \lambda\\
 0 \leq Ax - b &\ \bot\ \lambda \geq 0 \\
 \end{align}$$
 

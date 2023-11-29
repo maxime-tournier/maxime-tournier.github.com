@@ -28,10 +28,28 @@ is convex when its epigraph is convex:
 $$\forall x, y \in X: f\block{\block{1 - \lambda} x + \lambda y} \leq (1 - \lambda) f(x) + \lambda f(y)$$
 
 That is: the line segment between $$f(x)$$ and $$f(y)$$ remains
-*above* the graph of $$f$$.
+*above* the graph of $$f$$. Equivalently:
+
+$$f\block{x + \lambda(y - x)} \leq f(x) + \lambda \block{f(y) - f(x)}$$
+
+So for any $$0 < \lambda \leq 1$$ we have:
+
+$$\frac{f\block{x + \lambda (y - x)} - f(x)}{\lambda} \leq f(y) - f(x)$$
+
+Taking limits when $$\lambda$$ goes to zero:
+
+$$\lim_{\lambda \downarrow 0} \frac{f\block{x + \lambda (y - x)} - f(x)}{\lambda} \leq  f(y) - f(x)$$
+
+Therefore, if $$f$$ is differentiable at $$x$$, we obtain:
+
+$$\begin{align}
+\dd f(x).(y - x) &\leq f(y) - f(x)\\
+\inner{\nabla f(x), y - x} &\leq f(y) - f(x)\\
+\end{align}$$
+
+In other words, $$f$$ always stays *above* its tangent space at $$x$$.
 
 - TODO properties
-  - above its tangent iff differentiable & convex
   - positive semidefinite hessian
 - TODO examples
 - TODO strong convexity?
@@ -88,7 +106,7 @@ a given $$x \in C$$ to be a local minimizer means that $$f$$ can only increase
 locally around $$x$$ in $$C$$. If $$f$$ is differentiable, this means that the
 derivative of $$f$$ in any *admissible* direction $$v$$ should be positive:
 
-$$\dd f(x).v = \lim_{\epsilon \underset{>0}{\to} 0}\ \frac{f(x + \epsilon v) - f(x)}\epsilon \geq 0$$
+$$\dd f(x).v = \lim_{\epsilon \downarrow 0}\ \frac{f(x + \epsilon v) - f(x)}\epsilon \geq 0$$
 
 Now the set of admissible directions of $$C$$ at $$x$$ is obviously a subset of
 the full tangent space $$T_x(E)$$ of $$E$$ at $$x$$, and should restrict the set

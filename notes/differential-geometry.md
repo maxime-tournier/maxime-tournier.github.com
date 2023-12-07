@@ -158,7 +158,7 @@ $$
 \lambda^T \dd^2 f(x).\dd x_2.\dd x_1 &= -\frac{1}{\norm{x}^2} \dd x_2^T \block{f(x)K(x)^T + K(x)f(x)^T} \dd x_1
  - \dd x_2^T \frac{\lambda^T f(x)}{\norm{x}} \dd f(x) \dd x_1 \\
 
-&= -\frac{1}{\norm{x}^3}\dd x_2^T \block{x \lambda^T P(x) + P(x) \lambda x^T + \lambda^Tx P(x)}\dd x_1 
+&= -\frac{1}{\norm{x}^3}\dd x_2^T \block{\lambda^Tx P(x) + P(x) \lambda x^T + \lambda^Tx P(x)}\dd x_1 
 \end{align}
 $$
 

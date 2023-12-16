@@ -36,7 +36,7 @@ So for any $$0 < \lambda \leq 1$$ we have:
 
 $$\frac{f\block{x + \lambda (y - x)} - f(x)}{\lambda} \leq f(y) - f(x)$$
 
-Taking limits when $$\lambda$$ goes to zero:
+Taking limits when $$\lambda$$ goes to zero gives:
 
 $$\lim_{\lambda \downarrow 0} \frac{f\block{x + \lambda (y - x)} - f(x)}{\lambda} \leq  f(y) - f(x)$$
 
@@ -84,12 +84,12 @@ monotonicity of $$\dd f$$ we obtain:
 
 $$\block{\dd f(z) - \dd f(x)}\underbrace{(z - x)}_{\lambda\block{y - x}} \geq 0$$
 
-which since $$\lambda > 0$$ implies $$\block{\dd f(z) - \dd f(x)}(y -
-x) \geq 0$$. Putting everything together we obtain
+and since $$\lambda > 0$$ this implies $$\block{\dd f(z) - \dd
+f(x)}(y - x) \geq 0$$. Putting everything together:
 
 $$f(y) - f(x) \geq \dd f(z).(y - x) \geq \dd f(x).(y - x)$$
 
-and by the previous argument $$f$$ is convex.
+hence by the previous argument $$f$$ is convex.
 
 
 - TODO properties

@@ -32,13 +32,18 @@ That is: the line segment between $$f(x)$$ and $$f(y)$$ remains
 
 $$f\block{x + \lambda(y - x)} \leq f(x) + \lambda \block{f(y) - f(x)}$$
 
-So for any $$0 < \lambda \leq 1$$ we have:
+
+
+### First-Order Conditions
+
+For any $$0 < \lambda \leq 1$$ we have:
 
 $$\frac{f\block{x + \lambda (y - x)} - f(x)}{\lambda} \leq f(y) - f(x)$$
 
 Taking limits when $$\lambda$$ goes to zero gives:
 
-$$\lim_{\lambda \downarrow 0} \frac{f\block{x + \lambda (y - x)} - f(x)}{\lambda} \leq  f(y) - f(x)$$
+$$\lim_{\lambda \downarrow 0} \frac{f\block{x + \lambda (y - x)} -
+f(x)}{\lambda} \leq f(y) - f(x)$$
 
 Therefore, if $$f$$ is differentiable at $$x$$, we obtain:
 
@@ -89,11 +94,29 @@ f(x)}(y - x) \geq 0$$. Putting everything together:
 
 $$f(y) - f(x) \geq \dd f(z).(y - x) \geq \dd f(x).(y - x)$$
 
-hence by the previous argument $$f$$ is convex.
+hence by the previous argument $$f$$ is convex. 
+
+### Second-Order Conditions
+
+When $$f$$ is twice continuously differentiable, the monotonicity of
+$$\dd f$$ implies the following, for $$\lambda > 0$$:
+
+$$\frac{\dd f\block{x + \lambda (y - x)} - \dd f(x)}{\lambda}.(y - x) \geq 0$$
+
+Taking limits as $$\lambda \downarrow 0$$, we obtain by the defintion
+of the second derivative:
+
+$$\dd^2 f(x)(y - x, y - x) \geq 0$$
+
+Alternatively, using the Hessian matrix $$\nabla^2 f$$: 
+
+$$(y - x)^T \nabla^2 f(x) (y - x) \geq 0$$
+
+In other words, the Hessian of $$f$$ is positive semi-definite.
+
 
 
 - TODO properties
-  - positive semidefinite hessian
 - TODO examples
 - TODO strong convexity?
 - TODO minimization

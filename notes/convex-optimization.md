@@ -47,7 +47,50 @@ $$\begin{align}
 \inner{\nabla f(x), y - x} &\leq f(y) - f(x)\\
 \end{align}$$
 
-In other words, $$f$$ always stays *above* its tangent space at $$x$$.
+In other words, $$f$$ always stays *above* its tangent space at
+$$x$$. This condition is actually sufficient for convexity. Letting
+$$z = (1 - \lambda) x + \lambda y$$, we obtain:
+
+$$
+\begin{align}
+(1 - \lambda) f(x) &\geq (1 - \lambda)\block{f(z) + \dd f(z).(x - z)} \\
+\lambda f(y) &\geq \lambda \block{f(z) + \dd f(z).(y - z)}\\
+\end{align}
+$$
+
+and summing both equations provides the convexity of $$f$$:
+
+$$(1 - \lambda) f(x) + \lambda f(y) \geq f(z) + \dd f(z).\underbrace{\block{(1 - \lambda) x + \lambda y - z}}_{0}$$
+
+Alternatively, we easily obtain that $$\dd f$$ is *monotone*, that is:
+
+$$\block{\dd f(y) - \dd f(x)}(y - x) \geq 0$$
+
+As it turns out, this condition is again sufficient for the convexity
+of $$f$$. Let $$g(\lambda) = f\block{x + \lambda(y - x)}$$, we have:
+
+$$\begin{align}
+g(0) &= f(x) \\
+g(1) &= f(y) \\
+\end{align}$$
+
+and by the mean value theorem, there exists some $$0 < \lambda < 1$$
+such that:
+
+$$\underbrace{g'(\lambda)}_{\dd f(z).(y - x)} = f(y) - f(x)$$
+
+where once again $$z = (1 - \lambda) x + \lambda y$$. Assuming
+monotonicity of $$\dd f$$ we obtain:
+
+$$\block{\dd f(z) - \dd f(x)}\underbrace{(z - x)}_{\lambda\block{y - x}} \geq 0$$
+
+which since $$\lambda > 0$$ implies $$\block{\dd f(z) - \dd f(x)}(y -
+x) \geq 0$$. Putting everything together we obtain
+
+$$f(y) - f(x) \geq \dd f(z).(y - x) \geq \dd f(x).(y - x)$$
+
+and by the previous argument $$f$$ is convex.
+
 
 - TODO properties
   - positive semidefinite hessian

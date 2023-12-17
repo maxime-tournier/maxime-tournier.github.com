@@ -114,12 +114,29 @@ $$(y - x)^T \nabla^2 f(x) (y - x) \geq 0$$
 
 In other words, the Hessian of $$f$$ is positive semi-definite.
 
-
-
-- TODO properties
+- TODO more properties
 - TODO examples
-- TODO strong convexity?
-- TODO minimization
+- TODO strict convexity
+- TODO strong convexity
+
+# Optimization
+
+- TODO proper convex functions
+- TODO $$\min_{x \in C} f(x)$$ where $$f$$ is proper convex
+
+
+## Unicity
+
+Let us assume $$x_1, x_2 \in C$$ both minimize a strict convex
+function $$f$$ over $$C$$ with $$x_1 \neq x_2$$. In particular, we
+have $$f\block{x_1} = f\block{x_2} = f^\star$$. The strict convexity
+of $$f$$ gives, for any $$0 < \lambda < 1$$:
+
+$$f(\underbrace{(1- \lambda) x_1 + \lambda x_2}_{\neq x_1, \neq x_2}) < (1 - \lambda) f\block{x_1} + \lambda f\block{x_2} = f^\star$$
+
+which contradicts the fact that $$x_1, x_2$$ minimize $$f$$. Therefore
+the minimizer, should it exist, must be unique.
+
 
 
 # Cones
@@ -229,7 +246,7 @@ $$\cone{K} \ni x\ \bot\ \nabla f(x) \in \cone{K}^*$$
 We consider the problem of minimizing a quadratic function over some closed
 convex cone $$\cone{K}$$:
 
-$$\min_{x \in \cone{K}} \quad \frac{1}{2}x^TMx + q^Tx$$
+$$\min_{x \in \cone{K}} \ \frac{1}{2}x^TMx + q^Tx$$
 
 The optimality conditions are the following (linear) *Cone Complementarity
 Problem*:
@@ -282,7 +299,7 @@ always closed, but this is something to keep in mind.
 
 We now consider the following optimization problem:
 
-$$\min_x \ f(x)\ \st \ c(x) \in \cone{K}$$
+$$\min_{x \in E} \ f(x)\ \st \ c(x) \in \cone{K}$$
 
 for some convex closed cone $$\cone{K}$$. The admissible directions at
 $$x$$ must satisfy:
@@ -356,21 +373,6 @@ $$\pi_C(x) = \argmin{y \in C}\ \norm{x - y}^2$$
 
 TODO (weierstrass)
 
-
-## Unicity
-
-Assume there are two distinct $$c_1, c_2$$ that both minimize the distance
-$$d^\star$$ to $$C$$. The midpoint of $$c_1, c_2$$ belongs to $$C$$ and its
-distance squared $$d$$ to $$C$$ is:
-
-$$\begin{aligned}
-d = \norm{x - \frac{c_1 + c_2}{2}}^2 &= \norm{x - c_1 + \frac{c_1 - c_2}{2}}^2 \\
-&= \underbrace{\norm{x - c_1}^2}_{d^\star} + \block{x - c_1}^T\block{c_1 - c_2} + \frac{1}{4}\norm{c_1 - c_2}^2 \\
-&= \underbrace{\norm{x - c_2}^2}_{d^\star} + \block{x - c_2}^T\block{c_2 - c_1} + \frac{1}{4}\norm{c_2 - c_1}^2 \\
-\end{aligned}$$
-
-Therefore we get $$2d = 2d^\star - \frac{1}{2}\norm{c_2 - c_1}^2$$ which
-contradicts the fact that $$c_1, c_2$$ are minimizers.
 
 ## Characterization
 

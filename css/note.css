@@ -12,7 +12,6 @@ body {
     background: #fcfcfc;
 
     font-family: Bitstream Charter, Charter, Georgia, Serif;
-    font-size: 13pt;
     font-kerning: normal;
     font-feature-settings: "kern" 1;
     font-optical-sizing: auto;
@@ -73,6 +72,7 @@ blockquote {
     /* ... */
     body {
 	margin-left: auto;
+	font-size: 2.2vw;
     }
     
 }
@@ -82,6 +82,7 @@ blockquote {
     /* ... */
     body {
 	margin-left: 21em;
+	font-size: 13pt;	
     }
 
     #markdown-toc {

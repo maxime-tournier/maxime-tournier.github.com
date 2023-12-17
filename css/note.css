@@ -6,7 +6,6 @@
 body {
 
     margin: auto;
-    margin-left: 21em;
     max-width: 38em;
     padding: 0 1em;
     color: #222;
@@ -71,12 +70,19 @@ blockquote {
 
 /* mobile touchscreens */
 @media (hover: none) {
-	/* ... */
+    /* ... */
+    body {
+	margin-left: auto;
+    }
+    
 }
 
 /* desktop */
 @media (hover: hover) {
-	/* ... */
+    /* ... */
+    body {
+	margin-left: 21em;
+    }
 
     #markdown-toc {
         position: sticky;

@@ -67,12 +67,12 @@ and summing both equations provides the convexity of $$f$$:
 
 $$(1 - \lambda) f(x) + \lambda f(y) \geq f(z) + \dd f(z).\underbrace{\block{(1 - \lambda) x + \lambda y - z}}_{0}$$
 
-Alternatively, we easily obtain that $$\dd f$$ is *monotone*, that is:
+Besides, one can easily check that $$\dd f$$ is *monotone*, that is:
 
 $$\block{\dd f(y) - \dd f(x)}(y - x) \geq 0$$
 
-As it turns out, this condition is again sufficient for the convexity
-of $$f$$. Let $$g(\lambda) = f\block{x + \lambda(y - x)}$$, we have:
+As it turns out, this condition is also sufficient for the convexity of
+$$f$$. Let $$g(\lambda) = f\block{x + \lambda(y - x)}$$, we have:
 
 $$\begin{align}
 g(0) &= f(x) \\

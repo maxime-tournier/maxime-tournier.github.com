@@ -47,10 +47,11 @@ f(x)}{\lambda} \leq f(y) - f(x)$$
 
 Therefore, if $$f$$ is differentiable at $$x$$, we obtain:
 
-$$\begin{align}
-\dd f(x).(y - x) &\leq f(y) - f(x)\\
-\inner{\nabla f(x), y - x} &\leq f(y) - f(x)\\
-\end{align}$$
+$$\dd f(x).(y - x) \leq f(y) - f(x)$$
+
+Or, equivalently:
+
+$$\inner{\nabla f(x), y - x} \leq f(y) - f(x)$$
 
 In other words, $$f$$ always stays *above* its tangent space at
 $$x$$. This condition is actually sufficient for convexity. Letting
@@ -127,16 +128,17 @@ In other words, the Hessian of $$f$$ is positive semi-definite.
 
 ## Unicity
 
-Let us assume $$x_1, x_2 \in C$$ both minimize a strict convex
-function $$f$$ over $$C$$ with $$x_1 \neq x_2$$. In particular, we
-have $$f\block{x_1} = f\block{x_2} = f^\star$$. The strict convexity
-of $$f$$ gives, for any $$0 < \lambda < 1$$:
+Let us assume $$x_1, x_2 \in C$$ both minimize a *strict* convex function $$f$$
+over $$C$$ with $$x_1 \neq x_2$$. In particular, we have $$f\block{x_1} =
+f\block{x_2} = f^\star$$. The strict convexity of $$f$$ gives, for any $$0 <
+\lambda < 1$$:
 
 $$f(\underbrace{(1- \lambda) x_1 + \lambda x_2}_{\neq x_1, \neq x_2}) < (1 - \lambda) f\block{x_1} + \lambda f\block{x_2} = f^\star$$
 
-which contradicts the fact that $$x_1, x_2$$ minimize $$f$$. Therefore
-the minimizer, should it exist, must be unique.
-
+which contradicts the fact that $$x_1, x_2$$ minimize $$f$$. Therefore the
+minimizer, should it exist, must be unique. A similar argument can show that
+when $$f$$ is merely convex, every point on the segment $$[x_1, x_2]$$ must also
+minimize $$f$$.
 
 
 # Cones

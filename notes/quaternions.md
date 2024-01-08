@@ -147,6 +147,18 @@ $$ w_q = \frac{q + \bar{q}}{2} $$
 
 $$ v_q = \frac{q - \bar{q}}{2} $$
 
+In matrix form, the conjugation operator is given by:
+
+$$H = \matrix{1 & 0 \\ 0 & -I}$$
+
+One can easily check that the left/right translation matrices satisfy the
+following identities:
+
+$$\begin{align}
+L_{\bar{q}} &= L_q^T\\
+R_{\bar{q}} &= R_q^T\\
+\end{align}$$
+
 ## Norm
 
 As for the complex numbers, conjugation induces a norm over the quaternions

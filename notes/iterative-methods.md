@@ -12,6 +12,10 @@ I - \inv{P}M$$ is convergent, that is:
 
 $$\rho(B) < 1$$
 
+TODO convegent matrices 
+- https://en.wikipedia.org/wiki/Convergent_matrix
+- https://en.wikipedia.org/wiki/Spectral_radius#Power_sequence
+
 We start by splitting $$M = P - N$$ so that $$B = \inv{P}N$$, and let
 $$\lambda$$ be an eigenvalue of $$B$$ with corresponding eigenvector
 $$x$$, that is:

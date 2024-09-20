@@ -18,3 +18,8 @@ $$X$$, which immediately implies the following:
 - the union of finitely many closed subsets is a closed subset
 
 
+
+# Continuous Functions
+
+- preimage of an open set is open
+- preimage of a closed set is closed

@@ -197,6 +197,7 @@ Now the set of admissible directions of $$C$$ at $$x$$ is obviously a subset of
 the full tangent space $$T_x(E)$$ of $$E$$ at $$x$$, and should restrict the set
 of tangent vectors to the ones that somehow remain in $$C$$ (to the first order).
 
+### Tangent Cone
 In the general case, the correct definition is a bit technical (the Bouligand
 tangent cone) but in the case where $$C$$ is convex, it suffices to consider the
 set of directions that intersect $$C$$ near $$x$$:
@@ -223,7 +224,8 @@ cone at $$x$$, called the (negative) *normal cone* $$N_x(C)$$:
 
 $$\nabla f(x) \in \block{T_x(C)}^* \triangleq -N_x(C)$$
 
-From our earlier expression for $$T_x(C)$$, we obtain its dual as:
+### Normal Cone to a Convex Set
+- TODO $$N_x(C) = -\block{C - x}^*$$ when $$C$$ is convex
 
 $$-N_x(C) = \block{T_x(C)}^* = \left\{y \in E : \inner{y, z - x} \geq 0\quad  \forall z \in C \right\}$$
 

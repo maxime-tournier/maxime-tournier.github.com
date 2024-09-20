@@ -238,6 +238,49 @@ $$x_k^{(k)} + l_k x_{k-1}^{(k-1)} = y_k^{(k)}$$
 This procedure is used in the [Lanczos formulation of the Conjugate
 Gradient](krylov.html#conjugate-gradients) algorithm.
 
+
+# Elimination Trees
+
+In the general, non-acyclic sparse case, it is critical to be able to compute
+the non-zeros of the Cholesky matrix $$L$$ in advance to pre-allocate memory,
+and to so efficiently. For this, a data structure known as the *elimination
+tree* for the matrix can be constructed, which is derived from a graph useful in
+doing triangular solves efficiently.
+
+## Efficient Sparse Triangular Solves
+
+When solving $$Lx = b$$ for lower-triangular $$L$$, the usual back-substitution
+algorithm is the following:
+
+$$l_{ii} x_i + \sum_{k < i} l_{ik} x_k = b_i$$
+
+which solves for $$x_i$$ assuming $$x_k$$ for $$k < i$$ have been solved
+already. When $$L, x, b$$ are sparse, it is often difficult to iterate precisely
+over the $$k$$ indices for which both $$l_{ik}$$ and $$x_k$$ are
+non-zero. Instead, one can take a more "column-oriented" view of the algorithm:
+
+1. solve for $$x_1$$
+2. substract $$l_1 x_1$$ from $b$$
+3. solve for $$x_2$$
+4. and so on
+
+
+
+## Up-looking Cholesky Factorization
+
+
+
+
+# Ordering 
+
+## (Reverse) Cuthill-McKee
+
+TODO
+
+## (Approxmiate) Minimum Degree
+
+TODO
+
 # Notes
 
 [^1]: Of course one could choose to orient edges from parents to

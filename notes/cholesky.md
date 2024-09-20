@@ -296,6 +296,38 @@ solution index depends, have been processed already.
 
 ## Up-looking Cholesky Factorization
 
+Now why bother with these lower triangular solves? It turns out that the
+Cholesky factorization can be formulated instead of such triangular solves when
+expressed in block form:
+
+$$
+\mat{L_{11} & 0 \\ l_{12}^T & l_{22}} \mat{L_{11}^T & l_{12} \\ 0 & l_{22}} = \mat{A_{11} & a_{12} \\ a_{12}^T & a_{22}} =
+\mat{L_{11}L_{11}^T & L_{11}l_{12} \\ l_{12}^TL_{11}^T & l_{22}}
+$$
+
+so that:
+
+$$
+\begin{aligned}
+L_{11} l_{12} &= a_{12} \\
+l_{12}^T l_{12} + l_{22}^2 &= a_{22}
+\end{aligned}
+$$
+
+Since we know the non-zero set of $$a_{12}$$, we could compute its reachable set
+according to $$L_{11}$$ to compute $$l_{12}$$ (and its non-zero set)
+efficiently, which in turn makes it easy to compute $$l_{22}$$ efficiently. Now,
+since $$L$$ is computed incrementally we are only ever adding edges to some
+graph as we compute $$L$$ rows. Some edges could be redundant from the point of
+view of reachability, and should be removed to keep the reachability queries
+efficient.
+
+TODO due to the special structure of the problem (each row is produced by a low
+triangular solve), the reachability may always be described as a tree, called
+the elimination tree
+
+TODO how to compute such tree efficiently.
+
 
 
 

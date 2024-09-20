@@ -254,17 +254,45 @@ algorithm is the following:
 
 $$l_{ii} x_i + \sum_{k < i} l_{ik} x_k = b_i$$
 
-which solves for $$x_i$$ assuming $$x_k$$ for $$k < i$$ have been solved
-already. When $$L, x, b$$ are sparse, it is often difficult to iterate precisely
-over the $$k$$ indices for which both $$l_{ik}$$ and $$x_k$$ are
-non-zero. Instead, one can take a more "column-oriented" view of the algorithm:
+which solves for $$x_i$$ assuming $$x_k$$ have been solved already for $$k < i$$
+. When $$L, x, b$$ are sparse, it is often difficult to iterate precisely over
+the $$k$$ indices for which both $$l_{ik}$$ and $$x_k$$ are non-zero so instead,
+one can take a more "column-oriented" view of the algorithm:
 
 1. solve for $$x_1$$
-2. substract $$l_1 x_1$$ from $b$$
+2. subtract $$l_1 x_1$$ from $$b$$
 3. solve for $$x_2$$
 4. and so on
 
+Or, more generally:
 
+<div class="algorithm" markdown="1">
+
+- for $$i < n$$:
+  - solve $$l_{ii} x_i = b_i$$
+  - update $$b$$: $$b \gets b - l_i x_i$$ 
+    
+</div>
+
+Now, it is pretty clear that when $$b_i$$ is zero, $$x_i$$ will be zero as well,
+and there's no need to update $$b$$. Therefore, if we knew in advance which
+$$b_i$$ are going to be non-zero we could iterate on these indices only, which
+could potentially be much more efficient if $$n$$ is large.
+
+Fortunately, computing these indices is easy: every non-zero $$b_i$$ will
+produce a non-zero $$x_i$$, which in turn will produce (potentially new)
+non-zeros $$b_k$$ for each $$l_{k,i} \neq 0$$ when updating $$b$$, and so on for
+all the newly marked non-zeros (observe that since $$k > i$$ we're only ever
+marking non-zero indices that have not been processed yet). If we let $$G$$ be
+the graph of matrix $$L$$ where $$(i, k) \in E$$ whenever $$l_{ki} \neq 0$$, all
+the nodes reachable from the non-zeros in $$b$$ will end up non-zero in the
+solution $$x$$. Discovering the reachable nodes from the non-zero set of $$b$$
+is easy using depth-first search.
+
+Even better, this depth-first search can be used to sort reachable vertices
+topologically, telling us exactly in which order to process the reachable set in
+the triangular solve algorithm so that all the solution indices on which a given
+solution index depends, have been processed already.
 
 ## Up-looking Cholesky Factorization
 

@@ -314,19 +314,42 @@ l_{12}^T l_{12} + l_{22}^2 &= a_{22}
 \end{aligned}
 $$
 
-Such factorization is called "up-looking" since it reuses the parts of the
-solution $$L_{11}$$ "above" to compute current row $$\block{l_{12}^T \ \
-l_{22}}$$. Since we know the non-zero set of $$a_{12}$$, we may compute its
-reachable set according to $$L_{11}$$ to compute $$l_{12}$$ (and its non-zero
-set) efficiently, which in turn makes it easy to compute $$l_{22}$$
-efficiently. Now, since $$L$$ is computed incrementally we are only ever adding
-new edges to some initially empty graph as we compute $$L$$ rows. Some newly
-added edges could be redundant from the point of view of reachability, and we
+Such factorization is called "up-looking" since it reuses the parts of
+the solution $$L_{11}$$ "above" to compute current row
+$$\block{l_{12}^T \ \ l_{22}}$$. Since we know the non-zero set of
+$$a_{12}$$, we may compute its reachable set according to $$L_{11}$$
+to compute $$l_{12}$$ (and its non-zero set) efficiently, which in
+turn makes it easy to compute $$l_{22}$$ efficiently. Now, since $$L$$
+is computed incrementally we are only ever adding new edges to some
+initially empty graph as we compute $$L$$ rows. Some newly added edges
+could be redundant from the point of view of reachability, and we
 would like to remove them to keep the reachability queries efficient.
 
-TODO due to the special structure of the problem (each row is produced by a low
-triangular solve), the reachability may always be described as a tree, called
-the elimination tree
+Now, due to the special form of the Cholesky factor $$L$$, where each
+row is obtained by a triangular solve from the upper submatrix, there
+are some properties we can exploit to prune the graph as the algorithm
+progresses.
+
+Suppose we are currently solving for row $$k+1$$, that is:
+
+$$L_k l_{k + 1} = a_{k+1}$$
+
+As we saw before, this will produce non-zeros in column $l_{k+1}$
+exactly in the reach of the non-zero set of column $$a_{k+1}$$
+according to $L_k$. In turn, each newly introduced non-zero $$l_{k+1,
+j} \neq 0$$ will add an edge $$(j, k + 1)$$ to the graph of matrix
+$$L_{k+1}$$, where $$k + 1 > j$$. So every edge added to the graph
+will only connect strictly increasing vertex pairs. It is easy to see
+that we may prune this edge whenever there already exists a vertex
+$$i$$ in between $$j$$ and $$k+1$$ with edges $$(j, i)$$ and $$(i, k +
+1)$$, so that one can reach $$k+1$$ from $$j$$ through $$i$$.
+
+TODO therefore there is at most one path from $$j$$ to $$k+1$$
+
+
+TODO due to the special structure of the problem
+(each row is produced by a low triangular solve), the reachability may
+always be described as a tree, called the elimination tree
 
 TODO how to compute elimination tree efficiently.
 

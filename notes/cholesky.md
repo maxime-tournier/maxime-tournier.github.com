@@ -297,8 +297,8 @@ solution index depends, have been processed already.
 ## Up-looking Cholesky Factorization
 
 Now why bother with these lower triangular solves? It turns out that the
-Cholesky factorization can be formulated instead of such triangular solves when
-expressed in block form:
+Cholesky factorization can be formulated in terms of such triangular solves,
+when expressed in block form:
 
 $$
 \mat{L_{11} & 0 \\ l_{12}^T & l_{22}} \mat{L_{11}^T & l_{12} \\ 0 & l_{22}} = \mat{A_{11} & a_{12} \\ a_{12}^T & a_{22}} =
@@ -328,7 +328,7 @@ TODO due to the special structure of the problem (each row is produced by a low
 triangular solve), the reachability may always be described as a tree, called
 the elimination tree
 
-TODO how to compute such tree efficiently.
+TODO how to compute elimination tree efficiently.
 
 
 

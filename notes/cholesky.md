@@ -314,13 +314,15 @@ l_{12}^T l_{12} + l_{22}^2 &= a_{22}
 \end{aligned}
 $$
 
-Since we know the non-zero set of $$a_{12}$$, we could compute its reachable set
-according to $$L_{11}$$ to compute $$l_{12}$$ (and its non-zero set)
-efficiently, which in turn makes it easy to compute $$l_{22}$$ efficiently. Now,
-since $$L$$ is computed incrementally we are only ever adding edges to some
-graph as we compute $$L$$ rows. Some edges could be redundant from the point of
-view of reachability, and should be removed to keep the reachability queries
-efficient.
+Such factorization is called "up-looking" since it reuses the parts of the
+solution $$L_{11}$$ "above" to compute current row $$\block{l_{12}^T \ \
+l_{22}}$$. Since we know the non-zero set of $$a_{12}$$, we may compute its
+reachable set according to $$L_{11}$$ to compute $$l_{12}$$ (and its non-zero
+set) efficiently, which in turn makes it easy to compute $$l_{22}$$
+efficiently. Now, since $$L$$ is computed incrementally we are only ever adding
+new edges to some initially empty graph as we compute $$L$$ rows. Some newly
+added edges could be redundant from the point of view of reachability, and we
+would like to remove them to keep the reachability queries efficient.
 
 TODO due to the special structure of the problem (each row is produced by a low
 triangular solve), the reachability may always be described as a tree, called

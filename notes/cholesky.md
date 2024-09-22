@@ -334,12 +334,12 @@ Suppose we are currently solving for row $$k+1$$, that is:
 
 $$L_k l_{k + 1} = a_{k+1}$$
 
-As we saw before, this will produce non-zeros in column $l_{k+1}$
+As we saw before, this will produce non-zeros in column $$l_{k+1}$$
 exactly in the reach of the non-zero set of column $$a_{k+1}$$
-according to $L_k$. In turn, each newly introduced non-zero $$l_{k+1,
+according to $$L_k$$. In turn, each newly introduced non-zero $$l_{k+1,
 j} \neq 0$$ will add an edge $$(j, k + 1)$$ to the graph of matrix
 $$L_{k+1}$$, where $$k + 1 > j$$. So every edge added to the graph
-will only connect strictly increasing vertex pairs. It is easy to see
+only ever connects strictly increasing vertex pairs. It is easy to see
 that we may prune this edge whenever there already exists a vertex
 $$i$$ in between $$j$$ and $$k+1$$ with edges $$(j, i)$$ and $$(i, k +
 1)$$, so that one can reach $$k+1$$ from $$j$$ through $$i$$.

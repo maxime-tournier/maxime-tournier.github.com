@@ -279,26 +279,29 @@ and there's no need to update $$b$$. Therefore, if we knew in advance which
 $$b_i$$ are going to be non-zero we could iterate on these indices only, which
 could potentially be much more efficient if $$n$$ is large.
 
-Fortunately, computing these indices is easy: every non-zero $$b_i$$ will
-produce a non-zero $$x_i$$, which in turn will produce (potentially new)
-non-zeros $$b_k$$ for each $$l_{k,i} \neq 0$$ when updating $$b$$, and so on for
-all the newly marked non-zeros (observe that since $$k > i$$ we're only ever
-marking non-zero indices that have not been processed yet). If we let $$G$$ be
-the graph of matrix $$L$$ where $$(i, k) \in E$$ whenever $$l_{ki} \neq 0$$, all
-the nodes reachable from the non-zeros in $$b$$ will end up non-zero in the
-solution $$x$$. Discovering the reachable nodes from the non-zero set of $$b$$
-is easy using depth-first search.
+Fortunately, computing these indices is easy: every initial non-zero
+$$b_i$$ will produce a non-zero $$x_i$$, which in turn will produce
+(potentially new) non-zeros $$b_k$$ for each $$l_{k,i} \neq 0$$ when
+updating $$b$$, and so on for all the newly marked non-zeros (observe
+that since $$k > i$$ we're only ever marking non-zero indices that
+have not been processed yet). If we let $$G$$ be the graph of matrix
+$$L$$ where $$(i, k) \in E$$ whenever $$l_{ki} \neq 0$$, all the nodes
+reachable from the non-zeros in $$b$$ will end up non-zero in the
+solution $$x$$. Discovering the reachable nodes from the non-zero set
+of $$b$$ is easy using depth-first search.
 
-Even better, this depth-first search can be used to sort reachable vertices
-topologically, telling us exactly in which order to process the reachable set in
-the triangular solve algorithm so that all the solution indices on which a given
-solution index depends, have been processed already.
+Even better, depth-first search can be used to sort reachable vertices
+topologically, telling us exactly in which order to process the
+reachable set in the triangular solve algorithm so that all the
+solution indices on which a given solution index depends, have been
+processed already. Note that we could instead sort the reachable
+indices generically (which would also be sorted topologically) but
+that would be less efficient.
 
 ## Up-looking Cholesky Factorization
 
-Now why bother with these lower triangular solves? It turns out that the
-Cholesky factorization can be formulated in terms of such triangular solves,
-when expressed in block form:
+It turns out that the Cholesky factorization can be formulated in
+terms of triangular solves, when expressed in block form:
 
 $$
 \mat{L_{11} & 0 \\ l_{12}^T & l_{22}} \mat{L_{11}^T & l_{12} \\ 0 & l_{22}} = \mat{A_{11} & a_{12} \\ a_{12}^T & a_{22}} =
@@ -319,40 +322,37 @@ the solution $$L_{11}$$ "above" to compute current row
 $$\block{l_{12}^T \ \ l_{22}}$$. Since we know the non-zero set of
 $$a_{12}$$, we may compute its reachable set according to $$L_{11}$$
 to compute $$l_{12}$$ (and its non-zero set) efficiently, which in
-turn makes it easy to compute $$l_{22}$$ efficiently. Now, since $$L$$
-is computed incrementally we are only ever adding new edges to some
-initially empty graph as we compute $$L$$ rows. Some newly added edges
-could be redundant from the point of view of reachability, and we
-would like to remove them to keep the reachability queries efficient.
+turn makes it easy to compute $$l_{22}$$ efficiently. As we compute
+matrix $$L$$ incrementally row-by-row, we'll be adding edges to the
+its graph. Some new edges could be redundant from the point of view of
+reachability: ideally we should remove them to keep the reachability
+queries efficient.
 
 Now, due to the special form of the Cholesky factor $$L$$, where each
 row is obtained by a triangular solve from the upper submatrix, there
 are some properties we can exploit to prune the graph as the algorithm
-progresses.
-
-Suppose we are currently solving for row $$k+1$$, that is:
+progresses. Suppose we are currently solving for row $$k+1$$, that is:
 
 $$L_k l_{k + 1} = a_{k+1}$$
 
 As we saw before, this will produce non-zeros in column $$l_{k+1}$$
 exactly in the reach of the non-zero set of column $$a_{k+1}$$
-according to $$L_k$$. In turn, each newly introduced non-zero $$l_{k+1,
-j} \neq 0$$ will add an edge $$(j, k + 1)$$ to the graph of matrix
-$$L_{k+1}$$, where $$k + 1 > j$$. So every edge added to the graph
-only ever connects strictly increasing vertex pairs. It is easy to see
-that we may prune this edge whenever there already exists a vertex
-$$i$$ in between $$j$$ and $$k+1$$ with edges $$(j, i)$$ and $$(i, k +
-1)$$, so that one can reach $$k+1$$ from $$j$$ through $$i$$.
+according to $$L_k$$. In turn, each newly introduced non-zero
+$$l_{k+1, j} \neq 0$$ will add an edge $$(j, k + 1)$$ to the graph of
+matrix $$L_{k+1}$$, where $$k + 1 > j$$. Therefore, every edge added
+to the graph only ever connects strictly increasing vertex pairs. It
+is easy to see that we may prune this edge whenever there already
+exists a vertex $$i$$ in between $$j$$ and $$k+1$$ with edges $$(j,
+i)$$ and $$(i, k + 1)$$, so that one can reach $$k+1$$ from $$j$$
+through $$i$$.
 
-TODO therefore there is at most one path from $$j$$ to $$k+1$$
-
-
-TODO due to the special structure of the problem
-(each row is produced by a low triangular solve), the reachability may
-always be described as a tree, called the elimination tree
-
-TODO how to compute elimination tree efficiently.
-
+In fact, due to the special structure of the Cholesky matrix $$L$$,
+for every pair of outgoing edges from $$i$$, say $$(i, j)$$ and $$(i,
+k)$$, there will always exist an edge $$(j, k)$$ so that $$(i, j)$$
+can be pruned as explained above, turning our graph into a tree.
+Indeed, this means that $$l_{ji} \neq 0$$, and when solving for row
+$$k$$, $$l_{ki} \neq 0$$ implies that we'll also have $$l_{kj} \neq
+0$$ according to the triangular solve non-zero propagation.
 
 
 

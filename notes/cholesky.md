@@ -343,13 +343,31 @@ from $$j$$ through $$i$$.
 
 In fact, due to the special structure of the Cholesky matrix $$L$$, for every
 pair of outgoing edges from $$i$$, say $$(i, j)$$ and $$(i, k)$$ (assuming $$i <
-j < k$$), there must also exist an edge $$(j, k)$$ so that $$(i, j)$$ can be
+j < k$$), there must also exist an edge $$(j, k)$$ so that $$(i, k)$$ can be
 pruned as described above. Indeed, this means that $$l_{ji} \neq 0$$ in
 $$L_{k-1}$$, so when solving for row $$k$$, $$l_{ki} \neq 0$$ implies that we'll
 also have $$l_{kj} \neq 0$$ according to the triangular solve non-zero
 propagation. Therefore, the pruning process will terminate with at most one
 outgoing edge per vertex, and the pruned graph will be a tree called the
-*elimination tree*.
+*elimination tree*. For each vertex $$i$$, its parent vertex in the elimination
+tree is:
+
+$$p(i) = \min_{j > i} \left\{j: L_{ji} \neq 0 \right\}$$
+
+## Construction
+
+From the above, the general idea for constructing the elimination tree is the
+following:
+
+<div class="algorithm" markdown="1">
+- for $$k < n$$:
+  - compute the reach of the non-zero set of (truncated) column $$a_k$$
+    according to the current tree
+  - add the smallest index from the reach as the parent of vertex $$k$$
+</div>
+
+Of course, since we're only interested in its smallest index there is no need to
+compute the reach set entirely.
 
 
 # Ordering 

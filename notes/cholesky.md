@@ -295,7 +295,7 @@ which a given solution index depends have been processed already. Note that we
 could instead sort the reachable indices generically (which is also a valid
 topological sort) but that would be less efficient.
 
-## Up-looking Cholesky Factorization
+## Up-looking Factorization
 
 It turns out that the Cholesky factorization can be formulated in
 terms of triangular solves, when expressed in block form:

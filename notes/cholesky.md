@@ -356,19 +356,23 @@ $$p(i) = \min_{j > i} \left\{j: L_{ji} \neq 0 \right\}$$
 
 ## Construction
 
-From the above, the general idea for constructing the elimination tree is the
-following:
+Let us now assume that we've built the tree (or rather, the forest)
+$$T_{k - 1}$$ up until step $$k - 1$$. We must now compute the reach
+of $$a_k$$ according to $$T_{k - 1}$$, so for each non-zero $$a_{ik}
+\neq 0$$ we walk the tree up until we find a root: each vertex $$j$$
+along the path is reachable from vertex $$i$$, producing a non-zero
+$$l_{kj} \neq 0$$ in row $$l_k^T$$. Of course, we won't add edge $$(j,
+k)$$ unless $$j$$ is a root, since $$k$$ is also reachable by the
+parents of $$j$$ along the path (but we may record the fact that
+$$l_{kj}$$ will be non-zero if we're looking to pre-allocate
+$$L$$). So we simply walk the tree up from the non-zeros in
+$$\block{a_{ik}}_{i < k}$$ until we find a root, and connect this root
+to vertex $$k$$.
 
-<div class="algorithm" markdown="1">
-- for $$k < n$$:
-  - compute the reach of the non-zero set of (truncated) column $$a_k$$
-    according to the current tree
-  - add the smallest index from the reach as the parent of vertex $$k$$
-</div>
-
-Of course, since we're only interested in its smallest index there is no need to
-compute the reach set entirely.
-
+As we proceed up a path, we can store a shortcut to the new root $$k$$
+so we don't repeat useless work: if we encounter a vertex whose root
+is already $$k$$ we can skip it since it (and its parents) has already
+been processed. This technique is sometimes known as "path compression".
 
 # Ordering 
 

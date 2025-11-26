@@ -16,80 +16,53 @@ such that $$p(A)v = 0$$.
 
 # Tridiagonalization
 
-Let us construct an orthogonal basis for the family $$\left\{b, Ab,
-\ldots, A^k b\right\}$$ using the Graham-Schmidt process, and arrange
-the basis vectors $$q_0, q_1, \dots, q_k$$ by column in a matrix
-$$Q_k$$. If the matrix $$A$$ is symmetric, then $$Q_k$$
-satisifies:
+Let us construct an orthogonal basis for the family $$\left\{b, Ab, \ldots, A^k
+b\right\}$$ using the Graham-Schmidt process, and arrange the basis vectors
+$$q_0, q_1, \dots, q_k$$ by column in a matrix $$Q_k$$. We start with $$q_0 =
+\frac{b}{\norm{b}}$$, then orthogonalize $$A q_0$$ against $$q_0$$ to get
+$$q_1$$, then orthogonalize $$A q_1$$ against $$q_0, q_1$$ to get $$q_2$$, and
+so on. It is easy to show by recurrence that the $$q_k$$ span $$\Krylov_k(A,
+b)$$, to which the subsequent $$\block{q_{k+i}}_{i > 0}$$ are all orthogonal.
 
-$$Q_k^T A Q_k = T_k$$
+Let us consider two vectors $$q_i$$ and $$q_j$$ obtained by this process and
+assume $$i > j$$, there are two cases:
 
-where $$T_k$$ is tridiagonal. To see this, consider $$T_{ij}$$ for
-$$i>j + 1$$.  Clearly, $$T_{ij} = q_i^T A q_j$$ and $$Aq_j \in
-\Krylov_{j+1}(A, b)$$, of which $$Q_{j+1}$$'s columns form an
-orthogonal basis. But since $$Q_i$$'s columns are also orthogonal,
-$$q_i$$ is orthogonal to every column of $$Q_{j+1}$$. Therefore
-$$q_i^T A q_j = 0$$ and $$T$$ is lower-Hessenberg. But since $$T$$ is
-also symmetric, $$T$$ is tridiagonal. Now, an orthogonal basis $$Q \in
-O(n)$$ for the complete space $$\Krylov_n(A, b)$$ satisfies:
+- when $$i > j + 1$$, then $$A q_j \in \Krylov_{j+1}(A, b)$$ to which $$q_i$$ is
+  orthogonal. Therefore $$q_i^T A q_j = 0$$
+- when $$i = j + 1$$, then either the iteration stops due to $$A q_j \in
+  \Krylov_j(A, b)$$, causing $$q_i = 0$$, or $$q_i^T A q_j$$ is non-zero
 
-$$Q^T A Q = T$$
-
-or, equivalently:
-
-$$AQ = QT$$
-
-By the same token, if $$M$$ is a non-standard inner product and $$A$$ is
-auto-adjoint for $$M$$ (*i.e.* $$MA$$ is symmetric), then we have the following
-factorization:
-
-$$Q_k^T MA Q_k = T_k$$
-
-where $$T_k$$ is tridiagonal. The complete factorization satisfies:
-
-$$Q^T MA Q = T$$
-
-where $$Q^T M Q = I$$, and we again obtain:
-
-$$A Q = Q T$$
+In matrix terms, this means that $$H_k = Q_k^TAQ_k$$ is (strictly)
+lower-Hessenberg. Now since $$A$$ is symmetric, $$H_k$$ must also be symmetric,
+which means it is also upper-Hessenberg, therefore $$Q_k^TAQ_k = T_k$$ is
+tridiagonal. This means that we just need to orthogonalize $$Aq_i$$ against the
+*two* last $$q_i, q_{i-1}$$ instead of the complete sequence of predecessors,
+which is a huge computational win (assuming exact arithmetic).
 
 # The Lanczos Method
 
 The Lanczos Method is a simple iterative procedure to compute the above
-tridiagonal factorization columnwise. Let us rewrite $$T$$ as:
+tridiagonal factorization columnwise. Let us rewrite $$T_k$$ as:
 
-$$T = \mat{\alpha_1 & \beta_1 &     \\
+$$T_k = \mat{\alpha_1 & \beta_1 &     \\
            \beta_1 & \alpha_2 & \beta_2 \\
                  & \beta_2 &\alpha_3 & \beta_3 \\
                  & & \ddots  & \ddots & \ddots \\
-                 & & & \beta_{n-1} & \alpha_n  }
+                 & & & \beta_{k-1} & \alpha_k  }
 $$
 
-The $$k$$-th column of $$T$$ satisfies:
+As we've seen, the orthogonalization process only requires the last two vectors:
 
-$$Aq_k = Q t_k$$
+$$\gamma_k q_{k+1} = A q_k - \underbrace{q_k^TAq_k}_{\alpha_k} q_k -
+\underbrace{q_k^TA q_{k-1}}_{\beta_{k-1}} q_{k - 1}$$
 
-In other words:
+where $$\gamma_k$$ normalizes $$q_{k+1}$$. Taking the dot product with
+$$q_{k+1}$$ shows that $$\gamma_k = \beta_k$$ so that the iteration can be
+rewritten as:
 
-$$A q_k = \beta_{k-1} q_{k-1} + \alpha_k q_k + \beta_k q_{k+1}$$
+$$\beta_k q_{k+1} = A q_k - \alpha_k q_k - \beta_{k-1} q_{k - 1}$$
 
-where $$\alpha_k = q_k^T A q_k$$. This provides a recursion scheme for computing
-$$q_{k+1}$$ from previous values $$q_k, q_{k-1}$$. Let us introduce $$\beta_0
-q_0 = 0$$, the Lanczos iteration is defined as:
-
-$$\beta_k q_{k+1} = A q_k - \alpha_k q_k - \beta_{k-1} q_{k-1}$$
-
-where $$\beta_k$$ is chosen so that $$\norm{q_{k+1}} =
-1$$. Likewise, using a non-standard inner product $$M$$ still yields:
-
-$$\beta_k q_{k+1} = A q_k - \alpha_k q_k - \beta_{k-1} q_{k-1}$$
-
-except this time $$\alpha_k$$ is given by:
-
-$$\alpha_k = q_k^T MA q_k$$
-
-and $$\beta_k$$ is chosen so that $$\norm{q_{k+1}}_M = 1$$.
-
+where $$\beta_k$$ normalizes $$q_{k+1}$$ and $$\alpha_k = q_k^TAq_k$$.
 
 ## Gradient Methods
 

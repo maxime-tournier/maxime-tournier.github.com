@@ -62,7 +62,8 @@ rewritten as:
 
 $$\beta_k q_{k+1} = A q_k - \alpha_k q_k - \beta_{k-1} q_{k - 1}$$
 
-where $$\beta_k$$ normalizes $$q_{k+1}$$ and $$\alpha_k = q_k^TAq_k$$.
+where $$\beta_k$$ normalizes $$q_{k+1}$$ and $$\alpha_k = q_k^TAq_k$$. The
+iteration starts with $$\beta_0 q_0 = 0$$ and $$\beta_1 q_1 = b$$.
 
 ## Gradient Methods
 

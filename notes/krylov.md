@@ -44,26 +44,26 @@ which is a huge computational win (assuming exact arithmetic).
 The Lanczos Method is a simple iterative procedure to compute the above
 tridiagonal factorization columnwise. Let us rewrite $$T_k$$ as:
 
-$$T_k = \mat{\alpha_1 & \beta_1 &     \\
-           \beta_1 & \alpha_2 & \beta_2 \\
-                 & \beta_2 &\alpha_3 & \beta_3 \\
+$$T_k = \mat{\alpha_1 & \beta_2 &     \\
+           \beta_2 & \alpha_2 & \beta_3 \\
+                 & \beta_3 &\alpha_3 & \beta_4 \\
                  & & \ddots  & \ddots & \ddots \\
-                 & & & \beta_{k-1} & \alpha_k  }
+                 & & & \beta_{k} & \alpha_k  }
 $$
 
 As we've seen, the orthogonalization process only requires the last two vectors:
 
-$$\gamma_k q_{k+1} = A q_k - \underbrace{q_k^TAq_k}_{\alpha_k} q_k -
-\underbrace{q_k^TA q_{k-1}}_{\beta_{k-1}} q_{k - 1}$$
+$$\gamma_{k + 1} q_{k+1} = A q_k - \underbrace{q_k^TAq_k}_{\alpha_k} q_k -
+\underbrace{q_k^TA q_{k-1}}_{\beta_k} q_{k - 1}$$
 
-where $$\gamma_k$$ normalizes $$q_{k+1}$$. Taking the dot product with
-$$q_{k+1}$$ shows that $$\gamma_k = \beta_k$$ so that the iteration can be
-rewritten as:
+where $$\gamma_{k + 1}$$ normalizes $$q_{k+1}$$. Taking the dot product with
+$$q_{k+1}$$ shows that $$\gamma_{k + 1} = \beta_{k + 1}$$ so that the iteration
+can be rewritten as:
 
-$$\beta_k q_{k+1} = A q_k - \alpha_k q_k - \beta_{k-1} q_{k - 1}$$
+$$\beta_{k + 1} q_{k+1} = A q_k - \alpha_k q_k - \beta_k q_{k - 1}$$
 
-where $$\beta_k$$ normalizes $$q_{k+1}$$ and $$\alpha_k = q_k^TAq_k$$. The
-iteration starts with $$\beta_0 q_0 = 0$$ and $$\beta_1 q_1 = b$$.
+where $$\beta_{k + 1}$$ normalizes $$q_{k+1}$$ and $$\alpha_k = q_k^TAq_k$$. The
+iteration starts with $$\beta_1 q_1 = b$$ and $$q_0 = 0$$.
 
 ## Gradient Methods
 
@@ -75,11 +75,10 @@ form:
 $$x_{k+1} = x_k - \alpha_k \block{A x_k - b}$$
 
 One can easily check that $$x_k \in \Krylov_k \Rightarrow x_{k+1} \in
-\Krylov_{k+1}$$, and Krylov methods generalize gradient methods by
-projecting the solution onto nested Krylov subspaces. If one can build
-a sufficiently nice basis for these subspaces, one can hope to find a
-better approximation of the initial problem as we iterate. For
-instance, the [Conjugate Gradient](cg.html) method satisfies:
+\Krylov_{k+1}$$, and Krylov methods seek to accelerate gradient methods by
+directly projecting the solution onto nested Krylov subspaces, using Lanczos
+method to construct an orthonormal basis. For instance, the [Conjugate
+Gradient](cg.html) method satisfies:
 
 $$x_k = \argmin{x \in \Krylov_k}\ \half x^T A x - b^T x$$
 
@@ -87,7 +86,7 @@ while the MINRES[^minres] method satisfies:
 
 $$x_k = \argmin{x \in \Krylov_k}\ \norm{A x - b}^2$$
 
-## Conjugate Gradients
+## Conjugate Gradient
 
 $$x_k = \argmin{x \in \Krylov_k}\ \half x^T A x - b^T x$$
 
@@ -98,14 +97,31 @@ $$y_k = \argmin{y}\ \half y^T Q_k^T A Q_k y - b^T Q_k y$$
 
 That is:
 
-$$y_k = \argmin{y}\ \half y^T T_k y - \underbrace{b^T Q_k} y$$
+$$y_k = \argmin{y}\ \half y^T T_k y - \underbrace{b^T Q_k}_{c_k^T} y$$
 
 or equivalently: $$T_k y_k = c_k$$. Now, $$Q_k b = \beta_1 e_1$$ and since
 $$T_k$$ is tridiagonal, we can maintain an [incremental $$LDL^T$$
 factorization](cholesky.html#incremental-tridiagonal-factorization) to
-efficiently update $$y$$'s coordinates.
+efficiently compute $$y_k$$'s coordinates, then update the solution vector
+$$x$$. More precisely, $$T_k$$ factors as $$T_k = L_k D_k L_k^T$$ where 
 
+$$D_k = \diag\block{d_k}$$
 
+is diagonal and 
+
+$$L_k = \mat{
+1 & & & &  \\
+l_2 & 1 &  & \\
+  & l_3 & 1  & \\ 
+  &  & \ddots & \ddots \\
+& &  & l_{k} & 1
+}
+$$
+
+is lower-diagonal with only the first sub-diagonal filled.
+
+One can show that this approach is indeed equivalent to the usual presentation
+of the CG algorithm.
 
 ## MINRES
 
@@ -113,8 +129,10 @@ $$y_k = \argmin{y}\ \norm{Q_k^T A Q_k y - Q_k^Tb}^2$$
 
 $$y_k = \argmin{y}\ \norm{T_k y - Q_k^Tb}^2$$
 
-Here, an incremental QR factorization of $$T_k$$ is maintained. See
-Choi's thesis[^choi06] for more details.
+Here, an incremental QR factorization of $$T_k$$ is maintained using Givens
+rotations:
+
+See Choi's thesis[^choi06] for more details.
 
 # Notes & References
 

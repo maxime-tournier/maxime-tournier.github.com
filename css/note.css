@@ -1,7 +1,14 @@
-/* @font-face { */
-/*   font-family: 'Linux Libertine'; */
-/*   src: url('../fonts/linux-libertine-regular.ttf') format('truetype'); */
-/* } */
+@font-face {
+  font-family: 'Linux Libertine';
+  src: url('../fonts/linux-libertine-regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Arbutus Slab';
+    src: url('/fonts/arbutus-slab-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
 body {
 
@@ -17,7 +24,11 @@ body {
     font-optical-sizing: auto;
     
     line-height: 145%;
-    text-align: justify;
+    /* text-align: justify; */
+
+    hyphens: auto;
+    word-break: normal;
+    overflow-wrap: normal;    
 
 }
 
@@ -81,8 +92,8 @@ blockquote {
 @media (hover: hover) {
     /* ... */
     body {
-	margin-left: 21em;
-	font-size: 13pt;	
+	    margin-left: 21em;
+	    font-size: 14pt;	
     }
 
     #markdown-toc {
@@ -203,6 +214,7 @@ h3 {
     padding-bottom: 0;
 }
 
+
 #postamble {
     font-size: 80%;
     text-align:center;
@@ -230,13 +242,35 @@ div.algorithm li ul {
 }
 
 div.algorithm {
+    /* display: flex; */
     /* width:%; */
 }
 
+li {
+  hyphens: auto;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+div.algorithm li {
+    position: relative;
+}
+/* comments */
 div.algorithm em {
-    margin: 0 auto;
-    float:right;
+    /* display: inline-block; */
+    position: absolute;
+    right: 0;       
+    font-size: 0.9em;
+    margin-left: 2em;
     color: grey;
+}
+
+div.algorithm em::before {
+    content: "(";
+}
+
+div.algorithm em::after {
+    content: ")";
 }
 
 #footer {

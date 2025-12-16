@@ -3,8 +3,9 @@ title: Cholesky Decomposition
 categories: [math]
 ---
 
-Some notes on the Cholesky decomposition with a focus on the sparse
-case.
+Some notes on the Cholesky decomposition with a focus on the sparse case. [Tim
+Davis](https://www.youtube.com/playlist?list=PL5EvFKC69QIyRLFuxWRnH6hIw6e1-bBXB)'s
+course on the subject is a treasure trove for anyone interested.
 
 {% include toc.md %}
 
@@ -199,8 +200,9 @@ be transposed in the original algorithm.
 # Incremental Tridiagonal Factorization
 
 The graph of a tridiagonal matrix $$T_k = \block{\alpha_k, \beta_k}$$
-is a line, hence a tree. We consider the last coordinate to be the
-root of the tree, and get the following simple incremental algorithm:
+(diagonal/subdiagonal entries for column $$k$$) is a line, hence a tree. We
+consider the last coordinate to be the root of the tree, and get the following
+simple incremental algorithm:
 
 $$
    \begin{align}
@@ -213,11 +215,13 @@ $$
    \end{align}
 $$
    
-   where the Cholesky factors are $$L_k = \mat{1 & & & \\ l_2 & 1 & & \\ &
-   l_3 &1 & \\ & & \ldots & 1}$$ and $$D_k = \diag(d_1, \ldots, d_k)$$.
+where the Cholesky factors are 
 
-If we need to solve $$T_k x_k = b_k$$, we may express the incremental
-solution as:
+$$L_k = \mat{1 & & & \\ l_2 & 1 & & \\ &
+   l_3 &1 & \\ & & \ddots & 1}$$ 
+   
+and $$D_k = \diag(d_1, \ldots, d_k)$$. If we need to solve $$T_k x_k = b_k$$, we
+may express the incremental solution as:
 	
 $$x_k = L_k^{-T}y_k$$
 

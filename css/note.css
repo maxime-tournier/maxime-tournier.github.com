@@ -10,6 +10,21 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Libre Baskerville';
+    src: url('/fonts/libre-baskerville.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Libertinus Serif';
+    src: url('/fonts/libertinus-serif.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 body {
 
     margin: auto;
@@ -42,15 +57,15 @@ code { font-size: 11pt; }
 }
 
 img {
-    margin-left:auto;
-    margin-right:auto;
+    margin-left: auto;
+    margin-right: auto;
     display: block;
 }
 
 @media print {
 
     body {
-	font-size:13px;
+	    font-size: 13px;
     }
 
 }
@@ -82,8 +97,8 @@ blockquote {
 @media (hover: none) {
     /* ... */
     body {
-	margin-left: auto;
-	font-size: 2.2vw;
+	    margin-left: auto;
+	    font-size: 2.2vw;
     }
     
 }
@@ -103,7 +118,7 @@ blockquote {
         max-width: 16em;
         margin-left: -19em;
         margin-top: -6em;
-	marging-right: 0;
+	    marging-right: 0;
     }
     
 }

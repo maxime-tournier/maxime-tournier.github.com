@@ -389,6 +389,21 @@ TODO
 
 TODO
 
+
+# Schur Complements
+
+Cholesky factorization can be useful when working with Schur complements. One
+can easily check that if $$LL^T = M$$ with the following block structure:
+
+$$\mat{L_{11} & \\ L_{12} & L_{22}}\mat{L_{11}^T & L_{12}^T \\ & L_{22}^T} = \mat{M_{11} & M_{12}^T \\ M_{12} & M_{22}}$$
+
+then the Schur complement obtained by pivoting the top-left block is factored by
+$$L_2$$:
+
+$$M_{22} - M_{12}^T M_{11}^{-1} M_{12} = L_{22} L_{22}^T$$
+
+This may be useful when multiple such Schur complements must be computed.
+
 # Notes
 
 [^1]: Of course one could choose to orient edges from parents to

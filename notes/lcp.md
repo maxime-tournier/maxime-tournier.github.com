@@ -11,7 +11,7 @@ Definite (SPD) matrices.
 Given an $$n\times n$$ SPD matrix $$M \succ 0$$ and a vector $$q \in \RR^n$$, the goal is
 to find $$x \in \RR^n$$ such that:
 
-$$0 \leq x \ \bot\  M x + q \geq 0$$
+$$0 \leq x \ \bot\  \underbrace{M x + q}_w \geq 0$$
 
 These are the [KKT conditions](convex-optimization#kkt-conditions) of the
 following convex QP:
@@ -77,4 +77,15 @@ q_1}^+$$. This means we can compute $$\lambda_1$$ solely from the solution of an
 $$n-1$$-dimensional problem. This immediately gives rise to an (exponential)
 algorithm: for each coordinate $$i$$, form and solve the corresponding $$n-1$$
 problem obtained by removing coordinate $$i$$, then obtain $$\lambda_i$$ from
-it.
+it. While completely untractable for large $$n$$ this provides closed-form
+formula when $$n$$ is small, for instance for $$n=2$$:
+
+$$
+\begin{aligned}
+w_1 &= \block{q_1 + M_{12} \block{-\frac{q_2}{M_{22}}}^{+}}^{+} \\
+w_2 &= \block{q_2 + M_{21} \block{-\frac{q_1}{M_{11}}}^{+}}^{+} \\
+\end{aligned}
+$$
+
+
+

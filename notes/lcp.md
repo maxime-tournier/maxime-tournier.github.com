@@ -41,6 +41,11 @@ along $$-K$$ and its (negative) $$M^{-1}$$-dual.
 
 # Projected Jacobi/Gauss-Seidel/SOR
 
+- TODO jacobi/gauss-seidel + project negative variables
+- simple/reasonably
+- linear convergence
+- see [iterative methods](iterative-methods) for the theory in the linear case
+
 # Modulus
 
 # Dantzig-Cottle

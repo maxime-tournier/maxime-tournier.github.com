@@ -12,7 +12,7 @@ I - \inv{P}M$$ is convergent, that is:
 
 $$\rho(B) < 1$$
 
-TODO convegent matrices 
+TODO convergent matrices 
 - https://en.wikipedia.org/wiki/Convergent_matrix
 - https://en.wikipedia.org/wiki/Spectral_radius#Power_sequence
 
@@ -30,7 +30,7 @@ We now look for sufficient conditions for:
 
 $$|\lambda| < 1$$
 
-## Case 1: $$M$$ is positive definite
+# Positive-Definite Matrices
 
 In this case, $$x^*Mx >0$$ and we may normalize $$x$$ so that $$x^*Mx
 = 1$$. $$x$$ verifies:
@@ -76,6 +76,13 @@ $$L + 2D + L^T - M = D + M - M = D > 0$$
 
 which is always true for $$M$$ positive definite.
 
+
+
+## TODO mass-splitting preconditionner
+
+- for schur complement in contact kkt systems
+- obtained by dividing mass by the number of constraints touching dofs (IIRC)
+- diagonal (jacobi-like, parallel) yet always converges
 
 
 

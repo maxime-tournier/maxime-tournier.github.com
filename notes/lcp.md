@@ -11,7 +11,7 @@ Definite (SPD) matrices.
 Given an $$n\times n$$ SPD matrix $$M \succ 0$$ and a vector $$q \in \RR^n$$, the goal is
 to find $$x \in \RR^n$$ such that:
 
-$$0 \leq x \ \bot\  \underbrace{M x + q}_w \geq 0$$
+$$0 \leq x \ \bot\  \underbrace{M x + q}_\lambda \geq 0$$
 
 These are the [KKT conditions](convex-optimization#kkt-conditions) of the
 following convex QP:
@@ -45,6 +45,60 @@ along $$-K$$ and its (negative) $$M^{-1}$$-dual.
 
 # Dantzig-Cottle
 
+As usual, we use a set of complementary indices $$B, N$$ to designate *basic*
+(the ones to solve for) and *non-basic* (the ones fixed to zero) variables. The
+general idea of the Dantzig-Cottle algorithm is fairly simple:
+
+- Start with $$x = 0, \lambda = q, B = \emptyset, N = \emptyset$$
+- If there exist an index $$i$$ such that $$\lambda_i < 0$$, attempt to
+  *continuously* bring $$\lambda_i$$ to $$0$$ while tracking sign changes in
+  $$x, \lambda$$ coordinates. When this happen, pivot the system accordingly.
+- Repeat
+
+Of course, the heart of the algorithm is the procedure to drive a negative
+$$\lambda_i$$ to $$0$$. At the start of any iteration, we have the following
+invariants:
+
+- $$$$ $$M x + q = \lambda$$ 
+- $$$$ $$x_B > 0, \lambda_B = 0$$
+- $$$$ $$x_N = 0, \lambda_N > 0$$
+
+If we find an index $$i$$ such that $$\lambda_i < 0$$, then this index is
+neither in $$B$$ nor $$N$$. We now include $$x_i$$ in the system variables and
+add a new constraint to the system:
+
+$$\mat{M_{BB} & M_{Bi} \\ M_{iB} & M_{ii}} \mat{x_B \\ x_i} + \mat{q_B \\ q_i}$$
+
+From the first line of the system, we see that the solution of the constrained
+system should satisfy:
+
+$$x_B = M_{BB}^{-1} q_B + M_{BB}^{-1} M_{Bi} x_i$$
+
+where the first term of the sum is the current value for $$x_B$$. So the idea of
+Dantig-Cottle is increase $$x_i$$ continuously until either the constraint is
+met, or there is a sign change in $$x_B, \lambda_N$$. More precisely, we'll move
+from $$x_B$$ in direction $$M_{BB}^{-1} M_{Bi}$$ until one of the following
+happens:
+
+- some $$x_B$$ goes negative
+- some in $$\lambda_N = M_{NB} x_B + q_N$$ goes negative
+- the maximum step length is reached, making $$i$$ a basic variable
+
+At each sign change, the sets $$B, N$$ are updated and a new constraint
+direction is computed.
+
+## Implementation Notes
+
+The main challenge is to implement subsystem factorization efficiently. A simple
+yet effective approach is to maintain and update a Cholesky factorization of
+$$M_{BB}$$ as the algorithm progresses. When some index enters/exits the basic
+variables, only the rows of the Cholesky factor that come *after* it need to be
+updated.
+
+## TODO convergence theory
+
+- no zero-size steps
+
 # Lemke
 
 # Projected Gradient
@@ -77,15 +131,34 @@ q_1}^+$$. This means we can compute $$\lambda_1$$ solely from the solution of an
 $$n-1$$-dimensional problem. This immediately gives rise to an (exponential)
 algorithm: for each coordinate $$i$$, form and solve the corresponding $$n-1$$
 problem obtained by removing coordinate $$i$$, then obtain $$\lambda_i$$ from
-it. While completely untractable for large $$n$$ this provides closed-form
-formula when $$n$$ is small, for instance for $$n=2$$:
+it. Once $$\lambda$$ is obtained, invert $$M$$ to get $$x$$. While completely
+untractable for large $$n$$ this provides closed-form formula when $$n$$ is
+small, for instance for $$n=2$$:
 
 $$
 \begin{aligned}
-w_1 &= \block{q_1 + M_{12} \block{-\frac{q_2}{M_{22}}}^{+}}^{+} \\
-w_2 &= \block{q_2 + M_{21} \block{-\frac{q_1}{M_{11}}}^{+}}^{+} \\
+\lambda_1 &= \block{q_1 + M_{12} \block{-\frac{q_2}{M_{22}}}^{+}}^{+} \\
+\lambda_2 &= \block{q_2 + M_{21} \block{-\frac{q_1}{M_{11}}}^{+}}^{+} \\
 \end{aligned}
 $$
 
+For the general case, a less overkill algorithm can be derived: when
+$$M_{1\alpha} \tilde{x} + q_1 < 0$$ we know that $$\lambda_1 = 0$$ which
+provides a linear constraint between $$x_1$$ and $$x_\alpha$$. So we may simply
+pivot $$x_1$$ away and solve a *single* $$n-1$$ dimensional LCP with the Schur
+complement to get the solution:
 
+$$
+\begin{aligned}
+x_1 &= M_{11}^{-1}\block{-q_1 - M_{1\alpha} x_\alpha} \\
+M_{\alpha1} x_1 &+ M_{\alpha\alpha} x_\alpha + q_\alpha = \lambda_\alpha \\
+\end{aligned}
+$$
 
+Substituting the first line into the second yields the following LCP:
+
+$$\block{M_{\alpha\alpha} - M_{\alpha1} M_{11}^{-1} M_{1\alpha}} x_\alpha + q_\alpha - M_{\alpha1}M_{11}^{-1}q_1 = \lambda_\alpha$$
+
+which can be solved recursively to get $$x_\alpha$$, from which $$x_1$$ can be
+obtained. The runtime is still prohibitive, but this can work when then number
+of active positivity constraints is known to be large.

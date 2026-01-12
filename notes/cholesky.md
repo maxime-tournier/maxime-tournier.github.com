@@ -402,7 +402,9 @@ $$L_2$$:
 
 $$M_{22} - M_{12}^T M_{11}^{-1} M_{12} = L_{22} L_{22}^T$$
 
-This may be useful when multiple such Schur complements must be computed.
+This may be useful when multiple such Schur complements must be computed. This
+also shows that the Schur complement of tridiagonal matrices is itself
+tridiagonal.
 
 # Notes
 

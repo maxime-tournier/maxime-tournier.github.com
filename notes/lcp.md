@@ -150,12 +150,12 @@ $$
 For the general case, a less overkill algorithm can be derived: when
 $$M_{1\alpha} \tilde{x} + q_1 < 0$$ we know that $$\lambda_1 = 0$$ which
 provides a linear constraint between $$x_1$$ and $$x_\alpha$$. So we may simply
-pivot $$x_1$$ away and solve a *single* $$n-1$$ dimensional LCP with the Schur
-complement to get the solution:
+pivot $$x_1$$ away and solve a *single* additional $$n-1$$ dimensional LCP with
+the Schur complement to get the solution:
 
 $$
 \begin{aligned}
-x_1 &= M_{11}^{-1}\block{-q_1 - M_{1\alpha} x_\alpha} \\
+x_1 &= -M_{11}^{-1}\block{q_1 + M_{1\alpha} x_\alpha} \\
 M_{\alpha1} x_1 &+ M_{\alpha\alpha} x_\alpha + q_\alpha = \lambda_\alpha \\
 \end{aligned}
 $$

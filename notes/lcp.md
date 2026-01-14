@@ -86,7 +86,7 @@ from $$x_B$$ in direction $$M_{BB}^{-1} M_{Bi}$$ until one of the following
 happens:
 
 - some $$x_B$$ goes negative
-- some in $$\lambda_N = M_{NB} x_B + q_N$$ goes negative
+- some $$\lambda_N = M_{NB} x_B + q_N$$ goes negative
 - the maximum step length is reached, making $$i$$ a basic variable
 
 At each sign change, the sets $$B, N$$ are updated and a new constraint

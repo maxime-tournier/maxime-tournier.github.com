@@ -175,3 +175,36 @@ of active positivity constraints is known to be large.
 - includes positive definite matrices
 - LCP has a unique solution iff M is a P-matrix
 - properly closed by schur complements
+
+# Lower-Hessenberg P-matrices
+
+*(adapted from [https://arxiv.org/pdf/1112.0217](https://arxiv.org/pdf/1112.0217))*
+
+When matrix $$M$$ is both lower Hessenberg and a P-matrix, the active set has a
+special structure that can be exploited to speed up computations. As usual, we
+partition the LCP variables $$x$$ into *basic* $$x_B$$ and non-basic $$x_N$$
+variables, and introduce matrix $$\bar{M}(B)$$ obtained by replacing non-basic
+columns with that of $$-I$$. Modulo reordering, this gives the following system:
+
+$$\underbrace{\mat{M_{BB} & 0 \\ M_{NB} & -I}}_{\bar{M}(B)} \mat{z_B \\ z_N} + \mat{q_B \\ q_N} = 0$$
+
+so that $$x = \block{z_B, 0}$$ is the primal solution and $$w = \block{0, z_N}$$
+is the dual solution. Without losing generality, we may rewrite $$B$$ as:
+
+$$B = P \cup \underbrace{\left\{l + 2, l + 3, ... k\right\}}_S$$
+
+where the prefix $$P \subseteq \overbrace{[0, \ldots, l]} =: [l]$$, and $$-2
+\leq l \leq k - 1$$. In other words, $$B$$ ends with a (possibly empty) set of
+*consecutive* basic indices separated from the prefix $$C$$ by non-basic index
+$$l + 1$$. Note that the bounds on $$l$$ correspond respectively to a full and
+empty suffix. Now, since $$M$$ is lower-Hessenberg and $$l+1$$ is non-basic, it
+is easy to see that the top-right submatrix $$\bar{M}(B)_{[l]S}$$ is zero. This
+means that:
+
+- The solution prefix $$x_{[l]}$$ must be a solution of the (top-left) subsystem
+  $$\block{\bar{M}(B)_{[l][l]}, q_{[l]}}$$
+- The prefix set must be the basic set of the top-left subsystem
+
+Since the top-left subsystem is also lower-Hessenberg, this property carries
+over recursively.
+

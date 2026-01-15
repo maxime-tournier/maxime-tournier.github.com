@@ -167,3 +167,11 @@ $$\block{M_{\alpha\alpha} - M_{\alpha1} M_{11}^{-1} M_{1\alpha}} x_\alpha + q_\a
 which can be solved recursively to get $$x_\alpha$$, from which $$x_1$$ can be
 obtained. The runtime is still prohibitive, but this can work when then number
 of active positivity constraints is known to be large.
+
+
+# TODO P-matrices
+
+- all principal minors positive
+- includes positive definite matrices
+- LCP has a unique solution iff M is a P-matrix
+- properly closed by schur complements

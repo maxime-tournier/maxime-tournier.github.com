@@ -402,9 +402,10 @@ $$L_2$$:
 
 $$M_{22} - M_{12}^T M_{11}^{-1} M_{12} = L_{22} L_{22}^T$$
 
-This may be useful when multiple such Schur complements must be computed. This
-also shows that the Schur complement of tridiagonal matrices is itself
-tridiagonal.
+This may be useful when multiple such Schur complements must be
+computed. Interestingly, $$L_{11}$$ factorizes the top-left block of matrix
+$$M$$ while $$L_{22}$$ factorizes the bottom-right block of matrix $$M^{-1}$$
+(which is the inverse of the Schur complement above).
 
 # Notes
 

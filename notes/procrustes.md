@@ -58,7 +58,7 @@ That is:
 
 $$n t = \sum_i y_i$$
 
-The rotation term is a linear form to be optimized on $$SO(3))$$:
+The rotation term is a linear form to be optimized on $$SO(3)$$:
 
 $$\min_{R \in SO(3)} -\tr\block{\block{YX^T}^T R}$$
 

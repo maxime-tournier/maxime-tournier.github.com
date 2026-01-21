@@ -67,7 +67,8 @@ This is the same problem as the matrix projection onto $$SO(3)$$:
 $$\min_{R \in SO(3)} \norm{F - R}^2 = \min_{R \in SO(3)} -\tr\block{F^TR}$$
 
 with $$F = YX^T$$. Using the Singular Value Decomposition of $$F = USV^T$$
-(flipping singular value signs to get both $$U, V \in SO(3)$$), we obtain the
+(flipping singular value signs to get both $$U, V \in SO(3)$$, and assuming that
+the flipped $$S \neq I$$ otherwise $$F \in SO(3)$$ already), we obtain the
 following equivalent problem:
 
 $$\min_{Q \in SO(3)} -\tr\block{S^TQ}$$
@@ -135,9 +136,55 @@ t &= \frac{1}{n} \sum_i y_i\\
 \end{aligned}
 $$
 
+# Uniform Scaling
+
+If we allow an extra scaling parameter $$s > 0$$ to the problem, we get the
+following matrix form:
+
+$$\min_{s > 0, R \in SO(3), t \in \RR^3} \quad \underbrace{\norm{sRX + t 1^T - Y}}_{E(s, R, t)}{}^2$$
+
+which we expand as before as:
+
+$$
+\begin{aligned}
+E(s, R, t) &= \tr\block{\block{sRX + t1^T - Y}^T\block{sRX + t1^T - Y}} \\
+&= s^2\tr\block{X^TX} + 2 s\tr\block{X^TR^T\block{t1^T - Y}} + \tr\block{\block{t1^T - Y}^T\block{t1^T - Y}} \\
+\end{aligned}
+$$
+
+As before, the term $$\tr\block{X^TR^Tt1^T}$$ vanishes when $$X1 = 0$$, and the
+translation part becomes separable again with the same solution as before. The
+scale/rotation part remains:
+
+$$E(s, R) = s^2\ \tr\block{X^TX} - 2 s\ \tr\block{F^TR}$$
+
+where $$F=YX^T$$. As before, we change variables with $$Q=UV^T$$ given the
+decomposition $$F = UDV^T$$ (again, flipping signs so that both $$U$$ and $$V$$
+are rotations) and obtain:
+
+$$E(s, Q) = s^2\ \tr\block{X^TX} - 2 s\ \tr\block{D^TQ}$$
+
+whose differential is given by:
+
+$$\dd E(s, Q).\dd s.\dd Q = 2s\ \dd s\ \tr\block{X^TX} - 2\dd s\ \tr\block{D^TQ} - 2 s\ \tr\block{D^T\dd Q}$$
+
+Considering only admissible tangent vectors $$\dd s = s v$$ and $$\dd Q = Q
+\omega$$ for $$v \in \RR$$ and $$\omega \in \alg{so(3)}$$, we get the
+first-order stationary conditions:
+
+$$\forall v \in \RR, \omega \in \alg{so(3)}: v \block{s\ \tr\block{X^TX} - \tr\block{D^TQ}} - \tr\block{D^TQ\omega} = 0$$
+
+As before, $$Q^TD$$ must be symmetric which is only possible if $$Q = I$$, and
+we get the scale factor as:
+
+$$s = \frac{\tr\block{D}}{\tr\block{X^TX}}$$
+
+TODO how to handle negative scales?
+TODO if the point clouds are orientation-preserving, do we have $$s > 0$$ ?
+
+
 # TODO 
 
-- introduce uniform scale?
 - introduce non-uniform scale?
 - introduce point equality constraints?
 

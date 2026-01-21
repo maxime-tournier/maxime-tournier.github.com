@@ -38,9 +38,9 @@ $$\begin{aligned}
 $$
 
 We notice that $$X 1 = \sum_i x_i$$ so if we choose coordinates so that $$X 1 =
-0$$ (which is always possible), then the first term disappears and we're left
-with a linear form in $$R$$. The total energy is then reduced to the following
-*separable* energy:
+0$$ (which is always possible by centering around the mean), then the first term
+disappears and we're left with a linear form in $$R$$. The total energy is then
+reduced to the following *separable* energy:
 
 $$E(R, t) = -\tr\block{\block{YX^T}^T R} + \tr\block{\block{t1^T - Y}^T\block{t1^T - Y}}$$
 

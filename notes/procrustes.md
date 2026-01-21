@@ -29,7 +29,7 @@ E(R, t) &= \tr\block{\block{RX + t1^T - Y}^T\block{RX + t1^T - Y}} \\
 \end{aligned}
 $$
 
-Dropping the constant term $$\tr\block{X^TX}$$, we focus on the second term:
+Dropping the constant term $$\tr\block{X^TX}$$, let us focus on the second term:
 
 $$\begin{aligned}
 \tr\block{X^TR^T\block{t1^T - Y}} &= \tr\block{X^TR^Tt1^T} - \tr\block{X^TR^TY} \\

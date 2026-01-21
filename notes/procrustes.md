@@ -137,8 +137,9 @@ $$
 
 # TODO 
 
-- introduce uniform scale
-- introduce non-uniform scale
+- introduce uniform scale?
+- introduce non-uniform scale?
+- introduce point equality constraints?
 
 
 

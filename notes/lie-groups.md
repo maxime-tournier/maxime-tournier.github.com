@@ -45,8 +45,8 @@ $$\dd \inv{L_h}(e): T_e(G) \simeq T_g(G)$$
 $$\dd \inv{R_h}(e): T_e(G) \simeq T_g(G)$$
 
 These isomorphisms vary smoothly with $$g$$ so that the tangent bundle $$TG$$ is
-*globally* isomorphic to $$G \times T_e(G)$$ (it is said *trivializable*): any
-tangent vector $$\dd g$$ is uniquely determined by its coordinates in the
+*globally* isomorphic to $$G \times T_e(G)$$ (it is said to be *trivializable*):
+any tangent vector $$\dd g$$ is uniquely determined by its coordinates in the
 tangent space at the identity (together with the base point $$g$$). These
 coordinates are called the left/right trivializations of $$\dd g$$ and satisfy:
 

@@ -67,8 +67,8 @@ This is the same problem as the matrix projection onto $$SO(3)$$:
 $$\min_{R \in SO(3)} \norm{F - R}^2 = \min_{R \in SO(3)} -\tr\block{F^TR}$$
 
 with $$F = YX^T$$. Using the Singular Value Decomposition of $$F = USV^T$$
-(flipping singular value signs to get both $$U, V \in SO(3)$$, and assuming that
-the flipped $$S \neq I$$ otherwise $$F \in SO(3)$$ already), we obtain the
+(flipping singular value signs[^1] to get both $$U, V \in SO(3)$$, and assuming
+that the flipped $$S \neq I$$ otherwise $$F \in SO(3)$$ already), we obtain the
 following equivalent problem:
 
 $$\min_{Q \in SO(3)} -\tr\block{S^TQ}$$
@@ -160,7 +160,7 @@ $$E(s, R) = s^2\ \tr\block{X^TX} - 2 s\ \tr\block{F^TR}$$
 
 where $$F=YX^T$$. As before, we change variables with $$Q=UV^T$$ given the
 decomposition $$F = UDV^T$$ (again, flipping signs so that both $$U$$ and $$V$$
-are rotations) and obtain:
+are rotations[^2]) and obtain:
 
 $$E(s, Q) = s^2\ \tr\block{X^TX} - 2 s\ \tr\block{D^TQ}$$
 
@@ -179,15 +179,21 @@ we get the scale factor as:
 
 $$s = \frac{\tr\block{D}}{\tr\block{X^TX}}$$
 
-TODO how to handle negative scales?
-TODO if the point clouds are orientation-preserving, do we have $$s > 0$$ ?
-
+Note that it should always be possible to flip/swap singular values[^1][^2] so
+that $$s > 0$$.
 
 # TODO 
 
 - introduce non-uniform scale?
-- introduce point equality constraints?
 
+# Notes
 
+[^1]: If neither $$U$$ not $$V$$ are rotations, just swap two singular values
+    and update $$U$$, $$V$$ accordingly. If either $$U$$ or $$V$$ is already a
+    rotation, a single singular value sign change (updating $$U$$ or $$V$$
+    accordingly) should do the trick. 
+    
+[^2]: In order to always get a positive scaling value $$s$$, the smallest
+    singular value sign should be flipped so that $$\tr\block{D} > 0$$.
 
 

@@ -48,6 +48,78 @@ along $$-K$$ and its (negative) $$M^{-1}$$-dual.
 
 # Modulus
 
+Start by noticing that positive complementary variables $$x, \lambda$$ may be
+obtained from the positive and negative part of a single unconstrained variable
+$$z$$:
+
+$$
+\begin{aligned}
+x &= z^{+} = \frac{|z| + z}{2} \\
+\lambda &= -z^{-} = \frac{|z| - z}{2} \\
+\end{aligned}
+$$
+
+or even simpler by dropping the $$\frac{1}{2}$$ factors. Therefore, the LCP may
+be rewritten in terms of $$z$$ as:
+
+$$M\block{|z| + z} + q = |z| - z$$
+
+That is:
+
+$$\block{I + M} z = \block{I - M}|z| - q$$
+
+Therefore, the solution vector satisfies a fixpoint equation:
+
+$$z = \block{I + M}^{-1}\block{\block{I - M}|z| - q}$$
+
+It is easy to show that the iteration matrix $$\block{I + M}^{-1}\block{I - M}$$
+is [convergent](iterative-methods) when $$M$$ is positive definite. On the other
+hand, the absolute value is non-expansive:
+
+$$
+\begin{aligned}
+\norm{|x| - |y|}^2 &= \sum_i \block{\left|x_i\right| - \left|y_i\right|}^2 \\
+&\leq \sum_i \block{x_i - y_i}^2 \\
+&= \norm{x - y}^2 \\
+\end{aligned}
+$$
+
+where the (squared) reverse triangle inequality on $$\RR$$ is used
+term-wise. Therefore, the fixpoint iteration converges globally to the solution
+of the LCP. In practice though, the convergence will usually be slow but may be
+improved by diagonal preconditionning:
+
+$$M\block{|z| + z} + q = D\block{|z| - z}$$
+
+where $$D > 0$$ is diagonal. The resulting fixpoint iteration becomes:
+
+$$z = \block{D + M}^{-1}\block{\block{D - M}|z| - q}$$
+
+and can be easily shown to converge for the $$\norm{\cdot}_D$$ Euclidean
+norm. An equivalent but slightly more efficient iteration is the following:
+
+$$
+\begin{aligned}
+z &= \block{D + M}^{-1}\block{\block{D + D - D - M}|z| - q} \\
+  &= \block{D + M}^{-1}\block{2 D |z| - q} - |z| \\
+\end{aligned}
+$$
+
+Diagonal preconditioning or [sparse approximate
+diagonal](frobenius-preconditioners) preconditioners may improve convergence in
+some cases, but finding a provably good and easy-to compute preconditioner is
+still an open question.
+
+If we express the absolute value solely in terms of the projection onto the
+positive orthant:
+
+$$|z| = z^{+} - z^{-} = z^{+} - \block{z - z^{+}} = 2 z^{+} - z$$
+
+then one can easily generalize the above fixpoint iteration to the linear cone
+complementarity problem, provided we know how to project onto the cone (or its
+dual) for the $$\norm{\cdot}_D$$ norm.
+
+
 # Dantzig-Cottle
 
 As usual, we use a set of complementary indices $$B, N$$ to designate *basic*

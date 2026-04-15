@@ -150,8 +150,9 @@ Riemmanian metric as:
 $$\inner{\omega_1, \omega_2} = \int_\Omega \inner{\omega_1^\sharp(x), \omega_2^\sharp(x)}.\dd A$$
 
 where the Riemannian metric is used to define the $$\sharp, \flat$$ operators
-between the tangent and cotangent bundles. 
-
+between the tangent and cotangent bundles. We may now proceed to compute the
+$$L^2$$ inner product of Whitney forms $$\phi_{ij}$$, and see how to transfer it
+to discrete forms with a metric.
 
 Now if we consider the barycentric coordinates $$\lambda_i, \lambda_j$$ over a
 triangle $$ijk$$, their derivatives are constant and we may compute the above

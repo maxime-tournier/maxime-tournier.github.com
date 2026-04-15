@@ -102,11 +102,16 @@ $$M_2 = \diag\block{\frac{1}{\left|T_i\right|}}$$
 ## 1-forms
 
 Again, a discrete 1-form is the integral of some actual 1-form over a 1-cell
-(edge). Before even thinking of transporting the $$L^2$$ inner product from
+(edge). 
+
+Before even thinking of transporting the $$L^2$$ inner product from
 1-forms to discrete forms, we need some correspondance between 1-form on the
-mesh and basis discrete 1-forms, which is not entirely trivial. More precisely,
-we want to construct some 1-forms $$\omega_{ij}$$ such that $$\hat{\omega}_{ij}
-= e_{ij}$$, that is:
+mesh and basis discrete 1-forms, which is not entirely trivial. 
+
+### Whitney forms
+
+More precisely, we want to construct some 1-forms $$\omega_{ij}$$ such that
+$$\hat{\omega}_{ij} = e_{ij}$$, that is:
 
 $$\begin{aligned}
 \int_{ij} \omega_{ij} &= 1 \\
@@ -152,41 +157,62 @@ $$\inner{\omega_1, \omega_2} = \int_\Omega \inner{\omega_1^\sharp(x), \omega_2^\
 where the Riemannian metric is used to define the $$\sharp, \flat$$ operators
 between the tangent and cotangent bundles. We may now proceed to compute the
 $$L^2$$ inner product of Whitney forms $$\phi_{ij}$$, and see how to transfer it
-to discrete forms with a metric.
+to discrete forms with a metric. 
 
-Now if we consider the barycentric coordinates $$\lambda_i, \lambda_j$$ over a
-triangle $$ijk$$, their derivatives are constant and we may compute the above
-expression for the barycentric coordinates along edge $$ij$$:
+### Discrete Metric
 
-$$\begin{aligned} \inner{\dd \lambda_i, \dd \lambda_j}_{L^2} &= \int_{ijk}
-\inner{\nabla \lambda_i(x), \nabla \lambda_j(x)}.\dd A \\ &= |ijk| \inner{\nabla
-\lambda_i, \nabla \lambda_j} \\ \end{aligned} $$
+As before, let us consider the $$L^2$$ norm for $$\phi_{ij}$$, which will
+correspond the the metric diagonal terms:
 
-where the left-hand-side is the $$L^2$$ inner product of 1-forms, and the
-right-hand-side is the inner product of tangent vectors. Now, one can show that
-using a Riemannian metric induced by the canonical metric on $$\RR^3$$, we
-get[^1] the following expression:
+$$\norm{\phi_{ij}}_{L^2}^2 = \int_\Omega \norm{\phi_{ij}(x)}^2.\dd A$$
+
+Over triangle $$ijk$$ the basis functions $$\phi, \phi_j$$ are equal to the
+barycentric coordinates $$\lambda_i, \lambda_j$$ over this triangle:
+
+$$\int_{ijk} \norm{\phi_{ij}(x)}^2 = \int_{ijk} \norm{\lambda_i \nabla \lambda_j -
+\lambda_j \nabla \lambda_i}^2$$
+
+whose gradients $$\nabla \lambda_i, \nabla \lambda_j$$ are constant over
+$$ijk$$. Expanding the squared norm gives:
+
+$$\int_{ijk} \norm{\phi_{ij}(x)}^2 = \norm{\nabla \lambda_i}^2 \int_{ijk}\lambda_i^2 +  \norm{\nabla \lambda_j}^2 \int_{ijk}\lambda_j^2 - 2 \inner{\nabla \lambda_i, \nabla \lambda_j} \int_{ijk}\lambda_i \lambda_j$$
+
+It can be show that:
+
+$$
+\begin{aligned}\int_{ijk} \lambda_i^2 = \int_{ijk} \lambda_j^2 &= \frac{|ijk|}{6}\\
+\int_{ijk} \lambda_i\lambda_j &= \frac{|ijk|}{12} \\
+\end{aligned}
+$$
+
+So that we end up with:
+
+$$\int_{ijk} \norm{\phi_{ij}(x)}^2 = \frac{|ijk|}{6}\block{\norm{\nabla \lambda_i}^2 + \norm{\nabla \lambda_j}^2 - \inner{\nabla \lambda_i, \nabla \lambda_j}}$$
+
+
+Using the Riemannian metric induced by the canonical metric on $$\RR^3$$, we can
+obtain[^1] the following expression:
 
 $$\nabla \lambda_i = \frac{|jk|}{2|ijk|} n_i$$
 
 where $$n_i$$ is the unit vector orthogonal to $$jk$$ in triangle $$ijk$$. We
 end up with the following:
 
-$$\inner{\nabla \lambda_i, \nabla \lambda_i}_{\RR^3} = \frac{|jk| |ik| \cos\block{\theta_k}}{4|ijk|^2}$$
+$$\inner{\nabla \lambda_i, \nabla \lambda_j} = \frac{|jk| |ik| \cos\block{\theta_k}}{4|ijk|^2}$$
 
 which can be shown to be equal to the so-called *cotan weights*:
 
-$$\inner{\nabla \lambda_i, \nabla \lambda_i} = \frac{\cot\block\theta_k}{2|ijk|}$$
+$$\inner{\nabla \lambda_i, \nabla \lambda_j} = -\frac{\cot\block{\theta_k}}{4|ijk|^2}$$
 
-and we get the $$L^2$$ inner product over triangle $$ijk$$ as:
+Similarly, it can be shown that:
 
-$$\inner{\dd \lambda_i, \dd \lambda_j}_{L^2} = \frac{\cot\block\theta_k}{2}$$
+$$\norm{\nabla \lambda_i}^2 = \frac{\cot\block{\theta_j} + \cot\block{\theta_k}}{4|ijk|^2}$$
 
-Of course, there may be another triangle $$jim$$ sharing edge $$ij$$ in which case 
+which brings us to:
+
+$$\int_{ijk} \norm{\phi_{ij}(x)}^2 = \frac{1}{24|ijk|}\block{\cot\block{\theta_i} + \cot\block{\theta_j} + 3\cot\block{\theta_k}}$$
 
 
-Again, the metric on discrete 1-forms should mimic the $$L^2$$ inner product on
-1-forms
 
 # Notes & References
 

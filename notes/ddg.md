@@ -52,5 +52,56 @@ $$
 
 # Metrics on discrete forms
 
+## 0-forms
+
+We want the metric on discrete 0-forms (sampled functions at vertices) to mimic
+the $$L^2$$ inner product:
+
+$$\inner{\hat{u},\hat{v}} \approx \int_\Omega u(x) v(v) \dd x$$
+
+A first consequence is that the squared norm of the indicator function should
+match the volume/area of the domain:
+
+$$\inner{\hat{1},\hat{1}} = |\Omega|$$
+
+If we require the metric to be diagonal, there's not much we can do apart from
+partitioning the domain into subdomains $$\Omega_i$$ (which could be barycentric
+or Voronoi-based), one for each vertex $$i$$. We end up with the following
+metric:
+
+$$M_0 = \diag\block{\left|\Omega_i\right|}$$ 
+
+where 
+
+$$\sum_i \left|\Omega_i\right| = \left|\Omega\right|$$
+ 
+
+### TODO whitney basis/galerkin mass
+
+## 2-forms
+
+A discrete 2-form is the integral of some actual 2-form over a 2-cell
+(triangle). Let $$\hat{\omega}_i = e_i$$ be a piecewise constant 2-form whose
+integral over the i-th triangle $$T_i$$ is $$1$$ and $$0$$ over other
+triangles. That is, $$\omega_i$$ is a 2-form whose discrete version is the
+$$i$$-th basis vector $$e_i$$. Since $$\omega_i$$ is top-dimensional, it can be
+written as $$\omega_i = f_i {1}_{T_i} \dd A$$ where $$\dd A$$ is the area form,
+and $$f_i$$ is such that $$\int_{T_i} f_i \dd A = 1$$. Therefore:
+
+$$f_i =\frac{1}{\left|T_i\right|}$$ 
+
+Again, the metric on discrete 2-forms should mimic the $$L^2$$ inner product on
+2-forms, so we get the following diagonal elements:
+
+$$e_i^T M_2 e_i = \int_{T_i} f_i^2 \dd A = \frac{1}{\left|T_i\right|}$$
+
+If we further require the metric to be diagonal, we're done:
+
+$$M_2 = \diag\block{\frac{1}{\left|T_i\right|}}$$
+
+## 1-forms
+
+
+
 
 

@@ -101,7 +101,98 @@ $$M_2 = \diag\block{\frac{1}{\left|T_i\right|}}$$
 
 ## 1-forms
 
+Again, a discrete 1-form is the integral of some actual 1-form over a 1-cell
+(edge). Before even thinking of transporting the $$L^2$$ inner product from
+1-forms to discrete forms, we need some correspondance between 1-form on the
+mesh and basis discrete 1-forms, which is not entirely trivial. More precisely,
+we want to construct some 1-forms $$\omega_{ij}$$ such that $$\hat{\omega}_{ij}
+= e_{ij}$$, that is:
 
+$$\begin{aligned}
+\int_{ij} \omega_{ij} &= 1 \\
+\int_{e \neq ij} \omega_{ij} &= 0\\
+\end{aligned}
+$$
+
+If we consider Whitney basis functions $$\phi_i, \phi_j$$, we see that by
+Stokes' theorem:
+
+$$\begin{aligned}
+\int_{e} \dd\block{\phi_i \phi_j} &= \int_{\partial e} \phi_i \phi_j = 0 \\
+&= \int_{e} \phi_j \dd \phi_i + \phi_i \dd \phi_j \\
+\end{aligned}
+$$
+
+for any edge $$e$$. Also, on edge $$ij$$ we have $$\phi_i + \phi_j = 1$$,
+therefore $$\dd \phi_i = -\dd \phi_j$$, so instead of
+
+$$\int_{ij} \phi_j \dd \phi_i + \phi_i \dd \phi_j = \int_{ij} \underbrace{\block{\phi_j - \phi_i}}_0 \dd \phi_i = 0$$ 
+
+cancelling out as above, we could instead do:
+
+$$\int_{ij} \phi_j \dd \phi_i - \phi_i \dd \phi_j = \int_{ij} \underbrace{\block{\phi_j + \phi_i}}_1 \dd \phi_i = \int_{\partial ij} \phi_i = 1 - 0 = 1$$ 
+
+So the 1-form $$\phi_{ij} = \phi_j \dd \phi_i - \phi_i \dd \phi_j$$ integrates
+to 1 over edge $$ij$$. For some other edge that is not $$ij$$, for instance
+$$ik$$, we get:
+
+$$\int_{ik} \underbrace{\phi_j}_0 \dd \phi_i - \phi_i \dd \phi_j = \int_{ik}
+  \underbrace{\phi_j}_0 \dd \phi_i = 0$$
+
+by our first identity. The same trick works for any edge that is not $$ij$$, so that the $$\phi_{ij}$$ are a basis for discrete forms:
+
+$$\hat{\phi}_{ij} = e_{ij}$$
+
+Unlike 0 and 2-forms, there's no immediate way to link the $$L^2$$ inner product
+to the usual integration of functions: the inner product is obtained from the
+Riemmanian metric as:
+
+$$\inner{\omega_1, \omega_2} = \int_\Omega \inner{\omega_1^\sharp(x), \omega_2^\sharp(x)}.\dd A$$
+
+where the Riemannian metric is used to define the $$\sharp, \flat$$ operators
+between the tangent and cotangent bundles. 
+
+
+Now if we consider the barycentric coordinates $$\lambda_i, \lambda_j$$ over a
+triangle $$ijk$$, their derivatives are constant and we may compute the above
+expression for the barycentric coordinates along edge $$ij$$:
+
+$$\begin{aligned} \inner{\dd \lambda_i, \dd \lambda_j}_{L^2} &= \int_{ijk}
+\inner{\nabla \lambda_i(x), \nabla \lambda_j(x)}.\dd A \\ &= |ijk| \inner{\nabla
+\lambda_i, \nabla \lambda_j} \\ \end{aligned} $$
+
+where the left-hand-side is the $$L^2$$ inner product of 1-forms, and the
+right-hand-side is the inner product of tangent vectors. Now, one can show that
+using a Riemannian metric induced by the canonical metric on $$\RR^3$$, we
+get[^1] the following expression:
+
+$$\nabla \lambda_i = \frac{|jk|}{2|ijk|} n_i$$
+
+where $$n_i$$ is the unit vector orthogonal to $$jk$$ in triangle $$ijk$$. We
+end up with the following:
+
+$$\inner{\nabla \lambda_i, \nabla \lambda_i}_{\RR^3} = \frac{|jk| |ik| \cos\block{\theta_k}}{4|ijk|^2}$$
+
+which can be shown to be equal to the so-called *cotan weights*:
+
+$$\inner{\nabla \lambda_i, \nabla \lambda_i} = \frac{\cot\block\theta_k}{2|ijk|}$$
+
+and we get the $$L^2$$ inner product over triangle $$ijk$$ as:
+
+$$\inner{\dd \lambda_i, \dd \lambda_j}_{L^2} = \frac{\cot\block\theta_k}{2}$$
+
+Of course, there may be another triangle $$jim$$ sharing edge $$ij$$ in which case 
+
+
+Again, the metric on discrete 1-forms should mimic the $$L^2$$ inner product on
+1-forms
+
+# Notes & References
+
+[^1]: It is easy to see that $$\lambda_i$$ does not change in direction $$jk$$
+    (hence should be along $$n_i$$), and that moving along $$n_i$$ by the
+    altititude $$h_i = \frac{2|ijk|}{|jk|}$$ of vertex $$i$$ to edge $$jk$$
+    causes $$\lambda_i$$ to change linearly by exactly 1.
 
 
 

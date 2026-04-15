@@ -13,7 +13,7 @@ mathematical issues. Please let me know if you find anything useful in there :)
 <ul>
     {% for p in site.pages %}
         {% if p.categories contains category %}
-        <li> <a href="{{p.url}}">{{p.title}}</a> </li>
+        <li> <a href="{{p.url}}" {% if p.tags contains "draft" %} class="draft" {% endif %}>{{p.title}}</a> </li>
         {% endif %}
     {% endfor %}
     </ul>
@@ -27,7 +27,7 @@ mathematical issues. Please let me know if you find anything useful in there :)
         
         {% else %}
         {% if p.url != page.url %}
-            <li> <a href="{{p.url}}">{{p.title}}</a> </li>
+            <li> <a href="{{p.url}}" {% if p.tags contains "draft" %} class="draft" {% endif %} %}>{{p.title}}</a> </li>
         {% endif %}
         {% endif %}
     {% endfor %}

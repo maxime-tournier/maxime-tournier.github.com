@@ -1,6 +1,7 @@
 ---
-title: Discrete Differential Geometry (Draft)
-categories: [math, draft]
+title: Discrete Differential Geometry
+categories: [math]
+tags: [draft]
 ---
 
 {% include toc.md %}
@@ -48,5 +49,8 @@ $$
 # Exterior Derivative & Stoke's Theorem
 
 # Discrete Differential Forms & Exterior Derivative
+
+# Metrics on discrete forms
+
 
 

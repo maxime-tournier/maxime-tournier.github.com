@@ -15,36 +15,108 @@ stuff over discrete manifolds.
 - 2D manifolds: half-edge data structures (HDS)
 - in general: combinatorial maps
 
-# Differential Forms & Integration
+# Differential Forms
 
 Differential forms are the stuff that show up under the integral sign:
 
 $$\int_\Omega \omega$$
 
 In the above, $$\omega$$ is a differential form whose dimension matches that of
-the integration domain $$\Omega$$. Its purpose is to "eat" infinitesimal volume
-elements that make up $$\Omega$$ in order to produce a scalar, one per volume
-element. Conceptually, these (infinitely many) scalars are then summed up to
+the integration domain $$\Omega$$. Its purpose is to "eat" infinitesimal volumes
+that make up $$\Omega$$ in order to produce a scalar, one per infinitesimal
+volume. Conceptually, these (infinitely many) scalars are then summed up to
 compute the integral. The differential form thus encodes the *weighting*
-associated to each volume element.
+associated to each infinitesimal volume.
 
-Infinitesimal volume elements around a point $$x \in \Omega$$ may be represented
-by $$n$$ vectors describing the edges of the element. For integration to make
-sense, we would like the action of weighting this volume element to be
-$$n$$-linear: if we scale the size of any edge of our volume element, we expect
+Infinitesimal volumes around a point $$x \in \Omega$$ may be represented by
+$$n$$ (tangent) vectors describing the edges of a parallelotope. For integration
+to make sense, we would like the action of weighting this parallelotope to be
+$$n$$-linear: if we scale the size of any edge of the parallelotope, we expect
 its volume to scale similarly. Additionally, if two edge vectors are the same,
-the volume element degenerates and we expect its volume to be zero.
+we expect the volume to be zero. Taken together, there properties imply that the
+weighting of an infinitesimal volume should act like an *alternating* $$n$$-linear
+map.
 
-Therefore, a differential form can be seen as a function that associates some
-alternating $$n$$-linear map to every point of the domain $$x$$:
+Therefore, a differential form can be seen as a function that associates a
+alternating $$n$$-linear map $$\omega(x): \block{T_x\Omega}^n \to \RR$$ (in the tangent
+space at this point) to every point of the domain $$x$$:
 
 $$
 \begin{aligned}
-\omega(x)&: \RR^n \to \RR \\
 \omega(x)\block{\ldots, \lambda y + \mu z, \ldots} &= \lambda \omega(x)\block{\ldots, y, \ldots} + \mu \omega(x)\block{\ldots, z, \ldots} \\
 \omega(x)\block{\ldots, x, \ldots, x, \ldots} &= 0 \\
 \end{aligned}
 $$
+
+For instance, the usual differential of a scalar function is a 1-form: it
+associates to every point of the domain a linear form (the differential at that
+point, which is trivially alternating) and can be integrated along curves. By
+convention, 0-forms are scalar functions of the domain. An interesting property
+of $$n$$-linear alternating maps is that their pullback by an endomorphism $$A$$
+satisfies:
+
+$$A^*\omega\block{x_1, \ldots, x_n} = \omega\block{Ax_1, \ldots, Ax_n} =
+\det(A)\omega\block{x_1, \ldots, x_n}$$
+
+In fact, this property can even serve as a *definition* of the determinant. This
+implies that $$n$$-forms are rotation-invariant as one would expect: rotating
+infinitesimal volumes should not change their weight.
+
+Finally, since $$n$$-linear (alternating) maps form a 1-dimensional vector
+space, we may choose some non-degenerate differential $$n$$-form $$\mu$$ as a
+reference and obtain any other $$n$$-form as $$\omega = f \mu$$ where $$f$$ is a
+scalar function that provides the pointwise scaling factor. Such reference
+$$n$$-forms are usually called *volume forms*.
+
+## TODO wedge products
+
+
+
+## Volume forms
+
+*Orientable* manifolds are exactly defined as the ones for which such a volume
+form exists. When the manifold comes with a Riemannian metric, there is a
+natural choice of a volume form: it is chosen such that any
+orientation-preserving orthonormal parallelotope (as per the metric) is weighted
+to $$1$$[^orthogonal-invariance]. Now, any orthogonal basis $$B$$ satisfies:
+
+$$B^T M B = I$$
+
+where $$M$$ is the inner product matrix (pointwise). Since the metric is
+non-degenerate, a [Cholesky decomposition](cholesky) $$M=LL^T$$ can be used to
+show that an orientation-preserving basis must decompose as $$B=L^{-T}Q$$ where
+$$Q \in SO(n)$$ is a rotation. If we let $$\dd x^1, \ldots, \dd x^n$$ be local
+coordinates, the associated $$n$$-form $$\dd x^1\wedge \ldots \wedge \dd x^n$$
+satisfies
+
+$$\begin{aligned}
+B^*\block{\dd x^1\wedge \ldots \wedge \dd x^n} &= \det(B)\dd x^1\wedge \ldots \wedge \dd x^n \\
+&= \sqrt{\det(M)}\dd x^1\wedge \ldots \wedge \dd x^n
+\end{aligned}
+$$
+
+Trivially, $$B^*\block{\dd x^1\wedge \ldots \wedge \dd x^n} = \dd Bx^1 \wedge
+\ldots \wedge \dd Bx^n$$ will weight the parallelotope associated to basis $$B$$
+to $$1$$ and therefore, the Riemannian volume form in local coordinates is given by:
+
+$$\sqrt{\det(g)}\dd x^1\wedge \ldots \wedge \dd x^n$$
+
+
+## Metric
+
+On Riemannian manifolds, differential 1-forms can be identified to vector fields
+using the metric through the so-called *musical isomorphisms*:
+
+$$X^\flat = g(X, .)$$
+
+where $$g$$ is the Riemannian metric. Here $$X^\flat$$ is a 1-form obtained from
+vector field $$X$$ by considering the (pointwise) inner-product with $$X$$ using
+the metric $$g$$. Conversely, a 1-form $$\omega$$ and be (pointwise) represented
+by the inner product with some tangent vector $$\omega^\sharp$$, producing a
+vector field. This in turns provides an inner-product on differential 1-forms,
+obtained by integrating the inner product of their representing vector fields
+over the manifold.
+
 
 # Exterior Derivative & Stoke's Theorem
 
@@ -144,7 +216,8 @@ $$ik$$, we get:
 $$\int_{ik} \underbrace{\phi_j}_0 \dd \phi_i - \phi_i \dd \phi_j = \int_{ik}
   \underbrace{\phi_j}_0 \dd \phi_i = 0$$
 
-by our first identity. The same trick works for any edge that is not $$ij$$, so that the $$\phi_{ij}$$ are a basis for discrete forms:
+by our first identity. The same trick works for any edge that is not $$ij$$, so
+that the $$\phi_{ij}$$ are a basis for discrete forms:
 
 $$\hat{\phi}_{ij} = e_{ij}$$
 
@@ -158,6 +231,21 @@ where the Riemannian metric is used to define the $$\sharp, \flat$$ operators
 between the tangent and cotangent bundles. We may now proceed to compute the
 $$L^2$$ inner product of Whitney forms $$\phi_{ij}$$, and see how to transfer it
 to discrete forms with a metric. 
+
+### Discrete Metric
+
+$$\inner{\phi_{ij}, \phi_{kl}}_{L^2} = \int_\Omega \inner{\phi_{ij}(x), \phi_{kl}(x)}.\dd A$$
+
+Split on edge cells $$\sigma(e)$$:
+
+$$\inner{\phi_{ij}, \phi_{kl}}_{L^2} = \sum_e \int_{\sigma(e)} \inner{\phi_{ij}(x), \phi_{kl}(x)}.\dd A$$
+
+Use 1-point quadrature at the center of each edge $$c(e)$$:
+
+$$\int_{\sigma(e)} \inner{\phi_{ij}(x), \phi_{kl}(x)}.\dd A \approx
+\vol{\sigma(e)} \inner{\phi_{ij}\block{c(e)}, \phi_{kl}\block{c(x)}}$$
+
+Now assume $$e = ij$$. 
 
 ### Discrete Metric
 
@@ -198,19 +286,40 @@ $$\nabla \lambda_i = \frac{|jk|}{2|ijk|} n_i$$
 where $$n_i$$ is the unit vector orthogonal to $$jk$$ in triangle $$ijk$$. We
 end up with the following:
 
-$$\inner{\nabla \lambda_i, \nabla \lambda_j} = \frac{|jk| |ik| \cos\block{\theta_k}}{4|ijk|^2}$$
+$$\begin{aligned}
+\norm{\nabla \lambda_i}^2 &= \frac{|jk|^2}{4 |ijk|^2} \\
+\norm{\nabla \lambda_j}^2 &= \frac{|ki|^2}{4 |ijk|^2} \\
+\inner{\nabla \lambda_i, \nabla \lambda_j} &= \frac{1}{4 |ijk|^2} \inner{jk, ki} \\
+\end{aligned}$$
 
-which can be shown to be equal to the so-called *cotan weights*:
+By the polarization identity:
 
-$$\inner{\nabla \lambda_i, \nabla \lambda_j} = -\frac{\cot\block{\theta_k}}{4|ijk|^2}$$
+$$
+\begin{aligned}
+\inner{jk, ki} &= -\inner{jk, ik} \\
+&= -\frac{1}{2}\block{\norm{jk}^2 + \norm{ik}^2 - \norm{jk - ik}^2} \\
+&= -\frac{1}{2}\block{\norm{jk}^2 + \norm{ik}^2 - \norm{ji}^2} \\
+\end{aligned}
+$$
 
-Similarly, it can be shown that:
+Therefore:
 
-$$\norm{\nabla \lambda_i}^2 = \frac{\cot\block{\theta_j} + \cot\block{\theta_k}}{4|ijk|^2}$$
+$$\inner{\nabla \lambda_i, \nabla \lambda_j} = -\frac{1}{4 |ijk|^2} \frac{\norm{jk}^2 + \norm{ki}^2 - \norm{ji}^2}{2}$$
 
-which brings us to:
 
-$$\int_{ijk} \norm{\phi_{ij}(x)}^2 = \frac{1}{24|ijk|}\block{\cot\block{\theta_i} + \cot\block{\theta_j} + 3\cot\block{\theta_k}}$$
+<!-- $$\inner{\nabla \lambda_i, \nabla \lambda_j} = \frac{|jk| |ik| \cos\block{\theta_k}}{4|ijk|^2}$$ -->
+
+<!-- which can be shown to be equal to the so-called *cotan weights*: -->
+
+<!-- $$\inner{\nabla \lambda_i, \nabla \lambda_j} = -\frac{\cot\block{\theta_k}}{4|ijk|^2}$$ -->
+
+<!-- Similarly, it can be shown that: -->
+
+<!-- $$\norm{\nabla \lambda_i}^2 = \frac{\cot\block{\theta_j} + \cot\block{\theta_k}}{4|ijk|^2}$$ -->
+
+<!-- which brings us to: -->
+
+<!-- $$\int_{ijk} \norm{\phi_{ij}(x)}^2 = \frac{1}{24|ijk|}\block{\cot\block{\theta_i} + \cot\block{\theta_j} + 3\cot\block{\theta_k}}$$ -->
 
 
 
@@ -221,5 +330,9 @@ $$\int_{ijk} \norm{\phi_{ij}(x)}^2 = \frac{1}{24|ijk|}\block{\cot\block{\theta_i
     altititude $$h_i = \frac{2|ijk|}{|jk|}$$ of vertex $$i$$ to edge $$jk$$
     causes $$\lambda_i$$ to change linearly by exactly 1.
 
+[^2]: From the formula $$\cot\block{\theta_i} = \frac{\modulus{ki}^2 +
+    \modulus{ij}^2 - \modulus{jk}^2}{4\modulus{ijk}}$$
 
-
+[^orthogonal-invariance]: we just saw that $$n$$-forms are orthogonally
+    invariant, so this definition is consistent: any orthogonal basis will be
+    weighted to 1

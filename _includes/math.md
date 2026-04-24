@@ -30,9 +30,11 @@ $$
 \newcommand{\set}[1]{\left\{#1\right\}}
 \newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\trace}[1]{\mathrm{tr}\block{#1}}
+\newcommand{\vol}[1]{\mathrm{vol}\block{#1}}
 
 <!-- optimization -->
 \newcommand{\norm}[1]{ \left\| #1 \right\| }
+\newcommand{\modulus}[1]{ \left| #1 \right| }
 \newcommand{\argmin}[1]{ \underset{#1}{\mathrm{argmin}} }
 \newcommand{\argmax}[1]{ \underset{#1}{\mathrm{argmax}} }
 \newcommand{\st}{\ \mathrm{s.t.}\ }

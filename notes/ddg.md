@@ -7,13 +7,150 @@ tags: [draft]
 {% include toc.md %}
 
 Discrete Differential Geometry (DDG) provides a set of tools for integrating
-stuff over discrete manifolds.
+stuff consistently over discrete manifolds, usually 3-dimensional
+meshes. Unfortunately, the sheer amount of knowledge required to *properly*
+understand what's going on is absolutely daunting:
 
-# Discrete Manifolds
+- one first needs a firm grasp of the theory of differential forms in the
+  continuous setting, which extends tools from exterior algebra in much the same
+  way differential geometry extends linear algebra (pointwise in the
+  tangent/cotangent spaces).
+- Riemannian geometry is then required for proper integration on manifolds and
+  the metric structure on differential forms
+- at this point, a whole zoo of differential operators enters the scene (exterior
+  derivative, Hodge star, interior product, Lie derivative) with associated
+  theorems (Stoke's thorem, Cartan formula)
+- and *only then* we'll be finally ready to discretize the continuous concepts,
+  with two main lines of work Finite Element Methods (FEM) and Discrete Exterior
+  Calculus (DEC) which are both still active field of research.
 
-- simplicial complexes
-- 2D manifolds: half-edge data structures (HDS)
-- in general: combinatorial maps
+So this is going to take *some* time. We'll assume the basics of linear algebra,
+Euclidean (basis, dual basis, linear forms, metrics, inner products and
+representation theorems, orthogonal endomorphisms) and differential/Riemannian
+geometry (tangent/cotangent bundles, tangent maps, directional
+derivatives, metric) to be known.
+
+We'll start with exterior algebra, which is already quite a beast in
+itself. Then, on to integration theory and the metric structure on differential
+forms, followed by differential operators and Stoke's theorem. Finally, we'll
+cover the approaches to discretization.
+
+# Exterior Algebra
+
+Integrating differential forms is fundamentally about summing up the weightings
+of infinitesimal volumes over a domain. As we'll see, such weighting can be
+formalized as an alternating form. It turns out that alternating
+forms have a particularly rich algebraic structure, which is what *exterior
+algebra* is about. The usual treatments of the subject vary between the
+coordinate-ful approach, riddled with indices and painful change of coordinates,
+and the coordinate-free one, arguably more elegant but often abstracted to the
+point of uselessness. We'll try to strike a balance between the two, keeping the
+model of alternating linear forms in mind.
+
+## Alternating forms
+
+Let us start by fixing an $$n$$-dimensional vector space $$V$$, and consider
+alternating linear forms on $$V$$. We start with 1-dimensional forms, which are
+obviously linear, but cannot possibly be alternating since they only have one
+argument. The first interesting example is that of bililinear alternating forms:
+let $$\omega: V^2 \to \RR$$ be such a form, the alternating condition requires
+that:
+
+$$\omega(x, x) = 0$$
+
+for all $$x \in V$$ which by bilinearity implies that:
+
+$$\begin{aligned}
+\underbrace{\omega(x + y, x + y)}_0 &= \underbrace{\omega(x, x)}_0 +
+\omega(x, y) + \omega(y, x) + \underbrace{\omega(y, y)}_0 \\
+0 &= \omega(x, y) + \omega(y, x) \\
+\end{aligned}$$
+
+hence $$\omega(x, y) = -\omega(y, y)$$ and the name "alternating". $$k$$-linear
+alternating forms behave similarly:
+
+$$\omega(\ldots, x, \ldots, x, \ldots) = 0$$
+
+leading to:
+
+$$\omega(\ldots, x, \ldots, y, \ldots) = -\omega(\ldots, y, \ldots, x, \ldots)$$ 
+
+as well. One may immediately remark that one cannot construct a non-zero
+$$k$$-linear forms when $$k > n$$: by choosing a basis for $$V$$ and expanding
+each argument using multi-linearity, we would always end up with at least one
+repeated basis vector in the arguments, forcing the form to zero. We can also
+see that permuting the arguments flips the sign of the result by the sign of the
+permutation.
+
+Obviously, forms of a same degree can be added together and multiplied by a
+scalar to yield same-degree forms, turning alternating forms of a given degree
+$$k$$ into a vector space, $$A^k(V)$$. Of course, once we have a vector space it
+is natural to ask for a basis. The basis for 1-forms is given by the usual dual
+basis, but what about higher-degree forms? Again, using multi-linearity, one can
+easily see that a $$k$$-form is entirely determined by its value on subsets of
+$$k$$ distinct basis vectors modulo permutations. This suggests that the
+dimension of the space of $$k$$-linear alternating forms is:
+
+$$\dim\block{A^k(V)} = \mat{n \\ k}$$ 
+
+and that a basis can be constructed by associating a $$k$$-form to each of these
+subsets such that the $$k$$-form evaluates to $$1$$ on its associated subset, and
+$$0$$ on every other.
+
+
+## Wedge Product
+
+Now, the *algebra* in "exterior algebra" is about constructing alternating forms
+from lower-degree ones, using an operation called the *wedge product*, or
+*exterior* product. Let us try to construct a $$2$$-form from a pair of
+$$1$$-forms: given $$\omega_1, \omega_2 \in A^1(V)$$, we want to construct
+$$f\block{\omega_1, \omega_2} \in A^2(V)$$. There's not much we can do from
+$$\omega_1, \omega_2$$ apart from applying them to some vectors to obtain a pair
+of scalars. Likewise, there not much we could do with the scalars apart from
+multiplying them if we with to get something bilinear:
+
+$$f\block{\omega_1, \omega_2}\block{x_1, x_2} = \omega_1\block{x_1}\omega_2\block{x_2}$$
+
+Unfortunately, the result is not alternating:
+
+$$f\block{\omega_1, \omega_2}\block{x_2, x_1} = \omega_1\block{x_2}\omega_2\block{x_1} \neq \omega_1\block{x_1}\omega_2\block{x_2}$$
+
+in general. What about anti-symmetrizing?
+
+$$f\block{\omega_1, \omega_2}\block{x_1, x_2} = \omega_1\block{x_1}\omega_2\block{x_2} - \omega_1\block{x_2}\omega_2\block{x_1}$$
+
+Now the result *is* alternating:
+
+$$
+\begin{aligned}
+f\block{\omega_1, \omega_2}\block{x_2, x_1} &= \omega_1\block{x_2}\omega_2\block{x_1} - \omega_1\block{x_1}\omega_2\block{x_2}\\
+&= -f\block{\omega_1, \omega_2}\block{x_1, x_2}
+\end{aligned}
+$$
+
+Let us now try to build a $$3$$-form from a pair of a $$1$$-form and a
+$$2$$-form: again, there's not much we could do except multiply the result of
+applying the $$1$$-form to one argument vector, the $$2$$-form to the remaining
+ones, and somehow anti-symmetrize the result:
+
+$$\begin{aligned}
+f\block{\alpha, \beta}\block{x_1, x_2, x_3} =  &
+    \pm \alpha\block{x_1}\beta\block{x_2, x_3} \pm \alpha\block{x_2}\beta\block{x_3, x_1} \pm \alpha\block{x_3}\beta\block{x_1, x_2}\\
+   &  \pm \alpha\block{x_1}\beta\block{x_3, x_2} \pm \alpha\block{x_2}\beta\block{x_1, x_3} \pm \alpha\block{x_3}\beta\block{x_2, x_1}\\
+\end{aligned}
+$$
+
+But how to pick the signs?
+
+
+## Construction
+
+
+
+## Interior Product
+
+## Metric
+
 
 # Differential Forms
 
@@ -103,6 +240,7 @@ to $$1$$ and therefore, the Riemannian volume form in local coordinates is given
 $$\sqrt{\det(g)}\dd x^1\wedge \ldots \wedge \dd x^n$$
 
 where $$g$$ is the Riemannian metric.
+
 ## Metric
 
 On Riemannian manifolds, differential 1-forms can be identified to vector fields
@@ -122,9 +260,33 @@ $$\inner{\inner{\omega_1, \omega_2}} = \int_\Omega \inner{\omega_1^\sharp, \omeg
 
 where $$\mu$$ is the Riemannian volume form. As a reminder, $$\sharp$$ raises a
 row vector (linear form) into a column vector, while $$\flat$$ lowers a column
-vector into a linear form[^einstein-notation].
+vector into a linear form[^einstein-notation]. Now that we have a metric on
+1-forms, we may extend it to 2-forms using the following:
+
+$$\inner{x \wedge y, z} = \inner{x, \iota_{y^\sharp}(z)}$$
+
+TODO show that this makes sense.
+
+TODO show that for 2-forms: 
+
+$$\begin{aligned}
+\inner{\alpha_1 \wedge \alpha_2, \beta_1 \wedge \beta_2} &= \det\mat{\inner{\alpha_1, \beta_1} & \inner{\alpha_1, \beta_2}\\ \inner{\alpha_2, \beta_1} & \inner{\alpha_2, \beta_2}} \\
+&= \inner{\alpha_1, \beta_1}\inner{\alpha_2, \beta_2} -\inner{\alpha_1, \beta_2}\inner{\alpha_2, \beta_1}
+\end{aligned}
+$$
+
+This expression generalizes easily to
+higher-degree forms, and one can show that the above formula in local
+coordinates generalizes similarly.
 
 # Exterior Derivative & Stoke's Theorem
+
+
+# Discrete Manifolds
+
+- simplicial complexes
+- 2D manifolds: half-edge data structures (HDS)
+- in general: combinatorial maps
 
 # Discrete Differential Forms & Exterior Derivative
 

@@ -140,8 +140,35 @@ f\block{\alpha, \beta}\block{x_1, x_2, x_3} =  &
 \end{aligned}
 $$
 
-But how to pick the signs?
+But how do we pick the signs? The top row contains even permutations of the
+inputs, while the bottom row contains odd permutations. Therefore, applying an
+even permutation to the inputs should not change the sign: every member of the
+top row should have the same sign, and every member of the bottom row should
+have the same sign too. Likewise, applying an odd permutation to the inputs with
+end up swapping the top and bottom rows. Since this operation should produce a
+sign change, we should assign opposite signs to the top and bottom rows. 
 
+This operation can be generalized to higher-degree forms easily, and motivates
+the definition of the wedge product. Of course, we would like the wedge product
+to have additional nice properties like associativity $$a \wedge \block{b \wedge
+c} = \block{a \wedge b} \wedge c$$, which induces a few modifications over the
+above intuitive construction, but the overall idea is the same. The wedge
+product of $$k$$ $$1-$$forms is a $$k$$-form defined as:
+
+$$\omega_1 \wedge \ldots \wedge \omega_k = \frac{1}{k!}\sum_{\sigma \in S(k)} \sign{\sigma} \Pi_{i=1}^{i=k}\omega_{\sigma(i)}$$
+
+where $$S(k)$$ is the symmetric group of order $$k$$. Such $$k$$-forms obtained
+as the wedge product of $$k$$ vectors are called $$k$$-vectors. One can
+immediately show that:
+
+$$\omega \wedge \omega = 0$$
+
+$$x \wedge y = - y \wedge x$$
+
+By a dimension argument, one can show that the $$k$$-vectors obtained from a
+basis of $$V$$ span the space of alternating $$k$$-forms on $$V$$, thereby
+providing a basis for it. One should be cautious though: there are $$k$$-forms
+that cannot be expressed as single $$k$$-vectors.
 
 ## Construction
 

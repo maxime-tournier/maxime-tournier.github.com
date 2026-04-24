@@ -41,7 +41,7 @@ $$
 \newcommand{\sign}[1]{\mathrm{sign}\block{#1}}
 
 \newcommand{\half}{\frac{1}{2}}
-\newcommand{\inner}[1]{\langle #1 \rangle}
+\newcommand{\inner}[1]{\left\langle #1 \right\rangle}
 
 <!-- lie groups -->
 \newcommand{\dd}{\mathrm{d}}

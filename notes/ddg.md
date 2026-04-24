@@ -74,20 +74,21 @@ $$n$$-forms are usually called *volume forms*.
 
 ## Volume forms
 
-*Orientable* manifolds are exactly defined as the ones for which such a volume
-form exists. When the manifold comes with a Riemannian metric, there is a
+*Orientable* manifolds are defined as the ones for which a volume form
+exists. When the manifold further comes with a Riemannian metric, there is a
 natural choice of a volume form: it is chosen such that any
 orientation-preserving orthonormal parallelotope (as per the metric) is weighted
-to $$1$$[^orthogonal-invariance]. Now, any orthogonal basis $$B$$ satisfies:
+to $$1$$[^orthogonal-invariance]. More precisely, any $$M$$-orthonormal basis
+$$B$$ satisfies:
 
 $$B^T M B = I$$
 
-where $$M$$ is the inner product matrix (pointwise). Since the metric is
+where $$M$$ is the inner product matrix. Since the inner-product is
 non-degenerate, a [Cholesky decomposition](cholesky) $$M=LL^T$$ can be used to
-show that an orientation-preserving basis must decompose as $$B=L^{-T}Q$$ where
-$$Q \in SO(n)$$ is a rotation. If we let $$\dd x^1, \ldots, \dd x^n$$ be local
-coordinates, the associated $$n$$-form $$\dd x^1\wedge \ldots \wedge \dd x^n$$
-satisfies
+show that an orientation-preserving orthonormal basis must decompose as
+$$B=L^{-T}Q$$ where $$Q \in SO(n)$$ is a rotation. Let $$\dd x^1, \ldots, \dd
+x^n$$ be local coordinates, the canonical $$n$$-form $$\dd x^1\wedge \ldots
+\wedge \dd x^n$$ satisfies
 
 $$\begin{aligned}
 B^*\block{\dd x^1\wedge \ldots \wedge \dd x^n} &= \det(B)\dd x^1\wedge \ldots \wedge \dd x^n \\
@@ -101,22 +102,27 @@ to $$1$$ and therefore, the Riemannian volume form in local coordinates is given
 
 $$\sqrt{\det(g)}\dd x^1\wedge \ldots \wedge \dd x^n$$
 
-
+where $$g$$ is the Riemannian metric.
 ## Metric
 
 On Riemannian manifolds, differential 1-forms can be identified to vector fields
-using the metric through the so-called *musical isomorphisms*:
+using the metric. This provides the so-called *musical isomorphisms*:
 
 $$X^\flat = g(X, .)$$
 
 where $$g$$ is the Riemannian metric. Here $$X^\flat$$ is a 1-form obtained from
 vector field $$X$$ by considering the (pointwise) inner-product with $$X$$ using
-the metric $$g$$. Conversely, a 1-form $$\omega$$ and be (pointwise) represented
+the metric $$g$$. Likewise, a 1-form $$\omega$$ can be (pointwise) represented
 by the inner product with some tangent vector $$\omega^\sharp$$, producing a
 vector field. This in turns provides an inner-product on differential 1-forms,
 obtained by integrating the inner product of their representing vector fields
-over the manifold.
+over the manifold:
 
+$$\inner{\inner{\omega_1, \omega_2}} = \int_\Omega \inner{\omega_1^\sharp, \omega_2^\sharp} \mu$$
+
+where $$\mu$$ is the Riemannian volume form. As a reminder, $$\sharp$$ raises a
+row vector (linear form) into a column vector, while $$\flat$$ lowers a column
+vector into a linear form[^einstein-notation].
 
 # Exterior Derivative & Stoke's Theorem
 
@@ -333,6 +339,8 @@ $$\inner{\nabla \lambda_i, \nabla \lambda_j} = -\frac{1}{4 |ijk|^2} \frac{\norm{
 [^2]: From the formula $$\cot\block{\theta_i} = \frac{\modulus{ki}^2 +
     \modulus{ij}^2 - \modulus{jk}^2}{4\modulus{ijk}}$$
 
-[^orthogonal-invariance]: we just saw that $$n$$-forms are orthogonally
-    invariant, so this definition is consistent: any orthogonal basis will be
-    weighted to 1
+[^orthogonal-invariance]: we saw above that $$n$$-forms are rotation-invariant,
+    so the definition makes sense: any orientation-preserving orthonormal basis
+    will be weighted to 1
+
+[^einstein-notation]: or *raises/lowers* the indices in Einstein notation

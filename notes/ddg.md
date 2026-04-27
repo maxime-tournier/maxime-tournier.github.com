@@ -103,12 +103,13 @@ $$0$$ on every other.
 Now, the *algebra* in "exterior algebra" is about constructing alternating forms
 from lower-degree ones, using an operation called the *wedge product*, or
 *exterior* product. Let us try to construct a $$2$$-form from a pair of
-$$1$$-forms: given $$\omega_1, \omega_2 \in A^1(V)$$, we want to construct
-$$f\block{\omega_1, \omega_2} \in A^2(V)$$. There is not much we can do with
-$$\omega_1, \omega_2$$ apart from applying them to each input to obtain two
-pairs of scalars, and mix these bilinearly in an alternating way. There exists
-essentially one $$2\times2$$ antisymmetric bilinear form that we can use to mix
-the scalars:
+$$1$$-forms: given $$\omega_1, \omega_2 \in A^1(V)$$, we want to construct some
+$$2$$-form out of $$\omega_1, \omega_2$$ and inputs $$x_1, x_2$$. There is not
+much we can do with $$\omega_1, \omega_2$$ apart from applying them to each
+input to obtain two pairs of scalars, and mix these bilinearly in an alternating
+way. Luckily, there exists essentially one (modulo scaling) $$2\times2$$
+antisymmetric bilinear form that we can use to mix the scalars, so we don't have
+much choice:
 
 $$\mat{\omega_1\block{x_1} & \omega_1\block{x_2}}\mat{0 & 1 \\ -1 & 0}\mat{\omega_2\block{x_1} \\\omega_2\block{x_2}} = \omega_1\block{x_1}\omega_2\block{x_2} - \omega_1\block{x_2}\omega_2\block{x_1}$$
 
@@ -130,14 +131,15 @@ unchanged (even though individual terms are permuted *inside* each row) and
 should not change the sign: therefore the signs should be constant inside each
 row. Likewise, applying an odd permutation to the inputs with end up swapping
 the top and bottom rows. Since this operation should produce a sign change, we
-should assign opposite signs to the top and bottom rows.
+should assign opposite signs to the top and bottom rows. Again, apart from some
+global scaling parameter there's essentially no other choice we could have made.
 
-This operation can be generalized to higher-degree forms easily, and motivates
-the definition of the wedge product of a $$p$$-form $$\omega_p$$ with a
-$$q$$-form $$\omega_q$$ as follows:
+This precedure can be generalized to higher-degree forms fairly directly, and
+motivates the definition of the wedge product of a $$p$$-form $$\omega_p$$ with
+a $$q$$-form $$\omega_q$$ as follows:
 
 $$
-\frac{1}{k!}\sum_{\sigma \in S(k)} \sign{\sigma} \omega_p\block{x_{\sigma(1)}, \ldots, x_{\sigma(p)}}
+\omega_p \wedge \omega_q = \frac{1}{k!}\sum_{\sigma \in S(k)} \sign{\sigma} \omega_p\block{x_{\sigma(1)}, \ldots, x_{\sigma(p)}}
 \omega_q\block{x_{\sigma(p+1)}, \ldots, x_{\sigma(p + q)}}
 $$
 
@@ -152,7 +154,7 @@ $$\omega_p \wedge \omega_q = \block{-1}^{pq} \omega_q \wedge \omega_p$$
 
 for a $$p$$-form $$\omega_p$$ and $$q$$-form $$\omega_q$$. In particular:
 
-$$x \wedge y = -y \edge x$$
+$$x \wedge y = -y \wedge x$$
 
 for same-degree forms $$x, y$$. $$k$$-forms obtained as the wedge product of
 $$k$$ vectors are called $$k$$-vectors. By a dimension argument, one can show
@@ -163,18 +165,18 @@ $$k$$-vector.
 
 ## Algebra Structure
 
-Now that we've constructed a family of wedge products:
+Now that we've constructed a whole family of wedge products:
 
-$$\wedge^{p, q}: A^p(V) \times A^q(V) \to A^{p+q}$$
+$$\wedge^{p, q}: A^p(V) \times A^q(V) \to A^{p+q}(V)$$
 
-we will "bundle together" all the individual vector spaces $$A^i(V)$$ for $$i
-\leq n$$ into a single direct sum:
+we can "bundle together" all the individual vector spaces $$A^i(V)$$ for $$0
+\leq i \leq n$$ into a single direct sum:
 
 $$A(V) = \bigoplus_{i=0}^{i=n} A^i(V)$$
 
 with the convention that $$A^0(V) = \RR$$. As we saw earlier, forms of degree
-more than $$n$$ are all zero, so there's no point in including them. It is easy
-to see that this big vector space is of dimension:
+strictly larger than $$n$$ are all zero, so there's no point in including
+them. It is easy to see that this large vector space is of dimension:
 
 $$\dim\block{A(V)} = \sum_k \mat{n \\k} = 2^n$$
 
@@ -183,14 +185,72 @@ In this new vector space, we may define a single *internal* wedge product as:
 $$\wedge: A(V) \to A(V)$$
 
 which selects and applies the appropriate $$\wedge^{p, q}$$ based on the degree
-of its arguments. Equipped with this product, the above direct sum is given a
-structure of an *algebra*, called the *alternating algebra* of $$V$$. This
-algebra comes in "layers" given by the degree of its forms, and since the layers
-are well-behaved $$A^p \wedge A^q \subseteq A^{p+q}$$ we call such algebras
-*graded* algebras.
+of its arguments. This product gives our direct sum the structure of an
+*algebra*, called the *alternating algebra* of $$V$$. This algebra comes in
+"layers" given by the degree of its forms, and since the layers are well-behaved
+$$A^p \wedge A^q \subseteq A^{p+q}$$ we call it a *graded* algebra.
 
 
 ## Abstract Construction
+
+We were promised the *exterior algebra*, but all we got was this lousy
+*alternating algebra*, what gives? It turns out that the two are isomorphic, and
+that everything we obtained from alternating forms (the graded algebra
+structure) can be constructed purely abstractly from $$V$$. The construction is
+a bit abstract and can be puzzling at first, but it is a good exercice to
+understand it as it is both powerful and easily generalizable.
+
+The first step is to construct the *tensor algebra* out of $$V$$, which is an
+abstraction of multi-linear forms together with the tensor product. Again, we
+want to do so in a purely abstract way *i.e.*  without ever using *actual*
+multi-linear forms: we want to construct stuff with *just enough structure* to
+behave like multilinear maps, which actually being multilinear maps. The reason
+to do it this way is that by constructing the most general possible algebra that
+acts like tensors, we get factorization theorems for free. These theorems say
+that anything tensor-like happening in concrete realizations must have a
+counterpart in the abstract tensor algebra, where things can be proven once and
+for all.
+
+Given two vector spaces $$V, W$$ of finite dimensions, we start by constructing
+the *free vector space* of pairs of elements of $$V, W$$:
+
+$$F(V, W) \ = \bigoplus_{x \in V, y \in W} (x, y)$$
+
+This vector space is *enormous*: every possible pair of elements of $$V, W$$
+gives rise to a 1-dimensional subspace of $$F(V, W)$$ where one keeps track of
+the scaling associated to each pair of element. One way of making it smaller is
+to *quotient* it by linear subspaces. In particular, the bilinearity relations
+we expect from the tensor product can be expressed as linear subspaces. For
+instance, elements of the form
+
+$$\block{x_1 + x_2, y} - \block{x_1, y} - \block{x_2, y}$$
+
+span linear subspaces, and quotienting $$F(V, W)$$ by these subspaces will enforce
+
+$$\block{x_1 + x_2, y} - \block{x_1, y} - \block{x_2, y} = 0$$
+
+in the quotient space, providing the linearity of the tensor product with
+respect to the first argument. We may proceed similarly for the other following
+elements:
+
+$$\block{x, y_1 + y_2} - \block{x, y_1} - \block{x, y_2}$$
+
+$$\block{\lambda x, y} - \lambda \block{x, y}$$
+
+$$\block{x, \lambda y} - \lambda \block{x, y}$$
+
+Letting $$R$$ be the subspace spanned by all these elements, we obtain the
+*tensor space* $$V \otimes W$$ of $$V$$ and $$W$$ as the quotient
+
+$$V \otimes W = F(V, W) / R$$
+
+Elements of $$V \otimes W$$ are usually denoted by $$x\otimes y$$ instead of
+pairs. The kind of factorization theorem (called "universal property") that
+comes "for free" is the following: any bilinear mapping $$h: V \times W \to Z$$
+factors *uniquely* through $$V \otimes W$$ as $$h = \tilde{h} \circ \varphi$$ where
+$$\phi$$ is the canonical projection $$\varphi: V \times W \to V \otimes W$$ onto
+the quotient space.
+
 
 
 

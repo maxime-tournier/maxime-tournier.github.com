@@ -347,7 +347,8 @@ $$\begin{aligned}
 
 where the $$1$$-form $$a = \inner{a^\sharp, .}$$ is represented by vector
 $$a^\sharp$$. Notice how the interior product with $$a^\sharp$$ pushes inner
-products involving $$a$$ down the right-hand side $$2$$-form $$c \wedge d$$
+products involving $$a$$ down the right-hand side $$2$$-form $$c \wedge
+d$$. TODO extend this to non-decomposable 2-forms/check non-degeneracy.
 
 # Differential Forms
 

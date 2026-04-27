@@ -249,7 +249,7 @@ pairs. The kind of factorization theorem (called "universal property") that
 comes "for free" is the following: any bilinear mapping $$h: V \times W \to Z$$
 factors *uniquely* through $$V \otimes W$$ as $$h = \tilde{h} \circ \varphi$$ where
 $$\phi$$ is the canonical projection $$\varphi: V \times W \to V \otimes W$$ onto
-the quotient space.
+the quotient space. We can now use the same construction to build the exterior product
 
 
 

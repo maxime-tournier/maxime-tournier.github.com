@@ -286,7 +286,7 @@ algebra homomorphism.
 
 So far, we only have a way of constructing *higher-degree* forms using the wedge
 product. What about decreasing the degree? A simple way to achieve this is
-through the partial application of some $$k$$-form to a given input vector: let
+with the partial application of some $$k$$-form to a given input vector: let
 $$\omega_{p+1}$$ be a $$p+1$$-form and $$x \in V$$ be a vector, we obtain a
 $$p$$-form by feeding $$x$$ to $$\omega_{p+1}$$ as its first argument:
 
@@ -319,7 +319,7 @@ together somehow:
 
 $$\pm\inner{a, c}\inner{b, d} \pm \inner{a, d}\inner{b, c}$$
 
-Swapping $$\block{a, b}$$ or $$\block{c, d}$$ switches the two terms above, and
+Swapping $$\block{a, b}$$ or $$\block{c, d}$$ exchanges the two terms above, and
 should also negate the result: therefore each term should get an opposite sign:
 
 $$\pm \block{\inner{a, c}\inner{b, d} - \inner{a, d}\inner{b, c}}$$
@@ -333,10 +333,12 @@ by Cauchy-Schwarz, so plus it is:
 
 $$\inner{a \wedge b, c \wedge d} = \inner{a, c}\inner{b, d} - \inner{a, d}\inner{b, c}$$
 
-(modulo some positive factor, of course). Of course, we should also check that
-the above form is non-degenerate. The Cauchy-Schwarz inequality above becomes an
-equality exactly when $$a$$ and $$b$$ are colinear, in which case $$a \wedge b =
-0$$. Interestingly, the above expression can be factored as
+(modulo positive scaling, of course). We verify that exchanging $$a
+\wedge b$$ with $$c \wedge d$$ does indeed not change the result,
+making this bilinear form symmetric. We should also check that it is
+non-degenerate. The Cauchy-Schwarz inequality above becomes an
+equality exactly when $$a$$ and $$b$$ are colinear, in which case $$a
+\wedge b = 0$$. Interestingly, the above expression can be factored as
 
 $$\begin{aligned}
 \inner{a \wedge b, c \wedge d} &= \inner{b, \inner{a, c} d - \inner{a, d} c} \\
@@ -345,10 +347,17 @@ $$\begin{aligned}
 &= \inner{b, \iota_{a^\sharp}\block{c \wedge d}} \\
 \end{aligned}$$
 
-where the $$1$$-form $$a = \inner{a^\sharp, .}$$ is represented by vector
-$$a^\sharp$$. Notice how the interior product with $$a^\sharp$$ pushes inner
-products involving $$a$$ down the right-hand side $$2$$-form $$c \wedge
-d$$. TODO extend this to non-decomposable 2-forms/check non-degeneracy.
+where the $$1$$-form $$a = \inner{a^\sharp, .}$$ is represented by
+vector $$a^\sharp$$. Notice how the interior product with $$a^\sharp$$
+pushes inner products involving $$a$$ down the right-hand side
+$$2$$-form $$c \wedge d$$, which is passed directly to the interior
+product so the formula extends directly to a non-decomposable
+right-hand side by bilinearity:
+
+$$\inner{a \wedge b, \omega} = \inner{b, \iota_{a^\sharp}\omega}$$
+
+It is not too hard to check that this is indeed still a *symmetric*
+bilinear form, but non-degeneracy requires more scrutiny.
 
 # Differential Forms
 

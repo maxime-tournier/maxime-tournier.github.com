@@ -81,23 +81,29 @@ $$k$$-linear forms when $$k > n$$: by choosing a basis for $$V$$ and expanding
 each argument using multi-linearity, we would always end up with at least one
 repeated basis vector in the arguments, forcing the form to zero. We can also
 see that permuting the arguments flips the sign of the result by the sign of the
-permutation.
+permutation:
 
-Obviously, forms of a same degree can be added together and multiplied by a
-scalar to yield same-degree forms, turning alternating forms of a given degree
-$$k$$ into a vector space, $$A^k(V)$$. Of course, once we have a vector space it
-is natural to ask for a basis. The basis for 1-forms is given by the usual dual
-basis, but what about higher-degree forms? Again, using multi-linearity, one can
-easily see that a $$k$$-form is entirely determined by its value on subsets of
-$$k$$ distinct basis vectors modulo permutations. This suggests that the
-dimension of the space of $$k$$-linear alternating forms is:
+$$\omega\block{x_{\sigma(1)}, \ldots, x_{\sigma(k)}} = (-1)^{\sign{\sigma}} \omega\block{x_1, \ldots, x_k}$$
+
+for $$\sigma \in S(k)$$. Obviously, forms of a same degree can be
+added together and multiplied by a scalar to yield same-degree forms,
+turning alternating forms of a given degree $$k$$ into a vector space,
+$$A^k(V)$$. Of course, once we have a vector space it is natural to
+ask for a basis. The basis for 1-forms is given by the usual dual
+basis, but what about higher-degree forms? Again, using
+multi-linearity, one can easily see that a $$k$$-form is entirely
+determined by its value on subsets of $$k$$ distinct basis vectors
+modulo permutations. This suggests that the dimension of the space of
+$$k$$-linear alternating forms is:
 
 $$\dim\block{A^k(V)} = \mat{n \\ k}$$ 
 
-and that a basis can be constructed by associating a $$k$$-form to each of these
-subsets such that the $$k$$-form evaluates to $$1$$ on its associated subset, and
-$$0$$ on every other.
-
+and that a basis can be constructed by associating a $$k$$-form to
+each of these subsets such that the $$k$$-form evaluates to $$1$$ on
+its associated subset, and $$0$$ on every other. Such basis
+$$k$$-forms must involve basis $$1$$-forms somehow, so one should
+expect that basis forms should be constructible from basis
+$$1$$-forms, which is exactly the purpose of the *wedge product*.
 
 ## Wedge Product
 
@@ -357,7 +363,35 @@ right-hand side by bilinearity:
 $$\inner{a \wedge b, \omega} = \inner{b, \iota_{a^\sharp}\omega}$$
 
 It is not too hard to check that this is indeed still a *symmetric*
-bilinear form, but non-degeneracy requires more scrutiny.
+bilinear form, but positive definiteness requires a bit more
+scrutiny. Let us consider a non-decomposable $$2$$-form $$\omega = a
+\wedge b + c \wedge d$$. Then we get:
+
+$$\begin{aligned}
+\norm{w}^2 &= \norm{a \wedge b}^2 + \norm{c \wedge d}^2 + 2 \underbrace{\inner{a \wedge b, c \wedge d}}_{\geq -\norm{a \wedge b}\norm{c \wedge d}} \\
+& \geq \norm{a \wedge b}^2 + \norm{c \wedge d}^2 - 2 \norm{a \wedge b}\norm{c \wedge d} \\
+&= \block{\norm{a \wedge b} - \norm{c \wedge d}}^2 \\
+&\geq 0
+\end{aligned}$$
+
+thanks to Cauchy-Schwarz once again, with equality exactly when $$a
+\wedge b = \lambda \block{c \wedge d}$$. Since $$\omega$$ is
+non-decomposable, this leaves $$\lambda = 0$$ as the only
+possibility. The argument extends easily to *any* non-decomposable
+$$2$$-form, and we end up with an inner product on all $$2$$-forms.
+
+We may now proceed the exact same way on $$3$$-forms: consider a
+$$2$$-form $$\eta$$, a $$1$$-form $$\omega$$ and a $$3$$-form $$\nu$$,
+we construct an inner product as follows:
+
+$$\inner{\eta \wedge \omega, \nu} = \inner{\eta, \iota_{\omega^\sharp}, \nu}$$
+
+and extend it to any non-decomposable $$3$$-form as before, and repeat
+the process until we obtain an inner-product on each
+$$\bigwedge^k(V)$$. An inner product on the whole exterior algebra
+$$\bigwedge(V)$$ can be obtained as the direct sum of the inner
+products for each degree *i.e.* by having $$\inner{x, y} = 0$$ for
+different degree forms $$x, y$$.
 
 # Differential Forms
 

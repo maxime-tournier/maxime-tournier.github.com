@@ -20,7 +20,7 @@ understand what's going on is absolutely daunting:
 - at this point, a whole zoo of differential operators enters the scene (exterior
   derivative, Hodge star, interior product, Lie derivative) with associated
   theorems (Stoke's thorem, Cartan formula)
-- and *only then* we'll be finally ready to discretize the continuous concepts,
+- and *only then* one is finally ready to discretize the continuous concepts,
   with two main lines of work Finite Element Methods (FEM) and Discrete Exterior
   Calculus (DEC) which are both still active field of research.
 
@@ -48,14 +48,35 @@ uselessness. We'll try to strike a balance between the two, keeping the model of
 alternating linear forms in mind but underlying the general construction as
 well.
 
+## Measuring Volumes
+
+Integration theory is essentially about decomposing a domain into
+infinitely many *infinitesimal volumes*, weighting each volume and
+summing up the results. Assuming we're dealing with a vector space
+$$V$$ of dimension $$n$$, those infinitesimal volumes can be thought
+of as $$n$$-parallelotopes, which can be represented as a set of $$n$$
+vectors describing the edges of the parallelotope. Weighting such a
+parallelotope is given by a function $$\omega$$ taking $$n$$ vectors
+to a scalar:
+
+$$\omega: V^n \to \RR$$
+
+Since we wish to weight *volumes*, we expect such a function to be
+somewhat $$n$$-linear since scaling the length of an edge ends up
+scaling the volume accordingly. Likewise, repeating an edge collapses
+the parallelotope and should end up in a zero volume. Taken together,
+these conditions suggest that $$\omega$$ should be an *alternating*
+$$n$$-linear form, which is what exterior algebra is about.
+
 ## Alternating forms
 
-Let us start by fixing an $$n$$-dimensional vector space $$V$$, and consider
-alternating linear forms on $$V$$. We start with 1-dimensional forms, which are
-obviously linear, but cannot possibly be alternating since they only have one
-argument. The first interesting example is that of bililinear alternating forms:
-let $$\omega: V^2 \to \RR$$ be such a form, the alternating condition requires
-that:
+Let us start by fixing an $$n$$-dimensional vector space $$V$$, and
+consider alternating linear forms on $$V$$. We start with 1-linear
+forms *i.e.* linear forms, which cannot be alternating in any
+interesting way since they only have one argument. The first
+non-trivial case is that of *bililinear* alternating forms: let
+$$\omega: V^2 \to \RR$$ be such a form, the alternating condition
+requires that:
 
 $$\omega(x, x) = 0$$
 
@@ -166,12 +187,13 @@ $$x \wedge x$$ to vanish. By the same token:
 
 $$x \wedge y = \block{-1}^{k^2} y \wedge x$$
 
-for same-degree forms $$x, y$$. $$k$$-forms obtained as the wedge product of
-$$k$$ vectors are called $$k$$-vectors. By a dimension argument, one can show
-that the $$k$$-vectors obtained from a basis of $$V$$ span the space of
-alternating $$k$$-forms on $$V$$, thereby providing a basis for it. One should
-be cautious though: some $$k$$-forms cannot be expressed as a single
-$$k$$-vector.
+for same-degree forms $$x, y$$, so when $$k$$ is odd we get $$x\wedge
+y = -y \wedge x$$. $$k$$-forms obtained as the wedge product of $$k$$
+vectors are conveniently named $$k$$-vectors. By a dimension argument,
+one can show that the $$k$$-vectors obtained from a basis of $$V$$
+span the space of alternating $$k$$-forms on $$V$$, thereby providing
+a basis for it. One should be cautious though: some $$k$$-forms cannot
+be expressed as a single $$k$$-vector.
 
 ## Algebra Structure
 
@@ -212,28 +234,32 @@ structure) can be constructed purely abstractly from $$V$$ alone. The
 construction is a bit abstract and can be puzzling at first, but it is a good
 exercice to understand it as it is both powerful and easily generalizable.
 
-The first step is to construct the *tensor algebra* out of $$V$$, which is an
-abstraction of multi-linear forms together with the tensor product. Again, we
-want to do so in a purely abstract way *i.e.*  without ever using *actual*
-multi-linear forms: we want to construct stuff with *just enough structure* to
-behave like multilinear maps, without actually being multilinear maps. The
-reason to do it this way is that by constructing the most general possible
-algebra that acts like tensors, we get factorization theorems for free. These
-theorems say that anything tensor-like happening in concrete realizations must
-have a counterpart in the abstract tensor algebra, where things can be proven
-once and for all.
+The first step is to construct the *tensor algebra* out of $$V$$,
+which is an abstraction of multi-linear forms together with the tensor
+product. Again, we want to do so in a purely abstract way *i.e.*
+without ever using *actual* multi-linear forms: we want to construct
+stuff with *just enough structure* to behave like multilinear maps,
+without actually being multilinear maps. The reason to do it this way
+is that by constructing the most general possible algebra that acts
+like tensors, we get factorization theorems for free. These theorems
+say that anything tensor-like happening in concrete realizations must
+have a well-behaved counterpart in the abstract tensor algebra, where
+things can be proven once and for all.
 
 Given two vector spaces $$V, W$$ of finite dimensions, we start by constructing
 the *free vector space* of pairs of elements of $$V, W$$:
 
 $$F(V, W) \ = \bigoplus_{x \in V, y \in W} (x, y)$$
 
-This vector space is *enormous*: every possible pair of elements of $$V, W$$
-gives rise to a 1-dimensional subspace of $$F(V, W)$$ where one keeps track of
-the scaling associated to each pair of element. One way of making it smaller is
-to *quotient* it by linear subspaces. In particular, the bilinearity relations
-we expect from the tensor product can be expressed as linear subspaces. For
-instance, elements of the form
+This vector space is *enormous*: every possible pair of elements of
+$$V, W$$ gives rise to a 1-dimensional subspace of $$F(V, W)$$ where
+one keeps track of the scaling associated to this particular pair of
+elements. In particular, in this space $$(\lambda x, y) \neq \lambda
+(x, y)$$, which is somewhat unfortunate. One way to fix this and to
+make this space smaller is to *quotient* it by linear subspaces. In
+particular, the bilinearity relations we expect from the tensor
+product can be expressed as linear subspaces. For instance, elements
+of the form
 
 $$\block{x_1 + x_2, y} - \block{x_1, y} - \block{x_2, y}$$
 
@@ -293,13 +319,13 @@ algebra homomorphism.
 So far, we only have a way of constructing *higher-degree* forms using the wedge
 product. What about decreasing the degree? A simple way to achieve this is
 with the partial application of some $$k$$-form to a given input vector: let
-$$\omega_{p+1}$$ be a $$p+1$$-form and $$x \in V$$ be a vector, we obtain a
-$$p$$-form by feeding $$x$$ to $$\omega_{p+1}$$ as its first argument:
+$$\omega$$ be a $$p+1$$-form and $$x \in V$$ be a vector, we obtain a
+$$p$$-form by feeding $$x$$ to $$\omega$$ as its first argument:
 
-$$\block{\block{y_1, \ldots, y_p} \mapsto \omega_{p+1}\block{x, y_1, \ldots, y_p}} \in \bigwedge^p(V)$$
+$$\block{\block{y_1, \ldots, y_p} \mapsto \omega\block{x, y_1, \ldots, y_p}} \in \bigwedge^p(V)$$
 
-We call such a $$p$$-form the *interior product* of $$\omega_{p+1}$$ and $$v$$,
-denoted by $$\iota_x \omega_{p+1}$$, where
+We call such a $$p$$-form the *interior product* of $$\omega$$ and $$v$$,
+denoted by $$\iota_x \omega$$, where
 
 $$\iota_v: \bigwedge^{p+1}(V) \to \bigwedge^{p}(V)$$
 
@@ -341,14 +367,15 @@ $$\inner{a \wedge b, c \wedge d} = \inner{a, c}\inner{b, d} - \inner{a, d}\inner
 
 (modulo positive scaling, of course). We verify that exchanging $$a
 \wedge b$$ with $$c \wedge d$$ does indeed not change the result,
-making this bilinear form symmetric. We should also check that it is
-non-degenerate. The Cauchy-Schwarz inequality above becomes an
-equality exactly when $$a$$ and $$b$$ are colinear, in which case $$a
-\wedge b = 0$$. Interestingly, the above expression can be factored as
+making this bilinear form symmetric and positive, but we should also
+check that it is definite: the Cauchy-Schwarz inequality above becomes
+an equality exactly when $$a$$ and $$b$$ are colinear, in which case
+$$a \wedge b = 0$$. Interestingly, the above expression can be
+factored as
 
 $$\begin{aligned}
 \inner{a \wedge b, c \wedge d} &= \inner{b, \inner{a, c} d - \inner{a, d} c} \\
-&= \inner{b, d c\block{a^\sharp} - c d\block{a^\sharp}} \\
+&= \inner{b, c\block{a^\sharp}d - d\block{a^\sharp}c} \\
 &= \inner{b, \block{c \wedge d}\block{a^\sharp, .}} \\
 &= \inner{b, \iota_{a^\sharp}\block{c \wedge d}} \\
 \end{aligned}$$
@@ -356,14 +383,17 @@ $$\begin{aligned}
 where the $$1$$-form $$a = \inner{a^\sharp, .}$$ is represented by
 vector $$a^\sharp$$. Notice how the interior product with $$a^\sharp$$
 pushes inner products involving $$a$$ down the right-hand side
-$$2$$-form $$c \wedge d$$, which is passed directly to the interior
-product so the formula extends directly to a non-decomposable
-right-hand side by bilinearity:
+$$2$$-form $$c \wedge d$$. What is more, $$c \wedge d$$ is passed
+directly to the interior product so the formula extends directly to a
+non-decomposable right-hand side by linearity:
 
 $$\inner{a \wedge b, \omega} = \inner{b, \iota_{a^\sharp}\omega}$$
 
-It is not too hard to check that this is indeed still a *symmetric*
-bilinear form, but positive definiteness requires a bit more
+and proceed similarly for a non-decomposable left-hand side by
+linearity. It is not too hard to check that what we obtain is indeed
+still a *symmetric* bilinear form (expand everything down to
+decomposable forms, on which the inner product is symmetric, then
+recompose), but positive definiteness requires a bit more
 scrutiny. Let us consider a non-decomposable $$2$$-form $$\omega = a
 \wedge b + c \wedge d$$. Then we get:
 
@@ -380,14 +410,15 @@ non-decomposable, this leaves $$\lambda = 0$$ as the only
 possibility. The argument extends easily to *any* non-decomposable
 $$2$$-form, and we end up with an inner product on all $$2$$-forms.
 
-We may now proceed the exact same way on $$3$$-forms: consider a
+Now that we have an inner product on $$2$$-forms, we may use the exact
+same procedure to build one for $$3$$-forms. Let us consider a
 $$2$$-form $$\eta$$, a $$1$$-form $$\omega$$ and a $$3$$-form $$\nu$$,
-we construct an inner product as follows:
+we construct an inner product satifying:
 
-$$\inner{\eta \wedge \omega, \nu} = \inner{\eta, \iota_{\omega^\sharp}, \nu}$$
+$$\inner{\eta \wedge \omega, \nu} = \inner{\eta, \iota_{\omega^\sharp} \nu}$$
 
-and extend it to any non-decomposable $$3$$-form as before, and repeat
-the process until we obtain an inner-product on each
+and extend it to non-decomposable $$3$$-forms as before, and repeat
+the process until we obtain an inner-product on every
 $$\bigwedge^k(V)$$. An inner product on the whole exterior algebra
 $$\bigwedge(V)$$ can be obtained as the direct sum of the inner
 products for each degree *i.e.* by having $$\inner{x, y} = 0$$ for
@@ -399,39 +430,37 @@ Differential forms are the stuff that show up under the integral sign:
 
 $$\int_\Omega \omega$$
 
-In the above, $$\omega$$ is a differential form whose dimension matches that of
-the integration domain $$\Omega$$. Its purpose is to "eat" infinitesimal volumes
-that make up $$\Omega$$ in order to produce a scalar, one per infinitesimal
-volume. Conceptually, these (infinitely many) scalars are then summed up to
-compute the integral. The differential form thus encodes the *weighting*
+In the above, $$\omega$$ is a differential form whose dimension
+matches that of the integration domain $$\Omega$$. Its purpose is to
+"eat" infinitesimal volumes that compose $$\Omega$$ in order to
+produce a scalar, one per infinitesimal volume. Conceptually, these
+(infinitely many) scalars are then summed up to compute the
+integral. The differential form thus encodes the varying *weighting*
 associated to each infinitesimal volume.
 
-Infinitesimal volumes around a point $$x \in \Omega$$ may be represented by
-$$n$$ (tangent) vectors describing the edges of a parallelotope. For integration
-to make sense, we would like the action of weighting this parallelotope to be
-$$n$$-linear: if we scale the size of any edge of the parallelotope, we expect
-its volume to scale similarly. Additionally, if two edge vectors are the same,
-we expect the volume to be zero. Taken together, there properties imply that the
-weighting of an infinitesimal volume should act like an *alternating* $$n$$-linear
-map.
+Therefore, a differential form can be seen as a function that
+associates an alternating $$n$$-linear map $$\omega(x) \in
+A^n\block{T_x\Omega}$$ (in the tangent space at this point) to every
+point of the domain $$x$$. For instance, the usual differential of a
+scalar function is a differential 1-form: it associates to every point
+of the domain a linear form (the differential at that point, which is
+trivially alternating) and can be integrated along curves. By
+convention, 0-forms are scalar functions of the domain.
 
-Therefore, a differential form can be seen as a function that associates a
-alternating $$n$$-linear map $$\omega(x): \block{T_x\Omega}^n \to \RR$$ (in the tangent
-space at this point) to every point of the domain $$x$$:
+Of course, all the [exterior algebra](#exterior-algebra) machinery we
+already constructed translates point-wise to differential forms, so we
+may consider the *wedge product* of forms:
 
-$$
-\begin{aligned}
-\omega(x)\block{\ldots, \lambda y + \mu z, \ldots} &= \lambda \omega(x)\block{\ldots, y, \ldots} + \mu \omega(x)\block{\ldots, z, \ldots} \\
-\omega(x)\block{\ldots, x, \ldots, x, \ldots} &= 0 \\
-\end{aligned}
-$$
+$$\block{\omega \wedge \eta}(x) = \omega(x) \wedge \eta(x)$$
 
-For instance, the usual differential of a scalar function is a 1-form: it
-associates to every point of the domain a linear form (the differential at that
-point, which is trivially alternating) and can be integrated along curves. By
-convention, 0-forms are scalar functions of the domain. An interesting property
-of $$n$$-linear alternating maps is that their pullback by an endomorphism $$A$$
-satisfies:
+as well as the *interior product* of a vector field $$X$$ and a
+differential form $$\omega$$:
+
+$$\block{\iota_X \omega}(x) = \iota_{X(x)} \omega(x)$$
+
+and so on. An interesting property of $$n$$-linear alternating maps
+that will come handy later on is that their pullback by an
+endomorphism $$A$$ satisfies:
 
 $$A^*\omega\block{x_1, \ldots, x_n} = \omega\block{Ax_1, \ldots, Ax_n} =
 \det(A)\omega\block{x_1, \ldots, x_n}$$
@@ -446,18 +475,15 @@ reference and obtain any other $$n$$-form as $$\omega = f \mu$$ where $$f$$ is a
 scalar function that provides the pointwise scaling factor. Such reference
 $$n$$-forms are usually called *volume forms*.
 
-## TODO wedge products
-
-
 
 ## Volume forms
 
-*Orientable* manifolds are defined as the ones for which a volume form
-exists. When the manifold further comes with a Riemannian metric, there is a
-natural choice of a volume form: it is chosen such that any
-orientation-preserving orthonormal parallelotope (as per the metric) is weighted
-to $$1$$[^orthogonal-invariance]. More precisely, any $$M$$-orthonormal basis
-$$B$$ satisfies:
+*Orientable* manifolds are defined as the ones for which such a volume
+form exists. When the manifold further comes with a Riemannian metric,
+there is a natural choice of a volume form: it is chosen such that any
+orientation-preserving orthonormal parallelotope (as per the metric)
+is weighted to $$1$$[^orthogonal-invariance]. More precisely, any
+$$M$$-orthonormal basis $$B$$ satisfies:
 
 $$B^T M B = I$$
 
@@ -499,26 +525,11 @@ over the manifold:
 
 $$\inner{\inner{\omega_1, \omega_2}} = \int_\Omega \inner{\omega_1^\sharp, \omega_2^\sharp} \mu$$
 
-where $$\mu$$ is the Riemannian volume form. As a reminder, $$\sharp$$ raises a
-row vector (linear form) into a column vector, while $$\flat$$ lowers a column
-vector into a linear form[^einstein-notation]. Now that we have a metric on
-1-forms, we may extend it to 2-forms using the following:
-
-$$\inner{x \wedge y, z} = \inner{x, \iota_{y^\sharp}(z)}$$
-
-TODO show that this makes sense.
-
-TODO show that for 2-forms: 
-
-$$\begin{aligned}
-\inner{\alpha_1 \wedge \alpha_2, \beta_1 \wedge \beta_2} &= \det\mat{\inner{\alpha_1, \beta_1} & \inner{\alpha_1, \beta_2}\\ \inner{\alpha_2, \beta_1} & \inner{\alpha_2, \beta_2}} \\
-&= \inner{\alpha_1, \beta_1}\inner{\alpha_2, \beta_2} -\inner{\alpha_1, \beta_2}\inner{\alpha_2, \beta_1}
-\end{aligned}
-$$
-
-This expression generalizes easily to
-higher-degree forms, and one can show that the above formula in local
-coordinates generalizes similarly.
+where $$\mu$$ is the Riemannian volume form. The metric on $$1$$-forms
+is extended to arbitrary-degree forms on every tangent space using the
+procedure described in [exterior algebra](#inner-product), which we
+integrate over the manifold as above to obtain an inner-product on
+differential forms. 
 
 # Exterior Derivative & Stoke's Theorem
 

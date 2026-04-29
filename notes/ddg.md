@@ -445,14 +445,14 @@ $$
 
 for all $$\sigma \in S(k)$$ where we plug the primal basis vectors corresponding
 to basis $$1$$-forms into $$\omega$$ in the order they appear in the input
-$$k$$-vectors, extended linearly. This correspondance is not *natural* in the
-sense that it depends on the choice of basis both for the volume form and for
-the identification of $$V$$ with its dual. However, when $$V$$ has an
-inner-product the primal/dual identification through it becomes natural (it no
-longer depends on a particular choice of basis). Furthermore, there is also a
-natural choice of a volume form that no longer depends on the basis. In order do
-find it, we first need to ask ourselves *how does a volume form changes as we
-change basis?* 
+$$k$$-vectors, extended linearly to non-decomposable forms. This correspondance
+is not *natural* in the sense that it depends on the choice of basis both for
+the volume form and for the identification of $$V$$ with its dual. However, when
+$$V$$ has an inner-product the primal/dual identification through it becomes
+natural (it no longer depends on a particular choice of basis). Furthermore,
+there is also a natural choice of a volume form that no longer depends on the
+basis. In order do construct it, we first need to ask ourselves *how does a
+volume form changes as we change basis?*
 
 To answer this question, let us consider the *pullback* of a volume form by an
 endomorphism $$A: V \to V$$:
@@ -480,7 +480,7 @@ from *any* orientation-preserving basis, scale the canonical $$n$$-form so that
 it evaluates to $$1$$ on the orthonormalized basis *and we'll aways end up with
 the exact same volume form*.
 
-More precisely, let us pick some arbitrary dual basis $$\dd x_1, \ldots, \dd
+More concretely, let us pick some arbitrary dual basis $$\dd x_1, \ldots, \dd
 x_n$$. In the primal basis, an orthonormal basis matrix $$B$$ satisfies $$B^TMB
 = I$$ where $$M$$ is the Gram matrix of the inner product, which is
 positive-definite. Therefore, $$B$$ is of the form $$B = L^{-T}U$$ where $$M =
@@ -499,7 +499,17 @@ $$\frac{1}{\det(B)} = \sqrt{\det{M}}$$, and the natural volume form is given by:
 
 $$\sqrt{\det{M}} \dd x_1\wedge \ldots \wedge \dd x_n$$
 
+We now have everything we need to associate an $$n-k$$-form to a $$k$$-form in a
+natural way: let $$\mu$$ be the natural volume form and $$k$$ arbitrary
+$$1$$-forms $$\omega_i$$, we obtain an $$n-k$$-forms as follows:
 
+$$\omega_1 \wedge \ldots \wedge \omega_k \mapsto \iota_{\omega_k^\sharp} \circ \ldots \circ \iota_{\omega_1^\sharp} \mu$$
+
+when extended linearly to all $$k$$-forms, we obtain the degree-$$k$$ Hodge star:
+
+$$\star: \bigwedge^{k}(V) \to \bigwedge^{n - k}(V)$$
+
+TODO show that $$\omega \wedge \star \eta = \inner{\omega, \eta} \mu$$
 
 # Differential Forms
 

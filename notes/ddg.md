@@ -509,7 +509,9 @@ when extended linearly to all $$k$$-forms, we obtain the degree-$$k$$ Hodge star
 
 $$\star: \bigwedge^{k}(V) \to \bigwedge^{n - k}(V)$$
 
-TODO show that $$\omega \wedge \star \eta = \inner{\omega, \eta} \mu$$
+- TODO show that $$\star \star \omega = (-1)^k\omega$$
+- TODO show that $$\inner{\omega, \eta} = \inner{\star \omega, \star \eta}$$
+- TODO show that $$\omega \wedge \star \eta = \inner{\omega, \eta} \mu$$
 
 # Differential Forms
 

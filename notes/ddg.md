@@ -330,7 +330,13 @@ denoted by $$\iota_x \omega$$, where
 $$\iota_v: \bigwedge^{p+1}(V) \to \bigwedge^{p}(V)$$
 
 is the interior product. Of course, the interior product is linear in both
-arguments.
+arguments, and since it applies to alternating forms, we get:
+
+$$\iota_x \circ \iota_y = -\iota_y \circ \iota_x$$
+
+In particular:
+
+$$\iota_x \circ \iota_x = 0$$
 
 ## Inner Product
 
@@ -376,11 +382,11 @@ factored as
 $$\begin{aligned}
 \inner{a \wedge b, c \wedge d} &= \inner{b, \inner{a, c} d - \inner{a, d} c} \\
 &= \inner{b, c\block{a^\sharp}d - d\block{a^\sharp}c} \\
-&= \inner{b, \block{c \wedge d}\block{a^\sharp, .}} \\
+&= \inner{b, \block{c \wedge d}\block{a^\sharp, \cdot}} \\
 &= \inner{b, \iota_{a^\sharp}\block{c \wedge d}} \\
 \end{aligned}$$
 
-where the $$1$$-form $$a = \inner{a^\sharp, .}$$ is represented by
+where the $$1$$-form $$a = \inner{a^\sharp, \cdot}$$ is represented by
 vector $$a^\sharp$$. Notice how the interior product with $$a^\sharp$$
 pushes inner products involving $$a$$ down the right-hand side
 $$2$$-form $$c \wedge d$$. What is more, $$c \wedge d$$ is passed
@@ -423,6 +429,77 @@ $$\bigwedge^k(V)$$. An inner product on the whole exterior algebra
 $$\bigwedge(V)$$ can be obtained as the direct sum of the inner
 products for each degree *i.e.* by having $$\inner{x, y} = 0$$ for
 different degree forms $$x, y$$.
+
+## Hodge Duality
+
+As we saw above, $$\dim\block{A^n(V)} = 1$$ so all non-zero top-degree forms are
+scalar multiples of each other. These are called *volume forms*, and choosing a
+preferred volume form $$\omega$$ (*e.g.* $$\dd x_1 \wedge \ldots \dd x_n$$ for a
+dual basis $$\dd x_1, \ldots, \dd x_n$$) gives a correspondance between
+$$k$$-forms and $$n - k$$ forms via the interior product with $$\omega$$ as
+follows:
+
+$$
+\dd x_{\sigma(1)} \wedge \ldots \wedge \dd x_{\sigma(k)} \mapsto \underbrace{\block{\block{y_1, \ldots, y_{n - k}} \mapsto \omega\block{x_{\sigma(1)}, \ldots, x_{\sigma(k)}, y_1, \ldots, y_{n-k}}}}_{\iota_{x_{\sigma(k)}} \circ \ldots \circ \iota_{x_{\sigma(1)}} \omega}
+$$
+
+for all $$\sigma \in S(k)$$ where we plug the primal basis vectors corresponding
+to basis $$1$$-forms into $$\omega$$ in the order they appear in the input
+$$k$$-vectors, extended linearly. This correspondance is not *natural* in the
+sense that it depends on the choice of basis both for the volume form and for
+the identification of $$V$$ with its dual. However, when $$V$$ has an
+inner-product the primal/dual identification through it becomes natural (it no
+longer depends on a particular choice of basis). Furthermore, there is also a
+natural choice of a volume form that no longer depends on the basis. In order do
+find it, we first need to ask ourselves *how does a volume form changes as we
+change basis?* 
+
+To answer this question, let us consider the *pullback* of a volume form by an
+endomorphism $$A: V \to V$$:
+
+$$A^*\omega: \block{x_1, \ldots x_n} \mapsto \omega\block{Ax_1, \ldots, Ax_n}$$
+
+where we transform every input vector by $$A$$ before feeding them to
+$$\omega$$. The result is another $$n$$-form, which are a $$1$$-dimensional
+subspace so there should be some multiplicative constant $$\lambda_A$$ such that
+$$A^*\omega = \lambda_A \omega$$. In fact, one can easily see that the result is
+a volume form (that is, $$\lambda_A \neq 0$$) exactly when $$A$$ is
+non-singular. Obviously, $$\lambda_I = 1$$ and $$\lambda_{AB} = \lambda_{BA} =
+\lambda_A \lambda_B$$, therefore $$\lambda$$ is a group homomorphism $$GL(n) \to
+\RR^\times$$, which means that $$\lambda$$ must factor through the determinant
+$$\det$$. One can show that the scaling factor actually *is* the determinant:
+
+$$A^*\omega = \det(A)\omega$$
+
+How does this help us with choosing a basis-independent volume form? Well, the
+above formula implies that *any* orientation-preserving orthonormal basis will
+preserve volume forms, since any two such basis are related by rotations, hence
+$$\det(A) = 1$$[^orthonormal-determinant]. This makes sense intuitively:
+rotating $$n$$-parallelotopes should not change volumes. So, we can simply start
+from *any* orientation-preserving basis, scale the canonical $$n$$-form so that
+it evaluates to $$1$$ on the orthonormalized basis *and we'll aways end up with
+the exact same volume form*.
+
+More precisely, let us pick some arbitrary dual basis $$\dd x_1, \ldots, \dd
+x_n$$. In the primal basis, an orthonormal basis matrix $$B$$ satisfies $$B^TMB
+= I$$ where $$M$$ is the Gram matrix of the inner product, which is
+positive-definite. Therefore, $$B$$ is of the form $$B = L^{-T}U$$ where $$M =
+LL^T$$ is the [Cholesky](cholesky) decomposition of $$M$$ and $$U\in
+SO(n)$$. The canonical $$n$$-form $$\dd x_1 \wedge \ldots \wedge \dd x_n$$
+evaluated on $$B$$ yields:
+
+$$\begin{aligned}
+\block{\dd x_1 \wedge \ldots \wedge \dd x_n}\block{Bx_1, \ldots, Bx_n} &=
+\det(B)\underbrace{\block{\dd x_1 \wedge \ldots \wedge \dd x_n}\block{x_1, \ldots, x_n}}_1 \\
+&= \det(B)
+\end{aligned}$$
+
+Therefore, the scaling factor for $$B$$ to evaluate to $$1$$ should be
+$$\frac{1}{\det(B)} = \sqrt{\det{M}}$$, and the natural volume form is given by:
+
+$$\sqrt{\det{M}} \dd x_1\wedge \ldots \wedge \dd x_n$$
+
+
 
 # Differential Forms
 
@@ -469,11 +546,11 @@ In fact, this property can even serve as a *definition* of the determinant. This
 implies that $$n$$-forms are rotation-invariant as one would expect: rotating
 infinitesimal volumes should not change their weight.
 
-Finally, since $$n$$-linear (alternating) maps form a 1-dimensional vector
-space, we may choose some non-degenerate differential $$n$$-form $$\mu$$ as a
-reference and obtain any other $$n$$-form as $$\omega = f \mu$$ where $$f$$ is a
-scalar function that provides the pointwise scaling factor. Such reference
-$$n$$-forms are usually called *volume forms*.
+Finally, since $$n$$-linear alternating maps form a 1-dimensional vector space,
+we may choose some non-degenerate differential $$n$$-form $$\mu$$ as a reference
+and obtain any other $$n$$-form as $$\omega = f \mu$$ where $$f$$ is a scalar
+function that provides the pointwise scaling factor. Such reference $$n$$-forms
+are usually called *volume forms*.
 
 
 ## Volume forms
@@ -513,7 +590,7 @@ where $$g$$ is the Riemannian metric.
 On Riemannian manifolds, differential 1-forms can be identified to vector fields
 using the metric. This provides the so-called *musical isomorphisms*:
 
-$$X^\flat = g(X, .)$$
+$$X^\flat = g(X, \cdot)$$
 
 where $$g$$ is the Riemannian metric. Here $$X^\flat$$ is a 1-form obtained from
 vector field $$X$$ by considering the (pointwise) inner-product with $$X$$ using
@@ -530,6 +607,11 @@ is extended to arbitrary-degree forms on every tangent space using the
 procedure described in [exterior algebra](#inner-product), which we
 integrate over the manifold as above to obtain an inner-product on
 differential forms. 
+
+## Hodge Star
+
+
+
 
 # Exterior Derivative & Stoke's Theorem
 
@@ -758,3 +840,7 @@ $$\inner{\nabla \lambda_i, \nabla \lambda_j} = -\frac{1}{4 |ijk|^2} \frac{\norm{
     will be weighted to 1
 
 [^einstein-notation]: or *raises/lowers* the indices in Einstein notation
+
+[^orthonormal-determinant]: rotations in metric $$M$$ are exactly the
+    orientation and metric-preserving endomorphisms $$A$$ such that $$A^TMA =
+    M$$ with $$\det(A) > 0$$, therefore $$\det(A) = 1$$.

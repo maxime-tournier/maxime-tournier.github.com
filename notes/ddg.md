@@ -497,7 +497,7 @@ $$\begin{aligned}
 Therefore, the scaling factor for $$B$$ to evaluate to $$1$$ should be
 $$\frac{1}{\det(B)} = \sqrt{\det{M}}$$, and the natural volume form is given by:
 
-$$\sqrt{\det{M}} \dd x_1\wedge \ldots \wedge \dd x_n$$
+$$\sqrt{\det(M)} \dd x_1\wedge \ldots \wedge \dd x_n$$
 
 We now have everything we need to associate an $$n-k$$-form to a $$k$$-form in a
 natural way: let $$\mu$$ be the natural volume form and $$k$$ arbitrary

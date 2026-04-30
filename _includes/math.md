@@ -58,6 +58,7 @@ $$
 
 <!-- exterior algebra -->
 \newcommand{\wedges}{\wedge \ldots \wedge}
+\newcommand{\sgn}[1]{\mathrm{sgn}\block{#1}}
 
 <!-- krylov methods -->
 \newcommand{\Krylov}{\mathcal{K}}

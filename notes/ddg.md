@@ -164,11 +164,13 @@ global scaling parameter there's essentially no other choice we could have made.
 
 This precedure can be generalized to higher-degree forms fairly directly, and
 motivates the definition of the wedge product of a $$p$$-form $$\omega_p$$ with
-a $$q$$-form $$\omega_q$$ as follows:
+a $$q$$-form $$\omega_q$$ as a $$k = p + q$$-form defined as follows:
 
-$$
-\omega_p \wedge \omega_q = \frac{1}{k!}\sum_{\sigma \in S(k)} \sign{\sigma} \omega_p\block{x_{\sigma(1)}, \ldots, x_{\sigma(p)}}
+$$\begin{aligned}
+\block{\omega_p \wedge \omega_q}\block{x_1, \ldots, x_k} &= \\
+    \frac{1}{k!}\sum_{\sigma \in S(k)} \sign{\sigma} &\omega_p\block{x_{\sigma(1)}, \ldots, x_{\sigma(p)}}
 \omega_q\block{x_{\sigma(p+1)}, \ldots, x_{\sigma(p + q)}}
+\end{aligned}
 $$
 
 where the $$\frac{1}{k!}$$ normalization factor ensures proper associativity of
@@ -343,6 +345,19 @@ $$\iota_x \circ \iota_y = -\iota_y \circ \iota_x$$
 In particular:
 
 $$\iota_x \circ \iota_x = 0$$
+
+The interior product interacts nicely with the exterior product as we shall
+see. Let $$\omega_p$$ a $$p$$-form, $$\omega_q$$ be a $$q$$-form and $$k = p +
+q$$, the interior product with vector $$x_1$$ satisfies:
+
+$$
+\begin{aligned}
+\block{\iota_{x_1} \omega_p \wedge \omega_q}&\block{x_2, \ldots, x_k} \\ 
+    &= \block{\omega_p \wedge \omega_q}\block{x_1, x_2, \ldots, x_k} \\
+    &= \frac{1}{k!} \sum_{\sigma \in S(k)} \sign{\sigma}\omega_p\block{x_{\sigma(1)}, \ldots, x_{\sigma(p)}}\omega_q\block{x_{\sigma_{p + 1}}, \ldots, x_{\sigma(p + q)}} \\
+    &= \frac{1}{k!} \sum_{\sigma \ in S(k)} \sign{\sigma}
+\end{aligned}
+$$
 
 ## Inner Product
 

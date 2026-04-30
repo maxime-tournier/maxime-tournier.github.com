@@ -56,6 +56,9 @@ $$
 
 \newcommand{\LL}{\mathcal{L}}
 
+<!-- exterior algebra -->
+\newcommand{\wedges}{\wedge \ldots \wedge}
+
 <!-- krylov methods -->
 \newcommand{\Krylov}{\mathcal{K}}
 \newcommand{\Span}[1]{\mathrm{Span}\block{#1}}

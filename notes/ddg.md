@@ -173,8 +173,66 @@ $$\begin{aligned}
 \end{aligned}
 $$
 
-where the $$\frac{1}{k!}$$ normalization factor ensures proper associativity of
-the wedge product. One can show that:
+where the $$\frac{1}{p!q!}$$ is a normalization factor (some authors
+prefer using $$\frac{1}{k!}$$ to emphasize the projection of the
+tensor product on alternating forms, but we'll stick to the first one
+for reasons that will become clear soon). A somewhat more enlightening
+formula can be obtained, but we first need a few results on
+permutations and shuffles.
+
+### Permutations
+
+When permuting a set of $$p + q$$ indices with $$\sigma \in S(p +
+q)$$, one can keep track of where the first $$p$$ indices ended:
+$$\left\{\sigma(1), \dots, \sigma(p)\right\}$$ and similarly for the
+remaining $$q$$ indices. If we further sort each of these sets
+separately[^sorting-permutations], we obtain what is known as a
+$$(p,q)$$-shuffle: a permutation that preserves the relative ordering
+of the first $$p$$ elements and of the next $$q$$ elements:
+
+$$\sigma_p \circ \sigma(1) < \ldots < \sigma_p \circ \sigma(p)$$ 
+
+$$\sigma_q \circ \sigma(p + 1) < \ldots < \sigma_q \circ \sigma(p + q)$$
+
+where $$\sigma_p, \sigma_q$$ perform the sorting of $$p$$ and $$q$$
+elements. This means we factored our permutation as:
+
+$$\sigma = \tau \circ \block{\sigma_p^{-1} \oplus \sigma_q^{-1}}$$
+
+where $$\tau$$ is a $$(p, q)$$-shuffle. Now, for the purpose of
+defining the wedge product, $$(p, q)$$-shuffles are particularly
+interesting since they get rid of most duplicate terms popping up when
+the relative ordering is lost. For instance, we don't need both terms
+$$\alpha\block{x_1}\beta\block{x_2,x_3} =
+-\alpha\block{x_1}\beta\block{x_3, x_2}$$ so we can drop one term if
+we stick to $$(1, 2)$$-shuffles. In order to express the wedge
+formula, we need to know *how many $$(p, q)$$-shuffles there is* to
+account for deleted terms. A shuffle is entirely determined by which
+elements end up in the $$p$$-set (or similarly in the $$q$$-set) and
+once the choice is made there is exactly one shuffle that works: the
+one with sorted $$p$$-set and $$q$$-set. This means the number of
+$$(p, q)$$-shuffles is:
+
+$$|S(p, q)| = \mat{p + q \\ p} = \mat{p + q \\ q} = \frac{(p + q)!}{p! q!}$$
+
+In other words, there are $$p!q!$$ more permutations in $$S(p + q)$$
+than in $$S(p, q)$$, which is exactly the reason behind the
+$$\frac{1}{p!q!}$$ normalization factor in the wedge product
+formula. We obtain the nicer formula in terms of $$(p, q)$$-shuffles:
+
+$$
+\begin{aligned}
+\block{\omega_p \wedge \omega_q}\block{x_1, \ldots, x_k} &= \\
+    \sum_{\sigma \in S(p, q)} \sign{\sigma} &\omega_p\block{x_{\sigma(1)}, \ldots, x_{\sigma(p)}}
+\omega_q\block{x_{\sigma(p+1)}, \ldots, x_{\sigma(p + q)}}
+\end{aligned}
+$$
+
+that gets rid of normalization entirely.
+
+### Properties
+
+One can show that:
 
 $$\omega_p \wedge \omega_q = \block{-1}^{pq} \omega_q \wedge \omega_p$$
 
@@ -346,18 +404,26 @@ In particular:
 
 $$\iota_x \circ \iota_x = 0$$
 
-The interior product interacts nicely with the exterior product as we shall
-see. Let $$\omega_p$$ a $$p$$-form, $$\omega_q$$ be a $$q$$-form and $$k = p +
-q$$, the interior product with vector $$x_1$$ satisfies:
+The interior product interacts nicely with the exterior product as we
+shall see. Let $$\omega$$ a $$1$$-form and $$\eta$$ be a $$k$$-form,
+the interior product with vector $$x_1$$ satisfies:
 
 $$
 \begin{aligned}
-\block{\iota_{x_1} \omega_p \wedge \omega_q}&\block{x_2, \ldots, x_k} \\ 
-    &= \block{\omega_p \wedge \omega_q}\block{x_1, x_2, \ldots, x_k} \\
-    &= \frac{1}{k!} \sum_{\sigma \in S(k)} \sign{\sigma}\omega_p\block{x_{\sigma(1)}, \ldots, x_{\sigma(p)}}\omega_q\block{x_{\sigma_{p + 1}}, \ldots, x_{\sigma(p + q)}} \\
-    &= \frac{1}{k!} \sum_{\sigma \ in S(k)} \sign{\sigma}
+\block{\iota_{x_1} \omega \wedge \eta}&\block{x_2, \ldots, x_k} \\ 
+    &= \block{\omega \wedge \eta}\block{x_1, x_2, \ldots, x_k} \\
+    &= \frac{1}{(k + 1)!} \sum_{\sigma \in S(k + 1)} \sgn{\sigma}\omega\block{x_{\sigma(1)}}\eta\block{x_{\sigma(2)}, \ldots, x_{\sigma(k)}} \\
 \end{aligned}
 $$
+
+Let us partition $$S(k + 1)$$ into two subsets: elements that fix
+$$1$$ and the others. The sum over the first subset reduces to:
+
+$$\sum_{\sigma \in S(k)} \sgn{\sigma} \underbrace{\omega\block{x_1}\eta\block{x_{1 + \sigma(i)}}}_{\block{\iota_{x_1}\omega}\wedge \eta}$$
+
+while the sum over the second subset reduces to:
+
+
 
 ## Inner Product
 
@@ -921,3 +987,7 @@ $$\inner{\nabla \lambda_i, \nabla \lambda_j} = -\frac{1}{4 |ijk|^2} \frac{\norm{
 [^orthonormal-determinant]: rotations in metric $$M$$ are exactly the
     orientation and metric-preserving endomorphisms $$A$$ such that $$A^TMA =
     M$$ with $$\det(A) > 0$$, therefore $$\det(A) = 1$$.
+
+[^sorting-permutations]: imagine sorting the array of the first $$p$$
+    elements representing the permutation, then the next $$q$$
+    elements

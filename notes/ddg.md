@@ -180,10 +180,10 @@ for reasons that will become clear soon). A somewhat more enlightening
 formula can be obtained, but we first need a few results on
 permutations and shuffles.
 
-### Permutations
+### Permutations and Shuffles
 
 When permuting a set of $$p + q$$ indices with $$\sigma \in S(p +
-q)$$, one can keep track of where the first $$p$$ indices ended:
+q)$$, one can keep track of where the first $$p$$ indices end:
 $$\left\{\sigma(1), \dots, \sigma(p)\right\}$$ and similarly for the
 remaining $$q$$ indices. If we further sort each of these sets
 separately[^sorting-permutations], we obtain what is known as a
@@ -194,41 +194,54 @@ $$\sigma_p \circ \sigma(1) < \ldots < \sigma_p \circ \sigma(p)$$
 
 $$\sigma_q \circ \sigma(p + 1) < \ldots < \sigma_q \circ \sigma(p + q)$$
 
-where $$\sigma_p, \sigma_q$$ perform the sorting of $$p$$ and $$q$$
-elements. This means we factored our permutation as:
+where $$\sigma_p, \sigma_q$$ perform the sorting of their respective
+set. This means we factored our permutation as:
 
 $$\sigma = \tau \circ \block{\sigma_p^{-1} \oplus \sigma_q^{-1}}$$
 
-where $$\tau$$ is a $$(p, q)$$-shuffle. Now, for the purpose of
-defining the wedge product, $$(p, q)$$-shuffles are particularly
-interesting since they get rid of most duplicate terms popping up when
-the relative ordering is lost. For instance, we don't need both terms
-$$\alpha\block{x_1}\beta\block{x_2,x_3} =
--\alpha\block{x_1}\beta\block{x_3, x_2}$$ so we can drop one term if
-we stick to $$(1, 2)$$-shuffles. In order to express the wedge
-formula, we need to know *how many $$(p, q)$$-shuffles there is* to
-account for deleted terms. A shuffle is entirely determined by which
-elements end up in the $$p$$-set (or similarly in the $$q$$-set) and
-once the choice is made there is exactly one shuffle that works: the
-one with sorted $$p$$-set and $$q$$-set. This means the number of
-$$(p, q)$$-shuffles is:
+where $$\tau$$ is a $$(p, q)$$-shuffle. A shuffle is entirely
+determined by which elements end up in the $$p$$-set (or similarly in
+the $$q$$-set) and once the choice is made there is exactly one
+shuffle that works: the one with sorted $$p$$-set and $$q$$-set. This
+means the number of $$(p, q)$$-shuffles is:
 
 $$|S(p, q)| = \mat{p + q \\ p} = \mat{p + q \\ q} = \frac{(p + q)!}{p! q!}$$
 
 In other words, there are $$p!q!$$ more permutations in $$S(p + q)$$
 than in $$S(p, q)$$, which is exactly the reason behind the
-$$\frac{1}{p!q!}$$ normalization factor in the wedge product
-formula. We obtain the nicer formula in terms of $$(p, q)$$-shuffles:
+$$\frac{1}{p!q!}$$ normalization factor in the wedge product formula:
+it normalizes redundant terms, which we can get rid of by using
+shuffles. For instance, we don't need both terms
+$$\alpha\block{x_1}\beta\block{x_2,x_3} =
+-\alpha\block{x_1}\beta\block{x_3, x_2}$$ in the example above so we
+can drop the latter if we stick to $$(1, 2)$$-shuffles. In practice,
+we replace the sum over all $$\sigma \in S(p + q)$$ with:
+
+$$\sum_{\tau \in S(p, q)}\sum_{\sigma_p \in S(p)} \sum_{\sigma_q \in S(q)}$$
+
+and we may now factor out the redundant terms due to $$\sigma_p$$ as:
+
+$$\omega_p\block{x_{\sigma(i)}, \ldots} = \sgn{\sigma_p}\omega_p\block{x_{\tau(i)}, \ldots}$$
+
+and similarly for $$\sigma_q$$, leaving us with this beast:
+
+$$\sum_{\tau \in S(p, q)} \block{\sum_{\sigma_p \in S(p)} \sum_{\sigma_q \in S(q)} \underbrace{\sgn{\tau}\sgn{\sigma_p}\sgn{\sigma_q}}_{\sgn{\sigma}}\sgn{\sigma_p} \sgn{\sigma_q}}\omega_p\block{x_{\tau(i)}, \ldots}\omega_q\block{x_{\tau(p + j)}, \ldots}$$
+
+where 
+
+$$\sum_{\sigma_p \in S(p), \sigma_q \in S(q)} \underbrace{\sgn{\sigma_p}^2\sgn{\sigma_q}^2}_1 = p!q!$$
+
+We obtain the nicer formula in terms of $$(p, q)$$-shuffles:
 
 $$
 \begin{aligned}
 \block{\omega_p \wedge \omega_q}\block{x_1, \ldots, x_k} &= \\
-    \sum_{\sigma \in S(p, q)} \sign{\sigma} &\omega_p\block{x_{\sigma(1)}, \ldots, x_{\sigma(p)}}
-\omega_q\block{x_{\sigma(p+1)}, \ldots, x_{\sigma(p + q)}}
+    \sum_{\tau \in S(p, q)} \sgn{\tau} &\omega_p\block{x_{\tau(1)}, \ldots, x_{\tau(p)}}
+\omega_q\block{x_{\tau(p+1)}, \ldots, x_{\tau(p + q)}}
 \end{aligned}
 $$
 
-that gets rid of normalization entirely.
+which gets rid of normalization entirely as expected.
 
 ### Properties
 

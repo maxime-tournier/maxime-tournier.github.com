@@ -418,25 +418,33 @@ In particular:
 $$\iota_x \circ \iota_x = 0$$
 
 The interior product interacts nicely with the exterior product as we
-shall see. Let $$\omega$$ a $$1$$-form and $$\eta$$ be a $$k$$-form,
+shall see. Let $$\omega_p$$ a $$p$$-form and $$\omega_q$$ be a $$q$$-form,
 the interior product with vector $$x_1$$ satisfies:
 
 $$
 \begin{aligned}
-\block{\iota_{x_1} \omega \wedge \eta}&\block{x_2, \ldots, x_k} \\ 
-    &= \block{\omega \wedge \eta}\block{x_1, x_2, \ldots, x_k} \\
-    &= \frac{1}{(k + 1)!} \sum_{\sigma \in S(k + 1)} \sgn{\sigma}\omega\block{x_{\sigma(1)}}\eta\block{x_{\sigma(2)}, \ldots, x_{\sigma(k)}} \\
+\block{\iota_{x_1} \omega_p \wedge \omega_q}&\block{x_2, \ldots, x_k} \\ 
+    &= \block{\omega_p \wedge \omega_q}\block{x_1, x_2, \ldots, x_k} \\
+    &= \sum_{\tau \in S(p, q)} \sgn{\tau}\omega_p\block{x_{\tau(i)}}\omega_q\block{x_{\tau(p + i)}} \\
 \end{aligned}
 $$
 
-Let us partition $$S(k + 1)$$ into two subsets: elements that fix
-$$1$$ and the others. The sum over the first subset reduces to:
+Since $$\tau$$ is a $$(p, q)$$-shuffle, there are two cases: either
+$$1$$ ends up in the first $$p$$ elements or in the next $$q$$
+elements. Due to relative ordering being preserved in each set, $$1$$
+always ends up front of its set, so either $$\omega_p$$ or
+$$\omega_q$$ ends up having $$x_1$$ as its first argument in the above
+expression.
 
-$$\sum_{\sigma \in S(k)} \sgn{\sigma} \underbrace{\omega\block{x_1}\eta\block{x_{1 + \sigma(i)}}}_{\block{\iota_{x_1}\omega}\wedge \eta}$$
+$$
+\begin{aligned}
+\block{\iota_{x_1} \omega_p \wedge \omega_q}\block{x_2, \ldots, x_k}
+   &= \sum_{\tau \in S(p - 1, q)} \sgn{\tau}\iota_{x_1}\omega_p\block{x_{\tau(i)}}\omega_q\block{x_{\tau(p + i)}} \\
+	 &+ \sum_{\tau \in S(p, q - 1)} \sgn{\tau} \omega_p\block{x_{\tau(i)}}\iota_{x_1}\omega_q\block{x_{\tau(p + i)}} \\
+\end{aligned}
+$$
 
-while the sum over the second subset reduces to:
-
-
+TODO where does $$(-1)^p$$ come from
 
 ## Inner Product
 

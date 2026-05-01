@@ -430,21 +430,28 @@ $$
 $$
 
 Since $$\tau$$ is a $$(p, q)$$-shuffle, there are two cases: either
-$$1$$ ends up in the first $$p$$ elements or in the next $$q$$
+$$1$$ ends up in the first $$p$$ elements or in the last $$q$$
 elements. Due to relative ordering being preserved in each set, $$1$$
-always ends up front of its set, so either $$\omega_p$$ or
-$$\omega_q$$ ends up having $$x_1$$ as its first argument in the above
-expression.
+always ends up front of its set (*i.e.* either $$\sigma(1) = 1$$ or
+$$\sigma(p + 1) = 1$$), so either $$\omega_p$$ or $$\omega_q$$ ends up
+having $$x_1$$ as its first argument in the above expression.
 
 $$
 \begin{aligned}
 \block{\iota_{x_1} \omega_p \wedge \omega_q}\block{x_2, \ldots, x_k}
    &= \sum_{\tau \in S(p - 1, q)} \sgn{\tau}\iota_{x_1}\omega_p\block{x_{\tau(i)}}\omega_q\block{x_{\tau(p + i)}} \\
-	 &+ \sum_{\tau \in S(p, q - 1)} \sgn{\tau} \omega_p\block{x_{\tau(i)}}\iota_{x_1}\omega_q\block{x_{\tau(p + i)}} \\
+	 &+ (-1)^p \sum_{\tau \in S(p, q - 1)} \sgn{\tau} \omega_p\block{x_{\tau(i)}}\iota_{x_1}\omega_q\block{x_{\tau(p + i)}} \\
 \end{aligned}
 $$
 
-TODO where does $$(-1)^p$$ come from
+Where does $$(-1)^p$$ come from? It's because of how $$\tau \in S(p,
+q)$$ with $$\sigma(p + 1) = 1$$ and $$\tau' \in S(p, q - 1)$$ are
+related: the latter is obtained from the former by $$p$$ more
+transpositions bubbling $$1$$ to position $$p + 1$$, yielding
+$$\sgn{\tau} = (-1)^p \sgn{\tau'}$$. From this we finally obtain the
+interior/wedge product formula:
+
+$$\iota_{x} \block{\omega_p \wedge \omega_q} = \block{\iota_x \omega_p} \wedge \omega_q + (-1)^p \omega_p \wedge \block{\iota_x \omega_q}$$
 
 ## Inner Product
 

@@ -37,16 +37,17 @@ cover the approaches to discretization.
 
 # Exterior Algebra
 
-Integrating differential forms is fundamentally about summing up the weightings
-of infinitesimal volumes over a domain. As we'll see, such weighting can be
-formalized as an alternating form. It turns out that alternating forms have a
-particularly rich algebraic structure, which is what *exterior algebra* is
-about. The usual treatments of the subject vary between the coordinate-ful
-approach, riddled with indices and painful change of coordinates, and the
-coordinate-free one, arguably more elegant but often abstracted to the point of
-uselessness. We'll try to strike a balance between the two, keeping the model of
-alternating linear forms in mind but underlying the general construction as
-well.
+Integrating differential forms is fundamentally about summing up the
+weightings of infinitesimal volumes over a domain. As we'll see, such
+weighting can be formalized as an alternating form. It turns out that
+alternating forms have a particularly rich algebraic structure, which
+is what *exterior algebra* is about. The usual treatments of the
+subject vary between the coordinate-ful approach, riddled with indices
+and painful change of coordinates, and the coordinate-free one,
+arguably more elegant but often abstracted to the point of
+uselessness. We'll cover both points of view since the former is
+easier to get starting, but quickly becomes so tedious that it makes a
+perfect case for the latter.
 
 ## Measuring Volumes
 
@@ -263,10 +264,19 @@ $$x \wedge y = \block{-1}^{k^2} y \wedge x$$
 for same-degree forms $$x, y$$, so when $$k$$ is odd we get $$x\wedge
 y = -y \wedge x$$. $$k$$-forms obtained as the wedge product of $$k$$
 vectors are conveniently named $$k$$-vectors. By a dimension argument,
-one can show that the $$k$$-vectors obtained from a basis of $$V$$
-span the space of alternating $$k$$-forms on $$V$$, thereby providing
-a basis for it. One should be cautious though: some $$k$$-forms cannot
-be expressed as a single $$k$$-vector.
+one can show that the (ordered) $$k$$-vectors obtained from a basis of
+$$V$$ span the space of alternating $$k$$-forms on $$V$$, thereby
+providing a basis for it. One should be cautious though: some
+$$k$$-forms cannot be expressed as a single $$k$$-vector.
+
+The correspondance between sets of $$k$$ basis vectors and basis
+$$k$$-forms can be made a bit more precise. Let $$\block{x_i}_{i \leq
+n}$$ be a basis of $$V$$ and $$\block{\dd x_i}_{i \leq n}$$ the dual basis, and
+let $$\tau \in S(k, n - k)$$ be a shuffle. One can show the following:
+
+- $$\dd x_{\tau(1)} \wedges \dd x_{\tau(k)}$$ is a basis $$k$$-form
+- $$\block{\dd x_{\tau(1)} \wedges \dd x_{\tau(k)}}\block{x_{\sigma(1)}, \ldots, x_{\sigma(k)}} = \delta_{\tau\sigma}$$ for another shuffle $$\sigma \in S(k, n - k)$$
+
 
 ## Algebra Structure
 
@@ -586,13 +596,13 @@ carries over higher-degree forms.
 
 As we saw above, $$\dim\block{A^n(V)} = 1$$ so all non-zero top-degree forms are
 scalar multiples of each other. These are called *volume forms*, and choosing a
-preferred volume form $$\omega$$ (*e.g.* $$\dd x_1 \wedge \ldots \dd x_n$$ for a
+preferred volume form $$\omega$$ (*e.g.* $$\dd x_1 \wedges \dd x_n$$ for a
 dual basis $$\dd x_1, \ldots, \dd x_n$$) gives a correspondance between
 $$k$$-forms and $$n - k$$ forms via the interior product with $$\omega$$ as
 follows:
 
 $$
-\dd x_{\sigma(1)} \wedge \ldots \wedge \dd x_{\sigma(k)} \mapsto \underbrace{\block{\block{y_1, \ldots, y_{n - k}} \mapsto \omega\block{x_{\sigma(1)}, \ldots, x_{\sigma(k)}, y_1, \ldots, y_{n-k}}}}_{\iota_{x_{\sigma(k)}} \circ \ldots \circ \iota_{x_{\sigma(1)}} \omega}
+\dd x_{\sigma(1)} \wedges \dd x_{\sigma(k)} \mapsto \underbrace{\block{\block{y_1, \ldots, y_{n - k}} \mapsto \omega\block{x_{\sigma(1)}, \ldots, x_{\sigma(k)}, y_1, \ldots, y_{n-k}}}}_{\iota_{x_{\sigma(k)}} \circ \ldots \circ \iota_{x_{\sigma(1)}} \omega}
 $$
 
 for all $$\sigma \in S(k)$$ where we plug the primal basis vectors corresponding
@@ -604,12 +614,12 @@ $$V$$ has an inner-product the primal/dual identification through it becomes
 natural (it no longer depends on a particular choice of basis). Furthermore,
 there is also a natural choice of a volume form that no longer depends on the
 basis. In order do construct it, we first need to ask ourselves *how does a
-volume form changes as we change basis?*
+volume form transform as we change coordinates?*
 
 To answer this question, let us consider the *pullback* of a volume form by an
 endomorphism $$A: V \to V$$:
 
-$$A^*\omega: \block{x_1, \ldots x_n} \mapsto \omega\block{Ax_1, \ldots, Ax_n}$$
+$$A^*\omega: \block{x_1, \ldots, x_n} \mapsto \omega\block{Ax_1, \ldots, Ax_n}$$
 
 where we transform every input vector by $$A$$ before feeding them to
 $$\omega$$. The result is another $$n$$-form, which are a $$1$$-dimensional
@@ -665,12 +675,46 @@ Now let us consider an orthonormal (dual) basis $$\dd x_1, \ldots, \dd x_n$$. In
 this basis, the natural volume form is the canonical $$n$$-form: $$\dd x_1
 \wedges \dd x_n$$ and the Hodge star of a basis $$k$$-vector is given by:
 
-$$\dd x_{\sigma(1)} \wedges \dd x_{\sigma(k)} \mapsto \block{\dd x_1 \wedges \dd x_n}\block{\dd x_{\sigma(1)}^\sharp, \ldots, \dd x_{\sigma(k)}^\sharp, \cdot}$$
+$$\dd x_{\tau(1)} \wedges \dd x_{\tau(k)} \mapsto \block{\dd x_1 \wedges \dd x_n}\block{\dd x_{\tau(1)}^\sharp, \ldots, \dd x_{\tau(k)}^\sharp, \cdot}$$
+
+where $$\tau \in S(k, n - k)$$. For simplicity, let us permute the
+volume form with $$\tau$$:
+
+$$
+\block{\dd x_1 \wedges \dd x_n} =
+	\sgn{\tau}\block{\underbrace{\dd x_{\tau(1)} \wedges \dd x_{\tau(k)}}_{\mu_1} \wedge \underbrace{\dd x_{\tau(k + 1)} \wedges \dd x_{\tau(n)}}_{\mu_2}}
+$$
+
+The only shuffle that yields a non-zero term in the wedge product
+formula for $$\mu_1 \wedge \mu_2$$ applied to $$\block{\dd
+x_{\tau(1)}^\sharp, \ldots, \dd x_{\tau(k)}^\sharp, \ldots}$$ is
+exactly $$\tau$$, which leaves us with:
+
+$$\star\block{\dd x_{\tau(1)} \wedges \dd x_{\tau(k)}} = \sgn{\tau}\dd x_{\tau(k + 1)} \wedges \dd x_{\tau(n)}$$
+
+This formula shows that $$\star$$ maps an orthonormal basis to an
+orthonormal basis, hence is an isometry. If we wish to apply $$\star$$
+once more, we may turn $$\tau$$ into a $$(n - k, k)$$ shuffle
+$$\tau'$$ by applying $$k(n - k)$$ swaps to bubble $$k$$ elements past
+the next $$n - k$$, ending up with:
+
+$$\begin{aligned}
+\star\star\block{\dd x_{\tau(1)} \wedges \dd x_{\tau(k)}} &= \star\block{\sgn{\tau}\dd x_{\tau(k + 1)} \wedges \dd x_{\tau(n)}} \\
+&= \sgn{\tau} \star\block{\dd x_{\tau'(1)} \wedges \dd x_{\tau'(n - k)}} \\
+&= \sgn{\tau}\sgn{\tau'}\dd x_{\tau'(n - k + 1)} \wedges \dd x_{\tau'(n)} \\
+&= \sgn{\tau}^2 (-1)^{k(n - k)}\dd x_{\tau(1)} \wedges \dd x_{\tau(k)} \\
+\end{aligned}
+$$
+
+and we get $$\star \star = (-1)^{k(n - k)}$$.
 
 
-- TODO show that $$\star \star \omega = (-1)^{k(n - k)}\omega$$
-- TODO show that $$\inner{\omega, \eta} = \inner{\star \omega, \star \eta}$$
 - TODO show that $$\omega \wedge \star \eta = \inner{\omega, \eta} \mu$$
+
+$$\star\block{\eta \wedge \omega} = \iota_{\omega^\sharp} \star\eta$$
+
+for a $$1$$-form $$\omega$$ and $$k$$-form $$\eta$$.
+
 
 # Differential Forms
 

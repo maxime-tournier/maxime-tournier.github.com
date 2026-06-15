@@ -257,9 +257,13 @@ $$x \wedge x = \block{-1}^{k^2} x\wedge x$$
 for any $$k$$-form $$x$$. Therefore, when $$k$$ is odd $$\block{(-1)^k}^k =
 -1$$ and $$x \wedge x = 0$$, which is the case in particular when $$k =
 1$$. Otherwise, $$k$$ is even $$\block{(-1)^k}^k = 1$$ and there's no reason for
-$$x \wedge x$$ to vanish. By the same token:
+$$x \wedge x$$ to vanish. The formula can be reduced to:
 
-$$x \wedge y = \block{-1}^{k^2} y \wedge x$$
+$$x \wedge x = \block{-1}^k x\wedge x$$ 
+
+By the same token:
+
+$$x \wedge y = \block{-1}^{k} y \wedge x$$
 
 for same-degree forms $$x, y$$, so when $$k$$ is odd we get $$x\wedge
 y = -y \wedge x$$. $$k$$-forms obtained as the wedge product of $$k$$
@@ -439,12 +443,12 @@ $$
 \end{aligned}
 $$
 
-Since $$\tau$$ is a $$(p, q)$$-shuffle, there are two cases: either
-$$1$$ ends up in the first $$p$$ elements or in the last $$q$$
-elements. Due to relative ordering being preserved in each set, $$1$$
-always ends up front of its set (*i.e.* either $$\sigma(1) = 1$$ or
-$$\sigma(p + 1) = 1$$), so either $$\omega_p$$ or $$\omega_q$$ ends up
-having $$x_1$$ as its first argument in the above expression.
+Since $$\tau$$ is a $$(p, q)$$-shuffle, there are two cases: either $$1$$ ends
+up in the first $$p$$ elements or in the last $$q$$ elements. Due to relative
+ordering being preserved in each set, $$1$$ always ends up front of its set
+(*i.e.* either $$\sigma(1) = 1$$ or $$\sigma(p + 1) = 1$$), so either
+$$\omega_p$$ or $$\omega_q$$ ends up having $$x_1$$ as its first argument in the
+above expression, therefore:
 
 $$
 \begin{aligned}
@@ -706,15 +710,92 @@ $$\begin{aligned}
 \end{aligned}
 $$
 
-and we get $$\star \star = (-1)^{k(n - k)}$$.
+and we get the crucial identity $$\star \star = (-1)^{k(n - k)}$$. From there,
+we get for every $$1$$-forms $$\omega, \eta$$:
 
+$$\begin{aligned}
+\inner{\star\eta \wedge \omega, \mu} &= \inner{\star \eta, \iota_{\omega^\sharp} \mu} \\
+&= \inner{\star \eta, \star \omega} \\
+&= \inner{\eta, \omega} \\
+\end{aligned}
+$$
 
-- TODO show that $$\omega \wedge \star \eta = \inner{\omega, \eta} \mu$$
+which trivially extends to the case when $$\omega$$ is a $$k$$-vector, then any
+$$k$$-form. This inner product gives us the coordinate of $$\star \eta \wedge
+\omega$$ along the volume form $$\mu$$, therefore:
 
-$$\star\block{\eta \wedge \omega} = \iota_{\omega^\sharp} \star\eta$$
+$$\star \eta \wedge \omega = \inner{\eta, \omega} \mu$$
 
-for a $$1$$-form $$\omega$$ and $$k$$-form $$\eta$$.
+Note that this is *not* the standard formula usually found in textbooks, because
+the Hodge star we constructed is not exactly the standard one. More precisely,
+we plug arguments into the volume form in the order they appear in the argument:
 
+$$\star\block{x \wedge y} = \iota_{y^\sharp} \iota_{x^\sharp} \mu$$
+
+whereas the standard Hodge star plugs them in reverse:
+
+$$\star\block{x \wedge y} = \iota_{x^\sharp} \iota_{y^\sharp} \mu$$
+
+which incurs a $$(-1)^k$$ factor between the $$k$$-th standard Hodge star and
+ours. This is consistent with reversing the order of arguments in
+
+$$\omega \wedge \star \eta = \inner{\eta, \omega} \mu$$
+
+so this is "just" a matter of conventions. Note that this last identity may be
+used to *define* the Hodge star. From a dimension argument, one can easily see
+that the Hodge star is an isomorphism.
+
+## Summary
+
+### Wedge Product
+
+Constructs $$p + q$$-forms from a pair of $$p$$-form and $$q$$-form:
+
+$$
+\begin{aligned}
+\block{\omega_p \wedge \omega_q}\block{x_1, \ldots, x_k} &= \\
+    \sum_{\tau \in S(p, q)} \sgn{\tau} &\omega_p\block{x_{\tau(1)}, \ldots, x_{\tau(p)}}
+\omega_q\block{x_{\tau(p+1)}, \ldots, x_{\tau(p + q)}}
+\end{aligned}
+$$
+
+*(up to a normalization constant which may vary between authors)*
+
+$$\omega_p \wedge \omega_q = \block{-1}^{pq} \omega_q \wedge \omega_p$$
+
+### Interior Product
+
+Plugs its first argument (a vector) as the first argument of its second argument
+(a $$k + 1$$-form), yielding a $$k$$-form:
+
+$$\iota_x \circ \iota_y = -\iota_y \circ \iota_x$$
+
+$$\iota_{x} \block{\omega_p \wedge \omega_q} = \block{\iota_x \omega_p} \wedge \omega_q + (-1)^p \omega_p \wedge \block{\iota_x \omega_q}$$
+
+### Inner Product
+
+Extended from the inner product on vectors/$$1$$-forms using:
+
+$$\inner{\eta \wedge \omega, \nu} = \inner{\eta, \iota_{\omega^\sharp} \nu}$$
+
+### Volume Form
+
+Obtained from the metric, coordinate-invariant. In a given basis:
+
+$$\sqrt{\det(M)} \dd x_1\wedge \ldots \wedge \dd x_n$$
+
+### Hodge Star
+
+Identifies $$k$$-forms to $$n-k$$ forms through the volume form, naturally and
+isometrically:
+
+$$\omega \wedge \star \eta = \inner{\eta, \omega} \mu$$
+
+*(up to $$(-1)^k$$ sign which may vary between authors)*
+
+$$\star \star = (-1)^{k(n - k)}$$
+
+$$\inner{\omega, \eta} = \inner{\star \omega, \star \eta}$$
 
 # Differential Forms
 

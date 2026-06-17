@@ -33,10 +33,10 @@ That is: the line segment between $$f(x)$$ and $$f(y)$$ remains
 $$f\block{x + \lambda(y - x)} \leq f(x) + \lambda \block{f(y) - f(x)}$$
 
 
+## First-Order Conditions
 
-### First-Order Conditions
-
-For any $$0 < \lambda \leq 1$$ we have:
+When $$f$$ is smooth, convexity translates to special properties on the
+differential $$\dd f$$. For any $$0 < \lambda \leq 1$$ we have:
 
 $$\frac{f\block{x + \lambda (y - x)} - f(x)}{\lambda} \leq f(y) - f(x)$$
 
@@ -97,10 +97,11 @@ $$f(y) - f(x) \geq \dd f(z).(y - x) \geq \dd f(x).(y - x)$$
 
 hence by the previous argument $$f$$ is convex. 
 
-### Second-Order Conditions
+## Second-Order Conditions
 
-When $$f$$ is twice continuously differentiable, the monotonicity of
-$$\dd f$$ implies the following, for $$\lambda > 0$$:
+Similarly, $$\dd f$$ being smooth and monotone implies special properties on the
+Hessian $$\nabla^2 f$$. When $$f$$ is twice continuously differentiable, the
+monotonicity of $$\dd f$$ implies the following, for $$\lambda > 0$$:
 
 $$\frac{\dd f\block{x + \lambda (y - x)} - \dd f(x)}{\lambda}.(y - x) \geq 0$$
 
@@ -359,6 +360,58 @@ Qx + c &= A^T \lambda\\
 0 \leq Ax - b &\ \bot\ \lambda \geq 0 \\
 \end{align}$$
 
+
+# Subgradients, Subdifferential
+
+As we saw [above](#first-order-conditions), $$f$$ being smooth and convex
+implies it always stays *above* its first-order approximation:
+
+$$\inner{\nabla f(x), y - x} \leq f(y) - f(x)$$
+
+When $$f$$ is *not* smooth at $$x$$, there may still exist a set of vectors
+$$g$$ such that the above holds. We call such vectors *subgradients* of $$f$$ at
+$$x$$. The set of all subgradients at $$x$$ is called the *subdifferential* of
+$$f$$ at $$x$$, denoted by:
+
+$$\partial f(x) = \left\{g: \inner{g, y - x} \leq f(y) - f(x) \right\}$$
+
+TODO examples (norm)
+
+The subdifferential of $$f$$ can be seen as a multivalued function, mapping a
+set of subgradients to every point of the domain. It is easy to see that this
+set is convex. It is also closed, but it may be empty (TODO unbounded
+operators). As one can expect, when $$f$$ is smooth at $$x$$, we get 
+
+$$\partial f(x) = \left\{\nabla f(x)\right\}$$
+
+by showing that $$\inner{u - \nabla f(x), v} \leq 0$$ for all $$v$$. We saw
+[earlier](#first-order-conditions) that when $$f$$ is smooth and convex, its
+gradient is *monotone*:
+
+$$\inner{\nabla f(y) - \nabla f(x), y - x} \geq 0$$
+
+The subdifferential is also monotone in the following sense:
+
+$$\forall u \in \partial f(x), v \in \partial f(y): \inner{v - u, y - x} \geq 0$$
+
+Indeed, for all $$x, y$$ we get:
+
+
+$$\begin{aligned}
+\inner{u, y - x} &\leq f(y) - f(x) \\
+\inner{v, x - y} &\leq f(x) - f(y) \\
+\end{aligned}$$
+
+for any $$u\in \partial f(x), v \in \partial f(y)$$, therefore:
+
+$$\begin{aligned}
+\inner{v, y - x} &\geq f(y) - f(x)\\
+\inner{-u, y - x} &\geq f(x) - f(y)\\
+\end{aligned}$$
+
+and the result follows by summation. Obviously, $$f$$ being minimal at
+$$x^\star$$ is equivalent to having $$0 \in \partial f(x)$$, which since
+$$\partial f$$ is monotone is called a *monotone inclusion problem*.
 
 # Duality
 

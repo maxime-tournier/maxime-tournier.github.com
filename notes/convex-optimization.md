@@ -181,9 +181,19 @@ denoted $$X^\circ$$ (or $$X^-$$).
 
 ## Moreau Decomposition
 
-The Moreau decomposition generalizes the direct sum decomposition
-between a linear subspace and its orthogonal complement to a convex
-cone and its (negative) dual.
+The Moreau decomposition generalizes the direct sum decomposition between a
+linear subspace and its orthogonal complement to a convex cone and its
+(negative) dual. Given a cone $$\cone{K}$$, any $$x \in E$$ decomposes
+*uniquely* as:
+
+$$x = x_\cone{K} - x_{\cone{K}^*}$$
+
+with $$\inner{x_\cone{K}, x_{\cone{K}^*}} = 0$$. Equivalently:
+
+- $$x_\cone{K} = P_\cone{K}(x)$$
+- $$-x_{\cone{K}^*} = P_{-\cone{K}^*}(x)$$
+
+(TODO proof)
 
 # Optimality Conditions
 
@@ -359,6 +369,55 @@ $$\begin{align}
 Qx + c &= A^T \lambda\\
 0 \leq Ax - b &\ \bot\ \lambda \geq 0 \\
 \end{align}$$
+
+
+# Cone Indicator Function
+
+Assuming we know how to minize a convex function $$f$$ over a cone $$\cone{K}$$,
+we could in theory solve a minimization problem under the constraint that some
+other convex function $$g(x) \in \cone{K}^*$$ by adding a penalty term $$p(x)$$
+such that:
+
+- $$p(x) = 0$$ when $$g(x) \in \cone{K}^*$$
+- $$p(x) = +\infty$$ when $$g(x) \notin \cone{K}^*$$
+
+Such a penalty function is usually known as the *indicator function* $$\iota_C$$
+over the set $$C = g^{-1}\block{\cone{K}^*}$$. Such an indicator function is
+convex when $$C$$ is convex (thus when $$g$$ is), and so in principle one could
+just minimize $$f$$ over $$C$$ when $$C$$ is a cone and we're done.
+
+In practice however, it's not always clear how to compute $$C$$ from $$g$$ and
+$$\cone{K}$$, or that $$C$$ even is a cone for that matter. Despite all this,
+there is a simple trick to express $$\iota_C$$ in terms of $$g$$ by adding
+extra variables known as the *Lagrange multipliers*:
+
+$$p(x) = \max_{\lambda \in \cone{K}} \ -\inner{\lambda^T, g(x)}$$
+
+By the very definition of $$\cone{K}^*$$, we get that $$\inner{\lambda, g(x)}
+\geq 0$$ for all $$\lambda \in \cone{K}$$, so that 
+
+$$p(x) = \max_{\lambda \in \cone{K}} \ -\inner{\lambda, g(x)} = 0$$ 
+
+when $$g(x) \in \cone{K}^*$$. Conversely, when $$g(x) \notin \cone{K}^*$$, it
+has a non-zero [Moreau](#moreau-decomposition) component $$\mu$$ over
+$$-\cone{K}$$, for which $$\inner{\mu, g(x)} = \mu^2 > 0$$. So there exists
+$$\lambda = -\mu \in \cone{K}$$ such that $$-\inner{\lambda, g(x)} > 0$$, which
+can grow arbitrary large as $$\lambda$$ scales in $$\cone{K}$$. In other words:
+
+$$p(x) = \max_{\lambda \in \cone{K}} \ -\inner{\lambda, g(x)} = +\infty$$ 
+
+when $$g(x) \notin \cone{K}^*$$. Our initial problem becomes:
+
+$$\min_x\ \max_{\lambda \in \cone{K}} \ f(x) - \inner{\lambda, g(x)}$$
+
+# Duality
+
+An obvious follow-up question to the above is the following: what happens when
+one flips the $$\min/\max$$ in the above?
+
+
+
+
 
 
 # Subgradients, Subdifferential

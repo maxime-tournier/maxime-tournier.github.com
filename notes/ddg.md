@@ -555,12 +555,14 @@ we construct an inner product satifying:
 
 $$\inner{\eta \wedge \omega, \nu} = \inner{\eta, \iota_{\omega^\sharp} \nu}$$
 
-and extend it to non-decomposable $$3$$-forms as before, and repeat
-the process until we obtain an inner-product on every
-$$\bigwedge^k(V)$$. An inner product on the whole exterior algebra
-$$\bigwedge(V)$$ can be obtained as the direct sum of the inner
-products for each degree *i.e.* by having $$\inner{x, y} = 0$$ for
-different degree forms $$x, y$$.
+and extend it to non-decomposable $$3$$-forms as before, and repeat the process
+until we obtain an inner-product on every $$\bigwedge^k(V)$$. In other words:
+the inner product extends so that *the interior product is the adjoint of the
+wedge product*.
+
+Finally, an inner product on the whole exterior algebra $$\bigwedge(V)$$ can be
+obtained as the direct sum of the inner products for each degree *i.e.* by
+having $$\inner{x, y} = 0$$ for different degree forms $$x, y$$.
 
 ### Orthonormal Bases
 

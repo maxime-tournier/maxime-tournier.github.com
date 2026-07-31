@@ -373,23 +373,23 @@ Qx + c &= A^T \lambda\\
 
 # Cone Indicator Function
 
-Assuming we know how to minize a convex function $$f$$ over a cone $$\cone{K}$$,
-we could in theory solve a minimization problem under the constraint that some
-other convex function $$g(x) \in \cone{K}^*$$ by adding a penalty term $$p(x)$$
-such that:
+Assuming we know how to minimize a convex function $$f$$ over a closed convex
+cone $$\cone{K}$$, we could in theory solve a minimization problem under the
+constraint that some other smooth function $$g(x) \in \cone{K}^*$$ by
+adding a penalty term $$p(x)$$ such that:
 
 - $$p(x) = 0$$ when $$g(x) \in \cone{K}^*$$
 - $$p(x) = +\infty$$ when $$g(x) \notin \cone{K}^*$$
 
 Such a penalty function is usually known as the *indicator function* $$\iota_C$$
 over the set $$C = g^{-1}\block{\cone{K}^*}$$. Such an indicator function is
-convex when $$C$$ is convex (thus when $$g$$ is), and so in principle one could
-just minimize $$f$$ over $$C$$ when $$C$$ is a cone and we're done.
+convex when $$C$$ is convex and so in principle one could just minimize $$f$$
+over $$C$$ when $$C$$ is a cone and we're done.
 
 In practice however, it's not always clear how to compute $$C$$ from $$g$$ and
-$$\cone{K}$$, or that $$C$$ even is a cone for that matter. Despite all this,
-there is a simple trick to express $$\iota_C$$ in terms of $$g$$ by adding
-extra variables known as the *Lagrange multipliers*:
+$$\cone{K}$$, or that $$C$$ even is a cone to begin with. Despite all this,
+there is a simple trick to express $$\iota_C$$ in terms of $$g$$ by adding extra
+variables known as the *Lagrange multipliers*:
 
 $$p(x) = \max_{\lambda \in \cone{K}} \ -\inner{\lambda^T, g(x)}$$
 
@@ -410,14 +410,60 @@ when $$g(x) \notin \cone{K}^*$$. Our initial problem becomes:
 
 $$\min_x\ \max_{\lambda \in \cone{K}} \ f(x) - \inner{\lambda, g(x)}$$
 
+The function $$\LL(x, \lambda) = f(x) - \inner{\lambda, g(x)}$$ is called the
+*Lagrangian* of the contrained problem, which amounts to solving the following
+$$\min-\max$$ problem:
+
+$$\min_x\ \max_{\lambda \in \cone{K}} \ \LL(x, \lambda)$$
+
 # Duality
 
-An obvious follow-up question to the above is the following: what happens when
-one flips the $$\min/\max$$ in the above?
+What happens when the order of $$\min-\max$$ is reversed in the above? The
+general max-min inequality applies:
 
+$$\sup_\lambda \inf_x \LL(x, \lambda) \leq \inf_x \sup_\lambda \LL(x, \lambda)$$
 
+Indeed, let us call $$d(\lambda) = \inf_x \LL(x, \lambda)$$ and $$p(x) =
+\sup_\lambda \LL(x, \lambda)$$, we see that:
 
+$$\forall x: d(\lambda) \leq \LL(x, \lambda) \leq p(x)$$
 
+so that any $$p(x)$$ is an upper bound of $$d(\lambda)$$, which implies
+$$\sup_\lambda d(\lambda) \leq p(x)$$ for all $$x$$, by definition of
+$$\sup$$. In turn, $$\sup_\lambda d(\lambda)$$ is a lower bound of any $$p(x)$$,
+therefore $$\sup_\lambda d(\lambda) \leq \inf_x p(x)$$ and the result
+follows. Since all sets involved are assumed to be closed and convex, we even
+get $$\max$$ for $$\sup$$ and $$\min$$ for $$\inf$$. In particular:
+
+$$d^\star = \max_\lambda d(\lambda) \leq \min_x p(x) = p^\star$$
+
+We see that minimizing the *primal* function $$p(x)$$ (our original problem) is
+related to maximizing the *dual* function $$d(\lambda)$$ in the sense that
+solving the dual problem provides a lower bound on the solution of the primal
+problem. This is called *weak duality*, and the difference $$p^\star - d^\star$$
+is the *duality gap*. There are situations in which solving either problem is
+equivalent to solving the other, in which case the duality gap is $$0$$: this is
+called *strong duality*. For instance, the existence of a *saddle point*
+$$\block{x^\star, \lambda^\star}$$ such that
+
+$$\LL\block{x^\star, \lambda} \leq \LL\block{x^\star, \lambda^\star} \leq \LL\block{x, \lambda^\star}$$
+
+for all $$x, \lambda$$. Indeed, from $$\LL\block{x^\star, \lambda^\star} \leq
+\LL\block{x, \lambda^\star}$$ we get 
+
+$$\LL\block{x^\star, \lambda^\star} = \min_x \LL\block{x, \lambda^\star} = d\block{\lambda^\star} \leq d^\star$$ 
+
+and similarly from $$\LL\block{x^\star, \lambda} \leq \LL\block{x^\star, \lambda^\star}$$ we obtain
+
+$$\LL\block{x^\star, \lambda^\star} = \max_\lambda \LL\block{x^\star, \lambda} = p\block{x^\star} \geq p^\star$$ 
+
+which gives $$d^\star \geq p^\star$$ and the duality gap is 0. 
+
+## ... but why?
+
+Why bother with duality though? An especially nice property is that the dual
+problem is always convex, even though the original problem may not be:
+$$d(\lambda)$$ is the point-wise minimum of affine functions, which is convex.
 
 
 # Subgradients, Subdifferential

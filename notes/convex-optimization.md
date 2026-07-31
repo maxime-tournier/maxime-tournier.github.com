@@ -466,6 +466,8 @@ problem is always convex, even though the original problem may not be:
 $$d(\lambda)$$ is the point-wise minimum of affine functions, which is convex.
 
 
+## TODO examples
+
 # Subgradients, Subdifferential
 
 As we saw [above](#first-order-conditions), $$f$$ being smooth and convex

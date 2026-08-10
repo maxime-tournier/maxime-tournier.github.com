@@ -410,9 +410,10 @@ when $$g(x) \notin \cone{K}^*$$. Our initial problem becomes:
 
 $$\min_x\ \max_{\lambda \in \cone{K}} \ f(x) - \inner{\lambda, g(x)}$$
 
-The function $$\LL(x, \lambda) = f(x) - \inner{\lambda, g(x)}$$ is called the
-*Lagrangian* of the contrained problem, which amounts to solving the following
-$$\min-\max$$ problem:
+The function $$\LL(x, \lambda) = f(x) - \inner{\lambda, g(x)}$$ is
+called the *Lagrangian* of the original constrained problem, which is
+reduced to solving the following (unconstrained) $$\min-\max$$
+problem:
 
 $$\min_x\ \max_{\lambda \in \cone{K}} \ \LL(x, \lambda)$$
 
@@ -459,14 +460,48 @@ $$\LL\block{x^\star, \lambda^\star} = \max_\lambda \LL\block{x^\star, \lambda} =
 
 which gives $$d^\star \geq p^\star$$ and the duality gap is 0. 
 
-## ... but why?
+We note that whenever $$g(x) \in \cone{K}^*$$ and $$\lambda \in
+\cone{K}$$, the Lagrangian $$\LL(x, \lambda)$$ is a lower bound on the
+primal objective function $$f(x)$$, therefore the dual problem can be
+seen as maximizing this lower bound.
 
-Why bother with duality though? An especially nice property is that the dual
-problem is always convex, even though the original problem may not be:
-$$d(\lambda)$$ is the point-wise minimum of affine functions, which is convex.
+## Examples
+
+### Linear Programs (LP)
+
+Let us consider the following *linear program*:
+
+$$\argmin x \quad c^T x \quad \st \quad  Ax \geq b$$
+
+With the above notation, the constraint function is $$g(x) = Ax - b$$
+and the constraint cone is the (self-dual) positive orthant
+$$\RR^{m+}$$, so the Lagrangian is the following:
+
+$$\LL(x, \lambda) = c^T x - (Ax - b)^T \lambda$$
+
+with $$\lambda \geq 0$$. Expanding the Lagrangian
+
+$$\LL(x, \lambda) = c^T x - (Ax - b)^T \lambda = b^T \lambda -\block{A^T \lambda - c}^T x$$
+
+we see that this Lagrangian could as well be involved in optimizing
+$$b^T \lambda$$ under the constraint that $$ A^T \lambda = c$$ and
+indeed, the primal and dual functions as defined above make this
+connection explicit:
+
+$$p(x) = \max_{\lambda \geq 0} c^T x - (Ax - b)^T \lambda$$
+
+exactly encodes our original LP as expected, and the dual
+
+$$d(\lambda) = \min_{x} c^T x - (Ax - b)^T \lambda = b^T \lambda - \block{A^T \lambda - c}^T x$$
+
+is unbounded by below when $$A^T \lambda \neq c$$, and equal to
+$$b^T\lambda$$ otherwise, so the dual problem is
+
+$$\max_{\lambda \geq 0} b^T \lambda \quad \st \quad A^T \lambda = c$$
 
 
-## TODO examples
+### Quadratic Programs (QP)
+
 
 # Subgradients, Subdifferential
 

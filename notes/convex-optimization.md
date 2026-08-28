@@ -1,6 +1,7 @@
 ---
 title: Convex Optimization
 categories: [math]
+tags: [draft]
 ---
 
 {% include toc.md %}
@@ -501,6 +502,10 @@ $$\max_{\lambda \geq 0} b^T \lambda \quad \st \quad A^T \lambda = c$$
 
 
 ### Quadratic Programs (QP)
+
+## TODO
+
+- convex conjugate, relation to dual function/problem
 
 
 # Subgradients, Subdifferential

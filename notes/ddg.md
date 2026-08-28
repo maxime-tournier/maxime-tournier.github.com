@@ -799,6 +799,16 @@ $$\star \star = (-1)^{k(n - k)}$$
 
 $$\inner{\omega, \eta} = \inner{\star \omega, \star \eta}$$
 
+## TODO
+
+- Stoke's theorem, application to volume computation
+
+
+-------
+
+(old version)
+
+
 # Differential Forms
 
 Differential forms are the stuff that show up under the integral sign:

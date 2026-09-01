@@ -237,6 +237,7 @@ cone at $$x$$, called the (negative) *normal cone* $$N_x(C)$$:
 $$\nabla f(x) \in \block{T_x(C)}^* \triangleq -N_x(C)$$
 
 ### Normal Cone to a Convex Set
+
 - TODO $$N_x(C) = -\block{C - x}^*$$ when $$C$$ is convex
 
 $$-N_x(C) = \block{T_x(C)}^* = \left\{y \in E : \inner{y, z - x} \geq 0\quad  \forall z \in C \right\}$$
@@ -502,6 +503,93 @@ $$\max_{\lambda \geq 0} b^T \lambda \quad \st \quad A^T \lambda = c$$
 
 
 ### Quadratic Programs (QP)
+
+Let us consider the following *quadratic program*:
+
+$$\min x \quad \half x^T Q x + c^T x \quad \st \quad  Ax \geq b$$
+
+The Lagrangian is:
+
+$$\LL(x, \lambda) = \half x^T Q x + c^T x - \lambda^T\block{Ax - b}$$
+
+for $$\lambda \geq 0$$. The dual function is therefore:
+
+$$
+\begin{aligned}
+d(\lambda) &= \min_x \quad \half x^T Q x + c^T x - \lambda^T\block{Ax - b}\\
+&= \min_x \quad \half x^T Q x + x^T\block{c - A^T\lambda} + b^T \lambda
+\end{aligned}
+$$
+
+When $$Q$$ is positive-definite, this minimum is obtained for:
+
+$$x^\star(\lambda) = Q^{-1}\block{A^T \lambda - c}$$
+
+and the dual problem is:
+
+$$
+\begin{aligned}
+\max_{\lambda \geq 0} \LL\block{x^\star(\lambda), \lambda} 
+&= \max_{\lambda \geq 0} \quad \half \block{A^T \lambda - c} Q^{-1} \block{A^T \lambda - c} + \block{A^T \lambda - c}^T\block{c - A^T\lambda} + b^T \lambda \\
+&= \max_{\lambda \geq 0} \quad  -\half \block{A^T \lambda - c} Q^{-1} \block{A^T \lambda - c} + b^T \lambda \\
+\end{aligned}
+$$
+
+whose solution $$\lambda^\star$$ can be found by solving the following QP (dropping constant terms):
+
+$$\min_{\lambda \geq 0}\quad \half \lambda^T AQ^{-1}A^T \lambda + \lambda^T\block{b + Ac}$$
+
+# ADMM
+
+## Dual Ascent 
+
+Let us consider the following problem:
+
+$$\min_x \quad f(x) \quad \st A x = b$$
+
+Again, the Lagrangian is:
+
+$$\LL(x, \lambda) = f(x) - \lambda^T\block{Ax - b}$$
+
+with dual function:
+
+$$d(\lambda) = \min_x f(x) - \lambda^T\block{Ax - b}$$
+
+Assuming that $$f$$ is smooth and that we can compute the dual function its
+gradient is trivial to compute:
+
+$$\nabla d(\lambda) = Ax^\star(\lambda) - b$$
+
+where $$x^\star(\lambda) = \argmin{x}\quad f(x) - \lambda^T\block{Ax - b}$$. Therefore, we can simply use gradient ascent with step size $$\alpha_k$$ to solve the dual problem of maximizing $$d(\lambda)$$:
+
+1. set $$\lambda_0 = 0$$
+2. solve $$x_k = \argmin{x}\quad  f(x) - \lambda_k^T\block{Ax - b}$$
+3. update $$\lambda_{k+1} = \lambda_k + \alpha_k \block{A x_k - b}$$
+4. goto 2 until sufficient precision is achieved (more on this below)
+
+Note that when $$f$$ is not smooth, the above procedure provides a subgradient
+at each iteration and the method is known as *dual subgradient ascent*.
+
+## Method of Multipliers
+
+As usual, there are conditions to be met for the simple gradient ascent to
+converge. Unfortunately, it is not trivial to get Lipschitz constants for the
+dual function, therefore it might be difficult to converge robustly in practice.
+
+In order to improve convergence, we replace the initial problem with the
+following, equivalent one:
+
+$$\min_x \quad f(x) + \rho \norm{Ax - b}^2 \quad \st A x = b$$
+
+Clearly the added penalty is zero on the feasible set, so the two problems are
+equivalent. For $$\rho > 0$$, this change turns a convex objective function into
+a *strictly* convex one.
+
+
+## Alternating Direction Method of Multipliers
+
+## Stopping Criterion
+
 
 ## TODO
 

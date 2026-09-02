@@ -117,10 +117,37 @@ $$(y - x)^T \nabla^2 f(x) (y - x) \geq 0$$
 
 In other words, the Hessian of $$f$$ is positive semi-definite.
 
-- TODO more properties
-- TODO examples
-- TODO strict convexity
-- TODO strong convexity
+
+## Strict/Strong Convexity
+
+Recall the definition of convexity for a function $$f$$:
+
+$$f\block{x + \lambda(y - x)} \leq f(x) + \lambda \block{f(y) - f(x)}$$
+
+$$f$$ is said to be *strictly* convex when the above inequality is strict
+everywhere except at endpoints $$\lambda = 0$$ and $$\lambda = 1$$. As we'll see
+below, strict convexity helps establishing uniqueness of solutions in
+mimimization problems. Intuitively, a strictly convex function is never "flat".
+
+In practice however, a strictly convex function is allowed to be arbitrarily
+close to being flat somewhere. In contrast, a *strongly* convex function is
+never flatter than a given quadratic function:
+
+$$f\block{\lambda x + \block{1- \lambda} y} \leq \lambda f(x) + (1 - \lambda) f(y) - \frac{m}{2} \lambda(1 - \lambda) \norm{x - y}^2$$
+
+Note that $$m = 0$$ recovers the definition of convexity. As
+[before](#first-order-conditions), we get:
+
+$$\lim_{\lambda \downarrow 0} \frac{f\block{x + \lambda\block{y - x}} - f(x)}{\lambda} \leq f(y) - f(x) - \frac{m}{2}(1 - \lambda) \norm{x - y}^2$$
+
+so that $$f$$ being smooth and strongly convex implies:
+
+$$f(x) + \dd f(x).(y - x) + \frac{m}{2} \norm{x - y}^2 \leq f(y)$$
+
+When $$f$$ is twice differentiable, one can show that strong convexity implies
+that $$\nabla^2 f(x) \succeq m I$$. In fact, both first and second order
+conditions are equivalent to $$f$$ being strongly convex, with proofs similar to
+the ones for simple convexity.
 
 # Optimization
 
@@ -553,14 +580,27 @@ $$\LL(x, \lambda) = f(x) - \lambda^T\block{Ax - b}$$
 
 with dual function:
 
-$$d(\lambda) = \min_x f(x) - \lambda^T\block{Ax - b}$$
+$$d(\lambda) = \min_x \LL(x, \lambda) = f(x) - \lambda^T\block{Ax - b}$$
 
 Assuming that $$f$$ is smooth and that we can compute the dual function its
 gradient is trivial to compute:
 
 $$\nabla d(\lambda) = Ax^\star(\lambda) - b$$
 
-where $$x^\star(\lambda) = \argmin{x}\quad f(x) - \lambda^T\block{Ax - b}$$. Therefore, we can simply use gradient ascent with step size $$\alpha_k$$ to solve the dual problem of maximizing $$d(\lambda)$$:
+where $$x^\star(\lambda) = \argmin{x}\quad \LL(x, \lambda) = f(x) - \lambda^T\block{Ax -
+b}$$. Indeed, by definition of the dual function, we have:
+
+$$d(\lambda) = \LL\block{x^\star(\lambda), \lambda}$$
+
+But since $$x^\star(\lambda)$$ minimizes $$\LL\block{\cdot, \lambda}$$, the
+derivative along $$x$$ at the optimum is zero:
+
+$$\ddd{\LL}{x}\block{x^\star(\lambda), \lambda} = 0$$
+
+so that only $$\ddd{\LL}{\lambda}\block{x^\star(\lambda), \lambda} =
+\block{Ax^\star - b}^T$$ appears in the differential of $$d(\lambda)$$. We now
+have a smooth[^dual-ascent] function and its gradient, we can simply use gradient ascent with
+step sizes $$\alpha_k$$ to solve the dual problem of maximizing $$d(\lambda)$$:
 
 1. set $$\lambda_0 = 0$$
 2. solve $$x_k = \argmin{x}\quad  f(x) - \lambda_k^T\block{Ax - b}$$
@@ -582,9 +622,9 @@ following, equivalent one:
 $$\min_x \quad f(x) + \rho \norm{Ax - b}^2 \quad \st A x = b$$
 
 Clearly the added penalty is zero on the feasible set, so the two problems are
-equivalent. For $$\rho > 0$$, this change turns a convex objective function into
-a *strictly* convex one.
-
+equivalent. In a sense, doing so regularizes the function $$f$$ outside the
+feasible set by driving solutions towards the feasible set, over which the
+regularization vanishes.
 
 ## Alternating Direction Method of Multipliers
 
@@ -713,3 +753,5 @@ therefore $$\norm{x - y}^2 \geq \norm{x - c}^2$$ and $$c = \pi_C(x)$$.
     slicing plane gets further from the origin. The union of all these
     slices is the *open* half-plane plus the origin, which is not
     closed.
+
+[^dual-ascent]: Assuming strict convexity for $$f$$

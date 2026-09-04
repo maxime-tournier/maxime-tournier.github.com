@@ -645,10 +645,10 @@ benefits:
   regularized problem is that of the original problem at $$\lambda_{k+1}$$
   instead of $$\lambda_k$$
 
-and we might expect the good properties of implicit integration to ensure
-convergence. More precisely, convergence can be shown by considering $$V_k =
-\norm{\lambda_{k+1} - \lambda^\star}^2$$ where $$\lambda^\star$$ is the
-solution:
+and we might expect the nice properties of implicit integration to somehow
+ensure convergence. More precisely, convergence can be shown by considering the
+dual error $$V_k = \norm{\lambda_{k+1} - \lambda^\star}^2$$ where
+$$\lambda^\star$$ is the solution:
 
 $$
 \begin{aligned}
@@ -674,9 +674,46 @@ $$
 
 due to $$\nabla f$$ being monotone since $$f$$ is convex. This means the method
 strictly converges while $$x_k$$ is not primal feasible, and terminates with a
-result that is both primal and dual feasible.
+result that is both primal and dual feasible. One can also show that the Method
+of Multipliers corresponds to the proximal point algorithm applied to the dual
+function (dual proximal point method).
 
 ## Alternating Direction Method of Multipliers
+
+So far, so good: we solved the problem of choosing step sizes $$\alpha_k$$ and
+still get convergence, which is nice. One practical issue is that the penalty
+term $$\norm{Ax - b}^2$$ introduces coupling between variables that may not
+appear in function $$f$$: while dual ascent could optimize a separable function
+$$f(x) = g(y) + h(z)$$ in parallel, this is no longer possible with the Method
+of Multipliers.
+
+The *Alternating Direction Method of Multipliers* improves the situation by
+working around the coupling introduced by constraint matrix. Let us introduce
+some notation first: we consider the following problem of minimizing a separable
+function under affine constraints:
+
+$$\min_{x, z}\quad f(x) + g(z)\quad\st\ Ax + Bz = c$$
+
+Instead of minimizing *jointly* over both $$x, z$$ like the Method of
+Multipliers would, the minimization is split into two subproblems: minimizing
+along $$x$$ alone first with $$z$$ constant, then along $$z$$ alone with $$x$$
+constant, in a Gauss-Seidel fashion:
+
+1. initialize $$\lambda_0 = 0, \z_0 = 0$$
+2. solve $$x_k = \argmin{x}\quad f(x) - \lambda_k^T\block{Ax + Bz_{k-1} - c} + \rho\norm{Ax + Bz_{k-1} - c}^2$$
+2. solve $$z_k = \argmin{z}\quad g(z) - \lambda_k^T\block{Ax_k + Bz - c} + \rho\norm{Ax_k + Bz - c}^2$$
+3. update $$\lambda_{k+1} = \lambda_k - \alpha_k \block{A x_k + Bz_k - b}$$
+4. goto 2 until sufficient precision is achieved (more on this below)
+
+This is equivalent to alternating two Method of Multiplier solves in the $$x,
+z$$ directions with varying constraint values, hence the name. Crucially, the
+matrices $$A, B$$ remain constant so one can usually do some preprocessing so
+that inner solves for $$x, z$$ are as efficient as possible. The method is still
+not parallel, but it becomes possible to employ dedicated (possibly parallel)
+solvers for each subproblems, establishing consensus as the iteration converges.
+
+### Scaled Form
+
 
 ## Stopping Criterion
 

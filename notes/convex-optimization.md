@@ -602,9 +602,9 @@ so that only $$\ddd{\LL}{\lambda}\block{x^\star(\lambda), \lambda} =
 have a smooth[^dual-ascent] function and its gradient, we can simply use gradient ascent with
 step sizes $$\alpha_k$$ to solve the dual problem of maximizing $$d(\lambda)$$:
 
-1. set $$\lambda_0 = 0$$
+1. initialize $$\lambda_0 = 0$$
 2. solve $$x_k = \argmin{x}\quad  f(x) - \lambda_k^T\block{Ax - b}$$
-3. update $$\lambda_{k+1} = \lambda_k + \alpha_k \block{A x_k - b}$$
+3. update $$\lambda_{k+1} = \lambda_k - \alpha_k \block{A x_k - b}$$
 4. goto 2 until sufficient precision is achieved (more on this below)
 
 Note that when $$f$$ is not smooth, the above procedure provides a subgradient
@@ -616,15 +616,65 @@ As usual, there are conditions to be met for the simple gradient ascent to
 converge. Unfortunately, it is not trivial to get Lipschitz constants for the
 dual function, therefore it might be difficult to converge robustly in practice.
 
-In order to improve convergence, we replace the initial problem with the
-following, equivalent one:
+In order to improve convergence, the *Method of Multipliers* replace the initial
+problem with the following, equivalent one:
 
 $$\min_x \quad f(x) + \rho \norm{Ax - b}^2 \quad \st A x = b$$
 
-Clearly the added penalty is zero on the feasible set, so the two problems are
-equivalent. In a sense, doing so regularizes the function $$f$$ outside the
-feasible set by driving solutions towards the feasible set, over which the
-regularization vanishes.
+whose Lagrangian is usually called the *Augmented Lagrangian*. Clearly the added
+penalty is zero on the feasible set, so the two problems are equivalent. In a
+sense, doing so regularizes the function $$f$$ outside the feasible set by
+driving solutions towards the feasible set, over which the regularization
+vanishes.
+
+Applying dual ascent to the regularized problem yields the following optimality
+conditions *(dual feasibility)* after solving the optimization problem at each
+iteration:
+
+$$\nabla f\block{x_k} + \underbrace{\rho A^T\block{Ax_k - b} - A^T\lambda_k}_{-A^T\block{\lambda_k - \rho\block{Ax_k - b}}} = 0$$
+
+This suggests that picking step size $$\alpha_k = \rho$$ such that
+$$\lambda_{k+1} = \lambda_k - \rho\block{Ax_k - b}$$ will have the following
+benefits:
+
+- dual feasibility of the regularized problem at $$\lambda_k$$ is equivalent to
+  dual feasibility *of the original problem* at $$\lambda_{k+1}$$: $$\nabla
+  f\block{x_k} -A^T\lambda_{k+1} = 0$$
+- this corresponds to *implicit integration* of the gradient flow of the dual
+  function of the original problem: the gradient found by solving the
+  regularized problem is that of the original problem at $$\lambda_{k+1}$$
+  instead of $$\lambda_k$$
+
+and we might expect the good properties of implicit integration to ensure
+convergence. More precisely, convergence can be shown by considering $$V_k =
+\norm{\lambda_{k+1} - \lambda^\star}^2$$ where $$\lambda^\star$$ is the
+solution:
+
+$$
+\begin{aligned}
+V_{k+1} - V_k &= \norm{\lambda_{k+1} - \lambda_k + \lambda_k - \lambda^\star}^2 - \norm{\lambda_k - \lambda^\star}^2\\
+&= \norm{\lambda_{k+1} - \lambda_k}^2 + \norm{\lambda_k - \lambda^\star}^2 + 2\block{\lambda_{k+1} - \lambda_k}^T\block{\lambda_k - \lambda^\star} - \norm{\lambda_k - \lambda^\star}^2 \\
+&= \norm{\lambda_{k+1} - \lambda_k}^2 + 2\block{\lambda_{k+1} - \lambda_k}^T\block{\lambda_k - \lambda^\star} \\
+&= \norm{\lambda_{k+1} - \lambda_k}^2 + 2\block{\lambda_{k+1} - \lambda_k}^T\block{\lambda_k - \lambda_{k+1} + \lambda_{k+1} - \lambda^\star} \\
+&= - \norm{\lambda_{k+1} - \lambda_k}^2 + 2 \block{\lambda_{k+1} - \lambda_k}^T\block{\lambda_{k+1} - \lambda^\star} \\
+\end{aligned}
+$$
+
+The second term can be rewritten in terms of $$x$$:
+
+$$
+\begin{aligned}
+\block{\lambda_{k+1} - \lambda_k}^T\block{\lambda_{k+1} - \lambda^\star} &=
+    -\rho\block{A x_k - b}^T \block{\lambda_{k+1} - \lambda^\star} \\
+    &= -\rho\block{x_k - x^\star}^TA^T\block{\lambda_{k+1} - \lambda^\star} \\
+    &= -\rho\block{x_k - x^\star}^T\block{\nabla f\block{x_k} - \nabla f\block{x^\star}} \\ 
+    &\leq 0
+\end{aligned}
+$$
+
+due to $$\nabla f$$ being monotone since $$f$$ is convex. This means the method
+strictly converges while $$x_k$$ is not primal feasible, and terminates with a
+result that is both primal and dual feasible.
 
 ## Alternating Direction Method of Multipliers
 

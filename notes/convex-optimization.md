@@ -699,10 +699,10 @@ Multipliers would, the minimization is split into two subproblems: minimizing
 along $$x$$ alone first with $$z$$ constant, then along $$z$$ alone with $$x$$
 constant, in a Gauss-Seidel fashion:
 
-1. initialize $$\lambda_0 = 0, \z_0 = 0$$
+1. initialize $$\lambda_0 = 0, z_0 = 0$$
 2. solve $$x_k = \argmin{x}\quad f(x) - \lambda_k^T\block{Ax + Bz_{k-1} - c} + \rho\norm{Ax + Bz_{k-1} - c}^2$$
 2. solve $$z_k = \argmin{z}\quad g(z) - \lambda_k^T\block{Ax_k + Bz - c} + \rho\norm{Ax_k + Bz - c}^2$$
-3. update $$\lambda_{k+1} = \lambda_k - \alpha_k \block{A x_k + Bz_k - b}$$
+3. update $$\lambda_{k+1} = \lambda_k - \rho \block{A x_k + Bz_k - b}$$
 4. goto 2 until sufficient precision is achieved (more on this below)
 
 This is equivalent to alternating two Method of Multiplier solves in the $$x,

@@ -680,12 +680,13 @@ function (dual proximal point method).
 
 ## Alternating Direction Method of Multipliers
 
-So far, so good: we solved the problem of choosing step sizes $$\alpha_k$$ and
-still get convergence, which is nice. One practical issue is that the penalty
-term $$\norm{Ax - b}^2$$ introduces coupling between variables that may not
-appear in function $$f$$: while dual ascent could optimize a separable function
-$$f(x) = g(y) + h(z)$$ in parallel, this is no longer possible with the Method
-of Multipliers.
+So far, so good: we solved the problem of choosing step sizes
+$$\alpha_k$$ and still get convergence, which is nice. One practical
+issue is that the penalty term $$\norm{Ax - b}^2$$ introduces coupling
+between variables that may not appear in function $$f$$: while dual
+ascent could optimize a separable function $$f(x) = g(y) + h(z)$$
+well, separately (possibly using dedicated, optimized solvers), this
+is no longer possible with the Method of Multipliers.
 
 The *Alternating Direction Method of Multipliers* improves the situation by
 working around the coupling introduced by constraint matrix. Let us introduce
@@ -705,12 +706,13 @@ constant, in a Gauss-Seidel fashion:
 3. update $$\lambda_{k+1} = \lambda_k - \rho \block{A x_k + Bz_k - b}$$
 4. goto 2 until sufficient precision is achieved (more on this below)
 
-This is equivalent to alternating two Method of Multiplier solves in the $$x,
-z$$ directions with varying constraint values, hence the name. Crucially, the
-matrices $$A, B$$ remain constant so one can usually do some preprocessing so
-that inner solves for $$x, z$$ are as efficient as possible. The method is still
-not parallel, but it becomes possible to employ dedicated (possibly parallel)
-solvers for each subproblems, establishing consensus as the iteration converges.
+This is equivalent to alternating two Method of Multiplier solves in
+the $$x, z$$ directions with varying constraint values, hence the
+name. Crucially, the matrices $$A, B$$ remain constant so one can
+usually do some preprocessing so that inner solves for $$x, z$$ are as
+efficient as possible. The method is still not parallel, but it
+becomes possible to employ dedicated, optimized solvers for each
+subproblems, establishing consensus as the iteration converges.
 
 ### Scaled Form
 

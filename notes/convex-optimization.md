@@ -616,8 +616,8 @@ As usual, there are conditions to be met for the simple gradient ascent to
 converge. Unfortunately, it is not trivial to get Lipschitz constants for the
 dual function, therefore it might be difficult to converge robustly in practice.
 
-In order to improve convergence, the *Method of Multipliers* replace the initial
-problem with the following, equivalent one:
+In order to improve convergence, the *Method of Multipliers* replaces
+the initial problem with the following, equivalent one:
 
 $$\min_x \quad f(x) + \rho \norm{Ax - b}^2 \quad \st A x = b$$
 

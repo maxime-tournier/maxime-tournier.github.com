@@ -459,7 +459,8 @@ Indeed, let us call $$d(\lambda) = \inf_x \LL(x, \lambda)$$ *(the dual
 function)* and $$p(x) = \sup_{\lambda \in \cone{K}} \LL(x, \lambda)$$ *(the
 primal function)*, we see that:
 
-$$\forall x: d(\lambda) \leq \LL(x, \lambda) \leq p(x)$$
+$$\forall x, \forall \lambda \in \cone{K}: d(\lambda) \leq \LL(x,
+\lambda) \leq p(x)$$
 
 so that any $$p(x)$$ is an upper bound of $$d(\lambda)$$, which
 implies $$\sup_\lambda d(\lambda) \leq p(x)$$ for all $$x$$, by
@@ -478,30 +479,40 @@ the solution of the primal problem. This is called *weak duality*, and
 the difference $$p^\star - d^\star$$ is called the *duality
 gap*. There are situations in which solving one problem is equivalent
 to solving the other, in which case the duality gap is $$0$$: this is
-called *strong duality*. For instance, the existence of a *saddle
-point* $$\block{x^\star, \lambda^\star}$$ such that
+called *strong duality*. 
+
+## Saddle Points
+
+Strong duality is guaranteed by the existence of a *saddle point*
+$$\block{x^\star, \lambda^\star}$$ such that
 
 $$\LL\block{x^\star, \lambda} \leq \LL\block{x^\star, \lambda^\star} \leq \LL\block{x, \lambda^\star}$$
 
-for all $$x, \lambda$$. Indeed, from $$\LL\block{x^\star, \lambda^\star} \leq
-\LL\block{x, \lambda^\star}$$ we get 
+for all $$x, \lambda$$. Indeed, from $$\LL\block{x^\star,
+\lambda^\star} \leq \LL\block{x, \lambda^\star}$$ we get
 
-$$\LL\block{x^\star, \lambda^\star} = \min_x \LL\block{x, \lambda^\star} = d\block{\lambda^\star} \leq d^\star$$ 
+$$\LL\block{x^\star, \lambda^\star} \leq \min_x \LL\block{x, \lambda^\star} = d\block{\lambda^\star} \leq d^\star$$ 
 
 and similarly from $$\LL\block{x^\star, \lambda} \leq \LL\block{x^\star, \lambda^\star}$$ we obtain
 
-$$\LL\block{x^\star, \lambda^\star} = \max_\lambda \LL\block{x^\star, \lambda} = p\block{x^\star} \geq p^\star$$ 
+$$\LL\block{x^\star, \lambda^\star} \geq \max_{\lambda \in \cone{K}}
+\LL\block{x^\star, \lambda} = p\block{x^\star} \geq p^\star$$
 
-which gives $$d^\star \geq p^\star$$ and the duality gap is 0. Conversely,
-strong duality may hold in the absence of a saddle point in the following
-situations only:
+which gives $$d^\star \geq p^\star$$ and the duality gap is 0. In
+particular:
+
+$$d\block{\lambda^\star} = d^\star = p^\star = p\block{x^\star} = \LL\block{x^\star, \lambda^\star}$$
+
+Conversely, strong duality may hold in the absence of a saddle point
+in the following situations only:
 
 - unbounded objective function
 - unfeasible problem
 - primal/dual solutions not attained finitely (*e.g.* minimize $$\exp(x)$$)
 
-In all other cases, if a pair $$\block{x^\star, \lambda^\star}$$ exists, it is
-necessarily a saddle-point:
+In all other cases, if a pair $$\block{x^\star, \lambda^\star}$$ such
+that $$p\block{x^\star} = p^\star$$ and $$d\block{\lambda^\star} = d^\star$$
+exists then it must be a saddle-point:
 
 - by definition of the dual function $$d\block{\lambda^\star} \leq \LL\block{x,
   \lambda^\star}$$ for all $$x$$, in particular $$d\block{\lambda^\star} \leq
@@ -519,8 +530,11 @@ $$x^\star$$ is feasible:
 
 $$\max_{\lambda \in \cone{K}} -\lambda^Tg\block{x^\star} = 0$$
 
-therefore $$p\block{x^\star} = f\block{x^\star}$$, which implies
-$${\lambda^\star}^Tg\block{x^\star} = 0$$ *(complementary slackness)*.
+therefore $$\LL\block{x^\star, \lambda^\star} = p\block{x^\star} =
+f\block{x^\star}$$ and $${\lambda^\star}^Tg\block{x^\star} = 0$$
+*(complementary slackness)*.
+
+## Primal/Dual Feasibility
 
 A point $$x$$ at which $$p(x) < \infty$$ is called *primal-feasible*
 (it satisfies the constraints). Likewise, a point $$\lambda$$ at which
@@ -532,7 +546,7 @@ $$\nabla_x \LL\block{x^\star, \lambda^\star} = 0$$
 
 which expands to:
 
-$$\nabla f\block{x^\star} = \nabla g\block{x^\star}^T \lambda^\star$$
+$$\nabla f\block{x^\star} = \nabla g\block{x^\star} \lambda^\star$$
 
 Together with primal feasibility $$g\block{x^\star} \in \cone{K}^*$$
 and complementary slackless, we recover the KKT conditions for the
@@ -616,6 +630,9 @@ whose solution $$\lambda^\star$$ can be found by solving the following QP (dropp
 $$\min_{\lambda \geq 0}\quad \half \lambda^T AQ^{-1}A^T \lambda + \lambda^T\block{b + Ac}$$
 
 # ADMM
+
+We now turn to practical algorithms to solve constrained optimization
+problems, assuming we know how to solve unconstrained problems.
 
 ## Dual Ascent 
 
@@ -777,7 +794,7 @@ $$\underbrace{\nabla g\block{z_{k+1}} - B^T \lambda_k + \rho B^T\block{Ax_k + Bz
 
 For convergence, we consider the following energy:
 
-$$W_k = \frac{1}{\rho} \underbrace{\norm{\lambda_k - \lambda^\star}}_{V_k}^2 + \rho \underbrace{\norm{B\block{z_k - z^\star}}}_{U_k}^2$$
+$$W_k = \frac{1}{\rho} {\underbrace{\norm{\lambda_k - \lambda^\star}}_{V_k}^{}}^2 + \rho {\underbrace{\norm{B\block{z_k - z^\star}}}_{U_k}^{}}^2$$
 
 
 ### Scaled Form
@@ -842,10 +859,6 @@ $$\begin{aligned}
 and the result follows by summation. Obviously, $$f$$ being minimal at
 $$x^\star$$ is equivalent to having $$0 \in \partial f(x)$$, which since
 $$\partial f$$ is monotone is called a *monotone inclusion problem*.
-
-# Duality
-
-- TODO lol
 
 -----
 

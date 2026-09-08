@@ -453,7 +453,7 @@ The Lagrangian is an example of a *perturbation function*.
 What happens when the order of $$\min-\max$$ is reversed in the above? The
 general max-min inequality applies:
 
-$$\sup_{\lambda \in \cone{K}} \inf_x \LL(x, \lambda) \leq \inf_x \sup_\lambda \LL(x, \lambda)$$
+$$\sup_{\lambda \in \cone{K}} \inf_x \LL(x, \lambda) \leq \inf_x \sup_{\lambda \in \cone{K}} \LL(x, \lambda)$$
 
 Indeed, let us call $$d(\lambda) = \inf_x \LL(x, \lambda)$$ *(the dual
 function)* and $$p(x) = \sup_{\lambda \in \cone{K}} \LL(x, \lambda)$$ *(the
@@ -461,22 +461,24 @@ primal function)*, we see that:
 
 $$\forall x: d(\lambda) \leq \LL(x, \lambda) \leq p(x)$$
 
-so that any $$p(x)$$ is an upper bound of $$d(\lambda)$$, which implies
-$$\sup_\lambda d(\lambda) \leq p(x)$$ for all $$x$$, by definition of
-$$\sup$$. In turn, $$\sup_\lambda d(\lambda)$$ is a lower bound of any $$p(x)$$,
-therefore $$\sup_\lambda d(\lambda) \leq \inf_x p(x)$$ and the result
-follows. When both these $$\sup$$ and $$\inf$$ are attained, we switch $$\max$$
-for $$\sup$$ and $$\min$$ for $$\inf$$ and get:
+so that any $$p(x)$$ is an upper bound of $$d(\lambda)$$, which
+implies $$\sup_\lambda d(\lambda) \leq p(x)$$ for all $$x$$, by
+definition of $$\sup$$. In turn, $$\sup_\lambda d(\lambda)$$ is a
+lower bound of any $$p(x)$$, therefore $$\sup_\lambda d(\lambda) \leq
+\inf_x p(x)$$ and the result follows. Assuming both these $$\sup$$ and
+$$\inf$$ are attained, we switch $$\max$$ for $$\sup$$ and $$\min$$
+for $$\inf$$ and get:
 
-$$d^\star = \max_\lambda d(\lambda) \leq \min_x p(x) = p^\star$$
+$$d^\star = \max_{\lambda \in \cone{K}} d(\lambda) \leq \min_x p(x) = p^\star$$
 
-We see that minimizing the *primal* function $$p(x)$$ (our original problem) is
-related to maximizing the *dual* function $$d(\lambda)$$ in the sense that
-solving the dual problem provides a lower bound on the solution of the primal
-problem. This is called *weak duality*, and the difference $$p^\star - d^\star$$
-is called the *duality gap*. There are situations in which solving either
-problem is equivalent to solving the other, in which case the duality gap is
-$$0$$: this is called *strong duality*. For instance, the existence of a *saddle
+We see that minimizing the *primal* function $$p(x)$$ (our original
+problem) is related to maximizing the *dual* function $$d(\lambda)$$
+in the sense that solving the dual problem provides a lower bound on
+the solution of the primal problem. This is called *weak duality*, and
+the difference $$p^\star - d^\star$$ is called the *duality
+gap*. There are situations in which solving one problem is equivalent
+to solving the other, in which case the duality gap is $$0$$: this is
+called *strong duality*. For instance, the existence of a *saddle
 point* $$\block{x^\star, \lambda^\star}$$ such that
 
 $$\LL\block{x^\star, \lambda} \leq \LL\block{x^\star, \lambda^\star} \leq \LL\block{x, \lambda^\star}$$
@@ -520,16 +522,25 @@ $$\max_{\lambda \in \cone{K}} -\lambda^Tg\block{x^\star} = 0$$
 therefore $$p\block{x^\star} = f\block{x^\star}$$, which implies
 $${\lambda^\star}^Tg\block{x^\star} = 0$$ *(complementary slackness)*.
 
-A point $$x$$ at which $$p(x) < \infty$$ is called *primal-feasible* (it
-satisfies the constraints). Likewise, a point $$\lambda$$ at which $$d(\lambda)>
--\infty$$ is called *dual-feasible*. 
+A point $$x$$ at which $$p(x) < \infty$$ is called *primal-feasible*
+(it satisfies the constraints). Likewise, a point $$\lambda$$ at which
+$$d(\lambda)> -\infty$$ is called *dual-feasible*. A saddle point is
+both primal and dual feasible. If we further assume both $$f$$ and
+$$g$$ are smooth, dual feasibility implies:
 
+$$\nabla_x \LL\block{x^\star, \lambda^\star} = 0$$
 
-We note that whenever $$g(x) \in \cone{K}^*$$ and $$\lambda \in \cone{K}$$, the
-Lagrangian $$\LL(x, \lambda)$$ is a lower bound on the primal objective function
-$$f(x)$$, therefore the dual problem can be seen as maximizing this lower bound.
+which expands to:
 
+$$\nabla f\block{x^\star} = \nabla g\block{x^\star}^T \lambda^\star$$
 
+Together with primal feasibility $$g\block{x^\star} \in \cone{K}^*$$
+and complementary slackless, we recover the KKT conditions for the
+constrained problem.
+
+<!-- We note that whenever $$g(x) \in \cone{K}^*$$ and $$\lambda \in \cone{K}$$, the -->
+<!-- Lagrangian $$\LL(x, \lambda)$$ is a lower bound on the primal objective function -->
+<!-- $$f(x)$$, therefore the dual problem can be seen as maximizing this lower bound. -->
 
 
 ## Examples

@@ -462,8 +462,9 @@ so that any $$p(x)$$ is an upper bound of $$d(\lambda)$$, which implies
 $$\sup_\lambda d(\lambda) \leq p(x)$$ for all $$x$$, by definition of
 $$\sup$$. In turn, $$\sup_\lambda d(\lambda)$$ is a lower bound of any $$p(x)$$,
 therefore $$\sup_\lambda d(\lambda) \leq \inf_x p(x)$$ and the result
-follows. Since all sets involved are assumed to be closed and convex, we even
-get $$\max$$ for $$\sup$$ and $$\min$$ for $$\inf$$. In particular:
+follows. Since all sets involved are assumed to be closed and convex (TODO and
+bounded), we even get $$\max$$ for $$\sup$$ and $$\min$$ for $$\inf$$. In
+particular:
 
 $$d^\star = \max_\lambda d(\lambda) \leq \min_x p(x) = p^\star$$
 
@@ -487,12 +488,35 @@ and similarly from $$\LL\block{x^\star, \lambda} \leq \LL\block{x^\star, \lambda
 
 $$\LL\block{x^\star, \lambda^\star} = \max_\lambda \LL\block{x^\star, \lambda} = p\block{x^\star} \geq p^\star$$ 
 
-which gives $$d^\star \geq p^\star$$ and the duality gap is 0. 
+which gives $$d^\star \geq p^\star$$ and the duality gap is 0. Conversely,
+strong duality may hold in the absence of a saddle point in the following
+situations only:
 
-We note that whenever $$g(x) \in \cone{K}^*$$ and $$\lambda \in
-\cone{K}$$, the Lagrangian $$\LL(x, \lambda)$$ is a lower bound on the
-primal objective function $$f(x)$$, therefore the dual problem can be
-seen as maximizing this lower bound.
+- unbounded objective function
+- unfeasible problem
+- primal/dual solutions not attained finitely (*e.g.* minimize $$\exp(x)$$)
+
+In all other cases, the pair $$\block{x^\star, \lambda^\star}$$, if it exists,
+is necessarily a saddle-point:
+
+- by definition of the dual function $$d\block{\lambda^\star} \leq \LL\block{x,
+  \lambda^\star}$$ for all $$x$$, in particular $$d\block{\lambda^\star} \leq
+  \LL\block{x^\star, \lambda^\star}$$
+- by definition of the primal function $$p\block{x^\star} \geq
+  \LL\block{x^\star, \lambda}$$ for all $$\lambda \in \cone{K}$$, in particular
+  $$p\block{x^\star} \geq \LL\block{x^\star, \lambda^\star}$$
+
+which under strong duality gives:
+
+$$\LL\block{x^\star, \lambda^\star} \leq p\block{x^\star} = d\block{\lambda^\star} \leq \LL\block{x^\star, \lambda^\star}$$
+
+
+
+
+
+We note that whenever $$g(x) \in \cone{K}^*$$ and $$\lambda \in \cone{K}$$, the
+Lagrangian $$\LL(x, \lambda)$$ is a lower bound on the primal objective function
+$$f(x)$$, therefore the dual problem can be seen as maximizing this lower bound.
 
 ## Examples
 
@@ -706,18 +730,30 @@ along $$x$$ alone first with $$z$$ constant, then along $$z$$ alone with $$x$$
 constant, in a Gauss-Seidel fashion:
 
 1. initialize $$\lambda_0 = 0, z_0 = 0$$
-2. solve $$x_k = \argmin{x}\quad f(x) - \lambda_k^T\block{Ax + Bz_{k-1} - c} + \rho\norm{Ax + Bz_{k-1} - c}^2$$
-2. solve $$z_k = \argmin{z}\quad g(z) - \lambda_k^T\block{Ax_k + Bz - c} + \rho\norm{Ax_k + Bz - c}^2$$
-3. update $$\lambda_{k+1} = \lambda_k - \rho \block{A x_k + Bz_k - b}$$
-4. goto 2 until sufficient precision is achieved (more on this below)
+2. solve $$x_k = \argmin{x}\quad f(x) - \lambda_k^T\block{Ax + B z_k - c} + \rho\norm{Ax + B z_k - c}^2$$
+3. solve $$z_{k+1} = \argmin{z}\quad g(z) - \lambda_k^T\block{Ax_k + Bz - c} + \rho\norm{Ax_k + Bz - c}^2$$
+4. update $$\lambda_{k+1} = \lambda_k - \rho \block{A x_k + Bz_{k+1} - b}$$
+5. goto 2 until sufficient precision is achieved (more on this below)
 
-This is equivalent to alternating two Method of Multiplier solves in
-the $$x, z$$ directions with varying constraint values, hence the
-name. Crucially, the matrices $$A, B$$ remain constant, which enables
-preprocessing so that inner solves for $$x, z$$ are as efficient as
-possible. Unlike the Method of Multipliers, it becomes possible to
-employ dedicated, optimized solvers for each subproblems, establishing
-consensus as the iteration converges.
+This is equivalent to alternating two Method of Multiplier solves in the $$x,
+z$$ directions with varying constraint values, hence the name. Crucially, the
+matrices $$A, B$$ remain constant, which enables preprocessing so that inner
+solves for $$x, z$$ are as efficient as possible. Unlike the Method of
+Multipliers, it becomes possible to employ dedicated, optimized solvers for each
+subproblems, establishing consensus as the iteration converges. 
+
+Note that the role played by $$x,z$$ is *not* symmetric. Dual feasibility for $$x_k$$ gives:
+
+$$\nabla f\block{x_k} - A^T \lambda_k + \rho A^T\block{Ax_k + Bz_k - c} = 0$$
+
+while dual feasibility for $$z_{k+1}$$ gives:
+
+$$\underbrace{\nabla g\block{z_{k+1}} - B^T \lambda_k + \rho B^T\block{Ax_k + Bz_{k+1} - c}}_{\nabla g\block{z_{k+1}} - B^T \lambda_{k+1}} = 0$$
+
+For convergence, we consider the following energy:
+
+$$W_k = \frac{1}{\rho} \underbrace{\norm{\lambda_k - \lambda^\star}}_{V_k}^2 + \rho \underbrace{\norm{B\block{z_k - z^\star}}}_{U_k}^2$$
+
 
 ### Scaled Form
 

@@ -343,40 +343,40 @@ always closed, but this is something to keep in mind.
 
 We now consider the following optimization problem:
 
-$$\min_{x \in E} \ f(x)\ \st \ c(x) \in \cone{K}$$
+$$\min_{x \in E} \ f(x)\ \st \ g(x) \in \cone{K}$$
 
 for some convex closed cone $$\cone{K}$$. The admissible directions at
 $$x$$ must satisfy:
 
-$$\dd c(x).\dd x \in T_{c(x)}(\cone{K})$$
+$$\dd g(x).\dd x \in T_{g(x)}(\cone{K})$$
 
-In other words, tangent vectors outputted by $$c$$ must be admissible
-in $$\cone{K}$$, that is: belong to $$T_{c(x)}\cone{K}$$. From Farkas'
+In other words, tangent vectors outputted by $$g$$ must be admissible
+in $$\cone{K}$$, that is: belong to $$T_{g(x)}\cone{K}$$. From Farkas'
 lemma, we get:
 
-$$\dd c(x)^{-1}\block{T_{c(x)}(\cone{K})} = \block{\dd c(x)^T \block{T_{c(x)}\cone{K}}^*}^*$$
+$$\dd g(x)^{-1}\block{T_{g(x)}(\cone{K})} = \block{\dd g(x)^T \block{T_{g(x)}\cone{K}}^*}^*$$
 
 where the inverse is understood as a preimage. One generally asks that
-$$\dd c(x)^T \cone{K}^*$$ be closed (see the
+$$\dd g(x)^T \cone{K}^*$$ be closed (see the
 [discussion](#farkas-lemma) above) via a *constraint qualification*
 condition, so that the dual cone is:
 
 $$\begin{align}
-\block{\dd c(x)^{-1} \block{T_{c(x)}(\cone{K})}}^* &= \dd c(x)^T \block{T_{c(x)}\cone{K}}^*\\
-&= \dd c(x)^T \block{\cone{K}^* \cap c(x)^\bot}
+\block{\dd g(x)^{-1} \block{T_{g(x)}(\cone{K})}}^* &= \dd g(x)^T \block{T_{g(x)}\cone{K}}^*\\
+&= \dd g(x)^T \block{\cone{K}^* \cap g(x)^\bot}
 \end{align}$$
 
 (see the [discussion](#optimality-conditions) above on normal cones to
 convex closed cones). We are now ready to state the optimality
 conditions for the constrained problem:
 
-$$\nabla f(x) \in \dd c(x)^T \block{\cone{K}^* \cap c(x)^\bot}$$
+$$\nabla f(x) \in \dd g(x)^T \block{\cone{K}^* \cap g(x)^\bot}$$
 
 which expands to:
 
 $$\begin{align}
-\nabla f(x) &= \dd c(x)^T \lambda\\
-\cone{K} \ni c(x) &\ \bot\ \lambda \in \cone{K}^* \\
+\nabla f(x) &= \dd g(x)^T \lambda\\
+\cone{K} \ni g(x) &\ \bot\ \lambda \in \cone{K}^* \\
 \end{align}$$
 
 These are known as the Karush, Kuhn & Tucker (KKT) conditions.
@@ -400,12 +400,12 @@ Qx + c &= A^T \lambda\\
 \end{align}$$
 
 
-# Cone Indicator Function
+# Encoding Cone Constraints
 
 Assuming we know how to minimize a convex function $$f$$ over a closed convex
 cone $$\cone{K}$$, we could in theory solve a minimization problem under the
-constraint that some other smooth function $$g(x) \in \cone{K}^*$$ by
-adding a penalty term $$p(x)$$ such that:
+constraint that some other smooth function $$g(x) \in \cone{K}^*$$ lies in the
+dual cone $$\cone{K}^*$$ by adding a penalty term $$p(x)$$ such that:
 
 - $$p(x) = 0$$ when $$g(x) \in \cone{K}^*$$
 - $$p(x) = +\infty$$ when $$g(x) \notin \cone{K}^*$$
@@ -446,15 +446,18 @@ problem:
 
 $$\min_x\ \max_{\lambda \in \cone{K}} \ \LL(x, \lambda)$$
 
+The Lagrangian is an example of a *perturbation function*.
+
 # Duality
 
 What happens when the order of $$\min-\max$$ is reversed in the above? The
 general max-min inequality applies:
 
-$$\sup_\lambda \inf_x \LL(x, \lambda) \leq \inf_x \sup_\lambda \LL(x, \lambda)$$
+$$\sup_{\lambda \in \cone{K}} \inf_x \LL(x, \lambda) \leq \inf_x \sup_\lambda \LL(x, \lambda)$$
 
-Indeed, let us call $$d(\lambda) = \inf_x \LL(x, \lambda)$$ and $$p(x) =
-\sup_\lambda \LL(x, \lambda)$$, we see that:
+Indeed, let us call $$d(\lambda) = \inf_x \LL(x, \lambda)$$ *(the dual
+function)* and $$p(x) = \sup_{\lambda \in \cone{K}} \LL(x, \lambda)$$ *(the
+primal function)*, we see that:
 
 $$\forall x: d(\lambda) \leq \LL(x, \lambda) \leq p(x)$$
 
@@ -462,9 +465,8 @@ so that any $$p(x)$$ is an upper bound of $$d(\lambda)$$, which implies
 $$\sup_\lambda d(\lambda) \leq p(x)$$ for all $$x$$, by definition of
 $$\sup$$. In turn, $$\sup_\lambda d(\lambda)$$ is a lower bound of any $$p(x)$$,
 therefore $$\sup_\lambda d(\lambda) \leq \inf_x p(x)$$ and the result
-follows. Since all sets involved are assumed to be closed and convex (TODO and
-bounded), we even get $$\max$$ for $$\sup$$ and $$\min$$ for $$\inf$$. In
-particular:
+follows. When both these $$\sup$$ and $$\inf$$ are attained, we switch $$\max$$
+for $$\sup$$ and $$\min$$ for $$\inf$$ and get:
 
 $$d^\star = \max_\lambda d(\lambda) \leq \min_x p(x) = p^\star$$
 
@@ -472,10 +474,10 @@ We see that minimizing the *primal* function $$p(x)$$ (our original problem) is
 related to maximizing the *dual* function $$d(\lambda)$$ in the sense that
 solving the dual problem provides a lower bound on the solution of the primal
 problem. This is called *weak duality*, and the difference $$p^\star - d^\star$$
-is the *duality gap*. There are situations in which solving either problem is
-equivalent to solving the other, in which case the duality gap is $$0$$: this is
-called *strong duality*. For instance, the existence of a *saddle point*
-$$\block{x^\star, \lambda^\star}$$ such that
+is called the *duality gap*. There are situations in which solving either
+problem is equivalent to solving the other, in which case the duality gap is
+$$0$$: this is called *strong duality*. For instance, the existence of a *saddle
+point* $$\block{x^\star, \lambda^\star}$$ such that
 
 $$\LL\block{x^\star, \lambda} \leq \LL\block{x^\star, \lambda^\star} \leq \LL\block{x, \lambda^\star}$$
 
@@ -496,8 +498,8 @@ situations only:
 - unfeasible problem
 - primal/dual solutions not attained finitely (*e.g.* minimize $$\exp(x)$$)
 
-In all other cases, the pair $$\block{x^\star, \lambda^\star}$$, if it exists,
-is necessarily a saddle-point:
+In all other cases, if a pair $$\block{x^\star, \lambda^\star}$$ exists, it is
+necessarily a saddle-point:
 
 - by definition of the dual function $$d\block{\lambda^\star} \leq \LL\block{x,
   \lambda^\star}$$ for all $$x$$, in particular $$d\block{\lambda^\star} \leq
@@ -506,17 +508,29 @@ is necessarily a saddle-point:
   \LL\block{x^\star, \lambda}$$ for all $$\lambda \in \cone{K}$$, in particular
   $$p\block{x^\star} \geq \LL\block{x^\star, \lambda^\star}$$
 
-which under strong duality gives:
+Under strong duality, this gives:
 
 $$\LL\block{x^\star, \lambda^\star} \leq p\block{x^\star} = d\block{\lambda^\star} \leq \LL\block{x^\star, \lambda^\star}$$
 
+which makes $$\block{x^\star, \lambda^\star}$$ a saddle point. Notice that since
+$$x^\star$$ is feasible:
 
+$$\max_{\lambda \in \cone{K}} -\lambda^Tg\block{x^\star} = 0$$
 
+therefore $$p\block{x^\star} = f\block{x^\star}$$, which implies
+$${\lambda^\star}^Tg\block{x^\star} = 0$$ *(complementary slackness)*.
+
+A point $$x$$ at which $$p(x) < \infty$$ is called *primal-feasible* (it
+satisfies the constraints). Likewise, a point $$\lambda$$ at which $$d(\lambda)>
+-\infty$$ is called *dual-feasible*. 
 
 
 We note that whenever $$g(x) \in \cone{K}^*$$ and $$\lambda \in \cone{K}$$, the
 Lagrangian $$\LL(x, \lambda)$$ is a lower bound on the primal objective function
 $$f(x)$$, therefore the dual problem can be seen as maximizing this lower bound.
+
+
+
 
 ## Examples
 

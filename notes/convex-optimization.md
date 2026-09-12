@@ -415,10 +415,10 @@ over the set $$C = g^{-1}\block{\cone{K}^*}$$. Such an indicator function is
 convex when $$C$$ is convex and so in principle one could just minimize $$f$$
 over $$C$$ when $$C$$ is a cone and we're done.
 
-In practice however, it's not always clear how to compute $$C$$ from $$g$$ and
-$$\cone{K}$$, or that $$C$$ even is a cone to begin with. Despite all this,
-there is a simple trick to express $$\iota_C$$ in terms of $$g$$ by adding extra
-variables known as the *Lagrange multipliers*:
+In practice however, it's not always clear how to compute $$C$$ from
+$$g$$ and $$\cone{K}$$, and how to deal with infinities in the penalty
+term. Fortunately, there is a trick to express $$\iota_C$$ in terms of
+$$g$$ by adding extra variables known as the *Lagrange multipliers*:
 
 $$p(x) = \max_{\lambda \in \cone{K}} \ -\inner{\lambda^T, g(x)}$$
 

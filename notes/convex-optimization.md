@@ -484,7 +484,7 @@ called *strong duality*.
 ## Saddle Points
 
 Strong duality is guaranteed by the existence of a *saddle point*
-$$\block{x^\star, \lambda^\star}$$ such that
+$$\block{x^\star, \lambda^\star \in \cone{K}}$$ such that
 
 $$\LL\block{x^\star, \lambda} \leq \LL\block{x^\star, \lambda^\star} \leq \LL\block{x, \lambda^\star}$$
 
@@ -540,7 +540,7 @@ A point $$x$$ at which $$p(x) < \infty$$ is called *primal-feasible*
 (it satisfies the constraints). Likewise, a point $$\lambda$$ at which
 $$d(\lambda)> -\infty$$ is called *dual-feasible*. A saddle point is
 both primal and dual feasible. If we further assume both $$f$$ and
-$$g$$ are smooth, dual feasibility implies:
+$$g$$ are smooth, dual feasibility at a saddle point implies:
 
 $$\nabla_x \LL\block{x^\star, \lambda^\star} = 0$$
 
@@ -629,7 +629,7 @@ whose solution $$\lambda^\star$$ can be found by solving the following QP (dropp
 
 $$\min_{\lambda \geq 0}\quad \half \lambda^T AQ^{-1}A^T \lambda + \lambda^T\block{b + Ac}$$
 
-# ADMM
+# Algorithms
 
 We now turn to practical algorithms to solve constrained optimization
 problems, assuming we know how to solve unconstrained problems.
@@ -748,6 +748,26 @@ proximal point method)*, which is more direct in the non-smooth case.
 The Method of Multipliers is also known as the *Augmented Lagrangian
 Method* (ALM).
 
+### Scaled Form
+
+At every iteration, $$x$$ is solved as:
+
+$$x_k = \argmin{x}\ f(x) - \lambda_k^T\block{Ax - b} + \frac{\rho}{2}\norm{Ax - b}^2$$
+
+The above can be simplified by completing the square:
+
+$$\frac{\rho}2\norm{Ax - b - \frac{\lambda_k}{\rho}}^2 =  \frac{\rho}{2}\norm{Ax - b}^2 - \lambda_k^T\block{Ax - b} + \frac{1}{2\rho}\norm{\lambda_k}^2$$
+
+Therefore, we can introduce $$u_k = \frac{\lambda_k}{\rho}$$ and the ALM
+simplifies to the following:
+
+1. initialize $$u_0 = 0$$
+2. solve $$x_k = \argmin{x}\ f(x) + \frac{\rho}{2}\norm{Ax - b - u_k}^2$$
+3. update $$u_{k+1} = u_k - \block{A x_k - b}$$
+4. goto 2 until sufficient precision is achieved (more on this below)
+
+which is a bit more convenient in practice.
+
 ## Alternating Direction Method of Multipliers
 
 So far, so good: we solved the problem of choosing step sizes
@@ -772,9 +792,9 @@ along $$x$$ alone first with $$z$$ constant, then along $$z$$ alone with $$x$$
 constant, in a Gauss-Seidel fashion:
 
 1. initialize $$\lambda_0 = 0, z_0 = 0$$
-2. solve $$x_k = \argmin{x}\quad f(x) - \lambda_k^T\block{Ax + B z_k - c} + \rho\norm{Ax + B z_k - c}^2$$
-3. solve $$z_{k+1} = \argmin{z}\quad g(z) - \lambda_k^T\block{Ax_k + Bz - c} + \rho\norm{Ax_k + Bz - c}^2$$
-4. update $$\lambda_{k+1} = \lambda_k - \rho \block{A x_k + Bz_{k+1} - b}$$
+2. solve $$x_k = \argmin{x}\quad f(x) - \lambda_k^T\block{Ax + B z_k - c} + \frac{\rho}{2}\norm{Ax + B z_k - c}^2$$
+3. solve $$z_{k+1} = \argmin{z}\quad g(z) - \lambda_k^T\block{Ax_k + Bz - c} + \frac{\rho}{2}\norm{Ax_k + Bz - c}^2$$
+4. update $$\lambda_{k+1} = \lambda_k - \rho \block{A x_k + Bz_{k+1} - c}$$
 5. goto 2 until sufficient precision is achieved (more on this below)
 
 This is equivalent to alternating two Method of Multiplier solves in the $$x,
@@ -792,13 +812,35 @@ while dual feasibility for $$z_{k+1}$$ gives:
 
 $$\underbrace{\nabla g\block{z_{k+1}} - B^T \lambda_k + \rho B^T\block{Ax_k + Bz_{k+1} - c}}_{\nabla g\block{z_{k+1}} - B^T \lambda_{k+1}} = 0$$
 
-For convergence, we consider the following energy:
+Therefore, $$z_{k+1}, \lambda_{k+1}$$ is automatically dual-feasible for the
+original problem, while $$x_k, \lambda_{k+1}$$ is not:
+
+$$\begin{aligned}
+\nabla f\block{x_k} &- A^T \lambda_k + \rho A^T\block{Ax_k + Bz_k - c} \\
+= \nabla f\block{x_k} &- A^T \block{\lambda_k - \rho \block{Ax_k + Bz_k - c}} \\
+= \nabla f\block{x_k} &- A^T\block{\lambda_{k+1} - \rho Bz_{k+1} + \rho Bz_k} \\
+= \nabla f\block{x_k} &- A^T\lambda_{k+1} - \rho A^TB\block{z_{k+1} - z_k} \\
+\end{aligned}$$
+
+This suggests that convergence checks should not only consider the primal
+residual $$\norm{Ax_k + Bz_{k+1} - c}$$ (consensus), but also the dual residual
+$$\rho\norm{A^TB\block{z_{k+1} - z_k}}$$, as described below.
+
+For proving convergence, we consider the following energy:
 
 $$W_k = \frac{1}{\rho} {\underbrace{\norm{\lambda_k - \lambda^\star}}_{V_k}^{}}^2 + \rho {\underbrace{\norm{B\block{z_k - z^\star}}}_{U_k}^{}}^2$$
 
 
 ### Scaled Form
 
+As [before](#method-of-multipliers), introducing $$u_k =
+\frac{\lambda_k}{\rho}$$ yields slightly more convenient equations in practice:
+
+1. initialize $$u_0 = 0, z_0 = 0$$
+2. solve $$x_k = \argmin{x}\ f(x) + \frac{\rho}{2}\norm{Ax + B z_k - c - u_k}^2$$
+3. solve $$z_{k+1} = \argmin{z}\ g(z) + \frac{\rho}{2}\norm{Ax_k + Bz - c - u_k}^2$$
+4. update $$u_{k+1} = u_k - \block{A x_k + Bz_{k+1} - c}$$
+5. goto 2 until sufficient precision is achieved (more on this below)
 
 ## Stopping Criterion
 

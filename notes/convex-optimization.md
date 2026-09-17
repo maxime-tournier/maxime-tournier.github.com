@@ -842,6 +842,23 @@ As [before](#method-of-multipliers), introducing $$u_k =
 4. update $$u_{k+1} = u_k - \block{A x_k + Bz_{k+1} - c}$$
 5. goto 2 until sufficient precision is achieved (more on this below)
 
+Expanding quadratic terms gives
+
+$$\begin{aligned}
+x_k &= \argmin{x}\ f(x) + \frac{\rho}{2}x^TA^TAx + x^TA^T\block{B z_k - c - u_k}^2 \\
+z_{k+1} &= \argmin{z}\ g(z) + \frac{\rho}{2}z^TB^TBz + z^T\block{Ax_k - c - u_k}^2 \\
+\end{aligned}
+$$
+
+In particular, for the *consensus* problem $$A=I, B=-I, c = 0$$ this gives:
+
+$$\begin{aligned}
+x_k &= \argmin{x}\ f(x) + \frac{\rho}{2}\norm{x}^2 - x^T\block{u_k + z_k}^2 \\
+z_{k+1} &= \argmin{z}\ g(z) + \frac{\rho}{2}\norm{z}^2 - z^T\block{u_k - x_k}^2 \\
+\end{aligned}
+$$
+
+
 ## Stopping Criterion
 
 

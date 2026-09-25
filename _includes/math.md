@@ -1,6 +1,14 @@
 <div style="display:none">
 
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+<script>
+window.MathJax = {
+  chtml: {
+    scale: 1.1
+  }
+};
+</script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js"></script>
 
 
 $$

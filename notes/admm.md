@@ -86,9 +86,13 @@ benefits:
   $$\lambda_{k+1}$$ instead of $$\lambda_k$$
 
 Therefore we might expect the nice properties of implicit integration
-to somehow ensure convergence. More rigorously, convergence can be
-shown by considering the dual error $$V_k = \norm{\lambda_{k+1} -
-\lambda^\star}^2$$ where $$\lambda^\star$$ is the solution:
+to somehow ensure convergence. 
+
+## Convergence
+
+More rigorously, convergence can be shown by considering the dual error $$V_k =
+\norm{\lambda_{k+1} - \lambda^\star}^2$$ where $$\lambda^\star$$ is the
+solution:
 
 $$
 \begin{aligned}
@@ -187,7 +191,11 @@ while dual feasibility for $$z_{k+1}$$ gives:
 $$\underbrace{\nabla g\block{z_{k+1}} - B^T \lambda_k + \rho B^T\block{Ax_k + Bz_{k+1} - c}}_{\nabla g\block{z_{k+1}} - B^T \lambda_{k+1}} = 0$$
 
 Therefore, $$z_{k+1}, \lambda_{k+1}$$ is automatically dual-feasible for the
-original problem, while $$x_k, \lambda_{k+1}$$ is not:
+original problem:
+
+$$\nabla g\block{z_{k+1}} - B^T \lambda_{k+1} = 0$$
+
+while $$x_k, \lambda_{k+1}$$ is not:
 
 $$\begin{aligned}
 \nabla f\block{x_k} &- A^T \lambda_k + \rho A^T\block{Ax_k + Bz_k - c} \\
@@ -200,9 +208,19 @@ This suggests that convergence checks should not only consider the primal
 residual $$\norm{Ax_k + Bz_{k+1} - c}$$ (consensus), but also the dual residual
 $$\rho\norm{A^TB\block{z_{k+1} - z_k}}$$, as described below.
 
+## Convergence
+
 For proving convergence, we consider the following energy:
 
 $$W_k = \frac{1}{\rho} {\underbrace{\norm{\lambda_k - \lambda^\star}}_{V_k}^{}}^2 + \rho {\underbrace{\norm{B\block{z_k - z^\star}}}_{U_k}^{}}^2$$
+
+As above, we obtain:
+
+$$V_{k+1} - V_k = -\frac{1}{\rho}\norm{\lambda_{k+1} - \lambda_k}^2 + \frac{2}{\rho} \block{\lambda_{k+1} - \lambda_k}^T\block{\lambda_{k+1} - \lambda^\star}$$
+
+and a similar computation gives:
+
+$$U_{k+1} - U_k = -\rho\norm{B\block{z_{k+1} - z_k}}^2 + 2\rho\block{z_{k+1} - z_k}^TB^TB\block{z_{k+1} - z^\star}$$
 
 
 ## Scaled Form

@@ -6,7 +6,8 @@ tags: [draft]
 
 {% include toc.md %}
 
-Some notes on ADMM based on Boyd's resources [^boyd].
+Some notes on ADMM based on Boyd's resources [^boyd], assuming some
+familiarity with [duality](convex-optimization#duality).
 
 # Dual Ascent 
 

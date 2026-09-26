@@ -179,6 +179,10 @@ span.section-number-2:after {
     content: ".";
 }
 
+h1, h2, h3 {
+  scroll-margin-top: 1em;
+}
+
 h1 {
     margin: 1em 0;
     line-height: 120%;

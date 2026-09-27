@@ -245,7 +245,7 @@ $$\begin{aligned}
 \end{aligned}
 $$
 
-and we're left with analyzing the sign of 
+Therefore, we're left with analyzing the sign of 
 
 $$\block{B\block{z_{k+1} - z^\star} + A\block{x_k - x^\star}}^TB\block{z_{k+1} - z_k}$$
 

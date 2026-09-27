@@ -13,7 +13,7 @@ familiarity with [duality](convex-optimization#duality).
 
 Let us consider the following problem:
 
-$$\min_x \quad f(x) \quad \st A x = b$$
+$$\min_x \ f(x) \ \st A x = b$$
 
 Again, the Lagrangian is:
 
@@ -44,7 +44,7 @@ have a smooth[^dual-ascent] function and its gradient, we can simply use gradien
 step sizes $$\alpha_k$$ to solve the dual problem of maximizing $$d(\lambda)$$:
 
 1. initialize $$\lambda_0 = 0$$
-2. solve $$x_k = \argmin{x}\quad  f(x) - \lambda_k^T\block{Ax - b}$$
+2. solve $$x_k = \argmin{x}\  f(x) - \lambda_k^T\block{Ax - b}$$
 3. update $$\lambda_{k+1} = \lambda_k - \alpha_k \block{A x_k - b}$$
 4. goto 2 until sufficient precision is achieved (more on this below)
 
@@ -60,7 +60,7 @@ dual function, therefore it might be difficult to converge robustly in practice.
 In order to improve convergence, the *Method of Multipliers* replaces
 the initial problem with the following, equivalent one:
 
-$$\min_x \quad f(x) + \rho \norm{Ax - b}^2 \quad \st A x = b$$
+$$\min_x \ f(x) + \rho \norm{Ax - b}^2 \ \st A x = b$$
 
 whose Lagrangian is called the *Augmented Lagrangian*. Clearly the
 added penalty is zero on the feasible set, so the two problems are
@@ -163,7 +163,7 @@ matrix. Let us introduce some notation first: we consider the
 following problem of minimizing a separable function under affine
 constraints:
 
-$$\min_{x, z}\quad f(x) + g(z)\quad\st\ Ax + Bz = c$$
+$$\min_{x, z}\ f(x) + g(z)\ \st\ Ax + Bz = c$$
 
 Instead of minimizing *jointly* over both $$x, z$$ like the Method of
 Multipliers would, the minimization is now split into two subproblems:
@@ -172,8 +172,8 @@ minimizing along $$x$$ alone first with $$z$$ constant (the
 *$$z$$-update*), in a Gauss-Seidel-like fashion:
 
 1. initialize $$\lambda_0 = 0, z_0 = 0$$
-2. solve $$x_k = \argmin{x}\quad f(x) - \lambda_k^T\block{Ax + B z_k - c} + \frac{\rho}{2}\norm{Ax + B z_k - c}^2$$
-3. solve $$z_{k+1} = \argmin{z}\quad g(z) - \lambda_k^T\block{Ax_k + Bz - c} + \frac{\rho}{2}\norm{Ax_k + Bz - c}^2$$
+2. solve $$x_k = \argmin{x}\ f(x) - \lambda_k^T\block{Ax + B z_k - c} + \frac{\rho}{2}\norm{Ax + B z_k - c}^2$$
+3. solve $$z_{k+1} = \argmin{z}\ g(z) - \lambda_k^T\block{Ax_k + Bz - c} + \frac{\rho}{2}\norm{Ax_k + Bz - c}^2$$
 4. update $$\lambda_{k+1} = \lambda_k - \rho \block{A x_k + Bz_{k+1} - c}$$
 5. goto 2 until sufficient precision is achieved (more on this below)
 

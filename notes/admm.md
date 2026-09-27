@@ -223,6 +223,41 @@ and a similar computation gives:
 
 $$U_{k+1} - U_k = -\rho\norm{B\block{z_{k+1} - z_k}}^2 + 2\rho\block{z_{k+1} - z_k}^TB^TB\block{z_{k+1} - z^\star}$$
 
+This time, $$\frac{\lambda_{k+1} - \lambda_k}{\rho}$$ expands as:
+
+$$\begin{aligned}
+\frac{\lambda_{k+1} - \lambda_k}{\rho} &= -\block{Ax_k + Bz_{k+1} - c} \\
+	&= -\block{Ax_k + Bz_{k+1} - \block{Ax^\star + B z^\star}} \\
+	&= -A\block{x_k - x^\star} - B\block{z_{k+1} - z^\star}
+\end{aligned}
+$$
+
+and we obtain:
+
+$$\begin{aligned}
+&\frac{1}{\rho} \block{\lambda_{k+1} - \lambda_k}^T\block{\lambda_{k+1} - \lambda^\star} \\
+&=-\block{x_k - x^\star}^TA^T\block{\lambda_{k+1} - \lambda^\star} - \block{z_{k+1} - z^\star}^TB^T\block{\lambda_{k+1} - \lambda^\star} \\
+&= -\block{x_k - x^\star}^T\block{\nabla f\block{x_k} - \rho A^TB\block{z_{k+1} - z_k} -\nabla f\block{x^\star}} \\ 
+&\phantom{=\,\,} -\block{z_{k+1} - z^\star}^T\block{\nabla g\block{z_{k+1}} - \nabla g\block{z^\star}}\\
+&= -\underbrace{\block{x_k - x^\star}^T\block{\nabla f\block{x_k} -\nabla f\block{x^\star}}}_{\geq 0}\\
+&\phantom{=\,\,} -\underbrace{\block{z_{k+1} - z^\star}^T\block{\nabla g\block{z_{k+1}} - \nabla g\block{z^\star}}}_{\geq 0}\\
+&\phantom{=\,\,} +\rho \block{x_k - x^\star}^TA^TB\block{z_{k+1} - z_k} \\ 
+\end{aligned}
+$$
+
+and we're left with analyzing the sign of 
+
+$$\block{B\block{z_{k+1} - z^\star} + A\block{x_k - x^\star}}^TB\block{z_{k+1} - z_k}$$
+
+or, equivalently:
+
+$$\begin{aligned}
+-\block{\lambda_{k+1} - \lambda_k}^TB\block{z_{k+1} - z_k}
+&= -\block{\nabla g\block{z_{k+1}} - \nabla g\block{z_k}}^T\block{z_{k+1} - z_k}\\
+&\leq 0
+\end{aligned}
+$$
+
 
 ## Scaled Form
 

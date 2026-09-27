@@ -258,6 +258,8 @@ $$\begin{aligned}
 \end{aligned}
 $$
 
+which entails strict convegence as long as either the primal or dual
+residual is non-zero, and completes the proof.
 
 ## Scaled Form
 
@@ -285,7 +287,6 @@ x_k &= \argmin{x}\ f(x) + \frac{\rho}{2}\norm{x}^2 - \rho x^T\block{u_k + z_k} \
 z_{k+1} &= \argmin{z}\ g(z) + \frac{\rho}{2}\norm{z}^2 - \rho z^T\block{u_k - x_k} \\
 \end{aligned}
 $$
-
 
 ## Stopping Criterion
 

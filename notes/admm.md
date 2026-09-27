@@ -205,8 +205,8 @@ $$\begin{aligned}
 = \nabla f\block{x_k} &- A^T\lambda_{k+1} - \rho A^TB\block{z_{k+1} - z_k} \\
 \end{aligned}$$
 
-This suggests that convergence checks should not only consider the primal
-residual $$\norm{Ax_k + Bz_{k+1} - c}$$ (consensus), but also the dual residual
+This suggests that convergence checks should not only consider the
+primal residual $$\norm{Ax_k + Bz_{k+1} - c}$$ (consensus), but also
 $$\rho\norm{A^TB\block{z_{k+1} - z_k}}$$, as described below.
 
 ## Convergence
@@ -258,8 +258,10 @@ $$\begin{aligned}
 \end{aligned}
 $$
 
-which entails strict convegence as long as either the primal or dual
-residual is non-zero, and completes the proof.
+which entails strict convegence as long as either the primal residual
+$$\norm{Ax_k + Bz_{k+1} - c}$$ or the dual residual
+$$\rho\norm{B\block{z_{k+1} - z_k}}$$ is non-zero, and completes the
+proof.
 
 ## Scaled Form
 
@@ -288,7 +290,6 @@ z_{k+1} &= \argmin{z}\ g(z) + \frac{\rho}{2}\norm{z}^2 - \rho z^T\block{u_k - x_
 \end{aligned}
 $$
 
-## Stopping Criterion
 
 
 

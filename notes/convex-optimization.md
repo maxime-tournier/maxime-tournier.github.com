@@ -748,4 +748,4 @@ therefore $$\norm{x - y}^2 \geq \norm{x - c}^2$$ and $$c = \pi_C(x)$$.
     slices is the *open* half-plane plus the origin, which is not
     closed.
 
-[^dual-ascent]: Assuming strict convexity for $$f$$
+

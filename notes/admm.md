@@ -21,15 +21,15 @@ $$\LL(x, \lambda) = f(x) - \lambda^T\block{Ax - b}$$
 
 with dual function:
 
-$$d(\lambda) = \min_x \LL(x, \lambda) = f(x) - \lambda^T\block{Ax - b}$$
+$$d(\lambda) = \min_x \LL(x, \lambda)$$
 
-Assuming that $$f$$ is smooth and that we can compute the dual function its
-gradient is trivial to compute:
+Assuming that $$f$$ is smooth and that we can compute the dual
+function, its gradient is trivial to compute:
 
 $$\nabla d(\lambda) = Ax^\star(\lambda) - b$$
 
-where $$x^\star(\lambda) = \argmin{x}\quad \LL(x, \lambda) = f(x) - \lambda^T\block{Ax -
-b}$$. Indeed, by definition of the dual function, we have:
+where $$x^\star(\lambda) = \argmin{x}\ \LL(x, \lambda)$$. Indeed, by
+definition of the dual function, we have:
 
 $$d(\lambda) = \LL\block{x^\star(\lambda), \lambda}$$
 
@@ -58,7 +58,7 @@ converge. Unfortunately, it is not trivial to get Lipschitz constants for the
 dual function, therefore it might be difficult to converge robustly in practice.
 
 In order to improve convergence, the *Method of Multipliers* replaces
-the initial problem with the following equivalent one:
+the initial problem with the following, equivalent one:
 
 $$\min_x \quad f(x) + \rho \norm{Ax - b}^2 \quad \st A x = b$$
 
@@ -152,10 +152,10 @@ which is a bit more convenient in practice.
 So far, so good: we solved the problem of choosing step sizes
 $$\alpha_k$$ and still get convergence. One practical issue is that
 the penalty term $$\norm{Ax - b}^2$$ introduces coupling between
-variables that may not appear in function $$f$$: while dual ascent
+variables that may not exist in function $$f$$: while dual ascent
 could optimize a separable function $$f(x) = g(y) + h(z)$$ well,
 separately (possibly using dedicated, optimized solvers), this is no
-longer possible with the Method of Multipliers.
+longer possible in general with the Method of Multipliers.
 
 The *Alternating Direction Method of Multipliers* (ADMM) improves the
 situation by working around the coupling introduced by constraint
@@ -166,9 +166,10 @@ constraints:
 $$\min_{x, z}\quad f(x) + g(z)\quad\st\ Ax + Bz = c$$
 
 Instead of minimizing *jointly* over both $$x, z$$ like the Method of
-Multipliers would, the minimization is split into two subproblems: minimizing
-along $$x$$ alone first with $$z$$ constant, then along $$z$$ alone with $$x$$
-constant, in a Gauss-Seidel fashion:
+Multipliers would, the minimization is now split into two subproblems:
+minimizing along $$x$$ alone first with $$z$$ constant (the
+*$$x$$-update*), then along $$z$$ alone with $$x$$ constant (the
+*$$z$$-update*), in a Gauss-Seidel-like fashion:
 
 1. initialize $$\lambda_0 = 0, z_0 = 0$$
 2. solve $$x_k = \argmin{x}\quad f(x) - \lambda_k^T\block{Ax + B z_k - c} + \frac{\rho}{2}\norm{Ax + B z_k - c}^2$$
@@ -176,14 +177,12 @@ constant, in a Gauss-Seidel fashion:
 4. update $$\lambda_{k+1} = \lambda_k - \rho \block{A x_k + Bz_{k+1} - c}$$
 5. goto 2 until sufficient precision is achieved (more on this below)
 
-This is equivalent to alternating two Method of Multiplier solves in the $$x,
-z$$ directions with varying constraint values, hence the name. Crucially, the
-matrices $$A, B$$ remain constant, which enables preprocessing so that inner
-solves for $$x, z$$ are as efficient as possible. Unlike the Method of
-Multipliers, it becomes possible to employ dedicated, optimized solvers for each
-subproblems, establishing consensus as the iteration converges. 
-
-Note that the role played by $$x,z$$ is *not* symmetric. Dual feasibility for $$x_k$$ gives:
+In other words, this corresponds to alternating two Method of
+Multiplier solves in the $$x, z$$ directions with varying constraint
+values, hence the name. Crucially, the matrices $$A, B$$ remain
+constant, which enables preprocessing so that $$x, z$$-updates are as
+efficient as possible. Note that the role played by $$x,z$$ is *not*
+symmetric. Dual feasibility for $$x_k$$ gives:
 
 $$\nabla f\block{x_k} - A^T \lambda_k + \rho A^T\block{Ax_k + Bz_k - c} = 0$$
 
@@ -206,8 +205,9 @@ $$\begin{aligned}
 \end{aligned}$$
 
 This suggests that convergence checks should not only consider the
-primal residual $$\norm{Ax_k + Bz_{k+1} - c}$$ (consensus), but also
-$$\rho\norm{A^TB\block{z_{k+1} - z_k}}$$, as described below.
+primal residual $$\norm{Ax_k + Bz_{k+1} - c}$$ (constraints), but also
+$$\rho\norm{A^TB\block{z_{k+1} - z_k}}$$ (stationarity for $$f$$), as
+described below.
 
 ## Convergence
 
@@ -258,10 +258,12 @@ $$\begin{aligned}
 \end{aligned}
 $$
 
-which entails strict convegence as long as either the primal residual
+which entails strict convergence as long as either the primal residual
 $$\norm{Ax_k + Bz_{k+1} - c}$$ or the dual residual
-$$\rho\norm{B\block{z_{k+1} - z_k}}$$ is non-zero, and completes the
-proof.
+$$\rho\norm{B\block{z_{k+1} - z_k}}$$ is non-zero. A zero dual
+residual implies dual feasibility for $$x_k, \lambda_{k+1}$$ and since
+dual feasibility for $$z_{x+1}, \lambda_{k+1}$$ always holds, the
+proof is complete.
 
 ## Scaled Form
 
@@ -274,26 +276,20 @@ As [before](#method-of-multipliers), introducing $$u_k =
 4. update $$u_{k+1} = u_k - \block{A x_k + Bz_{k+1} - c}$$
 5. goto 2 until sufficient precision is achieved (more on this below)
 
-Expanding quadratic terms gives
-
-$$\begin{aligned}
-x_k &= \argmin{x}\ f(x) + \frac{\rho}{2}x^TA^TAx + \rho x^TA^T\block{B z_k - c - u_k} \\
-z_{k+1} &= \argmin{z}\ g(z) + \frac{\rho}{2}z^TB^TBz + \rho z^T\block{Ax_k - c - u_k} \\
-\end{aligned}
-$$
-
 In particular, for the *consensus* problem $$A=I, B=-I, c = 0$$ this gives:
 
 $$\begin{aligned}
-x_k &= \argmin{x}\ f(x) + \frac{\rho}{2}\norm{x}^2 - \rho x^T\block{u_k + z_k} \\
-z_{k+1} &= \argmin{z}\ g(z) + \frac{\rho}{2}\norm{z}^2 - \rho z^T\block{u_k - x_k} \\
+x_k &= \argmin{x}\ f(x) + \frac{\rho}{2}\norm{x - \block{z_k + u_k}}^2 \\
+z_{k+1} &= \argmin{z}\ g(z) \, + \frac{\rho}{2}\norm{z - \block{x_k - u_k}}^2 \\
 \end{aligned}
 $$
 
 
 
 
-# References 
+# Notes & References 
 
 [^boyd]: See [https://web.stanford.edu/~boyd/admm.html](https://web.stanford.edu/~boyd/admm.html)
+
+[^dual-ascent]: Assuming strict convexity for $$f$$
 

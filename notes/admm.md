@@ -285,6 +285,65 @@ z_{k+1} &= \argmin{z}\ g(z) \, + \frac{\rho}{2}\norm{z - \block{x_k - u_k}}^2 \\
 $$
 
 
+# Dual Regularization
+
+In some situations one might want to soften constraints in a
+controllable way, for instance when modelling materials with
+large-but-finite stiffness in physically-based simulations. A simple
+way to achieve this is to apply *dual regularization* to our
+constrained optimization problem:
+
+$$\min_x\ f(x)\ \st Ax = b$$
+
+with Lagrangian
+
+$$\LL(x, \lambda) = f(x) - \lambda^T(Ax - b)$$
+
+Dual regularization consists in penalizing Lagrange multipliers as
+follows:
+
+$$\LL_C(x, \lambda) = f(x) - \lambda^T(Ax - b) - \frac{1}{2}\lambda^T C \lambda$$
+
+for some suitable positive semidefinite matrix $$C$$, sometimes called
+*compliance* (inverse stiffness) in the context of mechanics. The
+primal function thus becomes:
+
+$$p(x) = \max_\lambda \LL_C(x, \lambda) = \LL_C\block{x, \lambda^\star(x)}$$
+
+where $$\lambda^\star(x) = \argmin_\lambda \LL_C\block{x, \lambda}$$
+satisfies
+
+$$C \lambda^\star(x) = -\block{Ax - b}$$
+
+Therefore, the primal function becomes:
+
+$$p(x) = f(x) + \frac{1}{2} \block{Ax - b}^T \inv{C} \block{Ax - b}$$
+
+which gets rid of constraints entirely, and validates the "constraint
+softening" interpretation. As $$C \to 0$$, this problem becomes
+severely ill-conditioned. 
+
+## Dual Ascent 
+
+In contrast, applying dual ascent to the
+regularized Lagrangian remains perfectly stable:
+
+$$d(\lambda) = \min_x \LL_C(x, \lambda)$$
+
+is minimized by the same $$x^\star(\lambda)$$ as for the original
+problem, but the gradient of the dual function becomes:
+
+$$\nabla d(\lambda) = -\block{Ax^\star(\lambda) - b} - C \lambda$$
+
+Therefore, the only modification to dual ascent is to replace the
+$$\lambda$$ update by:
+
+$$\lambda_{k+1} = \lambda_k - \alpha_k \block{\block{A x_k - b} + C \lambda_k}$$
+
+## Method of Multipliers
+
+
+ 
 
 
 # Notes & References 

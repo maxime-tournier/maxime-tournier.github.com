@@ -46,7 +46,7 @@ step sizes $$\alpha_k$$ to solve the dual problem of maximizing $$d(\lambda)$$:
 1. initialize $$\lambda_0 = 0$$
 2. solve $$x_k = \argmin{x}\  f(x) - \lambda_k^T\block{Ax - b}$$
 3. update $$\lambda_{k+1} = \lambda_k - \alpha_k \block{A x_k - b}$$
-4. goto 2 until sufficient precision is achieved (more on this below)
+4. goto 2 until sufficient precision is achieved
 
 Note that when $$f$$ is not smooth, the above procedure provides a subgradient
 at each iteration and the method is known as *dual subgradient ascent*.
@@ -87,7 +87,13 @@ benefits:
   $$\lambda_{k+1}$$ instead of $$\lambda_k$$
 
 Therefore we might expect the nice properties of implicit integration
-to somehow ensure convergence. 
+to somehow ensure convergence. The iteration becomes:
+
+1. initialize $$\lambda_0 = 0$$
+2. solve $$x_k = \argmin{x}\  f(x) + \frac{\rho}{2}\norm{Ax - b}^2 - \lambda_k^T\block{Ax - b}$$
+3. update $$\lambda_{k+1} = \lambda_k - \rho \block{A x_k - b}$$
+4. goto 2 until sufficient precision is achieved
+
 
 ## Convergence
 
@@ -372,7 +378,46 @@ we keep implicit integration but loose regularization, or keep
 regularization but loose implicit integration. Therefore, we need
 *some* way of expressing dual feasibility in terms of $$C$$ and deduce
 the dual update rule from it to recover implicit integration of the
-regularized problem.
+regularized problem. Luckily, the regularized problem can also be
+expressed as another constrained problem without regularization:
+
+$$\min_{x, w}\ f(x) + \frac{1}{2}w^TCw\ \st\ Ax - b + Cw = 0$$
+
+to which one can apply the vanilla method of multipliers. The
+$$x,w$$-update becomes:
+
+$$\block{x_k, w_k} = \argmin{x, w}\ f(x) + \frac{1}{2}w^TCw - \lambda^T\block{Ax - b + Cw} + \frac{\rho}{2}\norm{Ax - b + Cw}^2$$
+
+with optimality conditions:
+
+$$\begin{aligned}
+\nabla f(x) - A^T\lambda + \rho A^T\block{Ax - b} + \rho A^TCw = 0\\
+Cw - C^T\lambda + \rho C^TCw + \rho C^T\block{Ax - b} = 0\\
+\end{aligned}$$
+
+Eliminating $$w$$ gives (assuming $$C$$ is invertible):
+
+$$\begin{aligned}
+\block{I + \rho C} w &= \lambda - \rho \block{Ax - b}\\
+Cw &= C\block{I + \rho C}^{-1}\block{\lambda - \rho \block{Ax - b}} \\
+\end{aligned}$$
+
+and we're left with:
+
+$$\nabla f(x) - A^T\block{\block{I - \rho C\block{I + \rho C}^{-1}}\block{\lambda - \rho \block{Ax - b}}}= 0$$
+
+Since
+
+$$I - \rho C\block{I + \rho C}^{-1} = \block{I + \rho C - \rho C}\block{I + \rho C}^{-1} = \block{I + \rho C}^{-1}$$
+
+Dual feasibility reduces to:
+
+$$\nabla f(x) - A^T\block{I + \rho C}^{-1}\block{\lambda - \rho \block{Ax - b}} = 0$$
+
+and we recover implicit integration by choosing the following dual update:
+
+$$\lambda_{k+1} = \block{I + \rho C}^{-1}\block{\lambda_k - \rho \block{Ax_k - b}}$$
+
 
 
 # Notes & References 

@@ -304,46 +304,73 @@ follows:
 
 $$\LL_C(x, \lambda) = f(x) - \lambda^T(Ax - b) - \frac{1}{2}\lambda^T C \lambda$$
 
-for some suitable positive semidefinite matrix $$C$$, sometimes called
+for some suitable positive semidefinite matrix $$C$$ generally called
 *compliance* (inverse stiffness) in the context of mechanics. The
 primal function thus becomes:
 
 $$p(x) = \max_\lambda \LL_C(x, \lambda) = \LL_C\block{x, \lambda^\star(x)}$$
 
-where $$\lambda^\star(x) = \argmin_\lambda \LL_C\block{x, \lambda}$$
+where $$\lambda^\star(x) = \argmin{\lambda}\ \LL_C\block{x, \lambda}$$
 satisfies
 
 $$C \lambda^\star(x) = -\block{Ax - b}$$
 
-Therefore, the primal function becomes:
+Therefore, the primal function can be rewritten as:
 
 $$p(x) = f(x) + \frac{1}{2} \block{Ax - b}^T \inv{C} \block{Ax - b}$$
 
 which gets rid of constraints entirely, and validates the "constraint
-softening" interpretation. As $$C \to 0$$, this problem becomes
-severely ill-conditioned. 
+softening" interpretation. 
 
 ## Dual Ascent 
 
-In contrast, applying dual ascent to the
-regularized Lagrangian remains perfectly stable:
+Why bother, then? When $$C \to 0$$, the primal problem as written
+above becomes severely ill-conditioned since $$\inv{C} \to
+\infty$$. On the contrary, applying dual ascent to the regularized
+Lagrangian only ever involves matrix $$C$$ and remains perfectly
+stable: the regularized dual function
 
 $$d(\lambda) = \min_x \LL_C(x, \lambda)$$
 
-is minimized by the same $$x^\star(\lambda)$$ as for the original
-problem, but the gradient of the dual function becomes:
+is minimized by the same $$x^\star(\lambda)$$ as the original
+problem:
+
+$$\begin{aligned}
+x^\star(\lambda) &= \argmin{x}\ f(x) -\lambda^T(Ax - b) - \frac{1}{2} \lambda^TC\lambda \\
+	&=  \argmin{x}\ f(x) -\lambda^T(Ax - b) \\
+	&= \argmin{x}\ \LL(x, \lambda)
+\end{aligned}
+$$
+
+but the gradient of the dual function becomes:
 
 $$\nabla d(\lambda) = -\block{Ax^\star(\lambda) - b} - C \lambda$$
 
-Therefore, the only modification to dual ascent is to replace the
-$$\lambda$$ update by:
+Since the $$x$$-update remains unchanged:
+
+$$x_k = x^\star\block{\lambda_k} = \argmin{x}\ \LL(x, \lambda)$$
+
+the only modification to dual ascent is to replace the dual update with:
 
 $$\lambda_{k+1} = \lambda_k - \alpha_k \block{\block{A x_k - b} + C \lambda_k}$$
 
 ## Method of Multipliers
 
+Unfortunately, introducing dual regularization as above undermines the
+nice properties of the method of multipliers. Since the $$x$$-update
+for the regularized Lagrangian is unchanged, dual feasibility still gives:
 
- 
+$$\nabla f\block{x_k} + \underbrace{\rho A^T\block{Ax_k - b} - A^T\lambda_k}_{-A^T\block{\lambda_k - \rho\block{Ax_k - b}}} = 0$$
+
+and the dual update corresponding to implicit integration for
+the non-augmented problem is still
+
+$$\lambda_{k+1} = \lambda_k - \rho\block{A x_k - b}$$
+
+which correspond to the unregularized problem. Therefore, we need a
+way to express dual feasibility in terms of $$C$$ and deduce the dual
+update rule from it to recover implicit integration of the regularized
+problem.
 
 
 # Notes & References 

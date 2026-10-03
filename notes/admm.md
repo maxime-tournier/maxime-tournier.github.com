@@ -367,10 +367,12 @@ the non-augmented problem is still
 
 $$\lambda_{k+1} = \lambda_k - \rho\block{A x_k - b}$$
 
-which correspond to the unregularized problem. Therefore, we need a
-way to express dual feasibility in terms of $$C$$ and deduce the dual
-update rule from it to recover implicit integration of the regularized
-problem.
+which correspond to the unregularized problem. In other words, either
+we keep implicit integration but loose regularization, or keep
+regularization but loose implicit integration. Therefore, we need
+*some* way of expressing dual feasibility in terms of $$C$$ and deduce
+the dual update rule from it to recover implicit integration of the
+regularized problem.
 
 
 # Notes & References 

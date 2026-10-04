@@ -375,11 +375,9 @@ $$\lambda_{k+1} = \lambda_k - \rho\block{A x_k - b}$$
 
 which correspond to the unregularized problem. In other words, either
 we keep implicit integration but loose regularization, or keep
-regularization but loose implicit integration. Therefore, we need
-*some* way of expressing dual feasibility in terms of $$C$$ and deduce
-the dual update rule from it to recover implicit integration of the
-regularized problem. Luckily, the regularized problem can also be
-expressed as another constrained problem without regularization:
+regularization but loose implicit integration. Luckily, the
+regularized problem can also be expressed as another constrained
+problem without regularization:
 
 $$\min_{x, w}\ f(x) + \frac{1}{2}w^TCw\ \st\ Ax - b + Cw = 0$$
 
@@ -395,20 +393,20 @@ $$\begin{aligned}
 Cw - C^T\lambda + \rho C^TCw + \rho C^T\block{Ax - b} = 0\\
 \end{aligned}$$
 
-Eliminating $$w$$ gives (assuming $$C$$ is invertible):
+Eliminating $$Cw$$ gives:
 
 $$\begin{aligned}
-\block{I + \rho C} w &= \lambda - \rho \block{Ax - b}\\
-Cw &= C\block{I + \rho C}^{-1}\block{\lambda - \rho \block{Ax - b}} \\
+\block{I + \rho C} Cw &= C\block{\lambda - \rho \block{Ax - b}}\\
+Cw &= \block{I + \rho C}^{-1}C\block{\lambda - \rho \block{Ax - b}} \\
 \end{aligned}$$
 
 and we're left with:
 
-$$\nabla f(x) - A^T\block{\block{I - \rho C\block{I + \rho C}^{-1}}\block{\lambda - \rho \block{Ax - b}}}= 0$$
+$$\nabla f(x) - A^T\block{\block{I - \rho \block{I + \rho C}^{-1}C}\block{\lambda - \rho \block{Ax - b}}}= 0$$
 
 Since
 
-$$I - \rho C\block{I + \rho C}^{-1} = \block{I + \rho C - \rho C}\block{I + \rho C}^{-1} = \block{I + \rho C}^{-1}$$
+$$I - \rho \block{I + \rho C}^{-1}C =\block{I + \rho C}^{-1} \block{I + \rho C - \rho C} = \block{I + \rho C}^{-1}$$
 
 Dual feasibility reduces to:
 
@@ -417,6 +415,30 @@ $$\nabla f(x) - A^T\block{I + \rho C}^{-1}\block{\lambda - \rho \block{Ax - b}} 
 and we recover implicit integration by choosing the following dual update:
 
 $$\lambda_{k+1} = \block{I + \rho C}^{-1}\block{\lambda_k - \rho \block{Ax_k - b}}$$
+
+Dual feasibility with variable $$w$$ pivoted away corresponds to the
+following $$x$$-update:
+
+$$\argmin{x}\ f(x) + \frac{1}{2} \norm{\frac{\lambda}{\rho} - \block{Ax - b}}^2_W$$
+
+with $$W = \rho \block{I + \rho C}^{-1} = \block{\inv{\rho}I +
+C}^{-1}$$. Again, introducing scaled multipliers
+$$\frac{\lambda}{\rho} = u$$, we obtain the following scaled form for
+the $$x$$-update:
+
+$$x_k = \argmin{x}\ f(x) + \frac{1}{2} \norm{\block{Ax - b} - u_k}^2_W$$
+
+with corresponding dual update:
+
+$$u_{k+1} = \block{I + \rho C}^{-1}\block{u_k - \block{Ax_k - b}}$$
+
+Interestingly, the augmented + regularized system is obtained by
+adding *compliances* $$\inv{\rho} + C$$ together, and we immediately
+check that we recover the unregularized ALM iteration as $$C \to
+0$$. Note that this would *not* be the case if we added stiffnesses
+$$\rho I + \inv{C}$$ together.
+
+## ADMM
 
 
 

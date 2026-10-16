@@ -290,6 +290,85 @@ z_{k+1} &= \argmin{z}\ g(z) \, + \frac{\rho}{2}\norm{z - \block{x_k - u_k}}^2 \\
 \end{aligned}
 $$
 
+# Proximal Variants
+
+For both the ALM and ADMM, the $$x$$-update can be extended by adding a
+*proximal term* $$\sigma \norm{x - x_k}^2$$ to the objective function, usually
+with small-but-non-zero positive $$\sigma$$. For instance, for Quadratic
+Programs (QP) this ensures that the KKT system matrix remains invertible even
+when the objective function is not strictly convex over the nullspace of the
+constraints.
+
+Note that unlike regular ALM/ADMM, $$x$$ is now part of the state, and the
+$$x$$-update at iteration $$k$$ produces $$x_{k+1}$$ from $$x_k$$.
+
+## ALM
+
+Dual feasibility for the $$x$$-update yields:
+
+$$\nabla f(x) - A^T\block{\lambda_k - \rho \block{A x_k - b}} + \sigma\block{x - x_k} = 0$$
+
+We keep the vanilla dual update
+
+$$\lambda_{k+1} = \lambda_k - \rho\block{Ax_k - b}$$
+
+and we show that the Lyapunov energy
+
+$$V_k = \sigma \norm{x_k - x^\star}^2 + \frac{1}{\rho}\norm{\lambda_k - \lambda^\star}^2$$
+
+decreases by studying the sign of:
+
+$$
+\begin{aligned}
+V_{k+1} &- V_k = \\
+&\ \ \frac{1}{\rho}\block{-\norm{\lambda_{k+1} - \lambda_k}^2 + 2\block{\lambda_{k+1} - \lambda_k}^T\block{\lambda_{k+1} - \lambda^\star}} \\
+ & + \sigma\block{ -\norm{x_{k+1} - x_k}^2 + 2\block{x_{k+1} - x_k}^T\block{x_{k+1} - x^\star}} \\
+\end{aligned}
+$$
+
+As before, we're left with the sign of
+
+$$
+\frac{1}{\rho}\block{\lambda_{k+1} - \lambda_k}^T\block{\lambda_{k+1} - \lambda^\star}
++ \sigma\block{x_{k+1} - x_k}^T\block{x_{k+1} - x^\star}
+$$
+
+Expanding the first term gives:
+
+$$\begin{aligned}
+&\ \ \frac{1}{\rho}\block{\lambda_{k+1} - \lambda_k}^T\block{\lambda_{k+1} - \lambda^\star} \\
+&= -\block{Ax_{k+1} - b}^T\block{\lambda_{k+1} - \lambda^\star} \\
+&= -\block{Ax_{k+1} - Ax^\star}^T\block{\lambda_{k+1} - \lambda^\star} \\
+&= -\block{x_{k+1} - x^\star}^TA^T\block{\lambda_{k+1} - \lambda^\star} \\
+&= -\block{x_{k+1} - x^\star}^T\block{\nabla f\block{x_{k+1}} + \sigma\block{x_{k+1} - x_k}  -\nabla f\block{x^\star}} \\
+&= -\underbrace{\block{x_{k+1} - x^\star}^T\block{\nabla f\block{x_{k+1}} -\nabla f\block{x^\star}}}_{\geq 0} - \sigma\block{x_{k+1} - x^\star}^T\block{x_{k+1} - x_k}\\
+\end{aligned}
+$$
+
+which exactly cancels out the second term, and we again obtain strict
+convergence as long as $$\block{x_k, \lambda_k} \neq \block{x^\star,
+\lambda^\star}$$. Interestingly, dual feasibility at $$\block{x_k, \lambda_k}$$
+no longer holds and is obtained only upon convergence.
+
+## ADMM
+
+Another proximal term $$\frac{\tau}{2}\norm{z - z_k}^2$$ can be added to the
+$$z$$-update, keeping the dual update unchanged. Convergence is shown in a
+similar way, this time using the Lyapunov enery:
+
+$$V_k = \sigma \norm{x_k - x^\star}^2 + \frac{1}{\rho}\norm{\lambda_k - \lambda^\star}^2 + \rho\norm{B\block{z_k - z^\star}}^2 + \tau\norm{z_k - z^\star}^2$$
+
+Again, we loose dual feasibility after the $$z$$-update which is obtained only
+upon convergence. Proximal ADMM regularizes the $$x$$-update when $$A^TA$$ is
+rank-deficient, and the $$z$$-update when $$B^TB$$ is rank-deficient.
+
+## Alternate Metrics
+
+The proximal terms may of course use any metric instead of the canonical
+one. That is, the above proofs carry over unmodified when using proximal terms
+$$\norm{x - x_k}_S^2$$ and $$\norm{z - z_k}_T^2$$ for positive semi-definite
+matrices $$S, T$$.
+
 
 # Dual Regularization
 

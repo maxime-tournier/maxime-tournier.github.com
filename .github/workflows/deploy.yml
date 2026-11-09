@@ -3,7 +3,8 @@ name: Deploy website and WordCraft
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -20,12 +21,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout website
+      - name: Checkout personal website
         uses: actions/checkout@v4
 
       - name: Prepare website
         run: |
           mkdir -p public
+
           rsync -av \
             --exclude='.git' \
             --exclude='.github' \
@@ -41,16 +43,14 @@ jobs:
       - name: Extract WordCraft
         run: |
           mkdir -p /tmp/wordcraft public/wordcraft
+
           unzip -q /tmp/wordcraft.zip -d /tmp/wordcraft
 
-          INDEX=$(find /tmp/wordcraft -name index.html -print -quit)
-          if [ -z "$INDEX" ]; then
-            echo "WordCraft index.html not found"
-            exit 1
-          fi
+          cp -a \
+            /tmp/wordcraft/wordcraft-web-0.16.0/. \
+            public/wordcraft/
 
-          SITE_DIR=$(dirname "$INDEX")
-          cp -a "$SITE_DIR/." public/wordcraft/
+          rm -f public/wordcraft/HOSTING.md
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
@@ -61,5 +61,4 @@ jobs:
           path: public
 
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4

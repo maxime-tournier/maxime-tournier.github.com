@@ -38,10 +38,10 @@ jobs:
             --exclude='public' \
             ./ public/
 
-      - name: Download WordCraft 0.16.0
+      - name: Download WordCraft 0.17.0
         run: |
           curl -fL \
-            https://github.com/storytold/wordcraft/releases/download/v0.16.0/wordcraft-web-0.16.0.zip \
+            https://github.com/storytold/wordcraft/releases/download/v0.17.0/wordcraft-web-0.17.0.zip \
             -o /tmp/wordcraft.zip
 
       - name: Extract WordCraft
@@ -51,7 +51,7 @@ jobs:
           unzip -q /tmp/wordcraft.zip -d /tmp/wordcraft
 
           cp -a \
-            /tmp/wordcraft/wordcraft-web-0.16.0/. \
+            /tmp/wordcraft/wordcraft-web-0.17.0/. \
             public/wordcraft/
 
           rm -f public/wordcraft/HOSTING.md

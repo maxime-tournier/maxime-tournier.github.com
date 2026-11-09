@@ -1,0 +1,65 @@
+
+name: Deploy website and WordCraft
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout website
+        uses: actions/checkout@v4
+
+      - name: Prepare website
+        run: |
+          mkdir -p public
+          rsync -av \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='public' \
+            ./ public/
+
+      - name: Download WordCraft 0.16.0
+        run: |
+          curl -fL \
+            https://github.com/storytold/wordcraft/releases/download/v0.16.0/wordcraft-web-0.16.0.zip \
+            -o /tmp/wordcraft.zip
+
+      - name: Extract WordCraft
+        run: |
+          mkdir -p /tmp/wordcraft public/wordcraft
+          unzip -q /tmp/wordcraft.zip -d /tmp/wordcraft
+
+          INDEX=$(find /tmp/wordcraft -name index.html -print -quit)
+          if [ -z "$INDEX" ]; then
+            echo "WordCraft index.html not found"
+            exit 1
+          fi
+
+          SITE_DIR=$(dirname "$INDEX")
+          cp -a "$SITE_DIR/." public/wordcraft/
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
